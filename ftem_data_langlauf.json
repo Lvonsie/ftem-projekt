@@ -1,0 +1,1971 @@
+{
+ "stages": [
+  "F1",
+  "F2",
+  "F3",
+  "T1",
+  "T2",
+  "T3",
+  "T4",
+  "E1",
+  "E2",
+  "M"
+ ],
+ "ages": {
+  "F1": "U8",
+  "F2": "U10",
+  "F3": "U12",
+  "T1": "U14",
+  "T2": "U16",
+  "T3": "U18",
+  "T4": "U20",
+  "E1": "U23",
+  "E2": "> 24",
+  "M": "> 24"
+ },
+ "themes": [
+  {
+   "title": "Fördergefässe",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Trägerschaft",
+     "segs": [
+      {
+       "v": "Familie, Schule und Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=searchundtx_kochclubs_list%5Bcontroller%5D=ClubundcHash=e24ce532def903bc6b45a39cb315654c]]",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Familie, Schule,Skiclub/Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=searchundtx_kochclubs_list%5Bcontroller%5D=ClubundcHash=e24ce532def903bc6b45a39cb315654c]]",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=searchundtx_kochclubs_list%5Bcontroller%5D=ClubundcHash=e24ce532def903bc6b45a39cb315654c]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=searchundtx_kochclubs_list%5Bcontroller%5D=ClubundcHash=e24ce532def903bc6b45a39cb315654c]]",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "RLZ,  NLZ, Skiclub, Sportclubs, Familie, Sportschule\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=searchundtx_kochclubs_list%5Bcontroller%5D=ClubundcHash=e24ce532def903bc6b45a39cb315654c]]",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "RLZ, NLZ, Swiss-Ski C-Kader, Sportschule",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "NLZ, Swiss-Ski Kader, RV, Sportschule",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Swiss-Ski Kader",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Swiss-Ski Kader NM",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Trainingsstunden und Entwicklungsfokus",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Entwicklungsfokus",
+     "segs": [
+      {
+       "v": "Bewegungs- und Spielgrundformen entwickeln\nUmfangreich, vielseitig und herausfordernd",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Belastungsverträglichkeit aufbauen",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Aufbautraining\nLEARN TO TRAIN",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Aufbautraining\nLEARN TO TRAIN MORE",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Leistungstraining\nLEARN TO TRAIN AND COMPETE",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Leistungstraining\nLEARN TO TRAIN AND COMPETE SMART",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Hochleistungstraining\nTRAIN TO WIN",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Hochleistungstraining\nTRAIN TO BE A WINNER",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Sportart dominieren\nBE A WINNER",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Stunden / Jahr",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "ca. 260 - 300h\n(Mittel 280h)",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "ca. 330 - 370h\n(Mittel 350h)",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "ca. 430 - 500h\n(Mittel 465h)",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "ca. 550 - 600h\n(Mittel 575h)",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "ca. 650 - 700h\n(Mittel 675h)",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "ca. 760 - 860h\n(Mittel 810h)",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "ca. 910 - 960h\n(Mittel 935h)",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "ca. 980 - 1000h\n(Mittel 990h)",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sommer (Mai - November) On-Snow",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Rollski / Ski:\n1.9 h/Woche",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Rollski / Ski:\n3.4 h/Woche",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Rollski / Ski:\n4.4 h/Woche",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Rollski / Ski:\n6.1 h/Woche",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Rollski / Ski:\n7.3 h/Woche",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Rollski / Ski:\n8.4 h/Woche",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Rollski / Ski:\n8.9 h/Woche",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sommer Off-Snow",
+     "segs": [
+      {
+       "v": "Allgemein sportliche Aktivität:\nBewegung nach Belieben.",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n6.4 h/Woche",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n6.2 h/Woche",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n7.7 h/Woche",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n9.1 h/Woche",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n9.8 h/Woche",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n11.7 h/Woche",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n13.4 h/Woche",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n14.2 h/Woche",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Winter On-Snow Trainings",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n4.5 h/Woche",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n5.8 h/Woche",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n8.7 h/Woche",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n10.7 h/Woche",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n11.6 h/Woche",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n14 h/Woche",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n16.1 h/Woche",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ski / Rollski:\n17.1 h/Woche",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Winter Off-Snow",
+     "segs": [
+      {
+       "v": "Allgemein sportliche Aktivität:\nBewegung nach Belieben.",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n2.6 h/Woche",
+       "from": 2,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n3.3 h/Woche",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n3.8 h/Woche",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n4.3 h/Woche",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n4.6 h/Woche",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Makroplanung",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Regeneration\nApril bis mitte Mai",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und die Freude an polysportiver Bewegung wiederbeleben.\n\nInhalt:\nUnstrukturierte, spielerische Bewegung im Alltag (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Trainingsumfang und ohne langlaufspezifische Inhalte.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nErholung von der Wettkampfsaison sichern und mit polysportiver Bewegung die Freude am Sport erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Umfang.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und mit polysportiver Bewegung die Trainingsfreude erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und mit polysportiver Bewegung Belastungsmonotonie vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und Belastungsmonotonie sowie Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der internationalen Wettkampfsaison sichern und Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Weltcup-Saison sichern und Übertraining auf höchstem Belastungsniveau vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Vorbereitungsphase 1\nMitte Mai bis August",
+     "segs": [
+      {
+       "v": "Bewegungs- und Spielgrundformen entwickeln\nUmfangreich, vielseitig und herausfordernd",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nBelastungsverträglichkeit umfangreich und vielseitig aufbauen sowie athletische Grundlagen (Koordination, Beweglichkeit, Grundkraft) festigen.\n\nInhalt:\nPolysportives Athletiktraining (~6.4 h/Woche) mit Lauf-ABC, Sprüngen, Körpergewichtsübungen, Techniktraining an der Langhantel sowie erste Rollski-Einheiten zur Schulung von Klassisch- und Skating-Grundbewegungen.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nTrainingsgrundlagen breit aufbauen, Volumen und Häufigkeit steigern sowie sportartübergreifende Vielseitigkeit fördern.\n\nInhalt:\nAthletiktraining mit Fokus auf Langhanteltechnik, Rumpfstabilität und erste Sprungformen (~6.2 h/Woche), kombiniert mit Velo, Laufen, Schwimmen und ergänzenden Sportarten wie Leichtathletik oder Turnen.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nTrainingsgrundlagen breit aufbauen sowie Volumen und Häufigkeit auf ein deutlich höheres Niveau steigern.\n\nInhalt:\nPolysportives Athletiktraining mit Langhanteltechnik, Rumpfstabilität und Sprungschule (~7.7 h/Woche), kombiniert mit Velo, Laufen, Schwimmen und ergänzenden Sportarten wie Bike, Leichtathletik oder Turnen.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig aufbauen sowie Volumen und Häufigkeit auf hohem Niveau steigern.\n\nInhalt:\nPolysportives Athletiktraining (~9.1 h/Woche) mit Fokus auf funktioneller Effizienz, Langhanteltechnik, Plyometrie und Rumpfkraft, kombiniert mit Grundlagenausdauer auf Velo, im Laufen und auf Rollski bei tiefer bis mittlerer Intensität.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig aufbauen sowie Volumen und Häufigkeit auf hohem Niveau steigern.\n\nInhalt:\nUmfangreiches Athletiktraining (~9.8 h/Woche) mit Fokus auf funktioneller Effizienz, Langhanteltechnik, Plyometrie und Rumpfkraft, kombiniert mit Grundlagenausdauer auf Velo, im Laufen und auf Rollski bei tiefer bis mittlerer Intensität.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf hohem Umfangsniveau (18–22 h/Woche) aufbauen.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5) sowie Athletiktraining (~11.7 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf höchstem Umfangsniveau (18–22 h/Woche) aufbauen.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5) sowie Athletiktraining (~13.4 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKonditionelle Grundlagen auf Weltklasseniveau ausbauen und individuelle Bedürfnisse gezielt entwickeln.\n\nInhalt:\nHochvolumiges Ausdauertraining zu Fuss und auf Rollski mit spezifischen Trainingsgeräten, ergänzt durch Velo, Rudern und Schwimmen sowie Athletiktraining (~14.2 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Vorbereitungsphase 2\nSeptember bis Oktober",
+     "segs": [
+      {
+       "v": "Bewegungs- und Spielgrundformen entwickeln\nUmfangreich, vielseitig und herausfordernd",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nSportartspezifische Bewegungsqualität auf Rollski festigen und die Schnelligkeits-/Agilitätsfenster gezielt nutzen.\n\nInhalt:\nErhöhter Anteil Rollski (klassisch und skating) mit Fokus auf Beinabstoss, Doppelstock und 1:2-Technik, ergänzt durch Sprint-, Koordinations- und Sprungformen sowie weiterführendes Krafttraining.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nGrundlagenausdauer (I1) und sportartspezifische Technik festigen sowie Schnelligkeit und Muskelaufbau gezielt entwickeln.\n\nInhalt:\nStrukturierte Ausdauereinheiten (Berg- und Crosslauf, Velo 60–120'), Rollski mit Technikfokus sowie Muskelaufbau, beginnendes Explosivkrafttraining und Rumpfkraft.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nGrundlagenausdauer (I1), sportartspezifische Technik und Muskelaufbau gezielt entwickeln und die Schnelligkeit gemäss Window of Opportunity (besonders bei den Jungen) nutzen.\n\nInhalt:\nStrukturierte Ausdauereinheiten (Berg- und Crosslauf, Velo 60–120'), Rollski mit Technikfokus sowie Muskelaufbau, beginnendes Explosivkrafttraining und Rumpfkraft.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nSchwellen-, Kapazitäts- und Maximalkraft gezielt entwickeln und das individuelle Athletenprofil schärfen.\n\nInhalt:\nStrukturierte Schwellenblöcke (I2/I3) ergänzt durch Kapazitätstraining, Muskelhypertrophie und intramuskuläres Koordinationstraining, kombiniert mit Rollski-Technik sowie ersten nationalen Rollski-Rennen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nSchwellen-, Kapazitäts- und Maximalkraft gezielt entwickeln und das individuelle Athletenprofil weiter schärfen.\n\nInhalt:\nStrukturierte Schwellenblöcke (I2/I3) ergänzt durch Kapazitätstraining, Muskelhypertrophie und intramuskuläres Koordinationstraining, kombiniert mit Rollski-Technik sowie 2–4 nationalen Rollski-Rennen und Trainingsrennen Langlauf.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln sowie Muskelhypertrophie und Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch Sommerwettkämpfe (1–2 Rollski-Rennen, Trainingsrennen Langlauf) sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln sowie Muskelhypertrophie und Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch 2–4 nationale/internationale Rollski-Rennen und Trainingsrennen Langlauf sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nVO₂max, Laktattoleranz und Schwellen-Geschwindigkeit auf Weltklasseniveau entwickeln und Muskelhypertrophie sowie Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch 2–4 nationale/internationale Rollski-Rennen und Trainingsrennen Langlauf sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Vorwettkampfphase  November",
+     "segs": [
+      {
+       "v": "Bewegungs- und Spielgrundformen entwickeln\nUmfangreich, vielseitig und herausfordernd",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nÜbergang vom Rollski auf Schneeschnee schaffen und spielerisches, sicheres Bewegen auf den Langlaufski (Klassisch und Skating) etablieren.\n\nInhalt:\nErste Schneetrainings mit Spielformen (Elefantenwaschen, Spitalfangis, Skills Park), Grundtechniken (Diagonal, Gräten, Bogentreten, 1:2) sowie Erhaltung der Athletik durch kurze, intensive Einheiten und vielseitige Sprünge.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nTechnik auf Rollski und Schnee verfeinern und den Übergang zur Schneesaison vorbereiten.\n\nInhalt:\nTechnikparcours auf Rollski, Laufen mit Stöcken im koupierten Gelände, Spiele und Staffeln sowie Explosivkraft- und Rumpfkrafttraining.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nTechnik auf Rollski und Schnee verfeinern, Explosivkraft entwickeln und den Übergang zur Schneesaison vorbereiten.\n\nInhalt:\nTechnikparcours auf Rollski, Laufen mit Stöcken im koupierten Gelände, Spiele und Staffeln sowie Explosivkraft- und Rumpfkrafttraining.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nCForm über kurze Intervalle steuern und Maximal- sowie Schnellkraft auf das Saisonniveau bringen.\n\nInhalt:\nFortführung aller Trainingsformen mit Akzent auf kurzen Intervallen, Schnell- und Explosivkraft mit und ohne Zusatzgewicht sowie Übergang auf Schnee mit Technikfokus.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nForm über kurze Intervalle steuern sowie Maximal- und Schnellkraft auf das Saisonniveau bringen.\n\nInhalt:\nFortführung aller Trainingsformen mit Akzent auf kurzen Intervallen, Schnell- und Explosivkraft mit und ohne Zusatzgewicht sowie Übergang auf Schnee mit Technikfokus.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nRennintensität und VO₂max auf Wettkampfniveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nRennintensität und VO₂max auf Weltcup-Niveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nTempohärte und Hochgeschwindigkeitstechnik auf Weltcup-Niveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Wettkampfphase Dezember bis März",
+     "segs": [
+      {
+       "v": "Bewegungs- und Spielgrundformen entwickeln\nUmfangreich, vielseitig und herausfordernd",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nErste Wettkampferfahrungen in einem freudvollen, lernorientierten Umfeld sammeln und die im Sommer aufgebaute Bewegungsqualität auf Schnee anwenden.\n\nInhalt:\nRegelmässiges Schneetraining mit Technikvielfalt, Teilnahme an lokalen/regionalen Animationen und der Swiss Nordic Trophy, ergänzt durch reduziertes Athletiktraining (~2.6 h/Woche) zur Krafterhaltung und Verletzungsprophylaxe.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit intensiv für Technik- und Grundlagentraining nutzen und über regionale Wettkämpfe Erfahrung sammeln.\n\nInhalt:\nViel Zeit auf Ski mit Fokus auf Technik, Abfahrten, Spiele und Koordination, ergänzt durch erhaltendes Athletik- und Rumpfkrafttraining (~2.6 h/Woche) sowie reduziertes Explosivkrafttraining und Plyometrie.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit intensiv für Technik- und Grundlagentraining nutzen und über regionale sowie internationale Wettkämpfe Erfahrung sammeln.\n\nInhalt:\nViel Zeit auf Ski mit Fokus auf Technik, Abfahrten, Spiele und Koordination, ergänzt durch erhaltendes Athletik- und Rumpfkrafttraining (~2.6 h/Woche) sowie Explosivkrafttraining und Plyometrie mit reduziertem Volumen.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit für Form- und Leistungssteuerung in dichtem Wettkampfkalender nutzen.\n\nInhalt:\nViel Zeit auf Ski mit Grundlagen- und Techniktraining trotz Leistungseinbussen, Formsteuerung über kurze und kombinierte Intervalle sowie erhaltendes Athletik-, Explosiv- und Maximalkrafttraining (~2.6 h/Woche) mit an die Wettkämpfe angepasstem Volumen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit für gezielte Form- und Leistungssteuerung im dichten internationalen Wettkampfkalender nutzen.\n\nInhalt:\nViel Zeit auf Ski mit Grundlagen- und Techniktraining trotz Leistungseinbussen, Formsteuerung über kurze und kombinierte Intervalle sowie erhaltendes Athletik-, Explosiv- und Maximalkrafttraining (~3.3 h/Woche) mit an die Wettkämpfe angepasstem Volumen.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nWettkampfleistung im internationalen Kalender  abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~3.8 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender  abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.3 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender konstant abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit hochgradig individualisierter Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.6 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Ausdauer",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Ausdauer",
+     "segs": [
+      {
+       "v": "Off Snow Skills F1-2\n\nTurnen\nLeichtathletik\nGeländetraining\nRollen und Gleiten\nRadsport\n\n[[Skills Check F1-2|https://snowsports.flink.host/s/QEH4xaub/YyaeOBN1]]",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC 1: 90' leichte bis moderate sportliche Bewegung am Stück\n\nSC 2: 30' intermittierende Bewegung am Stück (intensiv)\n\n[[Skills Check F3|https://snowsports.flink.host/s/QEH4xaub/skbTiIFF]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC 1\n150' am Stück auf Ski, Rollski und zu Fuss (moderat)\n\nSC 2\n20' am Stück auf Ski, RS und zu Fuss (intensiv)\n\nSC 3\n1000m-Lauf\n\nLT\nPISTE\n\n[[Skills Check T1|https://snowsports.flink.host/s/QEH4xaub/KBG9w0kx]]",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC 1\n3000m-Fusslauf auf Laufbahn\n\nLT\nPISTE\n\n[[Skills Check T2|https://snowsports.flink.host/s/QEH4xaub/UlfUtKpv]]",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC 1\n3000m-Fusslauf auf Laufbahn\n\nLT\nPISTE\n\n[[Skills Check T3|https://snowsports.flink.host/s/QEH4xaub/8xNUKODE]]",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC 1\n3000m-Fusslauf auf Laufbahn\n\nLT 1\nPISTE\n\nLT 2\nKapazitäts- und Effizienztests auf Laufband RS\n\n[[Skills Check T4|https://snowsports.flink.host/s/QEH4xaub/dUmzwHTv]]",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "SC 1\n3000m-Fusslauf auf Laufbahn\n\nLT\nKapazitäts- und Effizienztests auf Laufband RS\n\n[[Skills Check E-M|https://snowsports.flink.host/s/QEH4xaub/vyqcs6RA]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Ausdauer",
+     "segs": [
+      {
+       "v": "Aktiven Alltag pflegen\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungsgrundformen\n\n[[Ausdauer F1-2|https://snowsports.flink.host/s/3rBylHzO/XQjBEeez]]",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Aktiven Alltag pflegen\n• Belastbar werden\n• Anwenden und Variieren von Bewegungsgrundformen\n\n[[Ausdauer F1-2|https://snowsports.flink.host/s/3rBylHzO/XQjBEeez]]",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Aktiven Alltag pflegen\nDie Belastungsverträglichkeit soll umfangreich, vielseitig und zugleich herausfordernd aufgebaut werden. Durch die Ausrichtung auf Polysportivität bleibt die Wahl der Sportarten individuell und ermöglicht eine abwechslungsreiche Gestaltung der körperlichen Aktivität.\n\n[[Ausdauer F3| https://snowsports.flink.host/s/3rBylHzO/hPTdbSXz]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Grundlagen aufbauen\n• Volumen und Häufigkeit steigern\n• Intensität tief bis mittel, kaum harte Einheiten\n• Vielseitig: Velo, Laufen, Schwimmen,  Spiele\n• Andere Sportarten nutzen (Bike, Leichtathletik, Turnen)\n\nVorbereitungsphase 2\n• Grundlagenausdauer (I1)\n• Technik gezielt trainieren\n• Schnelligkeit: Sprints, Sprünge, Spiele\n• Laufen: Berglauf und Cross\n• Velo 60–120'\n\nVorwettkampfphase\n• Trainingsformen aus VP2 laufen weiter\n• Technik im Fokus\n• Rollski, auch Technikparcours\n• Laufen mit Stöcken\n• Spiele und Staffeln\n• Koupiertes Gelände\n\nWettkampfphase:\n• Grundlagen- und Techniktraining auf\n• Schnee trotz Leistungseinbussen\n• Schneezeit (ca. 6 Monate) intensiv nutzen\n• Form über Wettkämpfe steuern\n• Viel Zeit auf Schnee und Ski\n• Spiele und Koordination\n• Abfahrten trainieren\n\n[[Ausdauer T1| https://snowsports.flink.host/s/3rBylHzO/HwOdB8Ra]]\n\n[[Ausdauer T2|https://snowsports.flink.host/s/3rBylHzO/vVlrXqGT]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Grundlagen aufbauen\n• Volumen und Häufigkeit steigern\n• Intensität tief bis mittel, kaum harte Einheiten\n\nVorbereitungsphase 2\n• Schwellentraining ergänzend zu Grundlagen\n• I2 gezielt, z.B. im Technikbereich\n• Kapazitätstraining nach Schwellenblock integrieren\n• Je nach Athletenprofil zwischen Kapazitäts- und Schwellentraining abwägen\n• Zweite Hälfte oft: ein Schwellen- und ein Kapazitätstraining pro Woche\n\nVorwettkampfphase\n• Meist alle Trainingsformen weiterhin enthalten\n• Formsteuerung über kurze Intervalle\n\nWettkampfphase:\n• Grundlagen und Technik auf Schnee trotz Leistungseinbussen\n• Schneezeit (ca. 6 Monate) nutzen\n• Formsteuerung mit kurzen und kombinierten Intervallen bei starker Wettkampfdichte\n\n[[Ausdauer T3-4|https://snowsports.flink.host/s/3rBylHzO/y5n8mYX6]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Umfang 18–22h pro Woche\n• Ausdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern, Schwimmen\n• 2 intensive Einheiten pro Woche (I4 und I5) zu Fuss oder Rollski\n\nVorbereitungsphase 2\n• VO₂max und Grundlagenausdauer entwickeln\n• Sommerwettkämpfe\n• Ausdauer- und Intervalltraining auf der Rollskibahn\n\nVorwettkampfphase\n• Rennintensität und VO₂max\n• Training auf Schnee und Ski\n\nWettkampfphase:\n• Wettkampfleistung erbringen\n• Tapering\n\n[[Ausdauer E1-2|https://snowsports.flink.host/s/3rBylHzO/Hyivkm8p]]",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Entwicklung individueller Bedürfnisse\n• Trainingsbelastung und -umfang auf Weltklasseniveau\n• Spezifische Trainingsgeräte\n• VO₂max, Laktattoleranz, Schwellen-Geschwindigkeit\n• Tempohärte, Hochgeschwindigkeitstechnik\n\n[[Ausdauer M|https://snowsports.flink.host/s/3rBylHzO/yGIhGyB5]]",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Mobilität & Beweglichkeit",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Mobilität",
+     "segs": [
+      {
+       "v": "Beweglichkeit Swiss-Ski Off Snow Skills F1-2\n\n[[Skills Check F1-2|https://snowsports.flink.host/s/82AcAbDz/]]",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Längssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\n[[Skills Check F3|https://snowsports.flink.host/s/V8RPoTvV/3DswFJec]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Längssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\n[[Skills Check T1-2|https://snowsports.flink.host/s/V8RPoTvV/zDp2jWdg]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4a: Active Straight Leg Raise (Hamstrings)\nSC 4b: Pelvic Tilt in Good Morning Position (Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\nLT: Physio Check NLZ\n\n[[Skills Check T3-4|https://snowsports.flink.host/s/V8RPoTvV/lKUuSGpU]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "LT: Physio Check Elite",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Mobilität",
+     "segs": [
+      {
+       "v": "Aktiver Alltag pflegen\n• Spielerische Bewegungsausführungen mit maximalem Bewegungsumfang\n\n[[Mobilität F1-2|https://snowsports.flink.host/s/P0EFjjys/bkjxEpe5]]\n\n[[Regenerationsmassnahmen|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362]]",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Aktiver Alltag pflegen\n• Spielerische Bewegungsausführungen mit maximalem Bewegungsumfang\n• Beweglichkeit erhalten\n\n[[Mobilität F1-2|https://snowsports.flink.host/s/P0EFjjys/bkjxEpe5]]\n\n[[Regenerationsmassnahmen|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362]]",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Spielerische Übungen\n• dynamische & spielerische Partnerübungen\n• Hilfsmittel (z.B. Ball) einsetzen\n• Integration ins Warm-Up\n\nDynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)\n\n[[Mobilität F3|https://snowsports.flink.host/s/P0EFjjys/VHRI4wej]]\n\n[[Regenerationsmassnahmen|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)\n\n[[Mobilität T1-2|https://snowsports.flink.host/s/P0EFjjys/dL2oQ7Sk]]\n\n[[Regenerationsmassnahmen|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Nach Bedarf zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe nach der Belastung\n• Vor dynamischen oder statischen Übungen\n\n[[Mobilität T3-4|https://snowsports.flink.host/s/P0EFjjys/Kw1HVhTz]]\n\n[[Regenerationsmassnahmen|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen\n\n[[Mobilität E-M|https://snowsports.flink.host/s/P0EFjjys/3q3YiY5n]]\n\n[[Regenerationsmassnahmen|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Kraft",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Kraft",
+     "segs": [
+      {
+       "v": "Swiss-Ski Off Snow Skills Kraft und Stabilität F1-2\n\n[[Skills Check F1-2|https://snowsports.flink.host/s/0j6vgp47/y649CbPO]]",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC 1: Kniebeuge einbeinig auf Box\nSC 2: Kniebeuge mit Miniband ohne Zusatzgewicht\nSC 3: Reisskniebeuge mit Stab\nSC 4: Bridging beidbeinig statisch\nSC 5: Standwaage\nSC 6 : Sprung von kniehohem Element  mit beidbeiniger Landung\nSC 7: Liegestütz\nSC 8: Klimmzug (exzentrische Phase)\n\n[[Skills Check F3|https://snowsports.flink.host/s/0j6vgp47/kvC7i1uL]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Zusatzgewicht vorne\nSC 3: Reisskniebeuge mit Reckstange / Langhantel\nSC 4: Umsetzen mit Reckstange / Langhantel\nSC 5: Leg Curls exzentrisch und konzentrisch bb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Standwaage\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\n\nLT: PISTE\n\n[[Skills Check T1-2|https://snowsports.flink.host/s/0j6vgp47/UgLkS6DV]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Reisskniebeuge mit Langhantel\nSC 4: Umsetzen mit Langhantel\nSC 5: Leg Curls einbeinig exzentrisch und konzentrisch eb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Good Morning mit Langhantel\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump to High Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\n\nST Nachwuchs: Sprungtests und Nordbord\n\nLT: PISTE und MLD\n\n[[Skills Check T3-4|https://snowsports.flink.host/s/0j6vgp47/zxViygWv]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nLT: MLD\n\n[[Skills Check E-M|https://snowsports.flink.host/s/0j6vgp47/wXSmixxp]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Kraft",
+     "segs": [
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen: Kraft, Stabilität und Beweglichkeit\n• Erwerben und Festigen von spielerischen Krafteinheiten\n\n[[Kraft F1-2|https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm]]",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastbar werden: Kraft, Stabilität und Beweglichkeit\n• Anwenden und Variieren von spielerischen Krafteinheiten\n\n[[Kraft F1-2|https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm]]",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Sommer\n• Techniktraining (Körperhaltung und Langhantel)\n• Koordination im vollen Bewegungsumfang\n• Übungen mit eigenem Körpergewicht\n• Vielseitige Sprünge\n\nWinter\n• Vielseitige Sprünge\n• Erhaltung der Kraft\n\n[[Kraft F3|https://snowsports.flink.host/s/HOx8PqfA/61f5x5Fo]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Langhanteltechnik mit Körpergewicht und leichten Zusatzgewichten\n• Erste Sprungformen (Fokus auf korrekte Landungstechnik)\n• Training der Rumpfstabilität\n\nVorbereitungsphase 2\n• Muskelaufbau\n• Aufbau des Explosivkrafttraining\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Explosivkrafttraining\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosivkrafttraining & Plyometrie mit reduziertem Volumen\n• Rumpfkrafttraining erhaltend\n\n* Window of Opportunity bei Mädchen T1\n* Window of Opportunity bei Jungen T2\n\n[[Kraft T1|https://snowsports.flink.host/s/HOx8PqfA/0lz9f3v1]]\n\n[[Kraft T2|https://snowsports.flink.host/s/HOx8PqfA/ZPtYjqVS]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen\n\n[[Kraft T3|https://snowsports.flink.host/s/HOx8PqfA/GyGRkrgf]]\n\n[[Kraft T4|https://snowsports.flink.host/s/HOx8PqfA/XaTXxDfC]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen\n\n[[Kraft E1-2|https://snowsports.flink.host/s/HOx8PqfA/Xm1bVW2K]]",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen\n\n[[Kraft M|https://snowsports.flink.host/s/HOx8PqfA/AAuP9QsT]]",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Schnelligkeit & Agilität",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Schnelligkeit",
+     "segs": [
+      {
+       "v": "Off Snow Skills F1-2\n\nTurnen\nLeichatheltik\nGeländetraining\nSpielen\n\n[[Skills Check F1-2|https://snowsports.flink.host/s/HF9mgLsD/caW1jsv7]]",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m)\nSC 2: 30x Seilspringen einfachdurchzüge\n\n[[Skills Check F3|https://snowsports.flink.host/s/HF9mgLsD/UdvThSLV]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m & 50m)\nSC 2: 50x Seilspringen einfachdurchzüge, 10x Doppeldurchzüge am Stück\n\nLT: PISTE\n\n[[Skills Check T1|https://snowsports.flink.host/s/HF9mgLsD/eye1J25O]]",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 60m)\nSC 2: 50x Seilspringen einfachdurchzüge, 20x Doppeldurchzüge am Stück\n\nLT: PISTE\n\n[[Skills Check T2|https://snowsports.flink.host/s/HF9mgLsD/dd0Ww3sg]]",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 80m)\nSC 2: 100x Seilspringen einfachdurchzüge, 30x Doppeldurchzüge am Stück\n\nLT: PISTE\n\n[[Skills Check T3|https://snowsports.flink.host/s/HF9mgLsD/P9lqnOKT]]",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 100m)\nSC 2: 100x Seilspringen einfachdurchzüge, 40x Doppeldurchzüge am Stück\n\nLT: PISTE\n\n[[Skills Check T4|https://snowsports.flink.host/s/HF9mgLsD/VQWOd1MB]]",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "LT: Individuell nach Absprache mit dem/der Athletiktrainer:in\n\n[[Skills Check E-M|https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Schnelligkeit",
+     "segs": [
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungs- & Spielgrundformen\n\n[[Schnelligkeit F1|https://snowsports.flink.host/s/PPsFiXFu/kY1BOb3c]]",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastbar werden\n• Anwenden und Variieren von Bewegungs- & Spielgrundformen\n\n[[Schnelligkeit F2|https://snowsports.flink.host/s/PPsFiXFu/kY1BOb3c]]",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel machen (stop & go)\n• Immer frisch & maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Windows of Opportunity im Alter von 8 bis 13 Jahren\n\n[[Schnelligkeit F3|https://snowsports.flink.host/s/PPsFiXFu/r8idtvTH]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (hohe Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Aufpassen: Wachstumsschub in der Adoleszenz\n\n[[Schnelligkeit T1-2|https://snowsports.flink.host/s/PPsFiXFu/UBlddCun]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n•  Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)\n\n[[Schnelligkeit T3-4|https://snowsports.flink.host/s/PPsFiXFu/0gahlWER]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)\n\n[[Schnelligkeit E1-2|https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh]]",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter die Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)\n\n[[Schnelligkeit M|https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh]]",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Technik & Taktik Übergeordnet",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Technik",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Technik Übergeordnet",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Taktik Übergeordnet",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Technik",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Technik Klassisch",
+     "segs": [
+      {
+       "v": "Element Schnee entdecken\n• Gleiten\n• Schieben\n• Rutschen\n• Drehen\n• Springen\n• Balancieren\n• Bremsen auf Rutschgeräten (Langlaufski, Snowboard oder Ski)\n\n[[Klassisch|https://snowsports.flink.host/s/UxZyybZ4/4x8Ml5xU]]",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Spielerisch den Schnee entdecken und sich variantenreich auf LL-Ski bewegen.\nSpielformen und abwechslungsreiche Übungen, die vielseitige Bewegungsarten fördern. Elefantenwaschen, Skills Park, Namen-Memory, Der Fuchs geht um, Spitalfangis etc.\n\nSicher und selbständig langlaufen und bremsen\n\nKL-Schritt (Beinarbeit)\nStreckung des Abstossbeines, stabiles Gleiten auf Gleitski\n\nDiagonal\nWechsel von Bein- und Armarbeit in diagonaler Bewegung für Vortrieb.\n\nGräten\nScherenschritte bergauf: Ski in V-Form setzen, Kick aus den Beinen (kein Gleiten)\n\nDoppelstock\nBeide Stöcke gleichzeitig einsetzen, Körper nach vorne bringen und Arme aktiv strecken.\n\nBogentreten\nSeitliches Treten in einer Bogenspurlinie, Gewicht auf den Aussenski\n\nSpurwechsel\nSki parallel anheben, Gewicht verlagern und sanft in die neue Spur setzen.\n\nÜbungen\nÜber Wurzeln steigen, Himbeeren pflücken, La-Ola-Welle, Schaukelschuhe etc.\n\n[[Klassisch|https://snowsports.flink.host/s/UxZyybZ4/4x8Ml5xU]]",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Technik Skating",
+     "segs": [
+      {
+       "v": "Element Schnee entdecken\n• Gleiten\n• Schieben\n• Rutschen\n• Drehen\n• Springen\n• Balancieren\n• Bremsen auf Rutschgeräten (Langlaufski, Snowboard oder Ski)\n\n[[Skating|https://snowsports.flink.host/s/UxZyybZ4/ZKsfqm45]]",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Spielerisch den Schnee entdecken und sich variantenreich auf LL-Ski bewegen.\nSpielformen und abwechslungsreiche Übungen, die vielseitige Bewegungsarten fördern. Elefantenwaschen, Skills Park, Namen-Memory, Der Fuchs geht um, Spitalfangis etc.\n\nSicher und selbständig langlaufen und bremsen\n\nSchlittschuschritt (Beinarbeit) Streckung des Abstossbeines (seitlich), stabiles Gleiten auf Gleitski\n\n1:2\nSchlittschuhschritt mit Doppelstockstoss auf jeden zweiten Beinabstoss.\n\n1:1\nSchlittschuhschritt mit Doppelstockstoss auf jeden Beinabstoss.\n\nAsymm. SS\nAsymmetrische Armarbeit (Führungsarm)  und gleichzeitiges aufsetzen von Stock und Ski (sonst gleich wie 1:2)\n\nDiagonal SS\nBeinschritt (seitlich) mit diagonalem Stockeinsatz.\n\nSchlittschuschritt ohne Stockeinsatz\nTiefer Schwerpunkt mit dynamischer Gewichtsverlagerung für längeres Gleiten.\n\nÜbungen\nKnöchel berühren, Zäunen, Glöckner, Hip-Hopper etc.\n\n[[Skating|https://snowsports.flink.host/s/UxZyybZ4/ZKsfqm45]]",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Psyche",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) Psyche",
+     "segs": [
+      {
+       "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "SC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC: Athleten:innen machen eine Aufgabe (z.B. Technikübung) mit Ablenkungen (z.B. Lärm): Fähigkeit testen, Konzentration zu halten.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC 1: Athleten:innen formulieren ein kleines Ziel für das Training und erklären, warum es ihnen wichtig ist.\nSC 2: Simulierte Stresssituation (z.B Wettkampfsimulation). Kinder sollen bewusst Techniken (z.B. Atmung) einsetzen, um „grün“ zu erreichen.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC: Athleten:innen beschreiben eine Bestleistung: „Wie hast du dich gefühlt?“: Merkmale des persönlichen optimalen Leistungszustand identifizieren und  anwenden.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Während Training und Wettkampf bewusst Atemtechniken nutzen, um Ruhe zu bewahren.\nSC 3: Vor einer Technikaufgabe den Ablauf mental durchspielen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Bei einer schwierigen Aufgabe (z.B. Zeitdruck) positive Selbstgespräche anwenden.\nSC 3: Technikübung mit eingebauten Ablenkungen durchführen.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Psyche",
+     "segs": [
+      {
+       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen\n\n[[Psyche F1|https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5]]\n\n[[Psyche F2|https://snowsports.flink.host/s/C8XpRskG/JptDIQmL]]",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative fördern\n\n[[Psyche F3|https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP]]",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[Psyche T1|https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9]]\n\n[[Psyche T2|https://snowsports.flink.host/s/C8XpRskG/6bNaH29j]]\n\n[[Psyche T3|https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ]]\n\n[[Psyche T4|https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv]]",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[Psyche E1|https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj]]\n\n[[Psyche E2|https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L]]",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[Psyche M|https://snowsports.flink.host/s/C8XpRskG/vR3SemYC]]",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Ernährung",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Skills-Check (SC)",
+     "segs": [
+      {
+       "v": "SC 1: Kinder schätzen, wie viel sie pro Training trinken sollten und überprüfen es (z.B. durch Markierungen an der Trinkflasche).\n\nSC 2: Kinder prüfen selbstständig, ob alle wichtigen Items dabei sind (Taschencheck).",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC: Einen Tag bezüglich Ernährung dokumentieren und diskutieren: Essen, Trinken und Snacks.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC: Selbständig eine Mahlzeit/Snack für vor, während und nach dem Training/Wettkampf zusammenstellen und diskutieren.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC: Mit verschiedenen Snacks, Trinkstrategien oder Mahlzeiten vor/während/nach dem Training/Wettkampf experimentieren und individuell anpassen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC 1: Ernährung und Hydration unter Wettkampfbedingungen testen (z.B. Gels, isotonische Getränke während Belastung).\n\nSC 2: Flüssigkeitsverlust, Energiebedarf und Regeneration dokumentieren und auswerten.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Flüssigkeit",
+     "segs": [
+      {
+       "v": "Ziel\nFörderung gesunder Gewohnheiten im Alltag. Eltern einbinden mit Tipps oder Workshops.\n\nSportaschen-Checkliste implementieren\nWasserflasche, Snackbox und Wechselkleidung.\n\nBewusste Snack- und Trinkpausen im Training einbauen\nErklärungen geben (pro h Training = 500 ml Wasser oder verdünnter Saft)\n\nKochen im Team\nGemeinsame Snack-Zubereitung oder Kochkurse.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziel\nGrundverständnis für ausgewogene Ernährung. Förderung gesunder Gewohnheiten im Alltag. Verbindung zwischen Ernährung, Energie für Sport und Schule.\n\nAusgewogene Ernährung\n½ Gemüse/Obst, ¼ Kohlenhydrate, ¼ Eiweiss bei jeder Mahlzeit.\n\nTrinken\nWasser als Hauptgetränk, ca. 1,5–2 l täglich, mehr bei Training.\n\nRegelmässige Mahlzeiten\nFrühstück, Mittagessen, Abendessen und 2 gesunde Snacks (z.B. Obst, Nüsse).\n\nVorbereitung\nSnacks und Wasserflasche zum Training mitbringen.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziel\nBewusstheit und Anpassung stärken Verständnis für Makronährstoffe (Kohlenhydrate, Eiweiss, Fett) und Flüssigkeitsbedarf vertiefen.\n\nVor dem Training\n1–2h vorher ca. 500 ml Wasser trinken. Bei Hitze oder viel Salzverlust leicht salzige Getränke verwenden (1x Prise Salz).\n\nWährend des Trainings\nAlle 15–20' 150–200 ml trinken, >1h Belastung zusätzliche Kohlenhydrate beigeben (z.B. verdünnte Fruchtsäfte, kohlenhydratreiche Getränke).\n\nNach dem Training\n0.5-1 l Flüssigkeit innerhalb von 30'. Bei intensiven Belastungen Proteinshake, Recovery-Drink, Elektrolytgetränke oder leicht salziges Wasser verwenden.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Essen",
+     "segs": [
+      {
+       "v": "Ziel\nFörderung gesunder Gewohnheiten im Alltag. Eltern einbinden mit Tipps oder Workshops.\n\nSportaschen-Checkliste implementieren\nWasserflasche, Snackbox und Wechselkleidung.\n\nBewusste Snack- und Trinkpausen im Training einbauen\nErklärungen geben (pro h Training = 500 ml Wasser oder verdünnter Saft)\n\nKochen im Team\nGemeinsame Snack-Zubereitung oder Kochkurse.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziel\nGrundverständnis für ausgewogene Ernährung. Förderung gesunder Gewohnheiten im Alltag. Verbindung zwischen Ernährung, Energie für Sport und Schule.\n\nAusgewogene Ernährung\n½ Gemüse/Obst, ¼ Kohlenhydrate, ¼ Eiweiss bei jeder Mahlzeit.\n\nTrinken\nWasser als Hauptgetränk, ca. 1,5–2 l täglich, mehr bei Training.\n\nRegelmässige Mahlzeiten\nFrühstück, Mittagessen, Abendessen und 2 gesunde Snacks (z.B. Obst, Nüsse).\n\nVorbereitung\nSnacks und Wasserflasche zum Training mitbringen.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Vor dem Training\n2–3h vorher: Kohlenhydratreiche, leicht verdauliche Mahlzeit (z.B. Vollkornbrot mit Honig). 30' vorher: Kleiner Snack (z.B. Banane)\n\nWährend des Trainings (>1h Belastung)\n30–60 g Kohlenhydrate pro h (z.B. Energieriegel, Trockenfrüchte)\n\nNach dem Training\nInnerhalb von 30': Snack mit Kohlenhydraten und Eiweiss (z. B. Joghurt mit Obst, Milchshake).\n\nHauptmahlzeit: Ausgewogen mit Kohlenhydraten (z.B. Reis, Nudeln), Eiweiss (z. B. Huhn, Linsen) und Gemüse.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.\n\n[[Ernährung|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Schlaf",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Skills-Check (SC)",
+     "segs": [
+      {
+       "v": "SC: Fragen an die Kinder: Wie viele Stunden Schlaf brauchen wir? Was hilft uns besser zu schlafen?",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC: Eine Woche lang Schlafdauer und wie sie sich am nächsten Tag fühlen dokumentieren.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC: Vor dem Schlafen Atemtechniken oder progressive Muskelrelaxation (PMR) ausprobieren.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC 1: Schlafdauer und Qualität eine Woche lang dokumentieren, zusammen mit der Trainingsleistung.\n\nSC 2: Abendroutinen reflektieren und Anpassungen vornehmen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC 1: Plan für Schlaf- und Essenszeiten vor einem Wettkampf erstellen und umsetzen.\n\nSC 2: Gedanken vor dem Schlaf „parken“, z.B. durch Aufschreiben oder Atemübungen (Grübelstopp)",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt",
+     "segs": [
+      {
+       "v": "Schlafdauer: 8–10h/Nacht\nSchlaf fördert Konzentration, Energie und Regeneration.\n\n[[Schlaf|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee5b97a3a51328a001678]]",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Schlafdauer\n8–10h/Nacht\n\nRoutine\nGleiche Schlafenszeiten, auch am Wochenende.\n\nEntspannung\n1h vor dem Schlafen Bildschirme meiden, Rituale wie Lesen oder Atemübungen einführen.\n\nSchlafumgebung\nDunkel, kühl, ruhig (16–18°C).\n\n[[Schlaf|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee5b97a3a51328a001678]]",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Regelmässige Schlafzeiten\nEntspannungsrituale einbauen\n\nGedankenstopp\nBei längerer Wachzeit aufstehen. Gedanken aufschreiben, um den Kopf zu entlasten. Negative Gedanken über Schlaf in positive Überzeugungen umwandeln.\n\nOptimierter Einsatz von Koffein und Hilfsmitteln\nWirkung beachten (HWZ 6h, verstärkte Wirkung bei Jugendlichen), mind. 6h vor dem Schlaf meiden. Augenmasken, Gehörschutz etc. verwenden.\n\nPowernaps einplanen\nKurze Nickerchen von 10–15' zur Regeneration, ideal nach dem Mittagessen.\n\nAnpassungen bei Reisen und Wettkämpfen\nSchlaf- und Essenszeiten an Zeitverschiebungen anpassen. Strategien gegen Jetlag nutzen.\n\n[[Schlaf|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee5b97a3a51328a001678]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Gedankenstopp fördern Erholung und mentale Ruhe.\n\n[[Schlaf|https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee5b97a3a51328a001678]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Förderstrukturen und Wettkämpfe",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Kader",
+     "segs": [
+      {
+       "v": "Skiclub",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "RLZ / Skiclub",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "RLZ / NLZ",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "NLZ / Swiss-Ski C-Kader",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Swiss-Ski C/B-Kader",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Swiss Ski B/A-Kader",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Swiss Ski A/NM-Kader",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Swiss Ski Kader-NM",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Swiss Olympic Card",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Regional",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "National / Regional",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "National",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Bronze",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Silber / Elite",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Gold",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Wettkampfart",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Wettkämpfe (und Spiele) in verschiedenen Sportarten",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Verschiedene Wettkämpfe in unterschiedlichen Sportarten (Leichtathletik, Laufen, Rad, Spielsportarten)\n• HNT und regionale Rennen\n• Biathlonrennen",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "• Verschiedene Wettkämpfe in unterschiedlichen Sportarten (Leichtathletik, Laufen, Rad, Spielsportarten)\n• Rollski (Biathlon)-Rennen\n• HNT und regionale Rennen\n• FESA-Games\n• EYOF",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• Nationale Rollski-Rennen, Fussläufe\n• Swiss Cup\n• FESA-Games\n• EYOF",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "• Swiss Cup\n• ausgewählte COC\n• JWM\n• Nationale Rollski-Rennen, Fussläufe",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• COC\n• ausgewählte WC\n• U23WM\n• WSC\n• Swiss Cup\n• Nationale Rollski-Rennen, Fussläufe",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "• WC\n• WSC\n• Swiss Cup\n• Olympische Spiele\n• Nationale/internationale Rollski-Rennen",
+       "from": 8,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Anzahl Wettkämpfe",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "0 bis 5",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "5 bis 10",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "10 bis 15",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "15 bis  20",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "20 bis 25",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "20 bis 30",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "25 bis 30",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "20 bis 30",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Selektionen",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Testing und Leistungsdiagnostik",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "gemäss RLZ",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "gemäss NLZ / Swiss-Ski\n\n[[Swiss-Ski 2026/27 |https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf]]",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "gemäss Swiss-Ski\n\n[[Swiss-Ski 2026/27 |https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf]]",
+       "from": 6,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Umfeldmanagement",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Ansprechpersonen",
+     "segs": [
+      {
+       "v": "• Familie",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "• Familie\n• Trainer:innen",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Familie und Trainer:innen\n• Sportkoordination Kantone\n• Berufsinformationszentren BIZ\n• Interregionsverantwortliche Swiss-Ski",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• Familie und Trainer:innen\n• Sportkoordination Kantone\n• Berufsinformationszentren BIZ\n• Interregionsverantwortliche Swiss-Ski\n\n[[Schule, Ausbildung & Beruf | https://www.swissolympic.ch/athleten-trainer/beruf-karriere]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• Umfeldmanager Swiss-Ski\n• Laufbahnberatung Swiss Olympic\n• Berufsinformationszentren BIZ\n\n[[Schule, Ausbildung & Beruf | https://www.swissolympic.ch/athleten-trainer/beruf-karriere]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sozial",
+     "segs": [
+      {
+       "v": "• Familie\n• Sportlich-schulisches Umfeld",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "• Familie\n• Trainer:innern und Trainingsgruppe\n• Sportlich-schulisches Umfeld\n• Sportclubs",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Familie\n• Trainer:innern und Trainingsgruppe\n• Sportlich-schulisches Umfeld\n• RLZ",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "• Familie\n• Trainer:innern und Trainingsgruppe\n• Sportlich-schulisches Umfeld\n• RLZ/NLZ",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• Familie\n• Trainer:innern und Trainingsgruppe\n• Sportlich-schulisches Umfeld\n• RLZ/NLZ/Swiss-Ski",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "• Familie/Partner:in\n• Trainer:innern und Trainingsgruppe\n• Sportlich-schulisches Umfeld\n• NLZ/Swiss-Ski",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• Familie/Partner:in\n• Trainer:innern und Trainingsgruppe\n• Sportlich-berufliches Umfeld\n• Swiss-Ski",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Finanziell",
+     "segs": [
+      {
+       "v": "• Unterstützung durch Eltern, Verwandte und Bekannte",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "• Unterstützung durch Eltern, Verwandte und Bekannte\n• Kantonale Einwohnergemeinde\n• Unterstützung vom Verein",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Unterstützung durch Eltern, Verwandte und Bekannte\n• Ausbildungs-Stipendien\n• Schweizer Sporthilfe\n• Kant. Fördergelder\n• Lokale und private Sponsoren\n• Sportartspez. und/oder lokale Stiftungen\n• Öffentliches Crowdfunding",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• Unterstützung durch Eltern, Verwandte und Bekannte\n• Ausbildungs-Stipendien\n• Schweizer Sporthilfe\n• Kant. Fördergelder\n• Sponsoren- und Werbeverträge\n• Sportartspez. und/oder lokale Stiftungen\n• Öffentliches Crowdfunding\n\n[[Strukturen & Förderung | https://www.swissolympic.ch/athleten-trainer/eltern-erziehungsberechtigte/strukturen-foerderung]]",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "• Unterstützung durch Eltern, Verwandte und Bekannte\n• Spitzensportförd. der Armee (SpiSpo RS)\n• Ausbildungs-Stipendien\n• Schweizer Sporthilfe\n• Kant. Fördergelder\n• Sponsoren- und Werbeverträge\n• Sportartspez. und/oder lokale Stiftungen\n• Öffentliches Crowdfunding\n• Ausrüster\n\n[[Strukturen & Förderung | https://www.swissolympic.ch/athleten-trainer/eltern-erziehungsberechtigte/strukturen-foerderung]]",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• Spitzensportförd. der Armee (WK /Zeitmilitär)\n• Schweizer Sporthilfe\n• Kantonale Fördergelder\n• Sponsoren- und Werbeverträge\n• Einkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\n• Sportartspez. und/oder lokale Stiftungen\n• Ausrüster",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Beruflich/Schulisch",
+     "segs": [
+      {
+       "v": "• Obligatorische Schule",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "• Obligatorische Schule\n• Langzeitgymnasium",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Obligatorische Schule\n• Schulen mit Sportlösung: Swiss Olympic Partner/Sport Schools und weitere",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "• Obligatorische Schule\n• Schulen mit Sportlösung: Swiss Olympic Partner/Sport Schools und weitere\n• Berufslehre und Leistungssport",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• Mittelschulen mit Sportlösung: Swiss Olympic Partner/Sport Schools und weitere\n• Berufslehre und Leistungssport\n\n[[Schule, Ausbildung & Beruf | https://www.swissolympic.ch/athleten-trainer/beruf-karriere]]",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "3 Hochschultypen mit Bachelor- und Masterstudiengänge (mit Fernlösungen)\n• Fachhochschulen FH\n• Pädagogische Hochschulen PH\n• Universitäre Hochschulen\n\n[[Studium & Leistungssport | https://www.swissolympic.ch/athleten-trainer/beruf-karriere/studium]]",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Material",
+   "group": "Material",
+   "rows": [
+    {
+     "label": "Off Snow",
+     "segs": [
+      {
+       "v": "• Joggingschuhe\n• Velo\n• Helm",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "• Joggingschuhe\n• MTB\n• Helm\n• Stocklaufstöcke\n• Inlineskates",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "• Joggingschuhe\n• MTB\n• Helm\n• Stocklaufstöcke\n• (Kombi-) Rollski klassisch",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Joggingschuhe\n• MTB\n• Helm\n• Stocklaufstöcke\n• 1× Rollski skating\n• 1× Rollski klassisch",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• Joggingschuhe\n• MTB und Rennvelo\n• Helm\n• Stocklaufstöcke\n• 2× Rollski skating\n• 2× Rollski klassisch",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "On Snow",
+     "segs": [
+      {
+       "v": "• 1x klassisch Fellski",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "• 1x Fellski klassisch\n• 1x Ski skating\n• 1x Kombischuhe",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• 1x Wachsski klassisch\n• 1x Fellski optional\n• 1x Ski skating\n• 1x Schuh klassisch\n• 1x Schuh skating",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• 3x Wachsski klassisch\n• 3x Ski skating\n• 1x Schuh klassisch\n• 1x Schuh skating",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "• 4-5x Wachsski klassisch\n• 4-5x Ski skating\n• 1x Schuh klassisch\n• 1x Schuh skating",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• 8-10x Wachsski klassisch\n• 8-10× Ski skating\n• 2× Schuhe klassisch\n• 2× Schuhe skating",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

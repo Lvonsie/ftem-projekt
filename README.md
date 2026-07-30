@@ -12,7 +12,7 @@ Entwicklungsstufen **F1–M**, in drei Sprachen (DE/FR/IT).
 
 | | Dateien | Bearbeiten? |
 |---|---|---|
-| **Quellen** (hier arbeiten) | `build.py`, `ftem_data.json`, `ftem_sports.json`, `translations.json` | ✅ ja |
+| **Quellen** (hier arbeiten) | `build.py`, `ftem_data_<sportart>.json`, `ftem_sports.json`, `translations.json`, `icons/` | ✅ ja |
 | **Ausgaben** (generiert) | `index.html` (DE), `fr.html`, `it.html` | ❌ nie von Hand! |
 
 Jede Änderung direkt in einer HTML-Datei geht beim nächsten `python3 build.py` **verloren**.
@@ -26,10 +26,11 @@ alles zusammen committen. So laufen keine zwei Stände nebeneinander.
 | Datei | Zweck |
 |---|---|
 | `build.py` | **Der Generator.** Enthält Layout (CSS), Interaktivität (JS) und den ganzen Seitenaufbau. Liest alle JSON-Dateien und schreibt `index.html`, `fr.html`, `it.html`. |
-| `ftem_sports.json` | **Die Sportarten-Liste** (Reihenfolge, Namen, Kürzel). Neue Sportart = hier ein Eintrag. |
-| `ftem_data.json` | **Inhalte Ski Alpin** (Themen, Zeilen, Stufen-Zellen, Dokument-Links). |
-| `ftem_data_<sportart>.json` | Inhalte weiterer Sportarten, z. B. `ftem_data_langlauf.json`. Gleiches Format wie `ftem_data.json`. Solange die Datei fehlt, zeigt die Sportart «Inhalte folgen». |
+| `ftem_sports.json` | **Die Sportarten-Liste** (Reihenfolge, Namen, Kürzel, Icon-Pfad). Neue Sportart = hier ein Eintrag. |
+| `ftem_data_<sportart>.json` | **Inhalte pro Sportart** (Themen, Zeilen, Stufen-Zellen, Alterskategorien), z. B. `ftem_data_ski-alpin.json`. Solange die Datei fehlt, zeigt die Sportart «Inhalte folgen». |
 | `translations.json` | **Übersetzungen FR/IT** als einfache Text-Paare (deutscher Text → Übersetzung). Nicht übersetzte Texte erscheinen auf Deutsch. |
+| `convert_xlsx.py` | **Excel-Import:** wandelt ein FTEM-Tool-Import-Excel in eine `ftem_data_<sportart>.json` um. Aufruf: `python3 convert_xlsx.py datei.xlsx sportart-id` |
+| `icons/` | Sportarten-Icons (rote Piktogramme). Zuordnung über das Feld `"icon"` in `ftem_sports.json`; `reserve-*.jpg` sind noch nicht zugeteilt. |
 
 ## Die generierten Dateien
 

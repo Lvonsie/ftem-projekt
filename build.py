@@ -75,6 +75,7 @@ BACK = {"de": "← Sportarten", "fr": "← Sports", "it": "← Sport"}
 BACK_TITLE = {"de": "Zurück zur Auswahl", "fr": "Retour à la sélection", "it": "Torna alla selezione"}
 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
+# Fallback, falls eine Datendatei keine "ages" enthaelt (Alterskategorien pro Sportart)
 AGE = {"F1":"U8","F2":"U8–U10","F3":"U10–U12","T1":"U12–U14","T2":"U14–U16","T3":"U16+","T4":"U18+","E1":"","E2":"","M":""}
 GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
 
@@ -154,12 +155,12 @@ def render_cell(seg, lang):
         if btns: inner += '<div class="lks">'+btns+'</div>'
     return inner or '<div class="empty">–</div>'
 
-def theme_html(t, idx, stages, prefix, lang):
+def theme_html(t, idx, stages, prefix, lang, ages):
     title = tr(t["title"], lang)
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(stages):
-        age = AGE.get(s,"")
+        age = ages.get(s,"")
         th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="'+esc(tr("Spalte hervorheben", lang))+'"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
     th += '</div>'
     body = ""
@@ -183,6 +184,7 @@ def theme_html(t, idx, stages, prefix, lang):
 def build_sections(d, prefix, lang):
     themes = d["themes"]
     stages = d["stages"]
+    ages = {k: v for k, v in (d.get("ages") or AGE).items() if v}
     seen = list(dict.fromkeys(t["group"] for t in themes))
     order = [g for g in GROUP_ORDER if g in seen] + [g for g in seen if g not in GROUP_ORDER]
     sections=""
@@ -191,7 +193,7 @@ def build_sections(d, prefix, lang):
         if not items: continue
         sections += '<h2 class="grp">'+esc(tr(g, lang))+'</h2>'
         for i,t in items:
-            sections += theme_html(t,i,stages,prefix,lang)
+            sections += theme_html(t,i,stages,prefix,lang,ages)
     jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
     return sections, jump
 
@@ -219,6 +221,8 @@ def sport_section(sport, d, lang):
     sid = sport["id"]; name = tr(sport["name"], lang)
     aw = esc(tr("Athlet:innen-Weg", lang))
     back = '<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'">'+esc(BACK[lang])+'</a>'
+    if sport.get("icon"):
+        back += '<img class="sicon" src="'+esc(sport["icon"])+'" alt="">'
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
             '<header class="top">'+back+'<h1>'+FTEM+' <span class="sk">'+esc(name)+'</span> <b>· '+aw+'</b></h1>'
@@ -295,10 +299,10 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .grid-sports .card:hover{border-color:var(--red);box-shadow:0 10px 24px rgba(213,43,30,.14);transform:translateY(-4px) scale(1.02)}
 .grid-sports .ab{width:60px;height:60px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;overflow:hidden}
 .grid-sports .card:hover .ab{transform:scale(1.12) rotate(-6deg)}
-.grid-sports .ab.has-img{background:#fff;border:1px solid var(--line)}
-.grid-sports .ab img{width:40px;height:40px;object-fit:contain}
+.grid-sports .ab.has-img{background:none;border:none}
+.grid-sports .ab img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 .grid-sports .card.nodata .ab{background:#b6c0cc}
-.grid-sports .card.nodata .ab.has-img{background:#fff;filter:grayscale(1);opacity:.6}
+.grid-sports .card.nodata .ab.has-img{background:none;filter:grayscale(1);opacity:.6}
 .grid-sports .cn{font-weight:800;font-size:13.5px}
 .grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
 /* "Was ist FTEM?" */
@@ -321,6 +325,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;height:var(--top)}
 header.top .back{font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 13px;white-space:nowrap}
 header.top .back:hover{background:#fff;border-color:var(--red);color:var(--red)}
+header.top .sicon{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px}
 header.top h1 b{color:var(--ink);font-weight:700}
 h1 .fF{color:var(--found)}h1 .fT{color:var(--talent)}h1 .fE{color:var(--elite)}h1 .fM{color:var(--mast)}

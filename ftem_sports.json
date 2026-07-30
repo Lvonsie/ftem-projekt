@@ -1,13 +1,14 @@
 {
   "sports": [
-    { "id": "langlauf",              "name": "Langlauf",              "short": "LL" },
-    { "id": "ski-alpin",             "name": "Ski Alpin",             "short": "SA", "file": "ftem_data.json" },
-    { "id": "telemark",              "name": "Telemark",              "short": "TM" },
-    { "id": "freestyle",             "name": "Freestyle",             "short": "FS" },
-    { "id": "snowboard",             "name": "Snowboard",             "short": "SB" },
-    { "id": "freeski",               "name": "Freeski",               "short": "FK" },
-    { "id": "skicross",              "name": "Skicross",              "short": "SX" },
-    { "id": "skispringen",           "name": "Skispringen",           "short": "SP" },
-    { "id": "nordische-kombination", "name": "Nordische Kombination", "short": "NK" }
+    { "id": "ski-alpin",             "name": "Ski Alpin",             "short": "SA",  "icon": "icons/ski-alpin.jpg" },
+    { "id": "langlauf",              "name": "Langlauf",              "short": "LL",  "icon": "icons/langlauf.jpg" },
+    { "id": "biathlon",              "name": "Biathlon",              "short": "BI",  "icon": "icons/biathlon.jpg" },
+    { "id": "skispringen",           "name": "Skispringen",           "short": "SP",  "icon": "icons/skispringen.jpg" },
+    { "id": "nordische-kombination", "name": "Nordische Kombination", "short": "NK",  "icon": "icons/nordische-kombination.jpg" },
+    { "id": "skicross",              "name": "Skicross",              "short": "SX",  "icon": "icons/skicross.jpg" },
+    { "id": "freeski-park-pipe",     "name": "Freeski Park & Pipe",   "short": "FK",  "icon": "icons/freeski-park-pipe.jpg" },
+    { "id": "snowboard-alpin",       "name": "Snowboard Alpin",       "short": "SBA" },
+    { "id": "snowboard-cross",       "name": "Snowboard Cross",       "short": "SBX" },
+    { "id": "snowboard-park-pipe",   "name": "Snowboard Park & Pipe", "short": "SBP", "icon": "icons/snowboard-park-pipe.jpg" }
   ]
 }
