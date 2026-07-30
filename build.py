@@ -8,11 +8,43 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 # Sportarten-Konfiguration: ftem_sports.json
 #   id    -> interner Schluessel (auch fuer #hash-Navigation) und Standard-Datendatei
 #   name  -> Anzeigename
-#   short -> Kuerzel in Seitenleiste und Auswahl-Karten
+#   short -> Kuerzel auf den Auswahl-Karten
 #   file  -> (optional) Datendatei; sonst wird ftem_data_<id>.json gesucht
-# Alles wird in EINE index.html gebaut (Startseite + alle Sportarten, Wechsel per JS).
+# Sprachen: uebersetzte Texte in translations.json (fr/it, Fallback = Deutsch).
+# Ausgabe: pro Sprache EINE Datei (index.html = DE, fr.html, it.html) mit
+# Startseite + allen Sportarten, Wechsel per JS/#hash.
 # ---------------------------------------------------------------------------
 SPORTS = json.load(open(os.path.join(BASE, "ftem_sports.json"), encoding="utf-8"))["sports"]
+try:
+    TR = json.load(open(os.path.join(BASE, "translations.json"), encoding="utf-8"))
+except FileNotFoundError:
+    TR = {}
+LANGS = ["de", "fr", "it"]
+FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html"}
+
+def tr(s, lang):
+    if lang == "de" or s is None:
+        return s
+    return TR.get(lang, {}).get(s, s)
+
+INTRO = {
+ "de": 'Vollständige, strukturierte Übersicht des {name} <b>Athlet:innen-Wegs</b> aus dem Swiss-Ski FTEM-Tool: <b>{n} Themen</b> über die zehn Entwicklungsstufen <b>F1–M</b>. Links je Zeile eine fixe Beschriftung; lange Texte sind zusammengeklappt und mit «mehr» ausklappbar. Die Tabellen lassen sich seitlich scrollen.',
+ "fr": 'Aperçu complet et structuré du <b>parcours de l&#x27;athlète</b> en {name}, issu de l&#x27;outil FTEM de Swiss-Ski : <b>{n} thèmes</b> à travers les dix niveaux de développement <b>F1–M</b>. À gauche de chaque ligne, un intitulé fixe ; les textes longs sont repliés et dépliables via « plus ». Les tableaux défilent latéralement.',
+ "it": 'Panoramica completa e strutturata del <b>percorso dell&#x27;atleta</b> in {name}, dallo strumento FTEM di Swiss-Ski: <b>{n} temi</b> lungo i dieci livelli di sviluppo <b>F1–M</b>. A sinistra di ogni riga un&#x27;etichetta fissa; i testi lunghi sono compressi ed espandibili con «altro». Le tabelle scorrono lateralmente.',
+}
+PLACE = {
+ "de": 'Der Athlet:innen-Weg für <b>{name}</b> ist noch nicht erfasst – Inhalte folgen.<br><br>Sobald die Daten vorliegen, kommen sie in die Datei <code>{file}</code> und die Seite wird mit <code>python3 build.py</code> neu erzeugt.',
+ "fr": 'Le parcours de l&#x27;athlète pour <b>{name}</b> n&#x27;est pas encore saisi – contenus à venir.<br><br>Dès que les données seront disponibles, elles seront ajoutées au fichier <code>{file}</code> et la page sera régénérée avec <code>python3 build.py</code>.',
+ "it": 'Il percorso dell&#x27;atleta per <b>{name}</b> non è ancora disponibile – contenuti in arrivo.<br><br>Non appena i dati saranno disponibili, verranno inseriti nel file <code>{file}</code> e la pagina sarà rigenerata con <code>python3 build.py</code>.',
+}
+HOME_SUB = {
+ "de": "Swiss-Ski Entwicklungsstufen F1–M · Sportart auswählen",
+ "fr": "Niveaux de développement Swiss-Ski F1–M · Choisir un sport",
+ "it": "Livelli di sviluppo Swiss-Ski F1–M · Scegliere lo sport",
+}
+NODATA = {"de": "Inhalte folgen", "fr": "Contenus à venir", "it": "Contenuti in arrivo"}
+BACK = {"de": "← Sportarten", "fr": "← Sports", "it": "← Sport"}
+BACK_TITLE = {"de": "Zurück zur Auswahl", "fr": "Retour à la sélection", "it": "Torna alla selezione"}
 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 AGE = {"F1":"U8","F2":"U8–U10","F3":"U10–U12","T1":"U12–U14","T2":"U14–U16","T3":"U16+","T4":"U18+","E1":"","E2":"","M":""}
@@ -71,9 +103,9 @@ def render_block(block, link_texts):
         return '<p><span class="lbl">'+esc(lab)+':</span> '+esc(val).replace("\n","<br>")+'</p>'
     return '<p>'+esc(b).replace("\n","<br>")+'</p>'
 
-def render_cell(seg):
-    txt = seg["v"].strip()
-    link_texts = set(l["text"] for l in seg["l"] if l.get("text"))
+def render_cell(seg, lang):
+    txt = (tr(seg["v"], lang) or "").strip()
+    link_texts = set(tr(l["text"], lang) for l in seg["l"] if l.get("text"))
     inner = ""
     if txt:
         blocks = re.split(r'\n\s*\n', txt)
@@ -87,20 +119,21 @@ def render_cell(seg):
             key=l.get("href")
             if key in seen: continue
             seen.add(key)
-            btns += '<a href="'+esc(l["href"] or "#")+'" target="_blank" rel="noopener">'+esc(l.get("text") or "Dokument")+'</a>'
+            btns += '<a href="'+esc(l["href"] or "#")+'" target="_blank" rel="noopener">'+esc(tr(l.get("text"), lang) or "Dokument")+'</a>'
         if btns: inner += '<div class="lks">'+btns+'</div>'
     return inner or '<div class="empty">–</div>'
 
-def theme_html(t, idx, stages, prefix):
+def theme_html(t, idx, stages, prefix, lang):
+    title = tr(t["title"], lang)
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(stages):
         age = AGE.get(s,"")
-        th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="Spalte hervorheben"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
+        th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="'+esc(tr("Spalte hervorheben", lang))+'"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
     th += '</div>'
     body = ""
     for r in t["rows"]:
-        lbl = r["label"] or ""
+        lbl = tr(r["label"], lang) or ""
         body += '<div class="r">'
         body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
         # render segs with spans; we lay out as 10 cells using grid-column span
@@ -110,13 +143,13 @@ def theme_html(t, idx, stages, prefix):
             # if seg spans multiple phases, neutral
             phs = set(ph(stages[i]) for i in range(seg["from"], seg["to"]+1))
             if len(phs) > 1: cls = "ph-multi"
-            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg)+'</div><button class="more" hidden>mehr ▾</button></div>'
+            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang)+'</div><button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button></div>'
         body += '</div>'
-    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" open data-title="'+esc(t["title"].lower())+'">'
-            '<summary><span class="tt">'+esc(t["title"])+'</span></summary>'
+    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" open data-title="'+esc(title.lower())+'">'
+            '<summary><span class="tt">'+esc(title)+'</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
-def build_sections(d, prefix):
+def build_sections(d, prefix, lang):
     themes = d["themes"]
     stages = d["stages"]
     seen = list(dict.fromkeys(t["group"] for t in themes))
@@ -125,10 +158,10 @@ def build_sections(d, prefix):
     for g in order:
         items=[(i,t) for i,t in enumerate(themes) if t["group"]==g]
         if not items: continue
-        sections += '<h2 class="grp">'+esc(g)+'</h2>'
+        sections += '<h2 class="grp">'+esc(tr(g, lang))+'</h2>'
         for i,t in items:
-            sections += theme_html(t,i,stages,prefix)
-    jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(t["title"])+'</option>' for i,t in enumerate(themes))
+            sections += theme_html(t,i,stages,prefix,lang)
+    jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
     return sections, jump
 
 def sport_data(sport):
@@ -139,47 +172,60 @@ def sport_data(sport):
     return None
 
 datestr = datetime.date.today().strftime("%d.%m.%Y")
-FOOTER = '<footer>Quelle: <a href="https://my.ftem.swiss-ski.ch" target="_blank" rel="noopener">my.ftem.swiss-ski.ch</a> · aufbereitet am '+datestr+'</footer>'
 
-def sport_section(sport, d):
-    sid = sport["id"]; name = sport["name"]
+def footer(lang):
+    return ('<footer>'+esc(tr("Quelle:", lang))+' <a href="https://my.ftem.swiss-ski.ch" target="_blank" rel="noopener">my.ftem.swiss-ski.ch</a> · '
+            +esc(tr("aufbereitet am", lang))+' '+datestr+'</footer>')
+
+def lang_switch(active):
+    out = '<div class="langsw">'
+    for l in LANGS:
+        cls = ' class="active"' if l == active else ''
+        out += '<a'+cls+' data-f="'+FILES[l]+'" href="'+FILES[l]+'">'+l.upper()+'</a>'
+    return out + '</div>'
+
+def sport_section(sport, d, lang):
+    sid = sport["id"]; name = tr(sport["name"], lang)
+    aw = esc(tr("Athlet:innen-Weg", lang))
+    back = '<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'">'+esc(BACK[lang])+'</a>'
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
-            '<header class="top"><a class="back" href="#" title="Zurück zur Auswahl">← Sportarten</a><h1>FTEM '+esc(name)+' <b>· Athlet:innen-Weg</b></h1></header>'
+            '<header class="top">'+back+'<h1>FTEM '+esc(name)+' <b>· '+aw+'</b></h1>'
+            '<div class="tools">'+lang_switch(lang)+'</div></header>'
             '<div class="wrap"><div class="placeholder">'
             '<div class="big">'+esc(name)+'</div>'
-            'Der Athlet:innen-Weg für <b>'+esc(name)+'</b> ist noch nicht erfasst – Inhalte folgen.<br><br>'
-            'Sobald die Daten vorliegen, kommen sie in die Datei <code>ftem_data_'+esc(sid)+'.json</code> '
-            'und die Seite wird mit <code>python3 build.py</code> neu erzeugt.'
-            '</div>'+FOOTER+'</div></section>')
-    sections, jump_opts = build_sections(d, sid)
+            +PLACE[lang].format(name=esc(name), file='ftem_data_'+esc(sid)+'.json')+
+            '</div>'+footer(lang)+'</div></section>')
+    sections, jump_opts = build_sections(d, sid, lang)
     n_themes = len(d["themes"])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
-        '<header class="top"><a class="back" href="#" title="Zurück zur Auswahl">← Sportarten</a><h1>FTEM '+esc(name)+' <b>· Athlet:innen-Weg</b></h1>'
-        '<div class="tools"><span class="cnt"></span>'
-        '<input class="q" type="search" placeholder="In allen Inhalten suchen…">'
-        '<select class="jump"><option>Zu Thema springen…</option>'+jump_opts+'</select>'
-        '<button class="exp">Alle öffnen</button><button class="col">Alle schliessen</button></div></header>'
+        '<header class="top">'+back+'<h1>FTEM '+esc(name)+' <b>· '+aw+'</b></h1>'
+        '<div class="tools">'+lang_switch(lang)+'<span class="cnt"></span>'
+        '<input class="q" type="search" placeholder="'+esc(tr("In allen Inhalten suchen…", lang))+'">'
+        '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
+        '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button></div></header>'
         '<div class="wrap">'
-        '<div class="intro">Vollständige, strukturierte Übersicht des '+esc(name)+' <b>Athlet:innen-Wegs</b> aus dem Swiss-Ski FTEM-Tool: <b>'+str(n_themes)+' Themen</b> über die zehn Entwicklungsstufen <b>F1–M</b>. Links je Zeile eine fixe Beschriftung; lange Texte sind zusammengeklappt und mit «mehr» ausklappbar. Die Tabellen lassen sich seitlich scrollen.'
+        '<div class="intro">'+INTRO[lang].format(name=esc(name), n=n_themes)+
         '<div class="legend"><span class="lg-f">F1–F3 · Foundation</span><span class="lg-t">T1–T4 · Talent</span><span class="lg-e">E1–E2 · Elite</span><span class="lg-m">M · Mastery</span></div></div>'
-        '<div class="hint">↔ Tabellen lassen sich seitlich scrollen · 📄 = externes Dokument</div>'
-        +sections+FOOTER+'</div></section>')
+        '<div class="hint">'+esc(tr("↔ Tabellen lassen sich seitlich scrollen · 📄 = externes Dokument", lang))+'</div>'
+        +sections+footer(lang)+'</div></section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
-def home_html(datamap):
+def home_html(datamap, lang):
     cards = ""
     for s in SPORTS:
         has = datamap[s["id"]] is not None
+        name = tr(s["name"], lang)
         cards += ('<a class="card'+('' if has else ' nodata')+'" href="#'+s["id"]+'">'
                   '<span class="ab">'+esc(s["short"])+'</span>'
-                  '<span class="cn">'+esc(s["name"])+'</span>'
-                  +('' if has else '<span class="tag">Inhalte folgen</span>')+'</a>')
+                  '<span class="cn">'+esc(name)+'</span>'
+                  +('' if has else '<span class="tag">'+esc(NODATA[lang])+'</span>')+'</a>')
     return ('<section id="home"><div class="home-hero">'
-            '<h1>FTEM <b>Athlet:innen-Weg</b></h1>'
-            '<p class="sub">Swiss-Ski Entwicklungsstufen F1–M · Sportart auswählen</p>'
+            '<h1>FTEM <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
+            '<p class="sub">'+esc(HOME_SUB[lang])+'</p>'
+            '<div class="hero-lang">'+lang_switch(lang)+'</div>'
             '<div class="grid-sports">'+cards+'</div>'
-            +FOOTER+'</div></section>')
+            +footer(lang)+'</div></section>')
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
@@ -192,11 +238,16 @@ CSS = r"""
 html{scroll-behavior:smooth}
 [hidden]{display:none!important}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px}
+.langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
+.langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
+.langsw a.active{background:var(--red);color:#fff}
+.langsw a:hover:not(.active){background:#fff;color:var(--ink)}
 /* Startseite */
 #home .home-hero{max-width:980px;margin:0 auto;padding:60px 24px 30px;text-align:center}
 #home h1{font-size:30px;margin:0 0 6px;font-weight:800;color:var(--red);letter-spacing:.2px}
 #home h1 b{color:var(--ink);font-weight:800}
-#home .sub{color:var(--mut);font-size:14px;margin:0 0 34px}
+#home .sub{color:var(--mut);font-size:14px;margin:0 0 18px}
+#home .hero-lang{display:flex;justify-content:center;margin:0 0 30px}
 .grid-sports{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;text-align:center}
 .grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .15s,transform .15s,border-color .15s}
 .grid-sports .card:hover{border-color:var(--red);box-shadow:0 6px 18px rgba(0,0,0,.09);transform:translateY(-2px)}
@@ -285,8 +336,12 @@ footer a{color:var(--red)}
 
 JS = r"""
 const SPORT_IDS = __SPORT_IDS__;
+const I18N = __I18N__;
 const sections = [...document.querySelectorAll('section.sport')];
 const home = document.getElementById('home');
+
+// Sprachwechsel behaelt die aktuelle Sportart (#hash) bei
+document.querySelectorAll('.langsw a').forEach(a=>a.addEventListener('click',()=>{a.href=a.dataset.f+location.hash;}));
 
 // ---- pro Sportart gekapselte Interaktivitaet ----
 function initSport(sec){
@@ -299,7 +354,7 @@ function initSport(sec){
       if(!w||!btn)return;
       if(w.scrollHeight>w.clientHeight+6){cell.classList.add('clamped');btn.hidden=false;}
       else{cell.classList.remove('clamped');btn.hidden=true;}
-      btn.onclick=()=>{const ex=cell.classList.toggle('expanded');btn.textContent=ex?'weniger ▴':'mehr ▾';};
+      btn.onclick=()=>{const ex=cell.classList.toggle('expanded');btn.textContent=ex?I18N.less:I18N.more;};
     });
   }
   sec.__clamp = setupClamp;
@@ -323,7 +378,7 @@ function initSport(sec){
         });
       }
     });
-    if(cnt)cnt.textContent=term?(vis+' Themen mit Treffern'):(themes.length+' Themen · F1–M');
+    if(cnt)cnt.textContent=term?(vis+' '+I18N.hits):(themes.length+' '+I18N.themes);
     grps.forEach(g=>{let s=g.nextElementSibling,any=false;while(s&&s.classList.contains('theme')){if(!s.classList.contains('hidden'))any=true;s=s.nextElementSibling;}g.classList.toggle('hidden',!!term&&!any);});
   }
   q.addEventListener('input',run);
@@ -379,15 +434,18 @@ route();
 datamap = {s["id"]: sport_data(s) for s in SPORTS}
 ids_with_data = [s["id"] for s in SPORTS if datamap[s["id"]] is not None]
 
-body = home_html(datamap) + "".join(sport_section(s, datamap[s["id"]]) for s in SPORTS)
-js = JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
+for lang in LANGS:
+    body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS)
+    i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
+            "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang)}
+    js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
+            .replace("__I18N__", json.dumps(i18n, ensure_ascii=False)))
+    page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title><style>'+CSS+'</style></head>'
+        '<body>'+body+'<script>'+js+'</script></body></html>')
+    out = os.path.join(BASE, FILES[lang])
+    open(out,"w",encoding="utf-8").write(page)
+    print("written", FILES[lang], len(page.encode("utf-8")), "bytes")
 
-HTML = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
-'<meta name="viewport" content="width=device-width,initial-scale=1">'
-'<title>FTEM – Athlet:innen-Weg</title><style>'+CSS+'</style></head>'
-'<body>'+body+'<script>'+js+'</script></body></html>')
-
-out = os.path.join(BASE, "index.html")
-open(out,"w",encoding="utf-8").write(HTML)
-print("written", len(HTML.encode("utf-8")), "bytes ->", out,
-      "| Sportarten mit Inhalt:", ", ".join(ids_with_data) or "-")
+print("Sportarten mit Inhalt:", ", ".join(ids_with_data) or "-")
