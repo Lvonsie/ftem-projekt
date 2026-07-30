@@ -168,8 +168,58 @@ def render_cell(seg, lang, cid=None, edit=False):
         if btns: out += '<div class="lks">'+btns+'</div>'
     return out
 
-def theme_html(t, idx, stages, prefix, lang, ages, edit=False):
+# --- Themen-Icons (Inline-SVG, offline) + dezente Bereichsfarben ---
+GROUP_COLORS = {
+    "Sport & Athlet:in":    ("#6274a0", "rgba(98,116,160,.15)"),   # gedaempftes Blaugrau
+    "Material":             ("#9c8a70", "rgba(156,138,112,.16)"),  # Taupe / Sandton
+    "Strukturen & Umfeld":  ("#8b7398", "rgba(139,115,152,.16)"),  # mattes Mauve
+}
+def group_accent(g):
+    return GROUP_COLORS.get(g, ("#7a828c", "rgba(122,130,140,.15)"))
+
+_ICONS = {
+ "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+ "calendar": '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/>',
+ "apple": '<path d="M12 8c1.4-2.2 5-1.8 5 1.6 0 3.6-2.4 8.4-5 8.4S7 13.2 7 9.6C7 6.2 10.6 5.8 12 8z"/><path d="M12 8c0-2 .9-3 2.2-3.4"/>',
+ "moon": '<path d="M12 3a6.5 6.5 0 0 0 9 9 9 9 0 1 1-9-9z"/>',
+ "mood": '<circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9 14.5c.9 1 2 1 3 1s2.1 0 3-1"/>',
+ "activity": '<path d="M3 12h4l2.5 6 4-13 2.5 7H21"/>',
+ "rotate": '<path d="M4.5 12a7.5 7.5 0 0 1 12.5-5.5L20 9M19.5 12a7.5 7.5 0 0 1-12.5 5.5L4 15"/><path d="M20 5v4h-4M4 19v-4h4"/>',
+ "barbell": '<path d="M2 12h2M20 12h2M4 9v6M20 9v6M7 7.5v9M17 7.5v9M7 12h10"/>',
+ "bolt": '<path d="M13 3 4 14h6l-1 7 9-11h-6l1-7z"/>',
+ "target": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>',
+ "box": '<path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/>',
+ "trophy": '<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5.5a2 2 0 0 0 2.5 3M16 6h2.5a2 2 0 0 1-2.5 3"/><path d="M10 15h4M9 20h6M11 15l-1 5M13 15l1 5"/>',
+ "flag": '<path d="M6 21V4M6 4h12l-2.5 4L18 12H6"/>',
+ "users": '<circle cx="9" cy="8" r="3"/><path d="M4 20c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M15 5.5a3 3 0 0 1 0 5M20 20c0-2-1.1-3.7-2.7-4.5"/>',
+ "list": '<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/>',
+}
+_KEYMAP = [
+ (("trainingsstund","entwicklungsfokus","trainings","stunden","umfang"),"clock"),
+ (("makroplan","periodis","jahresplan","planung"),"calendar"),
+ (("ernähr","ernaehr","nutrition"),"apple"),
+ (("schlaf","regenerat","erholung","recovery"),"moon"),
+ (("psyche","mental","kopf"),"mood"),
+ (("ausdauer","kondition","kapazit"),"activity"),
+ (("mobilit","beweglich","flexib"),"rotate"),
+ (("kraft","explosiv","power"),"barbell"),
+ (("technik","taktik"),"target"),
+ (("schnellig","agilit","speed"),"bolt"),
+ (("material","ausrüst","ausruest"),"box"),
+ (("förderge","foerderge","gefäss","gefaess","kader","talentpool"),"trophy"),
+ (("wettkampf","wettkämpf","wettkaempf","selekt","rennen"),"flag"),
+ (("umfeld","eltern","schule","beruf","management","betreu"),"users"),
+]
+def theme_icon(title):
+    t = (title or "").lower()
+    for keys, name in _KEYMAP:
+        if any(k in t for k in keys):
+            return '<svg viewBox="0 0 24 24" aria-hidden="true">'+_ICONS[name]+'</svg>'
+    return '<svg viewBox="0 0 24 24" aria-hidden="true">'+_ICONS["list"]+'</svg>'
+
+def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None):
     title = tr(t["title"], lang)
+    bar, chip = group_accent(group)
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(stages):
@@ -193,8 +243,9 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False):
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
     opn = ' open' if edit else ''
-    return ('<details class="theme'+('  edit' if edit else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'">'
-            '<summary><span class="tt">'+esc(title)+'</span></summary>'
+    return ('<details class="theme'+(' edit' if edit else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
+            '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(title)+'</span>'
+            '<span class="tt">'+esc(title)+'</span><span class="tchev"></span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
 def build_sections(d, prefix, lang, edit=False):
@@ -207,9 +258,10 @@ def build_sections(d, prefix, lang, edit=False):
     for g in order:
         items=[(i,t) for i,t in enumerate(themes) if t["group"]==g]
         if not items: continue
-        sections += '<h2 class="grp">'+esc(tr(g, lang))+'</h2>'
+        gbar, gchip = group_accent(g)
+        sections += '<h2 class="grp" style="--gc:'+gbar+'">'+esc(tr(g, lang))+'</h2>'
         for i,t in items:
-            sections += theme_html(t,i,stages,prefix,lang,ages,edit)
+            sections += theme_html(t,i,stages,prefix,lang,ages,edit,g)
     jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
     return sections, jump
 
@@ -547,14 +599,20 @@ mark.cur{background:#f0a500;color:#1d2630;box-shadow:0 0 0 2px #f0a500}
 .legend span{font-size:11.5px;padding:4px 11px;border-radius:30px;font-weight:700}
 .lg-f{background:var(--found-bg);color:var(--found-t)}.lg-t{background:var(--talent-bg);color:var(--talent-t)}.lg-e{background:var(--elite-bg);color:var(--elite-t)}.lg-m{background:var(--mast-bg);color:var(--mast-t)}
 .hint{font-size:12px;color:var(--mut);margin:14px 2px 2px;display:flex;align-items:center;gap:6px}
-h2.grp{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:22px 0 9px;font-weight:800}
-details.theme{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc-line);border-radius:9px;margin-bottom:8px;scroll-margin-top:66px;overflow:hidden}
+h2.grp{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gc,var(--mut));margin:24px 0 10px;font-weight:800;display:flex;align-items:center;gap:8px}
+h2.grp::before{content:'';width:9px;height:9px;border-radius:2px;background:var(--gc,var(--mut));flex:none}
+h2.grp::after{content:'';flex:1;height:1px;background:var(--line)}
+details.theme{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc-line);border-radius:9px;margin-bottom:8px;scroll-margin-top:66px;overflow:hidden;transition:box-shadow .16s}
+details.theme:hover{box-shadow:0 5px 16px rgba(0,0,0,.08)}
+details.theme[open]{box-shadow:0 6px 18px rgba(0,0,0,.06)}
 details.theme>summary{cursor:pointer;padding:9px 14px;list-style:none;display:flex;align-items:center;gap:10px}
 details.theme>summary:hover{background:#fafbfc}
 details.theme>summary::-webkit-details-marker{display:none}
-summary .tt{font-size:14px;font-weight:800;display:flex;align-items:center;gap:9px}
-summary .tt::before{content:'';width:7px;height:7px;border-right:2px solid var(--acc);border-bottom:2px solid var(--acc);transform:rotate(-45deg);transition:transform .15s;margin-left:1px}
-details[open] summary .tt::before{transform:rotate(45deg)}
+summary .ticon{flex:none;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+summary .ticon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+summary .tt{font-size:14px;font-weight:800;flex:1;min-width:0}
+summary .tchev{flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .18s;margin-right:3px}
+details[open]>summary .tchev{transform:rotate(45deg)}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:start}
