@@ -243,30 +243,16 @@ def sport_section(sport, d, lang):
         +sections+footer(lang)+'</div></section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
-<<<<<<< Updated upstream
-=======
-# Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Fläche
+# Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Flaeche
 CONS_POS = [(12,52),(21,40),(30,62),(39,44),(48,66),(57,42),(66,64),(75,46),(84,66),(91,50),
             (70,80),(48,80)]
-CONS_PHASE = ["found","talent","elite","mast"]
 CONS_LINKS = [(1,3),(6,8)]
 
->>>>>>> Stashed changes
 def home_html(datamap, lang):
-    cards = ""
+    n = len(SPORTS)
+    nodes = ""
     for i, s in enumerate(SPORTS):
-        has = datamap[s["id"]] is not None
         name = tr(s["name"], lang)
-<<<<<<< Updated upstream
-        # Logo-Platz: sobald ein Sportarten-Logo vorliegt, in ftem_sports.json
-        # z. B. "icon": "logos/ski-alpin.svg" ergaenzen -> wird statt Kuerzel gezeigt
-        ico = s.get("icon")
-        ico_html = ('<img src="'+esc(ico)+'" alt="" loading="lazy">') if ico else esc(s["short"])
-        cards += ('<a class="card'+('' if has else ' nodata')+'" href="#'+s["id"]+'" style="animation-delay:'+str(i*50)+'ms">'
-                  '<span class="ab'+(' has-img' if ico else '')+'">'+ico_html+'</span>'
-                  '<span class="cn">'+esc(name)+'</span>'
-                  +('' if has else '<span class="tag">'+esc(NODATA[lang])+'</span>')+'</a>')
-=======
         x, y = CONS_POS[i % len(CONS_POS)]
         icon = s.get("icon")
         ticon = None
@@ -288,7 +274,6 @@ def home_html(datamap, lang):
             lines += ('<line class="cl2" x1="'+str(CONS_POS[a][0])+'" y1="'+str(CONS_POS[a][1])+
                       '" x2="'+str(CONS_POS[b][0])+'" y2="'+str(CONS_POS[b][1])+'" vector-effect="non-scaling-stroke"/>')
     lines += '</svg>'
->>>>>>> Stashed changes
     info = FTEM_INFO[lang]
     phase_cls = {"F":"p-f","T":"p-t","E":"p-e","M":"p-m"}
     phases = "".join('<div class="phase '+phase_cls[k]+'"><span class="pl">'+k+'</span>'
@@ -298,12 +283,18 @@ def home_html(datamap, lang):
                  '<h2>'+info["title"]+'</h2>'
                  '<p class="lead">'+info["lead"]+'</p>'
                  '<div class="phases">'+phases+'</div></div>')
-    return ('<section id="home"><div class="home-hero">'
-            '<h1>'+FTEM+' <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
-            '<p class="sub">'+esc(HOME_SUB[lang])+'</p>'
-            '<div class="hero-lang">'+lang_switch(lang)+'</div>'
-            '<div class="grid-sports">'+cards+'</div>'
-            +ftem_info+footer(lang)+'</div></section>')
+    return ('<section id="home">'
+            '<div class="home-hero">'
+            '<div class="hero-top">'+lang_switch(lang)+'</div>'
+            '<div class="hero-head"><h1>'+FTEM+'</h1>'
+            '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
+            '<div class="constellation">'+lines+nodes+'</div>'
+            '<button class="scrolldown" type="button" aria-label="nach unten scrollen" '
+            'onclick="document.querySelector(&#39;.home-info&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">&#9662;</button>'
+            '</div>'
+            '<div class="home-info">'+ftem_info+footer(lang)+'</div>'
+            '</section>')
+
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
@@ -323,27 +314,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
 .langsw a.active{background:var(--acc);color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
-<<<<<<< HEAD
-/* Startseite */
-#home .home-hero{max-width:980px;margin:0 auto;padding:60px 24px 30px;text-align:center}
-#home h1{font-size:30px;margin:0 0 6px;font-weight:800;color:var(--red);letter-spacing:.2px}
-#home h1 b{color:var(--ink);font-weight:800}
-#home .sub{color:var(--mut);font-size:14px;margin:0 0 18px}
-#home .hero-lang{display:flex;justify-content:center;margin:0 0 30px}
-.grid-sports{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;text-align:center}
-@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .18s,transform .18s,border-color .18s;animation:cardIn .45s ease both}
-.grid-sports .card:hover{border-color:#9aa5b1;box-shadow:0 10px 24px rgba(0,0,0,.10);transform:translateY(-4px) scale(1.02)}
-.grid-sports .ab{width:60px;height:60px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;overflow:hidden}
-.grid-sports .card:hover .ab{transform:scale(1.12) rotate(-6deg)}
-.grid-sports .ab.has-img{background:none;border:none}
-.grid-sports .ab img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.grid-sports .card.nodata .ab{background:#b6c0cc}
-.grid-sports .card.nodata .ab.has-img{background:none;filter:grayscale(1);opacity:.6}
-.grid-sports .cn{font-weight:800;font-size:13.5px}
-.grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
-=======
-/* Startseite – Neon-Konstellation */
+/* Startseite - Neon-Konstellation */
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(9,14,24,.66),rgba(12,17,28,.5) 45%,rgba(7,11,20,.9)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7}
@@ -364,7 +335,6 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .node{position:absolute;transform:translate(-50%,-50%);text-decoration:none;padding:12px;line-height:0;
   animation:nodeIn .6s ease both;animation-delay:var(--d,0ms)}
 @keyframes nodeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.3)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-/* nur schimmernde Punkte – alle im gleichen harmonischen FTEM-Farbmix */
 .node .dot{display:block;width:13px;height:13px;border-radius:50%;position:relative;transition:transform .22s ease;
   background:conic-gradient(from 0deg,#57cce4,#ffd45c,#ff9b57,#ff6d60,#57cce4);
   box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 0 11px 3px rgba(255,255,255,.4),0 0 24px 8px rgba(255,150,80,.42);
@@ -374,25 +344,19 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 @keyframes twk{0%,100%{box-shadow:0 0 6px 1px rgba(255,255,255,.22);opacity:.7}50%{box-shadow:0 0 16px 5px rgba(255,190,120,.5);opacity:1}}
 .node:hover,.node:focus-visible{z-index:9;outline:none}
 .node:hover .dot,.node:focus-visible .dot{transform:scale(1.45)}
-/* Sportname – immer sichtbar unter dem Punkt */
 .node .nlabel{position:absolute;top:calc(100% - 4px);left:50%;transform:translateX(-50%);
   font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:.02em;
   text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.7);pointer-events:none}
-/* Hover: freigestelltes weißes Sport-Piktogramm über dem Punkt */
 .node .nhover{position:absolute;bottom:calc(100% - 4px);left:50%;transform:translate(-50%,10px);
   display:flex;justify-content:center;width:110px;
   opacity:0;pointer-events:none;transition:opacity .22s,transform .22s}
 .node:hover .nhover,.node:focus-visible .nhover{opacity:1;transform:translate(-50%,0)}
 .node .nicon{width:74px;height:74px;object-fit:contain;filter:drop-shadow(0 3px 12px rgba(0,0,0,.55))}
-.scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:5;color:rgba(255,255,255,.7);font-size:24px;animation:bob 1.8s ease-in-out infinite}
+.scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:8;color:rgba(255,255,255,.85);font-size:24px;line-height:1;background:none;border:none;cursor:pointer;padding:6px 14px;animation:bob 1.8s ease-in-out infinite}
+.scrolldown:hover{color:#fff}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
-<<<<<<< Updated upstream
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:112px}#home .hero-head{padding-top:56px}}
->>>>>>> 02a87112fa56ddfdcde3d5c4a4a7ea537183ab60
-=======
 @media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:11px}#home .hero-head{padding-top:56px}}
->>>>>>> Stashed changes
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
