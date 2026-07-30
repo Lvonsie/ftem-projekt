@@ -27,10 +27,38 @@ def tr(s, lang):
         return s
     return TR.get(lang, {}).get(s, s)
 
-INTRO = {
- "de": 'Vollständige, strukturierte Übersicht des {name} <b>Athlet:innen-Wegs</b> aus dem Swiss-Ski FTEM-Tool: <b>{n} Themen</b> über die zehn Entwicklungsstufen <b>F1–M</b>. Links je Zeile eine fixe Beschriftung; lange Texte sind zusammengeklappt und mit «mehr» ausklappbar. Die Tabellen lassen sich seitlich scrollen.',
- "fr": 'Aperçu complet et structuré du <b>parcours de l&#x27;athlète</b> en {name}, issu de l&#x27;outil FTEM de Swiss-Ski : <b>{n} thèmes</b> à travers les dix niveaux de développement <b>F1–M</b>. À gauche de chaque ligne, un intitulé fixe ; les textes longs sont repliés et dépliables via « plus ». Les tableaux défilent latéralement.',
- "it": 'Panoramica completa e strutturata del <b>percorso dell&#x27;atleta</b> in {name}, dallo strumento FTEM di Swiss-Ski: <b>{n} temi</b> lungo i dieci livelli di sviluppo <b>F1–M</b>. A sinistra di ogni riga un&#x27;etichetta fissa; i testi lunghi sono compressi ed espandibili con «altro». Le tabelle scorrono lateralmente.',
+# Kurzbeschrieb "Was ist FTEM?" auf der Auswahlseite (mit Swiss Olympic)
+FTEM_INFO = {
+ "de": {
+   "title": "Was ist FTEM?",
+   "lead": 'FTEM ist das gemeinsame Rahmenkonzept von <b>Swiss Olympic</b> und <b>Swiss-Ski</b> für die langfristige Athlet:innen- und Sportentwicklung im Schneesport. Es beschreibt den ganzen Weg – vom ersten Schneekontakt bis zur Weltspitze – in vier Schlüsselphasen und zehn Entwicklungsstufen (F1–M).',
+   "phases": [
+     ("F","Foundation","F1–F3","Fundament legen: vielseitige Bewegungs- und Schneesport-Grundlagen erwerben, anwenden und festigen."),
+     ("T","Talent","T1–T4","Potenzial zeigen und entwickeln: Talente bestätigen sich, trainieren gezielt und schaffen den Durchbruch."),
+     ("E","Elite","E1–E2","Die Schweiz international vertreten: Weltcup, WM und Olympische Spiele auf Elite-Niveau."),
+     ("M","Mastery","M","Die Weltspitze prägen: über Jahre nachhaltig Erfolge auf höchstem Niveau."),
+   ],
+ },
+ "fr": {
+   "title": "Qu&#x27;est-ce que FTEM ?",
+   "lead": 'FTEM est le cadre de référence commun de <b>Swiss Olympic</b> et <b>Swiss-Ski</b> pour le développement à long terme des athlètes et du sport dans les sports de neige. Il décrit tout le parcours – du premier contact avec la neige jusqu&#x27;à l&#x27;élite mondiale – en quatre phases clés et dix niveaux de développement (F1–M).',
+   "phases": [
+     ("F","Foundation","F1–F3","Poser les bases : acquérir, appliquer et consolider des bases variées de mouvement et de sports de neige."),
+     ("T","Talent","T1–T4","Révéler et développer le potentiel : les talents se confirment, s&#x27;entraînent de manière ciblée et percent."),
+     ("E","Elite","E1–E2","Représenter la Suisse au niveau international : Coupe du monde, championnats du monde et Jeux olympiques."),
+     ("M","Mastery","M","Marquer l&#x27;élite mondiale : des succès durables au plus haut niveau pendant des années."),
+   ],
+ },
+ "it": {
+   "title": "Che cos&#x27;è FTEM?",
+   "lead": 'FTEM è il quadro di riferimento comune di <b>Swiss Olympic</b> e <b>Swiss-Ski</b> per lo sviluppo a lungo termine degli atleti e dello sport negli sport sulla neve. Descrive l&#x27;intero percorso – dal primo contatto con la neve fino all&#x27;élite mondiale – in quattro fasi chiave e dieci livelli di sviluppo (F1–M).',
+   "phases": [
+     ("F","Foundation","F1–F3","Costruire le basi: acquisire, applicare e consolidare basi motorie e di sport sulla neve variate."),
+     ("T","Talent","T1–T4","Mostrare e sviluppare il potenziale: i talenti si confermano, si allenano in modo mirato e sfondano."),
+     ("E","Elite","E1–E2","Rappresentare la Svizzera a livello internazionale: Coppa del Mondo, Mondiali e Giochi olimpici."),
+     ("M","Mastery","M","Segnare l&#x27;élite mondiale: successi duraturi al massimo livello per anni."),
+   ],
+ },
 }
 PLACE = {
  "de": 'Der Athlet:innen-Weg für <b>{name}</b> ist noch nicht erfasst – Inhalte folgen.<br><br>Sobald die Daten vorliegen, kommen sie in die Datei <code>{file}</code> und die Seite wird mit <code>python3 build.py</code> neu erzeugt.',
@@ -208,27 +236,37 @@ def sport_section(sport, d, lang):
         '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button></div></header>'
         '<div class="wrap">'
-        '<div class="intro">'+INTRO[lang].format(name=esc(name), n=n_themes)+
-        '<div class="legend"><span class="lg-f">F1–F3 · Foundation</span><span class="lg-t">T1–T4 · Talent</span><span class="lg-e">E1–E2 · Elite</span><span class="lg-m">M · Mastery</span></div></div>'
-        '<div class="hint">'+esc(tr("↔ Tabellen lassen sich seitlich scrollen · 📄 = externes Dokument", lang))+'</div>'
         +sections+footer(lang)+'</div></section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
 def home_html(datamap, lang):
     cards = ""
-    for s in SPORTS:
+    for i, s in enumerate(SPORTS):
         has = datamap[s["id"]] is not None
         name = tr(s["name"], lang)
-        cards += ('<a class="card'+('' if has else ' nodata')+'" href="#'+s["id"]+'">'
-                  '<span class="ab">'+esc(s["short"])+'</span>'
+        # Logo-Platz: sobald ein Sportarten-Logo vorliegt, in ftem_sports.json
+        # z. B. "icon": "logos/ski-alpin.svg" ergaenzen -> wird statt Kuerzel gezeigt
+        ico = s.get("icon")
+        ico_html = ('<img src="'+esc(ico)+'" alt="" loading="lazy">') if ico else esc(s["short"])
+        cards += ('<a class="card'+('' if has else ' nodata')+'" href="#'+s["id"]+'" style="animation-delay:'+str(i*50)+'ms">'
+                  '<span class="ab'+(' has-img' if ico else '')+'">'+ico_html+'</span>'
                   '<span class="cn">'+esc(name)+'</span>'
                   +('' if has else '<span class="tag">'+esc(NODATA[lang])+'</span>')+'</a>')
+    info = FTEM_INFO[lang]
+    phase_cls = {"F":"p-f","T":"p-t","E":"p-e","M":"p-m"}
+    phases = "".join('<div class="phase '+phase_cls[k]+'"><span class="pl">'+k+'</span>'
+                     '<span class="pn">'+pn+'</span><span class="pr">'+pr+'</span>'
+                     '<p>'+desc+'</p></div>' for k,pn,pr,desc in info["phases"])
+    ftem_info = ('<div class="ftem-info">'
+                 '<h2>'+info["title"]+'</h2>'
+                 '<p class="lead">'+info["lead"]+'</p>'
+                 '<div class="phases">'+phases+'</div></div>')
     return ('<section id="home"><div class="home-hero">'
             '<h1>'+FTEM+' <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
             '<p class="sub">'+esc(HOME_SUB[lang])+'</p>'
             '<div class="hero-lang">'+lang_switch(lang)+'</div>'
             '<div class="grid-sports">'+cards+'</div>'
-            +footer(lang)+'</div></section>')
+            +ftem_info+footer(lang)+'</div></section>')
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
@@ -252,12 +290,33 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 #home .sub{color:var(--mut);font-size:14px;margin:0 0 18px}
 #home .hero-lang{display:flex;justify-content:center;margin:0 0 30px}
 .grid-sports{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;text-align:center}
-.grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .15s,transform .15s,border-color .15s}
-.grid-sports .card:hover{border-color:var(--red);box-shadow:0 6px 18px rgba(0,0,0,.09);transform:translateY(-2px)}
-.grid-sports .ab{width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .18s,transform .18s,border-color .18s;animation:cardIn .45s ease both}
+.grid-sports .card:hover{border-color:var(--red);box-shadow:0 10px 24px rgba(213,43,30,.14);transform:translateY(-4px) scale(1.02)}
+.grid-sports .ab{width:60px;height:60px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;overflow:hidden}
+.grid-sports .card:hover .ab{transform:scale(1.12) rotate(-6deg)}
+.grid-sports .ab.has-img{background:#fff;border:1px solid var(--line)}
+.grid-sports .ab img{width:40px;height:40px;object-fit:contain}
 .grid-sports .card.nodata .ab{background:#b6c0cc}
+.grid-sports .card.nodata .ab.has-img{background:#fff;filter:grayscale(1);opacity:.6}
 .grid-sports .cn{font-weight:800;font-size:13.5px}
 .grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
+/* "Was ist FTEM?" */
+.ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
+.ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
+.ftem-info .lead{color:var(--mut);font-size:13px;line-height:1.6;margin:0 0 18px}
+.ftem-info .lead b{color:var(--ink)}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.phase{border:1px solid var(--line);border-radius:12px;border-top:4px solid;padding:13px 14px 11px;transition:transform .16s,box-shadow .16s}
+.phase:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.08)}
+.phase .pl{font-size:22px;font-weight:900;margin-right:7px}
+.phase .pn{font-weight:800;font-size:13.5px}
+.phase .pr{float:right;font-size:10.5px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 8px;margin-top:4px}
+.phase p{margin:7px 0 0;font-size:12px;color:var(--mut);line-height:1.5}
+.p-f{border-top-color:var(--found)}.p-f .pl{color:var(--found)}
+.p-t{border-top-color:var(--talent)}.p-t .pl{color:var(--talent)}
+.p-e{border-top-color:var(--elite)}.p-e .pl{color:var(--elite)}
+.p-m{border-top-color:var(--mast)}.p-m .pl{color:var(--mast)}
 /* Sport-Ansicht */
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;height:var(--top)}
 header.top .back{font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 13px;white-space:nowrap}
