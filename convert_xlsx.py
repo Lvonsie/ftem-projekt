@@ -46,6 +46,43 @@ def group_of(topic_key, topic, group_key):
         return "Sport & Athlet:in"
     return "Strukturen & Umfeld"
 
+# Einheitliche Reihenfolge der Themen in "Sport & Athlet:in" (ueber alle Sportarten).
+# Nicht aufgefuehrte Themen (z. B. SL/RS/Speed, Cross-Bloecke, Akrobatik, Technik)
+# kommen danach in ihrer Original-Reihenfolge aus dem Excel.
+def sport_prio(title):
+    t = title.strip()
+    tests = [
+        t.startswith("Trainingsstunden"),
+        t.startswith("Makroplanung"),
+        t == "Ernährung",
+        t == "Schlaf",
+        t == "Psyche",
+        t == "Ausdauer",
+        t.startswith("Mobilität"),
+        t.startswith("Koordination"),          # Skispringen/NoKo: zwischen Mobilität und Kraft
+        t.startswith("Kraft"),
+        t.replace("&", "und").startswith("Schnelligkeit und Agilität"),
+        t == "Schnelligkeit",
+        t == "Schiessen",                      # Biathlon: vor Technik & Taktik Übergeordnet
+        t == "Technik & Taktik Übergeordnet",
+    ]
+    for i, hit in enumerate(tests):
+        if hit: return i
+    return len(tests)
+
+# Einheitliche Reihenfolge in "Strukturen & Umfeld"
+def struct_prio(title):
+    t = title.strip().replace(" und ", " & ")
+    tests = [
+        t == "Fördergefässe",
+        t.startswith("Förderstrukturen"),
+        t == "Selektionen",
+        t == "Umfeldmanagement",
+    ]
+    for i, hit in enumerate(tests):
+        if hit: return i
+    return len(tests)
+
 def convert(xlsx_path, sport_id):
     wb = openpyxl.load_workbook(xlsx_path, data_only=True)
     ws = wb["detail"]
@@ -87,6 +124,16 @@ def convert(xlsx_path, sport_id):
             else:
                 segs.append({"v": v, "from": i, "to": i, "l": links})
         by_title[topic]["rows"].append({"label": label or None, "segs": segs})
+    # Einheitliche Themen-Reihenfolge: Sport & Athlet:in sortiert, dann Material,
+    # dann Strukturen & Umfeld sortiert (stabil: Unbekanntes behaelt Excel-Reihenfolge)
+    sa = [t for t in themes if t["group"] == "Sport & Athlet:in"]
+    ma = [t for t in themes if t["group"] == "Material"]
+    su = [t for t in themes if t["group"] == "Strukturen & Umfeld"]
+    rest = [t for t in themes if t["group"] not in ("Sport & Athlet:in", "Material", "Strukturen & Umfeld")]
+    sa.sort(key=lambda t: sport_prio(t["title"]))
+    su.sort(key=lambda t: struct_prio(t["title"]))
+    themes = sa + ma + su + rest
+
     data = {"stages": STAGES, "ages": ages, "themes": themes}
     out = os.path.join(BASE, "ftem_data_" + sport_id + ".json")
     json.dump(data, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

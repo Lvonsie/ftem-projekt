@@ -248,7 +248,7 @@ def sport_section(sport, d, lang):
 # ueber den linken Grat zum Gipfelbereich, rechts wieder abfallend.
 # Strenges Zickzack (Gipfel/Tal im Wechsel): so laufen die Linien immer VON der
 # Beschriftung weg und keine Schrift kreuzt eine Linie.
-CONS_POS = [(7,68),(14,40),(22,63),(29,25),(37,56),(44,38),(55,64),(66,30),(77,59),(89,33)]
+CONS_POS = [(7,74),(14,49),(22,71),(29,35),(37,64),(44,48),(55,72),(66,40),(77,67),(89,43)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
 # 0 ski-alpin,1 langlauf,2 biathlon,3 skispringen,4 nord.komb,5 skicross,
 # 6 freeski-pp,7 sb-alpin,8 sb-cross,9 sb-pp

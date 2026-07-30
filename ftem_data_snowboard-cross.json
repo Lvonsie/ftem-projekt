@@ -25,85 +25,6 @@
  },
  "themes": [
   {
-   "title": "Fördergefässe",
-   "group": "Strukturen & Umfeld",
-   "rows": [
-    {
-     "label": "Trägerschaft",
-     "segs": [
-      {
-       "v": "Familie, Schule & Sportclubs",
-       "from": 0,
-       "to": 0,
-       "l": [
-        {
-         "text": "Unsere Schneesportclubs",
-         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
-        }
-       ]
-      },
-      {
-       "v": "Familie, Schule,Skiclub/Sportclubs",
-       "from": 1,
-       "to": 1,
-       "l": [
-        {
-         "text": "Unsere Schneesportclubs",
-         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
-        }
-       ]
-      },
-      {
-       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs",
-       "from": 2,
-       "to": 2,
-       "l": [
-        {
-         "text": "Unsere Schneesportclubs",
-         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
-        }
-       ]
-      },
-      {
-       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule",
-       "from": 3,
-       "to": 4,
-       "l": [
-        {
-         "text": "Unsere Schneesportclubs",
-         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
-        }
-       ]
-      },
-      {
-       "v": "RV, NLZ, C-Kader, Sportschule",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "NLZ, Swiss-Ski Kader, RV, Sportschule",
-       "from": 6,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "Swiss-Ski Kader",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "Swiss Ski Kader NM",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
-  },
-  {
    "title": "Trainingsstunden und Entwicklungsfokus",
    "group": "Sport & Athlet:in",
    "rows": [
@@ -442,6 +363,341 @@
        "from": 3,
        "to": 9,
        "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Ernährung",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) Ernährung",
+     "segs": [
+      {
+       "v": "SC 1: Kinder schätzen, wie viel sie pro Training trinken sollten und überprüfen es (z.B. durch Markierungen an der Trinkflasche).\nSC 2: Kinder prüfen selbstständig, ob alle wichtigen Items dabei sind (Taschencheck).",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC: Einen Tag bezüglich Ernährung dokumentieren und diskutieren: Essen, Trinken und Snacks.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC: Selbständig eine Mahlzeit/Snack für vor, während und nach dem Training/Wettkampf zusammenstellen und diskutieren.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC: Mit verschiedenen Snacks, Trinkstrategien oder Mahlzeiten vor/während/nach dem Training/Wettkampf experimentieren und individuell anpassen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC 1: Ernährung und Hydration unter Wettkampfbedingungen testen (z.B. Gels, isotonische Getränke während Belastung).\nSC 2: Flüssigkeitsverlust, Energiebedarf und Regeneration dokumentieren und auswerten.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Flüssigkeit",
+     "segs": [
+      {
+       "v": "Ziel\nFörderung gesunder Gewohnheiten im Alltag. Eltern einbinden mit Tipps oder Workshops.\n\nSportaschen-Checkliste implementieren\nWasserflasche, Snackbox und Wechselkleidung.\n\nBewusste Snack- und Trinkpausen im Training einbauen\nErklärungen geben (pro h Training = 500 ml Wasser oder verdünnter Saft)\n\nKochen im Team\nGemeinsame Snack-Zubereitung oder Kochkurse.",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziel\nGrundverständnis für ausgewogene Ernährung. Förderung gesunder Gewohnheiten im Alltag. Verbindung zwischen Ernährung, Energie für Sport und Schule.\n\nAusgewogene Ernährung\n½ Gemüse/Obst, ¼ Kohlenhydrate, ¼ Eiweiss bei jeder Mahlzeit.\n\nTrinken\nWasser als Hauptgetränk, ca. 1,5–2 l täglich, mehr bei Training.\n\nRegelmässige Mahlzeiten\nFrühstück, Mittagessen, Abendessen und 2 gesunde Snacks (z.B. Obst, Nüsse).\n\nVorbereitung\nSnacks und Wasserflasche zum Training mitbringen.",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziel\nBewusstheit und Anpassung stärken Verständnis für Makronährstoffe (Kohlenhydrate, Eiweiss, Fett) und Flüssigkeitsbedarf vertiefen.\n\nVor dem Training\n1–2h vorher ca. 500 ml Wasser trinken. Bei Hize oder viel Salzverlust leicht salzige Getränke verwenden (1x Prise Salz).\n\nWährend des Trainings\nAlle 15–20' 150–200 ml trinken, >1h Belastung zusätzliche Kohlenhydrate beigeben (z.B. verdünnte Fruchtsäfte).\n\nNach dem Training\n0.5-1 l Flüssigkeit innerhalb von 30'. Bei intens. Belastungen Elektrolytgetränke oder leicht salziges Wasser verwenden.",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Essen",
+     "segs": [
+      {
+       "v": "Ziel\nFörderung gesunder Gewohnheiten im Alltag. Eltern einbinden mit Tipps oder Workshops.\n\nSportaschen-Checkliste implementieren\nWasserflasche, Snackbox und Wechselkleidung.\n\nBewusste Snack- und Trinkpausen im Training einbauen\nErklärungen geben (pro h Training = 500 ml Wasser oder verdünnter Saft)\n\nKochen im Team\nGemeinsame Snack-Zubereitung oder Kochkurse.",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziel\nGrundverständnis für ausgewogene Ernährung. Förderung gesunder Gewohnheiten im Alltag. Verbindung zwischen Ernährung, Energie für Sport und Schule.\n\nAusgewogene Ernährung\n½ Gemüse/Obst, ¼ Kohlenhydrate, ¼ Eiweiss bei jeder Mahlzeit.\n\nTrinken\nWasser als Hauptgetränk, ca. 1,5–2 l täglich, mehr bei Training.\n\nRegelmässige Mahlzeiten\nFrühstück, Mittagessen, Abendessen und 2 gesunde Snacks (z.B. Obst, Nüsse).\n\nVorbereitung\nSnacks und Wasserflasche zum Training mitbringen.",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Vor dem Training\n2–3h vorher: Kohlenhydratreiche, leicht verdauliche Mahlzeit (z.B. Vollkornbrot mit Honig). 30' vorher: Kleiner Snack (z.B. Banane)\n\nWährend des Trainings (>1h Belastung)\n30–60 g Kohlenhydrate pro h (z.B. Energieriegel, Trockenfrüchte)\n\nNach dem Training\nInnerhalb von 30': Snack mit Kohlenhydraten und Eiweiss (z. B. Joghurt mit Obst, Milchshake).\n\nHauptmahlzeit: Ausgewogen mit Kohlenhydraten (z.B. Reis, Nudeln), Eiweiss (z. B. Huhn, Linsen) und Gemüse.",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Schlaf",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) Schlaf",
+     "segs": [
+      {
+       "v": "SC: Fragen an die Kinder: Wie viele Stunden Schlaf brauchen wir? Was hilft uns besser zu schlafen?",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC: Eine Woche lang Schlafdauer und wie sie sich am nächsten Tag fühlen dokumentieren.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC: Vor dem Schlafen Atemtechniken oder progressive Muskelrelaxation (PMR) ausprobieren.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC 1: Schlafdauer und Qualität eine Woche lang dokumentieren, zusammen mit der Trainingsleistung.\nSC 2: Abendroutinen reflektieren und Anpassungen vornehmen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC 1: Plan für Schlaf- und Essenszeiten vor einem Wettkampf erstellen und umsetzen.\nSC 2: Gedanken vor dem Schlaf „parken“, z.B. durch Aufschreiben oder Atemübungen (Grübelstopp)",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Schlaf",
+     "segs": [
+      {
+       "v": "Schlafdauer: 8–10h/Nacht\nSchlaf fördert Konzentration, Energie und Regeneration.",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Schlafdauer\n8–10h/Nacht\n\nRoutine\nGleiche Schlafenszeiten, auch am Wochenende.\n\nEntspannung\n1h vor dem Schlafen Bildschirme meiden, Rituale wie Lesen oder Atemübungen einführen.\n\nSchlafumgebung\nDunkel, kühl, ruhig (16–18°C).",
+       "from": 3,
+       "to": 4,
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
+      },
+      {
+       "v": "Regelmässige Schlafzeiten\nEntspannungsrituale einbauen\n\nGrübelstopp\nBei längerer Wachzeit aufstehen. Gedanken aufschreiben, um den Kopf zu entlasten. Negative Gedanken über Schlaf in positive Überzeugungen umwandeln.\n\nOptimierter Einsatz von Koffein und Hilfsmitteln\nWirkung beachten (HWZ 6h, verstärkte Wirkung bei Jugendlichen), mind. 6h vor dem Schlaf meiden. Augenmasken, Gehörschutz etc. verwenden.\n\nPowernaps einplanen\nKurze Nickerchen von 10–15' zur Regeneration, ideal nach dem Mittagessen.\n\nAnpassungen bei Reisen und Wettkämpfen\nSchlaf- und Essenszeiten an Zeitverschiebungen anpassen. Strategien gegen Jetlag nutzen.",
+       "from": 5,
+       "to": 6,
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
+      },
+      {
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
+       "from": 7,
+       "to": 9,
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Psyche",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) Psyche",
+     "segs": [
+      {
+       "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "SC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC: Athleten:innen machen eine Aufgabe (z.B. Technikübung) mit Ablenkungen (z.B. Lärm): Fähigkeit testen, Konzentration zu halten.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC 1: Athleten:innen formulieren ein kleines Ziel für das Training und erklären, warum es ihnen wichtig ist.\nSC 2: Simulierte Stresssituation (z.B Wettkampfsimulation). Kinder sollen bewusst Techniken (z.B. Atmung) einsetzen, um „grün“ zu erreichen.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC: Athleten:innen beschreiben eine Bestleistung: „Wie hast du dich gefühlt?“: Merkmale des persönlichen optimalen Leistungszustand identifizieren und  anwenden.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Während z.B. Intervalltraining bewusst Atemtechniken nutzen, um Ruhe zu bewahren.\nSC 3: Vor einer Technikaufgabe den Ablauf mental durchspielen.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Bei einer schwierigen Aufgabe (z.B. Zeitdruck) positive Selbstgespräche anwenden.\nSC 3: Technikübung mit eingebauten Ablenkungen durchführen.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Psyche",
+     "segs": [
+      {
+       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen",
+       "from": 0,
+       "to": 1,
+       "l": [
+        {
+         "text": "F1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5"
+        },
+        {
+         "text": "F2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/JptDIQmL"
+        }
+       ]
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative fördern",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "F3 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP"
+        }
+       ]
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "from": 3,
+       "to": 6,
+       "l": [
+        {
+         "text": "T1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9"
+        },
+        {
+         "text": "T2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/6bNaH29j"
+        },
+        {
+         "text": "T3 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ"
+        },
+        {
+         "text": "T4 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv"
+        }
+       ]
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "E1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj"
+        },
+        {
+         "text": "E2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L"
+        }
+       ]
+      },
+      {
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "from": 9,
+       "to": 9,
+       "l": [
+        {
+         "text": "M Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/vR3SemYC"
+        }
+       ]
       }
      ]
     }
@@ -1504,56 +1760,97 @@
    ]
   },
   {
-   "title": "Psyche",
-   "group": "Sport & Athlet:in",
+   "title": "Material",
+   "group": "Material",
    "rows": [
     {
-     "label": "Skills-Checks (SC) Psyche",
+     "label": "Off Snow",
      "segs": [
       {
-       "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\n\nMiete bei Bedarf:\nHelm\n1x Inlineskates\n1x Mountainbike\n1x Skateboard",
        "from": 0,
        "to": 0,
        "l": []
       },
       {
-       "v": "SC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n\nÜbernommenes Material:\n1x Inlineskates\n\nMiete bei Bedarf:\n1x Mountainbike\n1x Skateboard",
        "from": 1,
        "to": 1,
        "l": []
       },
       {
-       "v": "SC: Athleten:innen machen eine Aufgabe (z.B. Technikübung) mit Ablenkungen (z.B. Lärm): Fähigkeit testen, Konzentration zu halten.",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n\nÜbernommenes Material:\n1x Inlineskates\n1x Mountainbike\n\nMiete bei Bedarf:\n1x Skateboard",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "SC 1: Athleten:innen formulieren ein kleines Ziel für das Training und erklären, warum es ihnen wichtig ist.\nSC 2: Simulierte Stresssituation (z.B Wettkampfsimulation). Kinder sollen bewusst Techniken (z.B. Atmung) einsetzen, um „grün“ zu erreichen.",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n\nMiete bei Bedarf:\n1x Inliune Skates",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "SC: Athleten:innen beschreiben eine Bestleistung: „Wie hast du dich gefühlt?“: Merkmale des persönlichen optimalen Leistungszustand identifizieren und  anwenden.",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n\nÜbernommenes Material:\nPulsuhr\n\nMiete bei Bedarf:\n1x Inlineskates",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Während z.B. Intervalltraining bewusst Atemtechniken nutzen, um Ruhe zu bewahren.\nSC 3: Vor einer Technikaufgabe den Ablauf mental durchspielen.",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\nPulsuhr\n\nMiete bei Bedarf:\n1x Inlineskates",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Bei einer schwierigen Aufgabe (z.B. Zeitdruck) positive Selbstgespräche anwenden.\nSC 3: Technikübung mit eingebauten Ablenkungen durchführen.",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
+       "from": 6,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "On Snow Allgemein",
+     "segs": [
+      {
+       "v": "Helm\n\n1x Snowboard\n1x Snowboardschuhe\n\nMaterial kann/soll gemietet oder übernommen werden.",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Helm\n\n1x Snowboard\n1x Snowboardschuhe\nRückenpanzer\n\nMaterial kann/soll gemietet oder übernommen werden.",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Helm\n\n1x Snowboard Freestyle\n1x Snowboard Rennen\n1x Snowboardschuhe\nRückenpanzer\n\nMaterial kann übernommen werden",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n2x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\n\nMaterial kann übernommen werden",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n2x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n3x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "",
+       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n4x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
        "from": 7,
        "to": 9,
        "l": []
@@ -1561,278 +1858,114 @@
      ]
     },
     {
-     "label": "Inhalt Psyche",
+     "label": "Slalom (SL)",
      "segs": [
       {
-       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen",
+       "v": "",
        "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Riesenslalom (RS)",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Speed (SG/DH)",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Fördergefässe",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Trägerschaft",
+     "segs": [
+      {
+       "v": "Familie, Schule & Sportclubs",
+       "from": 0,
+       "to": 0,
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
+      },
+      {
+       "v": "Familie, Schule,Skiclub/Sportclubs",
+       "from": 1,
        "to": 1,
        "l": [
         {
-         "text": "F1 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5"
-        },
-        {
-         "text": "F2 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/JptDIQmL"
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
         }
        ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative fördern",
+       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs",
        "from": 2,
        "to": 2,
        "l": [
         {
-         "text": "F3 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP"
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
         }
        ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule",
        "from": 3,
-       "to": 6,
+       "to": 4,
        "l": [
         {
-         "text": "T1 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9"
-        },
-        {
-         "text": "T2 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/6bNaH29j"
-        },
-        {
-         "text": "T3 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ"
-        },
-        {
-         "text": "T4 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv"
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
         }
        ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "v": "RV, NLZ, C-Kader, Sportschule",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "NLZ, Swiss-Ski Kader, RV, Sportschule",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Swiss-Ski Kader",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "E1 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj"
-        },
-        {
-         "text": "E2 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L"
-        }
-       ]
+       "l": []
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "v": "Swiss Ski Kader NM",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "M Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/vR3SemYC"
-        }
-       ]
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "title": "Ernährung",
-   "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Skills-Checks (SC) Ernährung",
-     "segs": [
-      {
-       "v": "SC 1: Kinder schätzen, wie viel sie pro Training trinken sollten und überprüfen es (z.B. durch Markierungen an der Trinkflasche).\nSC 2: Kinder prüfen selbstständig, ob alle wichtigen Items dabei sind (Taschencheck).",
-       "from": 0,
-       "to": 2,
        "l": []
-      },
-      {
-       "v": "SC: Einen Tag bezüglich Ernährung dokumentieren und diskutieren: Essen, Trinken und Snacks.",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "SC: Selbständig eine Mahlzeit/Snack für vor, während und nach dem Training/Wettkampf zusammenstellen und diskutieren.",
-       "from": 4,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "SC: Mit verschiedenen Snacks, Trinkstrategien oder Mahlzeiten vor/während/nach dem Training/Wettkampf experimentieren und individuell anpassen.",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "SC 1: Ernährung und Hydration unter Wettkampfbedingungen testen (z.B. Gels, isotonische Getränke während Belastung).\nSC 2: Flüssigkeitsverlust, Energiebedarf und Regeneration dokumentieren und auswerten.",
-       "from": 6,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Flüssigkeit",
-     "segs": [
-      {
-       "v": "Ziel\nFörderung gesunder Gewohnheiten im Alltag. Eltern einbinden mit Tipps oder Workshops.\n\nSportaschen-Checkliste implementieren\nWasserflasche, Snackbox und Wechselkleidung.\n\nBewusste Snack- und Trinkpausen im Training einbauen\nErklärungen geben (pro h Training = 500 ml Wasser oder verdünnter Saft)\n\nKochen im Team\nGemeinsame Snack-Zubereitung oder Kochkurse.",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "Ziel\nGrundverständnis für ausgewogene Ernährung. Förderung gesunder Gewohnheiten im Alltag. Verbindung zwischen Ernährung, Energie für Sport und Schule.\n\nAusgewogene Ernährung\n½ Gemüse/Obst, ¼ Kohlenhydrate, ¼ Eiweiss bei jeder Mahlzeit.\n\nTrinken\nWasser als Hauptgetränk, ca. 1,5–2 l täglich, mehr bei Training.\n\nRegelmässige Mahlzeiten\nFrühstück, Mittagessen, Abendessen und 2 gesunde Snacks (z.B. Obst, Nüsse).\n\nVorbereitung\nSnacks und Wasserflasche zum Training mitbringen.",
-       "from": 3,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "Ziel\nBewusstheit und Anpassung stärken Verständnis für Makronährstoffe (Kohlenhydrate, Eiweiss, Fett) und Flüssigkeitsbedarf vertiefen.\n\nVor dem Training\n1–2h vorher ca. 500 ml Wasser trinken. Bei Hize oder viel Salzverlust leicht salzige Getränke verwenden (1x Prise Salz).\n\nWährend des Trainings\nAlle 15–20' 150–200 ml trinken, >1h Belastung zusätzliche Kohlenhydrate beigeben (z.B. verdünnte Fruchtsäfte).\n\nNach dem Training\n0.5-1 l Flüssigkeit innerhalb von 30'. Bei intens. Belastungen Elektrolytgetränke oder leicht salziges Wasser verwenden.",
-       "from": 5,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
-       "from": 7,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Essen",
-     "segs": [
-      {
-       "v": "Ziel\nFörderung gesunder Gewohnheiten im Alltag. Eltern einbinden mit Tipps oder Workshops.\n\nSportaschen-Checkliste implementieren\nWasserflasche, Snackbox und Wechselkleidung.\n\nBewusste Snack- und Trinkpausen im Training einbauen\nErklärungen geben (pro h Training = 500 ml Wasser oder verdünnter Saft)\n\nKochen im Team\nGemeinsame Snack-Zubereitung oder Kochkurse.",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "Ziel\nGrundverständnis für ausgewogene Ernährung. Förderung gesunder Gewohnheiten im Alltag. Verbindung zwischen Ernährung, Energie für Sport und Schule.\n\nAusgewogene Ernährung\n½ Gemüse/Obst, ¼ Kohlenhydrate, ¼ Eiweiss bei jeder Mahlzeit.\n\nTrinken\nWasser als Hauptgetränk, ca. 1,5–2 l täglich, mehr bei Training.\n\nRegelmässige Mahlzeiten\nFrühstück, Mittagessen, Abendessen und 2 gesunde Snacks (z.B. Obst, Nüsse).\n\nVorbereitung\nSnacks und Wasserflasche zum Training mitbringen.",
-       "from": 3,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "Vor dem Training\n2–3h vorher: Kohlenhydratreiche, leicht verdauliche Mahlzeit (z.B. Vollkornbrot mit Honig). 30' vorher: Kleiner Snack (z.B. Banane)\n\nWährend des Trainings (>1h Belastung)\n30–60 g Kohlenhydrate pro h (z.B. Energieriegel, Trockenfrüchte)\n\nNach dem Training\nInnerhalb von 30': Snack mit Kohlenhydraten und Eiweiss (z. B. Joghurt mit Obst, Milchshake).\n\nHauptmahlzeit: Ausgewogen mit Kohlenhydraten (z.B. Reis, Nudeln), Eiweiss (z. B. Huhn, Linsen) und Gemüse.",
-       "from": 5,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
-       "from": 7,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "title": "Schlaf",
-   "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Skills-Checks (SC) Schlaf",
-     "segs": [
-      {
-       "v": "SC: Fragen an die Kinder: Wie viele Stunden Schlaf brauchen wir? Was hilft uns besser zu schlafen?",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "SC: Eine Woche lang Schlafdauer und wie sie sich am nächsten Tag fühlen dokumentieren.",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "SC: Vor dem Schlafen Atemtechniken oder progressive Muskelrelaxation (PMR) ausprobieren.",
-       "from": 4,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "SC 1: Schlafdauer und Qualität eine Woche lang dokumentieren, zusammen mit der Trainingsleistung.\nSC 2: Abendroutinen reflektieren und Anpassungen vornehmen.",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "SC 1: Plan für Schlaf- und Essenszeiten vor einem Wettkampf erstellen und umsetzen.\nSC 2: Gedanken vor dem Schlaf „parken“, z.B. durch Aufschreiben oder Atemübungen (Grübelstopp)",
-       "from": 6,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Inhalt Schlaf",
-     "segs": [
-      {
-       "v": "Schlafdauer: 8–10h/Nacht\nSchlaf fördert Konzentration, Energie und Regeneration.",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "Schlafdauer\n8–10h/Nacht\n\nRoutine\nGleiche Schlafenszeiten, auch am Wochenende.\n\nEntspannung\n1h vor dem Schlafen Bildschirme meiden, Rituale wie Lesen oder Atemübungen einführen.\n\nSchlafumgebung\nDunkel, kühl, ruhig (16–18°C).",
-       "from": 3,
-       "to": 4,
-       "l": [
-        {
-         "text": "Gesundheit & Entwicklung",
-         "href": "https://snowsports.flink.host/s/57HHXkh9/"
-        }
-       ]
-      },
-      {
-       "v": "Regelmässige Schlafzeiten\nEntspannungsrituale einbauen\n\nGrübelstopp\nBei längerer Wachzeit aufstehen. Gedanken aufschreiben, um den Kopf zu entlasten. Negative Gedanken über Schlaf in positive Überzeugungen umwandeln.\n\nOptimierter Einsatz von Koffein und Hilfsmitteln\nWirkung beachten (HWZ 6h, verstärkte Wirkung bei Jugendlichen), mind. 6h vor dem Schlaf meiden. Augenmasken, Gehörschutz etc. verwenden.\n\nPowernaps einplanen\nKurze Nickerchen von 10–15' zur Regeneration, ideal nach dem Mittagessen.\n\nAnpassungen bei Reisen und Wettkämpfen\nSchlaf- und Essenszeiten an Zeitverschiebungen anpassen. Strategien gegen Jetlag nutzen.",
-       "from": 5,
-       "to": 6,
-       "l": [
-        {
-         "text": "Gesundheit & Entwicklung",
-         "href": "https://snowsports.flink.host/s/57HHXkh9/"
-        }
-       ]
-      },
-      {
-       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
-       "from": 7,
-       "to": 9,
-       "l": [
-        {
-         "text": "Gesundheit & Entwicklung",
-         "href": "https://snowsports.flink.host/s/57HHXkh9/"
-        }
-       ]
       }
      ]
     }
@@ -2236,139 +2369,6 @@
       {
        "v": "3 Hochschultypen mit Bachelor- & Masterstudiengänge (mit Fernlösungen)\nFachhochschulen FH\nPädagogische Hochschulen PH\nUniversitäre Hochschulen",
        "from": 7,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "title": "Material",
-   "group": "Material",
-   "rows": [
-    {
-     "label": "Off Snow",
-     "segs": [
-      {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\n\nMiete bei Bedarf:\nHelm\n1x Inlineskates\n1x Mountainbike\n1x Skateboard",
-       "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n\nÜbernommenes Material:\n1x Inlineskates\n\nMiete bei Bedarf:\n1x Mountainbike\n1x Skateboard",
-       "from": 1,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n\nÜbernommenes Material:\n1x Inlineskates\n1x Mountainbike\n\nMiete bei Bedarf:\n1x Skateboard",
-       "from": 2,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n\nMiete bei Bedarf:\n1x Inliune Skates",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n\nÜbernommenes Material:\nPulsuhr\n\nMiete bei Bedarf:\n1x Inlineskates",
-       "from": 4,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\nPulsuhr\n\nMiete bei Bedarf:\n1x Inlineskates",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
-       "from": 6,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "On Snow Allgemein",
-     "segs": [
-      {
-       "v": "Helm\n\n1x Snowboard\n1x Snowboardschuhe\n\nMaterial kann/soll gemietet oder übernommen werden.",
-       "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "Helm\n\n1x Snowboard\n1x Snowboardschuhe\nRückenpanzer\n\nMaterial kann/soll gemietet oder übernommen werden.",
-       "from": 1,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "Helm\n\n1x Snowboard Freestyle\n1x Snowboard Rennen\n1x Snowboardschuhe\nRückenpanzer\n\nMaterial kann übernommen werden",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n2x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\n\nMaterial kann übernommen werden",
-       "from": 4,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n2x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n3x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
-       "from": 6,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n4x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
-       "from": 7,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Slalom (SL)",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Riesenslalom (RS)",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Speed (SG/DH)",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
        "to": 9,
        "l": []
       }
