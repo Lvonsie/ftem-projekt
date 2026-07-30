@@ -5,68 +5,67 @@
       "name": "Ski Alpin",
       "short": "SA",
       "icon": "icons/ski-alpin.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/alpine-ski"
+      "mission": "https://snowsports.flink.host/s/iFt05YOw/"
     },
     {
       "id": "langlauf",
       "name": "Langlauf",
       "short": "LL",
       "icon": "icons/langlauf.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/cross-country"
+      "mission": "https://snowsports.flink.host/s/0QOLfudd/"
     },
     {
       "id": "biathlon",
       "name": "Biathlon",
       "short": "BI",
       "icon": "icons/biathlon.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/biathlon"
+      "mission": "https://snowsports.flink.host/s/DUs2W0eD/"
     },
     {
       "id": "skispringen",
       "name": "Skispringen",
       "short": "SP",
       "icon": "icons/skispringen.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/ski-jumping"
+      "mission": "https://snowsports.flink.host/s/FBDQQ9AP/"
     },
     {
       "id": "nordische-kombination",
       "name": "Nordische Kombination",
       "short": "NK",
-      "icon": "icons/nordische-kombination.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/nordic-combined"
+      "icon": "icons/nordische-kombination.jpg"
     },
     {
       "id": "skicross",
       "name": "Skicross",
       "short": "SX",
       "icon": "icons/skicross.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/ski-cross"
+      "mission": "https://snowsports.flink.host/s/8RhLL4D6/"
     },
     {
       "id": "freeski-park-pipe",
       "name": "Freeski Park & Pipe",
       "short": "FK",
       "icon": "icons/freeski-park-pipe.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/freeski-park-pipe"
+      "mission": "https://snowsports.flink.host/s/R7EVNr6x/"
     },
     {
       "id": "snowboard-alpin",
       "name": "Snowboard Alpin",
       "short": "SBA",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/snowboard-alpine"
+      "mission": "https://snowsports.flink.host/s/1nwko22K/"
     },
     {
       "id": "snowboard-cross",
       "name": "Snowboard Cross",
       "short": "SBX",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/snowboard-cross"
+      "mission": "https://snowsports.flink.host/s/0q2Deqp2/"
     },
     {
       "id": "snowboard-park-pipe",
       "name": "Snowboard Park & Pipe",
       "short": "SBP",
       "icon": "icons/snowboard-park-pipe.jpg",
-      "mission": "https://my.ftem.swiss-ski.ch/dashboard/snowboard-park-pipe"
+      "mission": "https://snowsports.flink.host/s/R7EVNr6x/"
     }
   ]
 }

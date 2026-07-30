@@ -38,6 +38,10 @@ def clean(v):
 def group_of(topic_key, topic, group_key):
     if topic_key == "equipment" or topic.strip() == "Material":
         return "Material"
+    # Persoenliche Themen gehoeren immer zu "Sport & Athlet:in", auch wenn sie im
+    # Excel (z. B. Biathlon) unter health_and_development einsortiert sind.
+    if topic_key in ("sleep", "nutrition", "psyche") or topic.strip() in ("Schlaf", "Ernährung", "Psyche"):
+        return "Sport & Athlet:in"
     if group_key == "training":
         return "Sport & Athlet:in"
     return "Strukturen & Umfeld"

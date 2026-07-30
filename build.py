@@ -246,7 +246,9 @@ def sport_section(sport, d, lang):
 # Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Flaeche
 # Entlang der Bergsilhouette von hero.jpg: unten links im Vorgelaende startend,
 # ueber den linken Grat zum Gipfelbereich, rechts wieder abfallend.
-CONS_POS = [(8,64),(15,53),(21,44),(28,30),(37,43),(46,38),(60,34),(69,43),(80,30),(91,45)]
+# Strenges Zickzack (Gipfel/Tal im Wechsel): so laufen die Linien immer VON der
+# Beschriftung weg und keine Schrift kreuzt eine Linie.
+CONS_POS = [(7,68),(14,40),(22,63),(29,25),(37,56),(44,38),(55,64),(66,30),(77,59),(89,33)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
 # 0 ski-alpin,1 langlauf,2 biathlon,3 skispringen,4 nord.komb,5 skicross,
 # 6 freeski-pp,7 sb-alpin,8 sb-cross,9 sb-pp
@@ -313,7 +315,7 @@ def home_html(datamap, lang):
         mission = s.get("mission")
         pop = ('<span class="npop">'
                '<a href="#'+s["id"]+'">'+esc(tr("Athlet:innen-Weg", lang))+'</a>'
-               + (('<a href="'+esc(mission)+'?locale='+lang+'" target="_blank" rel="noopener">Mission Swiss-Ski&nbsp;↗</a>') if mission else '')
+               + (('<a class="np-mission" href="'+esc(mission)+'" data-title="'+esc(name)+' – Mission Swiss-Ski">Mission Swiss-Ski</a>') if mission else '')
                + '</span>')
         nodes += ('<div class="node'+(' up' if up else '')+'" tabindex="0" role="button" '
                   'aria-haspopup="true" data-sport="'+s["id"]+'" '
@@ -429,6 +431,17 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .node.open .nhover,.node.open .nlabel{opacity:0!important}
 .npop a{display:block;text-align:center;background:rgba(255,255,255,.10);color:#fff;text-decoration:none;font-size:12.5px;font-weight:700;border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:8px 10px;line-height:1.25}
 .npop a:hover{background:var(--red);border-color:var(--red)}
+/* Mission-Iframe-Overlay */
+.mmodal{position:fixed;inset:0;z-index:120;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
+.mm-box{width:min(1240px,96vw);height:min(880px,92vh);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--ink);color:#fff}
+.mm-t{font-weight:800;font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mm-ext{color:#fff;text-decoration:none;font-weight:700;font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.4);border-radius:16px;white-space:nowrap}
+.mm-ext:hover{background:rgba(255,255,255,.15)}
+.mm-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
+.mm-x:hover{color:var(--talent)}
+.mm-frame{flex:1;border:0;width:100%;background:#fff}
+@media(max-width:700px){.mmodal{padding:0}.mm-box{width:100vw;height:100vh;border-radius:0}}
 .node:hover .dot,.node:focus-visible .dot{transform:scale(1.45)}
 .node .nlabel{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);
   font-size:12.5px;font-weight:700;color:#fff;text-align:center;line-height:1.25;letter-spacing:.02em;
@@ -727,7 +740,25 @@ heroNodes.forEach(n=>{
   });
 });
 document.addEventListener('click',e=>{if(!e.target.closest('.node'))closePops();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePops();});
+
+// ---- Mission Swiss-Ski im Iframe-Overlay ----
+const mm=document.querySelector('.mmodal');
+function openMission(url,title){
+  mm.querySelector('.mm-t').textContent=title;
+  mm.querySelector('.mm-ext').href=url;
+  mm.querySelector('.mm-frame').src=url;
+  mm.hidden=false;document.body.style.overflow='hidden';
+}
+function closeMission(){mm.hidden=true;mm.querySelector('.mm-frame').src='about:blank';document.body.style.overflow='';}
+mm.addEventListener('click',e=>{if(e.target===mm)closeMission();});
+mm.querySelector('.mm-x').addEventListener('click',closeMission);
+document.querySelectorAll('.np-mission').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();e.stopPropagation();closePops();
+  openMission(a.getAttribute('href'), a.dataset.title||'Mission Swiss-Ski');
+}));
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){ if(!mm.hidden)closeMission(); else closePops(); }
+});
 
 // ---- Umschalten Startseite <-> Sportart (per #hash, Zurueck-Taste funktioniert) ----
 function show(id){
@@ -753,7 +784,14 @@ datamap = {s["id"]: sport_data(s) for s in SPORTS}
 ids_with_data = [s["id"] for s in SPORTS if datamap[s["id"]] is not None]
 
 for lang in LANGS:
-    body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS)
+    open_ext = {"de": "Im neuen Tab öffnen", "fr": "Ouvrir dans un nouvel onglet", "it": "Aprire in una nuova scheda"}[lang]
+    mmodal = ('<div class="mmodal" hidden><div class="mm-box">'
+              '<div class="mm-bar"><span class="mm-t"></span>'
+              '<a class="mm-ext" href="#" target="_blank" rel="noopener">'+esc(open_ext)+' ↗</a>'
+              '<button class="mm-x" type="button" aria-label="schliessen">✕</button></div>'
+              '<iframe class="mm-frame" src="about:blank" title="Mission Swiss-Ski"></iframe>'
+              '</div></div>')
+    body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS) + mmodal
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
             "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang),
             "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati"}[lang],
