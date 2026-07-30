@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FTEM Skicross – Athlet:innen-Weg</title><style>
+:root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
+--found:#1f8fa6;--found-t:#0d5e6e;--found-bg:#ecf6f8;
+--talent:#e2a900;--talent-t:#8a6a00;--talent-bg:#fdf7e4;
+--elite:#e8772e;--elite-t:#a8511a;--elite-bg:#fdefe5;
+--mast:#d52b1e;--mast-t:#9c1d14;--mast-bg:#fce9e7;
+--colw:200px;--lblw:146px;--top:54px;--rail:76px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;padding-left:var(--rail);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px}
+nav.sports{position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:80;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:5px;padding:12px 8px;overflow-y:auto}
+nav.sports a{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--mut);padding:8px 2px;border-radius:10px}
+nav.sports a:hover{background:var(--bg);color:var(--ink)}
+nav.sports a.active{background:var(--red);color:#fff}
+nav.sports .ab{font-weight:800;font-size:13.5px;letter-spacing:.02em}
+nav.sports .nm{font-size:7.5px;font-weight:600;text-align:center;line-height:1.15}
+header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;height:var(--top)}
+header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px}
+header.top h1 b{color:var(--ink);font-weight:700}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
+.tools input,.tools select,.tools button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+.tools input{min-width:210px}
+.tools button{cursor:pointer;font-weight:600}
+.tools button:hover{background:var(--bg)}
+.tools .cnt{font-size:12px;color:var(--mut);font-weight:600;white-space:nowrap}
+.wrap{max-width:1500px;margin:0 auto;padding:14px 18px 90px}
+.intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:8px;font-size:13px;color:var(--mut)}
+.intro b{color:var(--ink)}
+.placeholder{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:64px 24px;margin-top:24px;text-align:center;color:var(--mut)}
+.placeholder .big{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:10px}
+.placeholder code{background:var(--bg);border-radius:6px;padding:2px 6px;font-size:12px}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.legend span{font-size:11.5px;padding:4px 11px;border-radius:30px;font-weight:700}
+.lg-f{background:var(--found-bg);color:var(--found-t)}.lg-t{background:var(--talent-bg);color:var(--talent-t)}.lg-e{background:var(--elite-bg);color:var(--elite-t)}.lg-m{background:var(--mast-bg);color:var(--mast-t)}
+.hint{font-size:12px;color:var(--mut);margin:14px 2px 2px;display:flex;align-items:center;gap:6px}
+h2.grp{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:22px 0 9px;font-weight:800}
+details.theme{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:9px;margin-bottom:8px;scroll-margin-top:66px;overflow:hidden}
+details.theme>summary{cursor:pointer;padding:9px 14px;list-style:none;display:flex;align-items:center;gap:10px}
+details.theme>summary:hover{background:#fafbfc}
+details.theme>summary::-webkit-details-marker{display:none}
+summary .tt{font-size:14px;font-weight:800;display:flex;align-items:center;gap:9px}
+summary .tt::before{content:'';width:7px;height:7px;border-right:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg);transition:transform .15s;margin-left:1px}
+details[open] summary .tt::before{transform:rotate(45deg)}
+.scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px}
+.grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
+.r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:start}
+.rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2)}
+.rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
+.r.head{position:relative;z-index:2}
+.r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--card);border:none}
+.c.hd{border-radius:8px;padding:6px 6px;text-align:center;display:flex;flex-direction:column;gap:0;justify-content:center}
+.c.hd .st{font-size:13.5px;font-weight:800}
+.c.hd .stf{font-size:9px;font-weight:600;opacity:.92}
+.c.hd[data-idx]{cursor:pointer;transition:box-shadow .12s}
+.c.hd[data-idx]:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+.c.hd.active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.45)}
+.cell.hl-foundation{background:var(--found-bg)}
+.cell.hl-talent{background:var(--talent-bg)}
+.cell.hl-elite{background:var(--elite-bg)}
+.cell.hl-mastery{background:var(--mast-bg)}
+.ph-foundation{background:var(--found);color:#fff}.ph-talent{background:var(--talent);color:#3b2e00}.ph-elite{background:var(--elite);color:#fff}.ph-mastery{background:var(--mast);color:#fff}
+.cell{background:#fff;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;align-self:start}
+.cell .cwrap{padding:8px 10px;font-size:11.5px;max-height:210px;overflow:hidden;transition:max-height .25s ease}
+.cell.expanded .cwrap{max-height:4000px}
+.cell::after{content:'';position:absolute;left:0;right:0;bottom:0;height:32px;background:linear-gradient(180deg,transparent,#fff);pointer-events:none;opacity:0;transition:opacity .2s}
+.cell.clamped::after{opacity:1}
+.cell.expanded::after{opacity:0}
+.cell.ph-foundation{border-top:3px solid var(--found)}.cell.ph-talent{border-top:3px solid var(--talent)}.cell.ph-elite{border-top:3px solid var(--elite)}.cell.ph-mastery{border-top:3px solid var(--mast)}.cell.ph-multi{border-top:3px solid #b6c0cc}
+.cwrap p{margin:0 0 6px}.cwrap p:last-child{margin-bottom:0}
+.cwrap .bh{font-weight:800;color:var(--ink);font-size:11.5px;margin-bottom:1px}
+.cwrap .sh{font-weight:800;color:var(--found-t);font-size:11px;margin:8px 0 1px;letter-spacing:.01em}
+.cwrap .sh:first-child{margin-top:0}
+.cwrap .lbl{font-weight:700;color:var(--found-t)}
+.cwrap ul{margin:2px 0 6px;padding-left:15px}
+.cwrap ul.bl li{margin-bottom:2px}
+.cwrap ul.sc{list-style:none;padding-left:0}
+.cwrap ul.sc li{margin-bottom:4px;padding-left:0}
+.cwrap ul.sc .badge{display:inline-block;background:var(--ink);color:#fff;font-size:9.5px;font-weight:700;border-radius:4px;padding:1px 5px;margin-right:4px}
+.cwrap .empty{color:#c2c8d0;text-align:center;font-size:14px}
+.lks{margin-top:7px;display:flex;flex-direction:column;gap:4px}
+.lks a{font-size:11px;color:var(--red);text-decoration:none;font-weight:700;background:var(--mast-bg);padding:5px 8px;border-radius:6px;display:flex;align-items:center;gap:5px}
+.lks a::before{content:'📄'}
+.lks a:hover{background:#f9d9d5}
+.more{position:absolute;bottom:6px;right:8px;z-index:3;font:inherit;font-size:10.5px;font-weight:700;color:var(--red);background:#fff;border:1px solid var(--line);border-radius:20px;padding:2px 9px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.more:hover{background:var(--mast-bg)}
+mark{background:#ffe08a;border-radius:2px;padding:0 1px}
+.hidden{display:none!important}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
+footer a{color:var(--red)}
+@media(max-width:700px){
+:root{--colw:200px;--lblw:128px}
+body{padding-left:0;padding-bottom:66px}
+nav.sports{top:auto;bottom:0;left:0;right:0;width:auto;height:62px;flex-direction:row;justify-content:flex-start;border-right:none;border-top:1px solid var(--line);padding:6px 8px;overflow-y:hidden;overflow-x:auto}
+nav.sports a{min-width:52px;padding:5px 2px}
+}
+</style></head><body><nav class="sports" aria-label="Sportarten"><a class="sp" href="langlauf.html" title="Langlauf"><span class="ab">LL</span><span class="nm">Langlauf</span></a><a class="sp" href="ski-alpin.html" title="Ski Alpin"><span class="ab">SA</span><span class="nm">Ski Alpin</span></a><a class="sp" href="telemark.html" title="Telemark"><span class="ab">TM</span><span class="nm">Telemark</span></a><a class="sp" href="freestyle.html" title="Freestyle"><span class="ab">FS</span><span class="nm">Freestyle</span></a><a class="sp" href="snowboard.html" title="Snowboard"><span class="ab">SB</span><span class="nm">Snowboard</span></a><a class="sp" href="freeski.html" title="Freeski"><span class="ab">FK</span><span class="nm">Freeski</span></a><a class="sp active" href="skicross.html" title="Skicross"><span class="ab">SX</span><span class="nm">Skicross</span></a><a class="sp" href="skispringen.html" title="Skispringen"><span class="ab">SP</span><span class="nm">Skispringen</span></a><a class="sp" href="nordische-kombination.html" title="Nordische Kombination"><span class="ab">NK</span><span class="nm">Nordische Kombination</span></a></nav><header class="top"><h1>FTEM Skicross <b>· Athlet:innen-Weg</b></h1></header><div class="wrap"><div class="placeholder"><div class="big">Skicross</div>Der Athlet:innen-Weg für <b>Skicross</b> ist noch nicht erfasst – Inhalte folgen.<br><br>Sobald die Daten vorliegen, kommen sie in die Datei <code>ftem_data_skicross.json</code> und die Seite wird mit <code>python3 build.py</code> neu erzeugt.</div><footer>Quelle: <a href="https://my.ftem.swiss-ski.ch" target="_blank">my.ftem.swiss-ski.ch</a> · aufbereitet am 30.07.2026</footer></div></body></html>

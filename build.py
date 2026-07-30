@@ -3,17 +3,20 @@ import os
 import json, re, html, datetime
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-d = json.load(open(os.path.join(BASE, "ftem_data.json"), encoding="utf-8"))
-STAGES = d["stages"]
+
+# ---------------------------------------------------------------------------
+# Sportarten-Konfiguration: ftem_sports.json
+#   id    -> interner Schluessel (auch fuer #hash-Navigation) und Standard-Datendatei
+#   name  -> Anzeigename
+#   short -> Kuerzel in Seitenleiste und Auswahl-Karten
+#   file  -> (optional) Datendatei; sonst wird ftem_data_<id>.json gesucht
+# Alles wird in EINE index.html gebaut (Startseite + alle Sportarten, Wechsel per JS).
+# ---------------------------------------------------------------------------
+SPORTS = json.load(open(os.path.join(BASE, "ftem_sports.json"), encoding="utf-8"))["sports"]
+
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 AGE = {"F1":"U8","F2":"U8–U10","F3":"U10–U12","T1":"U12–U14","T2":"U14–U16","T3":"U16+","T4":"U18+","E1":"","E2":"","M":""}
-
-POD_SVG = ('<svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true">'
-'<circle cx="12" cy="12" r="11.5" fill="#1DB954"/>'
-'<path d="M5.8 9.2c4-1.2 7.8-.8 11 1.1" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round"/>'
-'<path d="M6.5 12.3c3.2-.9 6.2-.6 8.9 1.1" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>'
-'<path d="M7.2 15.2c2.4-.6 4.6-.4 6.7.9" stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round"/>'
-'</svg>')
+GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
 
 def ph(st): return "foundation" if st[0]=="F" else "talent" if st[0]=="T" else "elite" if st[0]=="E" else "mastery"
 def esc(s): return html.escape(s, quote=True)
@@ -88,12 +91,10 @@ def render_cell(seg):
         if btns: inner += '<div class="lks">'+btns+'</div>'
     return inner or '<div class="empty">–</div>'
 
-# build theme html
-GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
-def theme_html(t, idx):
+def theme_html(t, idx, stages, prefix):
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
-    for si,s in enumerate(STAGES):
+    for si,s in enumerate(stages):
         age = AGE.get(s,"")
         th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="Spalte hervorheben"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
     th += '</div>'
@@ -105,28 +106,83 @@ def theme_html(t, idx):
         # render segs with spans; we lay out as 10 cells using grid-column span
         for seg in r["segs"]:
             span = seg["to"] - seg["from"] + 1
-            cls = "ph-"+ph(STAGES[seg["from"]])
+            cls = "ph-"+ph(stages[seg["from"]])
             # if seg spans multiple phases, neutral
-            phs = set(ph(STAGES[i]) for i in range(seg["from"], seg["to"]+1))
+            phs = set(ph(stages[i]) for i in range(seg["from"], seg["to"]+1))
             if len(phs) > 1: cls = "ph-multi"
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg)+'</div><button class="more" hidden>mehr ▾</button></div>'
         body += '</div>'
-    return ('<details class="theme" id="t'+str(idx)+'" open data-title="'+esc(t["title"].lower())+'">'
+    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" open data-title="'+esc(t["title"].lower())+'">'
             '<summary><span class="tt">'+esc(t["title"])+'</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
-sections=""
-for g in GROUP_ORDER:
-    items=[(i,t) for i,t in enumerate(d["themes"]) if t["group"]==g]
-    if not items: continue
-    sections += '<h2 class="grp">'+esc(g)+'</h2>'
-    for i,t in items:
-        sections += theme_html(t,i)
+def build_sections(d, prefix):
+    themes = d["themes"]
+    stages = d["stages"]
+    seen = list(dict.fromkeys(t["group"] for t in themes))
+    order = [g for g in GROUP_ORDER if g in seen] + [g for g in seen if g not in GROUP_ORDER]
+    sections=""
+    for g in order:
+        items=[(i,t) for i,t in enumerate(themes) if t["group"]==g]
+        if not items: continue
+        sections += '<h2 class="grp">'+esc(g)+'</h2>'
+        for i,t in items:
+            sections += theme_html(t,i,stages,prefix)
+    jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(t["title"])+'</option>' for i,t in enumerate(themes))
+    return sections, jump
 
-jump = "".join('<option value="t'+str(i)+'">'+esc(t["title"])+'</option>' for i,t in enumerate(d["themes"]))
+def sport_data(sport):
+    f = sport.get("file") or ("ftem_data_"+sport["id"]+".json")
+    path = os.path.join(BASE, f)
+    if os.path.exists(path):
+        return json.load(open(path, encoding="utf-8"))
+    return None
+
+datestr = datetime.date.today().strftime("%d.%m.%Y")
+FOOTER = '<footer>Quelle: <a href="https://my.ftem.swiss-ski.ch" target="_blank" rel="noopener">my.ftem.swiss-ski.ch</a> · aufbereitet am '+datestr+'</footer>'
+
+def sport_section(sport, d):
+    sid = sport["id"]; name = sport["name"]
+    if d is None:
+        return ('<section class="sport" data-sport="'+sid+'" hidden>'
+            '<header class="top"><a class="back" href="#" title="Zurück zur Auswahl">← Sportarten</a><h1>FTEM '+esc(name)+' <b>· Athlet:innen-Weg</b></h1></header>'
+            '<div class="wrap"><div class="placeholder">'
+            '<div class="big">'+esc(name)+'</div>'
+            'Der Athlet:innen-Weg für <b>'+esc(name)+'</b> ist noch nicht erfasst – Inhalte folgen.<br><br>'
+            'Sobald die Daten vorliegen, kommen sie in die Datei <code>ftem_data_'+esc(sid)+'.json</code> '
+            'und die Seite wird mit <code>python3 build.py</code> neu erzeugt.'
+            '</div>'+FOOTER+'</div></section>')
+    sections, jump_opts = build_sections(d, sid)
+    n_themes = len(d["themes"])
+    return ('<section class="sport" data-sport="'+sid+'" hidden>'
+        '<header class="top"><a class="back" href="#" title="Zurück zur Auswahl">← Sportarten</a><h1>FTEM '+esc(name)+' <b>· Athlet:innen-Weg</b></h1>'
+        '<div class="tools"><span class="cnt"></span>'
+        '<input class="q" type="search" placeholder="In allen Inhalten suchen…">'
+        '<select class="jump"><option>Zu Thema springen…</option>'+jump_opts+'</select>'
+        '<button class="exp">Alle öffnen</button><button class="col">Alle schliessen</button></div></header>'
+        '<div class="wrap">'
+        '<div class="intro">Vollständige, strukturierte Übersicht des '+esc(name)+' <b>Athlet:innen-Wegs</b> aus dem Swiss-Ski FTEM-Tool: <b>'+str(n_themes)+' Themen</b> über die zehn Entwicklungsstufen <b>F1–M</b>. Links je Zeile eine fixe Beschriftung; lange Texte sind zusammengeklappt und mit «mehr» ausklappbar. Die Tabellen lassen sich seitlich scrollen.'
+        '<div class="legend"><span class="lg-f">F1–F3 · Foundation</span><span class="lg-t">T1–T4 · Talent</span><span class="lg-e">E1–E2 · Elite</span><span class="lg-m">M · Mastery</span></div></div>'
+        '<div class="hint">↔ Tabellen lassen sich seitlich scrollen · 📄 = externes Dokument</div>'
+        +sections+FOOTER+'</div></section>')
+
+# --- Startseite (Sportart-Auswahl) -----------------------------------------
+def home_html(datamap):
+    cards = ""
+    for s in SPORTS:
+        has = datamap[s["id"]] is not None
+        cards += ('<a class="card'+('' if has else ' nodata')+'" href="#'+s["id"]+'">'
+                  '<span class="ab">'+esc(s["short"])+'</span>'
+                  '<span class="cn">'+esc(s["name"])+'</span>'
+                  +('' if has else '<span class="tag">Inhalte folgen</span>')+'</a>')
+    return ('<section id="home"><div class="home-hero">'
+            '<h1>FTEM <b>Athlet:innen-Weg</b></h1>'
+            '<p class="sub">Swiss-Ski Entwicklungsstufen F1–M · Sportart auswählen</p>'
+            '<div class="grid-sports">'+cards+'</div>'
+            +FOOTER+'</div></section>')
 
 CSS = r"""
-:root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8 ec;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
+:root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
 --found:#1f8fa6;--found-t:#0d5e6e;--found-bg:#ecf6f8;
 --talent:#e2a900;--talent-t:#8a6a00;--talent-bg:#fdf7e4;
 --elite:#e8772e;--elite-t:#a8511a;--elite-bg:#fdefe5;
@@ -134,8 +190,24 @@ CSS = r"""
 --colw:200px;--lblw:146px;--top:54px}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+[hidden]{display:none!important}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px}
+/* Startseite */
+#home .home-hero{max-width:980px;margin:0 auto;padding:60px 24px 30px;text-align:center}
+#home h1{font-size:30px;margin:0 0 6px;font-weight:800;color:var(--red);letter-spacing:.2px}
+#home h1 b{color:var(--ink);font-weight:800}
+#home .sub{color:var(--mut);font-size:14px;margin:0 0 34px}
+.grid-sports{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;text-align:center}
+.grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .15s,transform .15s,border-color .15s}
+.grid-sports .card:hover{border-color:var(--red);box-shadow:0 6px 18px rgba(0,0,0,.09);transform:translateY(-2px)}
+.grid-sports .ab{width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center}
+.grid-sports .card.nodata .ab{background:#b6c0cc}
+.grid-sports .cn{font-weight:800;font-size:13.5px}
+.grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
+/* Sport-Ansicht */
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;height:var(--top)}
+header.top .back{font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 13px;white-space:nowrap}
+header.top .back:hover{background:#fff;border-color:var(--red);color:var(--red)}
 header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px}
 header.top h1 b{color:var(--ink);font-weight:700}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
@@ -147,6 +219,9 @@ header.top h1 b{color:var(--ink);font-weight:700}
 .wrap{max-width:1500px;margin:0 auto;padding:14px 18px 90px}
 .intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:8px;font-size:13px;color:var(--mut)}
 .intro b{color:var(--ink)}
+.placeholder{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:64px 24px;margin-top:24px;text-align:center;color:var(--mut)}
+.placeholder .big{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:10px}
+.placeholder code{background:var(--bg);border-radius:6px;padding:2px 6px;font-size:12px}
 .legend{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
 .legend span{font-size:11.5px;padding:4px 11px;border-radius:30px;font-weight:700}
 .lg-f{background:var(--found-bg);color:var(--found-t)}.lg-t{background:var(--talent-bg);color:var(--talent-t)}.lg-e{background:var(--elite-bg);color:var(--elite-t)}.lg-m{background:var(--mast-bg);color:var(--mast-t)}
@@ -209,90 +284,110 @@ footer a{color:var(--red)}
 """
 
 JS = r"""
-const q=document.getElementById('q');
-const themes=[...document.querySelectorAll('details.theme')];
-const grps=[...document.querySelectorAll('h2.grp')];
-// clamp detection
-function setupClamp(){
-  document.querySelectorAll('.cell').forEach(cell=>{
-    const w=cell.querySelector('.cwrap');const btn=cell.querySelector('.more');
-    if(!w||!btn)return;
-    if(w.scrollHeight>w.clientHeight+6){cell.classList.add('clamped');btn.hidden=false;}
-    else{cell.classList.remove('clamped');btn.hidden=true;}
-    btn.onclick=()=>{const ex=cell.classList.toggle('expanded');btn.textContent=ex?'weniger ▴':'mehr ▾';};
-  });
+const SPORT_IDS = __SPORT_IDS__;
+const sections = [...document.querySelectorAll('section.sport')];
+const home = document.getElementById('home');
+
+// ---- pro Sportart gekapselte Interaktivitaet ----
+function initSport(sec){
+  const q = sec.querySelector('.q');
+  const themes = [...sec.querySelectorAll('details.theme')];
+  const grps = [...sec.querySelectorAll('h2.grp')];
+  function setupClamp(){
+    sec.querySelectorAll('.cell').forEach(cell=>{
+      const w=cell.querySelector('.cwrap');const btn=cell.querySelector('.more');
+      if(!w||!btn)return;
+      if(w.scrollHeight>w.clientHeight+6){cell.classList.add('clamped');btn.hidden=false;}
+      else{cell.classList.remove('clamped');btn.hidden=true;}
+      btn.onclick=()=>{const ex=cell.classList.toggle('expanded');btn.textContent=ex?'weniger ▴':'mehr ▾';};
+    });
+  }
+  sec.__clamp = setupClamp;
+  if(!q) return; // Platzhalter-Seite ohne Werkzeuge
+  const cnt = sec.querySelector('.cnt');
+  function clearMarks(el){el.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));el.normalize();}
+  function run(){
+    const term=q.value.trim().toLowerCase();
+    themes.forEach(clearMarks);
+    let vis=0;
+    themes.forEach(t=>{
+      if(!term){t.classList.remove('hidden');return;}
+      const hit=t.innerText.toLowerCase().includes(term);
+      t.classList.toggle('hidden',!hit);
+      if(hit){vis++;t.open=true;
+        const re=new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+        t.querySelectorAll('.cwrap p,.cwrap li,.tt').forEach(node=>{
+          const walk=document.createTreeWalker(node,NodeFilter.SHOW_TEXT,null);const tn=[];let n;
+          while(n=walk.nextNode())tn.push(n);
+          tn.forEach(x=>{if(x.nodeValue.toLowerCase().includes(term)){const sp=document.createElement('span');sp.innerHTML=x.nodeValue.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])).replace(re,'<mark>$1</mark>');x.replaceWith(sp);}});
+        });
+      }
+    });
+    if(cnt)cnt.textContent=term?(vis+' Themen mit Treffern'):(themes.length+' Themen · F1–M');
+    grps.forEach(g=>{let s=g.nextElementSibling,any=false;while(s&&s.classList.contains('theme')){if(!s.classList.contains('hidden'))any=true;s=s.nextElementSibling;}g.classList.toggle('hidden',!!term&&!any);});
+  }
+  q.addEventListener('input',run);
+  sec.querySelector('.exp').onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(setupClamp,50);};
+  sec.querySelector('.col').onclick=()=>themes.forEach(t=>t.open=false);
+  sec.querySelector('.jump').onchange=e=>{const el=document.getElementById(e.target.value);if(el){el.open=true;setTimeout(()=>el.scrollIntoView(),30);}e.target.selectedIndex=0;};
+  themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
+  window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
+  // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart
+  const scrollers=[...sec.querySelectorAll('.scroller')];
+  sec.__sx=0;let sy=false;
+  scrollers.forEach(s=>s.addEventListener('scroll',()=>{
+    if(sy)return;sy=true;sec.__sx=s.scrollLeft;
+    scrollers.forEach(o=>{if(o!==s&&o.scrollLeft!==sec.__sx)o.scrollLeft=sec.__sx;});
+    requestAnimationFrame(()=>{sy=false;});
+  }));
+  // Stufen-Spalten hervorheben
+  const active=new Set();
+  function phaseIdx(i){return i<3?'foundation':i<7?'talent':i<9?'elite':'mastery';}
+  function applyHl(){
+    sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.classList.toggle('active',active.has(+h.dataset.idx)));
+    sec.querySelectorAll('.cell').forEach(c=>{
+      c.classList.remove('hl-foundation','hl-talent','hl-elite','hl-mastery');
+      const f=+c.dataset.from,t=+c.dataset.to;
+      for(const i of active){if(i>=f&&i<=t){c.classList.add('hl-'+phaseIdx(i));break;}}
+    });
+  }
+  sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>{
+    const i=+h.dataset.idx;active.has(i)?active.delete(i):active.add(i);applyHl();
+  }));
+  run();
 }
-function clearMarks(el){el.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));el.normalize();}
-function run(){
-  const term=q.value.trim().toLowerCase();
-  themes.forEach(clearMarks);
-  let vis=0;
-  themes.forEach(t=>{
-    if(!term){t.classList.remove('hidden');return;}
-    const hit=t.innerText.toLowerCase().includes(term);
-    t.classList.toggle('hidden',!hit);
-    if(hit){vis++;t.open=true;
-      const re=new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
-      t.querySelectorAll('.cwrap p,.cwrap li,.tt').forEach(node=>{
-        const walk=document.createTreeWalker(node,NodeFilter.SHOW_TEXT,null);const tn=[];let n;
-        while(n=walk.nextNode())tn.push(n);
-        tn.forEach(x=>{if(x.nodeValue.toLowerCase().includes(term)){const sp=document.createElement('span');sp.innerHTML=x.nodeValue.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])).replace(re,'<mark>$1</mark>');x.replaceWith(sp);}});
-      });
-    }
-  });
-  document.getElementById('cnt').textContent=term?(vis+' Themen mit Treffern'):(themes.length+' Themen · F1–M');
-  grps.forEach(g=>{let s=g.nextElementSibling,any=false;while(s&&s.classList.contains('theme')){if(!s.classList.contains('hidden'))any=true;s=s.nextElementSibling;}g.classList.toggle('hidden',!!term&&!any);});
+sections.forEach(initSport);
+
+// ---- Umschalten Startseite <-> Sportart (per #hash, Zurueck-Taste funktioniert) ----
+function show(id){
+  home.hidden = !!id;
+  sections.forEach(s=>{s.hidden = s.dataset.sport!==id;});
+  window.scrollTo(0,0);
+  if(id){
+    const sec=sections.find(s=>s.dataset.sport===id);
+    if(sec&&sec.__clamp)setTimeout(sec.__clamp,60);
+  }
 }
-q.addEventListener('input',run);
-document.getElementById('exp').onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(setupClamp,50);};
-document.getElementById('col').onclick=()=>themes.forEach(t=>t.open=false);
-document.getElementById('jump').onchange=e=>{const el=document.getElementById(e.target.value);if(el){el.open=true;setTimeout(()=>el.scrollIntoView(),30);}e.target.selectedIndex=0;};
-themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=window.__sx||0;setTimeout(setupClamp,50);}}));
-window.addEventListener('resize',()=>setTimeout(setupClamp,150));
-// --- synchronized horizontal scrolling across all themes ---
-const scrollers=[...document.querySelectorAll('.scroller')];
-window.__sx=0;let __sy=false;
-scrollers.forEach(s=>s.addEventListener('scroll',()=>{
-  if(__sy)return;__sy=true;window.__sx=s.scrollLeft;
-  scrollers.forEach(o=>{if(o!==s&&o.scrollLeft!==window.__sx)o.scrollLeft=window.__sx;});
-  requestAnimationFrame(()=>{__sy=false;});
-}));
-// --- click a stage header to tint that column in all themes ---
-const active=new Set();
-function phaseIdx(i){return i<3?'foundation':i<7?'talent':i<9?'elite':'mastery';}
-function applyHl(){
-  document.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.classList.toggle('active',active.has(+h.dataset.idx)));
-  document.querySelectorAll('.cell').forEach(c=>{
-    c.classList.remove('hl-foundation','hl-talent','hl-elite','hl-mastery');
-    const f=+c.dataset.from,t=+c.dataset.to;
-    for(const i of active){if(i>=f&&i<=t){c.classList.add('hl-'+phaseIdx(i));break;}}
-  });
+function route(){
+  const id=decodeURIComponent(location.hash.replace('#',''));
+  show(SPORT_IDS.includes(id)?id:'');
 }
-document.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>{
-  const i=+h.dataset.idx;active.has(i)?active.delete(i):active.add(i);applyHl();
-}));
-run();setupClamp();
+window.addEventListener('hashchange',route);
+route();
 """
 
-datestr = datetime.date.today().strftime("%d.%m.%Y")
+datamap = {s["id"]: sport_data(s) for s in SPORTS}
+ids_with_data = [s["id"] for s in SPORTS if datamap[s["id"]] is not None]
+
+body = home_html(datamap) + "".join(sport_section(s, datamap[s["id"]]) for s in SPORTS)
+js = JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
+
 HTML = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
 '<meta name="viewport" content="width=device-width,initial-scale=1">'
-'<title>FTEM Ski Alpin – Athlet:innen-Weg</title><style>'+CSS+'</style></head><body>'
-'<header class="top"><h1>FTEM Ski Alpin <b>· Athlet:innen-Weg</b></h1>'
-'<div class="tools"><span class="cnt" id="cnt"></span>'
-'<input id="q" type="search" placeholder="In allen Inhalten suchen…">'
-'<select id="jump"><option>Zu Thema springen…</option>'+jump+'</select>'
-'<button id="exp">Alle öffnen</button><button id="col">Alle schliessen</button></div></header>'
-'<div class="wrap">'
-'<div class="intro">Vollständige, strukturierte Übersicht des Ski-Alpin <b>Athlet:innen-Wegs</b> aus dem Swiss-Ski FTEM-Tool: <b>17 Themen</b> über die zehn Entwicklungsstufen <b>F1–M</b>. Links je Zeile eine fixe Beschriftung; lange Texte sind zusammengeklappt und mit «mehr» ausklappbar. Die Tabellen lassen sich seitlich scrollen.'
-'<div class="legend"><span class="lg-f">F1–F3 · Foundation</span><span class="lg-t">T1–T4 · Talent</span><span class="lg-e">E1–E2 · Elite</span><span class="lg-m">M · Mastery</span></div></div>'
-'<div class="hint">↔ Tabellen lassen sich seitlich scrollen · 📄 = externes Dokument</div>'
-+sections+
-'<footer>Quelle: <a href="https://my.ftem.swiss-ski.ch/dashboard/alpine-ski" target="_blank">my.ftem.swiss-ski.ch</a> · aufbereitet am '+datestr+'</footer>'
-'</div><script>'+JS+'</script></body></html>')
+'<title>FTEM – Athlet:innen-Weg</title><style>'+CSS+'</style></head>'
+'<body>'+body+'<script>'+js+'</script></body></html>')
 
-out = os.path.join(BASE, "ftem-ski-alpin-uebersicht.html")
+out = os.path.join(BASE, "index.html")
 open(out,"w",encoding="utf-8").write(HTML)
-# also write index.html so the page works as the root of a website (Netlify etc.)
-open(os.path.join(BASE, "index.html"),"w",encoding="utf-8").write(HTML)
-print("written", len(HTML.encode("utf-8")), "bytes ->", out, "(+ index.html)")
+print("written", len(HTML.encode("utf-8")), "bytes ->", out,
+      "| Sportarten mit Inhalt:", ", ".join(ids_with_data) or "-")

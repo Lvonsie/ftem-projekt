@@ -1,0 +1,13 @@
+{
+  "sports": [
+    { "id": "langlauf",              "name": "Langlauf",              "short": "LL" },
+    { "id": "ski-alpin",             "name": "Ski Alpin",             "short": "SA", "file": "ftem_data.json" },
+    { "id": "telemark",              "name": "Telemark",              "short": "TM" },
+    { "id": "freestyle",             "name": "Freestyle",             "short": "FS" },
+    { "id": "snowboard",             "name": "Snowboard",             "short": "SB" },
+    { "id": "freeski",               "name": "Freeski",               "short": "FK" },
+    { "id": "skicross",              "name": "Skicross",              "short": "SX" },
+    { "id": "skispringen",           "name": "Skispringen",           "short": "SP" },
+    { "id": "nordische-kombination", "name": "Nordische Kombination", "short": "NK" }
+  ]
+}
