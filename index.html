@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FTEM – Athlet:innen-Weg</title><style>
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FTEM – Athlet:innen-Weg</title><script>if(location.hash)document.documentElement.classList.add("h");try{if(sessionStorage.ftemSeen)document.documentElement.classList.add("noanim");sessionStorage.ftemSeen=1}catch(e){}</script><style>
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
 --found:#1f8fa6;--found-t:#0d5e6e;--found-bg:#ecf6f8;
 --talent:#e2a900;--talent-t:#8a6a00;--talent-bg:#fdf7e4;
@@ -6,7 +6,9 @@
 --mast:#d52b1e;--mast-t:#9c1d14;--mast-bg:#fce9e7;
 --colw:200px;--lblw:146px;--top:54px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--bg)}
+html.h #home{display:none}
+html.noanim .grid-sports .card{animation:none}
 [hidden]{display:none!important}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px}
 .langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
@@ -225,6 +227,7 @@ function show(id){
   }
 }
 function route(){
+  document.documentElement.classList.remove('h'); // ab jetzt steuert JS die Sichtbarkeit
   const id=decodeURIComponent(location.hash.replace('#',''));
   show(SPORT_IDS.includes(id)?id:'');
 }

@@ -280,7 +280,9 @@ CSS = r"""
 --mast:#d52b1e;--mast-t:#9c1d14;--mast-bg:#fce9e7;
 --colw:200px;--lblw:146px;--top:54px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--bg)}
+html.h #home{display:none}
+html.noanim .grid-sports .card{animation:none}
 [hidden]{display:none!important}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px}
 .langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
@@ -495,6 +497,7 @@ function show(id){
   }
 }
 function route(){
+  document.documentElement.classList.remove('h'); // ab jetzt steuert JS die Sichtbarkeit
   const id=decodeURIComponent(location.hash.replace('#',''));
   show(SPORT_IDS.includes(id)?id:'');
 }
@@ -513,7 +516,11 @@ for lang in LANGS:
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False)))
     page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title><style>'+CSS+'</style></head>'
+        '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title>'
+        # verhindert Aufblitzen der Startseite, wenn direkt eine Sportart (#hash) geladen wird
+        '<script>if(location.hash)document.documentElement.classList.add("h");'
+        'try{if(sessionStorage.ftemSeen)document.documentElement.classList.add("noanim");sessionStorage.ftemSeen=1}catch(e){}</script>'
+        '<style>'+CSS+'</style></head>'
         '<body>'+body+'<script>'+js+'</script></body></html>')
     out = os.path.join(BASE, FILES[lang])
     open(out,"w",encoding="utf-8").write(page)
