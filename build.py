@@ -243,11 +243,21 @@ def sport_section(sport, d, lang):
         +sections+footer(lang)+'</div></section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
+<<<<<<< Updated upstream
+=======
+# Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Fläche
+CONS_POS = [(12,52),(21,40),(30,62),(39,44),(48,66),(57,42),(66,64),(75,46),(84,66),(91,50),
+            (70,80),(48,80)]
+CONS_PHASE = ["found","talent","elite","mast"]
+CONS_LINKS = [(1,3),(6,8)]
+
+>>>>>>> Stashed changes
 def home_html(datamap, lang):
     cards = ""
     for i, s in enumerate(SPORTS):
         has = datamap[s["id"]] is not None
         name = tr(s["name"], lang)
+<<<<<<< Updated upstream
         # Logo-Platz: sobald ein Sportarten-Logo vorliegt, in ftem_sports.json
         # z. B. "icon": "logos/ski-alpin.svg" ergaenzen -> wird statt Kuerzel gezeigt
         ico = s.get("icon")
@@ -256,6 +266,29 @@ def home_html(datamap, lang):
                   '<span class="ab'+(' has-img' if ico else '')+'">'+ico_html+'</span>'
                   '<span class="cn">'+esc(name)+'</span>'
                   +('' if has else '<span class="tag">'+esc(NODATA[lang])+'</span>')+'</a>')
+=======
+        x, y = CONS_POS[i % len(CONS_POS)]
+        icon = s.get("icon")
+        ticon = None
+        if icon:
+            cand = "assets/sporticons/" + os.path.splitext(os.path.basename(icon))[0] + ".png"
+            if os.path.exists(cand):
+                ticon = cand
+        hover = ('<span class="nhover"><img class="nicon" src="'+esc(ticon)+'" alt="" loading="lazy"></span>') if ticon else ''
+        nodes += ('<a class="node" href="#'+s["id"]+'" '
+                  'style="left:'+str(x)+'%;top:'+str(y)+'%;--d:'+str(i*150)+'ms">'
+                  + hover +
+                  '<span class="dot"></span>'
+                  '<span class="nlabel">'+esc(name)+'</span></a>')
+    chain = " ".join(str(CONS_POS[i][0])+","+str(CONS_POS[i][1]) for i in range(min(n, len(CONS_POS))))
+    lines = ('<svg class="clines" viewBox="0 0 100 100" preserveAspectRatio="none">'
+             '<polyline class="cl" points="'+chain+'" vector-effect="non-scaling-stroke"/>')
+    for a, b in CONS_LINKS:
+        if a < n and b < n:
+            lines += ('<line class="cl2" x1="'+str(CONS_POS[a][0])+'" y1="'+str(CONS_POS[a][1])+
+                      '" x2="'+str(CONS_POS[b][0])+'" y2="'+str(CONS_POS[b][1])+'" vector-effect="non-scaling-stroke"/>')
+    lines += '</svg>'
+>>>>>>> Stashed changes
     info = FTEM_INFO[lang]
     phase_cls = {"F":"p-f","T":"p-t","E":"p-e","M":"p-m"}
     phases = "".join('<div class="phase '+phase_cls[k]+'"><span class="pl">'+k+'</span>'
@@ -328,31 +361,38 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
 .clines .cl2{stroke:rgba(255,255,255,.16);stroke-width:1}
 @keyframes flow{to{stroke-dashoffset:-160}}
-.node{position:absolute;transform:translate(-50%,-50%);text-decoration:none;
+.node{position:absolute;transform:translate(-50%,-50%);text-decoration:none;padding:12px;line-height:0;
   animation:nodeIn .6s ease both;animation-delay:var(--d,0ms)}
 @keyframes nodeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.3)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
 /* nur schimmernde Punkte – alle im gleichen harmonischen FTEM-Farbmix */
-.node .dot{width:19px;height:19px;border-radius:50%;position:relative;transition:transform .22s ease;
+.node .dot{display:block;width:13px;height:13px;border-radius:50%;position:relative;transition:transform .22s ease;
   background:conic-gradient(from 0deg,#57cce4,#ffd45c,#ff9b57,#ff6d60,#57cce4);
-  box-shadow:0 0 0 2px rgba(255,255,255,.7),0 0 18px 6px rgba(255,255,255,.45),0 0 40px 15px rgba(255,150,80,.5);
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.7),0 0 11px 3px rgba(255,255,255,.4),0 0 24px 8px rgba(255,150,80,.42);
   animation:spin 7s linear infinite}
-.node .dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;animation:twk 3.2s ease-in-out infinite;pointer-events:none}
+.node .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;animation:twk 3.2s ease-in-out infinite;pointer-events:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes twk{0%,100%{box-shadow:0 0 6px 1px rgba(255,255,255,.22);opacity:.7}50%{box-shadow:0 0 16px 5px rgba(255,190,120,.5);opacity:1}}
 .node:hover,.node:focus-visible{z-index:9;outline:none}
 .node:hover .dot,.node:focus-visible .dot{transform:scale(1.45)}
-/* Hover: freigestelltes Sport-Bild (ohne Hintergrund) + Text */
-.node .nhover{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translate(-50%,10px);
-  display:flex;flex-direction:column;align-items:center;gap:6px;width:130px;
+/* Sportname – immer sichtbar unter dem Punkt */
+.node .nlabel{position:absolute;top:calc(100% - 4px);left:50%;transform:translateX(-50%);
+  font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:.02em;
+  text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.7);pointer-events:none}
+/* Hover: freigestelltes weißes Sport-Piktogramm über dem Punkt */
+.node .nhover{position:absolute;bottom:calc(100% - 4px);left:50%;transform:translate(-50%,10px);
+  display:flex;justify-content:center;width:110px;
   opacity:0;pointer-events:none;transition:opacity .22s,transform .22s}
 .node:hover .nhover,.node:focus-visible .nhover{opacity:1;transform:translate(-50%,0)}
-.node .nicon{width:74px;height:74px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.6))}
-.node .nname{font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2;text-shadow:0 1px 10px rgba(0,0,0,.85)}
+.node .nicon{width:74px;height:74px;object-fit:contain;filter:drop-shadow(0 3px 12px rgba(0,0,0,.55))}
 .scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:5;color:rgba(255,255,255,.7);font-size:24px;animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
+<<<<<<< Updated upstream
 @media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:112px}#home .hero-head{padding-top:56px}}
 >>>>>>> 02a87112fa56ddfdcde3d5c4a4a7ea537183ab60
+=======
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:11px}#home .hero-head{padding-top:56px}}
+>>>>>>> Stashed changes
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
