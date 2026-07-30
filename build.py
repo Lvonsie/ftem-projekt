@@ -257,7 +257,7 @@ def home_html(datamap, lang):
         name = tr(s["name"], lang)
         x, y = CONS_POS[i % len(CONS_POS)]
         ph = CONS_PHASE[i % 4]
-        img = s.get("image")
+        img = s.get("icon")
         thumb = ('<img src="'+esc(img)+'" alt="" loading="lazy">') if img else '<span class="ab2">'+esc(s["short"])+'</span>'
         tag = '' if has else '<span class="ntag">'+esc(NODATA[lang])+'</span>'
         nodes += ('<a class="node ph-'+ph+('' if has else ' nodata')+'" href="#'+s["id"]+'" '
@@ -310,7 +310,6 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
 .langsw a.active{background:var(--red);color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
-<<<<<<< HEAD
 /* Startseite – Neon-Konstellation */
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(9,14,24,.58),rgba(9,14,24,.34) 40%,rgba(7,11,20,.92)),url("assets/hero.jpg") center 28%/cover no-repeat}
@@ -350,36 +349,16 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
   display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;box-shadow:0 18px 44px rgba(0,0,0,.55)}
 .node:hover .ncard,.node:focus-visible .ncard{opacity:1;transform:translate(-50%,0) scale(1)}
 .node .ncard::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:rgba(15,21,32,.9)}
-.node .nthumb{width:100%;height:82px;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)}
-.node .nthumb img{width:100%;height:100%;object-fit:cover}
-.node .nthumb .ab2{font-size:24px;font-weight:800;color:#fff;opacity:.92}
-.node.ph-found .nthumb{background:rgba(31,143,166,.28)}.node.ph-talent .nthumb{background:rgba(226,169,0,.28)}.node.ph-elite .nthumb{background:rgba(232,119,46,.28)}.node.ph-mast .nthumb{background:rgba(213,43,30,.28)}
+.node .nthumb{width:100%;height:78px;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff}
+.node .nthumb img{width:100%;height:100%;object-fit:contain;padding:10px}
+.node .nthumb .ab2{font-size:24px;font-weight:800;color:#1d2630;opacity:.92}
+.node.ph-found .nthumb{box-shadow:inset 0 4px 0 #1f8fa6}.node.ph-talent .nthumb{box-shadow:inset 0 4px 0 #e2a900}.node.ph-elite .nthumb{box-shadow:inset 0 4px 0 #e8772e}.node.ph-mast .nthumb{box-shadow:inset 0 4px 0 #d52b1e}
 .node .nname{font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2}
 .node .ntag{font-size:10px;font-weight:700;color:#cdd6de;background:rgba(255,255,255,.12);border-radius:20px;padding:2px 8px}
 .scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:5;color:rgba(255,255,255,.7);font-size:24px;animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 @media(max-width:640px){.node .nlabel{font-size:10.5px}.node .ncard{width:130px}#home .hero-head{padding-top:60px}}
-=======
-/* Startseite */
-#home .home-hero{max-width:980px;margin:0 auto;padding:60px 24px 30px;text-align:center}
-#home h1{font-size:30px;margin:0 0 6px;font-weight:800;color:var(--red);letter-spacing:.2px}
-#home h1 b{color:var(--ink);font-weight:800}
-#home .sub{color:var(--mut);font-size:14px;margin:0 0 18px}
-#home .hero-lang{display:flex;justify-content:center;margin:0 0 30px}
-.grid-sports{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;text-align:center}
-@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .18s,transform .18s,border-color .18s;animation:cardIn .45s ease both}
-.grid-sports .card:hover{border-color:var(--red);box-shadow:0 10px 24px rgba(213,43,30,.14);transform:translateY(-4px) scale(1.02)}
-.grid-sports .ab{width:60px;height:60px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;overflow:hidden}
-.grid-sports .card:hover .ab{transform:scale(1.12) rotate(-6deg)}
-.grid-sports .ab.has-img{background:none;border:none}
-.grid-sports .ab img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.grid-sports .card.nodata .ab{background:#b6c0cc}
-.grid-sports .card.nodata .ab.has-img{background:none;filter:grayscale(1);opacity:.6}
-.grid-sports .cn{font-weight:800;font-size:13.5px}
-.grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
->>>>>>> 09592038aa835763b2dabffacbc5ed0e4f71a20a
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
