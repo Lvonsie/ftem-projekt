@@ -295,4 +295,6 @@ HTML = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
 
 out = os.path.join(BASE, "ftem-ski-alpin-uebersicht.html")
 open(out,"w",encoding="utf-8").write(HTML)
-print("written", len(HTML.encode("utf-8")), "bytes ->", out)
+# also write index.html so the page works as the root of a website (Netlify etc.)
+open(os.path.join(BASE, "index.html"),"w",encoding="utf-8").write(HTML)
+print("written", len(HTML.encode("utf-8")), "bytes ->", out, "(+ index.html)")
