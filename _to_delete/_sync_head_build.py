@@ -365,7 +365,7 @@ html{scroll-behavior:smooth;background:var(--bg);scrollbar-gutter:stable}
 html.h #home{display:none}
 html.noanim .grid-sports .card{animation:none}
 [hidden]{display:none!important}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px}
 .langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
 .langsw a.active{background:var(--acc);color:#fff}
@@ -545,41 +545,12 @@ mark{background:#ffe08a;border-radius:2px;padding:0 1px}
 .hidden{display:none!important}
 footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
 footer a{color:var(--red)}
-/* ---------- Responsive: Tablet ---------- */
-@media(max-width:1180px){
-header.top{flex-wrap:wrap;height:auto;padding:8px 14px;gap:8px 10px}
-header.top h1{flex:1;min-width:180px}
-.tools{width:100%;margin-left:0;flex-wrap:wrap}
-.tools input{flex:1 1 140px;width:auto;min-width:0}
-.tools select{flex:1 1 160px;width:auto;min-width:0}
-.tools .hits{width:auto;flex:0 0 auto;max-width:110px}
-details.theme{scroll-margin-top:118px}
+@media(max-width:1000px){
+header.top{flex-wrap:wrap;height:auto}
+header.top h1{white-space:normal}
+.tools{flex-wrap:wrap}
 }
-/* ---------- Responsive: Handy ---------- */
-@media(max-width:760px){
-:root{--colw:180px;--lblw:110px}
-header.top .back{width:auto;padding:6px 11px}
-header.top .sicon{width:28px;height:28px}
-header.top h1{font-size:13.5px;min-width:0}
-.tools{gap:6px}
-.tools input{font-size:16px;padding:6px 10px}
-.tools select{font-size:13px}
-.tools .exp,.tools .col{flex:1 1 auto;width:auto;padding:7px 6px}
-.wrap{padding:10px 10px 60px}
-.scroller{padding:0 8px 10px}
-.rl{font-size:10.5px;padding:7px 8px}
-.cell .cwrap{font-size:11px}
-summary .tt{font-size:13px}
-details.theme{scroll-margin-top:170px}
-.home-info{padding:28px 14px 20px}
-.ftem-info{padding:18px 14px 14px}
-.phases{grid-template-columns:1fr}
-footer{padding:16px;font-size:11px}
-}
-/* ---------- Responsive: sehr grosse Screens ---------- */
-@media(min-width:1800px){
-.wrap{max-width:1720px}
-}
+@media(max-width:700px){:root{--colw:200px;--lblw:128px}}
 """
 
 JS = r"""
