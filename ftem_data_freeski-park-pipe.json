@@ -32,22 +32,37 @@
      "label": "Trägerschaft",
      "segs": [
       {
-       "v": "Familie, Schule, Skiclub, Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c]]",
+       "v": "Familie, Schule, Skiclub, Sportclubs",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
       },
       {
-       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c]]",
+       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
       },
       {
-       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c]]",
+       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
       },
       {
        "v": "RV, NLZ, C-Kader, Sportschule",
@@ -109,7 +124,7 @@
        "l": []
       },
       {
-       "v": "Leistungstraining: \"LEARN TO TRAIN AND COMPETE\"[[|Leistungstraining: \"LEARN TO TRAIN AND COMPETE\"]]",
+       "v": "Leistungstraining: \"LEARN TO TRAIN AND COMPETE\"",
        "from": 5,
        "to": 5,
        "l": []
@@ -415,22 +430,37 @@
        "l": []
       },
       {
-       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Langssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\n[[Skills Checks Mobility F3|https://snowsports.flink.host/s/V8RPoTvV/3DswFJec]]",
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Langssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Mobility F3",
+         "href": "https://snowsports.flink.host/s/V8RPoTvV/3DswFJec"
+        }
+       ]
       },
       {
-       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Langssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\n[[Skills Checks Mobility T1&T2|https://snowsports.flink.host/s/V8RPoTvV/zDp2jWdg]]",
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Langssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Mobility T1&T2",
+         "href": "https://snowsports.flink.host/s/V8RPoTvV/zDp2jWdg"
+        }
+       ]
       },
       {
-       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4a: Active Straight Leg Raise (Hamstrings)\nSC 4b: Pelvic Tilt in Good Morning Position (Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\nST: Physio Screening NLZ\n\n[[Skills Checks Mobility T3&T4|https://snowsports.flink.host/s/V8RPoTvV/lKUuSGpU]]",
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4a: Active Straight Leg Raise (Hamstrings)\nSC 4b: Pelvic Tilt in Good Morning Position (Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\nST: Physio Screening NLZ",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Mobility T3&T4",
+         "href": "https://snowsports.flink.host/s/V8RPoTvV/lKUuSGpU"
+        }
+       ]
       },
       {
        "v": "ST: Physio Screening Magglingen",
@@ -444,40 +474,70 @@
      "label": "Inhalt Mobilität",
      "segs": [
       {
-       "v": "Aktiver Alltag pflegen\n• Spielerische Bewegungsausführungen mit maximalem Bewegungsumfang\n\n[[Inhalt F1-2|https://snowsports.flink.host/s/P0EFjjys/bkjxEpe5]]",
+       "v": "Aktiver Alltag pflegen\n• Spielerische Bewegungsausführungen mit maximalem Bewegungsumfang",
        "from": 0,
        "to": 0,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt F1-2",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/bkjxEpe5"
+        }
+       ]
       },
       {
-       "v": "Aktiver Alltag pflegen\n• Spielerische Bewegungsausführungen mit maximalem Bewegungsumfang\n• Beweglichkeit erhalten\n\n[[Inhalt F1-2|https://snowsports.flink.host/s/P0EFjjys/bkjxEpe5]]",
+       "v": "Aktiver Alltag pflegen\n• Spielerische Bewegungsausführungen mit maximalem Bewegungsumfang\n• Beweglichkeit erhalten",
        "from": 1,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt F1-2",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/bkjxEpe5"
+        }
+       ]
       },
       {
-       "v": "Spielerische Übungen\n• Mit maximalem Bewegungsumfang\n• Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)\n\n[[Inhalt F3|https://snowsports.flink.host/s/P0EFjjys/VHRI4wej]]",
+       "v": "Spielerische Übungen\n• Mit maximalem Bewegungsumfang\n• Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt F3",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/VHRI4wej"
+        }
+       ]
       },
       {
-       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)\n\n[[Inhalt T1-2|https://snowsports.flink.host/s/P0EFjjys/dL2oQ7Sk]]",
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt T1-2",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/dL2oQ7Sk"
+        }
+       ]
       },
       {
-       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Nach Bedarf zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe nach der Belastung\n• Vor dynamischen oder statischen Übungen\n\n[[Inhalt T3-4|https://snowsports.flink.host/s/P0EFjjys/Kw1HVhTz]]",
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor und nach der Belastung oder in/als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Nach Bedarf zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe nach der Belastung\n• Vor dynamischen oder statischen Übungen",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt T3-4",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/Kw1HVhTz"
+        }
+       ]
       },
       {
-       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen\n\n[[Inhalt E-M|https://snowsports.flink.host/s/P0EFjjys/3q3YiY5n]]",
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt E-M",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/3q3YiY5n"
+        }
+       ]
       }
      ]
     }
@@ -491,52 +551,92 @@
      "label": "Skills-Checks (SC) & Leistungstests (LT) Kraft",
      "segs": [
       {
-       "v": "SC: Off Snow Skills F1\n\n[[Skills Checks Kraft F1& F2|https://snowsports.flink.host/s/Z1E9fXeV/aQSehViR]]",
+       "v": "SC: Off Snow Skills F1",
        "from": 0,
        "to": 0,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Kraft F1& F2",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/aQSehViR"
+        }
+       ]
       },
       {
-       "v": "SC: Off Snow Skills F2\n\n[[Skills Checks Kraft F1& F2|https://snowsports.flink.host/s/Z1E9fXeV/aQSehViR]]",
+       "v": "SC: Off Snow Skills F2",
        "from": 1,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Kraft F1& F2",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/aQSehViR"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge einbeinig auf Box\nSC 2: Kniebeuge vorne mit Besen\nSC 3: Reisskniebeuge\nSC 4: Bridging beidbeinig\nSC 5: Standwaage\nSC 6 : Sprung von kniehohem Kasten  mit einbeiniger/beidbeiniger Landung\nSC 7: Liegestütz auf Knie\nSC 8: Felgaufzug\nSC 9: Klimmzug (exzentrische Phase)\n\n[[Skills Checks Kraft F3 |https://snowsports.flink.host/s/Z1E9fXeV/e9hjBQXV]]",
+       "v": "SC 1: Kniebeuge einbeinig auf Box\nSC 2: Kniebeuge vorne mit Besen\nSC 3: Reisskniebeuge\nSC 4: Bridging beidbeinig\nSC 5: Standwaage\nSC 6 : Sprung von kniehohem Kasten  mit einbeiniger/beidbeiniger Landung\nSC 7: Liegestütz auf Knie\nSC 8: Felgaufzug\nSC 9: Klimmzug (exzentrische Phase)",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Kraft F3",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/e9hjBQXV"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Lateral Step Down\nSC 3: Reisskniebeuge mit Stab\nSC 4: Front- und Backsquat mit Reckstange\nSC 5: Leg Curl exzentrisch und konzentrisch beidbeinig mit Teppich\nSC 6: Triple Hop einbeinig\nSC 7: Strecksprung mit tiefer Landung\nSC 8: Reverse Wood Chops\nSC 9: Wood Chops\n\nST: Powertest\n\n[[Skills Checks Kraft T1|https://snowsports.flink.host/s/Z1E9fXeV/dUbAGMht]]",
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Lateral Step Down\nSC 3: Reisskniebeuge mit Stab\nSC 4: Front- und Backsquat mit Reckstange\nSC 5: Leg Curl exzentrisch und konzentrisch beidbeinig mit Teppich\nSC 6: Triple Hop einbeinig\nSC 7: Strecksprung mit tiefer Landung\nSC 8: Reverse Wood Chops\nSC 9: Wood Chops\n\nST: Powertest",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Kraft T1",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/dUbAGMht"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge vorne\nSC 3: Reisskniebeuge mit Stab\nSC 4: Leg Curls mit Teppich\nSC 5: Nordic Hamstrings\nSC 6: Sprung von kniehohem Element mit einbeiniger Landung\nSC 7: Seitsprünge mit Stabilisieren\nSC 8: Boxjump beidbeinig\nSC 9: Kombinationsbewegungen mit Langhantel\nSC 10: Wood Chops\n\nST: Powertest\n\n[[Skills Checks Kraft T2|https://snowsports.flink.host/s/Z1E9fXeV/Za6krhnZ]]",
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge vorne\nSC 3: Reisskniebeuge mit Stab\nSC 4: Leg Curls mit Teppich\nSC 5: Nordic Hamstrings\nSC 6: Sprung von kniehohem Element mit einbeiniger Landung\nSC 7: Seitsprünge mit Stabilisieren\nSC 8: Boxjump beidbeinig\nSC 9: Kombinationsbewegungen mit Langhantel\nSC 10: Wood Chops\n\nST: Powertest",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Kraft T2",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/Za6krhnZ"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Kniebeuge mit Langhantel hinten\nSC 4: Reisskniebeuge mit Langhantel\nSC 5: Umsetzen aus dem Hang\nSC 6: Nordic Hamstring\nSC 7: Deadlift mit Langhantel\nSC 8: Sprung von kniehohem Element mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump to High Jump\nSC 11: Kombinationsbewegungen mit Langhantel imbalanced\nSC 12: Rotated Sit Ups Full ROM im GHD\n\nST: Powertest\n\n[[Skills Checks T3|https://snowsports.flink.host/s/Z1E9fXeV/VfIeUVRP]]",
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Kniebeuge mit Langhantel hinten\nSC 4: Reisskniebeuge mit Langhantel\nSC 5: Umsetzen aus dem Hang\nSC 6: Nordic Hamstring\nSC 7: Deadlift mit Langhantel\nSC 8: Sprung von kniehohem Element mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump to High Jump\nSC 11: Kombinationsbewegungen mit Langhantel imbalanced\nSC 12: Rotated Sit Ups Full ROM im GHD\n\nST: Powertest",
        "from": 5,
        "to": 5,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks T3",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/VfIeUVRP"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Kniebeuge mit Langhantel hinten\nSC 4: Reisskniebeuge mit Langhantel\nSC 5: Umsetzen aus dem Hang\nSC 6: Reissen aus dem Hang\nSC 7: Drop Snatch mit Langhantel\nSC 8: Nordic Hamstring\nSC 9: Sprung von kniehohem Element mit einbeiniger Landung\nSC 10: Seitsprünge mit Stabilisieren\nSC 11: Box Jump to High Jump\nSC 12: Kombinationsbewegungen mit Langhantel imbalanced\nSC 13: Rotated Sit Ups Full ROM im GHD\n\nST: NLZ Tests (Nordboard, Jump), Powertest\n\n[[Skills Checks Kraft T4|https://snowsports.flink.host/s/Z1E9fXeV/nH7jH2Gj]]",
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Kniebeuge mit Langhantel hinten\nSC 4: Reisskniebeuge mit Langhantel\nSC 5: Umsetzen aus dem Hang\nSC 6: Reissen aus dem Hang\nSC 7: Drop Snatch mit Langhantel\nSC 8: Nordic Hamstring\nSC 9: Sprung von kniehohem Element mit einbeiniger Landung\nSC 10: Seitsprünge mit Stabilisieren\nSC 11: Box Jump to High Jump\nSC 12: Kombinationsbewegungen mit Langhantel imbalanced\nSC 13: Rotated Sit Ups Full ROM im GHD\n\nST: NLZ Tests (Nordboard, Jump), Powertest",
        "from": 6,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Kraft T4",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/nH7jH2Gj"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge vorne\nSC 2: Kniebeuge hinten\nSC 3: Reisskniebeuge\nSC 4: Umsetzen\nSC 5: Reissen\nSC 6: Drop Snatch\nSC 7: Nordic Hamstring\n\nST: NLZ Test oder LD Magglingen\n\n[[Skills Checks Kraft E&M|https://snowsports.flink.host/s/Z1E9fXeV/5pb4ud0z]]",
+       "v": "SC 1: Kniebeuge vorne\nSC 2: Kniebeuge hinten\nSC 3: Reisskniebeuge\nSC 4: Umsetzen\nSC 5: Reissen\nSC 6: Drop Snatch\nSC 7: Nordic Hamstring\n\nST: NLZ Test oder LD Magglingen",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Kraft E&M",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/5pb4ud0z"
+        }
+       ]
       }
      ]
     },
@@ -544,34 +644,67 @@
      "label": "Inhalt Kraft",
      "segs": [
       {
-       "v": "Eingrenzen\nSpielerische Formen der Basis-bewegungen: Stossen, Stützen, Bremsen, Ziehen\nGanzheitlich Stark\n\nAktiven Alltag pflegen\n• Belastungsverträglichkeit aufbauen: Kraft, Stabilität & Schnellkraft\n• Erwerben und Festigen von spielerischen Krafteinheiten\n\n[[FTEM Kraft F1&F2|https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm]]",
+       "v": "Eingrenzen\nSpielerische Formen der Basis-bewegungen: Stossen, Stützen, Bremsen, Ziehen\nGanzheitlich Stark\n\nAktiven Alltag pflegen\n• Belastungsverträglichkeit aufbauen: Kraft, Stabilität & Schnellkraft\n• Erwerben und Festigen von spielerischen Krafteinheiten",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "FTEM Kraft F1&F2",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm"
+        }
+       ]
       },
       {
-       "v": "Eingrenzen\nSpielerische Formen der Basisbewegungen: Stossen, Stützen, Bremsen, Ziehen\nGanzheitlich Stark\n\nSommer\n• Techniktraining (Bewegungsschulung)\n• Koordination im vollen Bewegungsumfang\n• Übungen mit dem eigenen Körpergewicht\n• Variantenreiche Sprungformen\n\nWinter\n• Variantenreiche Sprungformen\n• Erhaltung der Kraft (ganzheitlich stark bleiben)\n\n[[FTEM Kraft F3|https://snowsports.flink.host/s/HOx8PqfA/61f5x5Fo]]",
+       "v": "Eingrenzen\nSpielerische Formen der Basisbewegungen: Stossen, Stützen, Bremsen, Ziehen\nGanzheitlich Stark\n\nSommer\n• Techniktraining (Bewegungsschulung)\n• Koordination im vollen Bewegungsumfang\n• Übungen mit dem eigenen Körpergewicht\n• Variantenreiche Sprungformen\n\nWinter\n• Variantenreiche Sprungformen\n• Erhaltung der Kraft (ganzheitlich stark bleiben)",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "FTEM Kraft F3",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/61f5x5Fo"
+        }
+       ]
       },
       {
-       "v": "Eingrenzen\nSpielerische Formen der Basisbewegungen: Stossen, Stützen, Bremsen, Ziehen\nGanzheitlich Stark\n\nVorbereitungsphase 1\n• Langhanteltechnik mit Körpergewicht und leichten Zusatzgewicht (unterschiedliche Kniebeugeformen)\n• Erste Sprungformen mit Fokus auf korrekte Landungsmechanismen (Beinachse)\n• Entwicklung der Rumpfkontrolle und der Stabilität\n\nVorbereitungsphase 2\n• Kraftpotential steigern\n• Steigerung der Explosivkraft\n• Rumpfkrafttraining statisch mit einzelnen dynamischen Formen\n\nVorwettkampfphase\n• Explosivkrafttraining\n• Rumpfkrafttraining\n\nWettkampfphase\n• Krafttraining mit reduziertem Volumen\n• Rumpfkrafttraining erhalten\n• Präventionsprogramme (ISPA)\n\n[[FTEM Kraft T1|https://snowsports.flink.host/s/HOx8PqfA/0lz9f3v1]]\n[[FTEM Kraft T2|https://snowsports.flink.host/s/HOx8PqfA/ZPtYjqVS]]",
+       "v": "Eingrenzen\nSpielerische Formen der Basisbewegungen: Stossen, Stützen, Bremsen, Ziehen\nGanzheitlich Stark\n\nVorbereitungsphase 1\n• Langhanteltechnik mit Körpergewicht und leichten Zusatzgewicht (unterschiedliche Kniebeugeformen)\n• Erste Sprungformen mit Fokus auf korrekte Landungsmechanismen (Beinachse)\n• Entwicklung der Rumpfkontrolle und der Stabilität\n\nVorbereitungsphase 2\n• Kraftpotential steigern\n• Steigerung der Explosivkraft\n• Rumpfkrafttraining statisch mit einzelnen dynamischen Formen\n\nVorwettkampfphase\n• Explosivkrafttraining\n• Rumpfkrafttraining\n\nWettkampfphase\n• Krafttraining mit reduziertem Volumen\n• Rumpfkrafttraining erhalten\n• Präventionsprogramme (ISPA)",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "FTEM Kraft T1",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/0lz9f3v1"
+        },
+        {
+         "text": "FTEM Kraft T2",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/ZPtYjqVS"
+        }
+       ]
       },
       {
-       "v": "Belasten\nEntwickeln der Kraft mittels Muskelkraftübungen. Tiefe bis mittlere Intensität mit hohem Trainingsumfang. Die Qualität ist hierbei entscheidend. Technisches Ausarbeiten der Muskelkraftübungen, bei guter Qualität bereits mit Zusatzgewichten arbeiten.\n\nVorbereitungsphase 1\n• Heranführen der unteren Extremitäten und des Rumpfes an die höheren Lasten der nächsten Stufe\n• Technisches erarbeiten der Langhanteltechnik in den Muskelleistungsübungen\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelkraftübungen als Trainingsübung anwenden)\n• weiter Entwickeln und anschliessendes Nutzen der Muskelleistungsübungen\n• Rumpfkrafttraining statisch und dynamisch mit Zusatzgewichten\n• Explosivkrafttraining mit und ohne Zusatzgewichten\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Steigerung der Explosivkraft mit und ohne Zusatzlast\n• Sprung und Landevarianten einbauen\n• dynamische und statische Rumpfkraft polarisiert und sportartspezifisch einbauen\n\nWettkampfphase\n• Explosiv- und Maximalkraft erhalten\n• hohe Intensitäten und reduzierter Umfang der Krafteinheiten\n• Präventionsprogramme\n\n[[FTEM Kraft T3|https://snowsports.flink.host/s/HOx8PqfA/GyGRkrgf]]\n[[FTEM Kraft T4|https://snowsports.flink.host/s/HOx8PqfA/XaTXxDfC]]",
+       "v": "Belasten\nEntwickeln der Kraft mittels Muskelkraftübungen. Tiefe bis mittlere Intensität mit hohem Trainingsumfang. Die Qualität ist hierbei entscheidend. Technisches Ausarbeiten der Muskelkraftübungen, bei guter Qualität bereits mit Zusatzgewichten arbeiten.\n\nVorbereitungsphase 1\n• Heranführen der unteren Extremitäten und des Rumpfes an die höheren Lasten der nächsten Stufe\n• Technisches erarbeiten der Langhanteltechnik in den Muskelleistungsübungen\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelkraftübungen als Trainingsübung anwenden)\n• weiter Entwickeln und anschliessendes Nutzen der Muskelleistungsübungen\n• Rumpfkrafttraining statisch und dynamisch mit Zusatzgewichten\n• Explosivkrafttraining mit und ohne Zusatzgewichten\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Steigerung der Explosivkraft mit und ohne Zusatzlast\n• Sprung und Landevarianten einbauen\n• dynamische und statische Rumpfkraft polarisiert und sportartspezifisch einbauen\n\nWettkampfphase\n• Explosiv- und Maximalkraft erhalten\n• hohe Intensitäten und reduzierter Umfang der Krafteinheiten\n• Präventionsprogramme",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "FTEM Kraft T3",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/GyGRkrgf"
+        },
+        {
+         "text": "FTEM Kraft T4",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/XaTXxDfC"
+        }
+       ]
       },
       {
-       "v": "Belasten\nEntwickeln der Kraft mittels Muskelkraftübungen. Tiefe bis mittlere Intensität mit hohem Trainingsumfang. Die Qualität ist hierbei entscheidend. Technisches Ausarbeiten der Muskelkraftübungen, bei guter Qualität bereits mit Zusatzgewichten arbeiten.\n\nVorbereitungsphase 1\n• Heranführen der unteren Extremitäten und des Rumpfes an die höheren Lasten der nächsten Stufe\n• Technisches erarbeiten der Langhanteltechnik in den Muskelleistungsübungen\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelkraftübungen als Trainingsübung anwenden)\n• weiter Entwickeln und anschliessendes Nutzen der Muskelleistungsübungen\n• Rumpfkrafttraining statisch und dynamisch mit Zusatzgewichten\n• Explosivkrafttraining mit und ohne Zusatzgewichten\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Steigerung der Explosivkraft mit und ohne Zusatzlast\n• Sprung und Landevarianten einbauen\n• dynamische und statische Rumpfkraft polarisiert und sportartspezifisch einbauen\n\nWettkampfphase\n• Explosiv- und Maximalkraft erhalten\n• hohe Intensitäten und reduzierter Umfang der Krafteinheiten\n• Präventionsprogramme\n\n[[FTEM Kraft E|https://snowsports.flink.host/s/3rBylHzO/O0aBRuUb]]",
+       "v": "Belasten\nEntwickeln der Kraft mittels Muskelkraftübungen. Tiefe bis mittlere Intensität mit hohem Trainingsumfang. Die Qualität ist hierbei entscheidend. Technisches Ausarbeiten der Muskelkraftübungen, bei guter Qualität bereits mit Zusatzgewichten arbeiten.\n\nVorbereitungsphase 1\n• Heranführen der unteren Extremitäten und des Rumpfes an die höheren Lasten der nächsten Stufe\n• Technisches erarbeiten der Langhanteltechnik in den Muskelleistungsübungen\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelkraftübungen als Trainingsübung anwenden)\n• weiter Entwickeln und anschliessendes Nutzen der Muskelleistungsübungen\n• Rumpfkrafttraining statisch und dynamisch mit Zusatzgewichten\n• Explosivkrafttraining mit und ohne Zusatzgewichten\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Steigerung der Explosivkraft mit und ohne Zusatzlast\n• Sprung und Landevarianten einbauen\n• dynamische und statische Rumpfkraft polarisiert und sportartspezifisch einbauen\n\nWettkampfphase\n• Explosiv- und Maximalkraft erhalten\n• hohe Intensitäten und reduzierter Umfang der Krafteinheiten\n• Präventionsprogramme",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "FTEM Kraft E",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/O0aBRuUb"
+        }
+       ]
       }
      ]
     }
@@ -585,46 +718,81 @@
      "label": "Skills-Checks (SC) & Leistungstests (LT) Schnelligkeit",
      "segs": [
       {
-       "v": "SC  \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\n\nOff Snow Skills F1-2\n\nSiehe Swiss-Ski-Skills\n\n[[Skills-Check Schnelligkeit Park & Pipe|https://snowsports.flink.host/s/mV4adYMV]]",
+       "v": "SC  \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\n\nOff Snow Skills F1-2\n\nSiehe Swiss-Ski-Skills",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Schnelligkeit Park & Pipe",
+         "href": "https://snowsports.flink.host/s/mV4adYMV"
+        }
+       ]
       },
       {
-       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m)\nSC 2: 30x Seilspringen Einfachdurchzüge\n\n[[Skills-Check Schnelligkeit Park & Pipe|https://snowsports.flink.host/s/mV4adYMV]]",
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m)\nSC 2: 30x Seilspringen Einfachdurchzüge",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Schnelligkeit Park & Pipe",
+         "href": "https://snowsports.flink.host/s/mV4adYMV"
+        }
+       ]
       },
       {
-       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m & 50m)\nSC 2: 50x Seilspringen Einfachdurchzüge, 10 Doppeldurchzüge am Stück\n\n[[Skills-Check Schnelligkeit Park & Pipe|https://snowsports.flink.host/s/mV4adYMV]]",
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m & 50m)\nSC 2: 50x Seilspringen Einfachdurchzüge, 10 Doppeldurchzüge am Stück",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Schnelligkeit Park & Pipe",
+         "href": "https://snowsports.flink.host/s/mV4adYMV"
+        }
+       ]
       },
       {
-       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 60m)\nSC 2: 50x Seilspringen Einfachdurchzüge, 20x Doppeldurchzüge am Stück\n\n[[Skills-Check Schnelligkeit Park & Pipe|https://snowsports.flink.host/s/mV4adYMV]]",
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 60m)\nSC 2: 50x Seilspringen Einfachdurchzüge, 20x Doppeldurchzüge am Stück",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Schnelligkeit Park & Pipe",
+         "href": "https://snowsports.flink.host/s/mV4adYMV"
+        }
+       ]
       },
       {
-       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 80m)\nSC 2: 100x Seilspringen Einfachdurchzüge, 30x Doppeldurchzüge am Stück\n\n[[Skills-Check Schnelligkeit Park & Pipe|https://snowsports.flink.host/s/mV4adYMV]]",
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 80m)\nSC 2: 100x Seilspringen Einfachdurchzüge, 30x Doppeldurchzüge am Stück",
        "from": 5,
        "to": 5,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Schnelligkeit Park & Pipe",
+         "href": "https://snowsports.flink.host/s/mV4adYMV"
+        }
+       ]
       },
       {
-       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 100m)\nSC 2: 100x Seilspringen Einfachdurchzüge, 40x Doppeldurchzüge am Stück\n\n[[Skills-Check Schnelligkeit Park & Pipe|https://snowsports.flink.host/s/mV4adYMV]]",
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 100m)\nSC 2: 100x Seilspringen Einfachdurchzüge, 40x Doppeldurchzüge am Stück",
        "from": 6,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Schnelligkeit Park & Pipe",
+         "href": "https://snowsports.flink.host/s/mV4adYMV"
+        }
+       ]
       },
       {
-       "v": "SC 1: Sprints über unterschliedliche Distanzen 30 m/ 80-100 m\nSC 2: Seilspringen 200x Einfachdurchzüge, 100x Doppeldurchzüge\nSC 3: Leichtathletische Grundlagen (Lauf ABC und Sprungvarianten maximal)\n\n[[Skills-Check Schnelligkeit Park & Pipe|https://snowsports.flink.host/s/mV4adYMV]]",
+       "v": "SC 1: Sprints über unterschliedliche Distanzen 30 m/ 80-100 m\nSC 2: Seilspringen 200x Einfachdurchzüge, 100x Doppeldurchzüge\nSC 3: Leichtathletische Grundlagen (Lauf ABC und Sprungvarianten maximal)",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Schnelligkeit Park & Pipe",
+         "href": "https://snowsports.flink.host/s/mV4adYMV"
+        }
+       ]
       }
      ]
     },
@@ -632,52 +800,92 @@
      "label": "Inhalt Schnelligkeit",
      "segs": [
       {
-       "v": "Beginne jedes Training mit Übungen aus\nden Bewegungs- und Spielgrundformen. Diese Formen sind sportübergreifend und fördern die Bewegungskompetenz der Kinder.\nSchnelligkeit:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen,\nSpringen, Hüpf- und Sprungformen verpackt in Spielformen oder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen.\n\nExplosivität:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen, Springen, Hüpf- und Sprungformen verpackt in Spielformen\noder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen\n\nGestalte die Spiel- und Bewegungsgrundformen freudvoll und\nverpack sie in fantasievolle, abwechslungsreiche Spiele.\n\n[[Schnelligkeit Park& Pipe F1&F2|https://snowsports.flink.host/s/3vdRISIx/YXhEDCmy]]",
+       "v": "Beginne jedes Training mit Übungen aus\nden Bewegungs- und Spielgrundformen. Diese Formen sind sportübergreifend und fördern die Bewegungskompetenz der Kinder.\nSchnelligkeit:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen,\nSpringen, Hüpf- und Sprungformen verpackt in Spielformen oder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen.\n\nExplosivität:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen, Springen, Hüpf- und Sprungformen verpackt in Spielformen\noder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen\n\nGestalte die Spiel- und Bewegungsgrundformen freudvoll und\nverpack sie in fantasievolle, abwechslungsreiche Spiele.",
        "from": 0,
        "to": 0,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe F1&F2",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/YXhEDCmy"
+        }
+       ]
       },
       {
-       "v": "Wähle Übungen aus den Bewegungs- und\nSpielgrundformen, welche einen der Entwicklungsfaktoren\nKraft, Explosivität oder Schnelligkeit akzentuieren.\n\nSchnelligkeit:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen,\nSpringen, Hüpf- und Sprungformen verpackt in Spielformen oder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen.\n\nExplosivität:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen, Springen, Hüpf- und Sprungformen verpackt in Spielformen\noder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen\n\nGestalte die Spiel- und Bewegungsgrundformen freudvoll und verpack sie in fantasievolle, abwechslungsreiche Spiele.\n\n[[Schnelligkeit Park& Pipe F1&F2|https://snowsports.flink.host/s/3vdRISIx/YXhEDCmy]]",
+       "v": "Wähle Übungen aus den Bewegungs- und\nSpielgrundformen, welche einen der Entwicklungsfaktoren\nKraft, Explosivität oder Schnelligkeit akzentuieren.\n\nSchnelligkeit:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen,\nSpringen, Hüpf- und Sprungformen verpackt in Spielformen oder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen.\n\nExplosivität:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen, Springen, Hüpf- und Sprungformen verpackt in Spielformen\noder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen\n\nGestalte die Spiel- und Bewegungsgrundformen freudvoll und verpack sie in fantasievolle, abwechslungsreiche Spiele.",
        "from": 1,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe F1&F2",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/YXhEDCmy"
+        }
+       ]
       },
       {
-       "v": "Wähle Übungen aus den Bewegungs- und\nSpielgrundformen, welche einen der Entwicklungsfaktoren\nKraft, Explosivität oder Schnelligkeit akzentuieren.\n\nSchnelligkeit:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen,\nSpringen, Hüpf- und Sprungformen verpackt in Spielformen oder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen.\nÜbungen aus den athletischen Basisbewegungen:\nBeschleunigung, maximal schnell sein oder Sprints mit Richtungswechsel.\n\nExplosivität:\nÜbungen aus den athletischen Basisbewegungen\nHüpfen/Springen, Springen/Landen und Werfen:\nSeilspringen, Reifensprünge oder Wurfformen.\n\n[[Schnelligkeit Park& Pipe F3|https://snowsports.flink.host/s/3vdRISIx/fE50PZvo]]",
+       "v": "Wähle Übungen aus den Bewegungs- und\nSpielgrundformen, welche einen der Entwicklungsfaktoren\nKraft, Explosivität oder Schnelligkeit akzentuieren.\n\nSchnelligkeit:\nÜbungen aus den Bewegungs- und Spielgrundformen zur Steigerung der Explosivität: Laufen,\nSpringen, Hüpf- und Sprungformen verpackt in Spielformen oder Übungsformen zu Verbesserung der koordinativen Kompetenz, werfen und fangen, Seilspringen.\nÜbungen aus den athletischen Basisbewegungen:\nBeschleunigung, maximal schnell sein oder Sprints mit Richtungswechsel.\n\nExplosivität:\nÜbungen aus den athletischen Basisbewegungen\nHüpfen/Springen, Springen/Landen und Werfen:\nSeilspringen, Reifensprünge oder Wurfformen.",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe F3",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/fE50PZvo"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit:\nVariiere in der Wahl der athletischen Erscheinungsform:\n• Beschleunigung\n• Maximalgeschwindigkeit\n• Richtungswechsel\nvon Training zu Training oder plane zwei athletische Erscheinungsformen in der gleichen Einheit ein.\n\nExplosivität:\nBeginne das Explosivkrafttraining mit 60-70% Grundlagentraining und 30-40% Leistungstraining, steigere dann allmählich den Anteil des Leistungstrainings.\nLeistungstraining: Explosivität: Einfach- vor Mehrfachsprünge (z.B. Doppelbeinsprünge vertikal sowie horizontal)\nGrundlagentraining Explosivität: Steigerung der Belastbarkeit, z.B. durch verschiedene Formen des Seilspringens (Oberschenkel-, Fussgelenkdominant, mit Partner, Doppelsprünge etc.)\n\n[[Schnelligkeit Park& Pipe T1|https://snowsports.flink.host/s/3vdRISIx/5WpNn72B]]",
+       "v": "Schnelligkeit:\nVariiere in der Wahl der athletischen Erscheinungsform:\n• Beschleunigung\n• Maximalgeschwindigkeit\n• Richtungswechsel\nvon Training zu Training oder plane zwei athletische Erscheinungsformen in der gleichen Einheit ein.\n\nExplosivität:\nBeginne das Explosivkrafttraining mit 60-70% Grundlagentraining und 30-40% Leistungstraining, steigere dann allmählich den Anteil des Leistungstrainings.\nLeistungstraining: Explosivität: Einfach- vor Mehrfachsprünge (z.B. Doppelbeinsprünge vertikal sowie horizontal)\nGrundlagentraining Explosivität: Steigerung der Belastbarkeit, z.B. durch verschiedene Formen des Seilspringens (Oberschenkel-, Fussgelenkdominant, mit Partner, Doppelsprünge etc.)",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe T1",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/5WpNn72B"
+        }
+       ]
       },
       {
-       "v": "Erhöhe den Anteil des Grundlagentrainings Explosivität\nund Kraft (mind. 2/3), technisches und athletisches\nGrundlagentraining zur Reduzierung der Belastung anstelle\ndes Leistungstrainings (1/3).\n\nSchnelligkeit:\nLeistungstraining Schnelligkeit: Lineares Sprinttraining;\nAkzentuierung des Trainings der Frequenzschnelligkeit\nGrundlagentraining Schnelligkeit: Übungen für die\nBewegungskontrolle (Techniktraining).\n\nExplosivität:\nErhöhe im Training der Explosivität den Anteil des athletischen und technischen Grundlagentrainings\nLeistungstraining: Explosivität: Einfach- vor Mehrfachsprünge (z.B. Doppelbeinsprünge vertikal sowie horizontal)\nGrundlagentraining Explosivität: Steigerung der Belastbarkeit, z.B. durch verschiedene Formen des Seilspringens\n\n[[Schnelligkeit Park& Pipe T2|https://snowsports.flink.host/s/3vdRISIx/Y1sHIVLq]]",
+       "v": "Erhöhe den Anteil des Grundlagentrainings Explosivität\nund Kraft (mind. 2/3), technisches und athletisches\nGrundlagentraining zur Reduzierung der Belastung anstelle\ndes Leistungstrainings (1/3).\n\nSchnelligkeit:\nLeistungstraining Schnelligkeit: Lineares Sprinttraining;\nAkzentuierung des Trainings der Frequenzschnelligkeit\nGrundlagentraining Schnelligkeit: Übungen für die\nBewegungskontrolle (Techniktraining).\n\nExplosivität:\nErhöhe im Training der Explosivität den Anteil des athletischen und technischen Grundlagentrainings\nLeistungstraining: Explosivität: Einfach- vor Mehrfachsprünge (z.B. Doppelbeinsprünge vertikal sowie horizontal)\nGrundlagentraining Explosivität: Steigerung der Belastbarkeit, z.B. durch verschiedene Formen des Seilspringens",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe T2",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/Y1sHIVLq"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit:\nspezifisch\n• Beschleunigungen\n• Richtungswechsel\n• Maximalgeschwindigkeit\n• Zwischen einzelnen Sprints 1:10-20 Pause (z.B. 5sec. Sprintdauer = mind. 100 Sec. Pause)\nallgemein:\n• Widerstand Stossen/ Ziehen (Beschleunigen)\n• Widerstand ziehen (Transitionsphase)\n• Zugunterstützung (Overspeed)\n\nExplosivität:\n• Sprungformen entwickeln\n• Leistungstraining Explosivität: Bei Sprungformen Einfach- vor\nMehrfachsprünge (z.B. Doppelbeinsprünge vertikal sowie horizontal)\n\n[[Schnelligkeit Park& Pipe T3|https://snowsports.flink.host/s/3vdRISIx/jIW9Ilyu]]",
+       "v": "Schnelligkeit:\nspezifisch\n• Beschleunigungen\n• Richtungswechsel\n• Maximalgeschwindigkeit\n• Zwischen einzelnen Sprints 1:10-20 Pause (z.B. 5sec. Sprintdauer = mind. 100 Sec. Pause)\nallgemein:\n• Widerstand Stossen/ Ziehen (Beschleunigen)\n• Widerstand ziehen (Transitionsphase)\n• Zugunterstützung (Overspeed)\n\nExplosivität:\n• Sprungformen entwickeln\n• Leistungstraining Explosivität: Bei Sprungformen Einfach- vor\nMehrfachsprünge (z.B. Doppelbeinsprünge vertikal sowie horizontal)",
        "from": 5,
        "to": 5,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe T3",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/jIW9Ilyu"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit:\nspezifisch\n• Beschleunigungen\n• Richtungswechsel\n• Maximalgeschwindigkeit\n• Zwischen einzelnen Sprints 1:10-20 Pause (z.B. 5sec. Sprintdauer = mind. 100 Sec. Pause)\nallgemein:\n• Widerstand Stossen/ Ziehen (Beschleunigen)\n• Widerstand ziehen (Transitionsphase)\n• Zugunterstützung (Overspeed)\n\nExplosivität:\n• Sprungformen entwickeln\n• Entwicklung der Sprungformen auf der gesamten Kraft-Geschwindigkeitskurve\n• Nutzung des exzentrischen Vordehnens\n• Übungsformen wählen, die auch auf kurze Brems- und Beschleunigungsphasen ausgerichtet sind.\n\n[[Schnelligkeit Park& Pipe T4|https://snowsports.flink.host/s/3vdRISIx/mMNNpTtp]]",
+       "v": "Schnelligkeit:\nspezifisch\n• Beschleunigungen\n• Richtungswechsel\n• Maximalgeschwindigkeit\n• Zwischen einzelnen Sprints 1:10-20 Pause (z.B. 5sec. Sprintdauer = mind. 100 Sec. Pause)\nallgemein:\n• Widerstand Stossen/ Ziehen (Beschleunigen)\n• Widerstand ziehen (Transitionsphase)\n• Zugunterstützung (Overspeed)\n\nExplosivität:\n• Sprungformen entwickeln\n• Entwicklung der Sprungformen auf der gesamten Kraft-Geschwindigkeitskurve\n• Nutzung des exzentrischen Vordehnens\n• Übungsformen wählen, die auch auf kurze Brems- und Beschleunigungsphasen ausgerichtet sind.",
        "from": 6,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe T4",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/mMNNpTtp"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit:\nspezifisch\n• Beschleunigungen\n• Richtungswechsel\n• Maximalgeschwindigkeit\n• Zwischen einzelnen Sprints 1:10-20 Pause (z.B. 5sec. Sprintdauer = mind. 100 Sec. Pause)\nallgemein:\n• Widerstand Stossen/ Ziehen (Beschleunigen)\n• Widerstand ziehen (Transitionsphase)\n• Zugunterstützung (Overspeed)\n\nExplosivität:\n• Sprungformen trainieren, die  der Charakteristik sowie  der Belastungsdynamik der Zielform gleichen\n• Sprungformen auf der gesamten Kraft-Geschwindigkeitskurve trainieren\n• Nutzung des exzentrischen Vordehnens\n• Übungsformen wählen, die auch auf kurze Brems- und Beschleunigungsphasen ausgerichtet sind.\n\n[[Schnelligkeit Park& Pipe E&M|https://snowsports.flink.host/s/3vdRISIx/V4TIEW6k]]",
+       "v": "Schnelligkeit:\nspezifisch\n• Beschleunigungen\n• Richtungswechsel\n• Maximalgeschwindigkeit\n• Zwischen einzelnen Sprints 1:10-20 Pause (z.B. 5sec. Sprintdauer = mind. 100 Sec. Pause)\nallgemein:\n• Widerstand Stossen/ Ziehen (Beschleunigen)\n• Widerstand ziehen (Transitionsphase)\n• Zugunterstützung (Overspeed)\n\nExplosivität:\n• Sprungformen trainieren, die  der Charakteristik sowie  der Belastungsdynamik der Zielform gleichen\n• Sprungformen auf der gesamten Kraft-Geschwindigkeitskurve trainieren\n• Nutzung des exzentrischen Vordehnens\n• Übungsformen wählen, die auch auf kurze Brems- und Beschleunigungsphasen ausgerichtet sind.",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Schnelligkeit Park& Pipe E&M",
+         "href": "https://snowsports.flink.host/s/3vdRISIx/V4TIEW6k"
+        }
+       ]
       }
      ]
     }
@@ -811,28 +1019,72 @@
      "label": "Inhalt Psyche",
      "segs": [
       {
-       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen\n\n[[F1 Inhalt|https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5]]\n\n[[F2 Inhalt|https://snowsports.flink.host/s/C8XpRskG/JptDIQmL]]\n\n[[F3 Inhalt|https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP]]",
+       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen",
        "from": 0,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "F1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5"
+        },
+        {
+         "text": "F2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/JptDIQmL"
+        },
+        {
+         "text": "F3 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP"
+        }
+       ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[T1 Inhalt|https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9]]\n\n[[T2 Inhalt|https://snowsports.flink.host/s/C8XpRskG/6bNaH29j]]\n\n[[T3 Inhalt|https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ]]\n\n[[T4 Inhalt|https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv]]",
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
        "from": 3,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "T1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9"
+        },
+        {
+         "text": "T2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/6bNaH29j"
+        },
+        {
+         "text": "T3 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ"
+        },
+        {
+         "text": "T4 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv"
+        }
+       ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[E1 Inhalt|https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj]]\n\n[[E2 Inhalt|https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L]]",
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "E1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj"
+        },
+        {
+         "text": "E2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L"
+        }
+       ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[M Inhalt|https://snowsports.flink.host/s/C8XpRskG/vR3SemYC]]",
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "M Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/vR3SemYC"
+        }
+       ]
       }
      ]
     }
@@ -998,22 +1250,37 @@
        "l": []
       },
       {
-       "v": "Schlafdauer\n8–10h/Nacht\n\nRoutine\nGleiche Schlafenszeiten, auch am Wochenende.\n\nEntspannung\n1h vor dem Schlafen Bildschirme meiden, Rituale wie Lesen oder Atemübungen einführen.\n\nSchlafumgebung\nDunkel, kühl, ruhig (16–18°C).\n\n[[Gesundheit & Entwicklung|https://snowsports.flink.host/s/57HHXkh9/]]",
+       "v": "Schlafdauer\n8–10h/Nacht\n\nRoutine\nGleiche Schlafenszeiten, auch am Wochenende.\n\nEntspannung\n1h vor dem Schlafen Bildschirme meiden, Rituale wie Lesen oder Atemübungen einführen.\n\nSchlafumgebung\nDunkel, kühl, ruhig (16–18°C).",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
       },
       {
-       "v": "Regelmässige Schlafzeiten\nEntspannungsrituale einbauen\n\nGrübelstopp\nBei längerer Wachzeit aufstehen. Gedanken aufschreiben, um den Kopf zu entlasten. Negative Gedanken über Schlaf in positive Überzeugungen umwandeln.\n\nOptimierter Einsatz von Koffein und Hilfsmitteln\nWirkung beachten (HWZ 6h, verstärkte Wirkung bei Jugendlichen), mind. 6h vor dem Schlaf meiden. Augenmasken, Gehörschutz etc. verwenden.\n\nPowernaps einplanen\nKurze Nickerchen von 10–15' zur Regeneration, ideal nach dem Mittagessen.\n\nAnpassungen bei Reisen und Wettkämpfen\nSchlaf- und Essenszeiten an Zeitverschiebungen anpassen. Strategien gegen Jetlag nutzen.\n\n[[Gesundheit & Entwicklung|https://snowsports.flink.host/s/57HHXkh9/]]",
+       "v": "Regelmässige Schlafzeiten\nEntspannungsrituale einbauen\n\nGrübelstopp\nBei längerer Wachzeit aufstehen. Gedanken aufschreiben, um den Kopf zu entlasten. Negative Gedanken über Schlaf in positive Überzeugungen umwandeln.\n\nOptimierter Einsatz von Koffein und Hilfsmitteln\nWirkung beachten (HWZ 6h, verstärkte Wirkung bei Jugendlichen), mind. 6h vor dem Schlaf meiden. Augenmasken, Gehörschutz etc. verwenden.\n\nPowernaps einplanen\nKurze Nickerchen von 10–15' zur Regeneration, ideal nach dem Mittagessen.\n\nAnpassungen bei Reisen und Wettkämpfen\nSchlaf- und Essenszeiten an Zeitverschiebungen anpassen. Strategien gegen Jetlag nutzen.",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
       },
       {
-       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.\n\n[[Gesundheit & Entwicklung|https://snowsports.flink.host/s/57HHXkh9/]]",
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
       }
      ]
     }
@@ -1227,28 +1494,64 @@
        "l": []
       },
       {
-       "v": "Heimtrainereinschätzung\n• Wird von der Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• Empfehlung: AWK mit geforderten Wochenumfängen (+/-)\n\nTesting\nMeldung ohne Powertest, Wettkampfresultate und TCU-Resultate möglich\n\nWettkampfresultate\n• Die Regionale Gesamtrangliste U11/U13 der jeweiligen interregionalen Tour wird beigezogen\n• Wir empfehlen, an den interregionalen Touren in deiner Region teilzunehmen. (BUZZ Tour, Eastside Tour, Tour Freestyle Romand)\n\n[[Selektionskonzept|https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/]]\n[[Selektionsguideline|https://www.thatsnowsports.ch/tcu-google-links/]]",
+       "v": "Heimtrainereinschätzung\n• Wird von der Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• Empfehlung: AWK mit geforderten Wochenumfängen (+/-)\n\nTesting\nMeldung ohne Powertest, Wettkampfresultate und TCU-Resultate möglich\n\nWettkampfresultate\n• Die Regionale Gesamtrangliste U11/U13 der jeweiligen interregionalen Tour wird beigezogen\n• Wir empfehlen, an den interregionalen Touren in deiner Region teilzunehmen. (BUZZ Tour, Eastside Tour, Tour Freestyle Romand)",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
       },
       {
-       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest\n• TCU\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die Regionale Gesamtrangliste U11/U13 der jeweiligen interregionalen Tour wird beigezogen..\n• bzw. die Nationale Gesamtrangliste U15/U18 wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Für eine Regionale Karte müssen Wettkampfesultate vorliegen\n• Keine Wettkampfresultate = Note 1\n• Notengebung gemäss PISTE Guidelines\n\n[[Selektionskonzept|https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/]]\n[[Selektionsguideline|https://www.thatsnowsports.ch/tcu-google-links/]]",
+       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest\n• TCU\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die Regionale Gesamtrangliste U11/U13 der jeweiligen interregionalen Tour wird beigezogen..\n• bzw. die Nationale Gesamtrangliste U15/U18 wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Für eine Regionale Karte müssen Wettkampfesultate vorliegen\n• Keine Wettkampfresultate = Note 1\n• Notengebung gemäss PISTE Guidelines",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
       },
       {
-       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest\n• TCU On- und Off-Snow mit Werten von mindestens 55% Performer oder 75% Contender\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n• Für eine Nationale Karte muss ein nationaler Powertest mit mind. Mittelwert 51 Punkte absolviert werden (ab 26/27 mit 55 P.)\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die FIS/WSPL Liste wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Notengebung gemäss PISTE Guidelines (www.Thatsnowsports.ch)\n• Verletztenstatus muss mit Arztzeugnis bei Assessment begründet werden\n\n[[Selektionskonzept|https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/]]\n[[Selektionsguideline|https://www.thatsnowsports.ch/tcu-google-links/]]",
+       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest\n• TCU On- und Off-Snow mit Werten von mindestens 55% Performer oder 75% Contender\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n• Für eine Nationale Karte muss ein nationaler Powertest mit mind. Mittelwert 51 Punkte absolviert werden (ab 26/27 mit 55 P.)\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die FIS/WSPL Liste wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Notengebung gemäss PISTE Guidelines (www.Thatsnowsports.ch)\n• Verletztenstatus muss mit Arztzeugnis bei Assessment begründet werden",
        "from": 5,
        "to": 5,
-       "l": []
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
       },
       {
-       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest mit mind. 55 Punkten (ab 26/27 mit 60 P.)\n• TCU On- und Off-Snow Resultate mit mindestens 80%-Score\n• NLZ Test muss absolviert werden\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die FIS/WSPL Liste wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Notengebung gemäss PISTE Guidelines\n• Verletztenstatus muss mit Arztzeugnis bei Assessment begründet werden\n\n[[Selektionskonzept|https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/]]\n[[Selektionsguideline|https://www.thatsnowsports.ch/tcu-google-links/]]",
+       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest mit mind. 55 Punkten (ab 26/27 mit 60 P.)\n• TCU On- und Off-Snow Resultate mit mindestens 80%-Score\n• NLZ Test muss absolviert werden\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die FIS/WSPL Liste wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Notengebung gemäss PISTE Guidelines\n• Verletztenstatus muss mit Arztzeugnis bei Assessment begründet werden",
        "from": 6,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
       },
       {
        "v": "Siehe die jeweiligen Selektionsrichtlinien auf der Swiss-Ski-Homepage",

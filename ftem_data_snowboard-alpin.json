@@ -32,28 +32,48 @@
      "label": "Trägerschaft",
      "segs": [
       {
-       "v": "Familie, Schule & Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c]]",
+       "v": "Familie, Schule & Sportclubs",
        "from": 0,
        "to": 0,
-       "l": []
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
       },
       {
-       "v": "Familie, Schule,Skiclub/Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c]]",
+       "v": "Familie, Schule,Skiclub/Sportclubs",
        "from": 1,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
       },
       {
-       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c]]",
+       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
       },
       {
-       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule\n\n[[Unsere Schneesportclubs|https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c]]",
+       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
       },
       {
        "v": "RV, NLZ, C-Kader, Sportschule",
@@ -115,7 +135,7 @@
        "l": []
       },
       {
-       "v": "Leistungstraining: \"LEARN TO TRAIN AND COMPETE\"[[|Leistungstraining: \"LEARN TO TRAIN AND COMPETE\"]]",
+       "v": "Leistungstraining: \"LEARN TO TRAIN AND COMPETE\"",
        "from": 5,
        "to": 5,
        "l": []
@@ -482,52 +502,92 @@
      "label": "Inhalt Ausdauer",
      "segs": [
       {
-       "v": "Aktiven Alltag pflegen\n\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungsgrundformen\n\n[[Ausdauer F1-2|https://snowsports.flink.host/s/3rBylHzO/XQjBEeez]]",
+       "v": "Aktiven Alltag pflegen\n\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungsgrundformen",
        "from": 0,
        "to": 0,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer F1-2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/XQjBEeez"
+        }
+       ]
       },
       {
-       "v": "Aktiven Alltag pflegen\n\n• Belastbar werden\n• Anwenden und Variieren von Bewegungsgrundformen\n\n[[Ausdauer F1-2|https://snowsports.flink.host/s/3rBylHzO/XQjBEeez]]",
+       "v": "Aktiven Alltag pflegen\n\n• Belastbar werden\n• Anwenden und Variieren von Bewegungsgrundformen",
        "from": 1,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer F1-2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/XQjBEeez"
+        }
+       ]
       },
       {
-       "v": "Aktiven Alltag pflegen\n\nDie Belastungsverträglichkeit soll umfangreich, vielseitig und zugleich herausfordernd aufgebaut werden. Durch die Ausrichtung auf Polysportivität bleibt die Wahl der Sportarten individuell und ermöglicht eine abwechslungsreiche Gestaltung der körperlichen Aktivität.\n\n[[Ausdauer F3|https://snowsports.flink.host/s/3rBylHzO/hPTdbSXz]]",
+       "v": "Aktiven Alltag pflegen\n\nDie Belastungsverträglichkeit soll umfangreich, vielseitig und zugleich herausfordernd aufgebaut werden. Durch die Ausrichtung auf Polysportivität bleibt die Wahl der Sportarten individuell und ermöglicht eine abwechslungsreiche Gestaltung der körperlichen Aktivität.",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer F3",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/hPTdbSXz"
+        }
+       ]
       },
       {
-       "v": "Vorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Spielerische Intervallformen\n\nVorwettkampfphase\n• Spielerische Intervallformen\n• Grundlagenausdauer zur Regeneration\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration\n\n[[Ausdauer T1|https://snowsports.flink.host/s/3rBylHzO/HwOdB8Ra]]",
+       "v": "Vorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Spielerische Intervallformen\n\nVorwettkampfphase\n• Spielerische Intervallformen\n• Grundlagenausdauer zur Regeneration\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer T1",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/HwOdB8Ra"
+        }
+       ]
       },
       {
-       "v": "Vorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer zur Regeneration\n\nWettkampfphase:\n• Grundlagenausdauer zur Regeneration\n\n[[Ausdauer T2|https://snowsports.flink.host/s/3rBylHzO/vVlrXqGT]]",
+       "v": "Vorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer zur Regeneration\n\nWettkampfphase:\n• Grundlagenausdauer zur Regeneration",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer T2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/vVlrXqGT"
+        }
+       ]
       },
       {
-       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration\n\n[[Ausdauer T3-4|https://snowsports.flink.host/s/3rBylHzO/y5n8mYX6]]",
+       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer T3-4",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/y5n8mYX6"
+        }
+       ]
       },
       {
-       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration\n\n[[Ausdauer E1-2|https://snowsports.flink.host/s/3rBylHzO/IjcexbkV]]",
+       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer E1-2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/IjcexbkV"
+        }
+       ]
       },
       {
-       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer (zur Regeneration und abhängig von Testergebnis)\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration\n\n[[Ausdauer M|https://snowsports.flink.host/s/3rBylHzO/0QdfkKdO]]",
+       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer (zur Regeneration und abhängig von Testergebnis)\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Ausdauer M",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/0QdfkKdO"
+        }
+       ]
       }
      ]
     }
@@ -541,28 +601,48 @@
      "label": "Skills-Checks (SC) & Leistungstests (LT) Mobilität",
      "segs": [
       {
-       "v": "Beweglichkeit Swiss-Ski Off Snow Skills F1-2\n\n[[Skills Check Mobility F1&2 | https://snowsports.flink.host/s/V8RPoTvV/bov0dF7v/iframe/67ff5f58067a67fb150e3824]]",
+       "v": "Beweglichkeit Swiss-Ski Off Snow Skills F1-2",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Check Mobility F1&2",
+         "href": "https://snowsports.flink.host/s/V8RPoTvV/bov0dF7v/iframe/67ff5f58067a67fb150e3824"
+        }
+       ]
       },
       {
-       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Längssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\n[[Skills Check Mobility F3 | https://snowsports.flink.host/s/V8RPoTvV/3DswFJec]]",
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Längssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Check Mobility F3",
+         "href": "https://snowsports.flink.host/s/V8RPoTvV/3DswFJec"
+        }
+       ]
       },
       {
-       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Längssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\n[[Skills Checks Mobility T1&T2|https://snowsports.flink.host/s/V8RPoTvV/zDp2jWdg]]",
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4: Pelvic Tilt im Längssitz (Hamstrings/Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Mobility T1&T2",
+         "href": "https://snowsports.flink.host/s/V8RPoTvV/zDp2jWdg"
+        }
+       ]
       },
       {
-       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4a: Active Straight Leg Raise (Hamstrings)\nSC 4b: Pelvic Tilt in Good Morning Position (Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\nLT: Physio Check NLZ\n\n[[Skills Checks Mobility T3 & T4|https://snowsports.flink.host/s/V8RPoTvV/lKUuSGpU]]",
+       "v": "SC 1: Cow Face Pose Arms (Schultermobilität)\nSC 2: Wall Slides (Schultermobilität)\nSC 3: Thoracic Wall Rotation (Brustwirbelsäule)\nSC 4a: Active Straight Leg Raise (Hamstrings)\nSC 4b: Pelvic Tilt in Good Morning Position (Beckenkontrolle)\nSC 5: Thomas Test (Oberschenkel vorne/Hüftstreckung)\nSC 6: Shinbox Hip Extension (Hüftrotation)\nSC 7: Knee-to-Wall (Fussgelenksflexion)\n\nLT: Physio Check NLZ",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Checks Mobility T3 & T4",
+         "href": "https://snowsports.flink.host/s/V8RPoTvV/lKUuSGpU"
+        }
+       ]
       },
       {
        "v": "ST: Physio Check Elite (MSS)",
@@ -617,28 +697,52 @@
      "label": "Skills-Checks (SC) & Leistungstests (LT) Kraft",
      "segs": [
       {
-       "v": "Swiss-Ski Off Snow Skills Kraft und Stabilität F1-2\n\n[[Skills-Check Kraft F1&F2|https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm]]",
+       "v": "Swiss-Ski Off Snow Skills Kraft und Stabilität F1-2",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Skills-Check Kraft F1&F2",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge einbeinig auf Box\nSC 2: Kniebeuge mit Miniband ohne Zusatzgewicht\nSC 3: Reisskniebeuge mit Stab\nSC 4: Bridging beidbeinig statisch\nSC 5: Standwaage\nSC 6 : Sprung von kniehohem Element  mit beidbeiniger Landung\nSC 7: Liegestütz\nSC 8: Klimmzug (exzentrische Phase)\n\n[[Skills Check Kraft F3 |https://snowsports.flink.host/s/Z1E9fXeV/e9hjBQXV]]",
+       "v": "SC 1: Kniebeuge einbeinig auf Box\nSC 2: Kniebeuge mit Miniband ohne Zusatzgewicht\nSC 3: Reisskniebeuge mit Stab\nSC 4: Bridging beidbeinig statisch\nSC 5: Standwaage\nSC 6 : Sprung von kniehohem Element  mit beidbeiniger Landung\nSC 7: Liegestütz\nSC 8: Klimmzug (exzentrische Phase)",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Check Kraft F3",
+         "href": "https://snowsports.flink.host/s/Z1E9fXeV/e9hjBQXV"
+        }
+       ]
       },
       {
-       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Zusatzgewicht vorne\nSC 3: Reisskniebeuge mit Reckstange / Langhantel\nSC 4: Umsetzen mit Reckstange / Langhantel\nSC 5: Leg Curls exzentrisch und konzentrisch bb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Standwaage\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\n\nLT: Swiss Ski Powertest (SSPT)\n\n[[Swiss-Ski Power Test (SSPT)|https://snowsports.flink.host/s/UmOtlQP3/]]\n\n[[Skills Check Kraft T 1 & 2 | https://snowsports.flink.host/s/LELW9uhe/jhbfUEpW]]",
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Zusatzgewicht vorne\nSC 3: Reisskniebeuge mit Reckstange / Langhantel\nSC 4: Umsetzen mit Reckstange / Langhantel\nSC 5: Leg Curls exzentrisch und konzentrisch bb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Standwaage\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\n\nLT: Swiss Ski Powertest (SSPT)",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Swiss-Ski Power Test (SSPT)",
+         "href": "https://snowsports.flink.host/s/UmOtlQP3/"
+        },
+        {
+         "text": "Skills Check Kraft T 1 & 2",
+         "href": "https://snowsports.flink.host/s/LELW9uhe/jhbfUEpW"
+        }
+       ]
       },
       {
-       "v": "SC 1. Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Reisskniebeuge mit Langhantel\nSC 4: Umsetzen mit Langhantel\nSC 5: Leg Curls einbeinig exzentrisch und konzentrisch eb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Good Morning mit Langhantel\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump to High Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\nSC 13: Bankziehen 1RM\n\nLT: Nachwuchsleistungstest & Eliteleistungstest\n\n[[Skills Check Kraft T 3 &4  | https://snowsports.flink.host/s/LELW9uhe/afjNYpUu]]",
+       "v": "SC 1. Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Reisskniebeuge mit Langhantel\nSC 4: Umsetzen mit Langhantel\nSC 5: Leg Curls einbeinig exzentrisch und konzentrisch eb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Good Morning mit Langhantel\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump to High Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\nSC 13: Bankziehen 1RM\n\nLT: Nachwuchsleistungstest & Eliteleistungstest",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Skills Check Kraft T 3 &4",
+         "href": "https://snowsports.flink.host/s/LELW9uhe/afjNYpUu"
+        }
+       ]
       },
       {
        "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nST: Magglingen (MLD, Nordic, Jump)",
@@ -652,40 +756,78 @@
      "label": "Inhalt Kraft",
      "segs": [
       {
-       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen: Kraft, Stabilität & Schnellkraft\n• Erwerben und Festigen von spielerischen Krafteinheiten\n\n[[F 1 & 2 Inhalt | https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm]]",
+       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen: Kraft, Stabilität & Schnellkraft\n• Erwerben und Festigen von spielerischen Krafteinheiten",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "F 1 & 2 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm"
+        }
+       ]
       },
       {
-       "v": "Sommer:\n• Techniktraining im Kraftbereich ( Langhanteltechnik)\n• Koordination im vollen Bewegungsumfang\n• Übungen mit eingem Körpergewicht (Stabiliität & Haltung)\n•  vielseitige Sprünge\n\nWinter\n• Vielseitige Sprünge\n• Erhaltung der Kraft\n\n[[F3 Inahlt | https://snowsports.flink.host/s/HOx8PqfA/61f5x5Fo]]",
+       "v": "Sommer:\n• Techniktraining im Kraftbereich ( Langhanteltechnik)\n• Koordination im vollen Bewegungsumfang\n• Übungen mit eingem Körpergewicht (Stabiliität & Haltung)\n•  vielseitige Sprünge\n\nWinter\n• Vielseitige Sprünge\n• Erhaltung der Kraft",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "F3 Inahlt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/61f5x5Fo"
+        }
+       ]
       },
       {
-       "v": "Das Training wird an das Leistungsniveau der Athlet:innen angepasst\n\nVorbereitungsphase 1\n• Langhanteltechnik mit Körpergewicht und leichten Zusatzgewichten\n• Erste Sprungformen (Fokus auf korrekte Landungstechnik)\n• Training der Rumpfstabilität\n\nVorbereitungsphase 2\n• Muskelaufbau\n• Aufbau des Explosivkrafttraining\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Explosivkrafttraining\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosivkrafttraining & Plyometrie mit reduziertem Volumen\n• Rumpfkrafttraining erhaltend\n\n* Window of Opportunity bei Mädchen T1\n* Window of Opportunity bei Jungen T2\n\n[[T1 Inhalt|https://snowsports.flink.host/s/HOx8PqfA/0lz9f3v1]]\n\n[[T2 Inhalt|https://snowsports.flink.host/s/HOx8PqfA/ZPtYjqVS]]",
+       "v": "Das Training wird an das Leistungsniveau der Athlet:innen angepasst\n\nVorbereitungsphase 1\n• Langhanteltechnik mit Körpergewicht und leichten Zusatzgewichten\n• Erste Sprungformen (Fokus auf korrekte Landungstechnik)\n• Training der Rumpfstabilität\n\nVorbereitungsphase 2\n• Muskelaufbau\n• Aufbau des Explosivkrafttraining\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Explosivkrafttraining\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosivkrafttraining & Plyometrie mit reduziertem Volumen\n• Rumpfkrafttraining erhaltend\n\n* Window of Opportunity bei Mädchen T1\n* Window of Opportunity bei Jungen T2",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "T1 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/0lz9f3v1"
+        },
+        {
+         "text": "T2 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/ZPtYjqVS"
+        }
+       ]
       },
       {
-       "v": "Das Training wird an das Leistungsniveau und Leistungstests der Athlet:innen angepasst und in Oberkörper und Unterkörper aufgeteilt\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen zur Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten (obere und untere Extremitäten)\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Training der Schnell- & Explosivkraft mit und ohne Zusatzgewicht der oberen und unteren Extremitäten\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen\n\n[[T3 Inhalt|https://snowsports.flink.host/s/HOx8PqfA/GyGRkrgf]]\n\n[[T4 Inhalt|https://snowsports.flink.host/s/HOx8PqfA/XaTXxDfC]]",
+       "v": "Das Training wird an das Leistungsniveau und Leistungstests der Athlet:innen angepasst und in Oberkörper und Unterkörper aufgeteilt\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen zur Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten (obere und untere Extremitäten)\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Training der Schnell- & Explosivkraft mit und ohne Zusatzgewicht der oberen und unteren Extremitäten\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "T3 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/GyGRkrgf"
+        },
+        {
+         "text": "T4 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/XaTXxDfC"
+        }
+       ]
       },
       {
-       "v": "Training wird individuell an Leistungstest (MLD) angepasst und vermehrt exzentrisch zur Maximierung der Kraftentwicklungsrate und Verletzungsprävention durchgeführt. Interferenzeffekte minimieren.\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining  der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten (obere und untere Extremitäten)\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht der oberen und unteren Extremitäten\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen\n\n[[E1 & 2 Inhalt |https://snowsports.flink.host/s/HOx8PqfA/Xm1bVW2K]]",
+       "v": "Training wird individuell an Leistungstest (MLD) angepasst und vermehrt exzentrisch zur Maximierung der Kraftentwicklungsrate und Verletzungsprävention durchgeführt. Interferenzeffekte minimieren.\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining  der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten (obere und untere Extremitäten)\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht der oberen und unteren Extremitäten\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "E1 & 2 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/Xm1bVW2K"
+        }
+       ]
       },
       {
-       "v": "Training wird individuell an Leistungstest (MLD) angepasst und vermehrt exzentrisch zur Maximierung der Kraftentwicklungsrate und Verletzungsprävention durchgeführt. Interferenzeffekte minimieren.\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining  der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten (obere und untere Extremitäten)\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht der oberen und unteren Extremitäten\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen\n\n[[M Inhalt |https://snowsports.flink.host/s/HOx8PqfA/AAuP9QsT]]",
+       "v": "Training wird individuell an Leistungstest (MLD) angepasst und vermehrt exzentrisch zur Maximierung der Kraftentwicklungsrate und Verletzungsprävention durchgeführt. Interferenzeffekte minimieren.\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Föderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining  der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten (obere und untere Extremitäten)\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining der oberen und unteren Extremitäten (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht der oberen und unteren Extremitäten\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "M Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/AAuP9QsT"
+        }
+       ]
       }
      ]
     }
@@ -752,40 +894,70 @@
      "label": "Inhalt Schnelligkeit",
      "segs": [
       {
-       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungs- & Spielgrundformen\n\n[[Inhalt F 1 & 2 | https://snowsports.flink.host/s/PPsFiXFu/kY1BOb3c]]",
+       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungs- & Spielgrundformen",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt F 1 & 2",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/kY1BOb3c"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel machen (stop & go)\n• Immer frisch & maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Windows of Opportunity im Alter von 8 bis 13 Jahren\n\n[[Inhalt F 3 | https://snowsports.flink.host/s/PPsFiXFu/r8idtvTH]]",
+       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel machen (stop & go)\n• Immer frisch & maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Windows of Opportunity im Alter von 8 bis 13 Jahren",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt F 3",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/r8idtvTH"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (hohe Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Aufpassen: Wachstumsschub in der Adoleszenz\n\n[[Inhalt T 1 & 2 | https://snowsports.flink.host/s/PPsFiXFu/UBlddCun]]",
+       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (hohe Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Aufpassen: Wachstumsschub in der Adoleszenz",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt T 1 & 2",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/UBlddCun"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n•  Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)\n\n[[Inhalt T 3 & 4 | https://snowsports.flink.host/s/PPsFiXFu/0gahlWER]]",
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n•  Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt T 3 & 4",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/0gahlWER"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)\n\n[[Inhalt E 1 & 2 | https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh]]",
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt E 1 & 2",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh"
+        }
+       ]
       },
       {
-       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)\n\n[[Inhalt  M | https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh]]",
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Inhalt  M",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh"
+        }
+       ]
       }
      ]
     }
@@ -810,52 +982,92 @@
      "label": "Technik Übergeordnet",
      "segs": [
       {
-       "v": "Grundlagen von Snowboard Alpin entdecken, erwerben und festigen:\n• Grundschwung (gerutscht)\n\n• One Foot fahren auf einfacher Piste (gerutscht)\n• Switchfahren mit Richtungsänderungen auf einfacher Piste (gerutscht)\n• Walzer\n\n• spielerisches Erlenen durch Parcours und freies Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "Grundlagen von Snowboard Alpin entdecken, erwerben und festigen:\n• Grundschwung (gerutscht)\n\n• One Foot fahren auf einfacher Piste (gerutscht)\n• Switchfahren mit Richtungsänderungen auf einfacher Piste (gerutscht)\n• Walzer\n\n• spielerisches Erlenen durch Parcours und freies Fahren",
        "from": 0,
        "to": 0,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       },
       {
-       "v": "Grundlagen von Snowboard Alpin anwenden und variieren:\n• Fahren in vorgegebenen Raum (Stangenwald, Besen etc.)\n• Grundschwung (gerutscht und geschnitten)\n\n• Kurzschwingen auf einfacher Piste\n• One Foot fahren auf einfacher Piste (gerutscht und geschnitten)\n• Switchfahren mit Richtungsänderungen auf einfacher Piste (gerutscht und geschnitten)\n• Walzer\n• Basic Air\n\n• spielerisches Erlernen durch Sationen und freies Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "Grundlagen von Snowboard Alpin anwenden und variieren:\n• Fahren in vorgegebenen Raum (Stangenwald, Besen etc.)\n• Grundschwung (gerutscht und geschnitten)\n\n• Kurzschwingen auf einfacher Piste\n• One Foot fahren auf einfacher Piste (gerutscht und geschnitten)\n• Switchfahren mit Richtungsänderungen auf einfacher Piste (gerutscht und geschnitten)\n• Walzer\n• Basic Air\n\n• spielerisches Erlernen durch Sationen und freies Fahren",
        "from": 1,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       },
       {
-       "v": "spezifische Grundlagen (Snowboard Alpin Essentials 1-) erwerben:\nspezifische Grundlagen (Snowboard Basics erwerben.\n• Fahren in Toren\n• Race - Grundschwung\n• Befahren (kurz und lange Schwünge) auf schwierigen Pisten\n\nAllgemeine Grundlagen erwerben und festigen:\n• fahren auf unpräparierten Pisten, • Pistentricks (180°, Basic Air (kleiner Kicker), Olie, Nolie, Noserole, Tailrole)\n\n• Spielerisches Erlernen durch Stationen und freies Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "spezifische Grundlagen (Snowboard Alpin Essentials 1-) erwerben:\nspezifische Grundlagen (Snowboard Basics erwerben.\n• Fahren in Toren\n• Race - Grundschwung\n• Befahren (kurz und lange Schwünge) auf schwierigen Pisten\n\nAllgemeine Grundlagen erwerben und festigen:\n• fahren auf unpräparierten Pisten, • Pistentricks (180°, Basic Air (kleiner Kicker), Olie, Nolie, Noserole, Tailrole)\n\n• Spielerisches Erlernen durch Stationen und freies Fahren",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       },
       {
-       "v": "Anwenden der Racing Baisc\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• stabiler Oberkörper\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "Anwenden der Racing Baisc\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• stabiler Oberkörper\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       },
       {
-       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n\nErwerben von:\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n\nErwerben von:\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       },
       {
-       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n\nAnwenden von:\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n\nAnwenden von:\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren",
        "from": 5,
        "to": 5,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       },
       {
-       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren",
        "from": 6,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       },
       {
-       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\n[[ Riding Konzept | https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/]]",
+       "v": "Gestalten und Ergänzen der Racing Basic\n• Dynamische Grundposition & Gleichgewicht\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Kontinuirelicher Druckaufbau durch Bewegungsfluss\n\n• Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n• Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/"
+        }
+       ]
       }
      ]
     },
@@ -1143,34 +1355,79 @@
      "label": "Inhalt Psyche",
      "segs": [
       {
-       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen\n\n[[F1 Inhalt|https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5]]\n\n[[F2 Inhalt|https://snowsports.flink.host/s/C8XpRskG/JptDIQmL]]",
+       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "F1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5"
+        },
+        {
+         "text": "F2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/JptDIQmL"
+        }
+       ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative fördern\n\n[[F3 Inhalt |https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP]]",
+       "v": "Psyche / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative fördern",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "F3 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP"
+        }
+       ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[T1 Inhalt|https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9]]\n\n[[T2 Inhalt|https://snowsports.flink.host/s/C8XpRskG/6bNaH29j]]\n\n[[T3 Inhalt|https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ]]\n\n[[T4 Inhalt|https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv]]",
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
        "from": 3,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "T1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9"
+        },
+        {
+         "text": "T2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/6bNaH29j"
+        },
+        {
+         "text": "T3 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ"
+        },
+        {
+         "text": "T4 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv"
+        }
+       ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[E1 Inhalt|https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj]]\n\n[[E2 Inhalt|https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L]]",
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "E1 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj"
+        },
+        {
+         "text": "E2 Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L"
+        }
+       ]
       },
       {
-       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung\n\n[[M Inhalt |  https://snowsports.flink.host/s/C8XpRskG/vR3SemYC]]",
+       "v": "Psyche / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "M Inhalt",
+         "href": "https://snowsports.flink.host/s/C8XpRskG/vR3SemYC"
+        }
+       ]
       }
      ]
     }
@@ -1336,22 +1593,37 @@
        "l": []
       },
       {
-       "v": "Schlafdauer\n8–10h/Nacht\n\nRoutine\nGleiche Schlafenszeiten, auch am Wochenende.\n\nEntspannung\n1h vor dem Schlafen Bildschirme meiden, Rituale wie Lesen oder Atemübungen einführen.\n\nSchlafumgebung\nDunkel, kühl, ruhig (16–18°C).\n\n[[Gesundheit & Entwicklung | https://snowsports.flink.host/s/57HHXkh9/]]",
+       "v": "Schlafdauer\n8–10h/Nacht\n\nRoutine\nGleiche Schlafenszeiten, auch am Wochenende.\n\nEntspannung\n1h vor dem Schlafen Bildschirme meiden, Rituale wie Lesen oder Atemübungen einführen.\n\nSchlafumgebung\nDunkel, kühl, ruhig (16–18°C).",
        "from": 3,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
       },
       {
-       "v": "Regelmässige Schlafzeiten\nEntspannungsrituale einbauen\n\nGrübelstopp\nBei längerer Wachzeit aufstehen. Gedanken aufschreiben, um den Kopf zu entlasten. Negative Gedanken über Schlaf in positive Überzeugungen umwandeln.\n\nOptimierter Einsatz von Koffein und Hilfsmitteln\nWirkung beachten (HWZ 6h, verstärkte Wirkung bei Jugendlichen), mind. 6h vor dem Schlaf meiden. Augenmasken, Gehörschutz etc. verwenden.\n\nPowernaps einplanen\nKurze Nickerchen von 10–15' zur Regeneration, ideal nach dem Mittagessen.\n\nAnpassungen bei Reisen und Wettkämpfen\nSchlaf- und Essenszeiten an Zeitverschiebungen anpassen. Strategien gegen Jetlag nutzen.\n\n[[Gesundheit & Entwicklung | https://snowsports.flink.host/s/57HHXkh9/]]",
+       "v": "Regelmässige Schlafzeiten\nEntspannungsrituale einbauen\n\nGrübelstopp\nBei längerer Wachzeit aufstehen. Gedanken aufschreiben, um den Kopf zu entlasten. Negative Gedanken über Schlaf in positive Überzeugungen umwandeln.\n\nOptimierter Einsatz von Koffein und Hilfsmitteln\nWirkung beachten (HWZ 6h, verstärkte Wirkung bei Jugendlichen), mind. 6h vor dem Schlaf meiden. Augenmasken, Gehörschutz etc. verwenden.\n\nPowernaps einplanen\nKurze Nickerchen von 10–15' zur Regeneration, ideal nach dem Mittagessen.\n\nAnpassungen bei Reisen und Wettkämpfen\nSchlaf- und Essenszeiten an Zeitverschiebungen anpassen. Strategien gegen Jetlag nutzen.",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
       },
       {
-       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.\n\n[[Gesundheit & Entwicklung | https://snowsports.flink.host/s/57HHXkh9/]]",
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
        "from": 7,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
       }
      ]
     }

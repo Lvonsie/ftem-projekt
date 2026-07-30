@@ -177,7 +177,7 @@ def theme_html(t, idx, stages, prefix, lang, ages):
             if len(phs) > 1: cls = "ph-multi"
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang)+'</div><button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button></div>'
         body += '</div>'
-    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" open data-title="'+esc(title.lower())+'">'
+    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'">'
             '<summary><span class="tt">'+esc(title)+'</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
@@ -235,8 +235,8 @@ def sport_section(sport, d, lang):
     n_themes = len(d["themes"])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
         '<header class="top">'+back+'<h1>'+FTEM+' <span class="sk">'+esc(name)+'</span> <b>· '+aw+'</b></h1>'
-        '<div class="tools">'+lang_switch(lang)+'<span class="cnt"></span>'
-        '<input class="q" type="search" placeholder="'+esc(tr("In allen Inhalten suchen…", lang))+'">'
+        '<div class="tools">'+lang_switch(lang)+
+        '<input class="q" type="search" placeholder="Search">'
         '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button></div></header>'
         '<div class="wrap">'
@@ -333,7 +333,8 @@ h1 .fF,h1 .fT,h1 .fE,h1 .fM{font-weight:900}
 h1 .sk{color:var(--ink)}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
 .tools input,.tools select,.tools button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
-.tools input{min-width:210px}
+.tools input{width:150px}
+.tools select{max-width:180px}
 .tools button{cursor:pointer;font-weight:600}
 .tools button:hover{background:var(--bg)}
 .tools .cnt{font-size:12px;color:var(--mut);font-weight:600;white-space:nowrap}

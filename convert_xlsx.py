@@ -15,12 +15,16 @@ Regeln:
 - Benachbarte Stufen-Zellen mit identischem Text werden zu einem Segment
   zusammengefasst (zusammengefasste Spalten wie im FTEM-Tool).
 - "-" oder leere Zellen gelten als leer.
+- Links im Format [[Text|https://...]] werden aus dem Zelltext entfernt und
+  als Dokument-Buttons (l-Liste) uebernommen.
 """
 import sys, os, json, re
 import openpyxl
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 STAGES = ["F1","F2","F3","T1","T2","T3","T4","E1","E2","M"]
+LINK_RE = re.compile(r'\[\[([^|\]]*)\|([^\]\n]*?)\]\]?')   # [[Text|URL]] (tolerant: auch nur eine schliessende Klammer)
+REF_RE = re.compile(r'\[\[[^\]|]*\]\]')                     # [[interner-verweis]] ohne URL -> entfernen
 
 def clean(v):
     if v is None: return ""
@@ -60,13 +64,24 @@ def convert(xlsx_path, sport_id):
             t = {"title": topic, "group": group_of(topic_key, topic, group_key), "rows": []}
             by_title[topic] = t
             themes.append(t)
-        # Segmente: benachbarte identische Zellen zusammenfassen
+        # Links [[Text|URL]] aus dem Zelltext loesen
+        parsed = []
+        for v in cells:
+            links = [{"text": m.group(1).strip() or "Dokument", "href": m.group(2).strip()}
+                     for m in LINK_RE.finditer(v)
+                     if m.group(2).strip().startswith("http")]
+            txt = LINK_RE.sub('', v)
+            txt = REF_RE.sub('', txt)
+            txt = re.sub(r'[ \t]+\n', '\n', txt)
+            txt = re.sub(r'\n{3,}', '\n\n', txt).strip()
+            parsed.append((txt, links))
+        # Segmente: benachbarte identische Zellen (Text UND Links) zusammenfassen
         segs = []
-        for i, v in enumerate(cells):
-            if segs and segs[-1]["v"] == v:
+        for i, (v, links) in enumerate(parsed):
+            if segs and segs[-1]["v"] == v and segs[-1]["l"] == links:
                 segs[-1]["to"] = i
             else:
-                segs.append({"v": v, "from": i, "to": i, "l": []})
+                segs.append({"v": v, "from": i, "to": i, "l": links})
         by_title[topic]["rows"].append({"label": label or None, "segs": segs})
     data = {"stages": STAGES, "ages": ages, "themes": themes}
     out = os.path.join(BASE, "ftem_data_" + sport_id + ".json")
