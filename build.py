@@ -28,8 +28,8 @@ ADMIN_PW = "ftem26*"
 # Cloud-Speicher (Supabase) fuer direkt gespeicherte, fuer alle sichtbare Aenderungen.
 # Einmalig eintragen (siehe SETUP-ADMIN.md). Solange leer: Seite laeuft normal,
 # Admin bietet dann Datei-Download als Rueckfall.
-SUPABASE_URL = ""       # z. B. https://abcdxyz.supabase.co
-SUPABASE_ANON_KEY = ""  # der oeffentliche "anon"-Key aus den Supabase-Projekt-Einstellungen
+SUPABASE_URL = "https://xphbwnzyebbejsdeqled.supabase.co"
+SUPABASE_ANON_KEY = "sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_"
 
 def tr(s, lang):
     if lang == "de" or s is None:
@@ -144,7 +144,10 @@ def render_block(block, link_texts):
         return '<p><span class="lbl">'+esc(lab)+':</span> '+esc(val).replace("\n","<br>")+'</p>'
     return '<p>'+esc(b).replace("\n","<br>")+'</p>'
 
-def render_cell(seg, lang, cid=None):
+def render_cell(seg, lang, cid=None, edit=False):
+    if edit:
+        raw = seg.get("v") or ""
+        return '<textarea class="cedit" data-cid="'+esc(cid or "")+'">'+esc(raw)+'</textarea>'
     txt = (tr(seg["v"], lang) or "").strip()
     link_texts = set(tr(l["text"], lang) for l in seg["l"] if l.get("text"))
     inner = ""
@@ -165,7 +168,7 @@ def render_cell(seg, lang, cid=None):
         if btns: out += '<div class="lks">'+btns+'</div>'
     return out
 
-def theme_html(t, idx, stages, prefix, lang, ages):
+def theme_html(t, idx, stages, prefix, lang, ages, edit=False):
     title = tr(t["title"], lang)
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
@@ -186,13 +189,15 @@ def theme_html(t, idx, stages, prefix, lang, ages):
             phs = set(ph(stages[i]) for i in range(seg["from"], seg["to"]+1))
             if len(phs) > 1: cls = "ph-multi"
             cid = prefix+"|"+str(idx)+"|"+str(ri)+"|"+str(si)
-            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid)+'</div><button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button></div>'
+            more = '' if edit else '<button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button>'
+            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
-    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'">'
+    opn = ' open' if edit else ''
+    return ('<details class="theme'+('  edit' if edit else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'">'
             '<summary><span class="tt">'+esc(title)+'</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
-def build_sections(d, prefix, lang):
+def build_sections(d, prefix, lang, edit=False):
     themes = d["themes"]
     stages = d["stages"]
     ages = {k: v for k, v in (d.get("ages") or AGE).items() if v}
@@ -204,7 +209,7 @@ def build_sections(d, prefix, lang):
         if not items: continue
         sections += '<h2 class="grp">'+esc(tr(g, lang))+'</h2>'
         for i,t in items:
-            sections += theme_html(t,i,stages,prefix,lang,ages)
+            sections += theme_html(t,i,stages,prefix,lang,ages,edit)
     jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
     return sections, jump
 
@@ -228,8 +233,11 @@ def lang_switch(active):
         out += '<a'+cls+' data-f="'+FILES[l]+'" href="'+FILES[l]+'">'+l.upper()+'</a>'
     return out + '</div>'
 
-def sport_section(sport, d, lang):
+def sport_section(sport, d, lang, edit=False):
     sid = sport["id"]; name = tr(sport["name"], lang)
+    if edit and d is not None:
+        sections, _ = build_sections(d, sid, lang, edit=True)
+        return '<section class="sport" data-sport="'+sid+'" hidden><div class="wrap">'+sections+'</div></section>'
     aw = esc(tr("Athlet:innen-Weg", lang))
     back = '<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'">'+esc(BACK[lang])+'</a>'
     if sport.get("icon"):
@@ -851,32 +859,31 @@ loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp
 ADMIN_TMPL = r'''<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>FTEM Admin</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#eef1f4;color:#1d2630;font-size:14px}
-#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+__MAINCSS__
+/* ---- Admin-Zusatz ---- */
+#gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#eef1f4;padding:20px}
 .gatebox{background:#fff;border:1px solid #e4e8ec;border-radius:16px;padding:30px 28px;width:340px;max-width:100%;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.08)}
 .gatebox h1{font-size:19px;margin:0 0 6px}
 .gatebox p{color:#697080;font-size:13px;margin:0 0 18px}
 .gatebox input{width:100%;padding:10px 12px;border:1px solid #cfd6dd;border-radius:9px;font-size:14px}
 .gatebox button{margin-top:12px;width:100%;background:#d52b1e;color:#fff;border:none;border-radius:9px;padding:10px;font-weight:800;font-size:14px;cursor:pointer}
 .gateerr{color:#d52b1e;font-size:12.5px;margin-top:10px;min-height:16px}
-header.abar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #e4e8ec;padding:12px 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-header.abar h1{font-size:16px;margin:0;font-weight:800}
-header.abar .sp{flex:1}
-.afilter{padding:7px 11px;border:1px solid #cfd6dd;border-radius:8px;font-size:13px;min-width:170px}
+.abar{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid #e4e8ec;padding:9px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.abar h1{font-size:15px;margin:0;font-weight:800}
+.abar label{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:6px}
+.abar select{padding:6px 9px;border:1px solid #cfd6dd;border-radius:8px;font-size:13px;font-weight:700}
+.abar .sp{flex:1}
+.astatus{font-size:12.5px;color:#697080}
 .asave{background:#d52b1e;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:800;font-size:13px;cursor:pointer}
 .asave:disabled{opacity:.5;cursor:default}
-.astatus{font-size:12.5px;color:#697080}
-.note{max-width:1000px;margin:14px auto 0;padding:0 18px;color:#8a6a00;font-size:12.5px}
-.wrap{max-width:1000px;margin:0 auto;padding:16px 18px 70px}
-.sport-h{font-size:15px;font-weight:800;margin:22px 0 8px;color:#d52b1e}
-.item{background:#fff;border:1px solid #e4e8ec;border-left:4px solid #cfd6dd;border-radius:12px;padding:11px 13px;margin:0 0 10px}
-.item.changed{border-left-color:#d52b1e}
-.item .meta{font-size:11.5px;color:#697080;margin:0 0 6px;font-weight:700}
-.item .meta b{color:#1d2630}
-.item textarea{width:100%;min-height:68px;resize:vertical;border:1px solid #dfe4ea;border-radius:8px;padding:8px 9px;font:inherit;font-size:13px;line-height:1.5;color:#1d2630}
-.item textarea:focus{outline:none;border-color:#d52b1e}
-.hidden{display:none!important}
+.asite{text-decoration:none;font-size:13px;font-weight:700;color:#d52b1e}
+.note{max-width:1100px;margin:12px auto 0;padding:0 18px;color:#8a6a00;font-size:12.5px}
+#app .wrap{padding-bottom:70px}
+#app .cell .cwrap{max-height:none!important;overflow:visible!important;display:block!important;-webkit-line-clamp:unset!important}
+#app .cell{height:auto}
+.cedit{width:100%;min-height:42px;border:1px solid #d4dae1;border-radius:6px;background:#fff;padding:6px 7px;font:inherit;font-size:11.5px;line-height:1.42;color:#1d2630;resize:vertical;overflow:hidden}
+.cedit:focus{outline:none;border-color:#d52b1e;box-shadow:0 0 0 2px rgba(213,43,30,.14)}
+.cedit.changed{border-color:#d52b1e;background:#fff8f7}
 </style></head>
 <body>
 <div id="gate"><form id="gateform" class="gatebox">
@@ -888,71 +895,59 @@ header.abar .sp{flex:1}
 </form></div>
 <div id="app" hidden>
   <header class="abar">
-    <h1>FTEM &ndash; Inhalte bearbeiten</h1>
-    <input id="afilter" class="afilter" type="search" placeholder="Suchen &hellip;">
+    <h1>&#128274; FTEM &ndash; Inhalte bearbeiten</h1>
+    <label>Sportart: <select id="sportsel">__SPORT_OPTIONS__</select></label>
     <span class="sp"></span>
     <span id="astatus" class="astatus"></span>
-    <button id="asave" class="asave" disabled>Alle &Auml;nderungen speichern</button>
-    <a href="index.html" style="text-decoration:none;font-size:13px;font-weight:700;color:#d52b1e">&#8617; Zur Seite</a>
+    <button id="asave" class="asave" disabled>Speichern</button>
+    <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
   <div id="note" class="note"></div>
-  <div class="wrap"><div id="list"></div></div>
+  __ADMIN_SECTIONS__
 </div>
 <script>
-const DATA=__ADMIN_DATA__;
-const PW="__ADMIN_PW__";
-const SUPA_URL="__SUPA_URL__",SUPA_KEY="__SUPA_KEY__";
+const ORIG=__ADMIN_ORIG__, PW="__ADMIN_PW__", SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
 const gate=document.getElementById('gate'),app=document.getElementById('app');
-const listEl=document.getElementById('list'),statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave');
-const base={};
-function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+const statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave'),sel=document.getElementById('sportsel');
+const base=Object.assign({},ORIG);
+function autosize(ta){ta.style.height='auto';ta.style.height=(ta.scrollHeight+2)+'px';}
 document.getElementById('gateform').addEventListener('submit',function(e){
   e.preventDefault();
-  if(document.getElementById('gatepw').value===PW){gate.classList.add('hidden');app.hidden=false;init();}
-  else{document.getElementById('gateerr').textContent='Falsches Passwort.';}
+  if(document.getElementById('gatepw').value===PW){gate.style.display='none';app.hidden=false;init();}
+  else document.getElementById('gateerr').textContent='Falsches Passwort.';
 });
-function render(){
-  let html='',lastSport=null;
-  DATA.forEach(function(it,idx){
-    if(it.sport!==lastSport){html+='<div class="sport-h">'+esc(it.sport)+'</div>';lastSport=it.sport;}
-    const meta='<b>'+esc(it.theme)+'</b>'+(it.label?(' &middot; '+esc(it.label)):'');
-    html+='<div class="item" data-i="'+idx+'"><div class="meta">'+meta+'</div><textarea>'+esc(it.text)+'</textarea></div>';
-  });
-  listEl.innerHTML=html;
-  listEl.querySelectorAll('.item').forEach(function(el){
-    const i=+el.dataset.i;base[DATA[i].cid]=DATA[i].text;
-    const ta=el.querySelector('textarea');
-    ta.addEventListener('input',function(){el.classList.toggle('changed',ta.value!==base[DATA[i].cid]);updateCount();});
-  });
+function showSport(id){
+  app.querySelectorAll('section.sport').forEach(function(s){s.hidden=s.dataset.sport!==id;});
+  app.querySelectorAll('section.sport[data-sport="'+id+'"] .cedit').forEach(autosize);
+  window.scrollTo(0,0);
 }
 function changed(){
   const out=[];
-  listEl.querySelectorAll('.item').forEach(function(el){
-    const i=+el.dataset.i,ta=el.querySelector('textarea');
-    if(ta.value!==base[DATA[i].cid])out.push({cid:DATA[i].cid,txt:ta.value});
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+    const cid=ta.dataset.cid;if((base[cid]||'')!==ta.value)out.push({cid:cid,txt:ta.value});
   });
   return out;
 }
-function updateCount(){const n=changed().length;saveBtn.disabled=n===0;statusEl.textContent=n?(n+' ungespeicherte Änderung(en)'):'Alles gespeichert';}
+function updateCount(){const n=changed().length;saveBtn.disabled=n===0;statusEl.textContent=n?(n+' ungespeichert'):'Alles gespeichert';}
 function init(){
-  render();updateCount();
-  document.getElementById('afilter').addEventListener('input',function(e){
-    const q=e.target.value.trim().toLowerCase();
-    listEl.querySelectorAll('.item').forEach(function(el){el.classList.toggle('hidden',q&&el.textContent.toLowerCase().indexOf(q)<0);});
-    listEl.querySelectorAll('.sport-h').forEach(function(h){let s=h.nextElementSibling,any=false;while(s&&s.classList.contains('item')){if(!s.classList.contains('hidden'))any=true;s=s.nextElementSibling;}h.classList.toggle('hidden',q&&!any);});
+  sel.addEventListener('change',function(){showSport(sel.value);});
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+    ta.addEventListener('input',function(){autosize(ta);ta.classList.toggle('changed',(base[ta.dataset.cid]||'')!==ta.value);updateCount();});
   });
   saveBtn.addEventListener('click',save);
-  if(!SUPA_URL||!SUPA_KEY){
-    document.getElementById('note').textContent='Hinweis: Cloud-Speicher (Supabase) ist noch nicht eingerichtet – Änderungen können bearbeitet und als Datei heruntergeladen, aber noch nicht direkt live gespeichert werden. Siehe SETUP-ADMIN.md.';
-    saveBtn.textContent='Änderungen herunterladen';
-  }else{
+  if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
       .then(function(r){return r.ok?r.json():[];}).then(function(rows){
         const m={};(rows||[]).forEach(function(x){m[x.cid]=x.txt;});
-        listEl.querySelectorAll('.item').forEach(function(el){const i=+el.dataset.i,cid=DATA[i].cid;if(m[cid]!=null){el.querySelector('textarea').value=m[cid];base[cid]=m[cid];}});
-        updateCount();
+        app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){const cid=ta.dataset.cid;if(m[cid]!=null){ta.value=m[cid];base[cid]=m[cid];}});
+        showSport(sel.value);updateCount();
       }).catch(function(){});
+  }else{
+    document.getElementById('note').textContent='Hinweis: Cloud-Speicher (Supabase) ist noch nicht eingerichtet – Änderungen können bearbeitet und als Datei heruntergeladen, aber noch nicht direkt live gespeichert werden. Siehe SETUP-ADMIN.md.';
+    saveBtn.textContent='Herunterladen';
   }
+  showSport(sel.value||(sel.options[0]&&sel.options[0].value));
+  updateCount();
 }
 function save(){
   const ch=changed();if(!ch.length)return;
@@ -963,32 +958,31 @@ function save(){
   saveBtn.disabled=true;statusEl.textContent='Speichere …';
   fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
     headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-    body:JSON.stringify(ch.map(function(x){return {cid:x.cid,txt:x.txt};}))})
+    body:JSON.stringify(ch)})
    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);
      ch.forEach(function(x){base[x.cid]=x.txt;});
-     listEl.querySelectorAll('.item').forEach(function(el){el.classList.remove('changed');});
+     app.querySelectorAll('.cedit.changed').forEach(function(t){t.classList.remove('changed');});
      statusEl.textContent='Gespeichert ✓ – Änderungen sind jetzt live.';saveBtn.disabled=true;
    }).catch(function(err){statusEl.textContent='Fehler beim Speichern: '+err.message;saveBtn.disabled=false;});
 }
 </script></body></html>'''
 
 def admin_html(datamap):
-    items = []
+    secs = ""; opts = ""; orig = {}
     for s in SPORTS:
         d = datamap[s["id"]]
         if not d: continue
+        secs += sport_section(s, d, "de", edit=True)
+        opts += '<option value="'+esc(s["id"])+'">'+esc(tr(s["name"], "de"))+'</option>'
         for ti, t in enumerate(d["themes"]):
             for ri, r in enumerate(t["rows"]):
                 for si, seg in enumerate(r["segs"]):
-                    v = seg.get("v") or ""
-                    if not v.strip(): continue
-                    items.append({"cid": s["id"]+"|"+str(ti)+"|"+str(ri)+"|"+str(si),
-                                  "sport": tr(s["name"], "de"),
-                                  "theme": tr(t["title"], "de"),
-                                  "label": (tr(r.get("label"), "de") or ""),
-                                  "text": v})
-    data_js = json.dumps(items, ensure_ascii=False).replace("</", "<\\/")
-    return (ADMIN_TMPL.replace("__ADMIN_DATA__", data_js)
+                    orig[s["id"]+"|"+str(ti)+"|"+str(ri)+"|"+str(si)] = seg.get("v") or ""
+    orig_js = json.dumps(orig, ensure_ascii=False).replace("</", "<\\/")
+    return (ADMIN_TMPL.replace("__MAINCSS__", CSS)
+                      .replace("__ADMIN_SECTIONS__", secs)
+                      .replace("__SPORT_OPTIONS__", opts)
+                      .replace("__ADMIN_ORIG__", orig_js)
                       .replace("__ADMIN_PW__", ADMIN_PW)
                       .replace("__SUPA_URL__", SUPABASE_URL)
                       .replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
