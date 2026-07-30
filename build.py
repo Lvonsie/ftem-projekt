@@ -4,6 +4,21 @@ import json, re, html, datetime
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 d = json.load(open(os.path.join(BASE, "ftem_data.json"), encoding="utf-8"))
+try:
+    TR = json.load(open(os.path.join(BASE, "translations.json"), encoding="utf-8"))
+except FileNotFoundError:
+    TR = {}
+LANGS = ["de", "fr", "it"]
+FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html"}
+def tr(s, lang):
+    if lang == "de" or s is None:
+        return s
+    return TR.get(lang, {}).get(s, s)
+INTRO = {
+ "de": 'Vollständige, strukturierte Übersicht des Ski-Alpin <b>Athlet:innen-Wegs</b> aus dem Swiss-Ski FTEM-Tool: <b>17 Themen</b> über die zehn Entwicklungsstufen <b>F1–M</b>. Links je Zeile eine fixe Beschriftung; lange Texte sind zusammengeklappt und mit «mehr» ausklappbar. Die Tabellen lassen sich seitlich scrollen.',
+ "fr": 'Aperçu complet et structuré du <b>parcours de l&#x27;athlète</b> en ski alpin, issu de l&#x27;outil FTEM de Swiss-Ski : <b>17 thèmes</b> à travers les dix niveaux de développement <b>F1–M</b>. À gauche de chaque ligne, un intitulé fixe ; les textes longs sont repliés et dépliables via « plus ». Les tableaux défilent latéralement.',
+ "it": 'Panoramica completa e strutturata del <b>percorso dell&#x27;atleta</b> nello sci alpino, dallo strumento FTEM di Swiss-Ski: <b>17 temi</b> lungo i dieci livelli di sviluppo <b>F1–M</b>. A sinistra di ogni riga un&#x27;etichetta fissa; i testi lunghi sono compressi ed espandibili con «altro». Le tabelle scorrono lateralmente.',
+}
 STAGES = d["stages"]
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 AGE = {"F1":"U8","F2":"U8–U10","F3":"U10–U12","T1":"U12–U14","T2":"U14–U16","T3":"U16+","T4":"U18+","E1":"","E2":"","M":""}
@@ -68,9 +83,9 @@ def render_block(block, link_texts):
         return '<p><span class="lbl">'+esc(lab)+':</span> '+esc(val).replace("\n","<br>")+'</p>'
     return '<p>'+esc(b).replace("\n","<br>")+'</p>'
 
-def render_cell(seg):
-    txt = seg["v"].strip()
-    link_texts = set(l["text"] for l in seg["l"] if l.get("text"))
+def render_cell(seg, lang):
+    txt = (tr(seg["v"], lang) or "").strip()
+    link_texts = set(tr(l["text"], lang) for l in seg["l"] if l.get("text"))
     inner = ""
     if txt:
         blocks = re.split(r'\n\s*\n', txt)
@@ -84,13 +99,14 @@ def render_cell(seg):
             key=l.get("href")
             if key in seen: continue
             seen.add(key)
-            btns += '<a href="'+esc(l["href"] or "#")+'" target="_blank" rel="noopener">'+esc(l.get("text") or "Dokument")+'</a>'
+            btns += '<a href="'+esc(l["href"] or "#")+'" target="_blank" rel="noopener">'+esc(tr(l.get("text"), lang) or "Dokument")+'</a>'
         if btns: inner += '<div class="lks">'+btns+'</div>'
     return inner or '<div class="empty">–</div>'
 
 # build theme html
 GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
-def theme_html(t, idx):
+def theme_html(t, idx, lang):
+    title = tr(t["title"], lang)
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(STAGES):
@@ -99,7 +115,7 @@ def theme_html(t, idx):
     th += '</div>'
     body = ""
     for r in t["rows"]:
-        lbl = r["label"] or ""
+        lbl = tr(r["label"], lang) or ""
         body += '<div class="r">'
         body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
         # render segs with spans; we lay out as 10 cells using grid-column span
@@ -109,21 +125,24 @@ def theme_html(t, idx):
             # if seg spans multiple phases, neutral
             phs = set(ph(STAGES[i]) for i in range(seg["from"], seg["to"]+1))
             if len(phs) > 1: cls = "ph-multi"
-            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg)+'</div><button class="more" hidden>mehr ▾</button></div>'
+            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang)+'</div><button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button></div>'
         body += '</div>'
-    return ('<details class="theme" id="t'+str(idx)+'" open data-title="'+esc(t["title"].lower())+'">'
-            '<summary><span class="tt">'+esc(t["title"])+'</span></summary>'
+    return ('<details class="theme" id="t'+str(idx)+'" open data-title="'+esc(title.lower())+'">'
+            '<summary><span class="tt">'+esc(title)+'</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
-sections=""
-for g in GROUP_ORDER:
-    items=[(i,t) for i,t in enumerate(d["themes"]) if t["group"]==g]
-    if not items: continue
-    sections += '<h2 class="grp">'+esc(g)+'</h2>'
-    for i,t in items:
-        sections += theme_html(t,i)
+def build_sections(lang):
+    s = ""
+    for g in GROUP_ORDER:
+        items=[(i,th) for i,th in enumerate(d["themes"]) if th["group"]==g]
+        if not items: continue
+        s += '<h2 class="grp">'+esc(tr(g, lang))+'</h2>'
+        for i,th in items:
+            s += theme_html(th, i, lang)
+    return s
 
-jump = "".join('<option value="t'+str(i)+'">'+esc(t["title"])+'</option>' for i,t in enumerate(d["themes"]))
+def build_jump(lang):
+    return "".join('<option value="t'+str(i)+'">'+esc(tr(th["title"], lang))+'</option>' for i,th in enumerate(d["themes"]))
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8 ec;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
@@ -140,6 +159,10 @@ header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-spa
 header.top h1 b{color:var(--ink);font-weight:700}
 header.top h1 .fF{color:var(--found)}header.top h1 .fT{color:var(--talent)}header.top h1 .fE{color:var(--elite)}header.top h1 .fM{color:var(--mast)}header.top h1 .fF,header.top h1 .fT,header.top h1 .fE,header.top h1 .fM{font-weight:900}
 header.top h1 .sk{color:var(--ink)}
+.langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
+.langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
+.langsw a.active{background:var(--red);color:#fff}
+.langsw a:hover:not(.active){background:#fff;color:var(--ink)}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
 .tools input,.tools select,.tools button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
 .tools input{min-width:210px}
@@ -221,7 +244,7 @@ function setupClamp(){
     if(!w||!btn)return;
     if(w.scrollHeight>w.clientHeight+6){cell.classList.add('clamped');btn.hidden=false;}
     else{cell.classList.remove('clamped');btn.hidden=true;}
-    btn.onclick=()=>{const ex=cell.classList.toggle('expanded');btn.textContent=ex?'weniger ▴':'mehr ▾';};
+    btn.onclick=()=>{const ex=cell.classList.toggle('expanded');btn.textContent=ex?I18N.less:I18N.more;};
   });
 }
 function clearMarks(el){el.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));el.normalize();}
@@ -242,7 +265,7 @@ function run(){
       });
     }
   });
-  document.getElementById('cnt').textContent=term?(vis+' Themen mit Treffern'):(themes.length+' Themen · F1–M');
+  document.getElementById('cnt').textContent=term?(vis+' '+I18N.hits):(themes.length+' '+I18N.themes);
   grps.forEach(g=>{let s=g.nextElementSibling,any=false;while(s&&s.classList.contains('theme')){if(!s.classList.contains('hidden'))any=true;s=s.nextElementSibling;}g.classList.toggle('hidden',!!term&&!any);});
 }
 q.addEventListener('input',run);
@@ -277,24 +300,41 @@ run();setupClamp();
 """
 
 datestr = datetime.date.today().strftime("%d.%m.%Y")
-HTML = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
-'<meta name="viewport" content="width=device-width,initial-scale=1">'
-'<title>FTEM Ski Alpin – Athlet:innen-Weg</title><style>'+CSS+'</style></head><body>'
-'<header class="top"><h1><span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span> <span class="sk">Ski Alpin</span> <b>· Athlet:innen-Weg</b></h1>'
-'<div class="tools"><span class="cnt" id="cnt"></span>'
-'<input id="q" type="search" placeholder="In allen Inhalten suchen…">'
-'<select id="jump"><option>Zu Thema springen…</option>'+jump+'</select>'
-'<button id="exp">Alle öffnen</button><button id="col">Alle schliessen</button></div></header>'
-'<div class="wrap">'
-'<div class="intro">Vollständige, strukturierte Übersicht des Ski-Alpin <b>Athlet:innen-Wegs</b> aus dem Swiss-Ski FTEM-Tool: <b>17 Themen</b> über die zehn Entwicklungsstufen <b>F1–M</b>. Links je Zeile eine fixe Beschriftung; lange Texte sind zusammengeklappt und mit «mehr» ausklappbar. Die Tabellen lassen sich seitlich scrollen.'
-'<div class="legend"><span class="lg-f">F1–F3 · Foundation</span><span class="lg-t">T1–T4 · Talent</span><span class="lg-e">E1–E2 · Elite</span><span class="lg-m">M · Mastery</span></div></div>'
-'<div class="hint">↔ Tabellen lassen sich seitlich scrollen · 📄 = externes Dokument</div>'
-+sections+
-'<footer>Quelle: <a href="https://my.ftem.swiss-ski.ch/dashboard/alpine-ski" target="_blank">my.ftem.swiss-ski.ch</a> · aufbereitet am '+datestr+'</footer>'
-'</div><script>'+JS+'</script></body></html>')
 
-out = os.path.join(BASE, "ftem-ski-alpin-uebersicht.html")
-open(out,"w",encoding="utf-8").write(HTML)
-# also write index.html so the page works as the root of a website (Netlify etc.)
-open(os.path.join(BASE, "index.html"),"w",encoding="utf-8").write(HTML)
-print("written", len(HTML.encode("utf-8")), "bytes ->", out, "(+ index.html)")
+def lang_switch(active):
+    names = {"de": "DE", "fr": "FR", "it": "IT"}
+    out = '<div class="langsw">'
+    for lg in LANGS:
+        cls = ' class="active"' if lg == active else ''
+        out += '<a href="'+FILES[lg]+'"'+cls+'>'+names[lg]+'</a>'
+    return out + '</div>'
+
+def render_page(lang):
+    sections = build_sections(lang)
+    jump = build_jump(lang)
+    i18n = json.dumps({"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
+                       "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang)}, ensure_ascii=False)
+    aw = esc(tr("Athlet:innen-Weg", lang))
+    return ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
+    '<meta name="viewport" content="width=device-width,initial-scale=1">'
+    '<title>FTEM Ski Alpin – '+aw+'</title><style>'+CSS+'</style></head><body>'
+    '<header class="top"><h1><span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span> <span class="sk">Ski Alpin</span> <b>· '+aw+'</b></h1>'
+    +lang_switch(lang)+
+    '<div class="tools"><span class="cnt" id="cnt"></span>'
+    '<input id="q" type="search" placeholder="'+esc(tr("In allen Inhalten suchen…", lang))+'">'
+    '<select id="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump+'</select>'
+    '<button id="exp">'+esc(tr("Alle öffnen", lang))+'</button><button id="col">'+esc(tr("Alle schliessen", lang))+'</button></div></header>'
+    '<div class="wrap">'
+    '<div class="intro">'+INTRO[lang]+
+    '<div class="legend"><span class="lg-f">F1–F3 · Foundation</span><span class="lg-t">T1–T4 · Talent</span><span class="lg-e">E1–E2 · Elite</span><span class="lg-m">M · Mastery</span></div></div>'
+    '<div class="hint">'+esc(tr("↔ Tabellen lassen sich seitlich scrollen · 📄 = externes Dokument", lang))+'</div>'
+    +sections+
+    '<footer>'+esc(tr("Quelle:", lang))+' <a href="https://my.ftem.swiss-ski.ch/dashboard/alpine-ski" target="_blank">my.ftem.swiss-ski.ch</a> · '+esc(tr("aufbereitet am", lang))+' '+datestr+'</footer>'
+    '</div><script>const I18N='+i18n+';'+JS+'</script></body></html>')
+
+for lang in LANGS:
+    page = render_page(lang)
+    open(os.path.join(BASE, FILES[lang]), "w", encoding="utf-8").write(page)
+    if lang == "de":
+        open(os.path.join(BASE, "ftem-ski-alpin-uebersicht.html"), "w", encoding="utf-8").write(page)
+    print("written", FILES[lang], len(page.encode("utf-8")), "bytes")
