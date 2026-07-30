@@ -243,19 +243,36 @@ def sport_section(sport, d, lang):
         +sections+footer(lang)+'</div></section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
+# Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Fläche
+CONS_POS = [(14,46),(28,67),(41,45),(53,63),(65,43),(77,61),(88,48),(60,80),(34,84),
+            (20,58),(70,80),(48,55)]
+CONS_PHASE = ["found","talent","elite","mast"]
+CONS_LINKS = [(1,8),(2,8),(3,7),(5,7)]
+
 def home_html(datamap, lang):
-    cards = ""
+    n = len(SPORTS)
+    nodes = ""
     for i, s in enumerate(SPORTS):
         has = datamap[s["id"]] is not None
         name = tr(s["name"], lang)
-        # Logo-Platz: sobald ein Sportarten-Logo vorliegt, in ftem_sports.json
-        # z. B. "icon": "logos/ski-alpin.svg" ergaenzen -> wird statt Kuerzel gezeigt
-        ico = s.get("icon")
-        ico_html = ('<img src="'+esc(ico)+'" alt="" loading="lazy">') if ico else esc(s["short"])
-        cards += ('<a class="card'+('' if has else ' nodata')+'" href="#'+s["id"]+'" style="animation-delay:'+str(i*50)+'ms">'
-                  '<span class="ab'+(' has-img' if ico else '')+'">'+ico_html+'</span>'
-                  '<span class="cn">'+esc(name)+'</span>'
-                  +('' if has else '<span class="tag">'+esc(NODATA[lang])+'</span>')+'</a>')
+        x, y = CONS_POS[i % len(CONS_POS)]
+        ph = CONS_PHASE[i % 4]
+        img = s.get("image")
+        thumb = ('<img src="'+esc(img)+'" alt="" loading="lazy">') if img else '<span class="ab2">'+esc(s["short"])+'</span>'
+        tag = '' if has else '<span class="ntag">'+esc(NODATA[lang])+'</span>'
+        nodes += ('<a class="node ph-'+ph+('' if has else ' nodata')+'" href="#'+s["id"]+'" '
+                  'style="left:'+str(x)+'%;top:'+str(y)+'%;--d:'+str(i*150)+'ms">'
+                  '<span class="ncard"><span class="nthumb">'+thumb+'</span>'
+                  '<span class="nname">'+esc(name)+'</span>'+tag+'</span>'
+                  '<span class="dot"></span><span class="nlabel">'+esc(name)+'</span></a>')
+    chain = " ".join(str(CONS_POS[i][0])+","+str(CONS_POS[i][1]) for i in range(min(7, n)))
+    lines = ('<svg class="clines" viewBox="0 0 100 100" preserveAspectRatio="none">'
+             '<polyline class="cl" points="'+chain+'" vector-effect="non-scaling-stroke"/>')
+    for a, b in CONS_LINKS:
+        if a < n and b < n:
+            lines += ('<line class="cl2" x1="'+str(CONS_POS[a][0])+'" y1="'+str(CONS_POS[a][1])+
+                      '" x2="'+str(CONS_POS[b][0])+'" y2="'+str(CONS_POS[b][1])+'" vector-effect="non-scaling-stroke"/>')
+    lines += '</svg>'
     info = FTEM_INFO[lang]
     phase_cls = {"F":"p-f","T":"p-t","E":"p-e","M":"p-m"}
     phases = "".join('<div class="phase '+phase_cls[k]+'"><span class="pl">'+k+'</span>'
@@ -265,12 +282,16 @@ def home_html(datamap, lang):
                  '<h2>'+info["title"]+'</h2>'
                  '<p class="lead">'+info["lead"]+'</p>'
                  '<div class="phases">'+phases+'</div></div>')
-    return ('<section id="home"><div class="home-hero">'
-            '<h1>'+FTEM+' <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
-            '<p class="sub">'+esc(HOME_SUB[lang])+'</p>'
-            '<div class="hero-lang">'+lang_switch(lang)+'</div>'
-            '<div class="grid-sports">'+cards+'</div>'
-            +ftem_info+footer(lang)+'</div></section>')
+    return ('<section id="home">'
+            '<div class="home-hero">'
+            '<div class="hero-top">'+lang_switch(lang)+'</div>'
+            '<div class="hero-head"><h1>'+FTEM+' <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
+            '<p class="sub">'+esc(HOME_SUB[lang])+'</p></div>'
+            '<div class="constellation">'+lines+nodes+'</div>'
+            '<div class="scrolldown" aria-hidden="true">▾</div>'
+            '</div>'
+            '<div class="home-info">'+ftem_info+footer(lang)+'</div>'
+            '</section>')
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
@@ -290,6 +311,57 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
 .langsw a.active{background:var(--acc);color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
+<<<<<<< HEAD
+/* Startseite – Neon-Konstellation */
+#home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,rgba(9,14,24,.58),rgba(9,14,24,.34) 40%,rgba(7,11,20,.92)),url("assets/hero.jpg") center 28%/cover no-repeat}
+#home .hero-top{position:absolute;top:16px;right:18px;z-index:7}
+#home .home-hero .langsw{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);backdrop-filter:blur(6px)}
+#home .home-hero .langsw a{color:rgba(255,255,255,.82)}
+#home .home-hero .langsw a.active{background:var(--red);color:#fff}
+#home .home-hero .langsw a:hover:not(.active){background:rgba(255,255,255,.22);color:#fff}
+#home .hero-head{position:relative;z-index:6;text-align:center;padding:74px 20px 0}
+#home .hero-head h1{font-size:clamp(28px,5vw,46px);margin:0 0 8px;font-weight:800;letter-spacing:.5px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
+#home .hero-head h1 b{color:#fff;font-weight:800}
+#home .hero-head h1 .fF{color:#57cce4}#home .hero-head h1 .fT{color:#ffd45c}#home .hero-head h1 .fE{color:#ff9b57}#home .hero-head h1 .fM{color:#ff6d60}
+#home .hero-head .sub{color:rgba(255,255,255,.85);font-size:15px;margin:0;text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
+.clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
+.clines .cl2{stroke:rgba(255,255,255,.16);stroke-width:1}
+@keyframes flow{to{stroke-dashoffset:-160}}
+.node{position:absolute;transform:translate(-50%,-50%);text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:9px;
+  animation:nodeIn .6s ease both;animation-delay:var(--d,0ms)}
+@keyframes nodeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.3)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.node .dot{width:15px;height:15px;border-radius:50%;background:#fff;position:relative;transition:transform .2s ease}
+.node .dot::after{content:"";position:absolute;inset:-3px;border-radius:50%;animation:twk 3.2s ease-in-out infinite}
+@keyframes twk{0%,100%{box-shadow:0 0 0 0 currentColor;opacity:.6}50%{box-shadow:0 0 12px 4px currentColor;opacity:1}}
+.node .nlabel{font-size:12px;font-weight:700;color:#fff;letter-spacing:.02em;white-space:nowrap;text-shadow:0 1px 9px rgba(0,0,0,.8);opacity:.92;transition:opacity .2s}
+.node.ph-found .dot{background:#7bd8ea;color:#1f8fa6;box-shadow:0 0 16px 3px #1f8fa6,0 0 36px 9px rgba(31,143,166,.5)}
+.node.ph-talent .dot{background:#ffdc7a;color:#e2a900;box-shadow:0 0 16px 3px #e2a900,0 0 36px 9px rgba(226,169,0,.5)}
+.node.ph-elite .dot{background:#ffb182;color:#e8772e;box-shadow:0 0 16px 3px #e8772e,0 0 36px 9px rgba(232,119,46,.5)}
+.node.ph-mast .dot{background:#ff8b81;color:#d52b1e;box-shadow:0 0 16px 3px #d52b1e,0 0 36px 9px rgba(213,43,30,.5)}
+.node.nodata .dot{background:#c7d0d8;color:#8a97a3;box-shadow:0 0 10px 2px rgba(160,175,190,.45)}
+.node.nodata .nlabel{opacity:.62}
+.node:hover,.node:focus-visible{z-index:9;outline:none}
+.node:hover .dot,.node:focus-visible .dot{transform:scale(1.4)}
+.node:hover .nlabel,.node:focus-visible .nlabel{opacity:0}
+.node .ncard{position:absolute;bottom:calc(100% + 15px);left:50%;transform:translate(-50%,10px) scale(.9);width:154px;
+  background:rgba(15,21,32,.9);backdrop-filter:blur(9px);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:10px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;box-shadow:0 18px 44px rgba(0,0,0,.55)}
+.node:hover .ncard,.node:focus-visible .ncard{opacity:1;transform:translate(-50%,0) scale(1)}
+.node .ncard::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:rgba(15,21,32,.9)}
+.node .nthumb{width:100%;height:82px;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)}
+.node .nthumb img{width:100%;height:100%;object-fit:cover}
+.node .nthumb .ab2{font-size:24px;font-weight:800;color:#fff;opacity:.92}
+.node.ph-found .nthumb{background:rgba(31,143,166,.28)}.node.ph-talent .nthumb{background:rgba(226,169,0,.28)}.node.ph-elite .nthumb{background:rgba(232,119,46,.28)}.node.ph-mast .nthumb{background:rgba(213,43,30,.28)}
+.node .nname{font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2}
+.node .ntag{font-size:10px;font-weight:700;color:#cdd6de;background:rgba(255,255,255,.12);border-radius:20px;padding:2px 8px}
+.scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:5;color:rgba(255,255,255,.7);font-size:24px;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
+@media(max-width:640px){.node .nlabel{font-size:10.5px}.node .ncard{width:130px}#home .hero-head{padding-top:60px}}
+=======
 /* Startseite */
 #home .home-hero{max-width:980px;margin:0 auto;padding:60px 24px 30px;text-align:center}
 #home h1{font-size:30px;margin:0 0 6px;font-weight:800;color:var(--red);letter-spacing:.2px}
@@ -308,6 +380,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .grid-sports .card.nodata .ab.has-img{background:none;filter:grayscale(1);opacity:.6}
 .grid-sports .cn{font-weight:800;font-size:13.5px}
 .grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
+>>>>>>> 09592038aa835763b2dabffacbc5ed0e4f71a20a
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
@@ -505,6 +578,18 @@ function route(){
 }
 window.addEventListener('hashchange',route);
 route();
+// Parallax: Konstellation folgt sanft der Maus (nur Desktop/feiner Zeiger)
+(function(){
+  const hero=document.querySelector('#home .home-hero');
+  const cons=document.querySelector('#home .constellation');
+  if(!hero||!cons||!window.matchMedia('(pointer:fine)').matches)return;
+  hero.addEventListener('mousemove',e=>{
+    const r=hero.getBoundingClientRect();
+    const dx=((e.clientX-r.left)/r.width-0.5)*26, dy=((e.clientY-r.top)/r.height-0.5)*20;
+    cons.style.transform='translate('+dx+'px,'+dy+'px)';
+  });
+  hero.addEventListener('mouseleave',()=>{cons.style.transform='';});
+})();
 """
 
 datamap = {s["id"]: sport_data(s) for s in SPORTS}
