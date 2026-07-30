@@ -246,13 +246,56 @@ def sport_section(sport, d, lang):
 # Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Flaeche
 CONS_POS = [(12,52),(21,40),(30,62),(39,44),(48,66),(57,42),(66,64),(75,46),(84,66),(91,50),
             (70,80),(48,80)]
-CONS_LINKS = [(1,3),(6,8)]
+# durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
+# 0 ski-alpin,1 langlauf,2 biathlon,3 skispringen,4 nord.komb,5 skicross,
+# 6 freeski-pp,7 sb-alpin,8 sb-cross,9 sb-pp
+CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9)]
+
+# --- Newsbox -----------------------------------------------------------------
+# Neue Meldung? Einfach oben in diese Liste einen Block einfuegen (neueste zuerst).
+#   "title"   : Ueberschrift
+#   "body"    : Liste von Absaetzen (Text)
+#   "bullets" : optionale Liste von Aufzaehlungspunkten
+#   "url"     : Link -> wird als "Link"-Button gezeigt (leer lassen = kein Button)
+NEWS = [
+    {
+        "title": "Neue Ausbildungsstruktur Ski Alpin",
+        "body": ["Die Übersichtsseite zur neuen Ausbildungsstruktur ist live!",
+                 "Entdecke den Ausbildungsweg bis hin zum «Swiss-Ski Trainer:in Spitzensport»."],
+        "bullets": [],
+        "url": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027/",
+    },
+    {
+        "title": "Swiss-Ski Ausbildungsnews Juli 26",
+        "body": ["Verschiedene News in folgenden Bereichen:"],
+        "bullets": ["Gut zu wissen",
+                    "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen"],
+        "url": "https://www.swiss-ski.ch/globale-datensammlung/mailings-neu/ausbildungsnews/saison-2026-2027/ausbildungsnews-juli-2026/",
+    },
+]
+
+def news_html(lang):
+    if not NEWS:
+        return ""
+    heading = {"de":"News","fr":"Actualités","it":"Notizie"}.get(lang, "News")
+    cards = ""
+    for it in NEWS:
+        body = "".join('<p>'+esc(tr(p, lang))+'</p>' for p in it.get("body", []))
+        if it.get("bullets"):
+            body += '<ul>'+"".join('<li>'+esc(tr(b, lang))+'</li>' for b in it["bullets"])+'</ul>'
+        link = ('<a class="news-link" href="'+esc(it["url"])+'" target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
+        cards += ('<article class="news-card"><h3>'+esc(tr(it["title"], lang))+'</h3>'
+                  '<div class="news-body">'+body+'</div>'+link+'</article>')
+    return ('<section class="news"><h2 class="news-h">'+esc(heading)+'</h2>'
+            '<div class="news-grid">'+cards+'</div></section>')
 
 def home_html(datamap, lang):
     n = len(SPORTS)
     nodes = ""
+    two_line = {"freeski-park-pipe","snowboard-alpin","snowboard-cross","snowboard-park-pipe","nordische-kombination"}
     for i, s in enumerate(SPORTS):
         name = tr(s["name"], lang)
+        label = esc(name).replace(" ", "<br>", 1) if s["id"] in two_line else esc(name)
         x, y = CONS_POS[i % len(CONS_POS)]
         icon = s.get("icon")
         ticon = None
@@ -260,12 +303,13 @@ def home_html(datamap, lang):
             cand = "assets/sporticons/" + os.path.splitext(os.path.basename(icon))[0] + ".png"
             if os.path.exists(cand):
                 ticon = cand
-        hover = ('<span class="nhover"><img class="nicon" src="'+esc(ticon)+'" alt="" loading="lazy"></span>') if ticon else ''
+        img_tag = ('<img class="nicon" src="'+esc(ticon)+'" alt="" loading="lazy">') if ticon else ''
+        hover = '<span class="nhover">'+img_tag+'<span class="nname">'+label+'</span></span>'
         nodes += ('<a class="node" href="#'+s["id"]+'" '
                   'style="left:'+str(x)+'%;top:'+str(y)+'%;--d:'+str(i*150)+'ms">'
                   + hover +
                   '<span class="dot"></span>'
-                  '<span class="nlabel">'+esc(name)+'</span></a>')
+                  '<span class="nlabel">'+label+'</span></a>')
     chain = " ".join(str(CONS_POS[i][0])+","+str(CONS_POS[i][1]) for i in range(min(n, len(CONS_POS))))
     lines = ('<svg class="clines" viewBox="0 0 100 100" preserveAspectRatio="none">'
              '<polyline class="cl" points="'+chain+'" vector-effect="non-scaling-stroke"/>')
@@ -283,16 +327,25 @@ def home_html(datamap, lang):
                  '<h2>'+info["title"]+'</h2>'
                  '<p class="lead">'+info["lead"]+'</p>'
                  '<div class="phases">'+phases+'</div></div>')
+    fb_ph = {"de":"Dein Feedback …","fr":"Votre commentaire …","it":"Il tuo feedback …"}.get(lang, "Dein Feedback …")
+    fb_send = {"de":"Senden","fr":"Envoyer","it":"Invia"}.get(lang, "Senden")
+    fb = ('<button class="fb-btn" type="button" '
+          'onclick="var p=this.nextElementSibling;p.hidden=!p.hidden;if(!p.hidden)p.querySelector(&#39;textarea&#39;).focus()">Feedback</button>'
+          '<div class="fb-panel" hidden>'
+          '<textarea class="fb-text" placeholder="'+esc(fb_ph)+'"></textarea>'
+          '<button class="fb-send" type="button" '
+          'onclick="location.href=&#39;mailto:forschung@swiss-ski.ch?subject=Feedback%20FTEM&amp;body=&#39;+encodeURIComponent(this.parentNode.querySelector(&#39;.fb-text&#39;).value)">'+esc(fb_send)+'</button>'
+          '</div>')
     return ('<section id="home">'
             '<div class="home-hero">'
-            '<div class="hero-top">'+lang_switch(lang)+'</div>'
+            '<div class="hero-top">'+lang_switch(lang)+fb+'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
             '<div class="constellation">'+lines+nodes+'</div>'
             '<button class="scrolldown" type="button" aria-label="nach unten scrollen" '
             'onclick="document.querySelector(&#39;.home-info&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">&#9662;</button>'
             '</div>'
-            '<div class="home-info">'+ftem_info+footer(lang)+'</div>'
+            '<div class="home-info">'+news_html(lang)+ftem_info+'</div>'
             '</section>')
 
 
@@ -317,7 +370,15 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 /* Startseite - Neon-Konstellation */
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(9,14,24,.66),rgba(12,17,28,.5) 45%,rgba(7,11,20,.9)),url("assets/hero.jpg") center 32%/cover no-repeat}
-#home .hero-top{position:absolute;top:16px;left:18px;z-index:7}
+#home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.fb-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:filter .15s}
+.fb-btn:hover{filter:brightness(1.12)}
+.fb-panel{display:flex;flex-direction:column;gap:8px;width:250px;background:rgba(15,21,32,.93);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:11px;padding:11px;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.fb-text{width:100%;min-height:84px;resize:vertical;border-radius:7px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;padding:8px;font:inherit;font-size:12.5px;line-height:1.4}
+.fb-text::placeholder{color:rgba(255,255,255,.55)}
+.fb-text:focus{outline:none;border-color:var(--red)}
+.fb-send{align-self:flex-end;background:var(--red);color:#fff;border:none;border-radius:7px;padding:7px 16px;font-weight:800;font-size:12px;cursor:pointer;transition:filter .15s}
+.fb-send:hover{filter:brightness(1.12)}
 #home .home-hero .langsw{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);backdrop-filter:blur(6px)}
 #home .home-hero .langsw a{color:rgba(255,255,255,.82)}
 #home .home-hero .langsw a.active{background:var(--red);color:#fff}
@@ -325,12 +386,17 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 #home .hero-head{position:relative;z-index:6;text-align:center;padding:74px 20px 0}
 #home .hero-head h1{font-size:clamp(46px,9vw,92px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
 #home .hero-head h1 b{color:#fff;font-weight:800}
-#home .hero-head h1 .fF{color:#57cce4}#home .hero-head h1 .fT{color:#ffd45c}#home .hero-head h1 .fE{color:#ff9b57}#home .hero-head h1 .fM{color:#ff6d60}
+#home .hero-head h1 .fF,#home .hero-head h1 .fT,#home .hero-head h1 .fE,#home .hero-head h1 .fM{animation:ftemglow 3.2s ease-in-out infinite}
+#home .hero-head h1 .fF{color:#57cce4;text-shadow:0 0 12px rgba(87,204,228,.9),0 0 26px rgba(87,204,228,.6),0 2px 24px rgba(0,0,0,.5)}
+#home .hero-head h1 .fT{color:#ffd45c;text-shadow:0 0 12px rgba(255,212,92,.9),0 0 26px rgba(255,212,92,.6),0 2px 24px rgba(0,0,0,.5)}
+#home .hero-head h1 .fE{color:#ff9b57;text-shadow:0 0 12px rgba(255,155,87,.9),0 0 26px rgba(255,155,87,.6),0 2px 24px rgba(0,0,0,.5)}
+#home .hero-head h1 .fM{color:#ff6d60;text-shadow:0 0 12px rgba(255,109,96,.95),0 0 26px rgba(255,109,96,.65),0 2px 24px rgba(0,0,0,.5)}
+@keyframes ftemglow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
 #home .hero-logo{display:block;margin:6px auto 0;width:clamp(96px,14vw,150px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
 .constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
 .clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
-.clines .cl2{stroke:rgba(255,255,255,.16);stroke-width:1}
+.clines .cl2{stroke:rgba(255,255,255,.55);stroke-width:1.4;stroke-linecap:round}
 @keyframes flow{to{stroke-dashoffset:-160}}
 .node{position:absolute;transform:translate(-50%,-50%);text-decoration:none;padding:12px;line-height:0;
   animation:nodeIn .6s ease both;animation-delay:var(--d,0ms)}
@@ -344,18 +410,32 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 @keyframes twk{0%,100%{box-shadow:0 0 6px 1px rgba(255,255,255,.22);opacity:.7}50%{box-shadow:0 0 16px 5px rgba(255,190,120,.5);opacity:1}}
 .node:hover,.node:focus-visible{z-index:9;outline:none}
 .node:hover .dot,.node:focus-visible .dot{transform:scale(1.45)}
-.node .nlabel{position:absolute;top:calc(100% - 4px);left:50%;transform:translateX(-50%);
-  font-size:12.5px;font-weight:700;color:#fff;white-space:nowrap;letter-spacing:.02em;
+.node .nlabel{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);
+  font-size:12.5px;font-weight:700;color:#fff;text-align:center;line-height:1.25;letter-spacing:.02em;
   text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.7);pointer-events:none}
-.node .nhover{position:absolute;bottom:calc(100% - 4px);left:50%;transform:translate(-50%,10px);
-  display:flex;justify-content:center;width:110px;
+.node .nhover{position:absolute;bottom:calc(100% - 2px);left:50%;transform:translate(-50%,10px);
+  display:flex;flex-direction:column;align-items:center;gap:5px;width:124px;
   opacity:0;pointer-events:none;transition:opacity .22s,transform .22s}
 .node:hover .nhover,.node:focus-visible .nhover{opacity:1;transform:translate(-50%,0)}
-.node .nicon{width:74px;height:74px;object-fit:contain;filter:drop-shadow(0 3px 12px rgba(0,0,0,.55))}
+.node .nicon{width:74px;height:74px;object-fit:contain;border-radius:16px;filter:drop-shadow(0 3px 12px rgba(0,0,0,.55))}
+.node .nhover .nname{font-size:12.5px;font-weight:800;color:#fff;text-align:center;line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,.92)}
 .scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:8;color:rgba(255,255,255,.85);font-size:24px;line-height:1;background:none;border:none;cursor:pointer;padding:6px 14px;animation:bob 1.8s ease-in-out infinite}
 .scrolldown:hover{color:#fff}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
+/* Newsbox */
+.news{margin:0 0 8px}
+.news-h{margin:0 0 12px;font-size:17px;font-weight:800;color:var(--ink)}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.news-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:14px;padding:15px 17px;display:flex;flex-direction:column;transition:box-shadow .16s,transform .16s}
+.news-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.07);transform:translateY(-2px)}
+.news-card h3{margin:0 0 8px;font-size:14.5px;font-weight:800;color:var(--ink);line-height:1.3}
+.news-body{color:var(--mut);font-size:13px;line-height:1.55}
+.news-body p{margin:0 0 8px}
+.news-body ul{margin:6px 0 8px;padding-left:18px}
+.news-body li{margin:2px 0}
+.news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
+.news-link:hover{filter:brightness(1.12)}
 @media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:11px}#home .hero-head{padding-top:56px}}
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
