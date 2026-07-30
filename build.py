@@ -112,8 +112,7 @@ def theme_html(t, idx):
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg)+'</div><button class="more" hidden>mehr ▾</button></div>'
         body += '</div>'
     return ('<details class="theme" id="t'+str(idx)+'" open data-title="'+esc(t["title"].lower())+'">'
-            '<summary><span class="tt">'+esc(t["title"])+'</span>'
-            '<span class="rown">'+str(len(t["rows"]))+' Zeilen</span></summary>'
+            '<summary><span class="tt">'+esc(t["title"])+'</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
 sections=""
@@ -160,7 +159,6 @@ details.theme>summary::-webkit-details-marker{display:none}
 summary .tt{font-size:14px;font-weight:800;display:flex;align-items:center;gap:9px}
 summary .tt::before{content:'';width:7px;height:7px;border-right:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg);transition:transform .15s;margin-left:1px}
 details[open] summary .tt::before{transform:rotate(45deg)}
-summary .rown{font-size:10.5px;color:var(--mut);font-weight:600;background:var(--bg);padding:2px 8px;border-radius:20px}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:start}
