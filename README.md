@@ -125,3 +125,4 @@ Die Inhalte stammen aus dem (login-geschützten) Swiss-Ski FTEM-Dashboard
 Sie wurden einmalig aus der eingeloggten Browser-Ansicht ausgelesen und in `ftem_data.json`
 strukturiert. Zum Aktualisieren bei künftigen Änderungen im Tool: die betroffenen Werte
 direkt in `ftem_data.json` anpassen und `build.py` neu ausführen.
+
