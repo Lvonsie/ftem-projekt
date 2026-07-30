@@ -92,7 +92,7 @@ def render_cell(seg):
 GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
 def theme_html(t, idx):
     # header row
-    th = '<div class="r head"><div class="rl corner">Stufe →</div>'
+    th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(STAGES):
         age = AGE.get(s,"")
         th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="Spalte hervorheben"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
@@ -165,7 +165,7 @@ details[open] summary .tt::before{transform:rotate(45deg)}
 .rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2)}
 .rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
 .r.head{position:relative;z-index:2}
-.r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--ink);color:#fff;font-size:10.5px;align-items:center;justify-content:center;border:none}
+.r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--card);border:none}
 .c.hd{border-radius:8px;padding:6px 6px;text-align:center;display:flex;flex-direction:column;gap:0;justify-content:center}
 .c.hd .st{font-size:13.5px;font-weight:800}
 .c.hd .stf{font-size:9px;font-weight:600;opacity:.92}
