@@ -139,6 +139,8 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;height:var(--top)}
 header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px}
 header.top h1 b{color:var(--ink);font-weight:700}
+header.top h1 .fF{color:var(--found)}header.top h1 .fT{color:var(--talent)}header.top h1 .fE{color:var(--elite)}header.top h1 .fM{color:var(--mast)}header.top h1 .fF,header.top h1 .fT,header.top h1 .fE,header.top h1 .fM{font-weight:900}
+header.top h1 .sk{color:var(--ink)}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
 .tools input,.tools select,.tools button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
 .tools input{min-width:210px}
@@ -280,7 +282,7 @@ datestr = datetime.date.today().strftime("%d.%m.%Y")
 HTML = ('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">'
 '<meta name="viewport" content="width=device-width,initial-scale=1">'
 '<title>FTEM Ski Alpin – Athlet:innen-Weg</title><style>'+CSS+'</style></head><body>'
-'<header class="top"><h1>FTEM Ski Alpin <b>· Athlet:innen-Weg</b></h1>'
+'<header class="top"><h1><span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span> <span class="sk">Ski Alpin</span> <b>· Athlet:innen-Weg</b></h1>'
 '<div class="tools"><span class="cnt" id="cnt"></span>'
 '<input id="q" type="search" placeholder="In allen Inhalten suchen…">'
 '<select id="jump"><option>Zu Thema springen…</option>'+jump+'</select>'
