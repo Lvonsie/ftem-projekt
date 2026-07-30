@@ -329,6 +329,12 @@
       {
        "v": "Athletik Training (ohne Rollski / Ski):\n2.6 h/Woche",
        "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Athletik Training (ohne Rollski / Ski):\n2.6 h/Woche",
+       "from": 3,
        "to": 5,
        "l": []
       },
@@ -695,6 +701,12 @@
       {
        "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -739,6 +751,17 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Ernährung",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708"
+        }
+       ]
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -788,6 +811,17 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Ernährung",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708"
+        }
+       ]
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -840,6 +874,12 @@
       {
        "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -884,6 +924,17 @@
       {
        "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Gedankenstopp fördern Erholung und mentale Ruhe.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Schlaf",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee5b97a3a51328a001678"
+        }
+       ]
+      },
+      {
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Gedankenstopp fördern Erholung und mentale Ruhe.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -948,6 +999,12 @@
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1111,6 +1168,17 @@
       {
        "v": "SC 1\n3000m-Fusslauf auf Laufbahn\n\nLT\nKapazitäts- und Effizienztests auf Laufband RS",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills Check E-M",
+         "href": "https://snowsports.flink.host/s/QEH4xaub/vyqcs6RA"
+        }
+       ]
+      },
+      {
+       "v": "SC 1\n3000m-Fusslauf auf Laufbahn\n\nLT\nKapazitäts- und Effizienztests auf Laufband RS",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1263,6 +1331,12 @@
       {
        "v": "LT: Physio Check Elite",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "LT: Physio Check Elite",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1349,6 +1423,21 @@
       {
        "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Mobilität E-M",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/3q3YiY5n"
+        },
+        {
+         "text": "Regenerationsmassnahmen",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362"
+        }
+       ]
+      },
+      {
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1419,6 +1508,17 @@
       {
        "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nLT: MLD",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills Check E-M",
+         "href": "https://snowsports.flink.host/s/0j6vgp47/wXSmixxp"
+        }
+       ]
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nLT: MLD",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1597,6 +1697,17 @@
       {
        "v": "LT: Individuell nach Absprache mit dem/der Athletiktrainer:in",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills Check E-M",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55"
+        }
+       ]
+      },
+      {
+       "v": "LT: Individuell nach Absprache mit dem/der Athletiktrainer:in",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1701,12 +1812,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
        "to": 6,
        "l": []
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1718,6 +1841,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1729,6 +1870,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1768,6 +1927,18 @@
       {
        "v": "",
        "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1801,6 +1972,18 @@
       {
        "v": "",
        "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1842,6 +2025,12 @@
       {
        "v": "• Joggingschuhe\n• MTB und Rennvelo\n• Helm\n• Stocklaufstöcke\n• 2× Rollski skating\n• 2× Rollski klassisch",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Joggingschuhe\n• MTB und Rennvelo\n• Helm\n• Stocklaufstöcke\n• 2× Rollski skating\n• 2× Rollski klassisch",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1883,6 +2072,12 @@
       {
        "v": "• 8-10x Wachsski klassisch\n• 8-10× Ski skating\n• 2× Schuhe klassisch\n• 2× Schuhe skating",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• 8-10x Wachsski klassisch\n• 8-10× Ski skating\n• 2× Schuhe klassisch\n• 2× Schuhe skating",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2132,6 +2327,12 @@
       {
        "v": "• WC\n• WSC\n• Swiss Cup\n• Olympische Spiele\n• Nationale/internationale Rollski-Rennen",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• WC\n• WSC\n• Swiss Cup\n• Olympische Spiele\n• Nationale/internationale Rollski-Rennen",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2231,6 +2432,28 @@
       {
        "v": "gemäss Swiss-Ski",
        "from": 6,
+       "to": 6,
+       "l": [
+        {
+         "text": "Swiss-Ski 2026/27",
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf"
+        }
+       ]
+      },
+      {
+       "v": "gemäss Swiss-Ski",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Swiss-Ski 2026/27",
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf"
+        }
+       ]
+      },
+      {
+       "v": "gemäss Swiss-Ski",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -2282,6 +2505,17 @@
       {
        "v": "• Umfeldmanager Swiss-Ski\n• Laufbahnberatung Swiss Olympic\n• Berufsinformationszentren BIZ",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Schule, Ausbildung & Beruf",
+         "href": "https://www.swissolympic.ch/athleten-trainer/beruf-karriere"
+        }
+       ]
+      },
+      {
+       "v": "• Umfeldmanager Swiss-Ski\n• Laufbahnberatung Swiss Olympic\n• Berufsinformationszentren BIZ",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -2334,6 +2568,12 @@
       {
        "v": "• Familie/Partner:in\n• Trainer:innern und Trainingsgruppe\n• Sportlich-berufliches Umfeld\n• Swiss-Ski",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Familie/Partner:in\n• Trainer:innern und Trainingsgruppe\n• Sportlich-berufliches Umfeld\n• Swiss-Ski",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2385,6 +2625,12 @@
       {
        "v": "• Spitzensportförd. der Armee (WK /Zeitmilitär)\n• Schweizer Sporthilfe\n• Kantonale Fördergelder\n• Sponsoren- und Werbeverträge\n• Einkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\n• Sportartspez. und/oder lokale Stiftungen\n• Ausrüster",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Spitzensportförd. der Armee (WK /Zeitmilitär)\n• Schweizer Sporthilfe\n• Kantonale Fördergelder\n• Sponsoren- und Werbeverträge\n• Einkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\n• Sportartspez. und/oder lokale Stiftungen\n• Ausrüster",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2431,6 +2677,17 @@
       {
        "v": "3 Hochschultypen mit Bachelor- und Masterstudiengänge (mit Fernlösungen)\n• Fachhochschulen FH\n• Pädagogische Hochschulen PH\n• Universitäre Hochschulen",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Studium & Leistungssport",
+         "href": "https://www.swissolympic.ch/athleten-trainer/beruf-karriere/studium"
+        }
+       ]
+      },
+      {
+       "v": "3 Hochschultypen mit Bachelor- und Masterstudiengänge (mit Fernlösungen)\n• Fachhochschulen FH\n• Pädagogische Hochschulen PH\n• Universitäre Hochschulen",
+       "from": 9,
        "to": 9,
        "l": [
         {

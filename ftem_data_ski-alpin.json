@@ -129,6 +129,12 @@
       {
        "v": "ca. 870 - 1030h (Mittel 950h)",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "ca. 870 - 1030h (Mittel 950h)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -188,6 +194,12 @@
       {
        "v": "35 - 55 Tage (Je nach Spezialisierung)",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "35 - 55 Tage (Je nach Spezialisierung)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -276,12 +288,24 @@
       {
        "v": "60-70 Tage",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "60-70 Tage",
+       "from": 7,
        "to": 7,
        "l": []
       },
       {
        "v": "45 - 65 Tage (je nach Spezialisierung)",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "45 - 65 Tage (je nach Spezialisierung)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -323,6 +347,12 @@
       {
        "v": "Geführte Trainings: ca. 200 - 240h (220h = 10h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2h/Wo.)",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Geführte Trainings: ca. 200 - 240h (220h = 10h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2h/Wo.)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -358,6 +388,12 @@
       {
        "v": "Ziele Off-Snow: Muskulatur stark und wiederstandsfähig machen. Langhanteltechnik verbessern. Aufbau einer guten aeroben Grundlage. Koordinative Fähigkeiten fördern. Variation von Trainingsmethoden.\n\nInhalt Off-Snow: Kraftausdauer (leichte Gewichte, hohe Wiederholungszahl), Muskelaufbau (moderate Gewichte, ca. zehn Wiederholungen), gegen Ende dieser Phase Maximalkrafttraining. Plyometrie (hohe Wiederholungszahl). Lange, lockere Ausdauereinheiten (Fahrrad, Laufen, Inline). Abwechslungsreiches Training mit Fokus auf Koordination, Kraft und Ausdauer.\n\nZiele On-Snow: Grundtechnik automatisieren im Freifahren und in Kurssetzungen mit Hilfsmitteln transferieren.\n\nInhalt On-Snow: Schulefahren im Freifahren , gezielte technische Übungen, Dialog und gemeinsamer roter Faden definieren, technische Übungen in Kurssetzungen transferieren.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele Off-Snow: Muskulatur stark und wiederstandsfähig machen. Langhanteltechnik verbessern. Aufbau einer guten aeroben Grundlage. Koordinative Fähigkeiten fördern. Variation von Trainingsmethoden.\n\nInhalt Off-Snow: Kraftausdauer (leichte Gewichte, hohe Wiederholungszahl), Muskelaufbau (moderate Gewichte, ca. zehn Wiederholungen), gegen Ende dieser Phase Maximalkrafttraining. Plyometrie (hohe Wiederholungszahl). Lange, lockere Ausdauereinheiten (Fahrrad, Laufen, Inline). Abwechslungsreiches Training mit Fokus auf Koordination, Kraft und Ausdauer.\n\nZiele On-Snow: Grundtechnik automatisieren im Freifahren und in Kurssetzungen mit Hilfsmitteln transferieren.\n\nInhalt On-Snow: Schulefahren im Freifahren , gezielte technische Übungen, Dialog und gemeinsamer roter Faden definieren, technische Übungen in Kurssetzungen transferieren.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -399,6 +435,12 @@
       {
        "v": "Ziele Off-Snow: Aufbau von Schnelligkeit, Schnell-und Explosivkraft. Umsetzen der Grundlagenausdauer in intensiven Intervallformen, Balance zwischen Erholung und Belastung.\n\nInhalt Off-Snow: Sprintformen, Plyometrie (Sprungformen, tiefe Wiederholungszahl), Kraftaufbau (hohe Gewichte, mittlere bis tiefe Wiederholungszahlen) Intervallläufe und Grundlagenausdauer, Regenerationsphasen gezielt einbauen.\n\nZiele On-Snow: Technik in versch. Gelände und Kurssetzungen anwenden.\n\nInhalt On-Snow: Vermehrt Variation in die Kurssetzung bringen, damit das Erworbene nun angewendet werden kann. Das Schulefahren ist ein zentraler Bestandteil des Trainings, vor allem im Ein- und Ausfahren.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele Off-Snow: Aufbau von Schnelligkeit, Schnell-und Explosivkraft. Umsetzen der Grundlagenausdauer in intensiven Intervallformen, Balance zwischen Erholung und Belastung.\n\nInhalt Off-Snow: Sprintformen, Plyometrie (Sprungformen, tiefe Wiederholungszahl), Kraftaufbau (hohe Gewichte, mittlere bis tiefe Wiederholungszahlen) Intervallläufe und Grundlagenausdauer, Regenerationsphasen gezielt einbauen.\n\nZiele On-Snow: Technik in versch. Gelände und Kurssetzungen anwenden.\n\nInhalt On-Snow: Vermehrt Variation in die Kurssetzung bringen, damit das Erworbene nun angewendet werden kann. Das Schulefahren ist ein zentraler Bestandteil des Trainings, vor allem im Ein- und Ausfahren.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -428,6 +470,12 @@
       {
        "v": "Ziele Off-Snow: Erhaltung der Schnell- und Explosivkraft. Nutzung des Schneetrainings zur koordinativen Umsetzung der konditionellen Fähigkeiten. Gesund und mental stark bleiben.\n\nInhalt Off-Snow: Schneetraining mit hohem Umfang an Trainingsläufen. Wettkampf-Simulationen. Fokus auf Coolness und Präzision. Grundlagenausdauer zurRegeneration. Erhaltungstraining im Krafttraining.\n\nZiele On-Snow: Rennläufe simulieren, taktische Massnahmen präzisieren.\n\nInhalt On-Snow: Rennläufe simulieren mit Zeitmessung, Vollkombi, umstecken.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele Off-Snow: Erhaltung der Schnell- und Explosivkraft. Nutzung des Schneetrainings zur koordinativen Umsetzung der konditionellen Fähigkeiten. Gesund und mental stark bleiben.\n\nInhalt Off-Snow: Schneetraining mit hohem Umfang an Trainingsläufen. Wettkampf-Simulationen. Fokus auf Coolness und Präzision. Grundlagenausdauer zurRegeneration. Erhaltungstraining im Krafttraining.\n\nZiele On-Snow: Rennläufe simulieren, taktische Massnahmen präzisieren.\n\nInhalt On-Snow: Rennläufe simulieren mit Zeitmessung, Vollkombi, umstecken.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -451,6 +499,12 @@
       {
        "v": "Ziele Off-Snow: Wettkämpfe steuern das Training. Priorisierung der Wettkämpfe (wichtig, mittel, unwichtig). Trainingsblöcke mit Blick auf die Erholung einplanen, Kraft- und Schnelligkeitstraining beibehalten, Erholung und Belastung ausbalancieren.\n\nInhalt Off-Snow: Gezielte Wettkampfvorbereitung. Kraft- und Schnelligkeitstraining. Klare Regenerationsphasen.\n\nZiele On-Snow: Einfahren bei Wettkämpfen nützen, für technische Stabiliät. Performen bei Wettkämpfen.\n\nInhalt On-Snow: Gezielt trainieren auf dem Schnee, zwischen dem Wettkämpfen, Mut haben für Pause, Mut haben fürs trainieren.",
        "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele Off-Snow: Wettkämpfe steuern das Training. Priorisierung der Wettkämpfe (wichtig, mittel, unwichtig). Trainingsblöcke mit Blick auf die Erholung einplanen, Kraft- und Schnelligkeitstraining beibehalten, Erholung und Belastung ausbalancieren.\n\nInhalt Off-Snow: Gezielte Wettkampfvorbereitung. Kraft- und Schnelligkeitstraining. Klare Regenerationsphasen.\n\nZiele On-Snow: Einfahren bei Wettkämpfen nützen, für technische Stabiliät. Performen bei Wettkämpfen.\n\nInhalt On-Snow: Gezielt trainieren auf dem Schnee, zwischen dem Wettkämpfen, Mut haben für Pause, Mut haben fürs trainieren.",
+       "from": 7,
        "to": 7,
        "l": []
       },
@@ -510,6 +564,12 @@
       {
        "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -539,6 +599,12 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -568,6 +634,12 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -615,6 +687,12 @@
       {
        "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -654,6 +732,17 @@
       {
        "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung T1-M",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
+      },
+      {
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -718,6 +807,12 @@
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1051,6 +1146,12 @@
       {
        "v": "ST: Physio Check Elite",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "ST: Physio Check Elite",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1117,6 +1218,17 @@
       {
        "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Inhalt E-M",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/3q3YiY5n"
+        }
+       ]
+      },
+      {
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1565,6 +1677,12 @@
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1638,6 +1756,12 @@
       {
        "v": "Gestalten und Ergänzen der Racing Basic 1 - 5:\nDynamische Grundposition, Unabhängige Beuge- und Steckbewegung der Beine, Stabiler Oberkörper, Hauptbelastung auf dem Aussenski, Kontinuierlicher Belastungsaufbau durch Bewegungsfluss\n\nFokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\nTechniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Gestalten und Ergänzen der Racing Basic 1 - 5:\nDynamische Grundposition, Unabhängige Beuge- und Steckbewegung der Beine, Stabiler Oberkörper, Hauptbelastung auf dem Aussenski, Kontinuierlicher Belastungsaufbau durch Bewegungsfluss\n\nFokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\nTechniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1863,6 +1987,36 @@
       {
        "v": "Trainingsmethoden:\nRepetition bis zur Automatisierung.\nOver Coaching vermeiden\nSpezifische Pistenpräparation (vermehrt auf gewässerten Pisten)\n\nKurssetzung:\nBlocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\nZeitlicher Aspekt: von Tor zu Tor +/- 0.9 Sek.\n\nGelände:\nUnterschiedliches Gelände mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nMinikipp, SL-Stangen (30mm),Bäseli, Zeitmessung und Video gezielt einsetzen",
        "from": 5,
+       "to": 6,
+       "l": [
+        {
+         "text": "Kurssetzung",
+         "href": "https://snowsports.flink.host/s/wloXwc9S/"
+        },
+        {
+         "text": "Pistenpräparation",
+         "href": "https://snowsports.flink.host/s/QEAsgJ7F/"
+        }
+       ]
+      },
+      {
+       "v": "Trainingsmethoden:\nRepetition bis zur Automatisierung.\nOver Coaching vermeiden\nSpezifische Pistenpräparation (vermehrt auf gewässerten Pisten)\n\nKurssetzung:\nBlocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\nZeitlicher Aspekt: von Tor zu Tor +/- 0.9 Sek.\n\nGelände:\nUnterschiedliches Gelände mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nMinikipp, SL-Stangen (30mm),Bäseli, Zeitmessung und Video gezielt einsetzen",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Kurssetzung",
+         "href": "https://snowsports.flink.host/s/wloXwc9S/"
+        },
+        {
+         "text": "Pistenpräparation",
+         "href": "https://snowsports.flink.host/s/QEAsgJ7F/"
+        }
+       ]
+      },
+      {
+       "v": "Trainingsmethoden:\nRepetition bis zur Automatisierung.\nOver Coaching vermeiden\nSpezifische Pistenpräparation (vermehrt auf gewässerten Pisten)\n\nKurssetzung:\nBlocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\nZeitlicher Aspekt: von Tor zu Tor +/- 0.9 Sek.\n\nGelände:\nUnterschiedliches Gelände mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nMinikipp, SL-Stangen (30mm),Bäseli, Zeitmessung und Video gezielt einsetzen",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1948,6 +2102,21 @@
       {
        "v": "Individuell, Präzise, Verfeinern, Automatisieren\n• Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten\n• Gelenksachsen bis zur \"Rise Line\" neutral",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Technikabgleich Riesenslalom",
+         "href": "https://snowsports.flink.host/s/E1jCrd2Y"
+        },
+        {
+         "text": "Rise-Line",
+         "href": "https://snowsports.flink.host/s/vpXgUvr9"
+        }
+       ]
+      },
+      {
+       "v": "Individuell, Präzise, Verfeinern, Automatisieren\n• Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten\n• Gelenksachsen bis zur \"Rise Line\" neutral",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -2145,6 +2314,17 @@
       {
        "v": "Individuell, Präzise, Verfeinern, Automatisieren\n• Aerodynamik: kompakte und aerodynamische Position fördern\n• Sprung: kompakter und stabiler Sprung mit möglichst kurzer Flugphase\n• Start: Beschleunigung durch Stockstösse und koordinierte Schlittschuhschritte",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Technikabgleich Speed",
+         "href": "https://snowsports.flink.host/s/qqEgGYt9"
+        }
+       ]
+      },
+      {
+       "v": "Individuell, Präzise, Verfeinern, Automatisieren\n• Aerodynamik: kompakte und aerodynamische Position fördern\n• Sprung: kompakter und stabiler Sprung mit möglichst kurzer Flugphase\n• Start: Beschleunigung durch Stockstösse und koordinierte Schlittschuhschritte",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -2239,6 +2419,21 @@
       {
        "v": "Trainingsmethoden:\nSicherheit!\nElementtraining (z.B. Sprungtraining im Park,  Negativkurven,  Steilwandkurve,  Gleiten,  Wellen/Mulden, ...).\nGezieltes und Datenbasiertes Coaching\nOffizielle Trainings vor den Rennen nützen\nSG im Training simulieren (erster Lauf zählt).\nSituativ bestmögliche Trainingsbedingungen sind erstrebenswert (falls nicht möglich müssen die Verhältnisse oder die Sicht stimmen um Sicherheit zu gewährleisten).\n\nKurssetzung:\nSicher- und Geländeangepasst\nVariationen einbringen\nMehrfachtore (2er,-3er, 4-er Tore)\n\nGelände:\nAusreichend gesichertes unterschiedliches Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Start-Material, GPS, Volllkombi",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Sicherheit im Schneetraining",
+         "href": "https://snowsports.flink.host/s/lhCLL3AR/"
+        },
+        {
+         "text": "Kurssetzung",
+         "href": "https://snowsports.flink.host/s/v690qhwB/"
+        }
+       ]
+      },
+      {
+       "v": "Trainingsmethoden:\nSicherheit!\nElementtraining (z.B. Sprungtraining im Park,  Negativkurven,  Steilwandkurve,  Gleiten,  Wellen/Mulden, ...).\nGezieltes und Datenbasiertes Coaching\nOffizielle Trainings vor den Rennen nützen\nSG im Training simulieren (erster Lauf zählt).\nSituativ bestmögliche Trainingsbedingungen sind erstrebenswert (falls nicht möglich müssen die Verhältnisse oder die Sicht stimmen um Sicherheit zu gewährleisten).\n\nKurssetzung:\nSicher- und Geländeangepasst\nVariationen einbringen\nMehrfachtore (2er,-3er, 4-er Tore)\n\nGelände:\nAusreichend gesichertes unterschiedliches Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Start-Material, GPS, Volllkombi",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -2301,6 +2496,12 @@
       {
        "v": "Basic Material:\n• Turnschuhe Indoor\n• Gewichtheberschuhe\n• Turnschuhe Outdoor\n• Helm\n• Inlineskates\n• Mountainbike (Schuhe/Klick)\n• Rennfahrrad (Schuhe/Klick)\n• Schlittschuhe\n• Pulsuhr",
        "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Basic Material:\n• Turnschuhe Indoor\n• Gewichtheberschuhe\n• Turnschuhe Outdoor\n• Helm\n• Inlineskates\n• Mountainbike (Schuhe/Klick)\n• Rennfahrrad (Schuhe/Klick)\n• Schlittschuhe\n• Pulsuhr",
+       "from": 7,
        "to": 8,
        "l": []
       },
@@ -2354,6 +2555,12 @@
       {
        "v": "Je nach Spezialisierung",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Je nach Spezialisierung",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2432,6 +2639,12 @@
       {
        "v": "Je nach Spezialisierung",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Je nach Spezialisierung",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2510,6 +2723,12 @@
       {
        "v": "Je nach Spezialisierung",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Je nach Spezialisierung",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2811,6 +3030,18 @@
       {
        "v": "SL, RS, SG, DH",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "SL, RS, SG, DH",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SL, RS, SG, DH",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2864,6 +3095,12 @@
       {
        "v": "je nach Spezialisierung",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "je nach Spezialisierung",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -3005,6 +3242,21 @@
       {
        "v": "gemäss Swiss-Ski",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Swiss-Ski (Frauen)",
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/ski-alpin/PDF/downloads/selektionsrichtlinien/DE/Ski_Alpin_Frauen_Selektionsrichtlinien__2026-2027_DE_final.pdf"
+        },
+        {
+         "text": "Swiss-Ski (Männer)",
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/ski-alpin/PDF/downloads/selektionsrichtlinien/DE/Ski_Alpin_Maenner_Selektionsrichtlinien__2026-2027_DE_final.pdf"
+        }
+       ]
+      },
+      {
+       "v": "gemäss Swiss-Ski",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -3049,6 +3301,12 @@
       {
        "v": "Umfeldmanager Swiss-Ski\nLaufbahnberatung Swiss Olympic\nBerufsinformationszentren BIZ",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Umfeldmanager Swiss-Ski\nLaufbahnberatung Swiss Olympic\nBerufsinformationszentren BIZ",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -3090,6 +3348,12 @@
       {
        "v": "• Familie\n• Trainer:innern & Trainingsgruppe\n• Sportlich-berufliches Umfeld\n• Swiss-Ski",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Familie\n• Trainer:innern & Trainingsgruppe\n• Sportlich-berufliches Umfeld\n• Swiss-Ski",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -3182,6 +3446,25 @@
       {
        "v": "• Spitzensportförd. der Armee (WK /Zeitmilitär)\n• Schweizer Sporthilfe\n• Kantonale Fördergelder\n• Sponsoren- & Werbeverträge\n• Einkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\n• Sportartspez. &/oder lokale Stiftungen\n• Ausrüster",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Strukturen und Förderungen",
+         "href": "https://www.swissolympic.ch/athleten-trainer/eltern-erziehungsberechtigte/strukturen-foerderung"
+        },
+        {
+         "text": "Ökonomische Ebene",
+         "href": "https://www.swiss-ski.ch/umfeldmanagement/oekonomische-ebene/"
+        },
+        {
+         "text": "Crowdfoundings",
+         "href": "https://www.lokalhelden.ch/blog/crowdfunding-schweiz~ba83.html"
+        }
+       ]
+      },
+      {
+       "v": "• Spitzensportförd. der Armee (WK /Zeitmilitär)\n• Schweizer Sporthilfe\n• Kantonale Fördergelder\n• Sponsoren- & Werbeverträge\n• Einkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\n• Sportartspez. &/oder lokale Stiftungen\n• Ausrüster",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -3236,6 +3519,12 @@
       {
        "v": "3 Hochschultypen mit Bachelor- & Masterstudiengänge (mit Fernlösungen)\n• Fachhochschulen FH\n• Pädagogische Hochschulen PH\n• Universitäre Hochschulen",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "3 Hochschultypen mit Bachelor- & Masterstudiengänge (mit Fernlösungen)\n• Fachhochschulen FH\n• Pädagogische Hochschulen PH\n• Universitäre Hochschulen",
+       "from": 9,
        "to": 9,
        "l": []
       }

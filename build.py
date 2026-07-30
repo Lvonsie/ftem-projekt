@@ -161,7 +161,7 @@ def theme_html(t, idx, stages, prefix, lang, ages):
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(stages):
         age = ages.get(s,"")
-        th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="'+esc(tr("Spalte hervorheben", lang))+'"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
+        th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="'+esc(tr("Spalte hervorheben", lang))+'"><span class="st">'+FULL[s]+'</span>'+('<span class="stf">'+age+'</span>' if age else '')+'</div>'
     th += '</div>'
     body = ""
     for r in t["rows"]:
@@ -548,7 +548,9 @@ details[open] summary .tt::before{transform:rotate(45deg)}
 .cell.hl-talent{background:var(--talent-bg)}
 .cell.hl-elite{background:var(--elite-bg)}
 .cell.hl-mastery{background:var(--mast-bg)}
-.ph-foundation{background:var(--found);color:#fff}.ph-talent{background:var(--talent);color:#3b2e00}.ph-elite{background:var(--elite);color:#fff}.ph-mastery{background:var(--mast);color:#fff}
+/* Phasenfarben NUR fuer die Stufen-Koepfe - Inhaltszellen behalten dunkle Schrift */
+.c.hd.ph-foundation{background:var(--found);color:#fff}.c.hd.ph-talent{background:var(--talent);color:#3b2e00}.c.hd.ph-elite{background:var(--elite);color:#fff}.c.hd.ph-mastery{background:var(--mast);color:#fff}
+.cell{color:var(--ink)}
 .cell{background:#fff;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;align-self:start}
 .cell .cwrap{padding:8px 10px;font-size:11.5px;max-height:210px;overflow:hidden;transition:max-height .25s ease}
 .cell.clamped .cwrap,.cell.expanded .cwrap{padding-bottom:34px}

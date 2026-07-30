@@ -59,15 +59,16 @@ def sport_prio(title):
         t == "Psyche",
         t == "Ausdauer",
         t.startswith("Mobilität"),
-        t.startswith("Koordination"),          # Skispringen/NoKo: zwischen Mobilität und Kraft
         t.startswith("Kraft"),
         t.replace("&", "und").startswith("Schnelligkeit und Agilität"),
         t == "Schnelligkeit",
-        t == "Schiessen",                      # Biathlon: vor Technik & Taktik Übergeordnet
+        t.startswith("Koordination"),          # Skispringen/NoKo: nach Schnelligkeit
         t == "Technik & Taktik Übergeordnet",
     ]
     for i, hit in enumerate(tests):
         if hit: return i
+    if t == "Schiessen":                       # Biathlon: nach den Technik-Bloecken
+        return len(tests) + 1
     return len(tests)
 
 # Einheitliche Reihenfolge in "Strukturen & Umfeld"
@@ -116,10 +117,14 @@ def convert(xlsx_path, sport_id):
             txt = re.sub(r'[ \t]+\n', '\n', txt)
             txt = re.sub(r'\n{3,}', '\n\n', txt).strip()
             parsed.append((txt, links))
-        # Segmente: benachbarte identische Zellen (Text UND Links) zusammenfassen
+        # Segmente: benachbarte identische Zellen (Text UND Links) zusammenfassen,
+        # aber NUR innerhalb derselben Phase (F, T, E, M) - nie phasenuebergreifend.
+        def phase_of(i):
+            return "F" if i < 3 else "T" if i < 7 else "E" if i < 9 else "M"
         segs = []
         for i, (v, links) in enumerate(parsed):
-            if segs and segs[-1]["v"] == v and segs[-1]["l"] == links:
+            if (segs and segs[-1]["v"] == v and segs[-1]["l"] == links
+                    and phase_of(segs[-1]["from"]) == phase_of(i)):
                 segs[-1]["to"] = i
             else:
                 segs.append({"v": v, "from": i, "to": i, "l": links})

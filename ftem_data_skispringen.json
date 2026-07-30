@@ -117,6 +117,18 @@
       {
        "v": "ca.550-650 Sprünge/Jahr\n(Mittel 600 Sprünge)",
        "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "ca.550-650 Sprünge/Jahr\n(Mittel 600 Sprünge)",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "ca.550-650 Sprünge/Jahr\n(Mittel 600 Sprünge)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -152,6 +164,18 @@
       {
        "v": "Sommerschanze:\ndurchschnittlich 18 Sprünge/Woche",
        "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Sommerschanze:\ndurchschnittlich 18 Sprünge/Woche",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Sommerschanze:\ndurchschnittlich 18 Sprünge/Woche",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -187,6 +211,18 @@
       {
        "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -204,12 +240,30 @@
       {
        "v": "Winterschanze:\nduchschnittlich 6 Sprünge/Woche",
        "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Winterschanze:\nduchschnittlich 6 Sprünge/Woche",
+       "from": 3,
        "to": 3,
        "l": []
       },
       {
        "v": "Winterschanze:\nduchschnittlich 10 Sprünge/Woche",
        "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Winterschanze:\nduchschnittlich 10 Sprünge/Woche",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Winterschanze:\nduchschnittlich 10 Sprünge/Woche",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -245,6 +299,18 @@
       {
        "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -292,6 +358,12 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -327,6 +399,12 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -362,6 +440,12 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -397,6 +481,12 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -444,6 +534,12 @@
       {
        "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -488,6 +584,17 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Ernährung",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708"
+        }
+       ]
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -537,6 +644,17 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Ernährung",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6d8912098c4a807f708"
+        }
+       ]
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -589,6 +707,12 @@
       {
        "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -633,6 +757,17 @@
       {
        "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Gedankenstopp fördern Erholung und mentale Ruhe.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Schlaf",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee5b97a3a51328a001678"
+        }
+       ]
+      },
+      {
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Gedankenstopp fördern Erholung und mentale Ruhe.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -697,6 +832,12 @@
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -860,6 +1001,17 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills Checks E-M",
+         "href": "https://snowsports.flink.host/s/3f4JohmR/bPwWjqWP"
+        }
+       ]
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -928,6 +1080,21 @@
       {
        "v": "Vorbereitungsphase 1\n• Grundlagenausdauer (aerobe Basis)\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Grundlagenausdauer (als Regeneration)\n\nWettkampfphase\n• Regenerative Grundlagenausdauer (low impact)",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Ausdauer E1-2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/Hyivkm8p"
+        },
+        {
+         "text": "Ausdauer M",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/yGIhGyB5"
+        }
+       ]
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Grundlagenausdauer (aerobe Basis)\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Grundlagenausdauer (als Regeneration)\n\nWettkampfphase\n• Regenerative Grundlagenausdauer (low impact)",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -998,6 +1165,12 @@
       {
        "v": "LT: Physio Check Elite",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "LT: Physio Check Elite",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1084,6 +1257,21 @@
       {
        "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Mobilität E-M",
+         "href": "https://snowsports.flink.host/s/P0EFjjys/3q3YiY5n"
+        },
+        {
+         "text": "Regenerationsmassnahmen",
+         "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362"
+        }
+       ]
+      },
+      {
+       "v": "Dynamische Übungen\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Als Tagesroutine vor und nach der Belastung oder als Trainingseinheit (Warm-Up, Cool-Down, Yoga)\n\nStatische Übungen\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Als Tagesroutine nach der Belastung oder als Trainingseinheit (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Als Tagesroutine zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe\n• Vor dynamischen oder statischen Übungen",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1095,87 +1283,6 @@
          "href": "https://snowsports.flink.host/s/nR9dtHwz/iframe/6a0ee6e16f13d4fa52091362"
         }
        ]
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "title": "Koordination und Imitation",
-   "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Skills-Checks (SC) und Leistungstests (LT) Imitation",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Inline-Sprünge\n\nLT: PISTE",
-       "from": 2,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "SC 1: Imitation fahrend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
-       "from": 4,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Inhalt Imitation",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Sommer\n• Inlineskate Training\n• Turnen\n• Turmspringen\n• Hindernisparcour\n• Koordinationsleiter (Laufschule)\n• Skisprungspezifisches Koordinationstraining\n\nWinter\n• Koordinationstraining auf Schnee und Eis (Langlauf-, Miniski und Schlittschuhe)\n• Turnen\n• Parcour\n• Skisprungspezifisches Koordinationstraining",
-       "from": 2,
-       "to": 2,
-       "l": [
-        {
-         "text": "Off-Snow Training für Kinder",
-         "href": "https://tool.jugendundsport.ch/modules/62c823b3c6518902c538f9a2?lang=de"
-        }
-       ]
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• Polysportive Koordination (Inlineskate, Turnen, ...)\n• Sensomotorisches Training (instabile Unterlagen)\n• Laufschule\n\nVorbereitungsphase 2\n• Skisprungspezifisches Koordinationstraining\n• Gleichgewichtstraining\n• Variables Imitationstraining\n\nVorwettkampfphase\n• Viele Imitationssprünge\n• Sensomotorisches Training (Körperwahrnehmung)\n• Allgemeines Koordinationstraining\n• Spezifisches Imitationstraining\n\nWettkampfphase\n• Allgemeines Koordinationstraining\n• Spezifisches Imitationstraining",
-       "from": 3,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• Polysportive Koordination (Inlineskate, Turnen, ...)\n• Sensomotorisches Krafttraining (extensiv)\n• Laufschule\n• Neuroathletik\n\nVorbereitungsphase 2\n• Skisprungspezifisches Koordinationstraining\n• Gleichgewichtstraining\n• Variables Imitationstraining\n\nVorwettkampfphase\n• Viele Imitationssprünge\n• Sensomotorisches Krafttraining (intensiv)\n• Allgemeines Koordinationstraining\n• Spezifisches Imitationstraining\n\nWettkampfphase\n• Spezifisches Imitationstraining",
-       "from": 5,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "• Neuroathletik",
-       "from": 7,
-       "to": 9,
-       "l": []
       }
      ]
     }
@@ -1235,6 +1342,17 @@
       {
        "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nLT: MLD",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills Check E-M",
+         "href": "https://snowsports.flink.host/s/LsMmpzBh/WECse1oE"
+        }
+       ]
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nLT: MLD",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1314,6 +1432,12 @@
       {
        "v": "Individuell",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Individuell",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1375,6 +1499,17 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills Check E-M",
+         "href": "https://snowsports.flink.host/s/TJgyYvT0/uKVSmTv5"
+        }
+       ]
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1452,6 +1587,105 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Koordination und Imitation",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) und Leistungstests (LT) Imitation",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Inline-Sprünge\n\nLT: PISTE",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "SC 1: Imitation fahrend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
+       "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Imitation",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Sommer\n• Inlineskate Training\n• Turnen\n• Turmspringen\n• Hindernisparcour\n• Koordinationsleiter (Laufschule)\n• Skisprungspezifisches Koordinationstraining\n\nWinter\n• Koordinationstraining auf Schnee und Eis (Langlauf-, Miniski und Schlittschuhe)\n• Turnen\n• Parcour\n• Skisprungspezifisches Koordinationstraining",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "Off-Snow Training für Kinder",
+         "href": "https://tool.jugendundsport.ch/modules/62c823b3c6518902c538f9a2?lang=de"
+        }
+       ]
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Polysportive Koordination (Inlineskate, Turnen, ...)\n• Sensomotorisches Training (instabile Unterlagen)\n• Laufschule\n\nVorbereitungsphase 2\n• Skisprungspezifisches Koordinationstraining\n• Gleichgewichtstraining\n• Variables Imitationstraining\n\nVorwettkampfphase\n• Viele Imitationssprünge\n• Sensomotorisches Training (Körperwahrnehmung)\n• Allgemeines Koordinationstraining\n• Spezifisches Imitationstraining\n\nWettkampfphase\n• Allgemeines Koordinationstraining\n• Spezifisches Imitationstraining",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Polysportive Koordination (Inlineskate, Turnen, ...)\n• Sensomotorisches Krafttraining (extensiv)\n• Laufschule\n• Neuroathletik\n\nVorbereitungsphase 2\n• Skisprungspezifisches Koordinationstraining\n• Gleichgewichtstraining\n• Variables Imitationstraining\n\nVorwettkampfphase\n• Viele Imitationssprünge\n• Sensomotorisches Krafttraining (intensiv)\n• Allgemeines Koordinationstraining\n• Spezifisches Imitationstraining\n\nWettkampfphase\n• Spezifisches Imitationstraining",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• Neuroathletik",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Neuroathletik",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1469,6 +1703,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1536,6 +1788,12 @@
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1663,6 +1921,18 @@
       {
        "v": "Basic Material:\n• Turnschuhe Indoor\n• Turnschuhe Outdoor\n• Helm\n• Inlineskates\n• Miniband\n• Resistance Band\n• Foamroller\n\nOptional:\n• Rollwagen\n• Massage Pistole\n• Pulsuhr (Garmin, Suunto)",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Basic Material:\n• Turnschuhe Indoor\n• Turnschuhe Outdoor\n• Helm\n• Inlineskates\n• Miniband\n• Resistance Band\n• Foamroller\n\nOptional:\n• Rollwagen\n• Massage Pistole\n• Pulsuhr (Garmin, Suunto)",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Basic Material:\n• Turnschuhe Indoor\n• Turnschuhe Outdoor\n• Helm\n• Inlineskates\n• Miniband\n• Resistance Band\n• Foamroller\n\nOptional:\n• Rollwagen\n• Massage Pistole\n• Pulsuhr (Garmin, Suunto)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1692,6 +1962,18 @@
       {
        "v": "Persönliches Material:\n• Helm (FIS Zertifiziert) mit passender Skibrille\n• Handschuhe\n• Unterkombi\n• Schuheinlagen\n\nNLZ/Swiss-Ski Material:\n• Ski\n• Sprungschuhe\n• Anzug\n• Keil\n• Bindung\n\n(individuelle Materialabstimmung)",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Persönliches Material:\n• Helm (FIS Zertifiziert) mit passender Skibrille\n• Handschuhe\n• Unterkombi\n• Schuheinlagen\n\nNLZ/Swiss-Ski Material:\n• Ski\n• Sprungschuhe\n• Anzug\n• Keil\n• Bindung\n\n(individuelle Materialabstimmung)",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Persönliches Material:\n• Helm (FIS Zertifiziert) mit passender Skibrille\n• Handschuhe\n• Unterkombi\n• Schuheinlagen\n\nNLZ/Swiss-Ski Material:\n• Ski\n• Sprungschuhe\n• Anzug\n• Keil\n• Bindung\n\n(individuelle Materialabstimmung)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1935,6 +2217,12 @@
       {
        "v": "• World Cup\n• WM\n• Skiflug WM\n• Olympische Spiele",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• World Cup\n• WM\n• Skiflug WM\n• Olympische Spiele",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1988,6 +2276,12 @@
       {
        "v": "40 bis 52",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "40 bis 52",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2028,6 +2322,28 @@
       {
        "v": "gemäss Swiss-Ski",
        "from": 6,
+       "to": 6,
+       "l": [
+        {
+         "text": "Swiss-Ski 2026/27",
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/skijumping/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Skisprung_Kader_2026-27_DE.pdf"
+        }
+       ]
+      },
+      {
+       "v": "gemäss Swiss-Ski",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Swiss-Ski 2026/27",
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/skijumping/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Skisprung_Kader_2026-27_DE.pdf"
+        }
+       ]
+      },
+      {
+       "v": "gemäss Swiss-Ski",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -2079,6 +2395,17 @@
       {
        "v": "• Umfeldmanager Swiss-Ski\n• Laufbahnberatung Swiss Olympic\n• Berufsinformationszentren BIZ",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Schule, Ausbildung & Beruf",
+         "href": "https://www.swissolympic.ch/athleten-trainer/beruf-karriere"
+        }
+       ]
+      },
+      {
+       "v": "• Umfeldmanager Swiss-Ski\n• Laufbahnberatung Swiss Olympic\n• Berufsinformationszentren BIZ",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -2131,6 +2458,12 @@
       {
        "v": "• Familie/Partner:in\n• Trainer:innern und Trainingsgruppe\n• Sportlich-berufliches Umfeld\n• Swiss-Ski",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Familie/Partner:in\n• Trainer:innern und Trainingsgruppe\n• Sportlich-berufliches Umfeld\n• Swiss-Ski",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2182,6 +2515,12 @@
       {
        "v": "• Spitzensportförd. der Armee (WK /Zeitmilitär)\n• Schweizer Sporthilfe\n• Kantonale Fördergelder\n• Sponsoren- und Werbeverträge\n• Einkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\n• Sportartspez. und/oder lokale Stiftungen\n• Ausrüster",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Spitzensportförd. der Armee (WK /Zeitmilitär)\n• Schweizer Sporthilfe\n• Kantonale Fördergelder\n• Sponsoren- und Werbeverträge\n• Einkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\n• Sportartspez. und/oder lokale Stiftungen\n• Ausrüster",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2228,6 +2567,17 @@
       {
        "v": "3 Hochschultypen mit Bachelor- und Masterstudiengänge (mit Fernlösungen)\n• Fachhochschulen FH\n• Pädagogische Hochschulen PH\n• Universitäre Hochschulen",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Studium & Leistungssport",
+         "href": "https://www.swissolympic.ch/athleten-trainer/beruf-karriere/studium"
+        }
+       ]
+      },
+      {
+       "v": "3 Hochschultypen mit Bachelor- und Masterstudiengänge (mit Fernlösungen)\n• Fachhochschulen FH\n• Pädagogische Hochschulen PH\n• Universitäre Hochschulen",
+       "from": 9,
        "to": 9,
        "l": [
         {

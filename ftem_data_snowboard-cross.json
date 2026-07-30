@@ -93,6 +93,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -146,6 +164,12 @@
       {
        "v": "35-45 Tage",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "35-45 Tage",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -199,6 +223,12 @@
       {
        "v": "ca. 365 - 435h (Mittel 400h (=13h/Woche))",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "ca. 365 - 435h (Mittel 400h (=13h/Woche))",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -240,6 +270,12 @@
       {
        "v": "75-90 Tage",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "75-90 Tage",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -281,6 +317,12 @@
       {
        "v": "7-10h / Woche",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "7-10h / Woche",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -304,6 +346,18 @@
       {
        "v": "Ziele: Muskulatur stark und widerstandsfähig machen. Langhanteltechnik verbessern. Aufbau einer guten aeroben Grundlage. Koordinative Fähigkeiten fördern. Variation von Trainingsmethoden.\n\nInhalt: Kraftausdauer (leichte Gewichte, hohe Wiederholungszahl), Muskelaufbau (moderate Gewichte, ca. zehn Wiederholungen), gegen Ende dieser Phase Maximalkrafttraining. Plyometrie (hohe Wiederholungszahl). Lange, lockere Ausdauereinheiten (Fahrrad, Laufen, Inline). Abwechslungsreiches Training mit Fokus auf Koordination, Kraft und Ausdauer.",
        "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele: Muskulatur stark und widerstandsfähig machen. Langhanteltechnik verbessern. Aufbau einer guten aeroben Grundlage. Koordinative Fähigkeiten fördern. Variation von Trainingsmethoden.\n\nInhalt: Kraftausdauer (leichte Gewichte, hohe Wiederholungszahl), Muskelaufbau (moderate Gewichte, ca. zehn Wiederholungen), gegen Ende dieser Phase Maximalkrafttraining. Plyometrie (hohe Wiederholungszahl). Lange, lockere Ausdauereinheiten (Fahrrad, Laufen, Inline). Abwechslungsreiches Training mit Fokus auf Koordination, Kraft und Ausdauer.",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele: Muskulatur stark und widerstandsfähig machen. Langhanteltechnik verbessern. Aufbau einer guten aeroben Grundlage. Koordinative Fähigkeiten fördern. Variation von Trainingsmethoden.\n\nInhalt: Kraftausdauer (leichte Gewichte, hohe Wiederholungszahl), Muskelaufbau (moderate Gewichte, ca. zehn Wiederholungen), gegen Ende dieser Phase Maximalkrafttraining. Plyometrie (hohe Wiederholungszahl). Lange, lockere Ausdauereinheiten (Fahrrad, Laufen, Inline). Abwechslungsreiches Training mit Fokus auf Koordination, Kraft und Ausdauer.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -327,6 +381,18 @@
       {
        "v": "Ziele: Aufbau von Schnelligkeit, Schnell-und Explosivkraft. Umsetzen der Grundlagenausdauer in intensiven Intervallformen, Balance zwischen Erholung und Belastung.\n\nInhalt: Sprintformen, Plyometrie (Sprungformen, tiefe Wiederholungszahl), Kraftaufbau (hohe Gewichte, mittlere bis tiefe Wiederholungszahlen) Intervallläufe und Grundlagenausdauer,   Regenerationsphasen gezielt einbauen",
        "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele: Aufbau von Schnelligkeit, Schnell-und Explosivkraft. Umsetzen der Grundlagenausdauer in intensiven Intervallformen, Balance zwischen Erholung und Belastung.\n\nInhalt: Sprintformen, Plyometrie (Sprungformen, tiefe Wiederholungszahl), Kraftaufbau (hohe Gewichte, mittlere bis tiefe Wiederholungszahlen) Intervallläufe und Grundlagenausdauer,   Regenerationsphasen gezielt einbauen",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele: Aufbau von Schnelligkeit, Schnell-und Explosivkraft. Umsetzen der Grundlagenausdauer in intensiven Intervallformen, Balance zwischen Erholung und Belastung.\n\nInhalt: Sprintformen, Plyometrie (Sprungformen, tiefe Wiederholungszahl), Kraftaufbau (hohe Gewichte, mittlere bis tiefe Wiederholungszahlen) Intervallläufe und Grundlagenausdauer,   Regenerationsphasen gezielt einbauen",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -344,6 +410,18 @@
       {
        "v": "Ziele: Erhaltung der Schnell- und Explosivkraft. Nutzung des Schneetrainings zum koordinativen Umsetzung der konditionellen Fähigkeiten. Gesund und mental stark bleiben.\n\nInhalt: Schneetraining mit hohem Umfang an Trainingsläufen. Wettkampf-Simulationen. Fokus auf Coolness und Präzision. Grundlagenausdauer zurRegeneration. Erhaltungstraining im Krafttraining.",
        "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele: Erhaltung der Schnell- und Explosivkraft. Nutzung des Schneetrainings zum koordinativen Umsetzung der konditionellen Fähigkeiten. Gesund und mental stark bleiben.\n\nInhalt: Schneetraining mit hohem Umfang an Trainingsläufen. Wettkampf-Simulationen. Fokus auf Coolness und Präzision. Grundlagenausdauer zurRegeneration. Erhaltungstraining im Krafttraining.",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele: Erhaltung der Schnell- und Explosivkraft. Nutzung des Schneetrainings zum koordinativen Umsetzung der konditionellen Fähigkeiten. Gesund und mental stark bleiben.\n\nInhalt: Schneetraining mit hohem Umfang an Trainingsläufen. Wettkampf-Simulationen. Fokus auf Coolness und Präzision. Grundlagenausdauer zurRegeneration. Erhaltungstraining im Krafttraining.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -361,6 +439,18 @@
       {
        "v": "Ziele: Wettkämpfe steuern das Training. Priorisierung der Wettkämpfe (wichtig, mittel, unwichtig). Trainingsblöcke mit Blick auf die Erholung einplanen, Kraft- und Schnelligkeitstraining beibehalten, Erholung und Belastung ausbalancieren.\n\nInhalt: Gezielte Wettkampfvorbereitung. Kraft- und Schnelligkeitstraining. Klare Regenerationsphasen.",
        "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele: Wettkämpfe steuern das Training. Priorisierung der Wettkämpfe (wichtig, mittel, unwichtig). Trainingsblöcke mit Blick auf die Erholung einplanen, Kraft- und Schnelligkeitstraining beibehalten, Erholung und Belastung ausbalancieren.\n\nInhalt: Gezielte Wettkampfvorbereitung. Kraft- und Schnelligkeitstraining. Klare Regenerationsphasen.",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele: Wettkämpfe steuern das Training. Priorisierung der Wettkämpfe (wichtig, mittel, unwichtig). Trainingsblöcke mit Blick auf die Erholung einplanen, Kraft- und Schnelligkeitstraining beibehalten, Erholung und Belastung ausbalancieren.\n\nInhalt: Gezielte Wettkampfvorbereitung. Kraft- und Schnelligkeitstraining. Klare Regenerationsphasen.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -408,6 +498,12 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -437,6 +533,12 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -466,6 +568,12 @@
       {
        "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Optimierung und Individualisierung\nFortgeschrittenes Wissen über Mikronährstoffe (Vitamine, Mineralstoffe) und deren Rolle für die Leistung.",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -513,6 +621,12 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -552,6 +666,17 @@
       {
        "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Gesundheit & Entwicklung",
+         "href": "https://snowsports.flink.host/s/57HHXkh9/"
+        }
+       ]
+      },
+      {
+       "v": "Eine gezielte und individuelle Schlafoptimierung sichert langfristige die Leistungsfähigkeit.\n\nRegelmässige Schlafroutinen und die Anpassung an Reisen oder Wettkämpfe sind entscheidend.\n\nSchlafprobleme sollten überwacht und bei Bedarf behandelt werden. Powernaps und Entspannungstechniken wie Grübelstopp fördern Erholung und mentale Ruhe.",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -616,6 +741,12 @@
       {
        "v": "",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -755,6 +886,12 @@
       {
        "v": "Zeitpunkt SC: Anfang Vorbereitungsphase / Ende Vorbereitungsphase\n\nZeitpunkt ST Swissski Kader: Anfang Vorbereitungsphase / Ende Vorbereitungsphase\n\nST Swissski Kader: Laktatstufentest",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Zeitpunkt SC: Anfang Vorbereitungsphase / Ende Vorbereitungsphase\n\nZeitpunkt ST Swissski Kader: Anfang Vorbereitungsphase / Ende Vorbereitungsphase\n\nST Swissski Kader: Laktatstufentest",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -909,6 +1046,12 @@
       {
        "v": "ST: Physio Check Elite (MSS)",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "ST: Physio Check Elite (MSS)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -944,6 +1087,12 @@
       {
        "v": "Dynamische Übungen (Mobilität)\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor der Belastung (zur Vorbereitung der Bewegungsumfänge im Training)\n• nach der Belastung\n • als Trainingseinheit oder Tagesroutine\n\nStatische Übungen (Beweglichkeit/Stretching)\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit/  Tagesroutine (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Nach Bedarf zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe nach der Belastung\n• Vor dynamischen oder statischen Übungen",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Dynamische Übungen (Mobilität)\n• Dynamische Bewegungen mit maximalem Bewegungsumfang\n• Vor der Belastung (zur Vorbereitung der Bewegungsumfänge im Training)\n• nach der Belastung\n • als Trainingseinheit oder Tagesroutine\n\nStatische Übungen (Beweglichkeit/Stretching)\n• Statische Positionen im maximalen Bewegungsumfang halten\n• Nach der Belastung oder in/als Trainingseinheit/  Tagesroutine (Cool-Down, Yoga)\n\nMobilisation mit Faszienrolle\n• Nach Bedarf zur allgemeinen und individuell lokalen Entspannung und Regeneration von Muskeln und Gewebe nach der Belastung\n• Vor dynamischen oder statischen Übungen",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1009,6 +1158,12 @@
       {
        "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nST: Magglingen (MLD, Nordic, Jump)",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nST: Magglingen (MLD, Nordic, Jump)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1235,6 +1390,24 @@
       {
        "v": "No Content yet",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1323,6 +1496,17 @@
       {
        "v": "Snowboard Basics & Snowboardcross Essentials gestalten und ergänzen:\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper Kontinuierlicher Belastungsaufbau durch Bewegungsfluss im SBX und im freien Fahren\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss  (Hoch- und Längsachse)\n\n• Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im SBX mit Hilfsmitteln\n\n• Fahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten\n\n• Start im Startgate\n• Geländeübergänge\n• Aerodynamische Position auf dem SBX",
        "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Riding Konzept",
+         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+        }
+       ]
+      },
+      {
+       "v": "Snowboard Basics & Snowboardcross Essentials gestalten und ergänzen:\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper Kontinuierlicher Belastungsaufbau durch Bewegungsfluss im SBX und im freien Fahren\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss  (Hoch- und Längsachse)\n\n• Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im SBX mit Hilfsmitteln\n\n• Fahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten\n\n• Start im Startgate\n• Geländeübergänge\n• Aerodynamische Position auf dem SBX",
+       "from": 9,
        "to": 9,
        "l": [
         {
@@ -1339,6 +1523,24 @@
       {
        "v": "No Content yet",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1380,6 +1582,18 @@
       {
        "v": "No Content yet",
        "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1415,12 +1629,24 @@
       {
        "v": "",
        "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
        "to": 7,
        "l": []
       },
       {
        "v": "Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1450,6 +1676,18 @@
       {
        "v": "No Content yet",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1473,6 +1711,18 @@
       {
        "v": "No Content yet",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "No Content yet",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1490,6 +1740,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1501,6 +1769,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1536,6 +1822,18 @@
       {
        "v": "SBX Start\n• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit\n\nGatestart vs. Backstart",
        "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "SBX Start\n• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit\n\nGatestart vs. Backstart",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "SBX Start\n• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit\n\nGatestart vs. Backstart",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1571,6 +1869,18 @@
       {
        "v": "• Wettkampfangepasster Start, Repetition bis zur Automatisierung\n\n• Varierender Start\n\n• Varierendes Gelände mit varierenden Elementen\n\n• Farbe als Markierung um Absprung,Vorsprung zu kenzeichnen. Videos und Zeitmessung gezielt einsetzen, GPS",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• Wettkampfangepasster Start, Repetition bis zur Automatisierung\n\n• Varierender Start\n\n• Varierendes Gelände mit varierenden Elementen\n\n• Farbe als Markierung um Absprung,Vorsprung zu kenzeichnen. Videos und Zeitmessung gezielt einsetzen, GPS",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Wettkampfangepasster Start, Repetition bis zur Automatisierung\n\n• Varierender Start\n\n• Varierendes Gelände mit varierenden Elementen\n\n• Farbe als Markierung um Absprung,Vorsprung zu kenzeichnen. Videos und Zeitmessung gezielt einsetzen, GPS",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1594,6 +1904,12 @@
       {
        "v": "Steilwandkurve",
        "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Steilwandkurve",
+       "from": 3,
        "to": 3,
        "l": []
       },
@@ -1606,12 +1922,24 @@
       {
        "v": "Individuelle,Präzise,Verfeinern,Automatisieren\nKurve möglichst geschnitten einleiten, hohe Ausgangsgeschwindigkeit generieren",
        "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Individuelle,Präzise,Verfeinern,Automatisieren\nKurve möglichst geschnitten einleiten, hohe Ausgangsgeschwindigkeit generieren",
+       "from": 7,
        "to": 7,
        "l": []
       },
       {
        "v": "Techniklernen im SBX mit Hilfsmitteln kombiniert mit freiem Fahren",
        "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Techniklernen im SBX mit Hilfsmitteln kombiniert mit freiem Fahren",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1647,6 +1975,12 @@
       {
        "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... )\n• Repetition bis zur Automatisierung\n• In schlechten Verhältnissen oder schlechter Sicht trainieren\n• Over Coaching vermeiden\n• Spezifische Pistenpräparation\n\nKurssetzung:\nBank etwas höher setzen\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Etwas Steilere Banks mit mehr Radius und Negativ Kurven mit mehr seitlichem Gefälle wählen\n• Variation ist das Wichtigste\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen,  Bäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... )\n• Repetition bis zur Automatisierung\n• In schlechten Verhältnissen oder schlechter Sicht trainieren\n• Over Coaching vermeiden\n• Spezifische Pistenpräparation\n\nKurssetzung:\nBank etwas höher setzen\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Etwas Steilere Banks mit mehr Radius und Negativ Kurven mit mehr seitlichem Gefälle wählen\n• Variation ist das Wichtigste\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen,  Bäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1676,12 +2010,30 @@
       {
        "v": "• möglichst viel Bodenkontakt\n\n• aerodynamische Position\n\n• WellenMulden / Pushen\n\n• Sprünge (Kicker)",
        "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• möglichst viel Bodenkontakt\n\n• aerodynamische Position\n\n• WellenMulden / Pushen\n\n• Sprünge (Kicker)",
+       "from": 3,
        "to": 3,
        "l": []
       },
       {
        "v": "Transitions\n• WellenMulden (Pushen, Doubles, Tripples, absorbieren)\n• Elemente drücken / vorspringen/ absorbieren / Pop / Late-Pop\n• Spünge (Kicker, Step Down) & Landungen\n• Windschatten fahren (Draft)",
        "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Transitions\n• WellenMulden (Pushen, Doubles, Tripples, absorbieren)\n• Elemente drücken / vorspringen/ absorbieren / Pop / Late-Pop\n• Spünge (Kicker, Step Down) & Landungen\n• Windschatten fahren (Draft)",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Transitions\n• WellenMulden (Pushen, Doubles, Tripples, absorbieren)\n• Elemente drücken / vorspringen/ absorbieren / Pop / Late-Pop\n• Spünge (Kicker, Step Down) & Landungen\n• Windschatten fahren (Draft)",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1705,12 +2057,30 @@
       {
        "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Motivierende Kommunikation fördern\n\nKurssetzung:\n• Sicher-, Gelände- und Materialangepasst\n• Niveaugerecht, so einfach wie möglich\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
        "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Motivierende Kommunikation fördern\n\nKurssetzung:\n• Sicher-, Gelände- und Materialangepasst\n• Niveaugerecht, so einfach wie möglich\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
+       "from": 3,
        "to": 3,
        "l": []
       },
       {
        "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Gezieltes Coaching\n\nKurssetzung:\n• Sicher- und Geländeangepasst\n• Variationen einbringen\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
        "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Gezieltes Coaching\n\nKurssetzung:\n• Sicher- und Geländeangepasst\n• Variationen einbringen\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Gezieltes Coaching\n\nKurssetzung:\n• Sicher- und Geländeangepasst\n• Variationen einbringen\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1752,6 +2122,12 @@
       {
        "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung / Fähigkeiten\n\nTaktik Linienwahl\n•  Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n•  Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n• Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n• Teamtaktik im selben Heat\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung / Fähigkeiten\n\nTaktik Linienwahl\n•  Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n•  Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n• Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n• Teamtaktik im selben Heat\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1805,6 +2181,18 @@
       {
        "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
        "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1852,6 +2240,12 @@
       {
        "v": "FIS-Helm\n\n1x Snowboard Freestyle\n4x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n4x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1863,6 +2257,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1874,6 +2286,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1885,6 +2315,24 @@
       {
        "v": "",
        "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -1987,6 +2435,12 @@
       {
        "v": "Skiclub, RLZ (BASE/ BABE)",
        "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Skiclub, RLZ (BASE/ BABE)",
+       "from": 3,
        "to": 4,
        "l": []
       },
@@ -2140,6 +2594,12 @@
       {
        "v": "5 bis 10",
        "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "5 bis 10",
+       "from": 3,
        "to": 3,
        "l": []
       },
@@ -2158,6 +2618,18 @@
       {
        "v": "Je nach Tour oder Wertungen",
        "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Je nach Tour oder Wertungen",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Je nach Tour oder Wertungen",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2193,6 +2665,12 @@
       {
        "v": "gemäss Swiss-Ski",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "gemäss Swiss-Ski",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2234,6 +2712,12 @@
       {
        "v": "Umfeldmanager Swiss-Ski\nLaufbahnberatung Swiss Olympic\nBerufsinformationszentren BIZ",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Umfeldmanager Swiss-Ski\nLaufbahnberatung Swiss Olympic\nBerufsinformationszentren BIZ",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2275,6 +2759,12 @@
       {
        "v": "Familie\nTrainer:innern & Trainingsgruppe\nSportlich-berufliches Umfeld\nSwiss-Ski",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Familie\nTrainer:innern & Trainingsgruppe\nSportlich-berufliches Umfeld\nSwiss-Ski",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2322,6 +2812,12 @@
       {
        "v": "Spitzensportförd. der Armee (WK /Zeitmilitär)\nSchweizer Sporthilfe\nKantonale Fördergelder\nSponsoren- & Werbeverträge\nEinkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\nSportartspez. &/oder lokale Stiftungen\nAusrüster",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Spitzensportförd. der Armee (WK /Zeitmilitär)\nSchweizer Sporthilfe\nKantonale Fördergelder\nSponsoren- & Werbeverträge\nEinkommen aus dem Leistungssport (Preisgelder, Startgelder, Prämien)\nSportartspez. &/oder lokale Stiftungen\nAusrüster",
+       "from": 9,
        "to": 9,
        "l": []
       }
@@ -2369,6 +2865,12 @@
       {
        "v": "3 Hochschultypen mit Bachelor- & Masterstudiengänge (mit Fernlösungen)\nFachhochschulen FH\nPädagogische Hochschulen PH\nUniversitäre Hochschulen",
        "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "3 Hochschultypen mit Bachelor- & Masterstudiengänge (mit Fernlösungen)\nFachhochschulen FH\nPädagogische Hochschulen PH\nUniversitäre Hochschulen",
+       "from": 9,
        "to": 9,
        "l": []
       }
