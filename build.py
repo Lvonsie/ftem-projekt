@@ -22,6 +22,15 @@ except FileNotFoundError:
 LANGS = ["de", "fr", "it"]
 FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html"}
 
+# --- Admin-Bereich -----------------------------------------------------------
+# Passwort fuer den Admin-/Bearbeitungsbereich (dezentes Schloss-Icon unten auf der Startseite)
+ADMIN_PW = "ftem26*"
+# Cloud-Speicher (Supabase) fuer direkt gespeicherte, fuer alle sichtbare Aenderungen.
+# Einmalig eintragen (siehe SETUP-ADMIN.md). Solange leer: Seite laeuft normal,
+# Admin bietet dann Datei-Download als Rueckfall.
+SUPABASE_URL = ""       # z. B. https://abcdxyz.supabase.co
+SUPABASE_ANON_KEY = ""  # der oeffentliche "anon"-Key aus den Supabase-Projekt-Einstellungen
+
 def tr(s, lang):
     if lang == "de" or s is None:
         return s
@@ -135,7 +144,7 @@ def render_block(block, link_texts):
         return '<p><span class="lbl">'+esc(lab)+':</span> '+esc(val).replace("\n","<br>")+'</p>'
     return '<p>'+esc(b).replace("\n","<br>")+'</p>'
 
-def render_cell(seg, lang):
+def render_cell(seg, lang, cid=None):
     txt = (tr(seg["v"], lang) or "").strip()
     link_texts = set(tr(l["text"], lang) for l in seg["l"] if l.get("text"))
     inner = ""
@@ -143,8 +152,9 @@ def render_cell(seg, lang):
         blocks = re.split(r'\n\s*\n', txt)
         parts = [render_block(bl, link_texts) for bl in blocks]
         inner = "".join(p for p in parts if p)
-    if not inner and not seg["l"]:
-        return '<div class="empty">–</div>'
+    text_html = inner or '<div class="empty">–</div>'
+    cidattr = (' data-cid="'+esc(cid)+'"') if cid else ''
+    out = '<div class="ctext"'+cidattr+'>'+text_html+'</div>'
     if seg["l"]:
         seen=set(); btns=""
         for l in seg["l"]:
@@ -152,8 +162,8 @@ def render_cell(seg, lang):
             if key in seen: continue
             seen.add(key)
             btns += '<a href="'+esc(l["href"] or "#")+'" target="_blank" rel="noopener">'+esc(tr(l.get("text"), lang) or "Dokument")+'</a>'
-        if btns: inner += '<div class="lks">'+btns+'</div>'
-    return inner or '<div class="empty">–</div>'
+        if btns: out += '<div class="lks">'+btns+'</div>'
+    return out
 
 def theme_html(t, idx, stages, prefix, lang, ages):
     title = tr(t["title"], lang)
@@ -164,18 +174,19 @@ def theme_html(t, idx, stages, prefix, lang, ages):
         th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="'+esc(tr("Spalte hervorheben", lang))+'"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
     th += '</div>'
     body = ""
-    for r in t["rows"]:
+    for ri, r in enumerate(t["rows"]):
         lbl = tr(r["label"], lang) or ""
         body += '<div class="r">'
         body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
         # render segs with spans; we lay out as 10 cells using grid-column span
-        for seg in r["segs"]:
+        for si, seg in enumerate(r["segs"]):
             span = seg["to"] - seg["from"] + 1
             cls = "ph-"+ph(stages[seg["from"]])
             # if seg spans multiple phases, neutral
             phs = set(ph(stages[i]) for i in range(seg["from"], seg["to"]+1))
             if len(phs) > 1: cls = "ph-multi"
-            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang)+'</div><button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button></div>'
+            cid = prefix+"|"+str(idx)+"|"+str(ri)+"|"+str(si)
+            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid)+'</div><button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button></div>'
         body += '</div>'
     return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'">'
             '<summary><span class="tt">'+esc(title)+'</span></summary>'
@@ -348,7 +359,8 @@ def home_html(datamap, lang):
             '<button class="scrolldown" type="button" aria-label="nach unten scrollen" '
             'onclick="document.querySelector(&#39;.home-info&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">&#9662;</button>'
             '</div>'
-            '<div class="home-info">'+news_html(lang)+ftem_info+'</div>'
+            '<div class="home-info">'+news_html(lang)+ftem_info
+            +'<div class="adminlink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">&#128274;</a></div></div>'
             '</section>')
 
 
@@ -429,6 +441,10 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .scrolldown:hover{color:#fff}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
+.ctext{display:contents}
+.adminlink{text-align:center;margin-top:30px}
+.adminlink a{opacity:.32;font-size:17px;text-decoration:none;transition:opacity .15s;filter:grayscale(1)}
+.adminlink a:hover{opacity:.85}
 /* Newsbox */
 .news{margin:0 0 8px}
 .news-h{margin:0 0 12px;font-size:17px;font-weight:800;color:var(--ink)}
@@ -590,6 +606,55 @@ const I18N = __I18N__;
 const sections = [...document.querySelectorAll('section.sport')];
 const home = document.getElementById('home');
 
+// ---- Live-Overrides aus dem Admin-Bereich (Supabase) ----
+const SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
+function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*([\s\S]*)$/;
+function structBlock(b){
+  b=b.replace(/\s+$/,'');
+  if(!b.trim())return '';
+  const lines=b.split('\n');
+  const nonempty=lines.map(l=>l.trim()).filter(Boolean);
+  if(lines.some(l=>l.trim().startsWith('•'))){
+    const intro=[],items=[];
+    lines.forEach(l=>{const ls=l.trim();if(ls.startsWith('•'))items.push(ls.replace(/^•+/,'').trim());else if(ls){items.length?items.push(ls):intro.push(ls);}});
+    let out='';if(intro.length)out+='<p class="bh">'+_esc(intro[0])+'</p>';
+    out+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';return out;
+  }
+  const scHits=nonempty.filter(l=>SC_RE.test(l));
+  if(nonempty.length>=1&&scHits.length>=1&&scHits.length>=Math.max(1,nonempty.length-1)){
+    let out='<ul class="sc">';
+    nonempty.forEach(ls=>{const m=ls.match(SC_RE);if(m)out+='<li><span class="badge">'+_esc(m[1].trim())+'</span> '+_esc(m[2].trim())+'</li>';else out+='<li>'+_esc(ls)+'</li>';});
+    return out+'</ul>';
+  }
+  if(lines.length>=2&&lines[0].trim()&&lines[0].trim().length<=46&&!/[.:,;]$/.test(lines[0].trim())){
+    return '<p class="bh">'+_esc(lines[0].trim())+'</p><p>'+_esc(lines.slice(1).join('\n').trim()).replace(/\n/g,'<br>')+'</p>';
+  }
+  const m=b.match(/^([^:\n]{2,46}):\s*([\s\S]+)$/);
+  if(m&&m[1].indexOf('\n')<0){
+    const lab=m[1].trim(),val=m[2].trim();
+    if(val.length>55||val.indexOf('\n')>=0)return '<p class="sh">'+_esc(lab)+'</p><p>'+_esc(val).replace(/\n/g,'<br>')+'</p>';
+    return '<p><span class="lbl">'+_esc(lab)+':</span> '+_esc(val).replace(/\n/g,'<br>')+'</p>';
+  }
+  return '<p>'+_esc(b).replace(/\n/g,'<br>')+'</p>';
+}
+function structCell(txt){
+  txt=(txt||'').trim();
+  if(!txt)return '<div class="empty">–</div>';
+  return txt.split(/\n\s*\n/).map(structBlock).filter(Boolean).join('')||'<div class="empty">–</div>';
+}
+function loadOverrides(){
+  if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
+  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+    .then(r=>r.ok?r.json():[]).then(rows=>{const m={};(rows||[]).forEach(x=>m[x.cid]=x.txt);return m;}).catch(()=>({}));
+}
+function applyOverrides(map){
+  document.querySelectorAll('.ctext[data-cid]').forEach(el=>{
+    const v=map[el.dataset.cid];
+    if(v!=null){el.innerHTML=structCell(v);}
+  });
+}
+
 // Sprachwechsel behaelt die aktuelle Sportart (#hash) bei
 document.querySelectorAll('.langsw a').forEach(a=>a.addEventListener('click',()=>{a.href=a.dataset.f+location.hash;}));
 
@@ -710,7 +775,153 @@ function route(){
 }
 window.addEventListener('hashchange',route);
 route();
+loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});
 """
+
+ADMIN_TMPL = r'''<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>FTEM Admin</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#eef1f4;color:#1d2630;font-size:14px}
+#gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.gatebox{background:#fff;border:1px solid #e4e8ec;border-radius:16px;padding:30px 28px;width:340px;max-width:100%;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.gatebox h1{font-size:19px;margin:0 0 6px}
+.gatebox p{color:#697080;font-size:13px;margin:0 0 18px}
+.gatebox input{width:100%;padding:10px 12px;border:1px solid #cfd6dd;border-radius:9px;font-size:14px}
+.gatebox button{margin-top:12px;width:100%;background:#d52b1e;color:#fff;border:none;border-radius:9px;padding:10px;font-weight:800;font-size:14px;cursor:pointer}
+.gateerr{color:#d52b1e;font-size:12.5px;margin-top:10px;min-height:16px}
+header.abar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid #e4e8ec;padding:12px 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+header.abar h1{font-size:16px;margin:0;font-weight:800}
+header.abar .sp{flex:1}
+.afilter{padding:7px 11px;border:1px solid #cfd6dd;border-radius:8px;font-size:13px;min-width:170px}
+.asave{background:#d52b1e;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:800;font-size:13px;cursor:pointer}
+.asave:disabled{opacity:.5;cursor:default}
+.astatus{font-size:12.5px;color:#697080}
+.note{max-width:1000px;margin:14px auto 0;padding:0 18px;color:#8a6a00;font-size:12.5px}
+.wrap{max-width:1000px;margin:0 auto;padding:16px 18px 70px}
+.sport-h{font-size:15px;font-weight:800;margin:22px 0 8px;color:#d52b1e}
+.item{background:#fff;border:1px solid #e4e8ec;border-left:4px solid #cfd6dd;border-radius:12px;padding:11px 13px;margin:0 0 10px}
+.item.changed{border-left-color:#d52b1e}
+.item .meta{font-size:11.5px;color:#697080;margin:0 0 6px;font-weight:700}
+.item .meta b{color:#1d2630}
+.item textarea{width:100%;min-height:68px;resize:vertical;border:1px solid #dfe4ea;border-radius:8px;padding:8px 9px;font:inherit;font-size:13px;line-height:1.5;color:#1d2630}
+.item textarea:focus{outline:none;border-color:#d52b1e}
+.hidden{display:none!important}
+</style></head>
+<body>
+<div id="gate"><form id="gateform" class="gatebox">
+  <h1>&#128274; FTEM Admin</h1>
+  <p>Bitte Passwort eingeben, um Inhalte zu bearbeiten.</p>
+  <input id="gatepw" type="password" placeholder="Passwort" autocomplete="current-password">
+  <button type="submit">Anmelden</button>
+  <div id="gateerr" class="gateerr"></div>
+</form></div>
+<div id="app" hidden>
+  <header class="abar">
+    <h1>FTEM &ndash; Inhalte bearbeiten</h1>
+    <input id="afilter" class="afilter" type="search" placeholder="Suchen &hellip;">
+    <span class="sp"></span>
+    <span id="astatus" class="astatus"></span>
+    <button id="asave" class="asave" disabled>Alle &Auml;nderungen speichern</button>
+    <a href="index.html" style="text-decoration:none;font-size:13px;font-weight:700;color:#d52b1e">&#8617; Zur Seite</a>
+  </header>
+  <div id="note" class="note"></div>
+  <div class="wrap"><div id="list"></div></div>
+</div>
+<script>
+const DATA=__ADMIN_DATA__;
+const PW="__ADMIN_PW__";
+const SUPA_URL="__SUPA_URL__",SUPA_KEY="__SUPA_KEY__";
+const gate=document.getElementById('gate'),app=document.getElementById('app');
+const listEl=document.getElementById('list'),statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave');
+const base={};
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+document.getElementById('gateform').addEventListener('submit',function(e){
+  e.preventDefault();
+  if(document.getElementById('gatepw').value===PW){gate.classList.add('hidden');app.hidden=false;init();}
+  else{document.getElementById('gateerr').textContent='Falsches Passwort.';}
+});
+function render(){
+  let html='',lastSport=null;
+  DATA.forEach(function(it,idx){
+    if(it.sport!==lastSport){html+='<div class="sport-h">'+esc(it.sport)+'</div>';lastSport=it.sport;}
+    const meta='<b>'+esc(it.theme)+'</b>'+(it.label?(' &middot; '+esc(it.label)):'');
+    html+='<div class="item" data-i="'+idx+'"><div class="meta">'+meta+'</div><textarea>'+esc(it.text)+'</textarea></div>';
+  });
+  listEl.innerHTML=html;
+  listEl.querySelectorAll('.item').forEach(function(el){
+    const i=+el.dataset.i;base[DATA[i].cid]=DATA[i].text;
+    const ta=el.querySelector('textarea');
+    ta.addEventListener('input',function(){el.classList.toggle('changed',ta.value!==base[DATA[i].cid]);updateCount();});
+  });
+}
+function changed(){
+  const out=[];
+  listEl.querySelectorAll('.item').forEach(function(el){
+    const i=+el.dataset.i,ta=el.querySelector('textarea');
+    if(ta.value!==base[DATA[i].cid])out.push({cid:DATA[i].cid,txt:ta.value});
+  });
+  return out;
+}
+function updateCount(){const n=changed().length;saveBtn.disabled=n===0;statusEl.textContent=n?(n+' ungespeicherte Änderung(en)'):'Alles gespeichert';}
+function init(){
+  render();updateCount();
+  document.getElementById('afilter').addEventListener('input',function(e){
+    const q=e.target.value.trim().toLowerCase();
+    listEl.querySelectorAll('.item').forEach(function(el){el.classList.toggle('hidden',q&&el.textContent.toLowerCase().indexOf(q)<0);});
+    listEl.querySelectorAll('.sport-h').forEach(function(h){let s=h.nextElementSibling,any=false;while(s&&s.classList.contains('item')){if(!s.classList.contains('hidden'))any=true;s=s.nextElementSibling;}h.classList.toggle('hidden',q&&!any);});
+  });
+  saveBtn.addEventListener('click',save);
+  if(!SUPA_URL||!SUPA_KEY){
+    document.getElementById('note').textContent='Hinweis: Cloud-Speicher (Supabase) ist noch nicht eingerichtet – Änderungen können bearbeitet und als Datei heruntergeladen, aber noch nicht direkt live gespeichert werden. Siehe SETUP-ADMIN.md.';
+    saveBtn.textContent='Änderungen herunterladen';
+  }else{
+    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+      .then(function(r){return r.ok?r.json():[];}).then(function(rows){
+        const m={};(rows||[]).forEach(function(x){m[x.cid]=x.txt;});
+        listEl.querySelectorAll('.item').forEach(function(el){const i=+el.dataset.i,cid=DATA[i].cid;if(m[cid]!=null){el.querySelector('textarea').value=m[cid];base[cid]=m[cid];}});
+        updateCount();
+      }).catch(function(){});
+  }
+}
+function save(){
+  const ch=changed();if(!ch.length)return;
+  if(!SUPA_URL||!SUPA_KEY){
+    const blob=new Blob([JSON.stringify(ch,null,2)],{type:'application/json'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ftem-aenderungen.json';a.click();return;
+  }
+  saveBtn.disabled=true;statusEl.textContent='Speichere …';
+  fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
+    headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
+    body:JSON.stringify(ch.map(function(x){return {cid:x.cid,txt:x.txt};}))})
+   .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);
+     ch.forEach(function(x){base[x.cid]=x.txt;});
+     listEl.querySelectorAll('.item').forEach(function(el){el.classList.remove('changed');});
+     statusEl.textContent='Gespeichert ✓ – Änderungen sind jetzt live.';saveBtn.disabled=true;
+   }).catch(function(err){statusEl.textContent='Fehler beim Speichern: '+err.message;saveBtn.disabled=false;});
+}
+</script></body></html>'''
+
+def admin_html(datamap):
+    items = []
+    for s in SPORTS:
+        d = datamap[s["id"]]
+        if not d: continue
+        for ti, t in enumerate(d["themes"]):
+            for ri, r in enumerate(t["rows"]):
+                for si, seg in enumerate(r["segs"]):
+                    v = seg.get("v") or ""
+                    if not v.strip(): continue
+                    items.append({"cid": s["id"]+"|"+str(ti)+"|"+str(ri)+"|"+str(si),
+                                  "sport": tr(s["name"], "de"),
+                                  "theme": tr(t["title"], "de"),
+                                  "label": (tr(r.get("label"), "de") or ""),
+                                  "text": v})
+    data_js = json.dumps(items, ensure_ascii=False).replace("</", "<\\/")
+    return (ADMIN_TMPL.replace("__ADMIN_DATA__", data_js)
+                      .replace("__ADMIN_PW__", ADMIN_PW)
+                      .replace("__SUPA_URL__", SUPABASE_URL)
+                      .replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
 
 datamap = {s["id"]: sport_data(s) for s in SPORTS}
 ids_with_data = [s["id"] for s in SPORTS if datamap[s["id"]] is not None]
@@ -722,7 +933,8 @@ for lang in LANGS:
             "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati"}[lang],
             "noHits": {"de": "keine Treffer", "fr": "aucun résultat", "it": "nessun risultato"}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
-            .replace("__I18N__", json.dumps(i18n, ensure_ascii=False)))
+            .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
+            .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
     page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title>'
@@ -734,5 +946,8 @@ for lang in LANGS:
     out = os.path.join(BASE, FILES[lang])
     open(out,"w",encoding="utf-8").write(page)
     print("written", FILES[lang], len(page.encode("utf-8")), "bytes")
+
+open(os.path.join(BASE, "admin.html"), "w", encoding="utf-8").write(admin_html(datamap))
+print("written admin.html")
 
 print("Sportarten mit Inhalt:", ", ".join(ids_with_data) or "-")
