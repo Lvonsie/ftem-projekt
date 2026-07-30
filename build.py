@@ -236,44 +236,26 @@ def sport_section(sport, d, lang):
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
         '<header class="top">'+back+'<h1>'+FTEM+' <span class="sk">'+esc(name)+'</span> <b>· '+aw+'</b></h1>'
         '<div class="tools">'+lang_switch(lang)+
-        '<input class="q" type="search" placeholder="Search">'
+        '<input class="q" type="search" placeholder="Search"><span class="hits"></span>'
         '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button></div></header>'
         '<div class="wrap">'
         +sections+footer(lang)+'</div></section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
-# Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Fläche
-CONS_POS = [(14,46),(28,67),(41,45),(53,63),(65,43),(77,61),(88,48),(60,80),(34,84),
-            (20,58),(70,80),(48,55)]
-CONS_PHASE = ["found","talent","elite","mast"]
-CONS_LINKS = [(1,8),(2,8),(3,7),(5,7)]
-
 def home_html(datamap, lang):
-    n = len(SPORTS)
-    nodes = ""
+    cards = ""
     for i, s in enumerate(SPORTS):
+        has = datamap[s["id"]] is not None
         name = tr(s["name"], lang)
-        x, y = CONS_POS[i % len(CONS_POS)]
-        icon = s.get("icon")
-        ticon = None
-        if icon:
-            cand = "assets/sporticons/" + os.path.splitext(os.path.basename(icon))[0] + ".png"
-            if os.path.exists(cand):
-                ticon = cand
-        img_html = ('<img class="nicon" src="'+esc(ticon)+'" alt="" loading="lazy">') if ticon else ''
-        nodes += ('<a class="node" href="#'+s["id"]+'" '
-                  'style="left:'+str(x)+'%;top:'+str(y)+'%;--d:'+str(i*150)+'ms">'
-                  '<span class="dot"></span>'
-                  '<span class="nhover">'+img_html+'<span class="nname">'+esc(name)+'</span></span></a>')
-    chain = " ".join(str(CONS_POS[i][0])+","+str(CONS_POS[i][1]) for i in range(min(7, n)))
-    lines = ('<svg class="clines" viewBox="0 0 100 100" preserveAspectRatio="none">'
-             '<polyline class="cl" points="'+chain+'" vector-effect="non-scaling-stroke"/>')
-    for a, b in CONS_LINKS:
-        if a < n and b < n:
-            lines += ('<line class="cl2" x1="'+str(CONS_POS[a][0])+'" y1="'+str(CONS_POS[a][1])+
-                      '" x2="'+str(CONS_POS[b][0])+'" y2="'+str(CONS_POS[b][1])+'" vector-effect="non-scaling-stroke"/>')
-    lines += '</svg>'
+        # Logo-Platz: sobald ein Sportarten-Logo vorliegt, in ftem_sports.json
+        # z. B. "icon": "logos/ski-alpin.svg" ergaenzen -> wird statt Kuerzel gezeigt
+        ico = s.get("icon")
+        ico_html = ('<img src="'+esc(ico)+'" alt="" loading="lazy">') if ico else esc(s["short"])
+        cards += ('<a class="card'+('' if has else ' nodata')+'" href="#'+s["id"]+'" style="animation-delay:'+str(i*50)+'ms">'
+                  '<span class="ab'+(' has-img' if ico else '')+'">'+ico_html+'</span>'
+                  '<span class="cn">'+esc(name)+'</span>'
+                  +('' if has else '<span class="tag">'+esc(NODATA[lang])+'</span>')+'</a>')
     info = FTEM_INFO[lang]
     phase_cls = {"F":"p-f","T":"p-t","E":"p-e","M":"p-m"}
     phases = "".join('<div class="phase '+phase_cls[k]+'"><span class="pl">'+k+'</span>'
@@ -283,16 +265,12 @@ def home_html(datamap, lang):
                  '<h2>'+info["title"]+'</h2>'
                  '<p class="lead">'+info["lead"]+'</p>'
                  '<div class="phases">'+phases+'</div></div>')
-    return ('<section id="home">'
-            '<div class="home-hero">'
-            '<div class="hero-top">'+lang_switch(lang)+'</div>'
-            '<div class="hero-head"><h1>'+FTEM+'</h1>'
-            '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            '<div class="constellation">'+lines+nodes+'</div>'
-            '<div class="scrolldown" aria-hidden="true">▾</div>'
-            '</div>'
-            '<div class="home-info">'+ftem_info+footer(lang)+'</div>'
-            '</section>')
+    return ('<section id="home"><div class="home-hero">'
+            '<h1>'+FTEM+' <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
+            '<p class="sub">'+esc(HOME_SUB[lang])+'</p>'
+            '<div class="hero-lang">'+lang_switch(lang)+'</div>'
+            '<div class="grid-sports">'+cards+'</div>'
+            +ftem_info+footer(lang)+'</div></section>')
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
@@ -303,7 +281,7 @@ CSS = r"""
 --acc:#4a5563;--acc-line:#c6ced6;--acc-bg:#eef1f4;--acc-bg2:#e2e6ea;
 --colw:200px;--lblw:146px;--top:54px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--bg)}
+html{scroll-behavior:smooth;background:var(--bg);scrollbar-gutter:stable}
 html.h #home{display:none}
 html.noanim .grid-sports .card{animation:none}
 [hidden]{display:none!important}
@@ -312,48 +290,24 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
 .langsw a.active{background:var(--acc);color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
-/* Startseite – Neon-Konstellation */
-#home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
-  background:linear-gradient(180deg,rgba(9,14,24,.58),rgba(9,14,24,.34) 40%,rgba(7,11,20,.92)),url("assets/hero.jpg") center 28%/cover no-repeat}
-#home .hero-top{position:absolute;top:16px;left:18px;z-index:7}
-#home .home-hero .langsw{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);backdrop-filter:blur(6px)}
-#home .home-hero .langsw a{color:rgba(255,255,255,.82)}
-#home .home-hero .langsw a.active{background:var(--red);color:#fff}
-#home .home-hero .langsw a:hover:not(.active){background:rgba(255,255,255,.22);color:#fff}
-#home .hero-head{position:relative;z-index:6;text-align:center;padding:74px 20px 0}
-#home .hero-head h1{font-size:clamp(28px,5vw,46px);margin:0 0 8px;font-weight:800;letter-spacing:.5px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
-#home .hero-head h1 b{color:#fff;font-weight:800}
-#home .hero-head h1 .fF{color:#57cce4}#home .hero-head h1 .fT{color:#ffd45c}#home .hero-head h1 .fE{color:#ff9b57}#home .hero-head h1 .fM{color:#ff6d60}
-#home .hero-logo{display:block;margin:12px auto 0;width:clamp(160px,24vw,240px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.55))}
-.constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
-.clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
-.clines .cl2{stroke:rgba(255,255,255,.16);stroke-width:1}
-@keyframes flow{to{stroke-dashoffset:-160}}
-.node{position:absolute;transform:translate(-50%,-50%);text-decoration:none;
-  animation:nodeIn .6s ease both;animation-delay:var(--d,0ms)}
-@keyframes nodeIn{from{opacity:0;transform:translate(-50%,-50%) scale(.3)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-/* nur schimmernde Punkte – alle im gleichen harmonischen FTEM-Farbmix */
-.node .dot{width:16px;height:16px;border-radius:50%;position:relative;overflow:hidden;transition:transform .22s ease;
-  box-shadow:0 0 14px 3px rgba(255,255,255,.32),0 0 32px 9px rgba(255,160,90,.28)}
-.node .dot::before{content:"";position:absolute;inset:-30%;border-radius:50%;
-  background:conic-gradient(from 0deg,#57cce4,#ffd45c,#ff9b57,#ff6d60,#57cce4);animation:spin 8s linear infinite}
-.node .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;animation:twk 3.4s ease-in-out infinite;pointer-events:none}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes twk{0%,100%{box-shadow:0 0 6px 1px rgba(255,255,255,.22);opacity:.7}50%{box-shadow:0 0 16px 5px rgba(255,190,120,.5);opacity:1}}
-.node:hover,.node:focus-visible{z-index:9;outline:none}
-.node:hover .dot,.node:focus-visible .dot{transform:scale(1.45)}
-/* Hover: freigestelltes Sport-Bild (ohne Hintergrund) + Text */
-.node .nhover{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translate(-50%,10px);
-  display:flex;flex-direction:column;align-items:center;gap:6px;width:130px;
-  opacity:0;pointer-events:none;transition:opacity .22s,transform .22s}
-.node:hover .nhover,.node:focus-visible .nhover{opacity:1;transform:translate(-50%,0)}
-.node .nicon{width:74px;height:74px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.6))}
-.node .nname{font-size:13px;font-weight:800;color:#fff;text-align:center;line-height:1.2;text-shadow:0 1px 10px rgba(0,0,0,.85)}
-.scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:5;color:rgba(255,255,255,.7);font-size:24px;animation:bob 1.8s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-.home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:112px}#home .hero-head{padding-top:56px}#home .hero-logo{width:150px}}
+/* Startseite */
+#home .home-hero{max-width:980px;margin:0 auto;padding:60px 24px 30px;text-align:center}
+#home h1{font-size:30px;margin:0 0 6px;font-weight:800;color:var(--red);letter-spacing:.2px}
+#home h1 b{color:var(--ink);font-weight:800}
+#home .sub{color:var(--mut);font-size:14px;margin:0 0 18px}
+#home .hero-lang{display:flex;justify-content:center;margin:0 0 30px}
+.grid-sports{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;text-align:center}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .18s,transform .18s,border-color .18s;animation:cardIn .45s ease both}
+.grid-sports .card:hover{border-color:#9aa5b1;box-shadow:0 10px 24px rgba(0,0,0,.10);transform:translateY(-4px) scale(1.02)}
+.grid-sports .ab{width:60px;height:60px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;overflow:hidden}
+.grid-sports .card:hover .ab{transform:scale(1.12) rotate(-6deg)}
+.grid-sports .ab.has-img{background:none;border:none}
+.grid-sports .ab img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.grid-sports .card.nodata .ab{background:#b6c0cc}
+.grid-sports .card.nodata .ab.has-img{background:none;filter:grayscale(1);opacity:.6}
+.grid-sports .cn{font-weight:800;font-size:13.5px}
+.grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
@@ -371,22 +325,26 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .p-e{border-top-color:var(--elite)}.p-e .pl{color:var(--elite)}
 .p-m{border-top-color:var(--mast)}.p-m .pl{color:var(--mast)}
 /* Sport-Ansicht */
-header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;height:var(--top)}
-header.top .back{font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 13px;white-space:nowrap}
+header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:nowrap;gap:10px 14px;align-items:center;height:var(--top)}
+header.top .back{flex:none;width:118px;text-align:center;font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 0;white-space:nowrap}
 header.top .back:hover{background:#fff;border-color:var(--acc);color:var(--acc)}
 header.top .sicon{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
-header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px}
+header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 header.top h1 b{color:var(--ink);font-weight:700}
 h1 .fF{color:var(--found)}h1 .fT{color:var(--talent)}h1 .fE{color:var(--elite)}h1 .fM{color:var(--mast)}
 h1 .fF,h1 .fT,h1 .fE,h1 .fM{font-weight:900}
 h1 .sk{color:var(--ink)}
-.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
+.tools{display:flex;flex-wrap:nowrap;gap:8px;align-items:center;margin-left:auto;flex:none}
 .tools input,.tools select,.tools button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
 .tools input{width:150px}
-.tools select{max-width:180px}
+.tools select{width:180px}
+.tools .exp{width:112px;padding:7px 0;text-align:center}
+.tools .col{width:126px;padding:7px 0;text-align:center}
 .tools button{cursor:pointer;font-weight:600}
 .tools button:hover{background:var(--bg)}
 .tools .cnt{font-size:12px;color:var(--mut);font-weight:600;white-space:nowrap}
+.tools .hits{font-size:12px;color:var(--mut);font-weight:700;white-space:nowrap;width:96px;flex:none;overflow:hidden;text-overflow:ellipsis}
+mark.cur{background:#f0a500;color:#1d2630;box-shadow:0 0 0 2px #f0a500}
 .wrap{max-width:1500px;margin:0 auto;padding:14px 18px 90px}
 .intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:8px;font-size:13px;color:var(--mut)}
 .intro b{color:var(--ink)}
@@ -452,6 +410,11 @@ mark{background:#ffe08a;border-radius:2px;padding:0 1px}
 .hidden{display:none!important}
 footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
 footer a{color:var(--red)}
+@media(max-width:1000px){
+header.top{flex-wrap:wrap;height:auto}
+header.top h1{white-space:normal}
+.tools{flex-wrap:wrap}
+}
 @media(max-width:700px){:root{--colw:200px;--lblw:128px}}
 """
 
@@ -481,6 +444,33 @@ function initSport(sec){
   sec.__clamp = setupClamp;
   if(!q) return; // Platzhalter-Seite ohne Werkzeuge
   const cnt = sec.querySelector('.cnt');
+  const hitEl = sec.querySelector('.hits');
+  let marks = [], cur = -1;
+  function updateHits(){
+    if(!hitEl) return;
+    const term = q.value.trim();
+    if(!term){ hitEl.textContent=''; return; }
+    if(!marks.length){ hitEl.textContent = I18N.noHits; return; }
+    hitEl.textContent = (cur>=0 ? (cur+1)+'/' : '') + marks.length + ' ' + I18N.hitsWord;
+  }
+  function gotoMark(i){
+    if(!marks.length) return;
+    cur = ((i % marks.length) + marks.length) % marks.length;
+    marks.forEach(x=>x.classList.remove('cur'));
+    const m = marks[cur];
+    m.classList.add('cur');
+    const det = m.closest('details'); if(det && !det.open) det.open = true;
+    const cell = m.closest('.cell');
+    if(cell && cell.classList.contains('clamped') && !cell.classList.contains('expanded')){
+      cell.classList.add('expanded');
+      const btn = cell.querySelector('.more'); if(btn) btn.textContent = I18N.less;
+    }
+    m.scrollIntoView({block:'center', inline:'center', behavior:'smooth'});
+    updateHits();
+  }
+  q.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); gotoMark(cur + (e.shiftKey ? -1 : 1)); }
+  });
   function clearMarks(el){el.querySelectorAll('mark').forEach(m=>m.replaceWith(document.createTextNode(m.textContent)));el.normalize();}
   function run(){
     const term=q.value.trim().toLowerCase();
@@ -488,7 +478,7 @@ function initSport(sec){
     let vis=0;
     themes.forEach(t=>{
       if(!term){t.classList.remove('hidden');return;}
-      const hit=t.innerText.toLowerCase().includes(term);
+      const hit=t.textContent.toLowerCase().includes(term);
       t.classList.toggle('hidden',!hit);
       if(hit){vis++;t.open=true;
         const re=new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
@@ -501,6 +491,9 @@ function initSport(sec){
     });
     if(cnt)cnt.textContent=term?(vis+' '+I18N.hits):(themes.length+' '+I18N.themes);
     grps.forEach(g=>{let s=g.nextElementSibling,any=false;while(s&&s.classList.contains('theme')){if(!s.classList.contains('hidden'))any=true;s=s.nextElementSibling;}g.classList.toggle('hidden',!!term&&!any);});
+    marks = [...sec.querySelectorAll('mark')];
+    cur = -1;
+    updateHits();
   }
   q.addEventListener('input',run);
   sec.querySelector('.exp').onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(setupClamp,50);};
@@ -551,18 +544,6 @@ function route(){
 }
 window.addEventListener('hashchange',route);
 route();
-// Parallax: Konstellation folgt sanft der Maus (nur Desktop/feiner Zeiger)
-(function(){
-  const hero=document.querySelector('#home .home-hero');
-  const cons=document.querySelector('#home .constellation');
-  if(!hero||!cons||!window.matchMedia('(pointer:fine)').matches)return;
-  hero.addEventListener('mousemove',e=>{
-    const r=hero.getBoundingClientRect();
-    const dx=((e.clientX-r.left)/r.width-0.5)*26, dy=((e.clientY-r.top)/r.height-0.5)*20;
-    cons.style.transform='translate('+dx+'px,'+dy+'px)';
-  });
-  hero.addEventListener('mouseleave',()=>{cons.style.transform='';});
-})();
 """
 
 datamap = {s["id"]: sport_data(s) for s in SPORTS}
@@ -571,7 +552,9 @@ ids_with_data = [s["id"] for s in SPORTS if datamap[s["id"]] is not None]
 for lang in LANGS:
     body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS)
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
-            "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang)}
+            "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang),
+            "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati"}[lang],
+            "noHits": {"de": "keine Treffer", "fr": "aucun résultat", "it": "nessun risultato"}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False)))
     page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
