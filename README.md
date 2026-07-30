@@ -1,60 +1,96 @@
-# FTEM Ski Alpin – Athlet:innen-Weg Übersicht
+# FTEM – Athlet:innen-Weg (Swiss-Ski)
 
-Interaktive, durchsuchbare HTML-Übersicht des Ski-Alpin **Athlet:innen-Wegs** aus dem
-Swiss-Ski FTEM-Tool: 17 Themen über die zehn Entwicklungsstufen **F1–M**
-(Foundation → Talent → Elite → Mastery), inkl. der externen Dokument-Links.
-
-Dieser Ordner enthält alles, um das Projekt weiterzuentwickeln.
+Interaktive, durchsuchbare Übersicht der **Athlet:innen-Wege** aus dem Swiss-Ski FTEM-Tool:
+Startseite mit Sportart-Auswahl (9 Sportarten), pro Sportart die Themen über die zehn
+Entwicklungsstufen **F1–M**, in drei Sprachen (DE/FR/IT).
 
 ---
 
-## Inhalt des Ordners
+## ⚠️ Das Wichtigste zuerst: Was wird bearbeitet, was wird generiert?
+
+**Es gibt genau eine Quelle der Wahrheit – die HTML-Dateien werden IMMER generiert und nie von Hand bearbeitet.**
+
+| | Dateien | Bearbeiten? |
+|---|---|---|
+| **Quellen** (hier arbeiten) | `build.py`, `ftem_data.json`, `ftem_sports.json`, `translations.json` | ✅ ja |
+| **Ausgaben** (generiert) | `index.html` (DE), `fr.html`, `it.html` | ❌ nie von Hand! |
+
+Jede Änderung direkt in einer HTML-Datei geht beim nächsten `python3 build.py` **verloren**.
+Deshalb gilt: Quelle ändern → `python3 build.py` ausführen → alle drei HTML werden neu geschrieben →
+alles zusammen committen. So laufen keine zwei Stände nebeneinander.
+
+---
+
+## Die Quell-Dateien im Detail
 
 | Datei | Zweck |
 |---|---|
-| `ftem-ski-alpin-uebersicht.html` | **Das fertige Resultat.** Einfach im Browser öffnen (Doppelklick). Läuft offline, keine Installation nötig. |
-| `ftem_data.json` | **Die Datenquelle.** Alle Inhalte (Themen, Zeilen, Stufen-Zellen, Links) als strukturierte Daten. Hier wird der Inhalt bearbeitet. |
-| `build.py` | **Der Generator.** Liest `ftem_data.json` und erzeugt daraus `ftem-ski-alpin-uebersicht.html`. Enthält das gesamte Layout (CSS) und die Interaktivität (JavaScript). |
-| `README.md` | Diese Datei. |
+| `build.py` | **Der Generator.** Enthält Layout (CSS), Interaktivität (JS) und den ganzen Seitenaufbau. Liest alle JSON-Dateien und schreibt `index.html`, `fr.html`, `it.html`. |
+| `ftem_sports.json` | **Die Sportarten-Liste** (Reihenfolge, Namen, Kürzel). Neue Sportart = hier ein Eintrag. |
+| `ftem_data.json` | **Inhalte Ski Alpin** (Themen, Zeilen, Stufen-Zellen, Dokument-Links). |
+| `ftem_data_<sportart>.json` | Inhalte weiterer Sportarten, z. B. `ftem_data_langlauf.json`. Gleiches Format wie `ftem_data.json`. Solange die Datei fehlt, zeigt die Sportart «Inhalte folgen». |
+| `translations.json` | **Übersetzungen FR/IT** als einfache Text-Paare (deutscher Text → Übersetzung). Nicht übersetzte Texte erscheinen auf Deutsch. |
+
+## Die generierten Dateien
+
+- `index.html` – Deutsch (zugleich Einstieg der Website / Netlify-Wurzel)
+- `fr.html` – Französisch, `it.html` – Italienisch
+- Alles in **einer Datei pro Sprache**: Startseite + alle Sportarten, Wechsel per Klick (`#ski-alpin` usw.),
+  Browser-Zurück funktioniert, Sprachwechsel behält die gewählte Sportart.
 
 ---
 
-## Schnellstart
+## Typische Arbeitsabläufe
 
-**Nur ansehen:** `ftem-ski-alpin-uebersicht.html` doppelklicken.
+**Inhalt ändern (z. B. Text in einer Zelle):**
+1. In `ftem_data.json` (bzw. `ftem_data_<sportart>.json`) anpassen
+2. `python3 build.py`
+3. Committen (JSON **und** die drei HTML zusammen)
 
-**Etwas ändern und neu erzeugen:**
+**Neue Sportart mit Inhalt füllen:**
+1. `ftem_data_<sportart>.json` anlegen (Format von `ftem_data.json` übernehmen)
+2. `python3 build.py` – die Karte auf der Startseite wird automatisch aktiv
 
-1. Voraussetzung: Python 3 (keine zusätzlichen Pakete nötig – nur Standardbibliothek).
-2. Inhalt in `ftem_data.json` bearbeiten **oder** Layout/Verhalten in `build.py` anpassen.
-3. Im Ordner ausführen:
-   ```
-   python3 build.py
-   ```
-4. `ftem-ski-alpin-uebersicht.html` wird neu geschrieben. Im Browser neu laden (Cmd/Ctrl+Shift+R).
+**Übersetzung ergänzen/korrigieren:**
+1. In `translations.json` unter `"fr"` bzw. `"it"` das Paar `"Deutscher Text": "Übersetzung"` ergänzen
+2. `python3 build.py`
+
+**Layout/Design ändern (Farben, Abstände, Verhalten):**
+1. In `build.py` im `CSS`- oder `JS`-String anpassen
+2. `python3 build.py`
+
+**Voraussetzung:** Python 3, keine Zusatzpakete. Ansehen: `index.html` doppelklicken (läuft offline).
 
 ---
 
-## Aufbau der Daten (`ftem_data.json`)
+## Funktionen der Seite
+
+- Startseite mit **Sportart-Auswahl** (Karten; grau = noch ohne Inhalt), Sprachumschalter **DE | FR | IT**
+- Pro Sportart: **Volltextsuche** mit Hervorhebung, **Sprung-Navigation**, Alle öffnen/schliessen,
+  «mehr»-Ausklappen langer Zellen, **synchrones Seitwärts-Scrollen**, **Stufen-Highlight**
+  (Klick auf Stufen-Kopf färbt die Spalte), «← Sportarten»-Button zurück zur Auswahl
+- Farbcodierung: Foundation (türkis), Talent (gold), Elite (orange), Mastery (rot) –
+  auch im **FTEM**-Schriftzug
+
+---
+
+## Aufbau der Inhalts-Daten (`ftem_data*.json`)
 
 ```jsonc
 {
-  "stages": ["F1","F2","F3","T1","T2","T3","T4","E1","E2","M"],   // die 10 Stufen (Spalten)
+  "stages": ["F1","F2","F3","T1","T2","T3","T4","E1","E2","M"],
   "themes": [
     {
-      "title": "Kraft & Explosivität",          // Themenname (echtes "&", wird beim Build maskiert)
-      "group": "Sport & Athlet:in",             // Gruppe: "Sport & Athlet:in" | "Material" | "Strukturen & Umfeld"
+      "title": "Kraft & Explosivität",
+      "group": "Sport & Athlet:in",        // Gruppe: "Sport & Athlet:in" | "Material" | "Strukturen & Umfeld"
       "rows": [
         {
-          "label": "Skills-Check ... Kraft",     // fixe Zeilen-Beschriftung links (oder null)
-          "segs": [                               // Segmente = zusammengefasste Spalten
+          "label": "Skills-Check Kraft",    // fixe Zeilen-Beschriftung links (oder null)
+          "segs": [                          // Segmente = zusammengefasste Stufen-Spalten
             {
-              "v": "SC 1: Kniebeuge ...",         // Text der Zelle (\n = Zeilenumbruch)
-              "from": 0,                          // erste Stufe (Index in "stages")
-              "to": 1,                            // letzte Stufe (Zelle deckt Spalten from..to ab)
-              "l": [                              // externe Links der Zelle (optional)
-                { "text": "Skills-Check Kraft F1", "href": "https://snowsports.flink.host/s/..." }
-              ]
+              "v": "SC 1: Kniebeuge …",      // Zelltext (\n = Zeilenumbruch)
+              "from": 0, "to": 1,            // Stufen-Indizes (0 = F1 … 9 = M), müssen pro Zeile 0–9 lückenlos abdecken
+              "l": [ { "text": "Skills-Check Kraft F1", "href": "https://…" } ]   // externe Links (optional)
             }
           ]
         }
@@ -64,65 +100,10 @@ Dieser Ordner enthält alles, um das Projekt weiterzuentwickeln.
 }
 ```
 
-Wichtig:
-- **Stufen-Spalten:** `from`/`to` sind Indizes in `stages` (0 = F1 … 9 = M). Ein Segment mit
-  `"from":0,"to":1` ist eine Zelle, die F1 **und** F2 abdeckt (zusammengefasst). Pro Zeile müssen die
-  Segmente zusammen genau die Spalten 0–9 abdecken.
-- **`label`:** der wiederkehrende Vorspann jeder Zeile wird einmal links als fixe Beschriftung gezeigt
-  (statt in jeder Zelle wiederholt). `null` = keine Beschriftung.
-- **`l`:** Liste externer Dokumente. Wird als anklickbarer Button (📄) gerendert.
-
----
-
-## Wie `build.py` Texte strukturiert
-
-Der Zelltext (`v`) wird in `render_block()` automatisch aufbereitet:
-
-- Zeilen mit `•` → Aufzählungsliste.
-- Zeilen wie `SC 1: …`, `SC: …`, `ST: …` → Liste mit Badge.
-- Kurze erste Zeile + Text darunter → fette Zwischenüberschrift + Absatz.
-- `Label: Wert` → bei kurzem Wert inline (fettes Label), bei langem Wert als farbige
-  Zwischenüberschrift (`.sh`) + Absatz darunter.
-
-Anpassen lässt sich das in der Funktion `render_block()` in `build.py`.
-
----
-
-## Funktionen der Seite
-
-- **Volltextsuche** (oben) mit Treffer-Hervorhebung.
-- **Sprung-Navigation** zu jedem Thema.
-- **Alle öffnen / schließen.**
-- **Lange Zellen** sind eingeklappt, per «mehr» ausklappbar.
-- **Synchrones Seitwärts-Scrollen:** alle Themen-Tabellen scrollen horizontal gemeinsam.
-- **Stufen-Highlight:** Klick auf einen Stufen-Kopf (z. B. „T2") färbt diese Spalte in allen
-  Themen dezent in der Stufenfarbe ein (nochmal klicken = aus; mehrere möglich).
-- Farbcodierung: Foundation (türkis), Talent (gold), Elite (orange), Mastery (rot).
-
-Layout (CSS) und Verhalten (JS) stehen vollständig als Strings `CSS` und `JS` in `build.py`.
-
----
-
-## Offene Punkte / Ideen für die Weiterarbeit
-
-- **Podcast/Spotify-Icon:** Rechts neben jedem Titel ist ein grünes Podcast-Icon als reine
-  Visualisierung eingebaut (noch **ohne Verknüpfung**). Echte Links können pro Thema ergänzt
-  werden – z. B. ein neues Feld `"podcast": "https://..."` je Theme in `ftem_data.json`,
-  das `build.py` dann im `<a href>` des Icons einsetzt.
-- **Alterskategorien E1/E2/M:** Für diese Stufen war im FTEM-Tool keine Alterskategorie
-  hinterlegt – sie sind im Stufen-Kopf entsprechend leer.
-- **Externe Links** zeigen auf die Original-Dokumente (meist `snowsports.flink.host`-PDFs);
-  deren Inhalte sind nicht eingebettet, sondern verlinkt.
-- **Stufen-Filter** (nur eine Phase anzeigen) und ein **Druck-/PDF-Export** wären mögliche
-  nächste Erweiterungen.
-
 ---
 
 ## Herkunft der Daten
 
-Die Inhalte stammen aus dem (login-geschützten) Swiss-Ski FTEM-Dashboard
-`my.ftem.swiss-ski.ch/dashboard/alpine-ski` → Ansicht „Athlet:innen-Weg".
-Sie wurden einmalig aus der eingeloggten Browser-Ansicht ausgelesen und in `ftem_data.json`
-strukturiert. Zum Aktualisieren bei künftigen Änderungen im Tool: die betroffenen Werte
-direkt in `ftem_data.json` anpassen und `build.py` neu ausführen.
-
+Inhalte aus dem (login-geschützten) Swiss-Ski FTEM-Dashboard `my.ftem.swiss-ski.ch`.
+Bei Änderungen im Tool: betroffene Werte in der jeweiligen `ftem_data*.json` anpassen
+und `python3 build.py` ausführen.

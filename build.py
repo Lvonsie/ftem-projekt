@@ -53,6 +53,9 @@ GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
 def ph(st): return "foundation" if st[0]=="F" else "talent" if st[0]=="T" else "elite" if st[0]=="E" else "mastery"
 def esc(s): return html.escape(s, quote=True)
 
+# "FTEM" in den vier Phasenfarben (Anpassung von Luca, Commit "Farben FTEM")
+FTEM = '<span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span>'
+
 SC_RE = re.compile(r'^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*(.*)$', re.S)
 
 def render_block(block, link_texts):
@@ -190,7 +193,7 @@ def sport_section(sport, d, lang):
     back = '<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'">'+esc(BACK[lang])+'</a>'
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
-            '<header class="top">'+back+'<h1>FTEM '+esc(name)+' <b>· '+aw+'</b></h1>'
+            '<header class="top">'+back+'<h1>'+FTEM+' <span class="sk">'+esc(name)+'</span> <b>· '+aw+'</b></h1>'
             '<div class="tools">'+lang_switch(lang)+'</div></header>'
             '<div class="wrap"><div class="placeholder">'
             '<div class="big">'+esc(name)+'</div>'
@@ -199,7 +202,7 @@ def sport_section(sport, d, lang):
     sections, jump_opts = build_sections(d, sid, lang)
     n_themes = len(d["themes"])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
-        '<header class="top">'+back+'<h1>FTEM '+esc(name)+' <b>· '+aw+'</b></h1>'
+        '<header class="top">'+back+'<h1>'+FTEM+' <span class="sk">'+esc(name)+'</span> <b>· '+aw+'</b></h1>'
         '<div class="tools">'+lang_switch(lang)+'<span class="cnt"></span>'
         '<input class="q" type="search" placeholder="'+esc(tr("In allen Inhalten suchen…", lang))+'">'
         '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
@@ -221,7 +224,7 @@ def home_html(datamap, lang):
                   '<span class="cn">'+esc(name)+'</span>'
                   +('' if has else '<span class="tag">'+esc(NODATA[lang])+'</span>')+'</a>')
     return ('<section id="home"><div class="home-hero">'
-            '<h1>FTEM <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
+            '<h1>'+FTEM+' <b>'+esc(tr("Athlet:innen-Weg", lang))+'</b></h1>'
             '<p class="sub">'+esc(HOME_SUB[lang])+'</p>'
             '<div class="hero-lang">'+lang_switch(lang)+'</div>'
             '<div class="grid-sports">'+cards+'</div>'
@@ -261,6 +264,9 @@ header.top .back{font-size:12.5px;font-weight:700;color:var(--ink);text-decorati
 header.top .back:hover{background:#fff;border-color:var(--red);color:var(--red)}
 header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px}
 header.top h1 b{color:var(--ink);font-weight:700}
+h1 .fF{color:var(--found)}h1 .fT{color:var(--talent)}h1 .fE{color:var(--elite)}h1 .fM{color:var(--mast)}
+h1 .fF,h1 .fT,h1 .fE,h1 .fM{font-weight:900}
+h1 .sk{color:var(--ink)}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
 .tools input,.tools select,.tools button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
 .tools input{min-width:210px}
