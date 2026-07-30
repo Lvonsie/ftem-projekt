@@ -113,7 +113,6 @@ def theme_html(t, idx):
         body += '</div>'
     return ('<details class="theme" id="t'+str(idx)+'" open data-title="'+esc(t["title"].lower())+'">'
             '<summary><span class="tt">'+esc(t["title"])+'</span>'
-            '<span class="pod" title="Podcast / Spotify – Visualisierung (noch keine Verknüpfung)">'+POD_SVG+'<span class="podlbl">Podcast</span></span>'
             '<span class="rown">'+str(len(t["rows"]))+' Zeilen</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
@@ -162,10 +161,6 @@ summary .tt{font-size:14px;font-weight:800;display:flex;align-items:center;gap:9
 summary .tt::before{content:'';width:7px;height:7px;border-right:2px solid var(--red);border-bottom:2px solid var(--red);transform:rotate(-45deg);transition:transform .15s;margin-left:1px}
 details[open] summary .tt::before{transform:rotate(45deg)}
 summary .rown{font-size:10.5px;color:var(--mut);font-weight:600;background:var(--bg);padding:2px 8px;border-radius:20px}
-summary .pod{margin-left:14px;display:inline-flex;align-items:center;gap:6px;padding:3px 9px 3px 4px;border-radius:20px;background:rgba(29,185,84,.1);cursor:pointer;transition:background .12s,transform .12s}
-summary .pod:hover{background:rgba(29,185,84,.2);transform:translateY(-1px)}
-summary .pod svg{display:block}
-summary .pod .podlbl{font-size:10.5px;font-weight:700;color:#1a7a3a}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:start}
@@ -278,8 +273,6 @@ function applyHl(){
 document.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>{
   const i=+h.dataset.idx;active.has(i)?active.delete(i):active.add(i);applyHl();
 }));
-// podcast icon = visual placeholder; don't toggle the chapter when clicked
-document.querySelectorAll('.pod').forEach(p=>p.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();}));
 run();setupClamp();
 """
 
