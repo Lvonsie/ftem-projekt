@@ -305,7 +305,10 @@ def home_html(datamap, lang):
                 ticon = cand
         img_tag = ('<img class="nicon" src="'+esc(ticon)+'" alt="" loading="lazy">') if ticon else ''
         hover = '<span class="nhover">'+img_tag+'<span class="nname">'+label+'</span></span>'
-        nodes += ('<a class="node" href="#'+s["id"]+'" '
+        # "Gipfel"-Punkt (hoeher als beide Nachbarn) -> Text/Popup oben, sonst unten
+        neigh = ([CONS_POS[i-1][1]] if i > 0 else []) + ([CONS_POS[i+1][1]] if i+1 < n else [])
+        up = bool(neigh) and y < min(neigh)
+        nodes += ('<a class="node'+(' up' if up else '')+'" href="#'+s["id"]+'" '
                   'style="left:'+str(x)+'%;top:'+str(y)+'%;--d:'+str(i*150)+'ms">'
                   + hover +
                   '<span class="dot"></span>'
@@ -412,10 +415,13 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .node:hover .dot,.node:focus-visible .dot{transform:scale(1.45)}
 .node .nlabel{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);
   font-size:12.5px;font-weight:700;color:#fff;text-align:center;line-height:1.25;letter-spacing:.02em;
-  text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.7);pointer-events:none}
-.node .nhover{position:absolute;bottom:calc(100% - 2px);left:50%;transform:translate(-50%,10px);
+  text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.7);pointer-events:none;transition:opacity .18s}
+.node.up .nlabel{top:auto;bottom:calc(100% + 5px)}
+.node:hover .nlabel,.node:focus-visible .nlabel{opacity:0}
+.node .nhover{position:absolute;top:calc(100% - 2px);left:50%;transform:translate(-50%,-8px);
   display:flex;flex-direction:column;align-items:center;gap:5px;width:124px;
   opacity:0;pointer-events:none;transition:opacity .22s,transform .22s}
+.node.up .nhover{top:auto;bottom:calc(100% - 2px);transform:translate(-50%,8px)}
 .node:hover .nhover,.node:focus-visible .nhover{opacity:1;transform:translate(-50%,0)}
 .node .nicon{width:74px;height:74px;object-fit:contain;border-radius:16px;filter:drop-shadow(0 3px 12px rgba(0,0,0,.55))}
 .node .nhover .nname{font-size:12.5px;font-weight:800;color:#fff;text-align:center;line-height:1.2;text-shadow:0 1px 8px rgba(0,0,0,.92)}
