@@ -75,6 +75,7 @@ BACK = {"de": "← Sportarten", "fr": "← Sports", "it": "← Sport"}
 BACK_TITLE = {"de": "Zurück zur Auswahl", "fr": "Retour à la sélection", "it": "Torna alla selezione"}
 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
+# Fallback, falls eine Datendatei keine "ages" enthaelt (Alterskategorien pro Sportart)
 AGE = {"F1":"U8","F2":"U8–U10","F3":"U10–U12","T1":"U12–U14","T2":"U14–U16","T3":"U16+","T4":"U18+","E1":"","E2":"","M":""}
 GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
 
@@ -154,12 +155,12 @@ def render_cell(seg, lang):
         if btns: inner += '<div class="lks">'+btns+'</div>'
     return inner or '<div class="empty">–</div>'
 
-def theme_html(t, idx, stages, prefix, lang):
+def theme_html(t, idx, stages, prefix, lang, ages):
     title = tr(t["title"], lang)
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(stages):
-        age = AGE.get(s,"")
+        age = ages.get(s,"")
         th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="'+esc(tr("Spalte hervorheben", lang))+'"><span class="st">'+s+'</span><span class="stf">'+FULL[s]+(' · '+age if age else '')+'</span></div>'
     th += '</div>'
     body = ""
@@ -176,13 +177,14 @@ def theme_html(t, idx, stages, prefix, lang):
             if len(phs) > 1: cls = "ph-multi"
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang)+'</div><button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button></div>'
         body += '</div>'
-    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" open data-title="'+esc(title.lower())+'">'
+    return ('<details class="theme" id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'">'
             '<summary><span class="tt">'+esc(title)+'</span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
 def build_sections(d, prefix, lang):
     themes = d["themes"]
     stages = d["stages"]
+    ages = {k: v for k, v in (d.get("ages") or AGE).items() if v}
     seen = list(dict.fromkeys(t["group"] for t in themes))
     order = [g for g in GROUP_ORDER if g in seen] + [g for g in seen if g not in GROUP_ORDER]
     sections=""
@@ -191,7 +193,7 @@ def build_sections(d, prefix, lang):
         if not items: continue
         sections += '<h2 class="grp">'+esc(tr(g, lang))+'</h2>'
         for i,t in items:
-            sections += theme_html(t,i,stages,prefix,lang)
+            sections += theme_html(t,i,stages,prefix,lang,ages)
     jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
     return sections, jump
 
@@ -219,6 +221,8 @@ def sport_section(sport, d, lang):
     sid = sport["id"]; name = tr(sport["name"], lang)
     aw = esc(tr("Athlet:innen-Weg", lang))
     back = '<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'">'+esc(BACK[lang])+'</a>'
+    if sport.get("icon"):
+        back += '<img class="sicon" src="'+esc(sport["icon"])+'" alt="">'
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
             '<header class="top">'+back+'<h1>'+FTEM+' <span class="sk">'+esc(name)+'</span> <b>· '+aw+'</b></h1>'
@@ -231,8 +235,8 @@ def sport_section(sport, d, lang):
     n_themes = len(d["themes"])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
         '<header class="top">'+back+'<h1>'+FTEM+' <span class="sk">'+esc(name)+'</span> <b>· '+aw+'</b></h1>'
-        '<div class="tools">'+lang_switch(lang)+'<span class="cnt"></span>'
-        '<input class="q" type="search" placeholder="'+esc(tr("In allen Inhalten suchen…", lang))+'">'
+        '<div class="tools">'+lang_switch(lang)+
+        '<input class="q" type="search" placeholder="Search">'
         '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button></div></header>'
         '<div class="wrap">'
@@ -297,13 +301,16 @@ CSS = r"""
 --mast:#d52b1e;--mast-t:#9c1d14;--mast-bg:#fce9e7;
 --colw:200px;--lblw:146px;--top:54px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;background:var(--bg)}
+html.h #home{display:none}
+html.noanim .grid-sports .card{animation:none}
 [hidden]{display:none!important}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px}
 .langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
 .langsw a.active{background:var(--red);color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
+<<<<<<< HEAD
 /* Startseite – Neon-Konstellation */
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(9,14,24,.58),rgba(9,14,24,.34) 40%,rgba(7,11,20,.92)),url("assets/hero.jpg") center 28%/cover no-repeat}
@@ -353,6 +360,26 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 @media(max-width:640px){.node .nlabel{font-size:10.5px}.node .ncard{width:130px}#home .hero-head{padding-top:60px}}
+=======
+/* Startseite */
+#home .home-hero{max-width:980px;margin:0 auto;padding:60px 24px 30px;text-align:center}
+#home h1{font-size:30px;margin:0 0 6px;font-weight:800;color:var(--red);letter-spacing:.2px}
+#home h1 b{color:var(--ink);font-weight:800}
+#home .sub{color:var(--mut);font-size:14px;margin:0 0 18px}
+#home .hero-lang{display:flex;justify-content:center;margin:0 0 30px}
+.grid-sports{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;text-align:center}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.grid-sports .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 12px 20px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:9px;transition:box-shadow .18s,transform .18s,border-color .18s;animation:cardIn .45s ease both}
+.grid-sports .card:hover{border-color:var(--red);box-shadow:0 10px 24px rgba(213,43,30,.14);transform:translateY(-4px) scale(1.02)}
+.grid-sports .ab{width:60px;height:60px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;transition:transform .2s ease;overflow:hidden}
+.grid-sports .card:hover .ab{transform:scale(1.12) rotate(-6deg)}
+.grid-sports .ab.has-img{background:none;border:none}
+.grid-sports .ab img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.grid-sports .card.nodata .ab{background:#b6c0cc}
+.grid-sports .card.nodata .ab.has-img{background:none;filter:grayscale(1);opacity:.6}
+.grid-sports .cn{font-weight:800;font-size:13.5px}
+.grid-sports .tag{font-size:10px;font-weight:700;color:var(--mut);background:var(--bg);border-radius:20px;padding:2px 9px}
+>>>>>>> 09592038aa835763b2dabffacbc5ed0e4f71a20a
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
@@ -373,6 +400,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;height:var(--top)}
 header.top .back{font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 13px;white-space:nowrap}
 header.top .back:hover{background:#fff;border-color:var(--red);color:var(--red)}
+header.top .sicon{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--red);white-space:nowrap;letter-spacing:.2px}
 header.top h1 b{color:var(--ink);font-weight:700}
 h1 .fF{color:var(--found)}h1 .fT{color:var(--talent)}h1 .fE{color:var(--elite)}h1 .fM{color:var(--mast)}
@@ -380,7 +408,8 @@ h1 .fF,h1 .fT,h1 .fE,h1 .fM{font-weight:900}
 h1 .sk{color:var(--ink)}
 .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-left:auto}
 .tools input,.tools select,.tools button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
-.tools input{min-width:210px}
+.tools input{width:150px}
+.tools select{max-width:180px}
 .tools button{cursor:pointer;font-weight:600}
 .tools button:hover{background:var(--bg)}
 .tools .cnt{font-size:12px;color:var(--mut);font-weight:600;white-space:nowrap}
@@ -541,6 +570,7 @@ function show(id){
   }
 }
 function route(){
+  document.documentElement.classList.remove('h'); // ab jetzt steuert JS die Sichtbarkeit
   const id=decodeURIComponent(location.hash.replace('#',''));
   show(SPORT_IDS.includes(id)?id:'');
 }
@@ -571,7 +601,11 @@ for lang in LANGS:
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False)))
     page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title><style>'+CSS+'</style></head>'
+        '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title>'
+        # verhindert Aufblitzen der Startseite, wenn direkt eine Sportart (#hash) geladen wird
+        '<script>if(location.hash)document.documentElement.classList.add("h");'
+        'try{if(sessionStorage.ftemSeen)document.documentElement.classList.add("noanim");sessionStorage.ftemSeen=1}catch(e){}</script>'
+        '<style>'+CSS+'</style></head>'
         '<body>'+body+'<script>'+js+'</script></body></html>')
     out = os.path.join(BASE, FILES[lang])
     open(out,"w",encoding="utf-8").write(page)
