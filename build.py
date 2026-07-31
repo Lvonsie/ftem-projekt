@@ -290,6 +290,11 @@ def lang_switch(active):
         out += '<a'+cls+' data-f="'+FILES[l]+'" href="'+FILES[l]+'">'+l.upper()+'</a>'
     return out + '</div>'
 
+def stage_bar(stages, lang):
+    btns = "".join('<button class="sb ph-'+ph(s)+'" data-si="'+str(i)+'" aria-pressed="false" '
+                   'title="'+esc(FULL.get(s,s))+'">'+esc(s)+'</button>' for i, s in enumerate(stages))
+    return ('<div class="stagebar" role="group" aria-label="'+esc(tr("Stufe hervorheben", lang))+'">'+btns+'</div>')
+
 def sport_section(sport, d, lang, edit=False):
     sid = sport["id"]; name = tr(sport["name"], lang)
     if edit and d is not None:
@@ -317,7 +322,8 @@ def sport_section(sport, d, lang, edit=False):
         '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
         +lang_switch(lang)+'</div></header>'
         '<div class="wrap">'
-        +sections+'</div></section>')
+        +sections+'</div>'
+        +stage_bar(d["stages"], lang)+'</section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
 # Positionen der Sternbild-Knoten (x%, y%) auf der Hero-Flaeche
@@ -612,7 +618,7 @@ header.top button:hover{background:var(--bg)}
   @page{size:A4 landscape;margin:9mm}
   :root{--colw:84px;--lblw:80px}
   html,body{background:#fff}
-  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel{display:none!important}
+  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar{display:none!important}
   section.sport{display:block!important}
   section.sport[hidden]{display:none!important}
   .wrap{padding:0;max-width:none}
@@ -667,10 +673,22 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .c.hd.active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.45)}
 /* dezente Phasen-Toenung je Spalte - Orientierung F1-M beim Scrollen */
 .cell.ph-foundation{background:#f4faf8}.cell.ph-talent{background:#fcf8ee}.cell.ph-elite{background:#fdf5ef}.cell.ph-mastery{background:#fcefef}.cell.ph-multi{background:#f7f8fa}
-.cell.hl-foundation{background:var(--found-bg)}
-.cell.hl-talent{background:var(--talent-bg)}
-.cell.hl-elite{background:var(--elite-bg)}
-.cell.hl-mastery{background:var(--mast-bg)}
+.cell.hl-foundation{background:#d6edf1;box-shadow:inset 0 0 0 2px var(--found)}
+.cell.hl-talent{background:#faeab4;box-shadow:inset 0 0 0 2px var(--talent)}
+.cell.hl-elite{background:#fbdcc6;box-shadow:inset 0 0 0 2px var(--elite)}
+.cell.hl-mastery{background:#f8d2cb;box-shadow:inset 0 0 0 2px var(--mast)}
+/* Sticky Stufen-Leiste (F1..M) - Inhalt einfaerben wie Spaltenkoepfe */
+.stagebar{position:sticky;bottom:0;z-index:12;display:flex;gap:5px;justify-content:center;
+  padding:7px 12px;padding-bottom:calc(7px + env(safe-area-inset-bottom));
+  background:rgba(247,249,251,.92);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-top:1px solid var(--line)}
+.stagebar .sb{flex:1 1 0;min-width:0;max-width:58px;font:inherit;font-size:11.5px;font-weight:800;letter-spacing:.02em;
+  color:var(--ink);background:#fff;border:1px solid var(--line);border-bottom:2.5px solid var(--phc,#b6c0cc);
+  border-radius:7px;padding:6px 2px;cursor:pointer;text-align:center;transition:background .12s,color .12s,transform .08s}
+.stagebar .sb:hover{background:var(--acc-bg)}
+.stagebar .sb:active{transform:translateY(1px)}
+.sb.ph-foundation{--phc:var(--found)}.sb.ph-talent{--phc:var(--talent)}.sb.ph-elite{--phc:var(--elite)}.sb.ph-mastery{--phc:var(--mast)}
+.stagebar .sb.active{background:var(--phc);color:#fff;border-color:var(--phc)}
+.stagebar .sb.ph-talent.active{color:#3b2e00}
 /* Phasenfarben NUR fuer die Stufen-Koepfe - Inhaltszellen behalten dunkle Schrift */
 .c.hd.ph-foundation{background:var(--found);color:#fff}.c.hd.ph-talent{background:var(--talent);color:#3b2e00}.c.hd.ph-elite{background:var(--elite);color:#fff}.c.hd.ph-mastery{background:var(--mast);color:#fff}
 .cell{color:var(--ink)}
@@ -730,6 +748,8 @@ header.top h1{font-size:13.5px;min-width:0}
 .rl{font-size:9.5px;padding:6px 6px;line-height:1.25;font-weight:600}
 .rl{box-shadow:0 0 0 6px var(--card),-12px 0 0 6px var(--card),7px 0 8px -5px rgba(0,0,0,.22)}
 .cell .cwrap{font-size:11px}
+.stagebar{gap:3px;padding:5px 8px;padding-bottom:calc(5px + env(safe-area-inset-bottom))}
+.stagebar .sb{font-size:10.5px;padding:6px 1px;border-bottom-width:2px;max-width:none}
 summary .tt{font-size:13px}
 details.theme{scroll-margin-top:170px}
 .home-info{padding:28px 14px 20px}
@@ -890,15 +910,16 @@ function initSport(sec){
   function phaseIdx(i){return i<3?'foundation':i<7?'talent':i<9?'elite':'mastery';}
   function applyHl(){
     sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.classList.toggle('active',active.has(+h.dataset.idx)));
+    sec.querySelectorAll('.stagebar .sb').forEach(b=>{const on=active.has(+b.dataset.si);b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});
     sec.querySelectorAll('.cell').forEach(c=>{
       c.classList.remove('hl-foundation','hl-talent','hl-elite','hl-mastery');
       const f=+c.dataset.from,t=+c.dataset.to;
       for(const i of active){if(i>=f&&i<=t){c.classList.add('hl-'+phaseIdx(i));break;}}
     });
   }
-  sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>{
-    const i=+h.dataset.idx;active.has(i)?active.delete(i):active.add(i);applyHl();
-  }));
+  function toggleStage(i){active.has(i)?active.delete(i):active.add(i);applyHl();}
+  sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>toggleStage(+h.dataset.idx)));
+  sec.querySelectorAll('.stagebar .sb').forEach(b=>b.addEventListener('click',()=>toggleStage(+b.dataset.si)));
   run();
 }
 sections.forEach(initSport);

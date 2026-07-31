@@ -1433,7 +1433,8 @@
   "SBX EC & WC": "SBX EC & WC",
   "SBX WC": "SBX WC",
   "10 bis 20": "10 à 20",
-  "Je nach Tour oder Wertungen": "Selon le tour ou les classements"
+  "Je nach Tour oder Wertungen": "Selon le tour ou les classements",
+  "Stufe hervorheben": "Mettre le niveau en évidence"
  },
  "it": {
   "Athlet:innen-Weg": "Percorso dell'atleta",
@@ -2869,6 +2870,7 @@
   "SBX EC & WC": "SBX EC & WC",
   "SBX WC": "SBX WC",
   "10 bis 20": "da 10 a 20",
-  "Je nach Tour oder Wertungen": "A seconda del tour o delle classifiche"
+  "Je nach Tour oder Wertungen": "A seconda del tour o delle classifiche",
+  "Stufe hervorheben": "Evidenzia il livello"
  }
 }
