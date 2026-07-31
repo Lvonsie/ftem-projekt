@@ -172,7 +172,7 @@ header.top button:hover{background:var(--bg)}
   @page{size:A4 landscape;margin:9mm}
   :root{--colw:84px;--lblw:80px}
   html,body{background:#fff}
-  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar{display:none!important}
+  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar,.printpick{display:none!important}
   section.sport{display:block!important}
   section.sport[hidden]{display:none!important}
   .wrap{padding:0;max-width:none}
@@ -278,6 +278,19 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .lks a:hover{background:var(--acc-bg2)}
 .more{position:absolute;bottom:6px;right:8px;z-index:3;font:inherit;font-size:10.5px;font-weight:700;color:var(--acc);background:#fff;border:1px solid var(--line);border-radius:20px;padding:2px 9px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .more:hover{background:var(--acc-bg)}
+/* Stufen-Druck-Dialog */
+.printpick{position:fixed;inset:0;z-index:60;background:rgba(15,22,34,.5);display:flex;align-items:center;justify-content:center;padding:20px}
+.printpick[hidden]{display:none}
+.pp-card{position:relative;background:#fff;border-radius:14px;padding:18px 18px 16px;max-width:344px;width:100%;box-shadow:0 14px 44px rgba(0,0,0,.32)}
+.pp-h{font-size:14px;font-weight:800;color:var(--ink);margin:0 0 13px;padding-right:26px}
+.pp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px}
+.pp-b{font:inherit;font-size:12.5px;font-weight:800;color:var(--ink);background:#fff;border:1px solid var(--line);border-bottom:2.5px solid var(--phc,#b6c0cc);border-radius:7px;padding:9px 0;cursor:pointer;transition:background .12s,transform .06s}
+.pp-b:hover{background:var(--acc-bg)}.pp-b:active{transform:translateY(1px)}
+.pp-b.ph-foundation{--phc:var(--found)}.pp-b.ph-talent{--phc:var(--talent)}.pp-b.ph-elite{--phc:var(--elite)}.pp-b.ph-mastery{--phc:var(--mast)}
+.pp-all{width:100%;font:inherit;font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-bg);border:none;border-radius:8px;padding:10px;cursor:pointer}
+.pp-all:hover{background:var(--acc-bg2)}
+.pp-x{position:absolute;top:9px;right:12px;background:none;border:none;font-size:22px;line-height:1;color:var(--mut);cursor:pointer;padding:2px 6px}
+.pp-x:hover{color:var(--ink)}
 mark{background:#ffe08a;border-radius:2px;padding:0 1px}
 .hidden{display:none!important}
 footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}

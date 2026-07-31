@@ -667,7 +667,7 @@ header.top button:hover{background:var(--bg)}
   @page{size:A4 landscape;margin:9mm}
   :root{--colw:84px;--lblw:80px}
   html,body{background:#fff}
-  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar{display:none!important}
+  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar,.printpick{display:none!important}
   section.sport{display:block!important}
   section.sport[hidden]{display:none!important}
   .wrap{padding:0;max-width:none}
@@ -773,6 +773,19 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .lks a:hover{background:var(--acc-bg2)}
 .more{position:absolute;bottom:6px;right:8px;z-index:3;font:inherit;font-size:10.5px;font-weight:700;color:var(--acc);background:#fff;border:1px solid var(--line);border-radius:20px;padding:2px 9px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .more:hover{background:var(--acc-bg)}
+/* Stufen-Druck-Dialog */
+.printpick{position:fixed;inset:0;z-index:60;background:rgba(15,22,34,.5);display:flex;align-items:center;justify-content:center;padding:20px}
+.printpick[hidden]{display:none}
+.pp-card{position:relative;background:#fff;border-radius:14px;padding:18px 18px 16px;max-width:344px;width:100%;box-shadow:0 14px 44px rgba(0,0,0,.32)}
+.pp-h{font-size:14px;font-weight:800;color:var(--ink);margin:0 0 13px;padding-right:26px}
+.pp-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px}
+.pp-b{font:inherit;font-size:12.5px;font-weight:800;color:var(--ink);background:#fff;border:1px solid var(--line);border-bottom:2.5px solid var(--phc,#b6c0cc);border-radius:7px;padding:9px 0;cursor:pointer;transition:background .12s,transform .06s}
+.pp-b:hover{background:var(--acc-bg)}.pp-b:active{transform:translateY(1px)}
+.pp-b.ph-foundation{--phc:var(--found)}.pp-b.ph-talent{--phc:var(--talent)}.pp-b.ph-elite{--phc:var(--elite)}.pp-b.ph-mastery{--phc:var(--mast)}
+.pp-all{width:100%;font:inherit;font-size:12px;font-weight:700;color:var(--acc);background:var(--acc-bg);border:none;border-radius:8px;padding:10px;cursor:pointer}
+.pp-all:hover{background:var(--acc-bg2)}
+.pp-x{position:absolute;top:9px;right:12px;background:none;border:none;font-size:22px;line-height:1;color:var(--mut);cursor:pointer;padding:2px 6px}
+.pp-x:hover{color:var(--ink)}
 mark{background:#ffe08a;border-radius:2px;padding:0 1px}
 .hidden{display:none!important}
 footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
@@ -948,7 +961,7 @@ function initSport(sec){
   sec.querySelector('.exp').onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(setupClamp,50);};
   sec.querySelector('.col').onclick=()=>themes.forEach(t=>t.open=false);
   const pdfBtn=sec.querySelector('.pdf');
-  if(pdfBtn)pdfBtn.onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(()=>window.print(),160);};
+  if(pdfBtn)pdfBtn.onclick=()=>openPrintPicker(sec);
   sec.querySelector('.jump').onchange=e=>{const el=document.getElementById(e.target.value);if(el){el.open=true;setTimeout(()=>el.scrollIntoView(),30);}e.target.selectedIndex=0;};
   themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
   window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
@@ -978,6 +991,93 @@ function initSport(sec){
   run();
 }
 sections.forEach(initSport);
+
+// ---- Stufendossier: erst Stufe waehlen, dann kompakt nur diese Stufe drucken ----
+const DOSSIER_CSS = '@page{size:A4 portrait;margin:12mm}'
+ +'body.ddoc{background:#fff!important;margin:0;padding:0;color:#1d2630;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}'
+ +'.ds-head{border-left:5px solid #b6c0cc;padding:1px 0 9px 12px;margin:0 0 13px}'
+ +'.ds-head.ph-foundation{border-color:#1f8fa6}.ds-head.ph-talent{border-color:#e2a900}.ds-head.ph-elite{border-color:#e8772e}.ds-head.ph-mastery{border-color:#d52b1e}'
+ +'.ds-title{font-size:15px;font-weight:800;line-height:1.2}.ds-stage{font-size:12px;font-weight:700;color:#5a6472;margin-top:2px}'
+ +'.ds-grp{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#5a6472;margin:13px 0 5px}'
+ +'.ds-theme{break-inside:avoid;margin:0 0 8px;border:1px solid #dfe4ea;border-radius:6px;overflow:hidden}'
+ +'.ds-theme h3{font-size:11.5px;font-weight:800;margin:0;padding:6px 9px;background:#f4f6f8;border-bottom:1px solid #dfe4ea;color:#1d2630}'
+ +'.ds-row{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:6px 9px;border-top:1px solid #eef1f4;break-inside:avoid}'
+ +'.ds-row:first-of-type{border-top:none}'
+ +'.ds-l{font-size:9.5px;font-weight:700;color:#39424e;line-height:1.3}'
+ +'.ds-c{font-size:10px;line-height:1.42}.ds-c .cwrap{padding:0!important;max-height:none!important;overflow:visible!important;font-size:10px!important;line-height:1.42!important;color:#1d2630!important}'
+ +'.ds-c .cwrap .zlab{background:#eef1f4!important;color:#4a5462!important}'
+ +'.ds-empty{font-size:11px;color:#8a929c;padding:14px 2px}';
+
+let ppSec=null;
+const pick=document.createElement('div');
+pick.className='printpick';pick.hidden=true;
+pick.innerHTML='<div class="pp-card" role="dialog" aria-modal="true"><button class="pp-x" type="button" aria-label="'+I18N.printClose+'">&times;</button>'
+  +'<div class="pp-h">'+I18N.printPick+'</div><div class="pp-grid"></div>'
+  +'<button class="pp-all" type="button">'+I18N.printAll+'</button></div>';
+document.body.appendChild(pick);
+const ppGrid=pick.querySelector('.pp-grid');
+function esc2(s){const d=document.createElement('div');d.textContent=(s==null?'':s);return d.innerHTML;}
+function stageMeta(sec,i){
+  const h=sec.querySelector('.c.hd[data-idx="'+i+'"]');
+  const full=h?(h.querySelector('.st')||{}).textContent||'':'';
+  const ph=h?([...h.classList].find(c=>c.indexOf('ph-')===0)||''):'';
+  return {full:full,ph:ph};
+}
+function openPrintPicker(sec){
+  ppSec=sec;ppGrid.innerHTML='';
+  sec.querySelectorAll('.stagebar .sb').forEach(b=>{
+    const i=+b.dataset.si,m=stageMeta(sec,i);
+    const el=document.createElement('button');
+    el.type='button';el.className='pp-b '+m.ph;el.dataset.si=i;
+    el.textContent=b.textContent;el.title=m.full;
+    ppGrid.appendChild(el);
+  });
+  pick.hidden=false;document.documentElement.style.overflow='hidden';
+}
+function closePrintPicker(){pick.hidden=true;document.documentElement.style.overflow='';}
+pick.addEventListener('click',e=>{if(e.target===pick||e.target.closest('.pp-x'))closePrintPicker();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!pick.hidden)closePrintPicker();});
+pick.querySelector('.pp-all').onclick=()=>{const s=ppSec;closePrintPicker();if(s){s.querySelectorAll('details.theme').forEach(t=>t.open=true);setTimeout(()=>window.print(),180);}};
+ppGrid.addEventListener('click',e=>{const b=e.target.closest('.pp-b');if(!b||!ppSec)return;const s=ppSec,i=+b.dataset.si;closePrintPicker();setTimeout(()=>printStage(s,i),60);});
+function buildDossier(sec,i){
+  const sportName=(sec.querySelector('header.top h1')||{}).textContent||'';
+  const m=stageMeta(sec,i);
+  let out='<div class="ds-head '+m.ph+'"><div class="ds-title">'+esc2(sportName)+'</div><div class="ds-stage">'+esc2(I18N.dossier)+' · '+esc2(m.full)+'</div></div>';
+  const wrap=sec.querySelector('.wrap');if(!wrap)return out+'<div class="ds-empty">–</div>';
+  let any=false;
+  [...wrap.children].forEach(ch=>{
+    if(ch.matches&&ch.matches('h2.grp')){out+='<div class="ds-grp">'+esc2(ch.textContent)+'</div>';}
+    else if(ch.matches&&ch.matches('details.theme')){
+      const title=(ch.querySelector('.tt')||{}).textContent||'';
+      let rows='';
+      ch.querySelectorAll('.r').forEach(r=>{
+        if(r.classList.contains('head'))return;
+        const rl=r.querySelector('.rl');
+        const label=(rl&&!rl.classList.contains('nolbl'))?rl.textContent.trim():'';
+        const cell=[...r.querySelectorAll('.cell')].find(c=>i>=+c.dataset.from&&i<=+c.dataset.to);
+        if(!cell)return;
+        const cw=cell.querySelector('.cwrap');
+        const plain=cw?cw.textContent.trim():'';
+        if(!plain||plain==='–')return;
+        rows+='<div class="ds-row"><div class="ds-l">'+esc2(label)+'</div><div class="ds-c"><div class="cwrap">'+(cw?cw.innerHTML:'')+'</div></div></div>';
+      });
+      if(rows){out+='<section class="ds-theme"><h3>'+esc2(title)+'</h3>'+rows+'</section>';any=true;}
+    }
+  });
+  if(!any)out+='<div class="ds-empty">–</div>';
+  return out;
+}
+function printStage(sec,i){
+  const win=window.open('','_blank');
+  if(!win){alert(I18N.popupBlocked);return;}
+  const appcss=(document.querySelector('style')||{}).textContent||'';
+  const body=buildDossier(sec,i);
+  const doc=win.document;
+  doc.open();
+  doc.write('<!DOCTYPE html><html lang="'+document.documentElement.lang+'"><head><meta charset="utf-8"><title>'+esc2(I18N.dossier)+'</title><style>'+appcss+'</style><style>'+DOSSIER_CSS+'</style></head><body class="ddoc">'+body+'</body></html>');
+  doc.close();win.focus();
+  setTimeout(()=>{try{win.print();}catch(e){}},500);
+}
 
 // ---- Sportarten-Popup auf der Startseite (Athlet:innen-Weg | Mission Swiss-Ski) ----
 const heroNodes=[...document.querySelectorAll('.node')];
@@ -1257,7 +1357,12 @@ for lang in LANGS:
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
             "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang),
             "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati"}[lang],
-            "noHits": {"de": "keine Treffer", "fr": "aucun résultat", "it": "nessun risultato"}[lang]}
+            "noHits": {"de": "keine Treffer", "fr": "aucun résultat", "it": "nessun risultato"}[lang],
+            "printPick": {"de": "Stufe für das Dossier wählen", "fr": "Choisir le niveau pour le dossier", "it": "Scegli il livello per il dossier"}[lang],
+            "printAll": {"de": "Ganze Sportart (Querformat)", "fr": "Tout le sport (paysage)", "it": "Tutto lo sport (orizzontale)"}[lang],
+            "printClose": {"de": "Schliessen", "fr": "Fermer", "it": "Chiudi"}[lang],
+            "dossier": {"de": "Stufendossier", "fr": "Dossier de niveau", "it": "Dossier di livello"}[lang],
+            "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
