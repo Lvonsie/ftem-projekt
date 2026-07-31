@@ -298,7 +298,7 @@ def sport_section(sport, d, lang, edit=False):
     aw = esc(tr("Athlet:innen-Weg", lang))
     back = '<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'">'+esc(BACK[lang])+'</a>'
     if sport.get("icon"):
-        back += '<img class="sicon" src="'+esc(sport["icon"])+'" alt="">'
+        back += '<img class="sicon" src="'+esc(sport["icon"])+'" alt="'+esc(name)+'" width="32" height="32" decoding="async">'
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
             '<header class="top"><div class="ht-l">'+back+'<h1>'+esc(name)+' · '+aw+'</h1></div>'
@@ -383,7 +383,7 @@ def home_html(datamap, lang):
             cand = "assets/sporticons/" + os.path.splitext(os.path.basename(icon))[0] + ".png"
             if os.path.exists(cand):
                 ticon = cand
-        img_tag = ('<img class="nicon" src="'+esc(ticon)+'" alt="" loading="lazy">') if ticon else ''
+        img_tag = ('<img class="nicon" src="'+esc(ticon)+'" alt="" width="200" height="200" loading="lazy" decoding="async">') if ticon else ''
         hover = '<span class="nhover">'+img_tag+'<span class="nname">'+label+'</span></span>'
         # "Gipfel"-Punkt (hoeher als beide Nachbarn) -> Text/Popup oben, sonst unten
         neigh = ([CONS_POS[i-1][1]] if i > 0 else []) + ([CONS_POS[i+1][1]] if i+1 < n else [])
@@ -394,7 +394,8 @@ def home_html(datamap, lang):
                '<a href="#'+s["id"]+'">'+esc(tr("Athlet:innen-Weg", lang))+'</a>'
                + (('<a class="np-mission" href="'+esc(mission)+'" data-title="'+esc(name)+' – Mission Swiss-Ski">Mission Swiss-Ski</a>') if mission else '')
                + '</span>')
-        nodes += ('<div class="node'+(' up' if up else '')+'" tabindex="0" role="button" '
+        edge = ' edge-l' if x <= 24 else (' edge-r' if x >= 76 else '')
+        nodes += ('<div class="node'+(' up' if up else '')+edge+'" tabindex="0" role="button" '
                   'aria-haspopup="true" data-sport="'+s["id"]+'" '
                   'style="left:'+str(x)+'%;top:'+str(y)+'%;--d:'+str(i*150)+'ms">'
                   + hover +
@@ -506,6 +507,12 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .node.up .npop{top:auto;bottom:calc(100% + 6px);transform:translate(-50%,-8px)}
 .node.open{z-index:13}
 .node.open .npop{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.node.edge-l .npop{left:0;right:auto;transform:translateY(8px)}
+.node.edge-l.up .npop{transform:translateY(-8px)}
+.node.edge-l.open .npop{transform:translateY(0)}
+.node.edge-r .npop{left:auto;right:0;transform:translateY(8px)}
+.node.edge-r.up .npop{transform:translateY(-8px)}
+.node.edge-r.open .npop{transform:translateY(0)}
 .node.open .nhover,.node.open .nlabel{opacity:0!important}
 .npop a{display:block;text-align:center;background:rgba(255,255,255,.10);color:#fff;text-decoration:none;font-size:12.5px;font-weight:700;border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:8px 10px;line-height:1.25}
 .npop a:hover{background:var(--red);border-color:var(--red)}
@@ -522,7 +529,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 @media(max-width:700px){.mmodal{padding:0}.mm-box{width:100vw;height:100vh;border-radius:0}}
 .node:hover .dot,.node:focus-visible .dot{transform:scale(1.45)}
 .node .nlabel{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);
-  font-size:12.5px;font-weight:700;color:#fff;text-align:center;line-height:1.25;letter-spacing:.02em;
+  font-size:13.5px;font-weight:700;color:#fff;text-align:center;line-height:1.25;letter-spacing:.02em;
   text-shadow:0 1px 8px rgba(0,0,0,.92),0 0 4px rgba(0,0,0,.7);pointer-events:none;transition:opacity .18s}
 .node.up .nlabel{top:auto;bottom:calc(100% + 5px)}
 .node:hover .nlabel,.node:focus-visible .nlabel{opacity:0}
@@ -536,6 +543,10 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .scrolldown{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:8;color:rgba(255,255,255,.85);font-size:24px;line-height:1;background:none;border:none;cursor:pointer;padding:6px 14px;animation:bob 1.8s ease-in-out infinite}
 .scrolldown:hover{color:#fff}
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+.node .dot{animation:none!important}.node .dot::after{animation:none!important}.clines .cl,.clines .cl2{animation:none!important}.scrolldown{animation:none!important}
+}
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
 .adminlink{text-align:center;margin-top:30px}
@@ -554,9 +565,9 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:11px}#home .hero-head{padding-top:56px}}
-@media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:9.5px;max-width:62px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
-@media(max-width:350px){.node .nlabel{font-size:8.5px;max-width:54px}.node .dot{width:10px;height:10px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:56px}}
+@media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
+@media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */
 .ftem-info{margin-top:46px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 26px 22px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
@@ -644,7 +655,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:start}
-.rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2)}
+.rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2);min-width:0;overflow:hidden;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 .rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
 .r.head{position:relative;z-index:2}
 .r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--card);border:none}
@@ -654,6 +665,8 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .c.hd[data-idx]{cursor:pointer;transition:box-shadow .12s}
 .c.hd[data-idx]:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 .c.hd.active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.45)}
+/* dezente Phasen-Toenung je Spalte - Orientierung F1-M beim Scrollen */
+.cell.ph-foundation{background:#f4faf8}.cell.ph-talent{background:#fcf8ee}.cell.ph-elite{background:#fdf5ef}.cell.ph-mastery{background:#fcefef}.cell.ph-multi{background:#f7f8fa}
 .cell.hl-foundation{background:var(--found-bg)}
 .cell.hl-talent{background:var(--talent-bg)}
 .cell.hl-elite{background:var(--elite-bg)}
@@ -702,7 +715,7 @@ details.theme{scroll-margin-top:118px}
 }
 /* ---------- Responsive: Handy ---------- */
 @media(max-width:760px){
-:root{--colw:158px;--lblw:76px}
+:root{--colw:158px;--lblw:86px}
 header.top .back{width:auto;padding:6px 11px}
 header.top .sicon{width:28px;height:28px}
 header.top h1{font-size:13.5px;min-width:0}
@@ -1177,16 +1190,32 @@ for lang in LANGS:
                "fr":"Le parcours des athlètes de Swiss-Ski : tous les sports de neige à travers les dix niveaux de développement FTEM (F1–M).",
                "it":"Il percorso degli atleti di Swiss-Ski: tutti gli sport sulla neve lungo i dieci livelli di sviluppo FTEM (F1–M)."}[lang]
     og_img = (SITE_URL.rstrip("/")+"/assets/og-image.jpg") if SITE_URL else "assets/og-image.jpg"
+    og_locales = {"de":"de_CH","fr":"fr_CH","it":"it_CH"}
+    base = SITE_URL.rstrip("/") if SITE_URL else ""
+    # hreflang: verlinkt die drei Sprachvarianten gegenseitig (+ x-default)
+    alt_links = ""
+    for lg, fn in FILES.items():
+        href = (base+"/"+fn) if base else fn
+        alt_links += '<link rel="alternate" hreflang="'+lg+'" href="'+esc(href)+'">'
+    alt_links += '<link rel="alternate" hreflang="x-default" href="'+esc((base+"/index.html") if base else "index.html")+'">'
+    og_alt = "".join('<meta property="og:locale:alternate" content="'+og_locales[lg]+'">'
+                     for lg in FILES if lg != lang)
     head_meta = ('<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">'
+        '<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">'
+        '<link rel="apple-touch-icon" href="assets/icon-180.png">'
+        '<link rel="manifest" href="manifest.webmanifest">'
+        +alt_links+
         '<meta name="theme-color" content="#0f1622">'
         '<meta name="description" content="'+esc(og_desc)+'">'
         '<meta property="og:type" content="website">'
         '<meta property="og:site_name" content="Swiss-Ski FTEM">'
+        '<meta property="og:locale" content="'+og_locales[lang]+'">'
+        +og_alt+
         '<meta property="og:title" content="'+esc(og_title)+'">'
         '<meta property="og:description" content="'+esc(og_desc)+'">'
         '<meta property="og:image" content="'+esc(og_img)+'">'
         '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
-        +('<meta property="og:url" content="'+esc(SITE_URL)+'">' if SITE_URL else '')+
+        +('<meta property="og:url" content="'+esc((base+"/"+FILES[lang]) if base else FILES[lang])+'">' if SITE_URL else '')+
         '<meta name="twitter:card" content="summary_large_image">'
         '<meta name="twitter:title" content="'+esc(og_title)+'">'
         '<meta name="twitter:description" content="'+esc(og_desc)+'">'
