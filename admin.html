@@ -226,7 +226,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .c.hd[data-idx]:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 .c.hd.active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.45)}
 /* dezente Phasen-Toenung je Spalte - Orientierung F1-M beim Scrollen */
-.cell.ph-foundation{background:#f4faf8}.cell.ph-talent{background:#fcf8ee}.cell.ph-elite{background:#fdf5ef}.cell.ph-mastery{background:#fcefef}.cell.ph-multi{background:#f7f8fa}
+.cell.ph-foundation{background:#f4faf8;--zc:#0d5e6e;--zbg:#e1f0f3}.cell.ph-talent{background:#fcf8ee;--zc:#8a6a00;--zbg:#f7edcf}.cell.ph-elite{background:#fdf5ef;--zc:#a8511a;--zbg:#f8e2d3}.cell.ph-mastery{background:#fcefef;--zc:#9c1d14;--zbg:#f6dcd8}.cell.ph-multi{background:#f7f8fa;--zc:#5a6472;--zbg:#eceff3}
 .cell.hl-foundation{background:#d6edf1;box-shadow:inset 0 0 0 2px var(--found)}
 .cell.hl-talent{background:#faeab4;box-shadow:inset 0 0 0 2px var(--talent)}
 .cell.hl-elite{background:#fbdcc6;box-shadow:inset 0 0 0 2px var(--elite)}
@@ -257,8 +257,14 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap p{margin:0 0 5px;line-height:1.5}.cwrap p:last-child{margin-bottom:0}
 .cwrap .bh,.cwrap .sh{font-weight:700;color:var(--found-t);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
 .cwrap .bh:first-child,.cwrap .sh:first-child{margin-top:0}
-.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top:1px solid #edf0f3;padding-top:10px}
+.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top:1px solid #e3e8ee;padding-top:10px}
 .cwrap .bi{font-weight:700;color:var(--ink);font-size:11.5px;margin:0 0 3px;line-height:1.4}
+/* Off-Snow / On-Snow Zonen */
+.cwrap .zone{margin-top:11px}.cwrap .zone:first-child{margin-top:0}
+.cwrap .zone+.zone{border-top:1px solid #e3e8ee;padding-top:10px}
+.cwrap .zlab{display:inline-block;font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--zc,#5a6472);background:var(--zbg,#eceff3);border-radius:5px;padding:2px 7px;margin:0 0 5px}
+.cwrap .zsub{margin:0 0 4px;line-height:1.5}.cwrap .zsub:last-child{margin-bottom:0}
+.cwrap .zk{font-weight:700;color:var(--ink)}.cwrap .zk::after{content:"·";margin:0 5px 0 4px;color:#b6c0cc;font-weight:400}
 .cwrap .lbl{font-weight:700;color:var(--found-t)}
 .cwrap ul{margin:3px 0 6px;padding-left:15px}
 .cwrap ul.bl li{margin-bottom:3px;line-height:1.45}

@@ -149,17 +149,66 @@ def render_block(block, link_texts):
         return '<p><span class="lbl">'+esc(lab)+':</span> '+esc(val).replace("\n","<br>")+'</p>'
     return '<p>'+esc(b).replace("\n","<br>")+'</p>'
 
+def clean_ws(s):
+    # nur fuer die Anzeige: Tabs zu Leerzeichen, Mehrfach-Leerzeichen und
+    # riesige Luecken zusammenfassen, Zeilenenden trimmen. Absaetze (\n\n) bleiben.
+    s = s.replace("\t", " ")
+    lines = [re.sub(r" {2,}", " ", ln).rstrip() for ln in s.split("\n")]
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
+
+# Off-Snow / On-Snow Zonen-Gruppierung: "Ziele Off-Snow: ..." -> Zone "Off-Snow"
+ZONE_RE = re.compile(r'^(.{1,20}?)\s+(Off-Snow|On-Snow)\s*[:.]\s*(.*)$', re.S)
+
+def _zone_body(text):
+    lines = text.split("\n")
+    if any(l.strip().startswith("•") for l in lines):
+        items = [l.strip().lstrip("•").strip() for l in lines if l.strip().startswith("•")]
+        intro = " ".join(l.strip() for l in lines if l.strip() and not l.strip().startswith("•"))
+        html = (esc(intro)+" ") if intro else ""
+        html += '<ul class="bl">'+"".join('<li>'+esc(i)+'</li>' for i in items if i)+'</ul>'
+        return html
+    return esc(text).replace("\n", "<br>")
+
+def render_zone_groups(blocks):
+    parsed = []
+    for b in blocks:
+        b = b.strip()
+        if not b: continue
+        head = b.split("\n", 1)
+        m = ZONE_RE.match(head[0].strip())
+        if not m: return None
+        label, zone, rest = m.group(1).strip(), m.group(2), m.group(3).strip()
+        tail = head[1] if len(head) > 1 else ""
+        text = "\n".join(x for x in ([rest] if rest else []) + ([tail] if tail.strip() else [])).strip()
+        parsed.append((zone, label, text))
+    if len(parsed) < 2: return None
+    order, buckets = [], {}
+    for zone, label, text in parsed:
+        if zone not in buckets: buckets[zone] = []; order.append(zone)
+        buckets[zone].append((label, text))
+    out = ""
+    for zone in order:
+        out += '<div class="zone"><span class="zlab">'+esc(zone)+'</span>'
+        for label, text in buckets[zone]:
+            out += '<div class="zsub"><span class="zk">'+esc(label)+'</span> '+_zone_body(text)+'</div>'
+        out += '</div>'
+    return out
+
 def render_cell(seg, lang, cid=None, edit=False):
     if edit:
         raw = seg.get("v") or ""
         return '<textarea class="cedit" data-cid="'+esc(cid or "")+'">'+esc(raw)+'</textarea>'
-    txt = (tr(seg["v"], lang) or "").strip()
+    txt = clean_ws((tr(seg["v"], lang) or "").strip())
     link_texts = set(tr(l["text"], lang) for l in seg["l"] if l.get("text"))
     inner = ""
     if txt:
         blocks = re.split(r'\n\s*\n', txt)
-        parts = [render_block(bl, link_texts) for bl in blocks]
-        inner = "".join(p for p in parts if p)
+        zoned = render_zone_groups(blocks)
+        if zoned is not None:
+            inner = zoned
+        else:
+            parts = [render_block(bl, link_texts) for bl in blocks]
+            inner = "".join(p for p in parts if p)
     text_html = inner or '<div class="empty">–</div>'
     cidattr = (' data-cid="'+esc(cid)+'"') if cid else ''
     out = '<div class="ctext"'+cidattr+'>'+text_html+'</div>'
@@ -672,7 +721,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .c.hd[data-idx]:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 .c.hd.active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.45)}
 /* dezente Phasen-Toenung je Spalte - Orientierung F1-M beim Scrollen */
-.cell.ph-foundation{background:#f4faf8}.cell.ph-talent{background:#fcf8ee}.cell.ph-elite{background:#fdf5ef}.cell.ph-mastery{background:#fcefef}.cell.ph-multi{background:#f7f8fa}
+.cell.ph-foundation{background:#f4faf8;--zc:#0d5e6e;--zbg:#e1f0f3}.cell.ph-talent{background:#fcf8ee;--zc:#8a6a00;--zbg:#f7edcf}.cell.ph-elite{background:#fdf5ef;--zc:#a8511a;--zbg:#f8e2d3}.cell.ph-mastery{background:#fcefef;--zc:#9c1d14;--zbg:#f6dcd8}.cell.ph-multi{background:#f7f8fa;--zc:#5a6472;--zbg:#eceff3}
 .cell.hl-foundation{background:#d6edf1;box-shadow:inset 0 0 0 2px var(--found)}
 .cell.hl-talent{background:#faeab4;box-shadow:inset 0 0 0 2px var(--talent)}
 .cell.hl-elite{background:#fbdcc6;box-shadow:inset 0 0 0 2px var(--elite)}
@@ -703,8 +752,14 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap p{margin:0 0 5px;line-height:1.5}.cwrap p:last-child{margin-bottom:0}
 .cwrap .bh,.cwrap .sh{font-weight:700;color:var(--found-t);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
 .cwrap .bh:first-child,.cwrap .sh:first-child{margin-top:0}
-.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top:1px solid #edf0f3;padding-top:10px}
+.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top:1px solid #e3e8ee;padding-top:10px}
 .cwrap .bi{font-weight:700;color:var(--ink);font-size:11.5px;margin:0 0 3px;line-height:1.4}
+/* Off-Snow / On-Snow Zonen */
+.cwrap .zone{margin-top:11px}.cwrap .zone:first-child{margin-top:0}
+.cwrap .zone+.zone{border-top:1px solid #e3e8ee;padding-top:10px}
+.cwrap .zlab{display:inline-block;font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--zc,#5a6472);background:var(--zbg,#eceff3);border-radius:5px;padding:2px 7px;margin:0 0 5px}
+.cwrap .zsub{margin:0 0 4px;line-height:1.5}.cwrap .zsub:last-child{margin-bottom:0}
+.cwrap .zk{font-weight:700;color:var(--ink)}.cwrap .zk::after{content:"·";margin:0 5px 0 4px;color:#b6c0cc;font-weight:400}
 .cwrap .lbl{font-weight:700;color:var(--found-t)}
 .cwrap ul{margin:3px 0 6px;padding-left:15px}
 .cwrap ul.bl li{margin-bottom:3px;line-height:1.45}
