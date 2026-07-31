@@ -166,13 +166,13 @@ header.top button:hover{background:var(--bg)}
 .ht-r .pdf svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ht-r .pdf:hover{border-color:var(--acc);color:var(--red)}
 @media print{
-  @page{size:A4 landscape;margin:9mm}
+  @page{size:A4 landscape;margin:0}
   :root{--colw:84px;--lblw:80px}
   html,body{background:#fff}
-  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar,.printpick{display:none!important}
+  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar,.printpick,.lks{display:none!important}
   section.sport{display:block!important}
   section.sport[hidden]{display:none!important}
-  .wrap{padding:0;max-width:none}
+  .wrap{padding:8mm;max-width:none}
   h2.grp{margin:12px 0 6px;break-after:avoid}
   details.theme{break-inside:avoid;box-shadow:none!important;border:1px solid #bbb;margin-bottom:8px;transform:none!important}
   details.theme .scroller{overflow:visible!important;padding:0}
@@ -499,8 +499,8 @@ function initSport(sec){
 sections.forEach(initSport);
 
 // ---- Stufendossier: erst Stufe waehlen, dann kompakt nur diese Stufe drucken ----
-const DOSSIER_CSS = '@page{size:A4 portrait;margin:12mm}'
- +'body.ddoc{background:#fff!important;margin:0;padding:0;color:#1d2630;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}'
+const DOSSIER_CSS = '@page{size:A4 portrait;margin:0}'
+ +'body.ddoc{background:#fff!important;margin:0;padding:12mm 12mm 14mm;color:#1d2630;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}'
  +'.ds-head{border-left:5px solid #b6c0cc;padding:1px 0 9px 12px;margin:0 0 13px}'
  +'.ds-head.ph-foundation{border-color:#1f8fa6}.ds-head.ph-talent{border-color:#e2a900}.ds-head.ph-elite{border-color:#e8772e}.ds-head.ph-mastery{border-color:#d52b1e}'
  +'.ds-title{font-size:15px;font-weight:800;line-height:1.2}.ds-stage{font-size:12px;font-weight:700;color:#5a6472;margin-top:2px}'
@@ -563,9 +563,13 @@ function buildDossier(sec,i){
         const cell=[...r.querySelectorAll('.cell')].find(c=>i>=+c.dataset.from&&i<=+c.dataset.to);
         if(!cell)return;
         const cw=cell.querySelector('.cwrap');
-        const plain=cw?cw.textContent.trim():'';
+        if(!cw)return;
+        const clone=cw.cloneNode(true);
+        clone.querySelectorAll('.lks').forEach(el=>el.remove());          // Dokument-Links raus
+        clone.querySelectorAll('a').forEach(a=>a.replaceWith(document.createTextNode(a.textContent)));
+        const plain=clone.textContent.trim();
         if(!plain||plain==='–')return;
-        rows+='<div class="ds-row"><div class="ds-l">'+esc2(label)+'</div><div class="ds-c"><div class="cwrap">'+(cw?cw.innerHTML:'')+'</div></div></div>';
+        rows+='<div class="ds-row"><div class="ds-l">'+esc2(label)+'</div><div class="ds-c"><div class="cwrap">'+clone.innerHTML+'</div></div></div>';
       });
       if(rows){out+='<section class="ds-theme"><h3>'+esc2(title)+'</h3>'+rows+'</section>';any=true;}
     }
