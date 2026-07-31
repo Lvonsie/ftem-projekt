@@ -336,13 +336,34 @@ footer{padding:16px;font-size:11px}
 }
 
 /* ---- Admin-Zusatz ---- */
-#gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;background:#eef1f4;padding:20px}
-.gatebox{background:#fff;border:1px solid #e4e8ec;border-radius:16px;padding:30px 28px;width:340px;max-width:100%;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.08)}
-.gatebox h1{font-size:19px;margin:0 0 6px}
-.gatebox p{color:#697080;font-size:13px;margin:0 0 18px}
-.gatebox input{width:100%;padding:10px 12px;border:1px solid #cfd6dd;border-radius:9px;font-size:14px}
-.gatebox button{margin-top:12px;width:100%;background:#d52b1e;color:#fff;border:none;border-radius:9px;padding:10px;font-weight:800;font-size:14px;cursor:pointer}
-.gateerr{color:#d52b1e;font-size:12.5px;margin-top:10px;min-height:16px}
+#gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden;background:radial-gradient(1200px 720px at 50% -12%,#17263f,#0f1622 58%,#090d17)}
+#gate::before,#gate::after{content:"";position:absolute;border-radius:50%;filter:blur(72px);opacity:.55;pointer-events:none;mix-blend-mode:screen}
+#gate::before{width:520px;height:520px;left:-130px;top:-130px;background:radial-gradient(circle,#1f8fa6,transparent 70%);animation:gfloat1 16s ease-in-out infinite}
+#gate::after{width:560px;height:560px;right:-150px;bottom:-170px;background:radial-gradient(circle,#e8772e,transparent 70%);animation:gfloat2 20s ease-in-out infinite}
+@keyframes gfloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,46px)}}
+@keyframes gfloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(-56px,-44px)}}
+.gmount{position:absolute;left:0;right:0;bottom:0;width:100%;height:230px;pointer-events:none;z-index:1}
+.gatebox{position:relative;z-index:2;background:rgba(255,255,255,.06);backdrop-filter:blur(17px);-webkit-backdrop-filter:blur(17px);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:32px 30px 26px;width:374px;max-width:100%;text-align:center;color:#fff;box-shadow:0 26px 64px rgba(0,0,0,.5);animation:gIn .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes gIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.glock{width:62px;height:62px;margin:0 auto 15px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 22px rgba(0,0,0,.4)}
+.glock svg{width:31px;height:31px}
+.gtitle{font-size:27px;font-weight:800;letter-spacing:3px;margin:0;line-height:1}
+.gtitle span{display:inline-block;text-shadow:0 0 20px currentColor;animation:gGlow 3.4s ease-in-out infinite}
+.gtitle .fF{color:#38b6cf}.gtitle .fT{color:#f2bd1a;animation-delay:.3s}.gtitle .fE{color:#f0873d;animation-delay:.6s}.gtitle .fM{color:#e5382b;animation-delay:.9s}
+@keyframes gGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.4)}}
+.gsub{color:rgba(255,255,255,.6);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin:7px 0 18px}
+.gquote{margin:0 0 20px;padding:12px 15px;border-radius:12px;background:rgba(255,255,255,.05);border-left:3px solid #e2a900;text-align:left}
+.gquote .gqlabel{font-size:9px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#f2bd1a;margin:0 0 5px}
+.gquote .gqtext{font-size:13px;line-height:1.5;color:rgba(255,255,255,.92);font-style:italic}
+.gquote .gqby{display:block;font-style:normal;margin-top:5px;font-size:11px;color:rgba(255,255,255,.5)}
+.gatebox input{width:100%;padding:12px 14px;border:1px solid rgba(255,255,255,.18);border-radius:11px;font-size:14px;background:rgba(255,255,255,.08);color:#fff;box-sizing:border-box;transition:border-color .15s,box-shadow .15s,background .15s}
+.gatebox input::placeholder{color:rgba(255,255,255,.45)}
+.gatebox input:focus{outline:none;border-color:#e2a900;box-shadow:0 0 0 3px rgba(226,169,0,.25);background:rgba(255,255,255,.13)}
+.gatebox button{margin-top:14px;width:100%;background:linear-gradient(135deg,#e5382b,#c8241a);color:#fff;border:none;border-radius:11px;padding:13px;font-weight:800;font-size:14.5px;letter-spacing:.4px;cursor:pointer;transition:transform .08s,box-shadow .2s,filter .15s;box-shadow:0 8px 22px rgba(213,43,30,.4)}
+.gatebox button:hover{box-shadow:0 12px 28px rgba(213,43,30,.55);filter:brightness(1.05)}
+.gatebox button:active{transform:translateY(1px)}
+.gateerr{color:#ff9c91;font-size:12.5px;margin-top:11px;min-height:16px;font-weight:700}
+@media(prefers-reduced-motion:reduce){#gate::before,#gate::after,.gatebox,.gtitle span{animation:none!important}}
 .abar{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid #e4e8ec;padding:9px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .abar h1{font-size:15px;margin:0;font-weight:800}
 .abar label{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:6px}
@@ -375,16 +396,34 @@ footer{padding:16px;font-size:11px}
 .cedit.changed{border-color:#d52b1e;background:#fff8f7}
 </style></head>
 <body>
-<div id="gate"><form id="gateform" class="gatebox">
-  <h1>&#128274; FTEM Admin</h1>
-  <p>Bitte Passwort eingeben, um Inhalte zu bearbeiten.</p>
-  <input id="gatepw" type="password" placeholder="Passwort" autocomplete="current-password">
-  <button type="submit">Anmelden</button>
-  <div id="gateerr" class="gateerr"></div>
-</form></div>
+<div id="gate">
+  <svg class="gmount" viewBox="0 0 1440 230" preserveAspectRatio="none" aria-hidden="true">
+    <polygon points="0,230 250,74 520,230" fill="#1f8fa6" opacity=".16"/>
+    <polygon points="290,230 620,28 950,230" fill="#e2a900" opacity=".17"/>
+    <polygon points="700,230 1000,92 1300,230" fill="#e8772e" opacity=".16"/>
+    <polygon points="1040,230 1330,52 1440,188 1440,230" fill="#d52b1e" opacity=".16"/>
+  </svg>
+  <form id="gateform" class="gatebox">
+    <div class="glock">
+      <svg viewBox="0 0 24 24" fill="none" stroke="url(#ftemlock)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <defs><linearGradient id="ftemlock" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#38b6cf"/><stop offset=".38" stop-color="#f2bd1a"/><stop offset=".7" stop-color="#f0873d"/><stop offset="1" stop-color="#e5382b"/></linearGradient></defs>
+        <rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.4"/>
+        <path d="M8 10.4V7.4a4 4 0 0 1 8 0v3"/>
+        <circle cx="12" cy="15" r="1.55" fill="url(#ftemlock)" stroke="none"/>
+      </svg>
+    </div>
+    <div class="gtitle"><span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span></div>
+    <div class="gsub">Admin &middot; Inhalte bearbeiten</div>
+    <div class="gquote"><div class="gqlabel">Spruch des Tages</div><div class="gqtext" id="gqtext"></div></div>
+    <input id="gatepw" type="password" placeholder="Passwort" autocomplete="current-password">
+    <button type="submit">Anmelden</button>
+    <div id="gateerr" class="gateerr"></div>
+  </form>
+</div>
 <div id="app" hidden>
   <header class="abar">
-    <h1>&#128274; FTEM &ndash; Inhalte bearbeiten</h1>
+    <h1><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#d52b1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px" aria-hidden="true"><rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.4"/><path d="M8 10.4V7.4a4 4 0 0 1 8 0v3"/></svg>FTEM &ndash; Inhalte bearbeiten</h1>
     <label>Sportart: <select id="sportsel"><option value="ski-alpin">Ski Alpin</option><option value="langlauf">Langlauf</option><option value="biathlon">Biathlon</option><option value="skispringen">Skispringen</option><option value="nordische-kombination">Nordische Kombination</option><option value="skicross">Skicross</option><option value="freeski-park-pipe">Freeski Park &amp; Pipe</option><option value="snowboard-alpin">Snowboard Alpin</option><option value="snowboard-cross">Snowboard Cross</option><option value="snowboard-park-pipe">Snowboard Park &amp; Pipe</option></select></label>
     <span class="sp"></span>
     <span id="astatus" class="astatus"></span>
@@ -11041,6 +11080,35 @@ function toggleGloss(){
 const statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave'),sel=document.getElementById('sportsel');
 const base=Object.assign({},ORIG);
 function autosize(ta){ta.style.height='auto';ta.style.height=(ta.scrollHeight+2)+'px';}
+// Spruch des Tages (nach Kalendertag rotierend)
+var FTEM_QUOTES=[
+ {t:"Erfolg ist die Summe kleiner Anstrengungen, Tag für Tag wiederholt.",b:""},
+ {t:"Wer aufhört besser zu werden, hat aufgehört gut zu sein.",b:""},
+ {t:"Fällst du siebenmal, steh achtmal auf.",b:"Japanisches Sprichwort"},
+ {t:"Der Weg ist das Ziel.",b:"Konfuzius"},
+ {t:"Was du heute trainierst, bist du morgen.",b:""},
+ {t:"Die härtesten Trainings machen die leichtesten Wettkämpfe.",b:""},
+ {t:"Jeder Champion war einmal ein Anfänger, der nicht aufgegeben hat.",b:""},
+ {t:"Kleine Fortschritte sind auch Fortschritte.",b:""},
+ {t:"Talent eröffnet die Tür – Disziplin geht hindurch.",b:""},
+ {t:"Nicht die Stärke entscheidet, sondern die Ausdauer.",b:""},
+ {t:"Form ist vergänglich, Klasse bleibt bestehen.",b:""},
+ {t:"Motivation bringt dich in Gang, Gewohnheit hält dich am Laufen.",b:""},
+ {t:"Der beste Athlet ist der, der mit dem Gestern nie zufrieden ist.",b:""},
+ {t:"Gib niemals auf, denn genau hier und jetzt beginnt der Wandel.",b:""},
+ {t:"Ein Ziel ohne Plan ist nur ein Wunsch.",b:""},
+ {t:"Aus jedem Sturz im Schnee wächst die nächste sichere Kurve.",b:""},
+ {t:"Vertraue dem Prozess – grosse Wege beginnen mit kleinen Schritten.",b:""},
+ {t:"Wer die Grundlagen liebt, meistert das Schwere.",b:""}
+];
+(function(){
+  var el=document.getElementById('gqtext'); if(!el)return;
+  var now=new Date();
+  var doy=Math.floor((now-new Date(now.getFullYear(),0,0))/864e5);
+  var q=FTEM_QUOTES[doy%FTEM_QUOTES.length];
+  el.textContent='«'+q.t+'»';
+  if(q.b){var by=document.createElement('span');by.className='gqby';by.textContent='— '+q.b;el.appendChild(by);}
+})();
 document.getElementById('gateform').addEventListener('submit',function(e){
   e.preventDefault();
   if(document.getElementById('gatepw').value===PW){gate.style.display='none';app.hidden=false;init();}
