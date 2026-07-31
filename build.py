@@ -31,6 +31,11 @@ ADMIN_PW = "ftem26*"
 SUPABASE_URL = "https://xphbwnzyebbejsdeqled.supabase.co"
 SUPABASE_ANON_KEY = "sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_"
 
+# Live-Adresse der Seite (Netlify), z. B. "https://ftem-projekt.netlify.app".
+# Wird fuer das Teilen-Vorschaubild (Open Graph) als absolute Bild-URL genutzt.
+# Leer lassen = relative URL (funktioniert bei vielen, aber nicht allen Diensten).
+SITE_URL = "https://ftemschneesport.netlify.app"
+
 def tr(s, lang):
     if lang == "de" or s is None:
         return s
@@ -309,6 +314,7 @@ def sport_section(sport, d, lang, edit=False):
         '<div class="ht-c"><input class="q" type="search" placeholder="Search"><span class="hits"></span></div>'
         '<div class="ht-r"><select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button>'
+        '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
         +lang_switch(lang)+'</div></header>'
         '<div class="wrap">'
         +sections+'</div></section>')
@@ -588,6 +594,28 @@ header.top button:hover{background:var(--bg)}
 .ht-r select{width:170px}
 .ht-r .exp{width:106px;padding:7px 0;text-align:center}
 .ht-r .col{width:120px;padding:7px 0;text-align:center}
+.ht-r .pdf{width:36px;padding:6px 0;display:inline-flex;align-items:center;justify-content:center;color:var(--acc)}
+.ht-r .pdf svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ht-r .pdf:hover{border-color:var(--acc);color:var(--red)}
+@media print{
+  @page{size:A4 landscape;margin:9mm}
+  :root{--colw:84px;--lblw:80px}
+  html,body{background:#fff}
+  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel{display:none!important}
+  section.sport{display:block!important}
+  section.sport[hidden]{display:none!important}
+  .wrap{padding:0;max-width:none}
+  h2.grp{margin:12px 0 6px;break-after:avoid}
+  details.theme{break-inside:avoid;box-shadow:none!important;border:1px solid #bbb;margin-bottom:8px;transform:none!important}
+  details.theme .scroller{overflow:visible!important;padding:0}
+  .grid{min-width:0;gap:4px}
+  .r{gap:3px;break-inside:avoid}
+  .rl{position:static!important;box-shadow:none!important;font-size:8.5px;padding:5px 6px}
+  .c.hd .st{font-size:9px}.c.hd .stf{display:none}
+  .cell{break-inside:avoid;overflow:visible!important}
+  .cell .cwrap{max-height:none!important;-webkit-line-clamp:unset!important;display:block!important;font-size:8.5px;line-height:1.35}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
 mark.cur{background:#f0a500;color:#1d2630;box-shadow:0 0 0 2px #f0a500}
 .wrap{max-width:1500px;margin:0 auto;padding:14px 18px 90px}
 .intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:8px;font-size:13px;color:var(--mut)}
@@ -613,7 +641,7 @@ summary .ticon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-w
 summary .tt{font-size:14px;font-weight:800;flex:1;min-width:0}
 summary .tchev{flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .18s;margin-right:3px}
 details[open]>summary .tchev{transform:rotate(45deg)}
-.scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px}
+.scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:start}
 .rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2)}
@@ -673,7 +701,7 @@ details.theme{scroll-margin-top:118px}
 }
 /* ---------- Responsive: Handy ---------- */
 @media(max-width:760px){
-:root{--colw:180px;--lblw:110px}
+:root{--colw:158px;--lblw:96px}
 header.top .back{width:auto;padding:6px 11px}
 header.top .sicon{width:28px;height:28px}
 header.top h1{font-size:13.5px;min-width:0}
@@ -682,9 +710,11 @@ header.top h1{font-size:13.5px;min-width:0}
 .ht-r{flex:1 1 100%;order:3;gap:6px}
 .ht-r select{flex:1 1 auto;width:auto;min-width:0;font-size:13px}
 .ht-r .exp,.ht-r .col{flex:1 1 auto;width:auto;padding:7px 6px}
+.ht-r .pdf{flex:none;width:40px}
 .wrap{padding:10px 10px 60px}
 .scroller{padding:0 8px 10px}
 .rl{font-size:10.5px;padding:7px 8px}
+.rl{box-shadow:0 0 0 6px var(--card),-12px 0 0 6px var(--card),7px 0 8px -5px rgba(0,0,0,.22)}
 .cell .cwrap{font-size:11px}
 summary .tt{font-size:13px}
 details.theme{scroll-margin-top:170px}
@@ -828,6 +858,8 @@ function initSport(sec){
   q.addEventListener('input',run);
   sec.querySelector('.exp').onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(setupClamp,50);};
   sec.querySelector('.col').onclick=()=>themes.forEach(t=>t.open=false);
+  const pdfBtn=sec.querySelector('.pdf');
+  if(pdfBtn)pdfBtn.onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(()=>window.print(),160);};
   sec.querySelector('.jump').onchange=e=>{const el=document.getElementById(e.target.value);if(el){el.open=true;setTimeout(()=>el.scrollIntoView(),30);}e.target.selectedIndex=0;};
   themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
   window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
@@ -934,7 +966,17 @@ __MAINCSS__
 .astatus{font-size:12.5px;color:#697080}
 .asave{background:#d52b1e;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:800;font-size:13px;cursor:pointer}
 .asave:disabled{opacity:.5;cursor:default}
+.agloss{background:#5a6b8f;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:800;font-size:13px;cursor:pointer}
+.agloss:hover{filter:brightness(1.08)}
 .asite{text-decoration:none;font-size:13px;font-weight:700;color:#d52b1e}
+#glosspanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
+.glosbar{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
+.glosbar input{flex:1;padding:9px 12px;border:1px solid #cfd6dd;border-radius:9px;font-size:14px}
+.glosnote{font-size:12.5px;color:#697080;margin:0 0 12px}
+.glostab{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid #e4e8ec;border-radius:12px;overflow:hidden}
+.glostab th{text-align:left;background:#f2f4f7;color:#546a8c;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:9px 12px;position:sticky;top:0}
+.glostab td{padding:8px 12px;border-top:1px solid #eef1f4;vertical-align:top}
+.glostab tr:hover td{background:#fafbfc}
 .note{max-width:1100px;margin:12px auto 0;padding:0 18px;color:#8a6a00;font-size:12.5px}
 #app .wrap{padding-bottom:70px}
 #app .cell .cwrap{max-height:none!important;overflow:visible!important;display:block!important;-webkit-line-clamp:unset!important}
@@ -958,14 +1000,36 @@ __MAINCSS__
     <span class="sp"></span>
     <span id="astatus" class="astatus"></span>
     <button id="asave" class="asave" disabled>Speichern</button>
+    <button id="glossbtn" class="agloss" type="button">Glossar</button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
   <div id="note" class="note"></div>
-  __ADMIN_SECTIONS__
+  <div id="glosspanel" hidden>
+    <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (Deutsch oder Französisch) …"><span id="gloscount" class="astatus"></span></div>
+    <p class="glosnote">Feste Übersetzungen DE&nbsp;&rarr;&nbsp;FR. Diese Begriffe werden bei der Übersetzung der Inhalte einheitlich verwendet.</p>
+    <div id="glostable"></div>
+  </div>
+  <div id="editwrap">__ADMIN_SECTIONS__</div>
 </div>
 <script>
-const ORIG=__ADMIN_ORIG__, PW="__ADMIN_PW__", SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
+const ORIG=__ADMIN_ORIG__, GLOSS=__GLOSSARY__, PW="__ADMIN_PW__", SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
 const gate=document.getElementById('gate'),app=document.getElementById('app');
+function gesc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+function renderGloss(q){
+  q=(q||'').trim().toLowerCase();
+  const rows=GLOSS.filter(function(g){return !q||g.de.toLowerCase().indexOf(q)>=0||g.fr.toLowerCase().indexOf(q)>=0;});
+  document.getElementById('gloscount').textContent=rows.length+' Begriffe';
+  let h='<table class="glostab"><thead><tr><th>Deutsch</th><th>Français</th></tr></thead><tbody>';
+  rows.forEach(function(g){h+='<tr><td>'+gesc(g.de)+'</td><td>'+gesc(g.fr)+'</td></tr>';});
+  document.getElementById('glostable').innerHTML=h+'</tbody></table>';
+}
+function toggleGloss(){
+  const gp=document.getElementById('glosspanel'),ew=document.getElementById('editwrap'),sw=document.getElementById('sportsel').parentNode;
+  const show=gp.hidden;
+  gp.hidden=!show; ew.hidden=show; sw.style.visibility=show?'hidden':'';
+  document.getElementById('glossbtn').textContent=show?'← Bearbeiten':'Glossar';
+  if(show&&!gp.dataset.done){gp.dataset.done='1';renderGloss('');document.getElementById('glosq').addEventListener('input',function(e){renderGloss(e.target.value);});}
+}
 const statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave'),sel=document.getElementById('sportsel');
 const base=Object.assign({},ORIG);
 function autosize(ta){ta.style.height='auto';ta.style.height=(ta.scrollHeight+2)+'px';}
@@ -993,6 +1057,7 @@ function init(){
     ta.addEventListener('input',function(){autosize(ta);ta.classList.toggle('changed',(base[ta.dataset.cid]||'')!==ta.value);updateCount();});
   });
   saveBtn.addEventListener('click',save);
+  document.getElementById('glossbtn').addEventListener('click',toggleGloss);
   if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
       .then(function(r){return r.ok?r.json():[];}).then(function(rows){
@@ -1037,10 +1102,16 @@ def admin_html(datamap):
                 for si, seg in enumerate(r["segs"]):
                     orig[s["id"]+"|"+str(ti)+"|"+str(ri)+"|"+str(si)] = seg.get("v") or ""
     orig_js = json.dumps(orig, ensure_ascii=False).replace("</", "<\\/")
+    gloss = []
+    gpath = os.path.join(BASE, "glossary.json")
+    if os.path.exists(gpath):
+        gloss = json.load(open(gpath, encoding="utf-8"))
+    gloss_js = json.dumps(gloss, ensure_ascii=False).replace("</", "<\\/")
     return (ADMIN_TMPL.replace("__MAINCSS__", CSS)
                       .replace("__ADMIN_SECTIONS__", secs)
                       .replace("__SPORT_OPTIONS__", opts)
                       .replace("__ADMIN_ORIG__", orig_js)
+                      .replace("__GLOSSARY__", gloss_js)
                       .replace("__ADMIN_PW__", ADMIN_PW)
                       .replace("__SUPA_URL__", SUPABASE_URL)
                       .replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
@@ -1064,9 +1135,29 @@ for lang in LANGS:
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
+    og_title = "FTEM – Athlet:innen-Weg · Swiss-Ski"
+    og_desc = {"de":"Der Athlet:innen-Weg von Swiss-Ski: alle Schneesportarten über die zehn FTEM-Entwicklungsstufen F1–M.",
+               "fr":"Le parcours des athlètes de Swiss-Ski : tous les sports de neige à travers les dix niveaux de développement FTEM (F1–M).",
+               "it":"Il percorso degli atleti di Swiss-Ski: tutti gli sport sulla neve lungo i dieci livelli di sviluppo FTEM (F1–M)."}[lang]
+    og_img = (SITE_URL.rstrip("/")+"/assets/og-image.jpg") if SITE_URL else "assets/og-image.jpg"
+    head_meta = ('<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">'
+        '<meta name="theme-color" content="#0f1622">'
+        '<meta name="description" content="'+esc(og_desc)+'">'
+        '<meta property="og:type" content="website">'
+        '<meta property="og:site_name" content="Swiss-Ski FTEM">'
+        '<meta property="og:title" content="'+esc(og_title)+'">'
+        '<meta property="og:description" content="'+esc(og_desc)+'">'
+        '<meta property="og:image" content="'+esc(og_img)+'">'
+        '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+        +('<meta property="og:url" content="'+esc(SITE_URL)+'">' if SITE_URL else '')+
+        '<meta name="twitter:card" content="summary_large_image">'
+        '<meta name="twitter:title" content="'+esc(og_title)+'">'
+        '<meta name="twitter:description" content="'+esc(og_desc)+'">'
+        '<meta name="twitter:image" content="'+esc(og_img)+'">')
     page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title>'
+        +head_meta+
         # verhindert Aufblitzen der Startseite, wenn direkt eine Sportart (#hash) geladen wird
         '<script>if(location.hash)document.documentElement.classList.add("h");'
         'try{if(sessionStorage.ftemSeen)document.documentElement.classList.add("noanim");sessionStorage.ftemSeen=1}catch(e){}</script>'

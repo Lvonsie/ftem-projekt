@@ -1,0 +1,1850 @@
+[
+ {
+  "de": "Abduktoren",
+  "fr": "abducteurs"
+ },
+ {
+  "de": "Abkanten",
+  "fr": "réduire la prise de carre"
+ },
+ {
+  "de": "Absprungbewegung",
+  "fr": "mouvement au décollage"
+ },
+ {
+  "de": "Absprungkante",
+  "fr": "bord du tremplin"
+ },
+ {
+  "de": "Adduktoren",
+  "fr": "adducteurs"
+ },
+ {
+  "de": "Aerobe Kapazität",
+  "fr": "capacité aérobie"
+ },
+ {
+  "de": "Aerobe Schwelle",
+  "fr": "Seuil aérobie"
+ },
+ {
+  "de": "aerodynamische Position",
+  "fr": "position aerodynamique"
+ },
+ {
+  "de": "Agilität",
+  "fr": "agilité"
+ },
+ {
+  "de": "Airtime",
+  "fr": "Airtime"
+ },
+ {
+  "de": "Akrobatik",
+  "fr": "Acrobatie"
+ },
+ {
+  "de": "Aktionsschnelligkeit",
+  "fr": "vitesse d'action"
+ },
+ {
+  "de": "aktive Erholung",
+  "fr": "récupération active"
+ },
+ {
+  "de": "Aktive Regeneration",
+  "fr": "récupération active"
+ },
+ {
+  "de": "Alley Oop",
+  "fr": "Alley Oop"
+ },
+ {
+  "de": "Amplitude",
+  "fr": "amplitude"
+ },
+ {
+  "de": "Anaerobe Kapazität",
+  "fr": "capacité anaérobie"
+ },
+ {
+  "de": "Anaerobe Schwelle",
+  "fr": "Seuil anaérobie"
+ },
+ {
+  "de": "Anfahrtsgeschwindigkeit",
+  "fr": "Vitesse d'approche"
+ },
+ {
+  "de": "Anfahrtswinkel",
+  "fr": "Angle d'approche"
+ },
+ {
+  "de": "Anspannung-Entspannung",
+  "fr": "contracté-relâché"
+ },
+ {
+  "de": "Anstellwinkel",
+  "fr": "angel d'attaque"
+ },
+ {
+  "de": "Anthropometrie",
+  "fr": "Anthropométrie"
+ },
+ {
+  "de": "Antrittsschnelligkeit",
+  "fr": "vitesse de démarrage"
+ },
+ {
+  "de": "Asymmetrischer Schlittschuhschritt",
+  "fr": "pas de patineur asymétrique"
+ },
+ {
+  "de": "Aufkanten",
+  "fr": "augmenter la prise de carre"
+ },
+ {
+  "de": "Aufkantwinkel",
+  "fr": "Angle de prise de carre"
+ },
+ {
+  "de": "Aufwärmen",
+  "fr": "échauffement"
+ },
+ {
+  "de": "Ausdauer",
+  "fr": "Endurance"
+ },
+ {
+  "de": "Ausdauerkapazität",
+  "fr": "Capacité d’endurance"
+ },
+ {
+  "de": "Ausdauerkapazität/",
+  "fr": "capacité d'endurance"
+ },
+ {
+  "de": "Ausdauerleistung",
+  "fr": "performance d'endurance"
+ },
+ {
+  "de": "Ausleitend",
+  "fr": "en sortie"
+ },
+ {
+  "de": "Ausleitender Teil",
+  "fr": "partie finale"
+ },
+ {
+  "de": "Auslösephase",
+  "fr": "phase de déclenchement"
+ },
+ {
+  "de": "Aussenbein",
+  "fr": "Jambe extérieur"
+ },
+ {
+  "de": "Aussenski",
+  "fr": "Ski extérieur"
+ },
+ {
+  "de": "Bauchmuskulatur",
+  "fr": "muscles abdominaux"
+ },
+ {
+  "de": "beidbeiniger Sprung",
+  "fr": "saut à deux jambes"
+ },
+ {
+  "de": "Beidseitigkeit fördern",
+  "fr": "Encourager l'entraînement des deux côtés"
+ },
+ {
+  "de": "Belasten",
+  "fr": "prendre l'appui"
+ },
+ {
+  "de": "Belastung",
+  "fr": "charge"
+ },
+ {
+  "de": "Belastungsdauer",
+  "fr": "Durée de charge"
+ },
+ {
+  "de": "Belastungspause",
+  "fr": "Pause d’effort"
+ },
+ {
+  "de": "Belastungssteuerung",
+  "fr": "gestion de la charge"
+ },
+ {
+  "de": "Belastungsverträglichkeit",
+  "fr": "résistance à la charge"
+ },
+ {
+  "de": "Belastungswechsel",
+  "fr": "transfert d'appui"
+ },
+ {
+  "de": "Bergkante",
+  "fr": "carre amont"
+ },
+ {
+  "de": "Bergski",
+  "fr": "Ski amont"
+ },
+ {
+  "de": "Bergwärts",
+  "fr": "vers l’amont"
+ },
+ {
+  "de": "Beschleunigung",
+  "fr": "Accélération"
+ },
+ {
+  "de": "Beschleunigungsfähigkeit",
+  "fr": "capacité d'accélération"
+ },
+ {
+  "de": "Beugen",
+  "fr": "flexion"
+ },
+ {
+  "de": "Beweglichkeit",
+  "fr": "mobilité"
+ },
+ {
+  "de": "Bewegungen trainieren",
+  "fr": "Entraîner des mouvements"
+ },
+ {
+  "de": "Bewegungen variieren",
+  "fr": "Varier les mouvements"
+ },
+ {
+  "de": "Bewegungsfluss",
+  "fr": "Mouvements fluides"
+ },
+ {
+  "de": "Bewegungsgeschwindigkeit",
+  "fr": "vitesse d’exécution"
+ },
+ {
+  "de": "Bewegungskoordination zur Erreichung maximaler Bewegungsgeschwindigkeiten",
+  "fr": "coordination des mouvements pour atteindre une vitesse maximale"
+ },
+ {
+  "de": "Bewegungsphasen",
+  "fr": "phases des mouvements"
+ },
+ {
+  "de": "Bewegungsqualität",
+  "fr": "qualité du mouvement"
+ },
+ {
+  "de": "Blocktraining",
+  "fr": "entraînement par blocs"
+ },
+ {
+  "de": "Bogenlaufen",
+  "fr": "pas tournant alternatif"
+ },
+ {
+  "de": "Bogentreten",
+  "fr": "pas tournant"
+ },
+ {
+  "de": "Breitenachsrotation",
+  "fr": "Rotation autour de l'axe transversal"
+ },
+ {
+  "de": "Brustmuskulatur",
+  "fr": "musculature thoracique"
+ },
+ {
+  "de": "Buckel",
+  "fr": "Bosses"
+ },
+ {
+  "de": "Bäseli",
+  "fr": "carotte"
+ },
+ {
+  "de": "Coping",
+  "fr": "Coping"
+ },
+ {
+  "de": "Cork",
+  "fr": "Cork"
+ },
+ {
+  "de": "Cross over",
+  "fr": "cross over"
+ },
+ {
+  "de": "Cross under",
+  "fr": "cross under"
+ },
+ {
+  "de": "Dauerlauf",
+  "fr": "méthode continue"
+ },
+ {
+  "de": "Dehnen",
+  "fr": "étirement"
+ },
+ {
+  "de": "Dehnintensität",
+  "fr": "intensité d’étirement"
+ },
+ {
+  "de": "Dehnungs-Verkürzungs-Zyklus (DVZ)",
+  "fr": "cycle étirement-raccourcissement (CER)"
+ },
+ {
+  "de": "Der Oberkörper bleibt talwärts gerichtet",
+  "fr": "Le haut du corps reste orienté vers l’aval"
+ },
+ {
+  "de": "diagonale Stockarbeit",
+  "fr": "poussée alternative des bâtons"
+ },
+ {
+  "de": "diagonaler Stockeinsatz",
+  "fr": "engagement des bâtons alternés"
+ },
+ {
+  "de": "Diagonalschlittschuhschritt",
+  "fr": "pas de patineur alternatif"
+ },
+ {
+  "de": "Diagonalschritt",
+  "fr": "pas alternatif"
+ },
+ {
+  "de": "Doppelstockstoss",
+  "fr": "poussée simultanée"
+ },
+ {
+  "de": "Double Cork 1080",
+  "fr": "Double Cork 1080"
+ },
+ {
+  "de": "Double Flat",
+  "fr": "Double Flat"
+ },
+ {
+  "de": "Drehachse",
+  "fr": "Axe de rotation"
+ },
+ {
+  "de": "Drehachsen verändern",
+  "fr": "Modifier les axes de rotation"
+ },
+ {
+  "de": "Drehen",
+  "fr": "tourner"
+ },
+ {
+  "de": "Drehgeschwindigkeit",
+  "fr": "Vitesse de rotation"
+ },
+ {
+  "de": "Drehimpuls",
+  "fr": "Impulsion de rotation"
+ },
+ {
+  "de": "Drehimpuls abbauen",
+  "fr": "Réduction de l'impulsion de rotation"
+ },
+ {
+  "de": "Drehung um eine Achse",
+  "fr": "rotation autour d’un axe"
+ },
+ {
+  "de": "DVZ",
+  "fr": "cycle étirement-raccourcissement"
+ },
+ {
+  "de": "Dynamik der Streckbewegung",
+  "fr": "Dynamisme du mouvement d'extension"
+ },
+ {
+  "de": "Dynamische Grundposition",
+  "fr": "Position de base dynamique"
+ },
+ {
+  "de": "Dynamisches Dehnen",
+  "fr": "étirement dynamique"
+ },
+ {
+  "de": "Einleitend",
+  "fr": "en entrée"
+ },
+ {
+  "de": "Einleitender Teil",
+  "fr": "partie initiale"
+ },
+ {
+  "de": "Eins-Eins-Schlittschuhschritt",
+  "fr": "pas de patineur un-un"
+ },
+ {
+  "de": "Eins-Zwei-Schlittschuhschritt",
+  "fr": "pas de patineur un-deux"
+ },
+ {
+  "de": "Einschritt",
+  "fr": "pas de un"
+ },
+ {
+  "de": "Einseitiger Pflug",
+  "fr": "chasse-neige unilatéral"
+ },
+ {
+  "de": "Elastische Energie",
+  "fr": "énergie élastique"
+ },
+ {
+  "de": "Elite",
+  "fr": "Elite"
+ },
+ {
+  "de": "Endphase",
+  "fr": "phase finale"
+ },
+ {
+  "de": "Energiesysteme",
+  "fr": "Systèmes énergétiques"
+ },
+ {
+  "de": "Entlasten",
+  "fr": "quitter l’appui"
+ },
+ {
+  "de": "Entwicklungsfokus",
+  "fr": "priorité de développement"
+ },
+ {
+  "de": "Erhaltungstraining",
+  "fr": "entraînement de maintien"
+ },
+ {
+  "de": "Erholungsmonitoring",
+  "fr": "suivi de la récupération"
+ },
+ {
+  "de": "Ermüdung",
+  "fr": "fatigue"
+ },
+ {
+  "de": "Ernährung",
+  "fr": "alimentation"
+ },
+ {
+  "de": "Explosivkraft",
+  "fr": "force explosive"
+ },
+ {
+  "de": "Extensive Intervalle",
+  "fr": "intervalles extensifs"
+ },
+ {
+  "de": "Exzentrische Kraft",
+  "fr": "force excentrique"
+ },
+ {
+  "de": "Fahreigenschaften der Ski",
+  "fr": "caractéristiques des skis"
+ },
+ {
+  "de": "Fahren",
+  "fr": "glisser"
+ },
+ {
+  "de": "Fahrlinie",
+  "fr": "trajectoire"
+ },
+ {
+  "de": "Fahrstellung",
+  "fr": "attitude de glisse"
+ },
+ {
+  "de": "Fahrtechnik",
+  "fr": "Technique de ride"
+ },
+ {
+  "de": "Fahrtspiel",
+  "fr": "fartlek"
+ },
+ {
+  "de": "Falllinie",
+  "fr": "Ligne de pente"
+ },
+ {
+  "de": "Faszien",
+  "fr": "fascias"
+ },
+ {
+  "de": "Fettstoffwechsel",
+  "fr": "métabolisme lipidique"
+ },
+ {
+  "de": "Flair",
+  "fr": "Flair"
+ },
+ {
+  "de": "Flat",
+  "fr": "Flat"
+ },
+ {
+  "de": "Flugbahn",
+  "fr": "Trajectoire"
+ },
+ {
+  "de": "Flugkurve",
+  "fr": "Courbe de vol"
+ },
+ {
+  "de": "Foamrolling",
+  "fr": "Foamrolling"
+ },
+ {
+  "de": "Formenrad der Fahr- und Bremsformen",
+  "fr": "modèle des formes de glisse et de freinage"
+ },
+ {
+  "de": "Formenrad der Fahr-/Bremsformen",
+  "fr": "modèle des formes de glisse/freinage"
+ },
+ {
+  "de": "Formenrad Fahr-/Bremsformen",
+  "fr": "modèle de formes de glisse et de freinage"
+ },
+ {
+  "de": "Foundation",
+  "fr": "Foundation"
+ },
+ {
+  "de": "Freeski",
+  "fr": "Freeski"
+ },
+ {
+  "de": "Freies Fahren",
+  "fr": "ski libre"
+ },
+ {
+  "de": "Frequenz",
+  "fr": "fréquence"
+ },
+ {
+  "de": "FTEM (Athlet:innen-Weg)",
+  "fr": "FTEM (chemin des athlètes)"
+ },
+ {
+  "de": "Fullbase",
+  "fr": "Fullbase"
+ },
+ {
+  "de": "Fundamentals",
+  "fr": "Fundamentals"
+ },
+ {
+  "de": "Funktionskette",
+  "fr": "chaîne d’action"
+ },
+ {
+  "de": "Fussgelenkachse",
+  "fr": "l’axe des chevilles"
+ },
+ {
+  "de": "Förderstrukturen & Wettkämpfe",
+  "fr": "structures de promotion & compétitions"
+ },
+ {
+  "de": "Gelenkmobilisation",
+  "fr": "mobilisation articulaire"
+ },
+ {
+  "de": "Gelenksachsen",
+  "fr": "Axes des articulations"
+ },
+ {
+  "de": "gerutschter Schwung",
+  "fr": "virage dérapé"
+ },
+ {
+  "de": "Gerät",
+  "fr": "engin"
+ },
+ {
+  "de": "Geräteachsen",
+  "fr": "axes de l’engin"
+ },
+ {
+  "de": "Gerätefunktionen (GF)",
+  "fr": "fonctions des engins (FdE)"
+ },
+ {
+  "de": "geschnittener Schwung",
+  "fr": "virage coupé"
+ },
+ {
+  "de": "Gesässmuskulatur tief",
+  "fr": "musculature profonde des fesseirs"
+ },
+ {
+  "de": "gleichzeitige Stockarbeit",
+  "fr": "utilisation simultanée des bâtons"
+ },
+ {
+  "de": "Gleitanteil",
+  "fr": "partie de glisse"
+ },
+ {
+  "de": "gleiten",
+  "fr": "glisser"
+ },
+ {
+  "de": "Gleitphase",
+  "fr": "Phase de glisse"
+ },
+ {
+  "de": "Gleitski",
+  "fr": "Ski de glisse"
+ },
+ {
+  "de": "Gravitationskraft",
+  "fr": "Force gravitationnelle"
+ },
+ {
+  "de": "Grundlagenausdauer",
+  "fr": "endurance de base"
+ },
+ {
+  "de": "Grätenschritt",
+  "fr": "pas en ciseaux"
+ },
+ {
+  "de": "Halbschlittschuhschritt",
+  "fr": "demi-pas de patineur"
+ },
+ {
+  "de": "Halfpipe",
+  "fr": "Halfpipe"
+ },
+ {
+  "de": "Handlungsschnelligkeit",
+  "fr": "rapidité d’action"
+ },
+ {
+  "de": "Handplant",
+  "fr": "Handplant"
+ },
+ {
+  "de": "Hauptbelastung auf dem Aussenski",
+  "fr": "Appui principal sur le ski extérieur"
+ },
+ {
+  "de": "Hauptphase",
+  "fr": "phase principale"
+ },
+ {
+  "de": "Herzfrequenz",
+  "fr": "fréquence cardiaque"
+ },
+ {
+  "de": "HFmax",
+  "fr": "FCmax"
+ },
+ {
+  "de": "Hindernissprünge",
+  "fr": "sauts d’obstacles"
+ },
+ {
+  "de": "Hocke",
+  "fr": "position de schuss"
+ },
+ {
+  "de": "Hocksprung",
+  "fr": "Saut groupé"
+ },
+ {
+  "de": "Horizontalsprünge",
+  "fr": "sauts horizontaux"
+ },
+ {
+  "de": "Hypertrophie",
+  "fr": "hypertrophie"
+ },
+ {
+  "de": "Hüftbeuger",
+  "fr": "fléchisseurs de la hanche"
+ },
+ {
+  "de": "Hüftgelenkachse",
+  "fr": "l’axe des hanches"
+ },
+ {
+  "de": "Impulsübertragungsschraube",
+  "fr": "Vrille par transfert d’impulsion"
+ },
+ {
+  "de": "Innenbein",
+  "fr": "Jambe intérieur"
+ },
+ {
+  "de": "Innenski",
+  "fr": "Ski intérieur"
+ },
+ {
+  "de": "Intensive Intervalle",
+  "fr": "intervalles intensifs"
+ },
+ {
+  "de": "inter- und intramuskuläre Koordination",
+  "fr": "coordination inter- et intramusculaire"
+ },
+ {
+  "de": "Intermittierende Methode",
+  "fr": "méthode intermittente"
+ },
+ {
+  "de": "intermuskuläre Koordination",
+  "fr": "coordination intermusculaire"
+ },
+ {
+  "de": "Intervallmethode",
+  "fr": "méthode par intervalles"
+ },
+ {
+  "de": "Intervalltraining",
+  "fr": "entraînement par intervalle"
+ },
+ {
+  "de": "intramuskuläre Koordination",
+  "fr": "coordination intramusculaire"
+ },
+ {
+  "de": "Inventory",
+  "fr": "Inventory"
+ },
+ {
+  "de": "Isometrische Kraft",
+  "fr": "force isométrique"
+ },
+ {
+  "de": "Isometrische Spannung",
+  "fr": "tension isométrique"
+ },
+ {
+  "de": "Kamm (Pistenrand)",
+  "fr": "Bord de piste"
+ },
+ {
+  "de": "kanten",
+  "fr": "prendre la carre"
+ },
+ {
+  "de": "Kantenwechsel",
+  "fr": "changement de carre"
+ },
+ {
+  "de": "Kernbewegungen (KB)",
+  "fr": "mouvements clés (MC)"
+ },
+ {
+  "de": "Kicker",
+  "fr": "Kicker"
+ },
+ {
+  "de": "Kippen",
+  "fr": "bascule"
+ },
+ {
+  "de": "Klassisch-Schritt",
+  "fr": "pas classique"
+ },
+ {
+  "de": "Knicken",
+  "fr": "angulation"
+ },
+ {
+  "de": "Kniebeuge",
+  "fr": "squat"
+ },
+ {
+  "de": "Kniegelenkachse",
+  "fr": "l’axe des genoux"
+ },
+ {
+  "de": "kognitive Fähigkeiten zur Erreichung maximaler Handlungsschnelligkeit",
+  "fr": "capacités cognitives pour atteindre une rapidité d'action maximale"
+ },
+ {
+  "de": "Kohlenhydratstoffwechsel",
+  "fr": "métabolisme des glucides"
+ },
+ {
+  "de": "Kombinierte Achsen",
+  "fr": "Axes combinés"
+ },
+ {
+  "de": "Kombinierte Tricks",
+  "fr": "Figures combinées"
+ },
+ {
+  "de": "Kompressionsbekleidung",
+  "fr": "vêtements de compression"
+ },
+ {
+  "de": "Kontaktzeit",
+  "fr": "temps de contact"
+ },
+ {
+  "de": "Kontraktionsgeschwindigkeit",
+  "fr": "vitesse de contraction"
+ },
+ {
+  "de": "Konzentrische Kraft",
+  "fr": "force concentrique"
+ },
+ {
+  "de": "korrekte Bewegungsausführung",
+  "fr": "exécution correcte du mouvement"
+ },
+ {
+  "de": "Kraft",
+  "fr": "force"
+ },
+ {
+  "de": "Kraft & Explosivität",
+  "fr": "Force et Explosivité"
+ },
+ {
+  "de": "Kraftausdauer",
+  "fr": "force-endurance"
+ },
+ {
+  "de": "Krafttraining",
+  "fr": "entraînement de force"
+ },
+ {
+  "de": "Kreuzungspunkt",
+  "fr": "point de croisement"
+ },
+ {
+  "de": "Kreuzungswinkel",
+  "fr": "angle de croisement"
+ },
+ {
+  "de": "KSP-Linie",
+  "fr": "trajectoire du CGC"
+ },
+ {
+  "de": "KSP-Verlagerung",
+  "fr": "Déplacement du CGC"
+ },
+ {
+  "de": "Kurssetzung",
+  "fr": "Traçage"
+ },
+ {
+  "de": "Kurzschwung",
+  "fr": "virage court"
+ },
+ {
+  "de": "Körperachsen",
+  "fr": "axes du corps"
+ },
+ {
+  "de": "Körperschwerpunkt (KSP)",
+  "fr": "Centre de gravité du corps (CGC)"
+ },
+ {
+  "de": "Laktat",
+  "fr": "lactate"
+ },
+ {
+  "de": "Laktatschwelle",
+  "fr": "seuil lactique"
+ },
+ {
+  "de": "Landetechnik",
+  "fr": "technique de réception"
+ },
+ {
+  "de": "Landung",
+  "fr": "Atterrissage"
+ },
+ {
+  "de": "Langhantel",
+  "fr": "haltère"
+ },
+ {
+  "de": "Langhanteltechnik",
+  "fr": "technique d'haltérophilie"
+ },
+ {
+  "de": "Langhanteltraining",
+  "fr": "entraînement avec haltères"
+ },
+ {
+  "de": "Lauf-ABC",
+  "fr": "école de course"
+ },
+ {
+  "de": "Lauftechnik",
+  "fr": "technique de course"
+ },
+ {
+  "de": "Linienwahl",
+  "fr": "Choix de ligne"
+ },
+ {
+  "de": "Luftwiderstand",
+  "fr": "Résistance de l’air"
+ },
+ {
+  "de": "Längsachse (longitudinale Achse)  .",
+  "fr": "Axe longitudinal"
+ },
+ {
+  "de": "Längsachsenrotation",
+  "fr": "Axe longitudinal"
+ },
+ {
+  "de": "Makroplanung",
+  "fr": "Planification à long terme"
+ },
+ {
+  "de": "Makrozyklus",
+  "fr": "macrocycle"
+ },
+ {
+  "de": "Massage",
+  "fr": "massage"
+ },
+ {
+  "de": "Mastery",
+  "fr": "Mastery"
+ },
+ {
+  "de": "Material",
+  "fr": "matériel"
+ },
+ {
+  "de": "Materialabstimmung",
+  "fr": "Ajustement du matériel"
+ },
+ {
+  "de": "Maximale Last",
+  "fr": "charge maximale"
+ },
+ {
+  "de": "Maximalkraft",
+  "fr": "force maximale"
+ },
+ {
+  "de": "Mensch",
+  "fr": "personne"
+ },
+ {
+  "de": "Mentale Ruhe",
+  "fr": "calme mental"
+ },
+ {
+  "de": "Mentales Training",
+  "fr": "entraînement mental"
+ },
+ {
+  "de": "Mesozyklus",
+  "fr": "mésocycle"
+ },
+ {
+  "de": "Mikrozyklus",
+  "fr": "microcycle"
+ },
+ {
+  "de": "Minikipp",
+  "fr": "Mini-piquet"
+ },
+ {
+  "de": "Misty",
+  "fr": "Misty"
+ },
+ {
+  "de": "Mobilisation",
+  "fr": "mobilisation"
+ },
+ {
+  "de": "Mobilität & Beweglichkeit",
+  "fr": "Mobilité & Souplesse"
+ },
+ {
+  "de": "Mulden",
+  "fr": "creux"
+ },
+ {
+  "de": "Muskel-Sehnen-Komplex",
+  "fr": "complexe musculo-tendineux"
+ },
+ {
+  "de": "Muskelhypertrophie",
+  "fr": "hypertrophie musculaire"
+ },
+ {
+  "de": "Muskelmasse",
+  "fr": "masse musculaire"
+ },
+ {
+  "de": "Muskelpotential",
+  "fr": "potentiel musculaire"
+ },
+ {
+  "de": "Muskeltonus",
+  "fr": "tonus musculaire"
+ },
+ {
+  "de": "muskuläre Ausdauer",
+  "fr": "endurance musculaire"
+ },
+ {
+  "de": "Nachdehnen",
+  "fr": "étirement post-effort"
+ },
+ {
+  "de": "Nackenmuskulatur",
+  "fr": "musculature du cou"
+ },
+ {
+  "de": "Oberschenkel hinten",
+  "fr": "muscles postérieurs de la cuisse"
+ },
+ {
+  "de": "Oberschenkel vorne",
+  "fr": "muscles antérieurs de la cuisse"
+ },
+ {
+  "de": "Off-Axis-Spins",
+  "fr": "Rotations hors axe"
+ },
+ {
+  "de": "Off-Snow",
+  "fr": "Off-Snow"
+ },
+ {
+  "de": "On-Snow",
+  "fr": "On-Snow"
+ },
+ {
+  "de": "Parallele Skistellung",
+  "fr": "Position parallèle"
+ },
+ {
+  "de": "paralleler Stockeinsatz",
+  "fr": "engagement des bâtons parallèles"
+ },
+ {
+  "de": "Parallelschwung",
+  "fr": "virage parallèle"
+ },
+ {
+  "de": "Parcours",
+  "fr": "Parcours"
+ },
+ {
+  "de": "Passive Regeneration",
+  "fr": "récupération passive"
+ },
+ {
+  "de": "Pendelverkürzung",
+  "fr": "raccourcissement de la pendule"
+ },
+ {
+  "de": "Periodisierung",
+  "fr": "périodisation"
+ },
+ {
+  "de": "Pflug",
+  "fr": "chasse-neige"
+ },
+ {
+  "de": "Pflugdrehen",
+  "fr": "chasse-neige tournant"
+ },
+ {
+  "de": "Pflugschwung",
+  "fr": "virage chasse-neige"
+ },
+ {
+  "de": "Pipezentrum",
+  "fr": "Centre de la pipe"
+ },
+ {
+  "de": "Planung",
+  "fr": "planification"
+ },
+ {
+  "de": "Plyometrie",
+  "fr": "plyométrie"
+ },
+ {
+  "de": "Progression",
+  "fr": "Progression"
+ },
+ {
+  "de": "Prozessziele",
+  "fr": "objectifs du processus"
+ },
+ {
+  "de": "Psyche",
+  "fr": "psyché"
+ },
+ {
+  "de": "Pufferkapazität",
+  "fr": "capacité tampon"
+ },
+ {
+  "de": "Qualität",
+  "fr": "Qualité"
+ },
+ {
+  "de": "Quantität",
+  "fr": "Quantité"
+ },
+ {
+  "de": "Quer- oder Breitenachse (transversale Achse)",
+  "fr": "Axe transversal"
+ },
+ {
+  "de": "Racing Basics",
+  "fr": "Racing Basics"
+ },
+ {
+  "de": "Racing Essentials",
+  "fr": "Racing Essentials"
+ },
+ {
+  "de": "Rail",
+  "fr": "Rail"
+ },
+ {
+  "de": "Rail Tricks",
+  "fr": "Figures sur rail"
+ },
+ {
+  "de": "RB 1 Grundposition",
+  "fr": "RB 1 Attitude (position) de base dynamique (se positionner)"
+ },
+ {
+  "de": "RB 2a Kurve: Unabhängige Beuge- und Streckbewegung der Beine (Agieren)",
+  "fr": "RB 2a virage : Mouvement (indépendant) de flexion et d'extension des jambes (agir)"
+ },
+ {
+  "de": "RB 2b Geländeangepasstes Skifahren durch Beuge- und Streckbewegung der Beine (Agieren)",
+  "fr": "RB 2b Adaptation au terrain grâce aux mouvements de flexion et d’extension des jambes (agir)"
+ },
+ {
+  "de": "RB 3 Stabiler Oberkörper (Stabilisieren)",
+  "fr": "RB 3 Haut du corps stable (stabiliser)"
+ },
+ {
+  "de": "RB 4 Hauptbelastung auf dem Aussenski (Steuern)",
+  "fr": "RB 4 Appui principal sur le ski extérieur (conduire)"
+ },
+ {
+  "de": "RB 5 Kontinuierlicher Belastungsaufbau durch Bewegungsfluss (Dynamisieren)",
+  "fr": "RB 5 Augmentation continue de l’appui via des mouvements fluides (dynamiser)"
+ },
+ {
+  "de": "RE 1 Alpiner Start «So effizient wie möglich»",
+  "fr": "RE 1 Départ alpin « Le plus efficace possible »"
+ },
+ {
+  "de": "RE 2a Schwung «Mutig hinters Tor fahren – hoch raus»",
+  "fr": "RE 2a Virage « Avoir le courage de skier derrière la porte - sortir haut »"
+ },
+ {
+  "de": "RE 2b Schwung «Diagonale suchen»",
+  "fr": "RE 2b Virage « Rechercher la diagonale »"
+ },
+ {
+  "de": "RE 3 Sprung & Gelände «Möglichst viel Bodenkontakt»",
+  "fr": "RE 3 Sauts & terrain « Autant de contact avec le sol que possible »"
+ },
+ {
+  "de": "RE 4 Aerodynamische Position «So lange wie möglich eine gute Position halten»",
+  "fr": "RE 4 Position aérodynamique « Maintenir aussi longtemps que possible une bonne position »"
+ },
+ {
+  "de": "Reaktionsfähigkeit",
+  "fr": "temps de réaction"
+ },
+ {
+  "de": "Reaktionsschnelligkeit",
+  "fr": "vitesse de réaction"
+ },
+ {
+  "de": "Reaktivkraft",
+  "fr": "force réactive"
+ },
+ {
+  "de": "Reflexaktivierung",
+  "fr": "activation des réflexes"
+ },
+ {
+  "de": "Regeneration",
+  "fr": "récupération"
+ },
+ {
+  "de": "Reibung minimieren",
+  "fr": "Minimiser le frottement"
+ },
+ {
+  "de": "Reibungskraft",
+  "fr": "Force de frottement"
+ },
+ {
+  "de": "Reissen",
+  "fr": "arraché"
+ },
+ {
+  "de": "Rennläufe",
+  "fr": "Manches de course"
+ },
+ {
+  "de": "Rennsimulation",
+  "fr": "simulation de course"
+ },
+ {
+  "de": "Resultierende Kraft",
+  "fr": "Force résultante"
+ },
+ {
+  "de": "Rhythmisierung",
+  "fr": "Rythmisation"
+ },
+ {
+  "de": "Richtungswechsel",
+  "fr": "changement de direction"
+ },
+ {
+  "de": "Richtungsänderung",
+  "fr": "changement de direction"
+ },
+ {
+  "de": "Rotation",
+  "fr": "Rotation"
+ },
+ {
+  "de": "Rumpfkraft",
+  "fr": "Force du tronc"
+ },
+ {
+  "de": "Rumpfkrafttraining",
+  "fr": "entraînement de la force du tronc"
+ },
+ {
+  "de": "Rumpfmuskulatur",
+  "fr": "musculature du tronc"
+ },
+ {
+  "de": "Rumpfspannung",
+  "fr": "Tension du tronc"
+ },
+ {
+  "de": "Rumpfstabilität",
+  "fr": "Stabilité du tronc"
+ },
+ {
+  "de": "Rutschen",
+  "fr": "déraper"
+ },
+ {
+  "de": "Rücklage",
+  "fr": "Inclinaison vers l`arrière"
+ },
+ {
+  "de": "Saisonplanung",
+  "fr": "planification de la saison"
+ },
+ {
+  "de": "Saisonziel",
+  "fr": "objectif de saison"
+ },
+ {
+  "de": "Salto",
+  "fr": "Salto"
+ },
+ {
+  "de": "Saltoarten",
+  "fr": "Types de salto"
+ },
+ {
+  "de": "Schattenfläche",
+  "fr": "surface de frottement"
+ },
+ {
+  "de": "Schaufeldruck",
+  "fr": "Prendre l'appui sur la spatule"
+ },
+ {
+  "de": "Schlaf",
+  "fr": "sommeil"
+ },
+ {
+  "de": "Schlafmanagement",
+  "fr": "gestion du sommeil"
+ },
+ {
+  "de": "Schlittschuhschritt",
+  "fr": "pas de patineur"
+ },
+ {
+  "de": "Schlittschuhschritt ohne Stockeinsatz",
+  "fr": "pas de patineur sans engagement des bâtons"
+ },
+ {
+  "de": "Schlittschuhschritte",
+  "fr": "Pas de patineur"
+ },
+ {
+  "de": "Schnee",
+  "fr": "neige"
+ },
+ {
+  "de": "Schneeeigenschaften",
+  "fr": "caractéristiques de la neige"
+ },
+ {
+  "de": "Schneewiderstand",
+  "fr": "résistance de la neige"
+ },
+ {
+  "de": "Schneewiderstand nutzen",
+  "fr": "Utiliser la résistance de la neige"
+ },
+ {
+  "de": "Schneewiderstand suchen",
+  "fr": "Recherche de résistance de la neige"
+ },
+ {
+  "de": "Schnelligkeit",
+  "fr": "vitesse"
+ },
+ {
+  "de": "Schnelligkeit & Agilität",
+  "fr": "Vitesse & Agilité"
+ },
+ {
+  "de": "Schnelligkeitsausdauer",
+  "fr": "endurance vitesse"
+ },
+ {
+  "de": "Schnellkraft",
+  "fr": "force-vitesse"
+ },
+ {
+  "de": "Schnellkrafttraining",
+  "fr": "entraînement de force-vitesse"
+ },
+ {
+  "de": "Schrittfrequenz",
+  "fr": "fréquence de pas"
+ },
+ {
+  "de": "Schrittlänge",
+  "fr": "longueur de pas"
+ },
+ {
+  "de": "Schrägfahren",
+  "fr": "descendre en traversée"
+ },
+ {
+  "de": "Schräglage",
+  "fr": "Inclinaison latérale"
+ },
+ {
+  "de": "Schulefahren",
+  "fr": "travail technique"
+ },
+ {
+  "de": "Schultergelenkachse",
+  "fr": "l’axe des épaules"
+ },
+ {
+  "de": "Schwellenleistung",
+  "fr": "performance seuil"
+ },
+ {
+  "de": "Schwierigkeitsgrad",
+  "fr": "Niveau de difficulté"
+ },
+ {
+  "de": "Schwung bergwärts",
+  "fr": "virage vers l’amont"
+ },
+ {
+  "de": "Schwungphasen",
+  "fr": "phases du virage"
+ },
+ {
+  "de": "Schwungverstärkung",
+  "fr": "Renforcement de l'élan"
+ },
+ {
+  "de": "Schwungwechsel",
+  "fr": "changement de virage"
+ },
+ {
+  "de": "Sehnen",
+  "fr": "tendons"
+ },
+ {
+  "de": "Seitrutschen",
+  "fr": "déraper latéralement"
+ },
+ {
+  "de": "Selektionen",
+  "fr": "sélections"
+ },
+ {
+  "de": "Sensibilisierung der Rezeptoren",
+  "fr": "sensibilisation des récepteurs"
+ },
+ {
+  "de": "Serienpause",
+  "fr": "pause entre les séries"
+ },
+ {
+  "de": "Ski-Linie",
+  "fr": "trajectoire des skis"
+ },
+ {
+  "de": "Skibiegelinie",
+  "fr": "Ligne de flexion du ski"
+ },
+ {
+  "de": "Skidurchbiegung",
+  "fr": "flexion des skis"
+ },
+ {
+  "de": "Skills-Check",
+  "fr": "Skills-Check"
+ },
+ {
+  "de": "Snowboard",
+  "fr": "Snowboard"
+ },
+ {
+  "de": "Sport & Athlet:in",
+  "fr": "Sport & Athlète"
+ },
+ {
+  "de": "Sprechtempo",
+  "fr": "rythme de conversation"
+ },
+ {
+  "de": "Sprint",
+  "fr": "sprint"
+ },
+ {
+  "de": "Sprung-ABC",
+  "fr": "ecole de saut"
+ },
+ {
+  "de": "Sprunghöhe",
+  "fr": "Hauteur du saut"
+ },
+ {
+  "de": "Sprungkrafttraining",
+  "fr": "entraînement de puissance de saut"
+ },
+ {
+  "de": "Sprungtechnik",
+  "fr": "technique de saut"
+ },
+ {
+  "de": "Stabiler Oberkörper",
+  "fr": "Buste stable"
+ },
+ {
+  "de": "Stabilisationssprünge",
+  "fr": "sauts de stabilisation"
+ },
+ {
+  "de": "Stabilisatoren",
+  "fr": "Stabilisateurs"
+ },
+ {
+  "de": "Stabilität",
+  "fr": "stabilité"
+ },
+ {
+  "de": "Stafetten",
+  "fr": "estafettes"
+ },
+ {
+  "de": "Stage",
+  "fr": "Stage"
+ },
+ {
+  "de": "Standfläche",
+  "fr": "surface de contact"
+ },
+ {
+  "de": "Startphase",
+  "fr": "Phase de départ"
+ },
+ {
+  "de": "Starttor",
+  "fr": "baguette de départ"
+ },
+ {
+  "de": "Statisches Dehnen",
+  "fr": "étirement statique"
+ },
+ {
+  "de": "Steifigkeit des Muskel-Sehnen-Komplexes",
+  "fr": "raideur du complexe musculo-tendineux"
+ },
+ {
+  "de": "Steuerphase 1",
+  "fr": "phase du conduite 1"
+ },
+ {
+  "de": "Steuerphase 2",
+  "fr": "phase du conduite 2"
+ },
+ {
+  "de": "Steuerprinzipien",
+  "fr": "principes de conduite"
+ },
+ {
+  "de": "Stockeinsatz",
+  "fr": "planté du bâton"
+ },
+ {
+  "de": "Straight Air",
+  "fr": "Straight Air"
+ },
+ {
+  "de": "Strecken",
+  "fr": "extension"
+ },
+ {
+  "de": "Stressabbau",
+  "fr": "réduction du stress"
+ },
+ {
+  "de": "Stressmanagement",
+  "fr": "gestion du stress"
+ },
+ {
+  "de": "Strukturen & Umfeld",
+  "fr": "structures & environnement"
+ },
+ {
+  "de": "Style-Elemente",
+  "fr": "Éléments de style"
+ },
+ {
+  "de": "Stützschraube",
+  "fr": "Vrille contact"
+ },
+ {
+  "de": "Submaximale Last",
+  "fr": "charge sous-maximale"
+ },
+ {
+  "de": "suchend nutzen",
+  "fr": "utiliser en la recherchant"
+ },
+ {
+  "de": "Superkompensation",
+  "fr": "supercompensation"
+ },
+ {
+  "de": "Swiss-Ski Powertest",
+  "fr": "Swiss-Ski Powertest"
+ },
+ {
+  "de": "switch / normal",
+  "fr": "switch / normal"
+ },
+ {
+  "de": "Talent",
+  "fr": "Talent"
+ },
+ {
+  "de": "Talkante",
+  "fr": "carre aval"
+ },
+ {
+  "de": "Talski",
+  "fr": "Ski aval"
+ },
+ {
+  "de": "talwärts",
+  "fr": "vers l’aval"
+ },
+ {
+  "de": "Tapering",
+  "fr": "tapering"
+ },
+ {
+  "de": "Technik & Taktik Riesenslalom (RS)",
+  "fr": "technique et tactique slalom géant (GS)"
+ },
+ {
+  "de": "Technik & Taktik Slalom (SL)",
+  "fr": "technique et tactique slalom (SL)"
+ },
+ {
+  "de": "Technik & Taktik Speed (SG/DH)",
+  "fr": "technique et tactique vitesse (SG/DH)"
+ },
+ {
+  "de": "Technik & Taktik übergeordnet",
+  "fr": "technique et tactique générale"
+ },
+ {
+  "de": "Teilkörperbewegungen",
+  "fr": "mouvements de parties du corps"
+ },
+ {
+  "de": "Teilkörperbewegungen in den Füssen",
+  "fr": "mouvements de parties du corps: chevilles/pieds"
+ },
+ {
+  "de": "Teilkörperbewegungen in Hüften/Knien",
+  "fr": "mouvements de parties du corps: hanches/genoux"
+ },
+ {
+  "de": "Teilkörperbewegungen in Schultern, Armen, Händen und Kopf",
+  "fr": "mouvements de parties du corps: épaules, bras, mains et tête"
+ },
+ {
+  "de": "Tempoanpassung",
+  "fr": "Adaptation de la vitesse"
+ },
+ {
+  "de": "Tempogefühl",
+  "fr": "sens du rythme"
+ },
+ {
+  "de": "Tempowechsel",
+  "fr": "changement de rythme"
+ },
+ {
+  "de": "Tiefenachse (sagittale Achse)",
+  "fr": "Axe sagittal"
+ },
+ {
+  "de": "Timing",
+  "fr": "Timing"
+ },
+ {
+  "de": "Tor",
+  "fr": "porte"
+ },
+ {
+  "de": "Torstange",
+  "fr": "piquet"
+ },
+ {
+  "de": "Trainingsaufwand",
+  "fr": "Heures d'entraînements"
+ },
+ {
+  "de": "Trainingsblöcke",
+  "fr": "blocs d'entraînement"
+ },
+ {
+  "de": "Trainingsdokumentation",
+  "fr": "documentation de l'entraînement"
+ },
+ {
+  "de": "Trainingsintensität",
+  "fr": "intensité d’entraînement"
+ },
+ {
+  "de": "Trainingsplanung",
+  "fr": "planification de l'entraînement"
+ },
+ {
+  "de": "Trainingssteuerung",
+  "fr": "gestion de l'entraînement"
+ },
+ {
+  "de": "Trainingsstunden",
+  "fr": "Heures d'entraînement"
+ },
+ {
+  "de": "Trainingsvolumen",
+  "fr": "volume d’entraînement"
+ },
+ {
+  "de": "Transition",
+  "fr": "Transition"
+ },
+ {
+  "de": "Treppenschritt",
+  "fr": "montée en escalier"
+ },
+ {
+  "de": "Treppensprünge",
+  "fr": "sauts d’escaliers"
+ },
+ {
+  "de": "Trickkombination",
+  "fr": "Combinaison de figures"
+ },
+ {
+  "de": "Trickvielfalt",
+  "fr": "Diversité de figures"
+ },
+ {
+  "de": "Umfeldmanagement",
+  "fr": "gestion de l'environnement"
+ },
+ {
+  "de": "umkanten",
+  "fr": "changer de carre"
+ },
+ {
+  "de": "Umsetzen",
+  "fr": "épaulé"
+ },
+ {
+  "de": "Umstecken",
+  "fr": "Retraçage"
+ },
+ {
+  "de": "Unterstützungsfläche",
+  "fr": "surface d’appui"
+ },
+ {
+  "de": "verbessertes Körpergefühl",
+  "fr": "amélioration de la perception corporelle"
+ },
+ {
+  "de": "Verlagern des Körperschwerpunkts talwärts",
+  "fr": "Déplacement du centre de gravité du corps vers l’aval"
+ },
+ {
+  "de": "Verschiebung des Körperschwepunktes entlang einer Achse",
+  "fr": "déplacement du centre de gravité du corps le long d’un axe"
+ },
+ {
+  "de": "Vertikalsprünge",
+  "fr": "sauts verticaux"
+ },
+ {
+  "de": "Vielseitigkeit fördern",
+  "fr": "Encourager la polyvalence"
+ },
+ {
+  "de": "VO2max",
+  "fr": "VO2max"
+ },
+ {
+  "de": "Vollkombi",
+  "fr": "combinaison intégrale"
+ },
+ {
+  "de": "Voraktivierung",
+  "fr": "pré-activation"
+ },
+ {
+  "de": "Vorbereitungsphase",
+  "fr": "phase de préparation"
+ },
+ {
+  "de": "Vorbereitungsphase 1",
+  "fr": "Phase de préparation 1"
+ },
+ {
+  "de": "Vorbereitungsphase 2",
+  "fr": "Phase de préparation 2"
+ },
+ {
+  "de": "Vorlage",
+  "fr": "Inclinaison vers l`avant"
+ },
+ {
+  "de": "Vorwettkampfphase",
+  "fr": "phase pré-compétition"
+ },
+ {
+  "de": "Wadenmuskulatur",
+  "fr": "musculature du mollet"
+ },
+ {
+  "de": "Wellen",
+  "fr": "Bosses"
+ },
+ {
+  "de": "Wellen-Mulden-Bahn",
+  "fr": "Piste à bosses et dépression"
+ },
+ {
+  "de": "Wettkampfausdauer",
+  "fr": "endurance de compétition"
+ },
+ {
+  "de": "Wettkampfkriterien",
+  "fr": "Critères de compétition"
+ },
+ {
+  "de": "Wettkampfphase",
+  "fr": "phase de compétition"
+ },
+ {
+  "de": "Wettkampfplanung",
+  "fr": "planification de la compétition"
+ },
+ {
+  "de": "Widerstand zwischen Gerät und Unterlage",
+  "fr": "la résistance entre l’engin et la neige"
+ },
+ {
+  "de": "Wiederholungen",
+  "fr": "répétitions"
+ },
+ {
+  "de": "Wiederholungsmethode",
+  "fr": "méthode par répétitions"
+ },
+ {
+  "de": "Wingate-Test",
+  "fr": "Test Wingate"
+ },
+ {
+  "de": "Zentrifugalkraft",
+  "fr": "Force centrifuge"
+ },
+ {
+  "de": "Zusatzgewichte",
+  "fr": "poids supplémentaires"
+ },
+ {
+  "de": "Ökonomisierung",
+  "fr": "économisation"
+ },
+ {
+  "de": "überleitend",
+  "fr": "en transition"
+ },
+ {
+  "de": "Überleitender Teil",
+  "fr": "partie de transition"
+ },
+ {
+  "de": "überwindend nutzen",
+  "fr": "utiliser en la reduisant"
+ }
+]
