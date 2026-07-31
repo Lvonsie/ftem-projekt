@@ -30,6 +30,17 @@ internen Kreis von 5–10 Personen ist das ok; das Passwort ist technisch im Sei
    create policy "read"  on ftem_overrides for select using (true);
    create policy "write" on ftem_overrides for insert with check (true);
    create policy "update" on ftem_overrides for update using (true) with check (true);
+
+   -- Glossar (neue Begriffe, die im Admin hinzugefügt werden)
+   create table if not exists ftem_glossary (
+     de text primary key,
+     fr text,
+     updated_at timestamptz default now()
+   );
+   alter table ftem_glossary enable row level security;
+   create policy "g_read"   on ftem_glossary for select using (true);
+   create policy "g_write"  on ftem_glossary for insert with check (true);
+   create policy "g_update" on ftem_glossary for update using (true) with check (true);
    ```
 
 3. Links **Project Settings → API** öffnen und zwei Werte kopieren:

@@ -972,7 +972,11 @@ __MAINCSS__
 #glosspanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
 .glosbar{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
 .glosbar input{flex:1;padding:9px 12px;border:1px solid #cfd6dd;border-radius:9px;font-size:14px}
-.glosnote{font-size:12.5px;color:#697080;margin:0 0 12px}
+.glosnote{font-size:12.5px;color:#697080;margin:0 0 10px}
+.glosadd{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px;background:#fff;border:1px solid #e4e8ec;border-radius:10px;padding:10px 12px}
+.glosadd input{padding:8px 10px;border:1px solid #cfd6dd;border-radius:8px;font-size:13px;min-width:150px}
+.glosadd button{background:#5a6b8f;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:800;font-size:13px;cursor:pointer}
+.glosadd button:hover{filter:brightness(1.08)}
 .glostab{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid #e4e8ec;border-radius:12px;overflow:hidden}
 .glostab th{text-align:left;background:#f2f4f7;color:#546a8c;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:9px 12px;position:sticky;top:0}
 .glostab td{padding:8px 12px;border-top:1px solid #eef1f4;vertical-align:top}
@@ -1007,6 +1011,12 @@ __MAINCSS__
   <div id="glosspanel" hidden>
     <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (Deutsch oder Französisch) …"><span id="gloscount" class="astatus"></span></div>
     <p class="glosnote">Feste Übersetzungen DE&nbsp;&rarr;&nbsp;FR. Diese Begriffe werden bei der Übersetzung der Inhalte einheitlich verwendet.</p>
+    <div class="glosadd">
+      <input id="gde" type="text" placeholder="Deutsch">
+      <input id="gfr" type="text" placeholder="Français">
+      <button id="gaddbtn" type="button">Hinzufügen</button>
+      <span id="gaddmsg" class="astatus"></span>
+    </div>
     <div id="glostable"></div>
   </div>
   <div id="editwrap">__ADMIN_SECTIONS__</div>
@@ -1023,12 +1033,38 @@ function renderGloss(q){
   rows.forEach(function(g){h+='<tr><td>'+gesc(g.de)+'</td><td>'+gesc(g.fr)+'</td></tr>';});
   document.getElementById('glostable').innerHTML=h+'</tbody></table>';
 }
+const glosDe=new Set(GLOSS.map(function(g){return g.de;}));
+function loadGlossAdditions(){
+  if(!SUPA_URL||!SUPA_KEY)return Promise.resolve();
+  return fetch(SUPA_URL+'/rest/v1/ftem_glossary?select=de,fr',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+    .then(function(r){return r.ok?r.json():[];}).then(function(rows){
+      (rows||[]).forEach(function(x){ if(!glosDe.has(x.de)){glosDe.add(x.de);GLOSS.unshift({de:x.de,fr:x.fr});} });
+    }).catch(function(){});
+}
+function addGloss(){
+  const de=document.getElementById('gde').value.trim(), fr=document.getElementById('gfr').value.trim();
+  const msg=document.getElementById('gaddmsg');
+  if(!de||!fr){msg.textContent='Bitte beide Felder ausfüllen.';return;}
+  if(!SUPA_URL||!SUPA_KEY){msg.textContent='Cloud-Speicher nicht eingerichtet – Begriff kann nicht gespeichert werden.';return;}
+  msg.textContent='Speichere …';
+  fetch(SUPA_URL+'/rest/v1/ftem_glossary',{method:'POST',
+    headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
+    body:JSON.stringify([{de:de,fr:fr}])})
+   .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);
+     if(glosDe.has(de)){GLOSS.forEach(function(g){if(g.de===de)g.fr=fr;});}else{glosDe.add(de);GLOSS.unshift({de:de,fr:fr});}
+     document.getElementById('gde').value='';document.getElementById('gfr').value='';
+     msg.textContent='✓ hinzugefügt';renderGloss(document.getElementById('glosq').value);
+   }).catch(function(e){msg.textContent='Fehler: '+e.message;});
+}
 function toggleGloss(){
   const gp=document.getElementById('glosspanel'),ew=document.getElementById('editwrap'),sw=document.getElementById('sportsel').parentNode;
   const show=gp.hidden;
   gp.hidden=!show; ew.hidden=show; sw.style.visibility=show?'hidden':'';
   document.getElementById('glossbtn').textContent=show?'← Bearbeiten':'Glossar';
-  if(show&&!gp.dataset.done){gp.dataset.done='1';renderGloss('');document.getElementById('glosq').addEventListener('input',function(e){renderGloss(e.target.value);});}
+  if(show&&!gp.dataset.done){gp.dataset.done='1';renderGloss('');
+    loadGlossAdditions().then(function(){renderGloss(document.getElementById('glosq').value);});
+    document.getElementById('glosq').addEventListener('input',function(e){renderGloss(e.target.value);});
+    document.getElementById('gaddbtn').addEventListener('click',addGloss);}
 }
 const statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave'),sel=document.getElementById('sportsel');
 const base=Object.assign({},ORIG);
