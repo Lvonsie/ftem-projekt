@@ -680,8 +680,9 @@ def home_html(datamap, lang):
     # Labels auf der Vertikalen der Bergspitze (x=1018 im Bild), nicht in der Bildmitte.
     LBLX = "1018"
     def band(y, h, name_y, sub_y, name, sub, key, cls=""):
+        # Klickflaeche nur innerhalb der Bergsilhouette (mtclip), nicht ueber die ganze Breite
         return ('<g class="pband" tabindex="0" role="button" data-ph="'+key+'" aria-label="'+esc(name)+'">'
-                '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0"/>'
+                '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0" clip-path="url(#mtclip)"/>'
                 '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
                 '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
     hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
@@ -693,11 +694,16 @@ def home_html(datamap, lang):
         '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
         '<g clip-path="url(#mtclip)">'
-        '<rect x="0" y="0" width="1896" height="375" fill="rgba(216,72,58,.46)"/>'
-        '<rect x="0" y="375" width="1896" height="165" fill="rgba(222,140,80,.46)"/>'
-        '<rect x="0" y="540" width="1896" height="250" fill="rgba(222,184,88,.48)"/>'
-        '<rect x="0" y="790" width="1896" height="196" fill="rgba(86,158,178,.48)"/>'
+        # Ein senkrechter Verlauf statt harter Kanten: an den Zonen-Grenzen (375/540/790)
+        # gehen die Farben ueber +-25px weich ineinander ueber.
+        '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad)"/>'
         '</g>'
+        '<linearGradient id="zonegrad" x1="0" y1="0" x2="0" y2="1">'
+        '<stop offset="0" stop-color="rgba(216,72,58,.46)"/><stop offset=".355" stop-color="rgba(216,72,58,.46)"/>'
+        '<stop offset=".406" stop-color="rgba(222,140,80,.46)"/><stop offset=".522" stop-color="rgba(222,140,80,.46)"/>'
+        '<stop offset=".573" stop-color="rgba(222,184,88,.48)"/><stop offset=".755" stop-color="rgba(222,184,88,.48)"/>'
+        '<stop offset=".848" stop-color="rgba(86,158,178,.48)"/><stop offset="1" stop-color="rgba(86,158,178,.48)"/>'
+        '</linearGradient>'
         '<clipPath id="zc-m"><rect x="0" y="0" width="1896" height="375"/></clipPath>'
         '<clipPath id="zc-e"><rect x="0" y="375" width="1896" height="165"/></clipPath>'
         '<clipPath id="zc-t"><rect x="0" y="540" width="1896" height="250"/></clipPath>'
@@ -750,25 +756,6 @@ def home_html(datamap, lang):
                     '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+'</div></div></div>'
                     '<p class="ps-desc">'+pdesc+'</p>'
                     '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
-    # Untere Leiste: sportartuebergreifende Themen (Links folgen, solange leer -> inaktiv)
-    linkfolgt = {"de": "Link folgt", "fr": "Lien à venir", "it": "Link in arrivo"}[lang]
-    overarch = [
-        ("FAPS", ""),
-        ("Swiss-Ski Clubs", ""),
-        ({"de":"Ethik-Charta","fr":"Charte éthique","it":"Carta etica"}[lang], ""),
-        ({"de":"Schneesport 2050","fr":"Sports de neige 2050","it":"Sport sulla neve 2050"}[lang], ""),
-        ({"de":"Nachhaltigkeit im Schneesport","fr":"Durabilité dans les sports de neige","it":"Sostenibilità negli sport sulla neve"}[lang], ""),
-    ]
-    if MISSION_URL:
-        bb_items = '<a class="bb-item np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission <b>swiss</b>ski</a>'
-    else:
-        bb_items = '<button class="bb-item" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission <b>swiss</b>ski</button>'
-    for lbl2, url2 in overarch:
-        if url2:
-            bb_items += '<a class="bb-item np-mission" href="'+esc(url2)+'" data-title="'+esc(lbl2)+'">'+esc(lbl2)+'</a>'
-        else:
-            bb_items += '<span class="bb-item bb-off" title="'+esc(linkfolgt)+'">'+esc(lbl2)+'</span>'
-    bottombar = '<div class="bottombar">'+bb_items+'</div>'
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
     fi_links = [
         ({"de":"Übersicht FTEM","fr":"Aperçu FTEM","it":"Panoramica FTEM"}[lang], "https://snowsports.flink.host/s/iFt05YOw/c5lG7vWX"),
@@ -811,7 +798,7 @@ def home_html(datamap, lang):
             +'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            +pyr+adminlk+'<div class="fb-corner">'+fb+'<button class="info-btn" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'+'</div>'+bottombar+
+            +pyr+adminlk+'<div class="fb-corner">'+fb+'<button class="info-btn" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'+'</div>'+
             '</div>'
             '<template id="tpl-news">'+news_html(lang)+'</template>'
             '<template id="tpl-app">'+install_hint(lang)+'</template>'
@@ -972,7 +959,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
 .hcta:hover{background:var(--red);border-color:var(--red)}
 .hcta-sec{background:rgba(255,255,255,.07)}
-.adminlink-hero{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);z-index:7;margin:0}
+.adminlink-hero{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:7;margin:0}
 .imodal{position:fixed;inset:0;z-index:112;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
@@ -1017,8 +1004,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-list li{position:relative;padding-left:14px;font-size:11px;font-weight:600;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#fff}
 /* Feedback unten rechts */
-.fb-corner{position:absolute;right:18px;bottom:54px;z-index:8;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:8px}
-@media(max-width:760px){.news-box{max-width:44vw}.homesport{max-width:160px}.fb-corner{bottom:50px}}
+.fb-corner{position:absolute;right:18px;bottom:16px;z-index:8;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:8px}
+@media(max-width:760px){.news-box{max-width:44vw}.homesport{max-width:160px}.fb-corner{bottom:14px}}
 .news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
 .news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
 .news-date{font-size:10.5px;font-weight:700;color:var(--mut);background:var(--acc-bg);border-radius:5px;padding:2px 7px}
@@ -1033,14 +1020,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.45);color:#fff;font-weight:800;font-size:13px;border-radius:22px;padding:9px 20px;cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
 .aw-btn .aw-ar{display:inline-flex;width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.22);align-items:center;justify-content:center;font-size:12px}
-/* Untere Themen-Leiste */
-.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:stretch;justify-content:center;gap:2px;background:rgba(8,12,19,.82);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12);padding:0 8px;overflow-x:auto;scrollbar-width:none}
-.bottombar::-webkit-scrollbar{display:none}
-.bb-item{font:inherit;flex:none;display:flex;align-items:center;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12px;padding:11px 15px;cursor:pointer;text-decoration:none;white-space:nowrap;letter-spacing:.02em}
-.bb-item b{color:var(--red);font-weight:800;margin-left:4px}
-.bb-item:hover{background:rgba(255,255,255,.10);color:#fff}
-.bb-item.bb-off{opacity:.45;cursor:default}
-.bb-item.bb-off:hover{background:none}
 /* Stufen-Summary-Overlay */
 .ph-sum{max-width:560px;margin:0 auto}
 .ph-sum .ps-head{display:flex;align-items:center;gap:13px;margin-bottom:11px}
@@ -1056,9 +1035,9 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* Zebra im Darkmode: leicht aufhellen statt abdunkeln */
 [data-theme="dark"] .grid .r:nth-child(odd):not(.head) .cell,[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045))}
 @media(max-width:760px){
-  .aw-cta{top:auto;bottom:56px;left:18px;transform:none}
+  .aw-cta{top:auto;bottom:18px;left:18px;transform:none}
   .aw-btn{font-size:12px;padding:8px 16px}
-  .adminlink-hero{bottom:44px}
+  .adminlink-hero{bottom:10px}
   .bottombar{justify-content:flex-start}
 }
 body.pres{--colw:290px;--lblw:200px}
@@ -1845,10 +1824,12 @@ function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SP
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero');
 function posAW(){
   if(!awCta||!heroEl)return;
-  if(window.innerWidth<=760){awCta.style.left='';return;}
+  if(window.innerWidth<=760){awCta.style.left='';awCta.style.top='';return;}
   const w=heroEl.clientWidth,h=heroEl.clientHeight;
   const s=Math.max(w/1896,h/986),ox=(w-1896*s)/2;
   awCta.style.left=Math.round(1018*s+ox)+'px';
+  // knapp ueber der Bergspitze (Gipfel bei Bild-y 227)
+  awCta.style.top=Math.max(10,Math.round(227*s-awCta.offsetHeight-12))+'px';
 }
 window.addEventListener('resize',posAW);posAW();
 document.querySelectorAll('.pband').forEach(bd=>{
