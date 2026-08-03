@@ -704,18 +704,18 @@ def home_html(datamap, lang):
         '<stop offset=".573" stop-color="rgba(222,184,88,.48)"/><stop offset=".755" stop-color="rgba(222,184,88,.48)"/>'
         '<stop offset=".848" stop-color="rgba(86,158,178,.48)"/><stop offset="1" stop-color="rgba(86,158,178,.48)"/>'
         '</linearGradient>'
-        '<clipPath id="zc-m"><rect x="0" y="0" width="1896" height="375"/></clipPath>'
-        '<clipPath id="zc-e"><rect x="0" y="375" width="1896" height="165"/></clipPath>'
-        '<clipPath id="zc-t"><rect x="0" y="540" width="1896" height="250"/></clipPath>'
-        '<clipPath id="zc-f"><rect x="0" y="790" width="1896" height="196"/></clipPath>'
+        # Kammlinie mit weichem Farbverlauf entlang der Hoehenzonen (statt harter Wechsel)
+        '<linearGradient id="linegrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="986">'
+        '<stop offset="0" stop-color="#ff6d60"/><stop offset=".355" stop-color="#ff6d60"/>'
+        '<stop offset=".406" stop-color="#ff9b57"/><stop offset=".522" stop-color="#ff9b57"/>'
+        '<stop offset=".573" stop-color="#ffd45c"/><stop offset=".776" stop-color="#ffd45c"/>'
+        '<stop offset=".827" stop-color="#57cce4"/><stop offset="1" stop-color="#57cce4"/>'
+        '</linearGradient>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="5" stroke-linejoin="round" opacity=".3"/>'
-        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-m)" fill="none" stroke="#ff6d60" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
-        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-e)" fill="none" stroke="#ff9b57" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
-        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-t)" fill="none" stroke="#ffd45c" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
-        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-f)" fill="none" stroke="#57cce4" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
+        '<path d="'+RIDGE_PATH+'" fill="none" stroke="url(#linegrad)" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
         + band(0, 375, 338, 364, band_lbl[3], "M", "m")
-        + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", "e", " pbn-t")
-        + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", "t", " pbn-t")
+        + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", "e")
+        + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", "t")
         + band(790, 196, 866, 894, band_lbl[0], "F1 – F3", "f")
         + '</svg>')
     pyr = hero_svg
@@ -853,7 +853,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 #home .hero-head h1 .fE{color:#ff9b57;text-shadow:0 0 12px rgba(255,155,87,.9),0 0 26px rgba(255,155,87,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fM{color:#ff6d60;text-shadow:0 0 12px rgba(255,109,96,.95),0 0 26px rgba(255,109,96,.65),0 2px 24px rgba(0,0,0,.5)}
 @keyframes ftemglow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
-#home .hero-logo{display:block;margin:10px 0 0 8px;width:clamp(96px,14vw,150px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
+#home .hero-logo{display:block;margin:-12px 0 0 8px;width:clamp(96px,14vw,150px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
 .constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
 .clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
@@ -922,8 +922,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
 .heromt .pband:hover,.heromt .pband:focus-visible{filter:brightness(1.28)}
-.heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:17px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:2.6px;stroke-linejoin:round}
-.heromt .pbn-t{font-size:27px;stroke-width:3.2px}
+.heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:22px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:3px;stroke-linejoin:round}
 .heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
 @media(min-aspect-ratio:19/10){
@@ -1072,7 +1071,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:170px}#home .hero-head h1{font-size:40px}#home .hero-logo{width:78px;margin:6px 0 0 6px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:170px}#home .hero-head h1{font-size:40px}#home .hero-logo{width:78px;margin:-6px 0 0 6px}}
 @media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
 @media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */
