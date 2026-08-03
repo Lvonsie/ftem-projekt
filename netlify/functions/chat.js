@@ -61,7 +61,7 @@ ${context || '(kein Kontext übermittelt)'}`;
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        model: process.env.CHAT_MODEL || 'claude-3-5-haiku-20241022',
+        model: process.env.CHAT_MODEL || 'claude-haiku-4-5-20251001',
         max_tokens: 800,
         system,
         messages
