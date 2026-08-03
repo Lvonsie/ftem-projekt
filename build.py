@@ -637,11 +637,13 @@ def home_html(datamap, lang):
     # Fenstergroesse exakt auf ihrer Zone, alle zentriert in einer Linie.
     # preserveAspectRatio "YMin": bei breiten/flachen Fenstern wird unten (Wald) statt
     # oben (Himmel) beschnitten -> der Titel ueberlappt den Gipfel nicht mehr.
+    # Labels auf der Vertikalen der Bergspitze (x=1018 im Bild), nicht in der Bildmitte.
+    LBLX = "1018"
     def band(y, h, name_y, sub_y, name, sub, cls=""):
         return ('<g class="pband" tabindex="0" role="button" aria-label="'+esc(name)+'">'
                 '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0"/>'
-                '<text class="pb-n'+cls+'" x="948" y="'+str(name_y)+'">'+esc(name)+'</text>'
-                '<text class="pb-s" x="948" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
+                '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
+                '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
     hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
@@ -755,7 +757,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 #home .home-hero .langsw a{color:rgba(255,255,255,.82)}
 #home .home-hero .langsw a.active{background:#3f4650;color:#fff}
 #home .home-hero .langsw a:hover:not(.active){background:rgba(255,255,255,.22);color:#fff}
-#home .hero-head{position:relative;z-index:6;text-align:center;padding:74px 20px 0;pointer-events:none}
+#home .hero-head{position:relative;z-index:6;text-align:center;padding:74px 26% 0 20px;pointer-events:none}
 #home .hero-head h1{font-size:clamp(46px,9vw,92px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
 #home .hero-head h1 b{color:#fff;font-weight:800}
 #home .hero-head h1 .fF,#home .hero-head h1 .fT,#home .hero-head h1 .fE,#home .hero-head h1 .fM{animation:ftemglow 3.2s ease-in-out infinite}
