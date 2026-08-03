@@ -499,7 +499,7 @@ def sport_section(sport, d, lang, edit=False):
 # Strenges Zickzack (Gipfel/Tal im Wechsel): so laufen die Linien immer VON der
 # Beschriftung weg und keine Schrift kreuzt eine Linie.
 # Kammlinie des Hero-Fotos (automatisch + manuell nachgezeichnet), Koordinaten in Bildpixeln (1896x986)
-RIDGE_PATH = "M0,986 L0,563 L0,563 L9,564 L13,574 L17,574 L40,568 L69,554 L80,554 L124,567 L161,584 L249,592 L272,582 L307,558 L397,463 L431,439 L439,429 L502,403 L572,341 L596,347 L624,346 L651,337 L661,328 L667,327 L750,357 L772,359 L811,343 L886,339 L915,323 L930,310 L935,310 L951,295 L969,285 L1018,227 L1039,231 L1068,248 L1089,276 L1103,285 L1112,302 L1129,319 L1141,323 L1149,332 L1169,342 L1183,344 L1196,355 L1208,360 L1216,371 L1254,380 L1299,409 L1311,413 L1326,429 L1341,437 L1361,465 L1392,475 L1431,477 L1458,474 L1496,451 L1508,454 L1530,451 L1553,435 L1581,408 L1591,407 L1598,412 L1629,415 L1644,400 L1677,412 L1693,431 L1722,452 L1749,456 L1788,475 L1794,487 L1799,487 L1803,475 L1819,472 L1840,460 L1854,457 L1879,438 L1895,432 L1896,432 L1896,986 Z"
+RIDGE_PATH = "M0,986 L0,570 L0,570 L12,570 L13,574 L17,574 L40,568 L69,554 L80,554 L124,567 L161,584 L249,592 L272,582 L307,558 L397,463 L431,439 L439,429 L502,403 L572,341 L596,347 L624,346 L651,337 L661,328 L667,327 L750,357 L772,359 L811,343 L886,339 L915,323 L930,310 L935,310 L951,295 L969,285 L1018,227 L1039,231 L1068,248 L1089,276 L1103,285 L1112,302 L1129,319 L1141,323 L1149,332 L1169,342 L1183,344 L1196,355 L1208,360 L1216,371 L1254,380 L1299,409 L1311,413 L1326,429 L1341,437 L1361,465 L1392,475 L1431,477 L1458,474 L1496,451 L1508,454 L1530,451 L1553,435 L1581,408 L1591,407 L1598,412 L1629,415 L1644,400 L1677,412 L1693,431 L1722,452 L1749,456 L1786,475 L1802,476 L1819,472 L1840,460 L1860,454 L1879,438 L1895,432 L1896,432 L1896,986 Z"
 
 CONS_POS = [(7,74),(14,49),(22,71),(29,35),(37,64),(44,48),(55,72),(66,40),(77,67),(89,43)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
@@ -633,7 +633,16 @@ def home_html(datamap, lang):
                 "it": ["FOUNDATION","TALENT","ELITE","MASTERY"]}[lang]
     # FTEM-Zonen folgen der echten Bergsilhouette: SVG mit Foto + ClipPath auf der Kammlinie.
     # Die Farbbaender sind Hoehenzonen des Bergs (M = Gipfel, F = Basis).
-    hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
+    # Beschriftungen liegen IM SVG (gleiche Bildkoordinaten) -> sie sitzen bei jeder
+    # Fenstergroesse exakt auf ihrer Zone, alle zentriert in einer Linie.
+    # preserveAspectRatio "YMin": bei breiten/flachen Fenstern wird unten (Wald) statt
+    # oben (Himmel) beschnitten -> der Titel ueberlappt den Gipfel nicht mehr.
+    def band(y, h, name_y, sub_y, name, sub, cls=""):
+        return ('<g class="pband" tabindex="0" role="button" aria-label="'+esc(name)+'">'
+                '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0"/>'
+                '<text class="pb-n'+cls+'" x="948" y="'+str(name_y)+'">'+esc(name)+'</text>'
+                '<text class="pb-s" x="948" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
+    hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
         '<linearGradient id="herodark" x1="0" y1="0" x2="0" y2="1">'
@@ -648,14 +657,12 @@ def home_html(datamap, lang):
         '<rect x="0" y="720" width="1896" height="266" fill="rgba(86,158,178,.48)"/>'
         '</g>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"/>'
-        '</svg>')
-    pyr = (hero_svg +
-           '<div class="pyr" role="navigation" aria-label="FTEM-Stufen">'
-           '<div class="pband pm" tabindex="0"><span class="pb-n">'+band_lbl[3]+'</span><span class="pb-s">M</span></div>'
-           '<div class="pband pe" tabindex="0"><span class="pb-n">'+band_lbl[2]+'</span><span class="pb-s">E1 – E2</span></div>'
-           '<div class="pband pt" tabindex="0"><span class="pb-n">'+band_lbl[1]+'</span><span class="pb-s">T1 – T4</span></div>'
-           '<div class="pband pf" tabindex="0"><span class="pb-n">'+band_lbl[0]+'</span><span class="pb-s">F1 – F3</span></div>'
-           '</div>')
+        + band(0, 375, 338, 364, band_lbl[3], "M")
+        + band(375, 118, 430, 458, band_lbl[2], "E1 – E2")
+        + band(493, 227, 602, 636, band_lbl[1], "T1 – T4", " pbn-t")
+        + band(720, 266, 812, 840, band_lbl[0], "F1 – F3")
+        + '</svg>')
+    pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
     choose_lbl = {"de": "Sportart wählen", "fr": "Choisir un sport", "it": "Scegli lo sport"}[lang]
     spitems = ""
@@ -822,23 +829,19 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
-/* FTEM-Zonen in der echten Bergsilhouette (SVG) + transparente Klick-Streifen */
+/* FTEM-Zonen in der echten Bergsilhouette (SVG); Labels im SVG = immer exakt auf der Zone */
 .heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.pyr{position:absolute;inset:0;z-index:3}
-.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
-.pband:hover .pb-n{transform:scale(1.06)}
-.pm{top:20%;height:18%;align-items:flex-start;justify-content:flex-end;padding-left:20.5%;padding-bottom:1.5%}
-.pe{top:38%;height:12%}
-.pt{top:50%;height:23%}
-.pf{top:73%;height:27%;justify-content:flex-start;padding-top:6.5%}
-.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.7);font-size:15px;transition:transform .18s}
-.pt .pb-n{font-size:24px}
-.pm .pb-n{font-size:14px}
-.pb-s{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6);letter-spacing:.12em}
-.pm .pb-s{font-size:10px;padding-left:14px}
-/* Stufen-Klick -> Sportarten-Auswahl */
-.pband{cursor:pointer}
-.pband:hover{filter:brightness(1.18)}
+.heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
+.heromt .pband:hover,.heromt .pband:focus-visible{filter:brightness(1.28)}
+.heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:17px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:2.6px;stroke-linejoin:round}
+.heromt .pbn-t{font-size:27px;stroke-width:3.2px}
+.heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
+/* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
+@media(min-aspect-ratio:19/10){
+  #home .hero-head{padding-top:30px}
+  #home .hero-head h1{font-size:clamp(38px,4.6vw,66px)}
+  #home .hero-logo{width:clamp(78px,8.5vw,116px);margin-top:4px}
+}
 .spmodal{position:fixed;inset:0;z-index:115;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .sp-box{width:min(760px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
 .sp-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em}
@@ -850,7 +853,6 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .sp-grid a b{font-size:13px}
 .sp-grid img,.sp-grid .spcode{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 .sp-grid .spcode{display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:10px;font-weight:800}
-@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm{padding-left:4.5%;padding-bottom:0;justify-content:center}.pm .pb-n{font-size:9.5px;letter-spacing:.12em}.pm .pb-s{display:none}}
 .adminlink{text-align:center;margin-top:26px}
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}

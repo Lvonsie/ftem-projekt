@@ -115,23 +115,19 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
-/* FTEM-Zonen in der echten Bergsilhouette (SVG) + transparente Klick-Streifen */
+/* FTEM-Zonen in der echten Bergsilhouette (SVG); Labels im SVG = immer exakt auf der Zone */
 .heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.pyr{position:absolute;inset:0;z-index:3}
-.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
-.pband:hover .pb-n{transform:scale(1.06)}
-.pm{top:20%;height:18%;align-items:flex-start;justify-content:flex-end;padding-left:20.5%;padding-bottom:1.5%}
-.pe{top:38%;height:12%}
-.pt{top:50%;height:23%}
-.pf{top:73%;height:27%;justify-content:flex-start;padding-top:6.5%}
-.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.7);font-size:15px;transition:transform .18s}
-.pt .pb-n{font-size:24px}
-.pm .pb-n{font-size:14px}
-.pb-s{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6);letter-spacing:.12em}
-.pm .pb-s{font-size:10px;padding-left:14px}
-/* Stufen-Klick -> Sportarten-Auswahl */
-.pband{cursor:pointer}
-.pband:hover{filter:brightness(1.18)}
+.heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
+.heromt .pband:hover,.heromt .pband:focus-visible{filter:brightness(1.28)}
+.heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:17px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:2.6px;stroke-linejoin:round}
+.heromt .pbn-t{font-size:27px;stroke-width:3.2px}
+.heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
+/* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
+@media(min-aspect-ratio:19/10){
+  #home .hero-head{padding-top:30px}
+  #home .hero-head h1{font-size:clamp(38px,4.6vw,66px)}
+  #home .hero-logo{width:clamp(78px,8.5vw,116px);margin-top:4px}
+}
 .spmodal{position:fixed;inset:0;z-index:115;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .sp-box{width:min(760px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
 .sp-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em}
@@ -143,7 +139,6 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .sp-grid a b{font-size:13px}
 .sp-grid img,.sp-grid .spcode{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 .sp-grid .spcode{display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:10px;font-weight:800}
-@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm{padding-left:4.5%;padding-bottom:0;justify-content:center}.pm .pb-n{font-size:9.5px;letter-spacing:.12em}.pm .pb-s{display:none}}
 .adminlink{text-align:center;margin-top:26px}
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
