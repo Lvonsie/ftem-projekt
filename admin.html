@@ -115,24 +115,20 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
-/* FTEM-Weg als Berg-Schichten (Beispiel 2) - Farben mit dem Foto verschmolzen */
-.pyr{position:absolute;inset:0;z-index:3;cursor:pointer}
-.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  transition:filter .25s;mix-blend-mode:hard-light}
-.pyr:hover .pband{filter:brightness(1.12)}
-.pf{top:79%;height:17%;clip-path:polygon(8% 100%,92% 100%,84% 0,16% 0);
-  background:linear-gradient(180deg,rgba(96,168,186,.30),rgba(52,118,136,.52))}
-.pt{top:57.5%;height:21%;clip-path:polygon(16.3% 100%,83.7% 100%,73% 0,27% 0);
-  background:linear-gradient(180deg,rgba(222,186,96,.34),rgba(196,152,52,.50))}
-.pe{top:46%;height:11%;clip-path:polygon(27.3% 100%,72.7% 100%,65% 0,35% 0);
-  background:linear-gradient(180deg,rgba(224,146,88,.34),rgba(198,112,56,.50))}
-.pm{top:34%;height:11.5%;clip-path:polygon(35.4% 100%,64.6% 100%,50% 0);
-  background:linear-gradient(180deg,rgba(220,96,80,.36),rgba(186,58,44,.52))}
-.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.65);font-size:15px}
+/* FTEM-Zonen in der echten Bergsilhouette (SVG) + transparente Klick-Streifen */
+.heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.pyr{position:absolute;inset:0;z-index:3}
+.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
+.pband:hover .pb-n{transform:scale(1.06)}
+.pm{top:20%;height:18%;align-items:flex-start;justify-content:flex-end;padding-left:20.5%;padding-bottom:1.5%}
+.pe{top:38%;height:12%}
+.pt{top:50%;height:23%}
+.pf{top:73%;height:27%;justify-content:flex-start;padding-top:6.5%}
+.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.7);font-size:15px;transition:transform .18s}
 .pt .pb-n{font-size:24px}
-.pm .pb-n{margin-top:26px;font-size:14px}
+.pm .pb-n{font-size:14px}
 .pb-s{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6);letter-spacing:.12em}
-.pm .pb-s{font-size:10px}
+.pm .pb-s{font-size:10px;padding-left:14px}
 /* Stufen-Klick -> Sportarten-Auswahl */
 .pband{cursor:pointer}
 .pband:hover{filter:brightness(1.18)}
@@ -147,7 +143,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .sp-grid a b{font-size:13px}
 .sp-grid img,.sp-grid .spcode{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 .sp-grid .spcode{display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:10px;font-weight:800}
-@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm .pb-n{margin-top:14px;font-size:9.5px}.pm .pb-s{display:none}}
+@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm{padding-left:4.5%;padding-bottom:0;justify-content:center}.pm .pb-n{font-size:9.5px;letter-spacing:.12em}.pm .pb-s{display:none}}
 .adminlink{text-align:center;margin-top:26px}
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
@@ -158,6 +154,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
 .news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
 .news-btn:hover{filter:brightness(1.12)}
+.hero-top-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.info-btn{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:11.5px;border-radius:8px;padding:6px 13px;cursor:pointer;backdrop-filter:blur(6px)}
+.info-btn:hover{background:var(--red);border-color:var(--red)}
 .hero-cta{display:flex;gap:10px;justify-content:center;margin-top:14px;pointer-events:auto}
 .hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
 .hcta:hover{background:var(--red);border-color:var(--red)}
@@ -222,7 +221,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:56px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:128px}}
 @media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
 @media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */
@@ -367,7 +366,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cell::after{content:'';position:absolute;left:0;right:0;bottom:0;height:32px;background:linear-gradient(180deg,transparent,#fff);pointer-events:none;opacity:0;transition:opacity .2s}
 .cell.clamped::after{opacity:1}
 .cell.expanded::after{opacity:0}
-.cell.ph-foundation{border-top:3px solid var(--found)}.cell.ph-talent{border-top:3px solid var(--talent)}.cell.ph-elite{border-top:3px solid var(--elite)}.cell.ph-mastery{border-top:3px solid var(--mast)}.cell.ph-multi{border-top:3px solid #b6c0cc}
+/* farbige Zellen-Oberkanten entfernt (nur noch dezente Grundlinie) */
 .cwrap p{margin:0 0 5px;line-height:1.5}.cwrap p:last-child{margin-bottom:0}
 .cwrap .bh,.cwrap .sh{font-weight:700;color:var(--found-t);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
 .cwrap .bh:first-child,.cwrap .sh:first-child{margin-top:0}

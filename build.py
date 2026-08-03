@@ -498,6 +498,9 @@ def sport_section(sport, d, lang, edit=False):
 # ueber den linken Grat zum Gipfelbereich, rechts wieder abfallend.
 # Strenges Zickzack (Gipfel/Tal im Wechsel): so laufen die Linien immer VON der
 # Beschriftung weg und keine Schrift kreuzt eine Linie.
+# Kammlinie des Hero-Fotos (automatisch + manuell nachgezeichnet), Koordinaten in Bildpixeln (1896x986)
+RIDGE_PATH = "M0,986 L0,493 L0,493 L24,529 L48,524 L72,521 L96,512 L120,520 L144,529 L168,538 L192,553 L216,546 L240,552 L264,543 L288,522 L312,503 L336,478 L360,452 L384,425 L408,408 L432,399 L456,412 L480,397 L504,372 L528,349 L552,329 L576,337 L600,350 L624,361 L648,346 L672,330 L696,316 L720,326 L744,356 L768,374 L792,391 L816,394 L840,391 L864,381 L888,369 L912,353 L936,332 L960,308 L984,282 L1008,255 L1032,235 L1056,257 L1080,283 L1104,304 L1128,306 L1152,312 L1176,314 L1200,322 L1224,337 L1248,342 L1272,347 L1296,358 L1320,372 L1344,393 L1368,418 L1392,438 L1416,440 L1440,429 L1464,423 L1488,410 L1512,406 L1536,402 L1560,385 L1584,381 L1608,382 L1632,385 L1656,387 L1680,402 L1704,406 L1728,416 L1752,421 L1776,431 L1800,434 L1824,426 L1848,418 L1872,410 L1895,493 L1896,493 L1896,986 Z"
+
 CONS_POS = [(7,74),(14,49),(22,71),(29,35),(37,64),(44,48),(55,72),(66,40),(77,67),(89,43)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
 # 0 ski-alpin,1 langlauf,2 biathlon,3 skispringen,4 nord.komb,5 skicross,
@@ -628,11 +631,30 @@ def home_html(datamap, lang):
     band_lbl = {"de": ["FOUNDATION","TALENT","ELITE","MASTERY"],
                 "fr": ["FOUNDATION","TALENT","ELITE","MASTERY"],
                 "it": ["FOUNDATION","TALENT","ELITE","MASTERY"]}[lang]
-    pyr = ('<div class="pyr" role="navigation" aria-label="FTEM-Stufen">'
-           '<div class="pband pf" tabindex="0"><span class="pb-n">'+band_lbl[0]+'</span><span class="pb-s">F1 – F3</span></div>'
-           '<div class="pband pt" tabindex="0"><span class="pb-n">'+band_lbl[1]+'</span><span class="pb-s">T1 – T4</span></div>'
-           '<div class="pband pe" tabindex="0"><span class="pb-n">'+band_lbl[2]+'</span><span class="pb-s">E1 – E2</span></div>'
+    # FTEM-Zonen folgen der echten Bergsilhouette: SVG mit Foto + ClipPath auf der Kammlinie.
+    # Die Farbbaender sind Hoehenzonen des Bergs (M = Gipfel, F = Basis).
+    hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'
+        '<defs>'
+        '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
+        '<linearGradient id="herodark" x1="0" y1="0" x2="0" y2="1">'
+        '<stop offset="0" stop-color="rgba(9,14,24,.66)"/><stop offset=".45" stop-color="rgba(12,17,28,.5)"/><stop offset="1" stop-color="rgba(7,11,20,.9)"/></linearGradient>'
+        '</defs>'
+        '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
+        '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
+        '<g clip-path="url(#mtclip)">'
+        '<rect x="0" y="0" width="1896" height="375" fill="rgba(216,72,58,.46)"/>'
+        '<rect x="0" y="375" width="1896" height="118" fill="rgba(222,140,80,.46)"/>'
+        '<rect x="0" y="493" width="1896" height="227" fill="rgba(222,184,88,.48)"/>'
+        '<rect x="0" y="720" width="1896" height="266" fill="rgba(86,158,178,.48)"/>'
+        '</g>'
+        '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"/>'
+        '</svg>')
+    pyr = (hero_svg +
+           '<div class="pyr" role="navigation" aria-label="FTEM-Stufen">'
            '<div class="pband pm" tabindex="0"><span class="pb-n">'+band_lbl[3]+'</span><span class="pb-s">M</span></div>'
+           '<div class="pband pe" tabindex="0"><span class="pb-n">'+band_lbl[2]+'</span><span class="pb-s">E1 – E2</span></div>'
+           '<div class="pband pt" tabindex="0"><span class="pb-n">'+band_lbl[1]+'</span><span class="pb-s">T1 – T4</span></div>'
+           '<div class="pband pf" tabindex="0"><span class="pb-n">'+band_lbl[0]+'</span><span class="pb-s">F1 – F3</span></div>'
            '</div>')
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
     choose_lbl = {"de": "Sportart wählen", "fr": "Choisir un sport", "it": "Scegli lo sport"}[lang]
@@ -670,11 +692,11 @@ def home_html(datamap, lang):
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
             +fb+'</div>'
-            '<div class="hero-top-r"><button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button></div>'
+            '<div class="hero-top-r"><button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button>'
+            '<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski">'
-            '<div class="hero-cta">'+mission_btn+
-            '<button class="hcta hcta-sec" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div></div>'
+            '<div class="hero-cta">'+mission_btn+'</div></div>'
             +pyr+adminlk+
             '</div>'
             '<template id="tpl-news">'+news_html(lang)+install_hint(lang)+'</template>'
@@ -793,24 +815,20 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
-/* FTEM-Weg als Berg-Schichten (Beispiel 2) - Farben mit dem Foto verschmolzen */
-.pyr{position:absolute;inset:0;z-index:3;cursor:pointer}
-.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  transition:filter .25s;mix-blend-mode:hard-light}
-.pyr:hover .pband{filter:brightness(1.12)}
-.pf{top:79%;height:17%;clip-path:polygon(8% 100%,92% 100%,84% 0,16% 0);
-  background:linear-gradient(180deg,rgba(96,168,186,.30),rgba(52,118,136,.52))}
-.pt{top:57.5%;height:21%;clip-path:polygon(16.3% 100%,83.7% 100%,73% 0,27% 0);
-  background:linear-gradient(180deg,rgba(222,186,96,.34),rgba(196,152,52,.50))}
-.pe{top:46%;height:11%;clip-path:polygon(27.3% 100%,72.7% 100%,65% 0,35% 0);
-  background:linear-gradient(180deg,rgba(224,146,88,.34),rgba(198,112,56,.50))}
-.pm{top:34%;height:11.5%;clip-path:polygon(35.4% 100%,64.6% 100%,50% 0);
-  background:linear-gradient(180deg,rgba(220,96,80,.36),rgba(186,58,44,.52))}
-.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.65);font-size:15px}
+/* FTEM-Zonen in der echten Bergsilhouette (SVG) + transparente Klick-Streifen */
+.heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.pyr{position:absolute;inset:0;z-index:3}
+.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
+.pband:hover .pb-n{transform:scale(1.06)}
+.pm{top:20%;height:18%;align-items:flex-start;justify-content:flex-end;padding-left:20.5%;padding-bottom:1.5%}
+.pe{top:38%;height:12%}
+.pt{top:50%;height:23%}
+.pf{top:73%;height:27%;justify-content:flex-start;padding-top:6.5%}
+.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.7);font-size:15px;transition:transform .18s}
 .pt .pb-n{font-size:24px}
-.pm .pb-n{margin-top:26px;font-size:14px}
+.pm .pb-n{font-size:14px}
 .pb-s{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6);letter-spacing:.12em}
-.pm .pb-s{font-size:10px}
+.pm .pb-s{font-size:10px;padding-left:14px}
 /* Stufen-Klick -> Sportarten-Auswahl */
 .pband{cursor:pointer}
 .pband:hover{filter:brightness(1.18)}
@@ -825,7 +843,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .sp-grid a b{font-size:13px}
 .sp-grid img,.sp-grid .spcode{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 .sp-grid .spcode{display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:10px;font-weight:800}
-@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm .pb-n{margin-top:14px;font-size:9.5px}.pm .pb-s{display:none}}
+@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm{padding-left:4.5%;padding-bottom:0;justify-content:center}.pm .pb-n{font-size:9.5px;letter-spacing:.12em}.pm .pb-s{display:none}}
 .adminlink{text-align:center;margin-top:26px}
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
@@ -836,6 +854,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
 .news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
 .news-btn:hover{filter:brightness(1.12)}
+.hero-top-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.info-btn{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:11.5px;border-radius:8px;padding:6px 13px;cursor:pointer;backdrop-filter:blur(6px)}
+.info-btn:hover{background:var(--red);border-color:var(--red)}
 .hero-cta{display:flex;gap:10px;justify-content:center;margin-top:14px;pointer-events:auto}
 .hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
 .hcta:hover{background:var(--red);border-color:var(--red)}
@@ -900,7 +921,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:56px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:128px}}
 @media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
 @media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */
@@ -1045,7 +1066,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cell::after{content:'';position:absolute;left:0;right:0;bottom:0;height:32px;background:linear-gradient(180deg,transparent,#fff);pointer-events:none;opacity:0;transition:opacity .2s}
 .cell.clamped::after{opacity:1}
 .cell.expanded::after{opacity:0}
-.cell.ph-foundation{border-top:3px solid var(--found)}.cell.ph-talent{border-top:3px solid var(--talent)}.cell.ph-elite{border-top:3px solid var(--elite)}.cell.ph-mastery{border-top:3px solid var(--mast)}.cell.ph-multi{border-top:3px solid #b6c0cc}
+/* farbige Zellen-Oberkanten entfernt (nur noch dezente Grundlinie) */
 .cwrap p{margin:0 0 5px;line-height:1.5}.cwrap p:last-child{margin-bottom:0}
 .cwrap .bh,.cwrap .sh{font-weight:700;color:var(--found-t);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
 .cwrap .bh:first-child,.cwrap .sh:first-child{margin-top:0}
