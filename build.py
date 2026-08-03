@@ -648,7 +648,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
   background:linear-gradient(180deg,rgba(9,14,24,.66),rgba(12,17,28,.5) 45%,rgba(7,11,20,.9)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 #home .hero-top .lsrow{display:flex;align-items:center;gap:8px}
-#home .hero-top .lsrow .themebtn{width:34px;height:34px}
+#home .hero-top .lsrow .themebtn{width:36px;height:36px}
 .fb-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:filter .15s}
 .fb-btn:hover{filter:brightness(1.12)}
 .fb-panel{display:flex;flex-direction:column;gap:8px;width:250px;background:rgba(15,21,32,.93);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:11px;padding:11px;box-shadow:0 16px 40px rgba(0,0,0,.5)}
@@ -793,12 +793,13 @@ h1 .sk{color:var(--ink)}
 .ht-l{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:10px}
 .ht-c{flex:0 0 auto;position:relative;display:flex;align-items:center}
 .ht-r{flex:1 1 0;display:flex;align-items:center;gap:8px;justify-content:flex-end}
-header.top input,header.top select,header.top button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+header.top input,header.top select,header.top button{font:inherit;font-size:13px;height:36px;padding:0 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
+header.top .langsw{height:36px;align-items:center;box-sizing:border-box}
 header.top button{cursor:pointer;font-weight:600}
 header.top button:hover{background:var(--bg)}
 .ht-c .qbox{position:relative;display:flex;align-items:center;width:280px;max-width:100%}
 .ht-c .qbox .qic{position:absolute;left:10px;width:15px;height:15px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;pointer-events:none}
-.ht-c input.q{width:100%;padding:7px 58px 7px 30px}
+.ht-c input.q{width:100%;height:36px;padding:0 58px 0 30px}
 .ht-c input.q::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
 .ht-c .hits{position:absolute;right:30px;top:50%;transform:translateY(-50%);font-size:11.5px;color:var(--mut);font-weight:700;white-space:nowrap;max-width:58px;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
 .ht-c .qx{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:22px;height:22px;padding:0;border:none;background:none;color:var(--mut);font-size:17px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
@@ -808,7 +809,7 @@ header.top button:hover{background:var(--bg)}
 .ht-r .toggleall svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
 .ht-r .toggleall.allopen svg{transform:rotate(180deg)}
 .ht-r .toggleall:hover{border-color:var(--acc);color:var(--red)}
-.ht-r .pdf{width:36px;padding:6px 0;display:inline-flex;align-items:center;justify-content:center;color:var(--acc)}
+.ht-r .pdf{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--acc)}
 .ht-r .pdf svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ht-r .pdf:hover{border-color:var(--acc);color:var(--red)}
 .ht-r .hdiv{width:1px;height:22px;background:var(--line);flex:none;margin:0 3px}
@@ -958,7 +959,7 @@ header.top .sicon{width:28px;height:28px}
 header.top h1{font-size:13.5px;min-width:0}
 .ht-c{flex:1 1 100%;order:2}
 .ht-c .qbox{width:100%}
-.ht-c input.q{font-size:16px;padding:8px 56px 8px 30px}
+.ht-c input.q{font-size:16px;padding:0 56px 0 30px}
 .ht-r{flex:1 1 100%;order:3;gap:6px}
 .ht-r select{flex:1 1 auto;width:auto;min-width:0;font-size:13px}
 .ht-r .toggleall{flex:none}
@@ -1038,7 +1039,7 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .glostab tr:hover td{background:#1c2740}
 [data-theme="dark"] .glosadd{background:#172231;border-color:rgba(255,255,255,.10)}
 /* diskreter Theme-Umschalter */
-.themebtn{background:none;border:1px solid var(--line);border-radius:8px;width:32px;height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mut);transition:color .15s,border-color .15s,background .15s}
+.themebtn{background:none;border:1px solid var(--line);border-radius:9px;width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mut);transition:color .15s,border-color .15s,background .15s}
 .themebtn:hover{color:var(--ink);border-color:var(--acc-line)}
 .themebtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .themebtn .ic-sun{display:none}
