@@ -37,9 +37,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fb-text:focus{outline:none;border-color:var(--red)}
 .fb-send{align-self:flex-end;background:var(--red);color:#fff;border:none;border-radius:7px;padding:7px 16px;font-weight:800;font-size:12px;cursor:pointer;transition:filter .15s}
 .fb-send:hover{filter:brightness(1.12)}
-#home .home-hero .langsw{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);backdrop-filter:blur(6px)}
+#home .home-hero .langsw{background:rgba(15,21,32,.55);border-color:rgba(255,255,255,.42);backdrop-filter:blur(6px)}
 #home .home-hero .langsw a{color:rgba(255,255,255,.82)}
-#home .home-hero .langsw a.active{background:#3f4650;color:#fff}
+#home .home-hero .langsw a.active{background:#fff;color:#1d2630}
 #home .home-hero .langsw a:hover:not(.active){background:rgba(255,255,255,.22);color:#fff}
 #home .hero-head{position:relative;z-index:6;text-align:center;padding:74px 26% 0 20px;pointer-events:none}
 #home .hero-head h1{font-size:clamp(46px,9vw,92px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
@@ -144,13 +144,13 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
-.homesport{font:inherit;font-size:12.5px;font-weight:700;color:#fff;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:7px 10px;backdrop-filter:blur(6px);max-width:190px;cursor:pointer}
+.homesport{font:inherit;font-size:12.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:8px;padding:7px 10px;backdrop-filter:blur(6px);max-width:190px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .homesport option{color:var(--ink)}
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
 .news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
 .news-btn:hover{filter:brightness(1.12)}
 .hero-top-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.info-btn{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:11.5px;border-radius:8px;padding:6px 13px;cursor:pointer;backdrop-filter:blur(6px)}
+.info-btn{font:inherit;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);color:#fff;font-weight:800;font-size:11.5px;border-radius:8px;padding:6px 13px;cursor:pointer;backdrop-filter:blur(6px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .info-btn:hover{background:var(--red);border-color:var(--red)}
 .hero-cta{display:flex;gap:10px;justify-content:center;margin-top:14px;pointer-events:auto}
 .hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
@@ -193,6 +193,13 @@ body.pres .steady{display:none}
 a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* News-Badge + News-Overlay-Metadaten */
 .nbadge{display:inline-block;background:#fff;color:var(--red);border-radius:9px;padding:0 6px;margin-left:7px;font-size:10px;font-weight:800;line-height:15px;vertical-align:1px}
+/* News-Teaser (Titel der aktuellen Meldungen) */
+.news-teaser{display:flex;flex-direction:column;align-items:flex-end;gap:4px;max-width:250px;cursor:pointer}
+.nt-item{max-width:100%;background:rgba(15,21,32,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.news-teaser:hover .nt-item{border-color:rgba(255,255,255,.45)}
+/* Feedback unten rechts */
+.fb-corner{position:absolute;right:18px;bottom:54px;z-index:8;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:8px}
+@media(max-width:760px){.news-teaser{max-width:46vw}.fb-corner{bottom:50px}}
 .news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
 .news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
 .news-date{font-size:10.5px;font-weight:700;color:var(--mut);background:var(--acc-bg);border-radius:5px;padding:2px 7px}
@@ -204,7 +211,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .fb-panel .fb-text{margin-top:14px}
 /* "Athlet:innen Weg"-Knopf oben Mitte */
 .aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
-.aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:800;font-size:13px;border-radius:22px;padding:9px 20px;cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.02em}
+.aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.45);color:#fff;font-weight:800;font-size:13px;border-radius:22px;padding:9px 20px;cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
 .aw-btn .aw-ar{display:inline-flex;width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.22);align-items:center;justify-content:center;font-size:12px}
 /* Untere Themen-Leiste */
@@ -230,7 +237,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* Zebra im Darkmode: leicht aufhellen statt abdunkeln */
 [data-theme="dark"] .grid .r:nth-child(odd):not(.head) .cell,[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045))}
 @media(max-width:760px){
-  .aw-cta{top:auto;bottom:96px}
+  .aw-cta{top:auto;bottom:56px;left:18px;transform:none}
   .aw-btn{font-size:12px;padding:8px 16px}
   .adminlink-hero{bottom:44px}
   .bottombar{justify-content:flex-start}
