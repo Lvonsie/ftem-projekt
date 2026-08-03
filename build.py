@@ -497,7 +497,7 @@ def sport_section(sport, d, lang, edit=False):
 # Strenges Zickzack (Gipfel/Tal im Wechsel): so laufen die Linien immer VON der
 # Beschriftung weg und keine Schrift kreuzt eine Linie.
 # Kammlinie des Hero-Fotos (automatisch + manuell nachgezeichnet), Koordinaten in Bildpixeln (1896x986)
-RIDGE_PATH = "M0,986 L0,563.5 L0,563.5 L15,566.3 L21,572.3 L38,568.1 L55,559.5 L68,554.8 L77,554.1 L91,556.7 L119,565.4 L162,585.0 L167,583.3 L200,586.2 L229,591.4 L249,591.8 L273,581.0 L310,555.0 L394,466.3 L410,452.1 L432,437.7 L440,428.6 L476,414.9 L504,401.2 L519,390.1 L542,367.7 L558,355.6 L573,340.8 L578,340.8 L599,347.5 L611,344.9 L623,345.7 L635,342.9 L653,335.8 L662,327.9 L666,327.4 L678,330.0 L707,340.0 L749,356.4 L768,359.0 L773,358.3 L813,342.9 L824,343.5 L838,339.3 L854,342.0 L871,340.3 L878,337.9 L886,338.6 L896,334.8 L917,321.4 L930,309.7 L936,309.0 L949,297.0 L966,286.0 L997,253.8 L1015,229.1 L1026,225.8 L1034,230.5 L1039,229.7 L1047,237.5 L1069,249.0 L1080,261.7 L1090,277.2 L1102,284.3 L1113,302.6 L1120,307.6 L1127,317.3 L1141,323.3 L1149,331.4 L1168,341.3 L1176,341.9 L1184,345.0 L1197,355.2 L1208,360.5 L1216,370.6 L1230,373.7 L1238,378.4 L1246,377.2 L1255,380.7 L1263,385.2 L1269,391.5 L1275,392.4 L1289,400.7 L1299,408.9 L1307,413.2 L1311,413.4 L1325,428.0 L1333,433.5 L1340,436.2 L1345,445.3 L1351,451.1 L1360,464.3 L1387,473.7 L1424,477.4 L1437,474.8 L1457,474.1 L1465,468.2 L1480,461.4 L1498,450.3 L1502,450.6 L1508,454.0 L1516,454.7 L1528,452.0 L1542,440.7 L1552,435.5 L1566,420.2 L1572,417.9 L1579,408.9 L1589,406.5 L1600,412.6 L1607,411.3 L1613,414.4 L1628,414.9 L1632,412.1 L1639,402.2 L1646,399.6 L1677,412.5 L1684,418.5 L1693,430.5 L1723,452.2 L1736,455.1 L1748,455.9 L1766,463.9 L1780,472.3 L1792,476.1 L1807,474.9 L1820,471.1 L1840,460.3 L1858,454.6 L1879,438.2 L1895,432.0 L1896,432.0 L1896,986 Z"
+RIDGE_PATH = "M0,986 L0,563.6 L0,563.6 L8,564.9 L21,569.6 L28,569.9 L39,567.0 L65,556.2 L80,554.8 L94,557.6 L119,565.6 L161,583.3 L200,586.5 L234,591.7 L244,591.6 L253,589.6 L276,578.9 L313,552.0 L394,466.3 L410,452.1 L432,437.7 L440,428.7 L451,423.4 L476,414.9 L505,400.6 L519,390.1 L542,367.7 L558,355.6 L573,340.9 L578,340.9 L599,347.4 L611,344.9 L623,345.6 L635,342.9 L653,335.7 L662,328.0 L666,327.4 L678,330.0 L707,340.0 L749,356.4 L768,358.9 L773,358.2 L780,354.6 L791,351.6 L813,342.9 L824,343.5 L838,339.4 L854,342.0 L870,340.5 L878,338.0 L886,338.6 L896,334.8 L917,321.4 L924,316.4 L930,309.8 L936,309.0 L949,297.1 L967,285.2 L983,269.6 L997,253.8 L1014,230.1 L1018,227.3 L1026,225.8 L1034,230.4 L1039,229.9 L1047,237.4 L1069,249.2 L1080,261.8 L1090,277.0 L1102,284.5 L1113,302.4 L1120,307.7 L1127,317.3 L1133,320.8 L1141,323.3 L1149,331.3 L1168,341.2 L1176,341.9 L1184,345.0 L1197,355.2 L1208,360.6 L1216,370.5 L1230,373.8 L1238,378.3 L1246,377.3 L1255,380.7 L1262,384.5 L1269,391.4 L1276,393.0 L1289,400.7 L1299,408.8 L1307,413.1 L1311,413.6 L1325,427.9 L1333,433.5 L1339,435.3 L1345,445.1 L1351,451.2 L1360,464.2 L1387,473.7 L1423,477.4 L1437,474.9 L1457,474.0 L1465,468.2 L1480,461.4 L1488,455.6 L1498,450.4 L1502,450.6 L1508,453.9 L1516,454.7 L1528,451.9 L1542,440.7 L1552,435.4 L1566,420.4 L1572,417.7 L1579,409.0 L1589,406.6 L1600,412.6 L1607,411.4 L1613,414.3 L1628,414.8 L1632,412.1 L1639,402.4 L1646,399.7 L1677,412.5 L1684,418.5 L1693,430.5 L1723,452.1 L1735,455.0 L1749,456.3 L1766,463.9 L1780,472.3 L1792,476.1 L1807,474.9 L1820,471.1 L1840,460.4 L1858,454.6 L1879,438.2 L1895,432.0 L1896,432.0 L1896,986 Z"
 
 CONS_POS = [(7,74),(14,49),(22,71),(29,35),(37,64),(44,48),(55,72),(66,40),(77,67),(89,43)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
@@ -823,8 +823,7 @@ def home_html(datamap, lang):
             '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+'</div>'
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
-            + '</select>'
-            '<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div>'
+            + '</select></div>'
             +aw_cta+
             '<div class="hero-top-r">'+mission_btn+
             (('<div class="news-box" data-open="tpl-news" data-t="'+esc(news_label)+'" role="button" tabindex="0">'
@@ -836,7 +835,7 @@ def home_html(datamap, lang):
             +'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            +pyr+adminlk+'<div class="fb-corner">'+fb+'<button class="info-btn" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'+'</div>'+
+            +pyr+adminlk+'<div class="fb-corner">'+fb+'<button class="info-btn" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'+'<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button>'+'</div>'+
             '</div>'
             '<template id="tpl-news">'+news_html(lang)+'</template>'
             '<template id="tpl-app">'+install_hint(lang)+'</template>'
