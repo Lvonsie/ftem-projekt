@@ -6,5 +6,9 @@
     <polygon points="8,28 14,4 21,28" fill="#e2a900"/>
     <polygon points="15,28 20.5,7.5 27,28" fill="#e8772e"/>
     <polygon points="21,28 26,11 32,28" fill="#d52b1e"/>
+    <polygon points="5.6,13 7,9 8.3,13" fill="#fff"/>
+    <polygon points="12,9 14,4 16,9" fill="#fff"/>
+    <polygon points="18.7,12 20.5,7.5 22.3,12" fill="#fff"/>
+    <polygon points="24.4,15 26,11 27.6,15" fill="#fff"/>
   </g>
 </svg>

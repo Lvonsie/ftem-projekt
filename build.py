@@ -424,6 +424,29 @@ def news_html(lang):
     return ('<section class="news"><h2 class="news-h">'+esc(heading)+'</h2>'
             '<div class="news-grid">'+cards+'</div></section>')
 
+INSTALL_HINT = {
+ "de": {"title": "Als App aufs Handy legen",
+        "body": "Diese Seite lässt sich wie eine App speichern – ohne Download.<br>"
+                "<b>iPhone (Safari):</b> «Teilen» <span class=\"ai-i\">&#8593;</span> → «Zum Home-Bildschirm».<br>"
+                "<b>Android (Chrome):</b> Menü ⋮ → «App installieren»."},
+ "fr": {"title": "Ajouter comme app",
+        "body": "Cette page s'enregistre comme une app – sans téléchargement.<br>"
+                "<b>iPhone (Safari) :</b> « Partager » <span class=\"ai-i\">&#8593;</span> → « Sur l'écran d'accueil ».<br>"
+                "<b>Android (Chrome) :</b> menu ⋮ → « Installer l'application »."},
+ "it": {"title": "Aggiungi come app",
+        "body": "Questa pagina si salva come un'app – senza download.<br>"
+                "<b>iPhone (Safari):</b> « Condividi » <span class=\"ai-i\">&#8593;</span> → « Aggiungi a Home ».<br>"
+                "<b>Android (Chrome):</b> menu ⋮ → « Installa app »."},
+}
+
+def install_hint(lang):
+    t = INSTALL_HINT.get(lang, INSTALL_HINT["de"])
+    return ('<div class="appinstall">'
+            '<img class="ai-icon" src="assets/icon-192.png" width="60" height="60" '
+            'alt="FTEM App-Icon" decoding="async">'
+            '<div class="ai-txt"><div class="ai-h">'+esc(t["title"])+'</div>'
+            '<p>'+t["body"]+'</p></div></div>')
+
 def home_html(datamap, lang):
     n = len(SPORTS)
     nodes = ""
@@ -491,8 +514,13 @@ def home_html(datamap, lang):
             '<button class="scrolldown" type="button" aria-label="nach unten scrollen" '
             'onclick="document.querySelector(&#39;.home-info&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">&#9662;</button>'
             '</div>'
-            '<div class="home-info">'+news_html(lang)+ftem_info
-            +'<div class="adminlink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">&#128274;</a></div></div>'
+            '<div class="home-info">'+news_html(lang)+ftem_info+install_hint(lang)
+            +'<div class="adminlink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
+            '<svg viewBox="0 0 24 24" fill="none" stroke="url(#adminlk)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+            '<defs><linearGradient id="adminlk" x1="0" y1="0" x2="1" y2="1">'
+            '<stop offset="0" stop-color="#1f8fa6"/><stop offset=".4" stop-color="#e2a900"/><stop offset=".7" stop-color="#e8772e"/><stop offset="1" stop-color="#d52b1e"/></linearGradient></defs>'
+            '<rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.4"/><path d="M8 10.4V7.4a4 4 0 0 1 8 0v3"/>'
+            '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a></div></div>'
             '</section>')
 
 
@@ -604,9 +632,18 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
-.adminlink{text-align:center;margin-top:30px}
-.adminlink a{opacity:.32;font-size:17px;text-decoration:none;transition:opacity .15s;filter:grayscale(1)}
-.adminlink a:hover{opacity:.85}
+.adminlink{text-align:center;margin-top:26px}
+.adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
+.adminlink a:hover{opacity:1;transform:translateY(-1px)}
+.adminlink svg{width:22px;height:22px}
+/* App-Installations-Hinweis */
+.appinstall{max-width:600px;margin:26px auto 0;display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
+.appinstall .ai-icon{width:60px;height:60px;border-radius:14px;flex:none;box-shadow:0 5px 14px rgba(0,0,0,.16)}
+.appinstall .ai-h{font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:4px}
+.appinstall .ai-txt p{margin:0;font-size:12.5px;line-height:1.6;color:var(--mut)}
+.appinstall .ai-txt b{color:var(--ink);font-weight:700}
+.appinstall .ai-i{display:inline-block;transform:translateY(-1px);font-weight:800;color:var(--red)}
+@media(max-width:520px){.appinstall{align-items:flex-start;padding:13px 14px;gap:12px}.appinstall .ai-icon{width:52px;height:52px}}
 /* Newsbox */
 .news{margin:0 0 8px}
 .news-h{margin:0 0 12px;font-size:17px;font-weight:800;color:var(--ink)}

@@ -109,9 +109,18 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Hel
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
-.adminlink{text-align:center;margin-top:30px}
-.adminlink a{opacity:.32;font-size:17px;text-decoration:none;transition:opacity .15s;filter:grayscale(1)}
-.adminlink a:hover{opacity:.85}
+.adminlink{text-align:center;margin-top:26px}
+.adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
+.adminlink a:hover{opacity:1;transform:translateY(-1px)}
+.adminlink svg{width:22px;height:22px}
+/* App-Installations-Hinweis */
+.appinstall{max-width:600px;margin:26px auto 0;display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
+.appinstall .ai-icon{width:60px;height:60px;border-radius:14px;flex:none;box-shadow:0 5px 14px rgba(0,0,0,.16)}
+.appinstall .ai-h{font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:4px}
+.appinstall .ai-txt p{margin:0;font-size:12.5px;line-height:1.6;color:var(--mut)}
+.appinstall .ai-txt b{color:var(--ink);font-weight:700}
+.appinstall .ai-i{display:inline-block;transform:translateY(-1px);font-weight:800;color:var(--red)}
+@media(max-width:520px){.appinstall{align-items:flex-start;padding:13px 14px;gap:12px}.appinstall .ai-icon{width:52px;height:52px}}
 /* Newsbox */
 .news{margin:0 0 8px}
 .news-h{margin:0 0 12px;font-size:17px;font-weight:800;color:var(--ink)}
