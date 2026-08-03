@@ -237,7 +237,13 @@ body.pres section.sport h2.grp{font-size:15px}
 .fweg-line{fill:none;stroke:#c3ccd6;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:2 11;animation:fwflow 9s linear infinite}
 @keyframes fwflow{to{stroke-dashoffset:-130}}
 .fweg .wn circle{filter:drop-shadow(0 2px 5px rgba(0,0,0,.2))}
-.fweg .wn-t{fill:#fff;font-size:13px;font-weight:800;font-family:Arial,sans-serif}
+.fweg .wn-t{fill:#fff;font-size:13px;font-weight:800;font-family:Arial,sans-serif;text-anchor:middle;dominant-baseline:central}
+.fweg .fmt1{fill:#e4e9ef}.fweg .fmt2{fill:#eef1f5}
+.fweg .gcable{stroke:#8a94a0;stroke-width:1.4}
+.gondel{offset-rotate:0deg;offset-distance:0%;animation:gondelup 8s ease-in-out infinite}
+@keyframes gondelup{0%{offset-distance:0%}86%,100%{offset-distance:100%}}
+[data-theme="dark"] .fweg .fmt1{fill:rgba(255,255,255,.06)}
+[data-theme="dark"] .fweg .fmt2{fill:rgba(255,255,255,.035)}
 .fweg .wl{font-size:13px;font-weight:800;font-family:'Inter',Arial,sans-serif;letter-spacing:.02em}
 .fweg .we{fill:var(--mut);font-size:11px;font-weight:700;font-family:'Inter',Arial,sans-serif}
 .fweg-desc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}

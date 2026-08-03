@@ -617,22 +617,30 @@ def home_html(datamap, lang):
     weg_stages = ["F1", "F2", "F3", "T1", "T2", "T3", "T4", "E1", "E2", "M"]
     def _nx(i): return 60 + i * (840 / 9.0)
     def _ny(i): return 246 - i * (176 / 9.0)
-    _pts = " ".join("%.0f,%.0f" % (_nx(i), _ny(i)) for i in range(10))
+    _pathd = "M" + " L".join("%.0f %.0f" % (_nx(i), _ny(i)) for i in range(10))
     _nodes = ""
     for i, st in enumerate(weg_stages):
         _nodes += ('<g class="wn"><circle cx="%.0f" cy="%.0f" r="16" fill="%s"/>'
                    '<text x="%.0f" y="%.0f" class="wn-t">%s</text></g>'
-                   % (_nx(i), _ny(i), PH_HEX[st[0]], _nx(i), _ny(i) + 4, esc(st)))
+                   % (_nx(i), _ny(i), PH_HEX[st[0]], _nx(i), _ny(i), esc(st)))
     _groups = [(0, 2), (3, 6), (7, 8), (9, 9)]
     _plabels = ""
     for (a, b), (pk, pn, pr, desc) in zip(_groups, info["phases"]):
         xc = (_nx(a) + _nx(b)) / 2.0; yc = (_ny(a) + _ny(b)) / 2.0
         _plabels += ('<text x="%.0f" y="%.0f" class="wl" fill="%s" text-anchor="middle">%s</text>'
-                     % (xc, yc - 32, PH_HEX[pk], esc(pn)))
-    _ends = ('<text x="60" y="280" class="we" text-anchor="middle">' + esc(WEG_ENDS[0]) + '</text>'
-             '<text x="900" y="44" class="we" text-anchor="middle">' + esc(WEG_ENDS[1]) + '</text>')
+                     % (xc, yc - 34, PH_HEX[pk], esc(pn)))
+    _ends = ('<text x="60" y="286" class="we" text-anchor="middle">' + esc(WEG_ENDS[0]) + '</text>'
+             '<text x="900" y="42" class="we" text-anchor="middle">' + esc(WEG_ENDS[1]) + '</text>')
+    _gondel = ('<g class="gondel" style="offset-path:path(\'' + _pathd + '\')">'
+               '<line x1="-6" y1="-9" x2="-6" y2="-13" class="gcable"/>'
+               '<line x1="6" y1="-9" x2="6" y2="-13" class="gcable"/>'
+               '<rect x="-13" y="-9" width="26" height="16" rx="4" fill="#d52b1e"/>'
+               '<rect x="-9" y="-6" width="18" height="5" rx="1.5" fill="rgba(255,255,255,.85)"/></g>')
     weg_svg = ('<svg class="fweg" viewBox="0 0 960 300" role="img" aria-label="FTEM Entwicklungsstufen F1 bis M">'
-               '<polyline class="fweg-line" points="' + _pts + '"/>' + _plabels + _nodes + _ends + '</svg>')
+               '<polygon class="fmt2" points="0,300 250,150 480,300 720,120 960,300"/>'
+               '<polygon class="fmt1" points="0,300 170,205 380,300 560,178 780,300 960,150 960,300"/>'
+               '<path class="fweg-line" d="' + _pathd + '"/>'
+               + _gondel + _plabels + _nodes + _ends + '</svg>')
     pc2 = {"F": "f", "T": "t", "E": "e", "M": "m"}
     _desc = "".join('<div class="fwd fwd-' + pc2[pk] + '"><span class="fwd-h"><b>' + pn + '</b> ' + pr + '</span>'
                     '<p>' + desc + '</p></div>' for pk, pn, pr, desc in info["phases"])
@@ -677,16 +685,16 @@ def home_html(datamap, lang):
         '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
         '<g clip-path="url(#mtclip)">'
-        '<rect x="0" y="0" width="1896" height="190" fill="rgba(216,72,58,.46)"/>'
-        '<rect x="0" y="190" width="1896" height="230" fill="rgba(222,140,80,.46)"/>'
-        '<rect x="0" y="420" width="1896" height="340" fill="rgba(222,184,88,.48)"/>'
-        '<rect x="0" y="760" width="1896" height="226" fill="rgba(86,158,178,.48)"/>'
+        '<rect x="0" y="0" width="1896" height="375" fill="rgba(216,72,58,.46)"/>'
+        '<rect x="0" y="375" width="1896" height="165" fill="rgba(222,140,80,.46)"/>'
+        '<rect x="0" y="540" width="1896" height="250" fill="rgba(222,184,88,.48)"/>'
+        '<rect x="0" y="790" width="1896" height="196" fill="rgba(86,158,178,.48)"/>'
         '</g>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"/>'
-        + band(0, 190, 150, 176, band_lbl[3], "M")
-        + band(190, 230, 300, 326, band_lbl[2], "E1 – E2")
-        + band(420, 340, 588, 622, band_lbl[1], "T1 – T4", " pbn-t")
-        + band(760, 226, 850, 878, band_lbl[0], "F1 – F3")
+        + band(0, 375, 338, 364, band_lbl[3], "M")
+        + band(375, 165, 450, 478, band_lbl[2], "E1 – E2")
+        + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", " pbn-t")
+        + band(790, 196, 866, 894, band_lbl[0], "F1 – F3")
         + '</svg>')
     pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
@@ -977,7 +985,13 @@ body.pres section.sport h2.grp{font-size:15px}
 .fweg-line{fill:none;stroke:#c3ccd6;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:2 11;animation:fwflow 9s linear infinite}
 @keyframes fwflow{to{stroke-dashoffset:-130}}
 .fweg .wn circle{filter:drop-shadow(0 2px 5px rgba(0,0,0,.2))}
-.fweg .wn-t{fill:#fff;font-size:13px;font-weight:800;font-family:Arial,sans-serif}
+.fweg .wn-t{fill:#fff;font-size:13px;font-weight:800;font-family:Arial,sans-serif;text-anchor:middle;dominant-baseline:central}
+.fweg .fmt1{fill:#e4e9ef}.fweg .fmt2{fill:#eef1f5}
+.fweg .gcable{stroke:#8a94a0;stroke-width:1.4}
+.gondel{offset-rotate:0deg;offset-distance:0%;animation:gondelup 8s ease-in-out infinite}
+@keyframes gondelup{0%{offset-distance:0%}86%,100%{offset-distance:100%}}
+[data-theme="dark"] .fweg .fmt1{fill:rgba(255,255,255,.06)}
+[data-theme="dark"] .fweg .fmt2{fill:rgba(255,255,255,.035)}
 .fweg .wl{font-size:13px;font-weight:800;font-family:'Inter',Arial,sans-serif;letter-spacing:.02em}
 .fweg .we{fill:var(--mut);font-size:11px;font-weight:700;font-family:'Inter',Arial,sans-serif}
 .fweg-desc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
