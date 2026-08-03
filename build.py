@@ -87,6 +87,10 @@ HOME_SUB = {
 NODATA = {"de": "Inhalte folgen", "fr": "Contenus à venir", "it": "Contenuti in arrivo"}
 BACK = {"de": "← Sportarten", "fr": "← Sports", "it": "← Sport"}
 BACK_TITLE = {"de": "Zurück zur Auswahl", "fr": "Retour à la sélection", "it": "Torna alla selezione"}
+SEARCH_PH = {"de": "Suche…", "fr": "Rechercher…", "it": "Cerca…"}
+EXPAND_ALL = {"de": "Alle öffnen", "fr": "Tout ouvrir", "it": "Apri tutto"}
+COLLAPSE_ALL = {"de": "Alle schliessen", "fr": "Tout fermer", "it": "Chiudi tutto"}
+CLEAR_LBL = {"de": "Leeren", "fr": "Effacer", "it": "Cancella"}
 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 # Fallback, falls eine Datendatei keine "ages" enthaelt (Alterskategorien pro Sportart)
@@ -456,10 +460,16 @@ def sport_section(sport, d, lang, edit=False):
     n_themes = len(d["themes"])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
         '<header class="top"><div class="ht-l">'+back+'<h1>'+esc(name)+' · '+aw+'</h1></div>'
-        '<div class="ht-c"><input class="q" type="search" placeholder="Search"><span class="hits"></span></div>'
+        '<div class="ht-c"><div class="qbox">'
+        '<svg class="qic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5l-3.6-3.6"/></svg>'
+        '<input class="q" type="search" placeholder="'+esc(SEARCH_PH[lang])+'" aria-label="'+esc(SEARCH_PH[lang])+'">'
+        '<span class="hits"></span>'
+        '<button class="qx" type="button" hidden title="'+esc(CLEAR_LBL[lang])+'" aria-label="'+esc(CLEAR_LBL[lang])+'">&times;</button>'
+        '</div></div>'
         '<div class="ht-r"><select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
-        '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button>'
+        '<button class="toggleall" type="button" title="'+esc(EXPAND_ALL[lang])+'" aria-label="'+esc(EXPAND_ALL[lang])+'" data-open="'+esc(EXPAND_ALL[lang])+'" data-close="'+esc(COLLAPSE_ALL[lang])+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13l5 5 5-5"/><path d="M7 6l5 5 5-5"/></svg></button>'
         '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
+        '<span class="hdiv" aria-hidden="true"></span>'
         +lang_switch(lang)+theme_toggle()+'</div></header>'
         '<div class="wrap">'
         +sections+'</div>'
@@ -786,14 +796,22 @@ h1 .sk{color:var(--ink)}
 header.top input,header.top select,header.top button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink)}
 header.top button{cursor:pointer;font-weight:600}
 header.top button:hover{background:var(--bg)}
-.ht-c input{width:280px;padding-right:96px}
-.ht-c .hits{position:absolute;right:32px;top:50%;transform:translateY(-50%);font-size:11.5px;color:var(--mut);font-weight:700;white-space:nowrap;max-width:78px;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.ht-c .qbox{position:relative;display:flex;align-items:center;width:280px;max-width:100%}
+.ht-c .qbox .qic{position:absolute;left:10px;width:15px;height:15px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;pointer-events:none}
+.ht-c input.q{width:100%;padding:7px 58px 7px 30px}
+.ht-c input.q::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.ht-c .hits{position:absolute;right:30px;top:50%;transform:translateY(-50%);font-size:11.5px;color:var(--mut);font-weight:700;white-space:nowrap;max-width:58px;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.ht-c .qx{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:22px;height:22px;padding:0;border:none;background:none;color:var(--mut);font-size:17px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+.ht-c .qx:hover{color:var(--ink);background:var(--acc-bg)}
 .ht-r select{width:170px}
-.ht-r .exp{width:106px;padding:7px 0;text-align:center}
-.ht-r .col{width:120px;padding:7px 0;text-align:center}
+.ht-r .toggleall{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--acc)}
+.ht-r .toggleall svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.ht-r .toggleall.allopen svg{transform:rotate(180deg)}
+.ht-r .toggleall:hover{border-color:var(--acc);color:var(--red)}
 .ht-r .pdf{width:36px;padding:6px 0;display:inline-flex;align-items:center;justify-content:center;color:var(--acc)}
 .ht-r .pdf svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ht-r .pdf:hover{border-color:var(--acc);color:var(--red)}
+.ht-r .hdiv{width:1px;height:22px;background:var(--line);flex:none;margin:0 3px}
 @media print{
   @page{size:A4 landscape;margin:0}
   :root{--colw:84px;--lblw:80px}
@@ -928,7 +946,7 @@ footer a{color:var(--red)}
 header.top{flex-wrap:wrap;height:auto;padding:8px 14px;gap:8px 10px}
 .ht-l{flex:1 1 100%}
 .ht-c{flex:1 1 auto;order:3}
-.ht-c input{width:100%;min-width:160px}
+.ht-c .qbox{width:100%;min-width:160px}
 .ht-r{flex:1 1 auto;order:2;flex-wrap:wrap}
 details.theme{scroll-margin-top:118px}
 }
@@ -939,10 +957,11 @@ header.top .back{width:34px;height:34px;padding:0}
 header.top .sicon{width:28px;height:28px}
 header.top h1{font-size:13.5px;min-width:0}
 .ht-c{flex:1 1 100%;order:2}
-.ht-c input{font-size:16px;padding:6px 96px 6px 10px}
+.ht-c .qbox{width:100%}
+.ht-c input.q{font-size:16px;padding:8px 56px 8px 30px}
 .ht-r{flex:1 1 100%;order:3;gap:6px}
 .ht-r select{flex:1 1 auto;width:auto;min-width:0;font-size:13px}
-.ht-r .exp,.ht-r .col{flex:1 1 auto;width:auto;padding:7px 6px}
+.ht-r .toggleall{flex:none}
 .ht-r .pdf{flex:none;width:40px}
 .wrap{padding:10px 10px 60px}
 .scroller{padding:0 8px 10px}
@@ -971,6 +990,8 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] header.top input,[data-theme="dark"] header.top select,[data-theme="dark"] header.top button{background:#1c2740;color:var(--ink)}
 [data-theme="dark"] header.top .back:hover{background:#243247;color:var(--ink)}
 [data-theme="dark"] .langsw a:hover:not(.active){background:#243247;color:var(--ink)}
+[data-theme="dark"] .ht-c .qx{background:none}
+[data-theme="dark"] .ht-c .qx:hover{background:#243247}
 [data-theme="dark"] .cell{background:#172231}
 [data-theme="dark"] .cell.ph-foundation{background:#152731;--zc:#7fd6e8;--zbg:rgba(31,143,166,.20)}
 [data-theme="dark"] .cell.ph-talent{background:#25220f;--zc:#f0cf72;--zbg:rgba(226,169,0,.18)}
@@ -999,6 +1020,7 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .stagebar .sb.ph-talent:not(.active){color:#f2c85f;background:rgba(226,169,0,.14);border-color:rgba(240,198,87,.4)}
 [data-theme="dark"] .stagebar .sb.ph-elite:not(.active){color:#f2a06a;background:rgba(232,119,46,.14);border-color:rgba(240,151,94,.42)}
 [data-theme="dark"] .stagebar .sb.ph-mastery:not(.active){color:#f28578;background:rgba(213,43,30,.15);border-color:rgba(240,126,114,.42)}
+[data-theme="dark"] .stagebar .sb.active{background:var(--phc);color:#fff;border-color:var(--phc)}
 [data-theme="dark"] .stagebar .sb.ph-talent.active{color:#3b2e00}
 [data-theme="dark"] mark{color:#1d2630}
 [data-theme="dark"] .pp-card{background:#172231}
@@ -1154,8 +1176,10 @@ function initSport(sec){
     updateHits();
   }
   q.addEventListener('input',run);
-  sec.querySelector('.exp').onclick=()=>{themes.forEach(t=>t.open=true);setTimeout(setupClamp,50);};
-  sec.querySelector('.col').onclick=()=>themes.forEach(t=>t.open=false);
+  const qx=sec.querySelector('.qx');
+  if(qx){function qtog(){qx.hidden=!q.value;}q.addEventListener('input',qtog);qx.onclick=()=>{q.value='';qtog();run();q.focus();};}
+  const toggleAll=sec.querySelector('.toggleall');
+  if(toggleAll){toggleAll.onclick=()=>{const open=!toggleAll.classList.contains('allopen');themes.forEach(t=>t.open=open);toggleAll.classList.toggle('allopen',open);var lbl=toggleAll.getAttribute(open?'data-close':'data-open');toggleAll.title=lbl;toggleAll.setAttribute('aria-label',lbl);if(open)setTimeout(setupClamp,50);};}
   const pdfBtn=sec.querySelector('.pdf');
   if(pdfBtn)pdfBtn.onclick=()=>openPrintPicker(sec);
   sec.querySelector('.jump').onchange=e=>{const el=document.getElementById(e.target.value);if(el){el.open=true;setTimeout(()=>el.scrollIntoView(),30);}e.target.selectedIndex=0;};
