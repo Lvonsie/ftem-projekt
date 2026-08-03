@@ -138,15 +138,23 @@ def render_block(block, link_texts):
     if len(lines) >= 2 and lines[0].strip() and len(lines[0].strip()) <= 46 and not lines[0].strip().endswith((".",":",",",";")):
         head = lines[0].strip()
         rest = "\n".join(lines[1:]).strip()
-        body = esc(rest).replace("\n","<br>")
-        return '<p class="bh">'+esc(head)+'</p><p>'+body+'</p>'
+        body_bl = bullets_from_text(rest)
+        if body_bl:
+            return '<p class="bh">'+esc(head)+'</p>'+body_bl
+        return '<p class="bh">'+esc(head)+'</p><p>'+esc(rest).replace("\n","<br>")+'</p>'
     # label: value (single label line)
     m = re.match(r'^([^:\n]{2,46}):\s*(.+)$', b, re.S)
     if m and "\n" not in m.group(1):
         lab = m.group(1).strip(); val = m.group(2).strip()
         if len(val) > 55 or "\n" in val:
+            vb = bullets_from_text(val)
+            if vb:
+                return '<p class="sh">'+esc(lab)+'</p>'+vb
             return '<p class="sh">'+esc(lab)+'</p><p>'+esc(val).replace("\n","<br>")+'</p>'
         return '<p><span class="lbl">'+esc(lab)+':</span> '+esc(val).replace("\n","<br>")+'</p>'
+    pb = bullets_from_text(b)
+    if pb:
+        return pb
     return '<p>'+esc(b).replace("\n","<br>")+'</p>'
 
 def clean_ws(s):
@@ -159,6 +167,33 @@ def clean_ws(s):
 # Off-Snow / On-Snow Zonen-Gruppierung: "Ziele Off-Snow: ..." -> Zone "Off-Snow"
 ZONE_RE = re.compile(r'^(.{1,20}?)\s+(Off-Snow|On-Snow)\s*[:.]\s*(.*)$', re.S)
 
+# Mehrsatz-Fliesstext -> Stichpunkte (ein Satz = ein Bullet), mit Abkuerzungs-Schutz
+_ABBR = ["z.B.","z. B.","u.a.","u. a.","d.h.","d. h.","u.v.m.","o.ä.","u.ä.","ca.","bzw.",
+         "inkl.","exkl.","max.","min.","Nr.","sek.","Sek.","Min.","Std.","etc.","usw.",
+         "evtl.","ggf.","vs.","engl.","env.","p.ex.","p. ex.","c.-à-d.","ecc.","Bsp."]
+_SENT_SPLIT = re.compile(r'(?<=[.!?])\s+(?=[«"„(\[A-ZÄÖÜ0-9])')
+def split_sentences(text):
+    t = text
+    for a in _ABBR:
+        t = t.replace(a, a.replace(".", "\x00"))
+    t = re.sub(r'(\d)\.(\d)', lambda m: m.group(1)+"\x00"+m.group(2), t)   # Dezimalzahlen
+    t = re.sub(r'\b(\d{1,2})\.(?=\s[A-ZÄÖÜ])', lambda m: m.group(1)+"\x00", t)  # Ordinalzahlen
+    parts = [p.strip() for p in _SENT_SPLIT.split(t) if p.strip()]
+    out = []
+    for p in parts:
+        p = p.replace("\x00", ".").strip()
+        if p.endswith(".") and not p.endswith(".."):
+            p = p[:-1]
+        out.append(p)
+    return out
+def bullets_from_text(text):
+    if "\n" in text or "•" in text:
+        return None
+    sents = split_sentences(text)
+    if len(sents) >= 2:
+        return '<ul class="bl">'+"".join('<li>'+esc(s)+'</li>' for s in sents)+'</ul>'
+    return None
+
 def _zone_body(text):
     lines = text.split("\n")
     if any(l.strip().startswith("•") for l in lines):
@@ -166,8 +201,11 @@ def _zone_body(text):
         intro = " ".join(l.strip() for l in lines if l.strip() and not l.strip().startswith("•"))
         html = (esc(intro)+" ") if intro else ""
         html += '<ul class="bl">'+"".join('<li>'+esc(i)+'</li>' for i in items if i)+'</ul>'
-        return html
-    return esc(text).replace("\n", "<br>")
+        return html, True
+    bl = bullets_from_text(text)
+    if bl:
+        return bl, True
+    return esc(text).replace("\n", "<br>"), False
 
 def render_zone_groups(blocks):
     parsed = []
@@ -190,7 +228,11 @@ def render_zone_groups(blocks):
     for zone in order:
         out += '<div class="zone"><span class="zlab">'+esc(zone)+'</span>'
         for label, text in buckets[zone]:
-            out += '<div class="zsub"><span class="zk">'+esc(label)+'</span> '+_zone_body(text)+'</div>'
+            body, is_list = _zone_body(text)
+            if is_list:
+                out += '<div class="zsub zsub-l"><span class="zk">'+esc(label)+'</span>'+body+'</div>'
+            else:
+                out += '<div class="zsub"><span class="zk">'+esc(label)+'</span> '+body+'</div>'
         out += '</div>'
     return out
 
@@ -797,6 +839,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap .zlab{display:inline-block;font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--zc,#5a6472);background:var(--zbg,#eceff3);border-radius:5px;padding:2px 7px;margin:0 0 5px}
 .cwrap .zsub{margin:0 0 4px;line-height:1.5}.cwrap .zsub:last-child{margin-bottom:0}
 .cwrap .zk{font-weight:700;color:var(--ink)}.cwrap .zk::after{content:"·";margin:0 5px 0 4px;color:#b6c0cc;font-weight:400}
+.cwrap .zsub-l .zk{display:block;margin:0 0 2px}.cwrap .zsub-l .zk::after{content:none}.cwrap .zsub-l ul{margin-top:2px}
 .cwrap .lbl{font-weight:700;color:var(--found-t)}
 .cwrap ul{margin:3px 0 6px;padding-left:15px}
 .cwrap ul.bl li{margin-bottom:3px;line-height:1.45}
