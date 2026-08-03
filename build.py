@@ -619,7 +619,7 @@ html{scroll-behavior:smooth;background:var(--bg);scrollbar-gutter:stable}
 html.h #home{display:none}
 html.noanim .grid-sports .card{animation:none}
 [hidden]{display:none!important}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px;-webkit-text-size-adjust:100%}
 .langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
 .langsw a.active{background:var(--red);color:#fff}
@@ -950,6 +950,56 @@ footer{padding:16px;font-size:11px}
 @media(min-width:1800px){
 .wrap{max-width:1720px}
 }
+/* ---------- Dark Mode (automatisch nach Systemeinstellung) ---------- */
+@media(prefers-color-scheme:dark){
+:root{--ink:#e7edf4;--mut:#98a4b3;--line:rgba(255,255,255,.11);--bg:#0d1420;--card:#172231;
+ --found-t:#59c6dd;--talent-t:#f0c657;--elite-t:#f0975e;--mast-t:#f07e72;
+ --found-bg:rgba(31,143,166,.16);--talent-bg:rgba(226,169,0,.15);--elite-bg:rgba(232,119,46,.15);--mast-bg:rgba(213,43,30,.16);
+ --acc:#9aa6b4;--acc-line:rgba(255,255,255,.16);--acc-bg:#212d40;--acc-bg2:#2a3850}
+header.top{background:rgba(16,24,38,.94)}
+header.top input,header.top select,header.top button{background:#1c2740;color:var(--ink)}
+header.top .back:hover{background:#243247;color:var(--ink)}
+.langsw a:hover:not(.active){background:#243247;color:var(--ink)}
+.cell{background:#172231}
+.cell.ph-foundation{background:#152731;--zc:#7fd6e8;--zbg:rgba(31,143,166,.20)}
+.cell.ph-talent{background:#25220f;--zc:#f0cf72;--zbg:rgba(226,169,0,.18)}
+.cell.ph-elite{background:#271c12;--zc:#f0a877;--zbg:rgba(232,119,46,.18)}
+.cell.ph-mastery{background:#271413;--zc:#f09287;--zbg:rgba(213,43,30,.20)}
+.cell.ph-multi{background:#1a2434;--zc:#aeb8c6;--zbg:rgba(255,255,255,.08)}
+.cell.hl-foundation{background:rgba(31,143,166,.22)}
+.cell.hl-talent{background:rgba(226,169,0,.20)}
+.cell.hl-elite{background:rgba(232,119,46,.20)}
+.cell.hl-mastery{background:rgba(213,43,30,.22)}
+.cell::after{background:linear-gradient(180deg,rgba(23,34,49,0),#172231)}
+.cwrap{color:#c2ccd8}
+.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top-color:rgba(255,255,255,.10)}
+.cwrap .zone+.zone{border-top-color:rgba(255,255,255,.10)}
+.cwrap .zk::after{color:#5a6472}
+.cwrap ul.sc .badge{background:#33425c;color:#e7edf4}
+.cwrap .empty{color:#4a5568}
+.more{background:#1c2740;color:var(--found-t);border-color:rgba(255,255,255,.14)}
+.more:hover{background:#243247}
+details.theme>summary:hover{background:#1c2740}
+details.theme:hover{box-shadow:0 5px 16px rgba(0,0,0,.4)}
+.stagebar{background:rgba(13,19,30,.92);border-top-color:rgba(255,255,255,.10)}
+.stagebar .sb{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
+.stagebar .sb:hover{background:#243247}
+mark{color:#1d2630}
+.pp-card{background:#172231}
+.pp-h{color:var(--ink)}
+.pp-b{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
+.pp-b:hover{background:#243247}
+.pp-all{background:#212d40;color:var(--found-t)}
+.pp-x{color:var(--mut)}
+.abar{background:rgba(16,24,38,.96)}
+.cedit{background:#141d2c;color:#e7edf4;border-color:rgba(255,255,255,.16)}
+.cedit.changed{background:#2a1a18;border-color:var(--red)}
+.glostab{background:#172231;border-color:rgba(255,255,255,.10)}
+.glostab th{background:#1c2740;color:#9fb0d6}
+.glostab td{border-top-color:rgba(255,255,255,.08)}
+.glostab tr:hover td{background:#1c2740}
+.glosadd{background:#172231;border-color:rgba(255,255,255,.10)}
+}
 """
 
 JS = r"""
@@ -1263,6 +1313,9 @@ loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp
 
 ADMIN_TMPL = r'''<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>FTEM Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
 __MAINCSS__
 /* ---- Admin-Zusatz ---- */
@@ -1596,18 +1649,68 @@ for lang in LANGS:
         '<meta name="twitter:image" content="'+esc(og_img)+'">')
     page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<link rel="preconnect" href="https://fonts.googleapis.com">'
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">'
         '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title>'
         +head_meta+
         # verhindert Aufblitzen der Startseite, wenn direkt eine Sportart (#hash) geladen wird
         '<script>if(location.hash)document.documentElement.classList.add("h");'
         'try{if(sessionStorage.ftemSeen)document.documentElement.classList.add("noanim");sessionStorage.ftemSeen=1}catch(e){}</script>'
         '<style>'+CSS+'</style></head>'
-        '<body>'+body+'<script>'+js+'</script></body></html>')
+        '<body>'+body+'<script>'+js+'</script>'
+        '<script>if("serviceWorker"in navigator){addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})})}</script>'
+        '</body></html>')
     out = os.path.join(BASE, FILES[lang])
     open(out,"w",encoding="utf-8").write(page)
     print("written", FILES[lang], len(page.encode("utf-8")), "bytes")
 
 open(os.path.join(BASE, "admin.html"), "w", encoding="utf-8").write(admin_html(datamap))
 print("written admin.html")
+
+# ---- PWA Service Worker (Offline) + SEO-Dateien ----
+def _write_pwa_seo():
+    import hashlib, glob as _glob
+    # Cache-Version aus Inhalts-Hash -> bricht Cache bei jedem echten Deploy
+    h = hashlib.sha1()
+    for f in ["index.html","fr.html","it.html"]:
+        p = os.path.join(BASE, f)
+        if os.path.exists(p): h.update(open(p,"rb").read())
+    ver = h.hexdigest()[:10]
+    core = ["./","./index.html","./fr.html","./it.html","./admin.html",
+            "./manifest.webmanifest","./assets/favicon.svg","./assets/icon-192.png",
+            "./assets/icon-512.png","./assets/icon-180.png","./assets/hero.jpg",
+            "./assets/og-image.jpg","./assets/swiss-ski-logo.svg"]
+    core += ["./"+p.replace("\\","/") for p in _glob.glob("assets/sporticons/*.png")]
+    sw = (
+        'const CACHE="ftem-'+ver+'";\n'
+        'const CORE='+json.dumps(core)+';\n'
+        'self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));});\n'
+        'self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});\n'
+        'self.addEventListener("fetch",e=>{const req=e.request;if(req.method!=="GET")return;const url=new URL(req.url);if(url.origin!==location.origin)return;\n'
+        '  e.respondWith(caches.open(CACHE).then(async c=>{const cached=await c.match(req);const net=fetch(req).then(res=>{if(res&&res.status===200)c.put(req,res.clone());return res;}).catch(()=>cached);return cached||net;}));});\n'
+    )
+    open(os.path.join(BASE,"sw.js"),"w",encoding="utf-8").write(sw)
+    print("written sw.js (cache ftem-"+ver+")")
+
+    base = SITE_URL.rstrip("/") if SITE_URL else ""
+    urls = ""
+    for fn in FILES.values():
+        loc = (base+"/"+fn) if base else fn
+        alts = "".join('<xhtml:link rel="alternate" hreflang="'+lg+'" href="'+((base+"/"+f2) if base else f2)+'"/>'
+                       for lg,f2 in FILES.items())
+        urls += ('<url><loc>'+loc+'</loc>'+alts+
+                 '<xhtml:link rel="alternate" hreflang="x-default" href="'+((base+"/index.html") if base else "index.html")+'"/>'
+                 '<changefreq>monthly</changefreq></url>')
+    sitemap = ('<?xml version="1.0" encoding="UTF-8"?>'
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+               'xmlns:xhtml="http://www.w3.org/1999/xhtml">'+urls+'</urlset>')
+    open(os.path.join(BASE,"sitemap.xml"),"w",encoding="utf-8").write(sitemap)
+    robots = ("User-agent: *\nAllow: /\nDisallow: /admin.html\n"
+              + (("Sitemap: "+base+"/sitemap.xml\n") if base else ""))
+    open(os.path.join(BASE,"robots.txt"),"w",encoding="utf-8").write(robots)
+    print("written sitemap.xml, robots.txt")
+
+_write_pwa_seo()
 
 print("Sportarten mit Inhalt:", ", ".join(ids_with_data) or "-")
