@@ -440,7 +440,8 @@ def sport_section(sport, d, lang, edit=False):
         sections, _ = build_sections(d, sid, lang, edit=True)
         return '<section class="sport" data-sport="'+sid+'" hidden><div class="wrap">'+sections+'</div></section>'
     aw = esc(tr("Athlet:innen-Weg", lang))
-    back = '<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'">'+esc(BACK[lang])+'</a>'
+    back = ('<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'" aria-label="'+esc(BACK_TITLE[lang])+'">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>')
     if sport.get("icon"):
         back += '<img class="sicon" src="'+esc(sport["icon"])+'" alt="'+esc(name)+'" width="32" height="32" decoding="async">'
     if d is None:
@@ -597,7 +598,7 @@ def home_html(datamap, lang):
           '</div>')
     return ('<section id="home">'
             '<div class="home-hero">'
-            '<div class="hero-top">'+lang_switch(lang)+theme_toggle()+fb+'</div>'
+            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'+fb+'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
             '<div class="constellation">'+lines+nodes+'</div>'
@@ -636,6 +637,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(9,14,24,.66),rgba(12,17,28,.5) 45%,rgba(7,11,20,.9)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+#home .hero-top .lsrow{display:flex;align-items:center;gap:8px}
+#home .hero-top .lsrow .themebtn{width:34px;height:34px}
 .fb-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:filter .15s}
 .fb-btn:hover{filter:brightness(1.12)}
 .fb-panel{display:flex;flex-direction:column;gap:8px;width:250px;background:rgba(15,21,32,.93);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:11px;padding:11px;box-shadow:0 16px 40px rgba(0,0,0,.5)}
@@ -768,7 +771,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .p-m{border-top-color:var(--mast)}.p-m .pl{color:var(--mast)}
 /* Sport-Ansicht */
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:nowrap;gap:10px 14px;align-items:center;height:var(--top)}
-header.top .back{flex:none;width:118px;text-align:center;font-size:12.5px;font-weight:700;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:6px 0;white-space:nowrap}
+header.top .back{flex:none;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0}
+header.top .back svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 header.top .back:hover{background:#fff;border-color:var(--acc);color:var(--acc)}
 header.top .sicon{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
 header.top h1{font-size:16px;margin:0;font-weight:800;color:var(--ink);white-space:nowrap;letter-spacing:.2px;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
@@ -931,7 +935,7 @@ details.theme{scroll-margin-top:118px}
 /* ---------- Responsive: Handy ---------- */
 @media(max-width:760px){
 :root{--colw:158px;--lblw:86px}
-header.top .back{width:auto;padding:6px 11px}
+header.top .back{width:34px;height:34px;padding:0}
 header.top .sicon{width:28px;height:28px}
 header.top h1{font-size:13.5px;min-width:0}
 .ht-c{flex:1 1 100%;order:2}
@@ -991,6 +995,11 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .stagebar{background:rgba(13,19,30,.92);border-top-color:rgba(255,255,255,.10)}
 [data-theme="dark"] .stagebar .sb{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
 [data-theme="dark"] .stagebar .sb:hover{background:#243247}
+[data-theme="dark"] .stagebar .sb.ph-foundation:not(.active){color:#6fd0e6;background:rgba(31,143,166,.15);border-color:rgba(89,198,221,.4)}
+[data-theme="dark"] .stagebar .sb.ph-talent:not(.active){color:#f2c85f;background:rgba(226,169,0,.14);border-color:rgba(240,198,87,.4)}
+[data-theme="dark"] .stagebar .sb.ph-elite:not(.active){color:#f2a06a;background:rgba(232,119,46,.14);border-color:rgba(240,151,94,.42)}
+[data-theme="dark"] .stagebar .sb.ph-mastery:not(.active){color:#f28578;background:rgba(213,43,30,.15);border-color:rgba(240,126,114,.42)}
+[data-theme="dark"] .stagebar .sb.ph-talent.active{color:#3b2e00}
 [data-theme="dark"] mark{color:#1d2630}
 [data-theme="dark"] .pp-card{background:#172231}
 [data-theme="dark"] .pp-h{color:var(--ink)}
