@@ -186,12 +186,52 @@ def split_sentences(text):
             p = p[:-1]
         out.append(p)
     return out
-def bullets_from_text(text):
+# Wörter nach einem Komma, die einen Nebensatz einleiten (kein Aufzählungsglied)
+_CONNECTORS = {"um","damit","sodass","wobei","weil","da","wenn","falls","aber","sondern",
+    "denn","dabei","während","bis","obwohl","indem","ohne","statt","anstatt","jedoch",
+    "allerdings","sowie","respektive","resp","bzw","evtl","ggf","wodurch","womit",
+    "welche","welcher","welches","was","also","dann","je","und","oder",
+    "für","mit","im","in","auf","bei","von","zur","zum","nach","über","unter",
+    "durch","gegen","an","am","aus","vor","als"}
+def split_commas(s):
+    # Trennung an Top-Level-Kommas; Klammern, Dezimalkommas (1,3) und Nebensatz-Kommas bleiben
+    parts, depth, cur, n = [], 0, "", len(s)
+    for i, ch in enumerate(s):
+        if ch in "([{": depth += 1
+        elif ch in ")]}": depth = max(0, depth - 1)
+        if ch == "," and depth == 0:
+            prevc = s[i-1] if i > 0 else ""
+            if prevc.isdigit() and i+1 < n and s[i+1].isdigit():
+                cur += ch; continue          # Dezimalkomma
+            j = i + 1
+            while j < n and s[j] == " ": j += 1
+            w = ""
+            while j < n and s[j].isalpha(): w += s[j]; j += 1
+            if w.lower() in _CONNECTORS:
+                cur += ch; continue          # Nebensatz-/Konjunktions-Komma
+            parts.append(cur); cur = ""
+        else:
+            cur += ch
+    parts.append(cur)
+    return [p.strip() for p in parts if p.strip()]
+
+def sentence_bullets(text):
+    # Satz- UND Komma-Aufzählungen -> Liste von Stichpunkten (oder None)
     if "\n" in text or "•" in text:
         return None
-    sents = split_sentences(text)
-    if len(sents) >= 2:
-        return '<ul class="bl">'+"".join('<li>'+esc(s)+'</li>' for s in sents)+'</ul>'
+    items = []
+    for s in split_sentences(text):
+        parts = split_commas(s)
+        if len(parts) >= 2:
+            items.extend(parts)
+        else:
+            items.append(s)
+    return items if len(items) >= 2 else None
+
+def bullets_from_text(text):
+    items = sentence_bullets(text)
+    if items:
+        return '<ul class="bl">'+"".join('<li>'+esc(s)+'</li>' for s in items)+'</ul>'
     return None
 
 def _zone_body(text):
