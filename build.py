@@ -27,6 +27,9 @@ FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html"}
 ADMIN_PW = "ftem26*"
 # Passwort fuer den versteckten Praesentationsmodus (dezentes ⛶-Symbol unten auf den Sportseiten)
 PRES_PW = "FTEMP"
+# Uebergeordnete Mission-Seite (Link folgt). Solange leer, oeffnet der Mission-Button
+# eine Auswahl der Sportarten-Missionen (aus ftem_sports.json).
+MISSION_URL = ""
 PRES_TITLE = {"de": "Präsentationsmodus", "fr": "Mode présentation", "it": "Modalità presentazione"}
 PRES_PWPH = {"de": "Passwort", "fr": "Mot de passe", "it": "Password"}
 # Cloud-Speicher (Supabase) fuer direkt gespeicherte, fuer alle sichtbare Aenderungen.
@@ -453,9 +456,13 @@ def sport_section(sport, d, lang, edit=False):
             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>')
     if sport.get("icon"):
         back += '<img class="sicon" src="'+esc(sport["icon"])+'" alt="'+esc(name)+'" width="32" height="32" decoding="async">'
+    # Sportarten-Wechsel direkt im Titel (Dropdown statt fixer Ueberschrift)
+    sport_opts = "".join('<option value="'+x["id"]+'"'+(' selected' if x["id"] == sid else '')+'>'
+                         + esc(tr(x["name"], lang)) + '</option>' for x in SPORTS)
+    title_sel = '<select class="sportsel2" aria-label="Sportart wechseln">'+sport_opts+'</select>'
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
-            '<header class="top"><div class="ht-l">'+back+'<h1>'+esc(name)+' · '+aw+'</h1></div>'
+            '<header class="top"><div class="ht-l">'+back+title_sel+'</div>'
             '<div class="ht-r">'+lang_switch(lang)+theme_toggle()+'</div></header>'
             '<div class="wrap"><div class="placeholder">'
             '<div class="big">'+esc(name)+'</div>'
@@ -464,7 +471,7 @@ def sport_section(sport, d, lang, edit=False):
     sections, jump_opts = build_sections(d, sid, lang)
     n_themes = len(d["themes"])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
-        '<header class="top"><div class="ht-l">'+back+'<h1>'+esc(name)+' · '+aw+'</h1></div>'
+        '<header class="top"><div class="ht-l">'+back+title_sel+'</div>'
         '<div class="ht-c"><div class="qbox">'
         '<svg class="qic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5l-3.6-3.6"/></svg>'
         '<input class="q" type="search" placeholder="'+esc(SEARCH_PH[lang])+'" aria-label="'+esc(SEARCH_PH[lang])+'">'
@@ -639,22 +646,37 @@ def home_html(datamap, lang):
     spmodal = ('<div class="spmodal" hidden><div class="sp-box">'
                '<div class="sp-bar"><span>'+esc(choose_lbl)+'</span><button class="sp-x" type="button" aria-label="schliessen">✕</button></div>'
                '<div class="sp-grid">'+spitems+'</div></div></div>')
-    return ('<section id="home">'
-            '<div class="home-hero">'
-            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'+fb+'</div>'
-            '<div class="hero-head"><h1>'+FTEM+'</h1>'
-            '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            +pyr+spmodal+
-            '<button class="scrolldown" type="button" aria-label="nach unten scrollen" '
-            'onclick="document.querySelector(&#39;.home-info&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">&#9662;</button>'
-            '</div>'
-            '<div class="home-info">'+news_html(lang)+ftem_info+install_hint(lang)
-            +'<div class="adminlink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
+    # Meeting-Paket: News-Button oben rechts, Mission-Button unter dem Logo,
+    # Startseite ohne Scrollen (News/Infos als Overlays), Admin-Schloss unten im Hero.
+    news_label = {"de": "News", "fr": "Actualités", "it": "Notizie"}[lang]
+    info_label = FTEM_INFO[lang]["title"].replace("&#x27;", "'")
+    mission_items = "".join(
+        '<a class="mission-item" href="'+esc(s2["mission"])+'" data-title="'+esc(tr(s2["name"], lang))+' – Mission Swiss-Ski">'
+        + esc(tr(s2["name"], lang)) + '</a>'
+        for s2 in SPORTS if s2.get("mission"))
+    if MISSION_URL:
+        mission_btn = '<a class="hcta np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission Swiss-Ski</a>'
+    else:
+        mission_btn = '<button class="hcta" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission Swiss-Ski</button>'
+    adminlk = ('<div class="adminlink adminlink-hero"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
             '<svg viewBox="0 0 24 24" fill="none" stroke="url(#adminlk)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
             '<defs><linearGradient id="adminlk" x1="0" y1="0" x2="1" y2="1">'
             '<stop offset="0" stop-color="#1f8fa6"/><stop offset=".4" stop-color="#e2a900"/><stop offset=".7" stop-color="#e8772e"/><stop offset="1" stop-color="#d52b1e"/></linearGradient></defs>'
             '<rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.4"/><path d="M8 10.4V7.4a4 4 0 0 1 8 0v3"/>'
-            '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a></div></div>'
+            '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a></div>')
+    return ('<section id="home">'
+            '<div class="home-hero">'
+            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'+fb+'</div>'
+            '<div class="hero-top-r"><button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button></div>'
+            '<div class="hero-head"><h1>'+FTEM+'</h1>'
+            '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski">'
+            '<div class="hero-cta">'+mission_btn+
+            '<button class="hcta hcta-sec" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div></div>'
+            +pyr+spmodal+adminlk+
+            '</div>'
+            '<template id="tpl-news">'+news_html(lang)+install_hint(lang)+'</template>'
+            '<template id="tpl-info">'+ftem_info+'</template>'
+            '<template id="tpl-missions"><div class="mlist">'+mission_items+'</div></template>'
             '</section>')
 
 
@@ -775,11 +797,11 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .pyr:hover .pband{filter:brightness(1.12)}
 .pf{top:79%;height:17%;clip-path:polygon(8% 100%,92% 100%,84% 0,16% 0);
   background:linear-gradient(180deg,rgba(96,168,186,.30),rgba(52,118,136,.52))}
-.pt{top:56%;height:22%;clip-path:polygon(16.3% 100%,83.7% 100%,73% 0,27% 0);
+.pt{top:57.5%;height:21%;clip-path:polygon(16.3% 100%,83.7% 100%,73% 0,27% 0);
   background:linear-gradient(180deg,rgba(222,186,96,.34),rgba(196,152,52,.50))}
-.pe{top:43%;height:12%;clip-path:polygon(27.3% 100%,72.7% 100%,65% 0,35% 0);
+.pe{top:46%;height:11%;clip-path:polygon(27.3% 100%,72.7% 100%,65% 0,35% 0);
   background:linear-gradient(180deg,rgba(224,146,88,.34),rgba(198,112,56,.50))}
-.pm{top:29.5%;height:12.5%;clip-path:polygon(35.4% 100%,64.6% 100%,50% 0);
+.pm{top:34%;height:11.5%;clip-path:polygon(35.4% 100%,64.6% 100%,50% 0);
   background:linear-gradient(180deg,rgba(220,96,80,.36),rgba(186,58,44,.52))}
 .pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.65);font-size:15px}
 .pt .pb-n{font-size:24px}
@@ -805,6 +827,32 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
+/* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
+.hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
+.news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
+.news-btn:hover{filter:brightness(1.12)}
+.hero-cta{display:flex;gap:10px;justify-content:center;margin-top:14px;pointer-events:auto}
+.hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
+.hcta:hover{background:var(--red);border-color:var(--red)}
+.hcta-sec{background:rgba(255,255,255,.07)}
+.adminlink-hero{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:7;margin:0}
+.imodal{position:fixed;inset:0;z-index:112;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
+.im-box{width:min(900px,94vw);max-height:92vh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--ink);color:#fff}
+.im-t{font-weight:800;font-size:13px;flex:1}
+.im-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
+.im-x:hover{color:var(--talent)}
+.im-body{padding:16px;overflow:auto}
+.im-body .news-h{display:none}
+.im-body .ftem-info{margin-top:0}
+.mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.mlist .mission-item{display:block;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 10px;font-weight:800;font-size:13px;color:var(--ink);text-decoration:none}
+.mlist .mission-item:hover{border-color:var(--red);color:var(--red)}
+header.top .sportsel2{font:inherit;font-size:15px;font-weight:800;color:var(--ink);max-width:280px;padding:6px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card)}
+.steady{position:fixed;right:18px;bottom:74px;z-index:95;display:flex;align-items:center;gap:9px;background:var(--red);color:#fff;border:none;border-radius:30px;padding:11px 19px;font:inherit;font-size:13.5px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);animation:steadybob 3s ease-in-out infinite}
+.steady:hover{filter:brightness(1.12)}
+@keyframes steadybob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+body.pres .steady{display:none}
 /* Versteckter Praesentationsmodus (Symbol unten wie Admin-Schloss, Passwort FTEMP) */
 .preslink{text-align:center;margin-top:26px}
 .presopen{background:none;border:none;font:inherit;font-size:20px;line-height:1;color:var(--mut);opacity:.42;cursor:pointer;transition:opacity .16s,transform .16s;padding:4px 8px}
@@ -925,7 +973,7 @@ header.top button:hover{background:var(--bg)}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 mark.cur{background:#f0a500;color:#1d2630;box-shadow:0 0 0 2px #f0a500}
-.wrap{max-width:1500px;margin:0 auto;padding:6px 18px 90px}
+.wrap{max-width:1500px;margin:0 auto;padding:6px 18px 40px}
 .intro{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:8px;font-size:13px;color:var(--mut)}
 .intro b{color:var(--ink)}
 .placeholder{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:64px 24px;margin-top:24px;text-align:center;color:var(--mut)}
@@ -935,19 +983,20 @@ mark.cur{background:#f0a500;color:#1d2630;box-shadow:0 0 0 2px #f0a500}
 .legend span{font-size:11.5px;padding:4px 11px;border-radius:30px;font-weight:700}
 .lg-f{background:var(--found-bg);color:var(--found-t)}.lg-t{background:var(--talent-bg);color:var(--talent-t)}.lg-e{background:var(--elite-bg);color:var(--elite-t)}.lg-m{background:var(--mast-bg);color:var(--mast-t)}
 .hint{font-size:12px;color:var(--mut);margin:14px 2px 2px;display:flex;align-items:center;gap:6px}
-h2.grp{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gc,var(--mut));margin:24px 0 10px;font-weight:800;display:flex;align-items:center;gap:8px}
+h2.grp{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--gc,var(--ink));margin:10px 0 5px;font-weight:800;display:flex;align-items:center;gap:8px}
+h2.grp:first-child{margin-top:0}
 .wrap>h2.grp:first-child{margin-top:6px}
 h2.grp::before{content:'';width:9px;height:9px;border-radius:2px;background:var(--gc,var(--mut));flex:none}
 h2.grp::after{content:'';flex:1;height:1px;background:var(--line)}
-details.theme{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc-line);border-radius:9px;margin-bottom:8px;scroll-margin-top:66px;overflow:hidden;transition:box-shadow .16s}
+details.theme{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--acc-line);border-radius:9px;margin-bottom:3px;scroll-margin-top:66px;overflow:hidden;transition:box-shadow .16s}
 details.theme:hover{box-shadow:0 5px 16px rgba(0,0,0,.08)}
 details.theme[open]{box-shadow:0 6px 18px rgba(0,0,0,.06)}
-details.theme>summary{cursor:pointer;padding:9px 14px;list-style:none;display:flex;align-items:center;gap:10px}
+details.theme>summary{cursor:pointer;padding:4px 12px;list-style:none;display:flex;align-items:center;gap:9px}
 details.theme>summary:hover{background:#fafbfc}
 details.theme>summary::-webkit-details-marker{display:none}
-summary .ticon{flex:none;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
-summary .ticon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-summary .tt{font-size:14px;font-weight:800;flex:1;min-width:0}
+summary .ticon{flex:none;width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center}
+summary .ticon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+summary .tt{font-size:12.5px;font-weight:700;flex:1;min-width:0}
 summary .tchev{flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .18s;margin-right:3px}
 details[open]>summary .tchev{transform:rotate(45deg)}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
@@ -1073,16 +1122,21 @@ details.theme{scroll-margin-top:118px}
 /* ---------- Responsive: Handy ---------- */
 @media(max-width:760px){
 :root{--colw:158px;--lblw:86px}
+header.top{gap:6px 8px}
 header.top .back{width:34px;height:34px;padding:0}
 header.top .sicon{width:28px;height:28px}
-header.top h1{font-size:13.5px;min-width:0}
-.ht-c{flex:1 1 100%;order:2}
+/* Header genau 2 Zeilen: 1) Zurueck+Icon+Sportart+Sprachen  2) Suche+Springen+Chat */
+.ht-r{display:contents}
+.ht-l{order:1;flex:1 1 0;min-width:0}
+header.top .sportsel2{flex:1 1 0;width:100%;min-width:0;font-size:14px;max-width:none}
+.ht-r .langsw{order:2;flex:none}
+.ht-r .themebtn{order:2;flex:none}
+.ht-c{flex:1 1 55%;order:3}
 .ht-c .qbox{width:100%}
 .ht-c input.q{font-size:16px;padding:0 56px 0 30px}
-.ht-r{flex:1 1 100%;order:3;gap:6px}
-.ht-r select{flex:1 1 auto;width:auto;min-width:0;font-size:13px}
-.ht-r .toggleall{flex:none}
-.ht-r .pdf{flex:none;width:40px}
+.ht-r select.jump{order:4;flex:1 1 26%;width:auto;min-width:0;font-size:13px}
+.ht-r .chatbtn{order:5;flex:none}
+.ht-r .toggleall,.ht-r .pdf,.ht-r .hdiv{display:none}
 .wrap{padding:10px 10px 60px}
 .scroller{padding:0 8px 10px}
 .rl{font-size:9.5px;padding:6px 6px;line-height:1.25;font-weight:600}
@@ -1520,6 +1574,35 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){ if(!mm.hidden)closeMission(); else closePops(); }
 });
 
+// ---- Inhalts-Overlay (News, Was ist FTEM?, Missions-Auswahl) ----
+const im=document.querySelector('.imodal');
+function openInfo(tplId,title){
+  im.querySelector('.im-t').textContent=title;
+  im.querySelector('.im-body').innerHTML=document.getElementById(tplId).innerHTML;
+  im.hidden=false;
+}
+function closeInfo(){im.hidden=true;}
+if(im){
+  im.addEventListener('click',e=>{if(e.target===im)closeInfo();});
+  im.querySelector('.im-x').addEventListener('click',closeInfo);
+}
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openInfo(b.dataset.open,b.dataset.t||'')));
+
+// Alle externen Links (Dokumente, News, Missionen) im Iframe-Overlay oeffnen
+document.addEventListener('click',e=>{
+  const a=e.target.closest('.lks a, .news-link, .np-mission, .mission-item');
+  if(!a)return;
+  e.preventDefault();
+  if(im&&!im.hidden)closeInfo();
+  openMission(a.getAttribute('href'), a.dataset.title||a.textContent.replace('↗','').trim());
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&im&&!im.hidden)closeInfo();});
+
+// ---- Sportarten-Dropdown im Titel + Steady-Chat-Knopf ----
+sections.forEach(s=>{const ss=s.querySelector('.sportsel2');if(ss)ss.addEventListener('change',e=>{location.hash='#'+e.target.value;});});
+const steadyBtn=document.querySelector('.steady');
+if(steadyBtn)steadyBtn.addEventListener('click',()=>{const sec=sections.find(x=>!x.hidden);if(sec)openChat(sec);});
+
 // ---- Stufen-Klick auf der Startseite -> Sportarten-Auswahl ----
 const spm=document.querySelector('.spmodal');
 if(spm){
@@ -1572,6 +1655,8 @@ document.addEventListener('keydown',e=>{
 function show(id){
   closePops();
   presOff();
+  sections.forEach(s=>{const sel=s.querySelector('.sportsel2');if(sel)sel.value=s.dataset.sport;});
+  const stb=document.querySelector('.steady');if(stb)stb.hidden=!id;
   home.hidden = !!id;
   sections.forEach(s=>{s.hidden = s.dataset.sport!==id;});
   window.scrollTo(0,0);
@@ -1879,7 +1964,12 @@ for lang in LANGS:
               '<button class="mm-x" type="button" aria-label="schliessen">✕</button></div>'
               '<iframe class="mm-frame" src="about:blank" title="Mission Swiss-Ski"></iframe>'
               '</div></div>')
-    body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS) + mmodal
+    imodal = ('<div class="imodal" hidden><div class="im-box">'
+              '<div class="im-bar"><span class="im-t"></span>'
+              '<button class="im-x" type="button" aria-label="schliessen">✕</button></div>'
+              '<div class="im-body"></div></div></div>')
+    steady_btn = '<button class="steady" type="button" hidden>💬 Steady</button>'
+    body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS) + mmodal + imodal + steady_btn
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
             "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang),
             "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati"}[lang],
