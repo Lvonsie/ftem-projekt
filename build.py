@@ -630,7 +630,7 @@ def home_html(datamap, lang):
         _plabels += ('<text x="%.0f" y="%.0f" class="wl" fill="%s" text-anchor="middle">%s</text>'
                      % (xc, yc - 34, PH_HEX[pk], esc(pn)))
     _ends = ('<text x="60" y="286" class="we" text-anchor="middle">' + esc(WEG_ENDS[0]) + '</text>'
-             '<text x="900" y="42" class="we" text-anchor="middle">' + esc(WEG_ENDS[1]) + '</text>')
+             '<text x="884" y="104" class="we" text-anchor="middle">' + esc(WEG_ENDS[1]) + '</text>')
     _gondel = ('<g class="gondel" style="offset-path:path(\'' + _pathd + '\')">'
                '<line x1="-6" y1="-9" x2="-6" y2="-13" class="gcable"/>'
                '<line x1="6" y1="-9" x2="6" y2="-13" class="gcable"/>'
@@ -692,7 +692,7 @@ def home_html(datamap, lang):
         '</g>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"/>'
         + band(0, 375, 338, 364, band_lbl[3], "M")
-        + band(375, 165, 450, 478, band_lbl[2], "E1 – E2")
+        + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", " pbn-t")
         + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", " pbn-t")
         + band(790, 196, 866, 894, band_lbl[0], "F1 – F3")
         + '</svg>')
