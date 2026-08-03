@@ -609,14 +609,38 @@ def home_html(datamap, lang):
                       '" x2="'+str(CONS_POS[b][0])+'" y2="'+str(CONS_POS[b][1])+'" vector-effect="non-scaling-stroke"/>')
     lines += '</svg>'
     info = FTEM_INFO[lang]
-    phase_cls = {"F":"p-f","T":"p-t","E":"p-e","M":"p-m"}
-    phases = "".join('<div class="phase '+phase_cls[k]+'"><span class="pl">'+k+'</span>'
-                     '<span class="pn">'+pn+'</span><span class="pr">'+pr+'</span>'
-                     '<p>'+desc+'</p></div>' for k,pn,pr,desc in info["phases"])
+    # "Was ist FTEM?" als aufsteigender Weg (F1 -> M) mit allen 10 Entwicklungsstufen
+    WEG_ENDS = {"de": ("Erster Schneekontakt", "Weltspitze"),
+                "fr": ("Premier contact neige", "Élite mondiale"),
+                "it": ("Primo contatto neve", "Élite mondiale")}[lang]
+    PH_HEX = {"F": "#1f8fa6", "T": "#e2a900", "E": "#e8772e", "M": "#d52b1e"}
+    weg_stages = ["F1", "F2", "F3", "T1", "T2", "T3", "T4", "E1", "E2", "M"]
+    def _nx(i): return 60 + i * (840 / 9.0)
+    def _ny(i): return 246 - i * (176 / 9.0)
+    _pts = " ".join("%.0f,%.0f" % (_nx(i), _ny(i)) for i in range(10))
+    _nodes = ""
+    for i, st in enumerate(weg_stages):
+        _nodes += ('<g class="wn"><circle cx="%.0f" cy="%.0f" r="16" fill="%s"/>'
+                   '<text x="%.0f" y="%.0f" class="wn-t">%s</text></g>'
+                   % (_nx(i), _ny(i), PH_HEX[st[0]], _nx(i), _ny(i) + 4, esc(st)))
+    _groups = [(0, 2), (3, 6), (7, 8), (9, 9)]
+    _plabels = ""
+    for (a, b), (pk, pn, pr, desc) in zip(_groups, info["phases"]):
+        xc = (_nx(a) + _nx(b)) / 2.0; yc = (_ny(a) + _ny(b)) / 2.0
+        _plabels += ('<text x="%.0f" y="%.0f" class="wl" fill="%s" text-anchor="middle">%s</text>'
+                     % (xc, yc - 32, PH_HEX[pk], esc(pn)))
+    _ends = ('<text x="60" y="280" class="we" text-anchor="middle">' + esc(WEG_ENDS[0]) + '</text>'
+             '<text x="900" y="44" class="we" text-anchor="middle">' + esc(WEG_ENDS[1]) + '</text>')
+    weg_svg = ('<svg class="fweg" viewBox="0 0 960 300" role="img" aria-label="FTEM Entwicklungsstufen F1 bis M">'
+               '<polyline class="fweg-line" points="' + _pts + '"/>' + _plabels + _nodes + _ends + '</svg>')
+    pc2 = {"F": "f", "T": "t", "E": "e", "M": "m"}
+    _desc = "".join('<div class="fwd fwd-' + pc2[pk] + '"><span class="fwd-h"><b>' + pn + '</b> ' + pr + '</span>'
+                    '<p>' + desc + '</p></div>' for pk, pn, pr, desc in info["phases"])
     ftem_info = ('<div class="ftem-info">'
-                 '<h2>'+info["title"]+'</h2>'
-                 '<p class="lead">'+info["lead"]+'</p>'
-                 '<div class="phases">'+phases+'</div></div>')
+                 '<h2>' + info["title"] + '</h2>'
+                 '<p class="lead">' + info["lead"] + '</p>'
+                 '<div class="fweg-wrap">' + weg_svg + '</div>'
+                 '<div class="fweg-desc">' + _desc + '</div></div>')
     fb_ph = {"de":"Dein Feedback …","fr":"Votre commentaire …","it":"Il tuo feedback …"}.get(lang, "Dein Feedback …")
     fb_send = {"de":"Senden","fr":"Envoyer","it":"Invia"}.get(lang, "Senden")
     fb = ('<button class="fb-btn" type="button" '
@@ -653,16 +677,16 @@ def home_html(datamap, lang):
         '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
         '<g clip-path="url(#mtclip)">'
-        '<rect x="0" y="0" width="1896" height="375" fill="rgba(216,72,58,.46)"/>'
-        '<rect x="0" y="375" width="1896" height="118" fill="rgba(222,140,80,.46)"/>'
-        '<rect x="0" y="493" width="1896" height="227" fill="rgba(222,184,88,.48)"/>'
-        '<rect x="0" y="720" width="1896" height="266" fill="rgba(86,158,178,.48)"/>'
+        '<rect x="0" y="0" width="1896" height="190" fill="rgba(216,72,58,.46)"/>'
+        '<rect x="0" y="190" width="1896" height="230" fill="rgba(222,140,80,.46)"/>'
+        '<rect x="0" y="420" width="1896" height="340" fill="rgba(222,184,88,.48)"/>'
+        '<rect x="0" y="760" width="1896" height="226" fill="rgba(86,158,178,.48)"/>'
         '</g>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"/>'
-        + band(0, 375, 338, 364, band_lbl[3], "M")
-        + band(375, 118, 430, 458, band_lbl[2], "E1 – E2")
-        + band(493, 227, 602, 636, band_lbl[1], "T1 – T4", " pbn-t")
-        + band(720, 266, 812, 840, band_lbl[0], "F1 – F3")
+        + band(0, 190, 150, 176, band_lbl[3], "M")
+        + band(190, 230, 300, 326, band_lbl[2], "E1 – E2")
+        + band(420, 340, 588, 622, band_lbl[1], "T1 – T4", " pbn-t")
+        + band(760, 226, 850, 878, band_lbl[0], "F1 – F3")
         + '</svg>')
     pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
@@ -704,7 +728,7 @@ def home_html(datamap, lang):
             '<button class="presgo" type="button">OK</button></span></div>')
     return ('<section id="home">'
             '<div class="home-hero">'
-            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'
+            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+'</div>'
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
@@ -947,6 +971,22 @@ body.pres section.sport h2.grp{font-size:15px}
 .ftem-info h2{margin:0 0 8px;font-size:17px;font-weight:800}
 .ftem-info .lead{color:var(--mut);font-size:13px;line-height:1.6;margin:0 0 18px}
 .ftem-info .lead b{color:var(--ink)}
+/* Was ist FTEM? – aufsteigender Weg (Entwicklungsstufen F1–M) */
+.fweg-wrap{margin:12px 0 8px}
+.fweg{width:100%;height:auto;display:block}
+.fweg-line{fill:none;stroke:#c3ccd6;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:2 11;animation:fwflow 9s linear infinite}
+@keyframes fwflow{to{stroke-dashoffset:-130}}
+.fweg .wn circle{filter:drop-shadow(0 2px 5px rgba(0,0,0,.2))}
+.fweg .wn-t{fill:#fff;font-size:13px;font-weight:800;font-family:Arial,sans-serif}
+.fweg .wl{font-size:13px;font-weight:800;font-family:'Inter',Arial,sans-serif;letter-spacing:.02em}
+.fweg .we{fill:var(--mut);font-size:11px;font-weight:700;font-family:'Inter',Arial,sans-serif}
+.fweg-desc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
+.fwd{background:var(--card);border:1px solid var(--line);border-top:3px solid;border-radius:10px;padding:9px 11px}
+.fwd-f{border-top-color:var(--found)}.fwd-t{border-top-color:var(--talent)}.fwd-e{border-top-color:var(--elite)}.fwd-m{border-top-color:var(--mast)}
+.fwd-h{font-size:12px;color:var(--ink)}.fwd-h b{font-weight:800}
+.fwd p{margin:4px 0 0;font-size:11px;color:var(--mut);line-height:1.45}
+[data-theme="dark"] .fweg-line{stroke:rgba(255,255,255,.28)}
+@media(max-width:640px){.fweg-desc{grid-template-columns:1fr 1fr}}
 .phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .phase{border:1px solid var(--line);border-radius:12px;border-top:4px solid;padding:13px 14px 11px;transition:transform .16s,box-shadow .16s}
 .phase:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(0,0,0,.08)}
