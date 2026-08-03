@@ -98,7 +98,7 @@ SEARCH_PH = {"de": "Suche…", "fr": "Rechercher…", "it": "Cerca…"}
 EXPAND_ALL = {"de": "Alle öffnen", "fr": "Tout ouvrir", "it": "Apri tutto"}
 COLLAPSE_ALL = {"de": "Alle schliessen", "fr": "Tout fermer", "it": "Chiudi tutto"}
 CLEAR_LBL = {"de": "Leeren", "fr": "Effacer", "it": "Cancella"}
-CHAT_BTN = {"de": "FTEM-Coach (KI)", "fr": "Coach FTEM (IA)", "it": "Coach FTEM (IA)"}
+CHAT_BTN = {"de": "FTEM-Assistent (KI)", "fr": "Assistant FTEM (IA)", "it": "Assistente FTEM (IA)"}
 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 # Fallback, falls eine Datendatei keine "ages" enthaelt (Alterskategorien pro Sportart)
@@ -317,11 +317,10 @@ def render_cell(seg, lang, cid=None, edit=False):
     return out
 
 # --- Themen-Icons (Inline-SVG, offline) + dezente Bereichsfarben ---
-# Einheitlich neutral (Feedback Bjoern: keine unterschiedlichen/blauen Titel-Farben)
 GROUP_COLORS = {
-    "Sport & Athlet:in":    ("#4a5563", "rgba(74,85,99,.13)"),
-    "Material":             ("#4a5563", "rgba(74,85,99,.13)"),
-    "Strukturen & Umfeld":  ("#4a5563", "rgba(74,85,99,.13)"),
+    "Sport & Athlet:in":    ("#6274a0", "rgba(98,116,160,.15)"),   # gedaempftes Blaugrau
+    "Material":             ("#9c8a70", "rgba(156,138,112,.16)"),  # Taupe / Sandton
+    "Strukturen & Umfeld":  ("#8b7398", "rgba(139,115,152,.16)"),  # mattes Mauve
 }
 def group_accent(g):
     return GROUP_COLORS.get(g, ("#7a828c", "rgba(122,130,140,.15)"))
@@ -486,8 +485,11 @@ def sport_section(sport, d, lang, edit=False):
         +lang_switch(lang)+theme_toggle()+'</div></header>'
         '<div class="wrap">'
         +sections
-        # Praesentationsmodus nur noch ueber den ⛶-Knopf auf der Startseite
-        +'</div>'
+        # Versteckter Praesentationsmodus: dezentes Symbol unten (wie Admin-Schloss), Passwort noetig
+        +'<div class="preslink"><button class="presopen" type="button" title="'+esc(PRES_TITLE[lang])+'" aria-label="'+esc(PRES_TITLE[lang])+'">⛶</button>'
+        '<span class="presask" hidden><input class="prespw" type="password" placeholder="'+esc(PRES_PWPH[lang])+'" autocomplete="off">'
+        '<button class="presgo" type="button">OK</button></span></div>'
+        '</div>'
         +stage_bar(d["stages"], lang)+'</section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
@@ -508,14 +510,12 @@ CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9)]
 # --- Newsbox -----------------------------------------------------------------
 # Neue Meldung? Einfach oben in diese Liste einen Block einfuegen (neueste zuerst).
 #   "title"   : Ueberschrift
-#   "date"    : Datum der Meldung (frei, z. B. "Juli 2026" oder "03.08.2026")
 #   "body"    : Liste von Absaetzen (Text)
 #   "bullets" : optionale Liste von Aufzaehlungspunkten
 #   "url"     : Link -> wird als "Link"-Button gezeigt (leer lassen = kein Button)
 NEWS = [
     {
         "title": "Neue Ausbildungsstruktur Ski Alpin",
-        "date": "Juli 2026",
         "body": ["Die Übersichtsseite zur neuen Ausbildungsstruktur ist live!",
                  "Entdecke den Ausbildungsweg bis hin zum «Swiss-Ski Trainer:in Spitzensport»."],
         "bullets": [],
@@ -523,7 +523,6 @@ NEWS = [
     },
     {
         "title": "Swiss-Ski Ausbildungsnews Juli 26",
-        "date": "Juli 2026",
         "body": ["Verschiedene News in folgenden Bereichen:"],
         "bullets": ["Gut zu wissen",
                     "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen"],
@@ -535,20 +534,15 @@ def news_html(lang):
     if not NEWS:
         return ""
     heading = {"de":"News","fr":"Actualités","it":"Notizie"}.get(lang, "News")
-    upd = {"de":"Aktualisiert am ","fr":"Mis à jour le ","it":"Aggiornato il "}.get(lang, "Aktualisiert am ")
     cards = ""
-    for i, it in enumerate(NEWS):
+    for it in NEWS:
         body = "".join('<p>'+esc(tr(p, lang))+'</p>' for p in it.get("body", []))
         if it.get("bullets"):
             body += '<ul>'+"".join('<li>'+esc(tr(b, lang))+'</li>' for b in it["bullets"])+'</ul>'
         link = ('<a class="news-link" href="'+esc(it["url"])+'" target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
-        date = ('<span class="news-date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
-        new_badge = '<span class="news-new">NEU</span>' if i == 0 else ''
-        cards += ('<article class="news-card"><div class="news-meta">'+date+new_badge+'</div>'
-                  '<h3>'+esc(tr(it["title"], lang))+'</h3>'
+        cards += ('<article class="news-card"><h3>'+esc(tr(it["title"], lang))+'</h3>'
                   '<div class="news-body">'+body+'</div>'+link+'</article>')
     return ('<section class="news"><h2 class="news-h">'+esc(heading)+'</h2>'
-            '<div class="news-upd">'+esc(upd)+datestr+'</div>'
             '<div class="news-grid">'+cards+'</div></section>')
 
 INSTALL_HINT = {
@@ -615,7 +609,7 @@ def home_html(datamap, lang):
                       '" x2="'+str(CONS_POS[b][0])+'" y2="'+str(CONS_POS[b][1])+'" vector-effect="non-scaling-stroke"/>')
     lines += '</svg>'
     info = FTEM_INFO[lang]
-    # "Was ist FTEM?" als aufsteigender Weg (F1 -> M) mit allen 10 Entwicklungsstufen (Luca)
+    # "Was ist FTEM?" als aufsteigender Weg (F1 -> M) mit allen 10 Entwicklungsstufen
     WEG_ENDS = {"de": ("Erster Schneekontakt", "Weltspitze"),
                 "fr": ("Premier contact neige", "Élite mondiale"),
                 "it": ("Primo contatto neve", "Élite mondiale")}[lang]
@@ -623,30 +617,22 @@ def home_html(datamap, lang):
     weg_stages = ["F1", "F2", "F3", "T1", "T2", "T3", "T4", "E1", "E2", "M"]
     def _nx(i): return 60 + i * (840 / 9.0)
     def _ny(i): return 246 - i * (176 / 9.0)
-    _pathd = "M" + " L".join("%.0f %.0f" % (_nx(i), _ny(i)) for i in range(10))
+    _pts = " ".join("%.0f,%.0f" % (_nx(i), _ny(i)) for i in range(10))
     _nodes = ""
     for i, st in enumerate(weg_stages):
         _nodes += ('<g class="wn"><circle cx="%.0f" cy="%.0f" r="16" fill="%s"/>'
                    '<text x="%.0f" y="%.0f" class="wn-t">%s</text></g>'
-                   % (_nx(i), _ny(i), PH_HEX[st[0]], _nx(i), _ny(i), esc(st)))
+                   % (_nx(i), _ny(i), PH_HEX[st[0]], _nx(i), _ny(i) + 4, esc(st)))
     _groups = [(0, 2), (3, 6), (7, 8), (9, 9)]
     _plabels = ""
     for (a, b), (pk, pn, pr, desc) in zip(_groups, info["phases"]):
         xc = (_nx(a) + _nx(b)) / 2.0; yc = (_ny(a) + _ny(b)) / 2.0
         _plabels += ('<text x="%.0f" y="%.0f" class="wl" fill="%s" text-anchor="middle">%s</text>'
-                     % (xc, yc - 34, PH_HEX[pk], esc(pn)))
-    _ends = ('<text x="60" y="286" class="we" text-anchor="middle">' + esc(WEG_ENDS[0]) + '</text>'
-             '<text x="884" y="104" class="we" text-anchor="middle">' + esc(WEG_ENDS[1]) + '</text>')
-    _gondel = ('<g class="gondel" style="offset-path:path(\'' + _pathd + '\')">'
-               '<line x1="-6" y1="-9" x2="-6" y2="-13" class="gcable"/>'
-               '<line x1="6" y1="-9" x2="6" y2="-13" class="gcable"/>'
-               '<rect x="-13" y="-9" width="26" height="16" rx="4" fill="#d52b1e"/>'
-               '<rect x="-9" y="-6" width="18" height="5" rx="1.5" fill="rgba(255,255,255,.85)"/></g>')
+                     % (xc, yc - 32, PH_HEX[pk], esc(pn)))
+    _ends = ('<text x="60" y="280" class="we" text-anchor="middle">' + esc(WEG_ENDS[0]) + '</text>'
+             '<text x="900" y="44" class="we" text-anchor="middle">' + esc(WEG_ENDS[1]) + '</text>')
     weg_svg = ('<svg class="fweg" viewBox="0 0 960 300" role="img" aria-label="FTEM Entwicklungsstufen F1 bis M">'
-               '<polygon class="fmt2" points="0,300 250,150 480,300 720,120 960,300"/>'
-               '<polygon class="fmt1" points="0,300 170,205 380,300 560,178 780,300 960,150 960,300"/>'
-               '<path class="fweg-line" d="' + _pathd + '"/>'
-               + _gondel + _plabels + _nodes + _ends + '</svg>')
+               '<polyline class="fweg-line" points="' + _pts + '"/>' + _plabels + _nodes + _ends + '</svg>')
     pc2 = {"F": "f", "T": "t", "E": "e", "M": "m"}
     _desc = "".join('<div class="fwd fwd-' + pc2[pk] + '"><span class="fwd-h"><b>' + pn + '</b> ' + pr + '</span>'
                     '<p>' + desc + '</p></div>' for pk, pn, pr, desc in info["phases"])
@@ -660,8 +646,6 @@ def home_html(datamap, lang):
     fb = ('<button class="fb-btn" type="button" '
           'onclick="var p=this.nextElementSibling;p.hidden=!p.hidden;if(!p.hidden)p.querySelector(&#39;textarea&#39;).focus()">Feedback</button>'
           '<div class="fb-panel" hidden>'
-          '<button class="fb-x" type="button" aria-label="schliessen" '
-          'onclick="this.closest(&#39;.fb-panel&#39;).hidden=true">&times;</button>'
           '<textarea class="fb-text" placeholder="'+esc(fb_ph)+'"></textarea>'
           '<button class="fb-send" type="button" '
           'onclick="location.href=&#39;mailto:forschung@swiss-ski.ch?subject=Feedback%20FTEM&amp;body=&#39;+encodeURIComponent(this.parentNode.querySelector(&#39;.fb-text&#39;).value)">'+esc(fb_send)+'</button>'
@@ -679,44 +663,30 @@ def home_html(datamap, lang):
     # oben (Himmel) beschnitten -> der Titel ueberlappt den Gipfel nicht mehr.
     # Labels auf der Vertikalen der Bergspitze (x=1018 im Bild), nicht in der Bildmitte.
     LBLX = "1018"
-    def band(y, h, name_y, sub_y, name, sub, key, cls=""):
-        return ('<g class="pband" tabindex="0" role="button" data-ph="'+key+'" aria-label="'+esc(name)+'">'
+    def band(y, h, name_y, sub_y, name, sub, cls=""):
+        return ('<g class="pband" tabindex="0" role="button" aria-label="'+esc(name)+'">'
                 '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0"/>'
                 '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
                 '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
-    # Athlet:innen-Weg als "Piste" im Berg: Slalom-Linie mit 10 Stufen-Punkten (F1 unten -> M oben)
-    # rechts der Beschriftungs-Spalte, damit Piste und Labels sich nicht ueberlagern
-    aw_pts = [("M",1042,258),("E2",1130,420),("E1",1180,500),("T4",1122,590),("T3",1185,650),
-              ("T2",1126,707),("T1",1180,762),("F3",1122,830),("F2",1178,880),("F1",1140,930)]
-    aw_col = {"F":"#57cce4","T":"#f2c85f","E":"#f2a06a","M":"#f28578"}
-    aw_path_d = "M"+" L".join(str(x)+","+str(y) for _, x, y in aw_pts)
-    aw_dots = "".join('<circle cx="'+str(x)+'" cy="'+str(y)+'" r="8" fill="'+aw_col[s[0]]+'">'
-                      '<title>'+esc(FULL[s])+'</title></circle>' for s, x, y in aw_pts)
-    awpath = ('<g class="awpath" tabindex="0" role="button" aria-label="'+esc(tr("Athlet:innen-Weg", lang))+'">'
-              '<title>'+esc(tr("Athlet:innen-Weg", lang))+'</title>'
-              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="26" stroke-linejoin="round" stroke-linecap="round"/>'
-              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="3" stroke-dasharray="8 7" stroke-linejoin="round"/>'
-              + aw_dots + '</g>')
     hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
         '<linearGradient id="herodark" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="rgba(9,14,24,.34)"/><stop offset=".45" stop-color="rgba(12,17,28,.30)"/><stop offset="1" stop-color="rgba(7,11,20,.82)"/></linearGradient>'
+        '<stop offset="0" stop-color="rgba(9,14,24,.66)"/><stop offset=".45" stop-color="rgba(12,17,28,.5)"/><stop offset="1" stop-color="rgba(7,11,20,.9)"/></linearGradient>'
         '</defs>'
         '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
         '<g clip-path="url(#mtclip)">'
-        '<rect x="0" y="0" width="1896" height="375" fill="rgba(216,72,58,.46)"/>'
-        '<rect x="0" y="375" width="1896" height="165" fill="rgba(222,140,80,.46)"/>'
-        '<rect x="0" y="540" width="1896" height="250" fill="rgba(222,184,88,.48)"/>'
-        '<rect x="0" y="790" width="1896" height="196" fill="rgba(86,158,178,.48)"/>'
+        '<rect x="0" y="0" width="1896" height="190" fill="rgba(216,72,58,.46)"/>'
+        '<rect x="0" y="190" width="1896" height="230" fill="rgba(222,140,80,.46)"/>'
+        '<rect x="0" y="420" width="1896" height="340" fill="rgba(222,184,88,.48)"/>'
+        '<rect x="0" y="760" width="1896" height="226" fill="rgba(86,158,178,.48)"/>'
         '</g>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"/>'
-        + band(0, 375, 338, 364, band_lbl[3], "M", "m")
-        + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", "e", " pbn-t")
-        + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", "t", " pbn-t")
-        + band(790, 196, 866, 894, band_lbl[0], "F1 – F3", "f")
-        + awpath
+        + band(0, 190, 150, 176, band_lbl[3], "M")
+        + band(190, 230, 300, 326, band_lbl[2], "E1 – E2")
+        + band(420, 340, 588, 622, band_lbl[1], "T1 – T4", " pbn-t")
+        + band(760, 226, 850, 878, band_lbl[0], "F1 – F3")
         + '</svg>')
     pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
@@ -738,52 +708,10 @@ def home_html(datamap, lang):
         '<a class="mission-item" href="'+esc(s2["mission"])+'" data-title="'+esc(tr(s2["name"], lang))+' – Mission Swiss-Ski">'
         + esc(tr(s2["name"], lang)) + '</a>'
         for s2 in SPORTS if s2.get("mission"))
-    # "Mission Sportart": oeffnet direkt die Mission der oben vorgewaehlten Sportart
-    misp_lbl = {"de": "Mission Sportart", "fr": "Mission du sport", "it": "Missione sport"}[lang]
-    mission_btn = '<button class="news-btn np-sportmission" type="button">'+esc(misp_lbl)+'</button>'
-    # App-Hinweis als eigener Knopf (nicht mehr in den News)
-    app_lbl = INSTALL_HINT.get(lang, INSTALL_HINT["de"])["title"]
-    # "Athlet:innen Weg"-Knopf oben Mitte (Bjoern-Mock) + Piste im Berg
-    aw_lbl = tr("Athlet:innen-Weg", lang)
-    go_lbl = {"de": "Zum Athlet:innen-Weg", "fr": "Vers le parcours de l'athlète", "it": "Al percorso dell'atleta"}[lang]
-    aw_cta = ('<div class="aw-cta"><button class="aw-btn" type="button">'+esc(aw_lbl)+
-              ' <span class="aw-ar">→</span></button></div>')
-    # Stufen-Summaries (Klick auf Zone -> Kurzbeschrieb statt direkt Athletenweg)
-    ph_tpls = ""
-    for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
-        ph_tpls += ('<template id="tpl-ph-'+k+'" data-t="'+esc(pname)+' · '+esc(prng)+'">'
-                    '<div class="ph-sum ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
-                    '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+'</div></div></div>'
-                    '<p class="ps-desc">'+pdesc+'</p>'
-                    '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
-    # Untere Leiste: sportartuebergreifende Themen (Links folgen, solange leer -> inaktiv)
-    linkfolgt = {"de": "Link folgt", "fr": "Lien à venir", "it": "Link in arrivo"}[lang]
-    overarch = [
-        ("FAPS", ""),
-        ("Swiss-Ski Clubs", ""),
-        ({"de":"Ethik-Charta","fr":"Charte éthique","it":"Carta etica"}[lang], ""),
-        ({"de":"Schneesport 2050","fr":"Sports de neige 2050","it":"Sport sulla neve 2050"}[lang], ""),
-        ({"de":"Nachhaltigkeit im Schneesport","fr":"Durabilité dans les sports de neige","it":"Sostenibilità negli sport sulla neve"}[lang], ""),
-    ]
     if MISSION_URL:
-        bb_items = '<a class="bb-item np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission <b>swiss</b>ski</a>'
+        mission_btn = '<a class="news-btn np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission Swiss-Ski</a>'
     else:
-        bb_items = '<button class="bb-item" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission <b>swiss</b>ski</button>'
-    for lbl2, url2 in overarch:
-        if url2:
-            bb_items += '<a class="bb-item np-mission" href="'+esc(url2)+'" data-title="'+esc(lbl2)+'">'+esc(lbl2)+'</a>'
-        else:
-            bb_items += '<span class="bb-item bb-off" title="'+esc(linkfolgt)+'">'+esc(lbl2)+'</span>'
-    bottombar = '<div class="bottombar">'+bb_items+'</div>'
-    # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
-    fi_links = [
-        ({"de":"Übersicht FTEM","fr":"Aperçu FTEM","it":"Panoramica FTEM"}[lang], "https://snowsports.flink.host/s/iFt05YOw/c5lG7vWX"),
-        ("How to use FTEM", "https://snowsports.flink.host/s/iFt05YOw/CVg0efTY"),
-        ({"de":"Leitsätze der Athlet:innen-Entwicklung","fr":"Principes du développement des athlètes","it":"Principi dello sviluppo degli atleti"}[lang], "https://snowsports.flink.host/s/Ur9yhq2P/"),
-    ]
-    fi_html = ('<div class="mlist fi-links">'
-               + "".join('<a class="mission-item" href="'+esc(u2)+'" data-title="'+esc(t2)+'">'+esc(t2)+'</a>' for t2, u2 in fi_links)
-               + '</div>')
+        mission_btn = '<button class="news-btn" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission Swiss-Ski</button>'
     # Unten im Hero: Admin-Schloss + Praesentations-Knopf nebeneinander, gemeinsam
     # zentriert, beide mit demselben Farbverlauf (#adminlk).
     adminlk = ('<div class="adminlink adminlink-hero preslink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
@@ -798,28 +726,22 @@ def home_html(datamap, lang):
             '<path d="M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>'
             '<span class="presask" hidden><input class="prespw" type="password" placeholder="'+esc(PRES_PWPH[lang])+'" autocomplete="off">'
             '<button class="presgo" type="button">OK</button></span></div>')
-    nbadge = ('<span class="nbadge">'+str(len(NEWS))+'</span>') if NEWS else ''
     return ('<section id="home">'
             '<div class="home-hero">'
             '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+'</div>'
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
-            '<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button>'
-            '<button class="info-btn" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button></div>'
-            +aw_cta+
-            '<div class="hero-top-r">'+mission_btn+
-            '<button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+nbadge+'</button>'
-            +fb+'</div>'
+            '<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div>'
+            '<div class="hero-top-r"><button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button>'
+            +mission_btn+fb+'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            +pyr+adminlk+bottombar+
+            +pyr+adminlk+
             '</div>'
-            '<template id="tpl-news">'+news_html(lang)+'</template>'
-            '<template id="tpl-app">'+install_hint(lang)+'</template>'
-            '<template id="tpl-info">'+ftem_info+fi_html+'</template>'
+            '<template id="tpl-news">'+news_html(lang)+install_hint(lang)+'</template>'
+            '<template id="tpl-info">'+ftem_info+'</template>'
             '<template id="tpl-missions"><div class="mlist">'+mission_items+'</div></template>'
-            +ph_tpls+
             '</section>')
 
 
@@ -843,7 +765,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
 /* Startseite - Neon-Konstellation */
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
-  background:linear-gradient(180deg,rgba(9,14,24,.34),rgba(12,17,28,.30) 45%,rgba(7,11,20,.82)),url("assets/hero.jpg") center 32%/cover no-repeat}
+  background:linear-gradient(180deg,rgba(9,14,24,.66),rgba(12,17,28,.5) 45%,rgba(7,11,20,.9)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 #home .hero-top .lsrow{display:flex;align-items:stretch;gap:8px}
 #home .hero-top .lsrow .themebtn{width:33px;height:auto;align-self:stretch}
@@ -903,7 +825,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 /* Mission-Iframe-Overlay */
 .mmodal{position:fixed;inset:0;z-index:120;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .mm-box{width:min(1240px,96vw);height:min(880px,92vh);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#1d2630;color:#fff}
+.mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--ink);color:#fff}
 .mm-t{font-weight:800;font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mm-ext{color:#fff;text-decoration:none;font-weight:700;font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.4);border-radius:16px;white-space:nowrap}
 .mm-ext:hover{background:rgba(255,255,255,.15)}
@@ -948,7 +870,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 }
 .spmodal{position:fixed;inset:0;z-index:115;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .sp-box{width:min(760px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.sp-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;background:#1d2630;color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em}
+.sp-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em}
 .sp-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;line-height:1}
 .sp-x:hover{color:var(--talent)}
 .sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;padding:14px}
@@ -974,10 +896,10 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
 .hcta:hover{background:var(--red);border-color:var(--red)}
 .hcta-sec{background:rgba(255,255,255,.07)}
-.adminlink-hero{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);z-index:7;margin:0}
+.adminlink-hero{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:7;margin:0}
 .imodal{position:fixed;inset:0;z-index:112;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
+.im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--ink);color:#fff}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
 .im-x:hover{color:var(--talent)}
@@ -1009,54 +931,6 @@ body.pres .steady{display:none}
 .adminlink-hero .presopen svg{width:21px;height:21px;display:block}
 .adminlink-hero .presask{margin-left:0}
 a.news-btn{text-decoration:none;display:inline-block;text-align:center}
-/* News-Badge + News-Overlay-Metadaten */
-.nbadge{display:inline-block;background:#fff;color:var(--red);border-radius:9px;padding:0 6px;margin-left:7px;font-size:10px;font-weight:800;line-height:15px;vertical-align:1px}
-.news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
-.news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
-.news-date{font-size:10.5px;font-weight:700;color:var(--mut);background:var(--acc-bg);border-radius:5px;padding:2px 7px}
-.news-new{font-size:9.5px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--red);border-radius:5px;padding:2px 6px}
-/* Feedback-Panel: Schliessen-Knopf */
-.fb-panel{position:relative}
-.fb-x{position:absolute;top:4px;right:6px;z-index:2;background:none;border:none;color:rgba(255,255,255,.75);font-size:17px;line-height:1;cursor:pointer;padding:3px 6px}
-.fb-x:hover{color:#fff}
-.fb-panel .fb-text{margin-top:14px}
-/* "Athlet:innen Weg"-Knopf oben Mitte */
-.aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
-.aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:800;font-size:13px;border-radius:22px;padding:9px 20px;cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.02em}
-.aw-btn:hover{background:var(--red);border-color:var(--red)}
-.aw-btn .aw-ar{display:inline-flex;width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.22);align-items:center;justify-content:center;font-size:12px}
-/* Piste (Athlet:innen-Weg) im Berg */
-.heromt .awpath{pointer-events:auto;cursor:pointer;outline:none}
-.heromt .awpath:hover circle,.heromt .awpath:focus-visible circle{filter:brightness(1.25)}
-.heromt .awpath circle{stroke:rgba(255,255,255,.85);stroke-width:2}
-/* Untere Themen-Leiste */
-.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:stretch;justify-content:center;gap:2px;background:rgba(8,12,19,.82);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12);padding:0 8px;overflow-x:auto;scrollbar-width:none}
-.bottombar::-webkit-scrollbar{display:none}
-.bb-item{font:inherit;flex:none;display:flex;align-items:center;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12px;padding:11px 15px;cursor:pointer;text-decoration:none;white-space:nowrap;letter-spacing:.02em}
-.bb-item b{color:var(--red);font-weight:800;margin-left:4px}
-.bb-item:hover{background:rgba(255,255,255,.10);color:#fff}
-.bb-item.bb-off{opacity:.45;cursor:default}
-.bb-item.bb-off:hover{background:none}
-/* Stufen-Summary-Overlay */
-.ph-sum{max-width:560px;margin:0 auto}
-.ph-sum .ps-head{display:flex;align-items:center;gap:13px;margin-bottom:11px}
-.ph-sum .ps-badge{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:var(--psc,#4a5563)}
-.ps-f{--psc:var(--found)}.ps-t{--psc:var(--talent)}.ps-e{--psc:var(--elite)}.ps-m{--psc:var(--mast)}
-.ps-t .ps-badge{color:#3b2e00}
-.ph-sum .ps-name{font-size:17px;font-weight:800}
-.ph-sum .ps-rng{font-size:12px;font-weight:700;color:var(--mut)}
-.ph-sum .ps-desc{font-size:13.5px;line-height:1.6;margin:0 0 15px}
-.ph-sum .aw-go{font:inherit;font-size:13px;font-weight:800;color:#fff;background:var(--red);border:none;border-radius:9px;padding:10px 18px;cursor:pointer}
-.ph-sum .aw-go:hover{filter:brightness(1.12)}
-.fi-links{margin-top:16px}
-/* Zebra im Darkmode: leicht aufhellen statt abdunkeln */
-[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .cell,[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045))}
-@media(max-width:760px){
-  .aw-cta{top:auto;bottom:96px}
-  .aw-btn{font-size:12px;padding:8px 16px}
-  .adminlink-hero{bottom:44px}
-  .bottombar{justify-content:flex-start}
-}
 body.pres{--colw:290px;--lblw:200px}
 body.pres .ht-c,body.pres .chatbtn,body.pres .jump,body.pres .pdf,body.pres .hdiv,body.pres .preslink{display:none!important}
 body.pres section.sport summary .tt{font-size:19px}
@@ -1089,7 +963,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:176px}#home .hero-head h1{font-size:40px}#home .hero-logo{width:88px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:128px}}
 @media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
 @media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */
@@ -1103,13 +977,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .fweg-line{fill:none;stroke:#c3ccd6;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:2 11;animation:fwflow 9s linear infinite}
 @keyframes fwflow{to{stroke-dashoffset:-130}}
 .fweg .wn circle{filter:drop-shadow(0 2px 5px rgba(0,0,0,.2))}
-.fweg .wn-t{fill:#fff;font-size:13px;font-weight:800;font-family:Arial,sans-serif;text-anchor:middle;dominant-baseline:central}
-.fweg .fmt1{fill:#e4e9ef}.fweg .fmt2{fill:#eef1f5}
-.fweg .gcable{stroke:#8a94a0;stroke-width:1.4}
-.gondel{offset-rotate:0deg;offset-distance:0%;animation:gondelup 8s ease-in-out infinite}
-@keyframes gondelup{0%{offset-distance:0%}86%,100%{offset-distance:100%}}
-[data-theme="dark"] .fweg .fmt1{fill:rgba(255,255,255,.06)}
-[data-theme="dark"] .fweg .fmt2{fill:rgba(255,255,255,.035)}
+.fweg .wn-t{fill:#fff;font-size:13px;font-weight:800;font-family:Arial,sans-serif}
 .fweg .wl{font-size:13px;font-weight:800;font-family:'Inter',Arial,sans-serif;letter-spacing:.02em}
 .fweg .we{fill:var(--mut);font-size:11px;font-weight:700;font-family:'Inter',Arial,sans-serif}
 .fweg-desc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:6px}
@@ -1217,7 +1085,7 @@ summary .tchev{flex:none;width:8px;height:8px;border-right:2px solid var(--mut);
 details[open]>summary .tchev{transform:rotate(45deg)}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
-.r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:stretch}
+.r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:start}
 .rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2);min-width:0;overflow:hidden;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 .rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
 .r.head{position:relative;z-index:2}
@@ -1249,9 +1117,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 /* Phasenfarben NUR fuer die Stufen-Koepfe - Inhaltszellen behalten dunkle Schrift */
 .c.hd.ph-foundation{background:var(--found);color:#fff}.c.hd.ph-talent{background:var(--talent);color:#3b2e00}.c.hd.ph-elite{background:var(--elite);color:#fff}.c.hd.ph-mastery{background:var(--mast);color:#fff}
 .cell{color:var(--ink)}
-.cell{background:#fff;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;align-self:stretch}
-/* Zebra: jede zweite Inhaltszeile dezent abgedunkelt (Bjoern-Feedback) */
-.grid .r:nth-child(odd):not(.head) .cell,.grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(29,38,48,.035),rgba(29,38,48,.035))}
+.cell{background:#fff;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;align-self:start}
 .cell .cwrap{padding:9px 11px;font-size:11.5px;line-height:1.5;color:#33404d;max-height:212px;overflow:hidden;transition:max-height .25s ease}
 .cell.clamped .cwrap,.cell.expanded .cwrap{padding-bottom:34px}
 .cell.expanded .cwrap{max-height:4000px}
@@ -1260,7 +1126,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cell.expanded::after{opacity:0}
 /* farbige Zellen-Oberkanten entfernt (nur noch dezente Grundlinie) */
 .cwrap p{margin:0 0 5px;line-height:1.5}.cwrap p:last-child{margin-bottom:0}
-.cwrap .bh,.cwrap .sh{font-weight:700;color:var(--acc);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
+.cwrap .bh,.cwrap .sh{font-weight:700;color:var(--found-t);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
 .cwrap .bh:first-child,.cwrap .sh:first-child{margin-top:0}
 .cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top:1px solid #e3e8ee;padding-top:10px}
 .cwrap .bi{font-weight:700;color:var(--ink);font-size:11.5px;margin:0 0 3px;line-height:1.4}
@@ -1271,7 +1137,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap .zsub{margin:0 0 4px;line-height:1.5}.cwrap .zsub:last-child{margin-bottom:0}
 .cwrap .zk{font-weight:700;color:var(--ink)}.cwrap .zk::after{content:"·";margin:0 5px 0 4px;color:#b6c0cc;font-weight:400}
 .cwrap .zsub-l .zk{display:block;margin:0 0 2px}.cwrap .zsub-l .zk::after{content:none}.cwrap .zsub-l ul{margin-top:2px}
-.cwrap .lbl{font-weight:700;color:var(--acc)}
+.cwrap .lbl{font-weight:700;color:var(--found-t)}
 .cwrap ul{margin:3px 0 6px;padding-left:15px}
 .cwrap ul.bl li{margin-bottom:3px;line-height:1.45}
 .cwrap ul.bl li::first-letter{text-transform:uppercase}
@@ -1401,7 +1267,7 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .cwrap .zk::after{color:#5a6472}
 [data-theme="dark"] .cwrap ul.sc .badge{background:#33425c;color:#e7edf4}
 [data-theme="dark"] .cwrap .empty{color:#4a5568}
-[data-theme="dark"] .more{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
+[data-theme="dark"] .more{background:#1c2740;color:var(--found-t);border-color:rgba(255,255,255,.14)}
 [data-theme="dark"] .more:hover{background:#243247}
 [data-theme="dark"] details.theme>summary:hover{background:#1c2740}
 [data-theme="dark"] details.theme:hover{box-shadow:0 5px 16px rgba(0,0,0,.4)}
@@ -1443,8 +1309,6 @@ footer{padding:16px;font-size:11px}
 JS = r"""
 function toggleTheme(){var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',d);try{localStorage.setItem('ftem-theme',d);}catch(e){}}
 const SPORT_IDS = __SPORT_IDS__;
-const SPORT_MISSIONS = __SPORT_MISSIONS__;
-const SPORT_NAMES = __SPORT_NAMES__;
 const I18N = __I18N__;
 const sections = [...document.querySelectorAll('section.sport')];
 const home = document.getElementById('home');
@@ -1603,16 +1467,7 @@ function initSport(sec){
   }
   function toggleStage(i){active.has(i)?active.delete(i):active.add(i);applyHl();}
   sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>toggleStage(+h.dataset.idx)));
-  function scrollToStage(i){
-    const h=sec.querySelector('details.theme[open] .c.hd[data-idx="'+i+'"]');
-    if(!h)return;
-    const sc=h.closest('.scroller');if(!sc)return;
-    const x=Math.max(0, sc.scrollLeft + h.getBoundingClientRect().left - sc.getBoundingClientRect().left
-      - (sec.querySelector('.rl')?sec.querySelector('.rl').getBoundingClientRect().width:146) - 14);
-    scrollers.forEach(o=>{o.scrollTo({left:x,behavior:'smooth'});});
-    sec.__sx=x;
-  }
-  sec.querySelectorAll('.stagebar .sb').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.si;toggleStage(i);if(active.has(i))scrollToStage(i);}));
+  sec.querySelectorAll('.stagebar .sb').forEach(b=>b.addEventListener('click',()=>toggleStage(+b.dataset.si)));
   run();
 }
 sections.forEach(initSport);
@@ -1815,7 +1670,7 @@ if(im){
   im.addEventListener('click',e=>{if(e.target===im)closeInfo();});
   im.querySelector('.im-x').addEventListener('click',closeInfo);
 }
-document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{if(document.getElementById(b.dataset.open))openInfo(b.dataset.open,b.dataset.t||'');}));
+document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openInfo(b.dataset.open,b.dataset.t||'')));
 
 // Alle externen Links (Dokumente, News, Missionen) im Iframe-Overlay oeffnen
 document.addEventListener('click',e=>{
@@ -1832,27 +1687,13 @@ sections.forEach(s=>{const ss=s.querySelector('.sportsel2');if(ss)ss.addEventLis
 const steadyBtn=document.querySelector('.steady');
 if(steadyBtn)steadyBtn.addEventListener('click',()=>{const sec=sections.find(x=>!x.hidden);if(sec)openChat(sec);});
 
-// ---- Startseite: Stufen-Klick -> Kurz-Summary; Piste/AW-Knopf -> Athlet:innen-Weg ----
+// ---- Stufen-Klick -> direkt zum Athlet:innen-Weg der im Dropdown gewaehlten Sportart ----
 const homeSport=document.querySelector('.homesport');
-function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
 document.querySelectorAll('.pband').forEach(bd=>{
-  const open=()=>{const k=bd.dataset.ph;const tpl=document.getElementById('tpl-ph-'+k);
-    if(tpl){openInfo('tpl-ph-'+k, tpl.dataset.t||'');}else{goAW();}};
-  bd.addEventListener('click',open);
-  bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+  const go=()=>{location.hash='#'+(homeSport?homeSport.value:SPORT_IDS[0]);};
+  bd.addEventListener('click',go);
+  bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
 });
-document.querySelectorAll('.aw-btn,.awpath').forEach(el=>{
-  el.addEventListener('click',goAW);
-  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goAW();}});
-});
-document.addEventListener('click',e=>{const g=e.target.closest('.aw-go');if(g){closeInfo();goAW();}});
-// "Mission Sportart": Mission der vorgewaehlten Sportart direkt im Iframe
-document.querySelectorAll('.np-sportmission').forEach(b=>b.addEventListener('click',()=>{
-  const id=homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0];
-  const u=SPORT_MISSIONS[id];
-  if(u)openMission(u,(SPORT_NAMES[id]||id)+' \u2013 Mission Swiss-Ski');
-  else openInfo('tpl-missions','Mission Swiss-Ski');
-}));
 
 // ---- Versteckter Praesentationsmodus (Symbol unten, Passwort) ----
 const PRES_PW='__PRES_PW__';
@@ -2214,7 +2055,7 @@ for lang in LANGS:
               '<div class="im-bar"><span class="im-t"></span>'
               '<button class="im-x" type="button" aria-label="schliessen">✕</button></div>'
               '<div class="im-body"></div></div></div>')
-    assist_lbl = {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM"}[lang]
+    assist_lbl = {"de": "FTEM-Assistent", "fr": "Assistant FTEM", "it": "Assistente FTEM"}[lang]
     steady_btn = '<button class="steady" type="button" hidden>💬 '+esc(assist_lbl)+'</button>'
     body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS) + mmodal + imodal + steady_btn
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
@@ -2226,14 +2067,12 @@ for lang in LANGS:
             "printClose": {"de": "Schliessen", "fr": "Fermer", "it": "Chiudi"}[lang],
             "dossier": {"de": "Stufendossier", "fr": "Dossier de niveau", "it": "Dossier di livello"}[lang],
             "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier."}[lang],
-            "chatTitle": {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM"}[lang],
+            "chatTitle": {"de": "FTEM-Assistent", "fr": "Assistant FTEM", "it": "Assistente FTEM"}[lang],
             "chatPh": {"de": "Frage zum Athlet:innen-Weg…", "fr": "Question sur le parcours…", "it": "Domanda sul percorso…"}[lang],
             "chatWelcome": {"de": "Hallo! Ich beantworte Fragen zum Athlet:innen-Weg dieser Sportart und verweise dich auf passende verlinkte Dokumente. Was möchtest du wissen?", "fr": "Bonjour ! Je réponds aux questions sur le parcours des athlètes de ce sport et vous oriente vers les documents liés pertinents. Que voulez-vous savoir ?", "it": "Ciao! Rispondo alle domande sul percorso degli atleti di questo sport e ti indico i documenti collegati pertinenti. Cosa vuoi sapere?"}[lang],
             "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi."}[lang],
             "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
-            .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: s.get("mission","") for s in SPORTS}))
-            .replace("__SPORT_NAMES__", json.dumps({s["id"]: tr(s["name"], lang) for s in SPORTS}, ensure_ascii=False))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
             .replace("__PRES_PW__", PRES_PW))
