@@ -19,8 +19,8 @@ Server** (Netlify Function `netlify/functions/chat.js`), niemals im Browser.
    - **Key:** `ANTHROPIC_API_KEY`
    - **Value:** dein `sk-ant-…`
 3. Optional, um ein anderes Modell zu nutzen:
-   - **Key:** `CHAT_MODEL` – z. B. `claude-3-5-haiku-latest` (Standard) oder ein
-     stärkeres Modell wie `claude-3-5-sonnet-latest` (teurer, ausführlicher).
+   - **Key:** `CHAT_MODEL` – z. B. `claude-3-5-haiku-20241022` (Standard, günstig)
+     oder ein stärkeres Modell wie `claude-3-5-sonnet-20241022` (teurer, ausführlicher).
 4. **Redeploy** auslösen (Deploys → Trigger deploy), damit die Variable greift.
 
 Die Functions sind bereits in `netlify.toml` konfiguriert – du musst nichts weiter tun.
