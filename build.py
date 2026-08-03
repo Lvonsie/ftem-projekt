@@ -478,8 +478,7 @@ def sport_section(sport, d, lang, edit=False):
         '<span class="hits"></span>'
         '<button class="qx" type="button" hidden title="'+esc(CLEAR_LBL[lang])+'" aria-label="'+esc(CLEAR_LBL[lang])+'">&times;</button>'
         '</div></div>'
-        '<div class="ht-r"><button class="chatbtn" type="button" title="'+esc(CHAT_BTN[lang])+'" aria-label="'+esc(CHAT_BTN[lang])+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M12 7.6l.85 2.05L15 10.5l-2.15.85L12 13.4l-.85-2.05L9 10.5l2.15-.85z"/></svg></button>'
-        '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
+        '<div class="ht-r"><select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="toggleall" type="button" title="'+esc(EXPAND_ALL[lang])+'" aria-label="'+esc(EXPAND_ALL[lang])+'" data-open="'+esc(EXPAND_ALL[lang])+'" data-close="'+esc(COLLAPSE_ALL[lang])+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13l5 5 5-5"/><path d="M7 6l5 5 5-5"/></svg></button>'
         '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
         '<span class="hdiv" aria-hidden="true"></span>'
@@ -666,13 +665,17 @@ def home_html(datamap, lang):
             '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a></div>')
     return ('<section id="home">'
             '<div class="home-hero">'
-            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'+fb+'</div>'
+            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'
+            '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
+            + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
+            + '</select>'
+            +fb+'</div>'
             '<div class="hero-top-r"><button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button></div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski">'
             '<div class="hero-cta">'+mission_btn+
             '<button class="hcta hcta-sec" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div></div>'
-            +pyr+spmodal+adminlk+
+            +pyr+adminlk+
             '</div>'
             '<template id="tpl-news">'+news_html(lang)+install_hint(lang)+'</template>'
             '<template id="tpl-info">'+ftem_info+'</template>'
@@ -828,6 +831,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
+.homesport{font:inherit;font-size:12.5px;font-weight:700;color:#fff;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:7px 10px;backdrop-filter:blur(6px);max-width:190px;cursor:pointer}
+.homesport option{color:var(--ink)}
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
 .news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
 .news-btn:hover{filter:brightness(1.12)}
@@ -1603,17 +1608,13 @@ sections.forEach(s=>{const ss=s.querySelector('.sportsel2');if(ss)ss.addEventLis
 const steadyBtn=document.querySelector('.steady');
 if(steadyBtn)steadyBtn.addEventListener('click',()=>{const sec=sections.find(x=>!x.hidden);if(sec)openChat(sec);});
 
-// ---- Stufen-Klick auf der Startseite -> Sportarten-Auswahl ----
-const spm=document.querySelector('.spmodal');
-if(spm){
-  document.querySelectorAll('.pband').forEach(bd=>{
-    bd.addEventListener('click',e=>{e.stopPropagation();spm.hidden=false;});
-    bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();spm.hidden=false;}});
-  });
-  spm.addEventListener('click',e=>{if(e.target===spm||e.target.closest('a'))spm.hidden=true;});
-  spm.querySelector('.sp-x').addEventListener('click',()=>{spm.hidden=true;});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!spm.hidden)spm.hidden=true;});
-}
+// ---- Stufen-Klick -> direkt zum Athlet:innen-Weg der im Dropdown gewaehlten Sportart ----
+const homeSport=document.querySelector('.homesport');
+document.querySelectorAll('.pband').forEach(bd=>{
+  const go=()=>{location.hash='#'+(homeSport?homeSport.value:SPORT_IDS[0]);};
+  bd.addEventListener('click',go);
+  bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+});
 
 // ---- Versteckter Praesentationsmodus (Symbol unten, Passwort) ----
 const PRES_PW='__PRES_PW__';
@@ -1968,7 +1969,8 @@ for lang in LANGS:
               '<div class="im-bar"><span class="im-t"></span>'
               '<button class="im-x" type="button" aria-label="schliessen">✕</button></div>'
               '<div class="im-body"></div></div></div>')
-    steady_btn = '<button class="steady" type="button" hidden>💬 Steady</button>'
+    assist_lbl = {"de": "FTEM-Assistent", "fr": "Assistant FTEM", "it": "Assistente FTEM"}[lang]
+    steady_btn = '<button class="steady" type="button" hidden>💬 '+esc(assist_lbl)+'</button>'
     body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS) + mmodal + imodal + steady_btn
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
             "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang),
