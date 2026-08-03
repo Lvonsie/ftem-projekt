@@ -497,7 +497,7 @@ def sport_section(sport, d, lang, edit=False):
 # Strenges Zickzack (Gipfel/Tal im Wechsel): so laufen die Linien immer VON der
 # Beschriftung weg und keine Schrift kreuzt eine Linie.
 # Kammlinie des Hero-Fotos (automatisch + manuell nachgezeichnet), Koordinaten in Bildpixeln (1896x986)
-RIDGE_PATH = "M0,986 L0,570 L0,570 L12,570 L13,574 L17,574 L40,568 L69,554 L80,554 L124,567 L161,584 L249,592 L272,582 L307,558 L397,463 L431,439 L439,429 L502,403 L572,341 L596,347 L624,346 L651,337 L661,328 L667,327 L750,357 L772,359 L811,343 L886,339 L915,323 L930,310 L935,310 L951,295 L969,285 L1018,227 L1039,231 L1068,248 L1089,276 L1103,285 L1112,302 L1129,319 L1141,323 L1149,332 L1169,342 L1183,344 L1196,355 L1208,360 L1216,371 L1254,380 L1299,409 L1311,413 L1326,429 L1341,437 L1361,465 L1392,475 L1431,477 L1458,474 L1496,451 L1508,454 L1530,451 L1553,435 L1581,408 L1591,407 L1598,412 L1629,415 L1644,400 L1677,412 L1693,431 L1722,452 L1749,456 L1786,475 L1802,476 L1819,472 L1840,460 L1860,454 L1879,438 L1895,432 L1896,432 L1896,986 Z"
+RIDGE_PATH = "M0,986 L0,563.5 L0,563.5 L15,566.3 L21,572.3 L38,568.1 L55,559.5 L68,554.8 L77,554.1 L91,556.7 L119,565.4 L162,585.0 L167,583.3 L200,586.2 L229,591.4 L249,591.8 L273,581.0 L310,555.0 L394,466.3 L410,452.1 L432,437.7 L440,428.6 L476,414.9 L504,401.2 L519,390.1 L542,367.7 L558,355.6 L573,340.8 L578,340.8 L599,347.5 L611,344.9 L623,345.7 L635,342.9 L653,335.8 L662,327.9 L666,327.4 L678,330.0 L707,340.0 L749,356.4 L768,359.0 L773,358.3 L813,342.9 L824,343.5 L838,339.3 L854,342.0 L871,340.3 L878,337.9 L886,338.6 L896,334.8 L917,321.4 L930,309.7 L936,309.0 L949,297.0 L966,286.0 L997,253.8 L1015,229.1 L1026,225.8 L1034,230.5 L1039,229.7 L1047,237.5 L1069,249.0 L1080,261.7 L1090,277.2 L1102,284.3 L1113,302.6 L1120,307.6 L1127,317.3 L1141,323.3 L1149,331.4 L1168,341.3 L1176,341.9 L1184,345.0 L1197,355.2 L1208,360.5 L1216,370.6 L1230,373.7 L1238,378.4 L1246,377.2 L1255,380.7 L1263,385.2 L1269,391.5 L1275,392.4 L1289,400.7 L1299,408.9 L1307,413.2 L1311,413.4 L1325,428.0 L1333,433.5 L1340,436.2 L1345,445.3 L1351,451.1 L1360,464.3 L1387,473.7 L1424,477.4 L1437,474.8 L1457,474.1 L1465,468.2 L1480,461.4 L1498,450.3 L1502,450.6 L1508,454.0 L1516,454.7 L1528,452.0 L1542,440.7 L1552,435.5 L1566,420.2 L1572,417.9 L1579,408.9 L1589,406.5 L1600,412.6 L1607,411.3 L1613,414.4 L1628,414.9 L1632,412.1 L1639,402.2 L1646,399.6 L1677,412.5 L1684,418.5 L1693,430.5 L1723,452.2 L1736,455.1 L1748,455.9 L1766,463.9 L1780,472.3 L1792,476.1 L1807,474.9 L1820,471.1 L1840,460.3 L1858,454.6 L1879,438.2 L1895,432.0 L1896,432.0 L1896,986 Z"
 
 CONS_POS = [(7,74),(14,49),(22,71),(29,35),(37,64),(44,48),(55,72),(66,40),(77,67),(89,43)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
@@ -684,19 +684,6 @@ def home_html(datamap, lang):
                 '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0"/>'
                 '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
                 '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
-    # Athlet:innen-Weg als "Piste" im Berg: Slalom-Linie mit 10 Stufen-Punkten (F1 unten -> M oben)
-    # rechts der Beschriftungs-Spalte, damit Piste und Labels sich nicht ueberlagern
-    aw_pts = [("M",1042,258),("E2",1130,420),("E1",1180,500),("T4",1122,590),("T3",1185,650),
-              ("T2",1126,707),("T1",1180,762),("F3",1122,830),("F2",1178,880),("F1",1140,930)]
-    aw_col = {"F":"#57cce4","T":"#f2c85f","E":"#f2a06a","M":"#f28578"}
-    aw_path_d = "M"+" L".join(str(x)+","+str(y) for _, x, y in aw_pts)
-    aw_dots = "".join('<circle cx="'+str(x)+'" cy="'+str(y)+'" r="8" fill="'+aw_col[s[0]]+'">'
-                      '<title>'+esc(FULL[s])+'</title></circle>' for s, x, y in aw_pts)
-    awpath = ('<g class="awpath" tabindex="0" role="button" aria-label="'+esc(tr("Athlet:innen-Weg", lang))+'">'
-              '<title>'+esc(tr("Athlet:innen-Weg", lang))+'</title>'
-              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="26" stroke-linejoin="round" stroke-linecap="round"/>'
-              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="3" stroke-dasharray="8 7" stroke-linejoin="round"/>'
-              + aw_dots + '</g>')
     hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
@@ -711,12 +698,19 @@ def home_html(datamap, lang):
         '<rect x="0" y="540" width="1896" height="250" fill="rgba(222,184,88,.48)"/>'
         '<rect x="0" y="790" width="1896" height="196" fill="rgba(86,158,178,.48)"/>'
         '</g>'
-        '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"/>'
+        '<clipPath id="zc-m"><rect x="0" y="0" width="1896" height="375"/></clipPath>'
+        '<clipPath id="zc-e"><rect x="0" y="375" width="1896" height="165"/></clipPath>'
+        '<clipPath id="zc-t"><rect x="0" y="540" width="1896" height="250"/></clipPath>'
+        '<clipPath id="zc-f"><rect x="0" y="790" width="1896" height="196"/></clipPath>'
+        '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="5" stroke-linejoin="round" opacity=".3"/>'
+        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-m)" fill="none" stroke="#ff6d60" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
+        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-e)" fill="none" stroke="#ff9b57" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
+        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-t)" fill="none" stroke="#ffd45c" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
+        '<path d="'+RIDGE_PATH+'" clip-path="url(#zc-f)" fill="none" stroke="#57cce4" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
         + band(0, 375, 338, 364, band_lbl[3], "M", "m")
         + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", "e", " pbn-t")
         + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", "t", " pbn-t")
         + band(790, 196, 866, 894, band_lbl[0], "F1 – F3", "f")
-        + awpath
         + '</svg>')
     pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
@@ -1025,10 +1019,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:800;font-size:13px;border-radius:22px;padding:9px 20px;cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.02em}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
 .aw-btn .aw-ar{display:inline-flex;width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.22);align-items:center;justify-content:center;font-size:12px}
-/* Piste (Athlet:innen-Weg) im Berg */
-.heromt .awpath{pointer-events:auto;cursor:pointer;outline:none}
-.heromt .awpath:hover circle,.heromt .awpath:focus-visible circle{filter:brightness(1.25)}
-.heromt .awpath circle{stroke:rgba(255,255,255,.85);stroke-width:2}
 /* Untere Themen-Leiste */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:stretch;justify-content:center;gap:2px;background:rgba(8,12,19,.82);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12);padding:0 8px;overflow-x:auto;scrollbar-width:none}
 .bottombar::-webkit-scrollbar{display:none}
@@ -1841,7 +1831,7 @@ document.querySelectorAll('.pband').forEach(bd=>{
   bd.addEventListener('click',open);
   bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
 });
-document.querySelectorAll('.aw-btn,.awpath').forEach(el=>{
+document.querySelectorAll('.aw-btn').forEach(el=>{
   el.addEventListener('click',goAW);
   el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();goAW();}});
 });
