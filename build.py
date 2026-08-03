@@ -1359,7 +1359,11 @@ function openChat(sec){chatSec=sec;chatPanel.hidden=false;document.documentEleme
 function closeChat(){chatPanel.hidden=true;document.documentElement.style.overflow='';}
 chatPanel.addEventListener('click',e=>{if(e.target===chatPanel||e.target.closest('.cp-x'))closeChat();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatPanel.hidden)closeChat();});
-function linkify(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML.replace(/(https?:\/\/[^\s<)]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');}
+function linkify(t){var d=document.createElement('div');d.textContent=t;var h=d.innerHTML;
+  h=h.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
+  h=h.replace(/^\s*#{1,6}\s*(.+)$/gm,'<strong>$1</strong>');
+  h=h.replace(/(https?:\/\/[^\s<)]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+  return h;}
 function addMsg(role,text,think){const d=document.createElement('div');d.className='cp-msg '+role+(think?' think':'');
   if(role==='a'&&!think)d.innerHTML=linkify(text);else d.textContent=text;
   cpMsgs.appendChild(d);cpMsgs.scrollTop=cpMsgs.scrollHeight;return d;}
@@ -1374,7 +1378,7 @@ function gatherChatContext(sec){
       if(txts.length){if(label)parts.push('### '+label);txts.forEach(x=>parts.push('- '+x));}
     });
   });
-  let text=parts.join('\n');if(text.length>28000)text=text.slice(0,28000);
+  let text=parts.join('\n');if(text.length>100000)text=text.slice(0,100000);
   const seenL=new Set();const links=[];
   sec.querySelectorAll('.lks a').forEach(a=>{const u=a.href;if(u&&!seenL.has(u)){seenL.add(u);links.push({t:(a.textContent||'').trim(),u:u});}});
   const name=(((sec.querySelector('header.top h1')||{}).textContent)||'').split('·')[0].trim();

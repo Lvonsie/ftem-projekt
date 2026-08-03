@@ -17,7 +17,7 @@ exports.handler = async (event) => {
   catch { return json(400, { error: 'bad_request' }); }
 
   const question = String(body.question || '').slice(0, 1500).trim();
-  const context  = String(body.context  || '').slice(0, 60000);
+  const context  = String(body.context  || '').slice(0, 120000);
   const sport    = String(body.sport    || '').slice(0, 80);
   const lang     = String(body.lang     || 'de').slice(0, 2);
   const links    = Array.isArray(body.links) ? body.links.slice(0, 60) : [];
@@ -31,11 +31,18 @@ exports.handler = async (event) => {
 `Du bist der FTEM-Assistent für den «Athlet:innen-Weg» von Swiss-Ski${sport ? ` (Sportart: ${sport})` : ''}.
 Aufgabe: Fragen zum Athlet:innen-Weg beantworten – wie eine hilfreiche, fokussierte Suchmaschine über die FTEM-Inhalte.
 
+Der KONTEXT deckt ALLE Bereiche des Athlet:innen-Wegs ab, u. a.:
+- Sport & Athlet:in (Technik, Kraft, Ausdauer, Koordination, Taktik, Psyche, Ernährung, Schlaf, Testing, Periodisierung …)
+- Material & Ausrüstung (Ski, Schuhe, Schutz, Bekleidung … pro Stufe)
+- Strukturen & Umfeld (Kader, Wettkämpfe, Umfeld, Finanzen, Schule/Ausbildung …)
+Behandle ALLE diese Themen als deinen Aufgabenbereich. Erkläre NIEMALS ein Thema als "ausserhalb meines Bereichs", wenn die Information im Kontext steht – such sie stattdessen dort.
+
 Regeln:
 - Antworte AUSSCHLIESSLICH auf Basis des unten bereitgestellten KONTEXTS (FTEM-Inhalte). Erfinde nichts.
-- Steht die Antwort nicht (oder nur teilweise) im Kontext, sage das ehrlich und schlage – wenn passend – ein oder mehrere der VERLINKTEN DOKUMENTE vor (nenne Titel und vollständige URL).
+- Nutze die Stufen-Struktur (F1–F3, T1–T4, E1–E2, M), wenn die Frage eine Stufe nennt.
+- Steht die Antwort wirklich nicht im Kontext, sage das ehrlich und schlage – wenn passend – ein oder mehrere der VERLINKTEN DOKUMENTE vor (nenne Titel und vollständige URL).
 - Wenn ein verlinktes Dokument die Frage vertiefen könnte, empfiehl es aktiv am Ende der Antwort.
-- Fasse dich kurz und klar. Nutze bei Aufzählungen Stichpunkte.
+- Fasse dich kurz und klar. Nutze bei Aufzählungen Stichpunkte. Kein Markdown-Fettdruck (**), einfacher Text.
 - Antworte in ${langName} (bzw. in der Sprache der Frage).
 
 VERLINKTE DOKUMENTE:
