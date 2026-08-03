@@ -91,6 +91,7 @@ SEARCH_PH = {"de": "Suche…", "fr": "Rechercher…", "it": "Cerca…"}
 EXPAND_ALL = {"de": "Alle öffnen", "fr": "Tout ouvrir", "it": "Apri tutto"}
 COLLAPSE_ALL = {"de": "Alle schliessen", "fr": "Tout fermer", "it": "Chiudi tutto"}
 CLEAR_LBL = {"de": "Leeren", "fr": "Effacer", "it": "Cancella"}
+CHAT_BTN = {"de": "FTEM-Assistent (KI)", "fr": "Assistant FTEM (IA)", "it": "Assistente FTEM (IA)"}
 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 # Fallback, falls eine Datendatei keine "ages" enthaelt (Alterskategorien pro Sportart)
@@ -466,7 +467,8 @@ def sport_section(sport, d, lang, edit=False):
         '<span class="hits"></span>'
         '<button class="qx" type="button" hidden title="'+esc(CLEAR_LBL[lang])+'" aria-label="'+esc(CLEAR_LBL[lang])+'">&times;</button>'
         '</div></div>'
-        '<div class="ht-r"><select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
+        '<div class="ht-r"><button class="chatbtn" type="button" title="'+esc(CHAT_BTN[lang])+'" aria-label="'+esc(CHAT_BTN[lang])+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M12 7.6l.85 2.05L15 10.5l-2.15.85L12 13.4l-.85-2.05L9 10.5l2.15-.85z"/></svg></button>'
+        '<select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="toggleall" type="button" title="'+esc(EXPAND_ALL[lang])+'" aria-label="'+esc(EXPAND_ALL[lang])+'" data-open="'+esc(EXPAND_ALL[lang])+'" data-close="'+esc(COLLAPSE_ALL[lang])+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13l5 5 5-5"/><path d="M7 6l5 5 5-5"/></svg></button>'
         '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
         '<span class="hdiv" aria-hidden="true"></span>'
@@ -641,14 +643,14 @@ html.noanim .grid-sports .card{animation:none}
 body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45;font-size:13px;-webkit-text-size-adjust:100%}
 .langsw{display:flex;gap:2px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:2px}
 .langsw a{font-size:11.5px;font-weight:800;color:var(--mut);text-decoration:none;padding:4px 9px;border-radius:6px;letter-spacing:.03em}
-.langsw a.active{background:var(--red);color:#fff}
+.langsw a.active{background:#3f4650;color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
 /* Startseite - Neon-Konstellation */
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(9,14,24,.66),rgba(12,17,28,.5) 45%,rgba(7,11,20,.9)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-#home .hero-top .lsrow{display:flex;align-items:center;gap:8px}
-#home .hero-top .lsrow .themebtn{width:36px;height:36px}
+#home .hero-top .lsrow{display:flex;align-items:stretch;gap:8px}
+#home .hero-top .lsrow .themebtn{width:36px;height:auto;align-self:stretch}
 .fb-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);transition:filter .15s}
 .fb-btn:hover{filter:brightness(1.12)}
 .fb-panel{display:flex;flex-direction:column;gap:8px;width:250px;background:rgba(15,21,32,.93);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);border-radius:11px;padding:11px;box-shadow:0 16px 40px rgba(0,0,0,.5)}
@@ -659,7 +661,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fb-send:hover{filter:brightness(1.12)}
 #home .home-hero .langsw{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.22);backdrop-filter:blur(6px)}
 #home .home-hero .langsw a{color:rgba(255,255,255,.82)}
-#home .home-hero .langsw a.active{background:var(--red);color:#fff}
+#home .home-hero .langsw a.active{background:#3f4650;color:#fff}
 #home .home-hero .langsw a:hover:not(.active){background:rgba(255,255,255,.22);color:#fff}
 #home .hero-head{position:relative;z-index:6;text-align:center;padding:74px 20px 0;pointer-events:none}
 #home .hero-head h1{font-size:clamp(46px,9vw,92px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
@@ -813,6 +815,10 @@ header.top button:hover{background:var(--bg)}
 .ht-r .pdf{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--acc)}
 .ht-r .pdf svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ht-r .pdf:hover{border-color:var(--acc);color:var(--red)}
+.ht-r .chatbtn{width:36px;height:36px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--red);border-color:var(--red)}
+.ht-r .chatbtn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ht-r .chatbtn svg path:last-child{fill:currentColor;stroke:none}
+.ht-r .chatbtn:hover{background:var(--red);color:#fff}
 .ht-r .hdiv{width:1px;height:22px;background:var(--line);flex:none;margin:0 3px}
 @media print{
   @page{size:A4 landscape;margin:0}
@@ -940,6 +946,32 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .pp-all:hover{background:var(--acc-bg2)}
 .pp-x{position:absolute;top:9px;right:12px;background:none;border:none;font-size:22px;line-height:1;color:var(--mut);cursor:pointer;padding:2px 6px}
 .pp-x:hover{color:var(--ink)}
+/* KI-Assistent Chat-Panel */
+.chatpanel{position:fixed;inset:0;z-index:70;background:rgba(15,22,34,.42);display:flex;justify-content:flex-end}
+.chatpanel[hidden]{display:none}
+.cp-card{width:min(430px,100%);height:100%;background:var(--card);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.28);animation:cpIn .25s ease}
+@keyframes cpIn{from{transform:translateX(34px);opacity:.5}to{transform:none;opacity:1}}
+.cp-head{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.cp-head .cp-ic{width:28px;height:28px;flex:none;border-radius:8px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center}
+.cp-head .cp-ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.cp-head .cp-ic svg path:last-child{fill:currentColor;stroke:none}
+.cp-t{font-weight:800;font-size:14.5px;color:var(--ink);flex:1}
+.cp-x{background:none;border:none;font-size:23px;line-height:1;color:var(--mut);cursor:pointer;padding:0 6px}
+.cp-x:hover{color:var(--ink)}
+.cp-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.cp-msg{max-width:90%;font-size:13px;line-height:1.5;padding:9px 12px;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.cp-msg.u{align-self:flex-end;background:#3f4650;color:#fff;border-bottom-right-radius:4px}
+.cp-msg.a{align-self:flex-start;background:var(--bg);color:var(--ink);border-bottom-left-radius:4px}
+.cp-msg.a a{color:var(--red);font-weight:600}
+.cp-msg.think{color:var(--mut);font-style:italic}
+.cp-form{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+.cp-in{flex:1;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:13px;background:var(--card);color:var(--ink)}
+.cp-in:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 2px rgba(213,43,30,.14)}
+.cp-send{width:40px;height:40px;flex:none;background:var(--red);color:#fff;border:none;border-radius:9px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+.cp-send:hover{filter:brightness(1.08)}
+.cp-send:disabled{opacity:.5;cursor:default}
+.cp-note{font-size:10px;color:var(--mut);padding:2px 16px 10px;text-align:center;line-height:1.4}
+@media(max-width:520px){.cp-card{width:100%}}
 mark{background:#ffe08a;border-radius:2px;padding:0 1px}
 .hidden{display:none!important}
 footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
@@ -1185,6 +1217,8 @@ function initSport(sec){
   if(toggleAll){toggleAll.onclick=()=>{const open=!toggleAll.classList.contains('allopen');themes.forEach(t=>t.open=open);toggleAll.classList.toggle('allopen',open);var lbl=toggleAll.getAttribute(open?'data-close':'data-open');toggleAll.title=lbl;toggleAll.setAttribute('aria-label',lbl);if(open)setTimeout(setupClamp,50);};}
   const pdfBtn=sec.querySelector('.pdf');
   if(pdfBtn)pdfBtn.onclick=()=>openPrintPicker(sec);
+  const chatBtn=sec.querySelector('.chatbtn');
+  if(chatBtn)chatBtn.onclick=()=>openChat(sec);
   sec.querySelector('.jump').onchange=e=>{const el=document.getElementById(e.target.value);if(el){el.open=true;setTimeout(()=>el.scrollIntoView(),30);}e.target.selectedIndex=0;};
   themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
   window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
@@ -1305,6 +1339,61 @@ function printStage(sec,i){
   doc.close();win.focus();
   setTimeout(()=>{try{win.print();}catch(e){}},500);
 }
+
+// ---- KI-Assistent (Chat) ----
+const chatPanel=document.createElement('div');
+chatPanel.className='chatpanel';chatPanel.hidden=true;
+chatPanel.innerHTML='<div class="cp-card" role="dialog" aria-modal="true" aria-label="'+_esc(I18N.chatTitle)+'">'
+ +'<div class="cp-head"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M12 7.6l.85 2.05L15 10.5l-2.15.85L12 13.4l-.85-2.05L9 10.5l2.15-.85z"/></svg></span>'
+ +'<span class="cp-t">'+_esc(I18N.chatTitle)+'</span><button class="cp-x" type="button" aria-label="Schliessen">&times;</button></div>'
+ +'<div class="cp-msgs"></div>'
+ +'<form class="cp-form"><input class="cp-in" type="text" autocomplete="off" placeholder="'+_esc(I18N.chatPh)+'"><button class="cp-send" type="submit" aria-label="Senden">&#10148;</button></form>'
+ +'<div class="cp-note">'+_esc(I18N.chatNote)+'</div></div>';
+document.body.appendChild(chatPanel);
+const cpMsgs=chatPanel.querySelector('.cp-msgs'),cpForm=chatPanel.querySelector('.cp-form'),cpIn=chatPanel.querySelector('.cp-in'),cpSend=chatPanel.querySelector('.cp-send');
+let chatSec=null,chatBusy=false;const chatHist=[];const chatWelcomed=new Set();
+function openChat(sec){chatSec=sec;chatPanel.hidden=false;document.documentElement.style.overflow='hidden';
+  const id=sec.dataset.sport;
+  if(!chatWelcomed.has(id)){cpMsgs.innerHTML='';chatHist.length=0;addMsg('a',I18N.chatWelcome);chatWelcomed.add(id);}
+  setTimeout(()=>cpIn.focus(),60);}
+function closeChat(){chatPanel.hidden=true;document.documentElement.style.overflow='';}
+chatPanel.addEventListener('click',e=>{if(e.target===chatPanel||e.target.closest('.cp-x'))closeChat();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatPanel.hidden)closeChat();});
+function linkify(t){const d=document.createElement('div');d.textContent=t;return d.innerHTML.replace(/(https?:\/\/[^\s<)]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');}
+function addMsg(role,text,think){const d=document.createElement('div');d.className='cp-msg '+role+(think?' think':'');
+  if(role==='a'&&!think)d.innerHTML=linkify(text);else d.textContent=text;
+  cpMsgs.appendChild(d);cpMsgs.scrollTop=cpMsgs.scrollHeight;return d;}
+function gatherChatContext(sec){
+  const parts=[];
+  sec.querySelectorAll('details.theme').forEach(t=>{
+    const title=((t.querySelector('.tt')||{}).textContent||'').trim();if(title)parts.push('## '+title);
+    t.querySelectorAll('.r').forEach(r=>{if(r.classList.contains('head'))return;
+      const rl=r.querySelector('.rl');const label=(rl&&!rl.classList.contains('nolbl'))?rl.textContent.trim():'';
+      const seen=new Set();const txts=[];
+      r.querySelectorAll('.cell .cwrap').forEach(c=>{const x=c.textContent.trim();if(x&&x!=='–'&&!seen.has(x)){seen.add(x);txts.push(x);}});
+      if(txts.length){if(label)parts.push('### '+label);txts.forEach(x=>parts.push('- '+x));}
+    });
+  });
+  let text=parts.join('\n');if(text.length>28000)text=text.slice(0,28000);
+  const seenL=new Set();const links=[];
+  sec.querySelectorAll('.lks a').forEach(a=>{const u=a.href;if(u&&!seenL.has(u)){seenL.add(u);links.push({t:(a.textContent||'').trim(),u:u});}});
+  const name=(((sec.querySelector('header.top h1')||{}).textContent)||'').split('·')[0].trim();
+  return {text:text,links:links,sport:name};
+}
+cpForm.addEventListener('submit',function(e){e.preventDefault();if(chatBusy||!chatSec)return;
+  const qv=cpIn.value.trim();if(!qv)return;
+  addMsg('u',qv);chatHist.push({role:'user',content:qv});cpIn.value='';
+  chatBusy=true;cpSend.disabled=true;const thinking=addMsg('a','…',true);
+  const ctx=gatherChatContext(chatSec);
+  fetch('/.netlify/functions/chat',{method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({question:qv,context:ctx.text,links:ctx.links,sport:ctx.sport,lang:document.documentElement.lang,history:chatHist.slice(0,-1)})})
+   .then(r=>r.json().then(j=>({ok:r.ok,j:j})).catch(()=>({ok:false,j:{}})))
+   .then(function(res){thinking.remove();
+     if(res.ok&&res.j.answer){addMsg('a',res.j.answer);chatHist.push({role:'assistant',content:res.j.answer});}
+     else{addMsg('a',(res.j&&res.j.message)||I18N.chatErr);}})
+   .catch(function(){thinking.remove();addMsg('a',I18N.chatErr);})
+   .then(function(){chatBusy=false;cpSend.disabled=false;cpIn.focus();});
+});
 
 // ---- Sportarten-Popup auf der Startseite (Athlet:innen-Weg | Mission Swiss-Ski) ----
 const heroNodes=[...document.querySelectorAll('.node')];
@@ -1661,7 +1750,12 @@ for lang in LANGS:
             "printAll": {"de": "Ganze Sportart (Querformat)", "fr": "Tout le sport (paysage)", "it": "Tutto lo sport (orizzontale)"}[lang],
             "printClose": {"de": "Schliessen", "fr": "Fermer", "it": "Chiudi"}[lang],
             "dossier": {"de": "Stufendossier", "fr": "Dossier de niveau", "it": "Dossier di livello"}[lang],
-            "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier."}[lang]}
+            "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier."}[lang],
+            "chatTitle": {"de": "FTEM-Assistent", "fr": "Assistant FTEM", "it": "Assistente FTEM"}[lang],
+            "chatPh": {"de": "Frage zum Athlet:innen-Weg…", "fr": "Question sur le parcours…", "it": "Domanda sul percorso…"}[lang],
+            "chatWelcome": {"de": "Hallo! Ich beantworte Fragen zum Athlet:innen-Weg dieser Sportart und verweise dich auf passende verlinkte Dokumente. Was möchtest du wissen?", "fr": "Bonjour ! Je réponds aux questions sur le parcours des athlètes de ce sport et vous oriente vers les documents liés pertinents. Que voulez-vous savoir ?", "it": "Ciao! Rispondo alle domande sul percorso degli atleti di questo sport e ti indico i documenti collegati pertinenti. Cosa vuoi sapere?"}[lang],
+            "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi."}[lang],
+            "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
