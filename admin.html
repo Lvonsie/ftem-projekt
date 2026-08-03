@@ -189,6 +189,13 @@ body.pres .steady{display:none}
 @keyframes pshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .presask .presgo{font:inherit;font-size:12.5px;font-weight:700;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
 .presask .presgo:hover{background:var(--bg)}
+/* Schloss + Praesentations-Knopf als zentriertes Paar unten im Hero */
+.adminlink-hero{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:0}
+.adminlink-hero .presopen{display:inline-flex;padding:2px;opacity:.42}
+.adminlink-hero .presopen:hover{opacity:1;transform:translateY(-1px)}
+.adminlink-hero .presopen svg{width:21px;height:21px;display:block}
+.adminlink-hero .presask{margin-left:0}
+a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 body.pres{--colw:290px;--lblw:200px}
 body.pres .ht-c,body.pres .chatbtn,body.pres .jump,body.pres .pdf,body.pres .hdiv,body.pres .preslink{display:none!important}
 body.pres section.sport summary .tt{font-size:19px}

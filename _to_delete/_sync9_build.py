@@ -499,7 +499,7 @@ def sport_section(sport, d, lang, edit=False):
 # Strenges Zickzack (Gipfel/Tal im Wechsel): so laufen die Linien immer VON der
 # Beschriftung weg und keine Schrift kreuzt eine Linie.
 # Kammlinie des Hero-Fotos (automatisch + manuell nachgezeichnet), Koordinaten in Bildpixeln (1896x986)
-RIDGE_PATH = "M0,986 L0,563 L0,563 L9,564 L13,574 L17,574 L40,568 L69,554 L80,554 L124,567 L161,584 L249,592 L272,582 L307,558 L397,463 L431,439 L439,429 L502,403 L572,341 L596,347 L624,346 L651,337 L661,328 L667,327 L750,357 L772,359 L811,343 L886,339 L915,323 L930,310 L935,310 L951,295 L969,285 L1018,227 L1039,231 L1068,248 L1089,276 L1103,285 L1112,302 L1129,319 L1141,323 L1149,332 L1169,342 L1183,344 L1196,355 L1208,360 L1216,371 L1254,380 L1299,409 L1311,413 L1326,429 L1341,437 L1361,465 L1392,475 L1431,477 L1458,474 L1496,451 L1508,454 L1530,451 L1553,435 L1581,408 L1591,407 L1598,412 L1629,415 L1644,400 L1677,412 L1693,431 L1722,452 L1749,456 L1788,475 L1794,487 L1799,487 L1803,475 L1819,472 L1840,460 L1854,457 L1879,438 L1895,432 L1896,432 L1896,986 Z"
+RIDGE_PATH = "M0,986 L0,493 L0,493 L24,529 L48,524 L72,521 L96,512 L120,520 L144,529 L168,538 L192,553 L216,546 L240,552 L264,543 L288,522 L312,503 L336,478 L360,452 L384,425 L408,408 L432,399 L456,412 L480,397 L504,372 L528,349 L552,329 L576,337 L600,350 L624,361 L648,346 L672,330 L696,316 L720,326 L744,356 L768,374 L792,391 L816,394 L840,391 L864,381 L888,369 L912,353 L936,332 L960,308 L984,282 L1008,255 L1032,235 L1056,257 L1080,283 L1104,304 L1128,306 L1152,312 L1176,314 L1200,322 L1224,337 L1248,342 L1272,347 L1296,358 L1320,372 L1344,393 L1368,418 L1392,438 L1416,440 L1440,429 L1464,423 L1488,410 L1512,406 L1536,402 L1560,385 L1584,381 L1608,382 L1632,385 L1656,387 L1680,402 L1704,406 L1728,416 L1752,421 L1776,431 L1800,434 L1824,426 L1848,418 L1872,410 L1895,493 L1896,493 L1896,986 Z"
 
 CONS_POS = [(7,74),(14,49),(22,71),(29,35),(37,64),(44,48),(55,72),(66,40),(77,67),(89,43)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
@@ -676,34 +676,27 @@ def home_html(datamap, lang):
         + esc(tr(s2["name"], lang)) + '</a>'
         for s2 in SPORTS if s2.get("mission"))
     if MISSION_URL:
-        mission_btn = '<a class="news-btn np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission Swiss-Ski</a>'
+        mission_btn = '<a class="hcta np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission Swiss-Ski</a>'
     else:
-        mission_btn = '<button class="news-btn" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission Swiss-Ski</button>'
-    # Unten im Hero: Admin-Schloss + Praesentations-Knopf nebeneinander, gemeinsam
-    # zentriert, beide mit demselben Farbverlauf (#adminlk).
-    adminlk = ('<div class="adminlink adminlink-hero preslink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
+        mission_btn = '<button class="hcta" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission Swiss-Ski</button>'
+    adminlk = ('<div class="adminlink adminlink-hero"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
             '<svg viewBox="0 0 24 24" fill="none" stroke="url(#adminlk)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
             '<defs><linearGradient id="adminlk" x1="0" y1="0" x2="1" y2="1">'
             '<stop offset="0" stop-color="#1f8fa6"/><stop offset=".4" stop-color="#e2a900"/><stop offset=".7" stop-color="#e8772e"/><stop offset="1" stop-color="#d52b1e"/></linearGradient></defs>'
             '<rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.4"/><path d="M8 10.4V7.4a4 4 0 0 1 8 0v3"/>'
-            '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a>'
-            '<button class="presopen" type="button" title="'+esc(PRES_TITLE[lang])+'" aria-label="'+esc(PRES_TITLE[lang])+'">'
-            '<svg viewBox="0 0 24 24" fill="none" stroke="url(#adminlk)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-            '<path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9"/><path d="M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9"/>'
-            '<path d="M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>'
-            '<span class="presask" hidden><input class="prespw" type="password" placeholder="'+esc(PRES_PWPH[lang])+'" autocomplete="off">'
-            '<button class="presgo" type="button">OK</button></span></div>')
+            '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a></div>')
     return ('<section id="home">'
             '<div class="home-hero">'
             '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
-            '<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div>'
+            +fb+'</div>'
             '<div class="hero-top-r"><button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button>'
-            +mission_btn+fb+'</div>'
+            '<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button></div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
-            '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
+            '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski">'
+            '<div class="hero-cta">'+mission_btn+'</div></div>'
             +pyr+adminlk+
             '</div>'
             '<template id="tpl-news">'+news_html(lang)+install_hint(lang)+'</template>'
@@ -896,13 +889,6 @@ body.pres .steady{display:none}
 @keyframes pshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .presask .presgo{font:inherit;font-size:12.5px;font-weight:700;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
 .presask .presgo:hover{background:var(--bg)}
-/* Schloss + Praesentations-Knopf als zentriertes Paar unten im Hero */
-.adminlink-hero{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:0}
-.adminlink-hero .presopen{display:inline-flex;padding:2px;opacity:.42}
-.adminlink-hero .presopen:hover{opacity:1;transform:translateY(-1px)}
-.adminlink-hero .presopen svg{width:21px;height:21px;display:block}
-.adminlink-hero .presask{margin-left:0}
-a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 body.pres{--colw:290px;--lblw:200px}
 body.pres .ht-c,body.pres .chatbtn,body.pres .jump,body.pres .pdf,body.pres .hdiv,body.pres .preslink{display:none!important}
 body.pres section.sport summary .tt{font-size:19px}
@@ -1664,14 +1650,7 @@ document.querySelectorAll('.preslink').forEach(pl=>{
   const btn=pl.querySelector('.presopen'), ask=pl.querySelector('.presask'), pw=pl.querySelector('.prespw');
   btn.addEventListener('click',()=>{ask.hidden=!ask.hidden;if(!ask.hidden){pw.value='';pw.focus();}});
   function tryGo(){
-    if(pw.value===PRES_PW){
-      ask.hidden=true;
-      if(sections.some(s=>!s.hidden)){presOn();}
-      else{ // auf der Startseite: zuerst zum Athlet:innen-Weg der vorgewaehlten Sportart
-        location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);
-        setTimeout(presOn,250);
-      }
-    }
+    if(pw.value===PRES_PW){ask.hidden=true;presOn();}
     else{pw.classList.add('bad');setTimeout(()=>pw.classList.remove('bad'),500);pw.select();}
   }
   pl.querySelector('.presgo').addEventListener('click',tryGo);
