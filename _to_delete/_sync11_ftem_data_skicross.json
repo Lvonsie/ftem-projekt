@@ -99,6 +99,18 @@
       {
        "v": "",
        "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "ca. 750 - 880h (Mittel 815h)",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "ca. 770 - 900h (Mittel 835h)",
+       "from": 6,
        "to": 6,
        "l": []
       },
@@ -367,14 +379,8 @@
      "label": "Vorbereitungsphase 2 (VP2): Sept-Okt",
      "segs": [
       {
-       "v": "100501",
-       "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
        "v": "",
-       "from": 1,
+       "from": 0,
        "to": 2,
        "l": []
       },
@@ -866,7 +872,7 @@
        "l": []
       },
       {
-       "v": "Zeitpunkt SC: Anfang Vorbereitungsphase / Ende Vorbereitungsphase\n\nZeitpunkt ST: Nationaler Powertest / NLZ Tests (Anfang Vorbereitungsphase / Ende Vorbereitungsphase)\n\nSC 1: 90 Minuten Dauerlauf bei \"Sprechtempo\" (Dokument Seiler)\nSC 2: 12 Minuten Lauf mit verbesserter Leistung im Vergleich zum Powertest\nSC 3: 1000 Meter mit Verbesserter Zeit im Vergleich zu persönlicher Messung im T2\n\nST: Wattbike 30 Sekunden und 3 Minuten MPO (NLZ Tests)",
+       "v": "Zeitpunkt SC: Anfang Vorbereitungsphase / Ende Vorbereitungsphase\n\nZeitpunkt ST: Nationaler Powertest / NLZ Tests (Anfang Vorbereitungsphase / Ende Vorbereitungsphase)\n\nSC 1: 90 Minuten Dauerlauf bei \"Sprechtempo\" (Dokument Seiler)\nSC 2: 12 Minuten Lauf mit verbesserter Leistung im Vergleich zum Powertest\nSC 3: 1000 Meter mit Verbesserter Zeit im Vergleich zu persönlicher Messung im T2\n\nST: Wattbike 30 Sekunden und 3 Minuten MPO (NLZ Tests) oder Laktatstufentest",
        "from": 5,
        "to": 5,
        "l": []
@@ -1296,6 +1302,12 @@
       {
        "v": "ST: LD Magglingen und individuel nach Absprache mit dem/der Athletiktrainer:in",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "4",
+       "from": 8,
        "to": 8,
        "l": []
       },
@@ -1388,25 +1400,55 @@
      "label": "Skills-Checks (SC) & Leistungstests (LT) Technik",
      "segs": [
       {
-       "v": "No Content yet",
+       "v": "SC: On Snow Skills für Kinder F1 Gold",
        "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "SC: On Snow Skills für Kinder F2 Gold",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "SC: On Snow Skills für Kinder F3 Race Gold",
+       "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "LT: Regionale Techniktests U12-U16\nSC: Vorbereitung Techniktest",
        "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "LT: Swiss Ski Nationaler Techniktest U 16\nSC: Vorbereitung Techniktest",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "LT: 3 Techniknoten (SL, RS, Freifahren)",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "",
        "from": 9,
        "to": 9,
        "l": []
@@ -1417,238 +1459,119 @@
      "label": "Technik Übergeordnet",
      "segs": [
       {
-       "v": "Snowboard Basics entdecken, erwerben und festigen:\n• Schwünge (gerutscht)\n• Switchfahren  (einfaches Gelände)\n\n• spielerisches Erlernen durch Parcous und freies Fahren\n\n• Freies Fahren: jede Gelegenheit nutzen",
+       "v": "Grundlagen vom Skifahren entdecken, erwerben und festigen:\n• Parallelschwingen (gerutscht)\n• Einbeinschwingen (einfaches Gelände)\n• Switchfahren in V-Stellung mit  Richtungsänderungen\n• Schlittschuhschritt in der Ebene\n• Walzer\n\n• spielerisches Erlernen durch Parcous und freies Fahren\n\n• Freies Fahren: jede Gelegenheit nutzen",
        "from": 0,
        "to": 0,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
         }
        ]
       },
       {
-       "v": "Snowboard Basics anwenden und variieren:\n\n• Schwungformen (gerutscht und geschnitten)\nKurzschwingen auf einfacher Piste\nSwitchfahren (einfaches Gelände)\n\n• Sprungformen auf Piste\n\n• spielerisches Erlernen durch Stationen und freies Fahren\n\n• Erste Fahrten in einem Kids Cross\n\n• Freies Fahren: jede Gelegenheit nutzen und Grundtechnik erleben",
+       "v": "Grundlagen vom Skifahren anwenden und variieren:\n• Fahren in vorgegebenem Raum (Stangenwald)\n• Parallelschwingen (gerutscht und geschnitten)\n• Kurzschwingen auf einfacher Piste\n• Einbeinschwingen auf einfacher Piste\n• Parallelschwung Switch (gerutscht)\n• effizienter Schlittschuhschritt\n• Walzer\n• Basic Air (Pistenrand)\n\n• spielerisches Erlernen durch Stationen und freies Fahren\n\n• Erste Fahrten in einem Kids Cross\n\n• Freies Fahren: jede Gelegenheit nutzen und Grundtechnik erleben",
        "from": 1,
        "to": 1,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
         }
        ]
       },
       {
-       "v": "Snowboard Basics anwenden und variieren:\n\n• Schwungformen (gerutscht und geschnitten)\nKurzschwingen auf einfacher Piste\nSwitchfahren mit Richtungsänderungen (einfaches Gelände)\nBasic Air (kleiner Sprung )\n\n• spielerisches Erlernen durch Stationen und freies Fahren\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Erste Fahrten in einem Cross\n\n• Freies Fahren: im Training implementieren, um die Grundtechnik anzuwenden\n\n• Gelände und Schneeverhältnisse nutzen für die Variation\n\nErwerben der Snowboardcross Essential\n• Start im Startgate\n• Geländeübergänge, Transition, Aerodynamische Position",
+       "v": "spezifische Grundlagen (Racing Basics 1-3) vom Ski Alpin erwerben:\n• Fahren in Toren\n• • Race-Grundschwung\nKurzschwingen auf schwieriger Piste\n• Fahren auf einem Ski ohne Stöcke\n• Beschleunigung durch koordinierte Schlittschuhschritte (Start)\n• Hocksprung\n\nallgemeine Grundlagen erwerben und festigen:\n• Parallelschwung Switch\n• Parallelschwingen in unpräpariertem Schnee\n• Pistentrick (180°, Powerslide)\n• Basic Air (Small Kicker)\n\n• spielerisches Erlernen durch Stationen und freies Fahren\n\n• Fahren in einem Kids Cross\n\n• Freies Fahren: im Training implementieren um die Grundtechnik anzuwenden\n\n• Gelände und Schneeverhältnisse nutzen für die Variation",
        "from": 2,
        "to": 2,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
         }
        ]
       },
       {
-       "v": "Snowboard Basics anwenden und variieren:\n\n• Erlernen durch Stationen und freies Fahren\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Fahren in einem Cross\n\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine, Stabiler Oberkörper\n\n• Erwerben  des Carvingschwungs\nTechniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\nSnowboardcross Essentials erwerben:\n• Einfache Abschnitte in einem Pro Cross fahren\n\n• Freies Fahren: im Training implementieren, Gelände und Schneeverhältnisse nutzen für die Variation\n\n• aktives Snowboarden\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss\n\n• Fahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten",
+       "v": "Anwenden der Racing Basic 1 - 3:\n• Dynamische Grundposition\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n\nErwerben der Racing Basic 4:\n• Hauptbelastung auf dem Aussenski\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\nEinfache Abschnitte in einem Pro Cross fahren\n\n• Freies Fahren: im Training implementieren, Gelände und Schneeverhältnisse nutzen für die Variation\n\nAnwenden der Racing Essenital 1:\nAlpiner Start\n\nErwerben der Racing Essential 3 und 4:\n• Elemente und Gelände\n• Aerodynamische Position\n• Transitions (WellenMulden Pushen, Doubles, Tripples / Elemente drücken / vorspringen/ absorbieren)\n                                                                                                                                                                                                                                                          Anwenden der Racing SX Essenital 1:\n• SX  Start",
        "from": 3,
        "to": 3,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
         }
        ]
       },
       {
-       "v": "Snowboard Basics anwenden und variieren:\n\n• Erlernen durch Stationen und freies Fahren\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Fahrten in einem Cross\n\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper\n\n• Erwerben  des Carvingschwungs\nTechniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Freies Fahren: im Training implementieren, Gelände und Schneeverhältnisse nutzen für die Variation\n• aktives Snowboarden\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss (Hoch- und Längsachse)\n\n• Fahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten\n\nSnowboardcross Essentials erwerben\n• Start im Startgate\n• Einfache Abschnitte in einem Pro Cross fahren\n•  Geländeübergänge, Transition\n• Aerodynamische Position erlernen",
+       "v": "Gestalten und Ergänzen der Racing Basic 1 - 3:\n• Dynamische Grundposition\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n\nAnwenden der Racing Basic 4:\n• Hauptbelastung auf dem Aussenski\n\nErwerben der Racing Basic 5:\nKontinuierlicher Belastungsaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Einfache Abschnitte in einem Pro Cross fahren                                                          erlernen\n\nFreies Fahren: im Training implementieren als selbständiges Ein- und Ausfahren für das gute Gefühl und Ritual, Gelände und Schneeverhältnisse nutzen für die Variation\n\nAnwenden der Racing Essenital 1, 3 und 4:\n• Alpiner Start\n• Sprung\n• Gelände\n•  Aerodynamische Position\n\nErwerben der Racing Essential 2:\n• Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen)\n\nAnwenden der Racing SX Essenital 1, 3 und 4:\n• SX Start\n• Elemente und Gelände\n• Aerodynamische Position\n• Transitions (WellenMulden Pushen, Doubles, Tripples / Elemente drücken / vorspringen/ absorbieren)\n\nErwerben der Racing SX Essential 2:\n• Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen)\n• Steilwandkurve, Negativkurve, Wellenkurve",
        "from": 4,
        "to": 4,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
         }
        ]
       },
       {
-       "v": "Gestalten und Ergänzen der Snowboard Basics:\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper, Zentrale Position auf dem Snowboard\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im SBX mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Freies Fahren: im Training implementieren, Gelände und Schneeverhältnisse nutzen für die Variation\n• aktives Snowboarden\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss (Hoch- und Längsachse)\n\nFahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten\n\nSnowboardcross Essentials anwenden:\n• Start im Startgate\n• Geländeübergänge\n• Aerodynamische Position erlernen",
+       "v": "Gestalten und Ergänzen der Racing Basic 1 - 4:\n• Dynamische Grundposition\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Hauptbelastung auf dem Aussenski\n\nAnwenden der Racing Basic 5:\n• Kontinuierlicher Belastungsaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im Skicross mit Hilfsmitteln kombiniert mit freiem Fahren\n\nFreies Fahren: im Training implementieren als selbständiges Ein- und Ausfahren für das gute Gefühl und Ritual\n\nGestalten und Ergänzen der Racing Essential 1 und 4:\n• Alpiner Start\n• Aerodynamische Position\n\nAnwenden der Racing Essenital 2 und 3:\n• Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen),\n• Sprung und Gelände\n\nGestalten und Ergänzen der Racing SX Essential 1 und 4:\n• Skicross Start\n• Aerodynamische Position\n\nAnwenden der Racing SX Essenital 2 und 3:\n• Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen), Steilwandkurve, Negativkurve, Wellenkurve\n• Elemente & Gelände\n• Transitions (WellenMulden Pushen, Doubles, Tripples / Elemente drücken / vorspringen/ absorbieren)",
        "from": 5,
        "to": 5,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
+        },
+        {
+         "text": "Technikabgleich Skicross",
+         "href": "https://snowsports.flink.host/s/W4qUh9WA"
         }
        ]
       },
       {
-       "v": "Gestalten und Ergänzen der Snowboard Basics:\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper, Zentrale Position auf dem Snowboard\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im SBX mit Hilfsmitteln\n\n• Freies Fahren: im Training implementieren, Gelände und Schneeverhältnisse nutzen für die Variation\n• aktives Snowboarden\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss (Hoch- und Längsachse)\n\n• Fahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten\n\nSnowboardcross Essentials anwenden:\n• Start im Startgate\n• Geländeübergänge\n• Aerodynamische Position erlernen",
+       "v": "Gestalten und Ergänzen der Racing Basic 1 - 5:\n• Dynamische Grundposition\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Hauptbelastung auf dem Aussenski\n• Kontinuierlicher Belastungsaufbau durch Bewegungsfluss\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im Skicross mit Hilfsmitteln kombiniert mit freiem Fahren\n\nFreies Fahren: im Training implementieren als selbständiges Ein- und Ausfahren für das gute Gefühl und Ritual\n• Implizite Übungen sind zu bevorzugen\n\nGestalten und Ergänzen der Racing Essential 1 bis 4:\n• Alpiner Start\n• Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen)\n• Sprung und Gelände\n• Aerodynamische Position\n\nGestalten und Ergänzen der Racing SX Essential 1 bis 4:\n• Skicross Start\n• Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen), Steilwandkurve, Negativkurve, Wellenkurve\n• Elemente und Gelände (Transitions: WellenMulden Pushen, Doubles, Tripples / Elemente drücken / vorspringen/ absorbieren)\n• Aerodynamische Position",
        "from": 6,
        "to": 6,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
+        },
+        {
+         "text": "Technikabgleich Skicross",
+         "href": "https://snowsports.flink.host/s/W4qUh9WA"
         }
        ]
       },
       {
-       "v": "Snowboard Basics & Snowboardcross Essentials gestalten und ergänzen:\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper Kontinuierlicher Belastungsaufbau durch Bewegungsfluss im SBX und im freien Fahren\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss  (Hoch- und Längsachse)\n\n• Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im SBX mit Hilfsmitteln\n\n• Fahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten\n\n• Start im Startgate\n• Geländeübergänge\n• Aerodynamische Position auf dem SBX",
+       "v": "Gestalten und Ergänzen der Racing Basic 1 - 5:\n• Dynamische Grundposition\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Hauptbelastung auf dem Aussenski\n• Kontinuierlicher Belastungsaufbau durch Bewegungsfluss\n\nFokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n•Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n•Techniklernen im Skicross mit Hilfsmitteln kombiniert mit freiem Fahren\n\nFreies Fahren: Im Training implementieren als selbständiges Ein- und Ausfahren für das gute Gefühl und Ritual\n•Implizite Übungen sind zu bevorzugen\n\nIndividuelles Gestalten und Ergänzen der Racing Essential 1 bis 4:\n•Alpiner Start\n•Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen)\n•Sprung und Gelände (möglichst viel Bodenkontakt)\n•Aerodynamische Position\n\nIndividuelles Gestalten und Ergänzen der Racing SX Essential 1 bis 4:\n•Skicross Start\n•Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen), Steilwandkurve, Negativkurve, Wellenkurve\n•Elemente und Gelände (möglichst viel Bodenkontakt,effiziente Energiegewinnung)\n•Transitions: WellenMulden Pushen, Doubles, Tripples / Elemente drücken / vorspringen/ absorbieren)\n•Aerodynamische Position",
        "from": 7,
        "to": 8,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
+        },
+        {
+         "text": "Technikabgleich Skicross",
+         "href": "https://snowsports.flink.host/s/W4qUh9WA"
         }
        ]
       },
       {
-       "v": "Snowboard Basics & Snowboardcross Essentials gestalten und ergänzen:\n• Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper Kontinuierlicher Belastungsaufbau durch Bewegungsfluss im SBX und im freien Fahren\n\n• Rumpfspannung erhöhen\nVerlagerung Oberkörper, Belastung Zehen/Ferse, Schwung über hinteren Fuss  (Hoch- und Längsachse)\n\n• Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n• Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n• Techniklernen im SBX mit Hilfsmitteln\n\n• Fahren mit Fokus auf Kantenbelastung, von gerutscht zu geschnitten\n\n• Start im Startgate\n• Geländeübergänge\n• Aerodynamische Position auf dem SBX",
+       "v": "Gestalten und Ergänzen der Racing Basic 1 - 5:\n• Dynamische Grundposition\n• Unabhängige Beuge- und Streckbewegung der Beine\n• Stabiler Oberkörper\n• Hauptbelastung auf dem Aussenski\n• Kontinuierlicher Belastungsaufbau durch Bewegungsfluss\n\nFokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n\n•Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n\n•Techniklernen im Skicross mit Hilfsmitteln kombiniert mit freiem Fahren\n\nFreies Fahren: Im Training implementieren als selbständiges Ein- und Ausfahren für das gute Gefühl und Ritual\n•Implizite Übungen sind zu bevorzugen\n\nIndividuelles Gestalten und Ergänzen der Racing Essential 1 bis 4:\n•Alpiner Start\n•Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen)\n•Sprung und Gelände (möglichst viel Bodenkontakt)\n•Aerodynamische Position\n\nIndividuelles Gestalten und Ergänzen der Racing SX Essential 1 bis 4:\n•Skicross Start\n•Schwung (Mutig hinters Tor fahren - hoch raus, Diagonale suchen), Steilwandkurve, Negativkurve, Wellenkurve\n•Elemente und Gelände (möglichst viel Bodenkontakt,effiziente Energiegewinnung)\n•Transitions: WellenMulden Pushen, Doubles, Tripples / Elemente drücken / vorspringen/ absorbieren)\n•Aerodynamische Position",
        "from": 9,
        "to": 9,
        "l": [
         {
-         "text": "Riding Konzept",
-         "href": "https://www.thatsnowsports.ch/riding-konzept-snowboard-cross/"
+         "text": "Racing Konzept",
+         "href": "https://www.thatsnowsports.ch/racing-konzept-sx/"
+        },
+        {
+         "text": "Technikabgleich Skicross",
+         "href": "https://snowsports.flink.host/s/W4qUh9WA"
         }
        ]
-      }
-     ]
-    },
-    {
-     "label": "Taktik Übergeordnet",
-     "segs": [
-      {
-       "v": "No Content yet",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "No Content yet",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "No Content yet",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "No Content yet",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "title": "Technik & Taktik Slalom (SL)",
-   "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Technik/Taktik Slalom",
-     "segs": [
-      {
-       "v": "Basic Turn",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "active turn",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "Carving",
-       "from": 4,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "short turns",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "No Content yet",
-       "from": 6,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "No Content yet",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "No Content yet",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Methode Slalom",
-     "segs": [
-      {
-       "v": "Steuerphase 1 gerutscht\nSteuerphase 2 fast geschnitten",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "Auslösen durch Vor-Mitdrehen\nAuslösen nur durch Knicken (Torsion)\nSteuerphase 2 hinterer Fuss fühlen\naktives aussteuern\nAus Beinen fahren\nStrecken in Steuerphase 2\nVon Fullbase zu Kanten springen und wieder retour",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "Knicken in Hüfte spühren\nVerschiedene Radien fahren\nextremes Kippen in Querachse  (cross over)\nextremes Knicken in Fuss/Knie/Hüftgelenken.\nOberkörper bleibt in Position (cross under)\nAktive Beuge- und Streckbewegungen in den Beinen\nFahren und  fs/bs\nAusholbewegungeng machen & Fahren mit Armen immer in Ausholposition\nstarkes Kippen/Knicken in der Längsachse\nKleiner Zwischenschwung in Traverse (cross under)\nKantenwechsel mit Ollie\nFallinie Carving mit feinem Kantenwechsel",
-       "from": 4,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "Stark Vordrehen/Gegendrehen\nSlowMotion Bewegungen\nNur durch Torsion\nWalzerturns fs/bs\nOlliekurzschwung\nJeder 3. Schwung ein Noseturn etc.\nNur Crossunder ShortTurns",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 6,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 7,
-       "l": []
-      },
-      {
-       "v": "Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen",
-       "from": 8,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen",
-       "from": 9,
-       "to": 9,
-       "l": []
       }
      ]
     }
@@ -1662,31 +1585,43 @@
      "label": "Technik/Taktik Riesenslalom",
      "segs": [
       {
-       "v": "No Content yet",
+       "v": "",
        "from": 0,
        "to": 2,
        "l": []
       },
       {
-       "v": "\"mutig hinters Tor fahren - hoch raus\"\n\n\"Diagonale suchen\"",
+       "v": "",
        "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "• Belastungswechsel über den zukünftigen Aussenski",
+       "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "•Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten -",
        "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "• Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten\n• Gelenksachsen bis zur \"Rise Line\"",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "Individuell, Präzise, Verfeinern, Automatisieren\n\n•  Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten\n• Gelenksachsen bis zur \"Rise Line\" neutral",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "Individuell, Präzise, Verfeinern, Automatisieren\n\n•  Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten\n• Gelenksachsen bis zur \"Rise Line\" neutral",
        "from": 9,
        "to": 9,
        "l": []
@@ -1697,31 +1632,55 @@
      "label": "Methode Riesenslalom",
      "segs": [
       {
-       "v": "No Content yet",
+       "v": "",
        "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\nEinfache Stationen im vorgegeben Raum\n\nKurssetzung:\n-\n\nGelände:\nflache bis mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nMinikipp/RS-Tore/Bäseli",
+       "from": 1,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Stationen mit klarem Ziel.\n• Einfacher Lauf mit gleichmässigem Kurssetzung\n\nKurssetzung:\nZeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n\nGelände:\nEher flache/mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfmittel:\nRS-Tore, Minikipp, Bäseli als Hilfsmarkierung",
+       "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\nStationen mit klarem Ziel.\nEinfacher Lauf mit gleichmässigem Rhythmus.\nOver Coaching vermeiden.\n\nKurssetzung:\nVerzögerte Schwünge (Bananen) einbauen.\nkürzere Torabstände (fördert aktiveren Fahrstil)\n\nGelände:\nEher flache/mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nRS-Tore, Bäseli, Zeitmessung und Video gezielt einsetzen",
+       "v": "Trainingsmethoden:\n• Stationen mit klarem Ziel.\n• Einfacher Lauf mit gleichmässigem Rhythmus.\n• Over Coaching vermeiden.\n\nKurssetzung:\n• Zeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n• Verzögerte Schwünge (Bananen) einbauen.\n\nGelände:\n• Eher flache/mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nRS-Tore, Bäseli, Zeitmessung und Video gezielt einsetzen",
        "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Stationen falls möglich von der länge (1.Station min. 20 Richtungsänderungen)\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• Over Coaching vermeiden.\n\nKurssetzung:\n• Zeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n\nGelände:\n• Eher flache/mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten.\n\nHilfsmittel:\nRS-Tore, Bäseli, Zeitmessung und Video gezielt einsetzen",
+       "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• In schlechten Verhältnissen oder schlechte Sicht trainieren.\n• Over Coaching vermeiden.\n\nKurssetzung:\n• Zeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n• Bank etwas höher setzen Negativ Kurve rund setzen\n\nGelände:\n• Unterschiedliches Gelände mit schnellen Rotationsmöglichkeiten\n• Etwas steilere Banks mit mehr Radius und Negativ Kurven mit mehr seitlichem Gefälle wählen\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video gezielt einsetzen                                          Bäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
        "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• In schlechten Verhältnissen oder schlechter Sicht trainieren.\n• Over Coaching vermeiden.\n• Spezifische Pistenpräparation (vermehrt auf gewässerten Pisten)\n\nKurssetzung:\nZeitlicher Aspekt von Tor zu Tor +/- 1.3 sek.\n\nGelände:\nUnterschiedliches Gelände mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• Repetition bis zur Automatisierung.\n• Over Coaching vermeiden.\n• Dem Wettkampfprofil angepasste Pistenpräparation.\n\nKurssetzung:\n• Zeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n• Dem Wettkampfprofil angepasste Kurssetzung\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Dem Wettkampfprofil angepasstes Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen, GPS",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "No Content yet",
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• Repetition bis zur Automatisierung.\n• Over Coaching vermeiden.\n• Dem Wettkampfprofil angepasste Pistenpräparation.\n\nKurssetzung:\n• Zeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n• Dem Wettkampfprofil angepasste Kurssetzung\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Dem Wettkampfprofil angepasstes Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen, GPS",
        "from": 9,
        "to": 9,
        "l": []
@@ -1731,71 +1690,7 @@
    ]
   },
   {
-   "title": "Technik & Taktik Speed (SG/DH)",
-   "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Technik/Taktik Speed",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Methode Speed",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "title": "Cross Start",
+   "title": "Skicross Start",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -1808,31 +1703,31 @@
        "l": []
       },
       {
-       "v": "erste Versuche in einem SBX Start",
+       "v": "Erste Versuche in einem SX Start",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "SBX Start\n• Grundposition\n• Körperspannung\n• koordinierter, effizienter Bewegungsfluss",
+       "v": "• Grundposition                                                                                                                                           • Körperspannung,\n• koordinierter, effizienter Bewegungsfluss",
        "from": 3,
-       "to": 3,
+       "to": 4,
        "l": []
       },
       {
-       "v": "SBX Start\n• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit\n\nGatestart vs. Backstart",
-       "from": 4,
+       "v": "• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit",
+       "from": 5,
        "to": 6,
        "l": []
       },
       {
-       "v": "SBX Start\n• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit\n\nGatestart vs. Backstart",
+       "v": "• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "SBX Start\n• Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit\n\nGatestart vs. Backstart",
+       "v": "• Individuell,Präzise,Verfeinert,Automatisiert                                                                      • Körperspannung, Vorspannung\n• Koordinierter, effizienter Bewegungsfluss\n• Schnellkraft\n• Reaktionsschnelligkeit",
        "from": 9,
        "to": 9,
        "l": []
@@ -1849,7 +1744,7 @@
        "l": []
       },
       {
-       "v": "Stationen mit klarem Ziel.\nStart ohne Gaps",
+       "v": "• Stationen mit klarem Ziel\n• Start ohne Gaps",
        "from": 2,
        "to": 2,
        "l": []
@@ -1861,25 +1756,37 @@
        "l": []
       },
       {
-       "v": "• Stationen mit klarem Ziel. Repetition bis zur Automatisierung\n\n• Flacher und mittlerer Start\n\n• Elemente näher zusammen & grösser\n• anspruchsvolle Elemente\n\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen. Erste Videos und Zeitmessung gezielt einsetzen",
+       "v": "• Stationen mit klarem Ziel\n• Start ohne Gaps mit etwas mehr Elementen\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen\n• Erstes Video gezielt einsetzen.",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "• Wettkampfangepasster Start, Repetition bis zur Automatisierung\n\n• Varierender Start\n\n• Varierendes Gelände mit varierenden Elementen\n\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen. Videos und Zeitmessung gezielt einsetzen, GPS",
+       "v": "• Stationen mit klarem Ziel\n• Repetition bis zur Automatisierung\n• Flacher Start\n• Start mit ersten kleinen Gaps & anspruchsvollen Elementen\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen\n• Videos und Zeitmessung gezielt einsetzen",
        "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "• Stationen mit klarem Ziel\n• Repetition bis zur Automatisierung\n• Flacher & mittlerer Start\n• Start mit ersten kleinen Gaps & anspruchsvollen Elementen\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen\n• Videos und Zeitmessung gezielt einsetzen",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "• Wettkampfangepasster Start, Repetition bis zur Automatisierung\n\n• Varierender Start\n\n• Varierendes Gelände mit varierenden Elementen\n\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen. Videos und Zeitmessung gezielt einsetzen, GPS",
+       "v": "• Repetition bis zur Automatisierung\n• Over Coaching vermeiden\n• Flacher,mittel und steiler Start einbauen\n• Anspruchvolle Elemente, Elemente näher zusammen und grösser, mehr Transition\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen\n• Videos und Zeitmessung gezielt einsetzen\n• GPS",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "• Wettkampfangepasster Start\n• Repetition bis zur Automatisierung\n• Varierender Start\n• Varierendes Gelände mit varierenden Elementen\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen\n• Videos und Zeitmessung gezielt einsetzen\n• GPS",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "• Wettkampfangepasster Start, Repetition bis zur Automatisierung\n\n• Varierender Start\n\n• Varierendes Gelände mit varierenden Elementen\n\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen. Videos und Zeitmessung gezielt einsetzen, GPS",
+       "v": "• Wettkampfangepasster Start\n• Repetition bis zur Automatisierung\n• Varierender Start\n• Varierendes Gelände mit varierenden Elementen\n• Farbe als Markierung um Absprung,Vorsprung zu kennzeichnen\n• Videos und Zeitmessung gezielt einsetzen\n• GPS",
        "from": 9,
        "to": 9,
        "l": []
@@ -1889,7 +1796,7 @@
    ]
   },
   {
-   "title": "Cross Schwung",
+   "title": "Skicross Schwung",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -1898,47 +1805,41 @@
       {
        "v": "",
        "from": 0,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Steilwandkurve",
-       "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Steilwandkurve",
+       "v": "",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Steilwandkurve / Bankturn\n\nRoller Turn",
+       "v": "Belastungswechsel über den zukünftigen Aussenski",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Individuelle,Präzise,Verfeinern,Automatisieren\nKurve möglichst geschnitten einleiten, hohe Ausgangsgeschwindigkeit generieren",
+       "v": "• Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten\n• Negativ Kurven einbauen",
        "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "• neutral Belastungswechsel über den zukünftigen Aussenski\n• Kurve möglichst geschnitten einleiten, Negativ Kurven,Bang einbauen\n• Gelenksachse bis zur Rise Line neutral",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Individuelle,Präzise,Verfeinern,Automatisieren\nKurve möglichst geschnitten einleiten, hohe Ausgangsgeschwindigkeit generieren",
+       "v": "• Individuelle,Präzise,Verfeinern,Automatisieren\n• neutraler Belastungswechsel über den zukünftigen Aussenski\n•  Kurve möglichst geschnitten einleiten, Negativ Kurven,Bang einbauen\n• Gelenksachse bis zur Rise Line neutral",
        "from": 7,
-       "to": 7,
-       "l": []
-      },
-      {
-       "v": "Techniklernen im SBX mit Hilfsmitteln kombiniert mit freiem Fahren",
-       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Techniklernen im SBX mit Hilfsmitteln kombiniert mit freiem Fahren",
+       "v": "• Individuelle,Präzise,Verfeinern,Automatisieren\n• neutraler Belastungswechsel über den zukünftigen Aussenski\n•  Kurve möglichst geschnitten einleiten, Negativ Kurven,Bang einbauen\n• Gelenksachse bis zur Rise Line neutral",
        "from": 9,
        "to": 9,
        "l": []
@@ -1951,35 +1852,59 @@
       {
        "v": "",
        "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\nEinfache Stationen im vorgegeben Raum\n\nKurssetzung:\n-\n\nGelände:\nflache bis mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nMinikipp/RS-Tore/Bäseli",
+       "from": 1,
        "to": 1,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\nEinfache Stationen im vorgegeben Raum\n\nKurssetzung:\neinfach\n\nGelände:\nflache bis mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nMinikipp/RS-Tore/Bäseli/ Farbe",
+       "v": "Trainingsmethoden:\n• Stationen mit klarem Ziel.\n• Einfacher Lauf mit gleichmässigem Kurssetzung\n\nKurssetzung:\nZeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n\nGelände:\nEher flache/mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfmittel:\nRS-Tore, Minikipp, Bäseli als Hilfsmarkierung",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Stationen mit klarem Ziel\n• Einfacher Lauf mit gleichmässigem Rhythmus\n• Over Coaching vermeiden\n\nKurssetzung:\n• Verzögerte Schwünge (Bananen) einbauen\n• kürzere Torabstände (fördert aktiveren Fahrstil)\n\nGelände:\nEher flache/mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfsmittel:\nRS-Tore, Bäseli, Zeitmessung und Video gezielt einsetzen",
+       "v": "Trainingsmethoden:\n• Stationen mit klarem Ziel.\n• Einfacher Lauf mit gleichmässigem Kurssetzung\n\nKurssetzung:\nZeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n\nGelände:\nEher flache/mittelsteile und gleichmässige Piste mit schnellen Rotationsmöglichkeiten\n\nHilfmittel:\nRS-Tore, Minikipp, Bäseli als Hilfsmarkierung",
        "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Stationen falls möglich von der länge (1.Station min. 20 Richtungsänderungen)\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... )\n• Over Coaching vermeiden.\n\nKurssetzung:\n• Bank unten setzen\n• Negativ Kurve rund setzen\n\nGelände:\n• Flache Banks\n• nicht zu steile Negativ Kurven\n\nHilfsmittel:\nBäseli und Farbe als Markierung bei der Einfahrt",
+       "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... )\n• Repetition bis zur Automatisierung\n• In schlechten Verhältnissen oder schlechter Sicht trainieren\n• Over Coaching vermeiden\n• Spezifische Pistenpräparation\n\nKurssetzung:\nBank etwas höher setzen\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Etwas steilere Banks mit mehr Radius und Negativkurven mit mehr seitlichem Gefälle wählen\n• Variation ist das Wichtigste\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen,  Bäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• In schlechten Verhältnissen oder schlechte Sicht trainieren.\n• Over Coaching vermeiden.\n\nKurssetzung:\n• Bank etwas höher setzen\n• Negativ Kurve rund setzen\n\nGelände:\n• Etwas steilere Banks mit mehr Radius\n• Negativ Kurven mit mehr seitlichem Gefälle wählen\n\nHilfsmittel:\nBäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
        "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• In schlechten Verhältnissen oder schlechter Sicht trainieren.\n• Over Coaching vermeiden.\n• Spezifische Pistenpräparation (vermehrt auf gewässerten Pisten)\n\nKurssetzung:\n• Bank etwas höher setzen\n• Negativ Kurve mit kleinerem Radius setzen\n\nGelände:\n• Etwas steilere Banks mit mehr Radius\n• Negativ Kurven mit mehr seitlichem Gefälle wählen\n\nHilfsmittel:\nBäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... )\n• Repetition bis zur Automatisierung\n• In schlechten Verhältnissen oder schlechter Sicht trainieren\n• Over Coaching vermeiden\n• Spezifische Pistenpräparation\n\nKurssetzung:\nBank etwas höher setzen\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Etwas Steilere Banks mit mehr Radius und Negativ Kurven mit mehr seitlichem Gefälle wählen\n• Variation ist das Wichtigste\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen,  Bäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• Repetition bis zur Automatisierung.\n• In schlechten Verhältnissen oder schlechter Sicht trainieren.\n• Over Coaching vermeiden.\n• Spezifische Pistenpräparation.\n\nKurssetzung:\n• Zeitlicher Aspekt: von Tor zu Tor +/- 1.3 sek.\n• Bank etwas höher setzen\n• Negativ Kurve mit kleinerem Radius setzen\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Etwas Steilere Banks mit mehr Radius\n• Negativ Kurven mit mehr seitlichem Gefälle wählen\n• Variation ist das Wichtigste\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen, GPS                                        Bäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen, GPS",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• Repetition bis zur Automatisierung.\n• Over Coaching vermeiden.\n• Dem Wettkampfprofil angepasste Pistenpräparation.\n\nKurssetzung:\nDem Wettkampfprofil angepasste Kurssetzung\n\nGelände:\nDem Wettkampfprofil angepasstes Gelände\n\nHilfsmittel:\nBäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen, GPS",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... )\n• Repetition bis zur Automatisierung\n• In schlechten Verhältnissen oder schlechter Sicht trainieren\n• Over Coaching vermeiden\n• Spezifische Pistenpräparation\n\nKurssetzung:\nBank etwas höher setzen\n\nGelände:\n• Unterschiedliches Gelände: flach, steil, Übergänge, Wellen-Mulden.\n• Schnelle Rotationsmöglichkeiten\n• Etwas Steilere Banks mit mehr Radius und Negativ Kurven mit mehr seitlichem Gefälle wählen\n• Variation ist das Wichtigste\n\nHilfsmittel:\nRS-Tore, Farbe, Zeitmessung und Video einsetzen,  Bäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen",
+       "v": "Trainingsmethoden:\n• Blocktrainings mit klarem Ziel (schnell, langsam, drehend, direkt, eng, weit, ... ).\n• Repetition bis zur Automatisierung.\n• Over Coaching vermeiden.\n• Dem Wettkampfprofil angepasste Pistenpräparation.\n\nKurssetzung:\nDem Wettkampfprofil angepasste Kurssetzung\n\nGelände:\nDem Wettkampfprofil angepasstes Gelände\n\nHilfsmittel:\nBäseli und Farbe als Markierung bei der Einfahrt, Zeitmessung und Videos gezielt einsetzen, GPS",
        "from": 9,
        "to": 9,
        "l": []
@@ -1989,7 +1914,7 @@
    ]
   },
   {
-   "title": "Cross Elemente, Gelände, Aerodynamik",
+   "title": "Skicross Elemente, Gelände, Aerodynamik",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -1998,41 +1923,41 @@
       {
        "v": "",
        "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "erste Versuche in einem einfachen SBX",
-       "from": 1,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "• möglichst viel Bodenkontakt\n\n• aerodynamische Position\n\n• WellenMulden / Pushen\n\n• Sprünge (Kicker)",
-       "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "• möglichst viel Bodenkontakt\n\n• aerodynamische Position\n\n• WellenMulden / Pushen\n\n• Sprünge (Kicker)",
+       "v": "Aerodynamik: kompakte und aerodynamische Position fördern",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Transitions\n• WellenMulden (Pushen, Doubles, Tripples, absorbieren)\n• Elemente drücken / vorspringen/ absorbieren / Pop / Late-Pop\n• Spünge (Kicker, Step Down) & Landungen\n• Windschatten fahren (Draft)",
+       "v": "• Aerodynamik: kompakte und aerodynamische Position fördern\n• Sprung: kompakter und stabiler Sprung mit möglichst kurzer Flugphase\n• Stabile Grundposition bei Wellen mit Hüftstreckung",
        "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• Aerodynamik: kompakte und aerodynamische Position fördern\n• Sprung: kompakter und stabiler Sprung mit möglichst kurzer Flugphase\n• erste Frosch Übung mit einbauen\n• Stabile Grundpositon bei Wellen mit Hüftstreckung",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "•  Aerodynamik: kompakte und aerodynamische Position fördern\n•  Sprung: kompakter und stabiler Sprung mit möglichst kurzer Flugphase\n• Drücken,Vorspringen,Absorbieren,Pop und Late Pop einbauen\n• Stabile Grundpositon bei Wellen mit Hüftstreckung,$\n• Strecken und Beugen der Beine aktiv fördern bei Wellen und Mulden",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Transitions\n• WellenMulden (Pushen, Doubles, Tripples, absorbieren)\n• Elemente drücken / vorspringen/ absorbieren / Pop / Late-Pop\n• Spünge (Kicker, Step Down) & Landungen\n• Windschatten fahren (Draft)",
+       "v": "• Individuell,Präzis,Verfeinern, Automatisieren\n• Aerodynamik: kompakte und aerodynamische Position fördern\n• Sprung: kompakter und stabiler Sprung mit möglichst kurzer Flugphase\n• Drücken,Vorspringen,Absorbieren,Pop,und Late Pop einbauen\n• Stabile Grundpositon bei Wellen mit Hüftstreckung\n•Strecken und Beugen der Beine aktiv fördern bei Wellen und Mulden",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Transitions\n• WellenMulden (Pushen, Doubles, Tripples, absorbieren)\n• Elemente drücken / vorspringen/ absorbieren / Pop / Late-Pop\n• Spünge (Kicker, Step Down) & Landungen\n• Windschatten fahren (Draft)",
+       "v": "• Individuell,Präzis,Verfeinern, Automatisieren\n• Aerodynamik: kompakte und aerodynamische Position fördern\n• Sprung: kompakter und stabiler Sprung mit möglichst kurzer Flugphase\n• Drücken,Vorspringen,Absorbieren,Pop,und Late Pop einbauen\n• Stabile Grundpositon bei Wellen mit Hüftstreckung\n•Strecken und Beugen der Beine aktiv fördern bei Wellen und Mulden",
        "from": 9,
        "to": 9,
        "l": []
@@ -2045,41 +1970,41 @@
       {
        "v": "",
        "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "einfache Elemente",
-       "from": 1,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Motivierende Kommunikation fördern\n\nKurssetzung:\n• Sicher-, Gelände- und Materialangepasst\n• Niveaugerecht, so einfach wie möglich\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
-       "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Motivierende Kommunikation fördern\n\nKurssetzung:\n• Sicher-, Gelände- und Materialangepasst\n• Niveaugerecht, so einfach wie möglich\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten, Gleitskurven\n• Motivierende Kommunikation fördern\n\nKurssetzung:\n• Sicher-, Gelände- und Materialangepasst\n• Niveaugerecht\n• so einfach wie möglich\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Farbe B-Netz",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Gezieltes Coaching\n\nKurssetzung:\n• Sicher- und Geländeangepasst\n• Variationen einbringen\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten, Gleitskurven\n• Motivierende Kommunikation fördern\n\nKurssetzung:\nSo setzten das der Speed dem Element angepasst wird\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Farbe B-Netz",
        "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten, Gleitskurven\n• Gezieltes Coaching\n\nKurssetzung:\n• Varianten von Sprüngen und Wellen und Elemente wählen und den Speed anpassen\n\nGelände:\n• Ausreichend gesichtertes einfaches bis mittelsteiles Gelände mit\n• genügend Gefälle für Landungen\n• Elemente und Wellen gezielt wählen\n\nHilfsmittel:\nFarbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Vollkombi, Anfahrtsdistanzen kennzeichnen, Flugdistanz markieren, Höhenkontrolle beim Absprung",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Gezieltes und Datenbasiertes Coaching\n\nKurssetzung:\nSpeedkontrolle ist das Wichtigste\n\nGelände:\nAneinanderfolgende Elemente wählen\n\nHilfsmittel:\nFarbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Vollkomb, Anfahrts distanze kenzeichenen, Flugdistanz markieren, Höhenkontrolle beim Absprung",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Gezieltes Coaching\n\nKurssetzung:\n• Sicher- und Geländeangepasst\n• Variationen einbringen\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Gezieltes und Datenbasiertes Coaching\n• Offizielle Trainings vor den Rennen nützen\n\nKurssetzung:\n• Speedkontrolle ist das Wichtigste\n\nGelände:\n• Ausreichend gesichtertes unterschiedliche Strecken mit genügend Gefälle für Landungen und dem Level angepasste Elemente\n\nHilfsmittel:\nFarbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Vollkomb, Anfahrts distanze kenzeichenen, Flugdistanz markieren, Höhenkontrolle beim Absprung, GPS",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Trainingsmethoden:\n• Sicherheit!\n• Elementschulen z.B Sprung, Wellen, Gleiten\n• Gezieltes Coaching\n\nKurssetzung:\n• Sicher- und Geländeangepasst\n• Variationen einbringen\n\nGelände:\nAusreichend gesichtertes einfaches bis mittelsteiles Gelände mit genügend Gefälle für Landungen\n\nHilfsmittel:\nRS-Tore, Farbe, B-Netze, Funk, Zeitmessung und Video einsetzen",
+       "v": "Trainingsmethoden:\n• Sicherheit!\n• Gezieltes und Datenbasiertes Coaching\n• Offizielle Trainings vor den Rennen nützen\n\nKurssetzung:\n• Speedkontrolle ist das Wichtigste\n\nGelände:\n• Ausreichend gesichtertes unterschiedliche Strecken mit genügend Gefälle für Landungen und dem Level angepasste Elemente\n\nHilfsmittel:\nFarbe, B-Netze, Funk, Zeitmessung und Video einsetzen, Vollkomb, Anfahrts distanze kenzeichenen, Flugdistanz markieren, Höhenkontrolle beim Absprung, GPS",
        "from": 9,
        "to": 9,
        "l": []
@@ -2102,31 +2027,31 @@
        "l": []
       },
       {
-       "v": "Taktik Linienwahl\n• Qualifikation (schnellste Linie)\n• Rennen (erlernen der Intution)\n\nTaktik für Heats\n• Überholoptionen anschauen bei Kursbesichtung\n\nTaktiktraining:\n• verschiedene Linien vorgeben\n• Markierungen",
+       "v": "Taktik Linienwahl\n• Qualifikation (schnellste Linie)\n• Rennen (erlernen der Intution)\n\nTaktik für Heats\n• Überholoptionen anschauen bei Kursbesichtung",
        "from": 3,
        "to": 4,
        "l": []
       },
       {
-       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung / Fähigkeiten\n\nTaktik Linienwahl\n• Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n• Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n•  Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n\n• Windschatten fahren und Überholen",
+       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung  / Fähigkeiten\n\nTaktik Linienwahl\n• Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n• Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n\n • Windschatten fahren und Überholen",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung / Fähigkeiten\n\nTaktik Linienwahl\n•  Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n• Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n•  (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n• Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
+       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung  / Fähigkeiten\n\nTaktik Linienwahl\n•  Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n• Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n•  Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung / Fähigkeiten\n\nTaktik Linienwahl\n•  Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n•  Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n• Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n• Teamtaktik im selben Heat\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
+       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung  / Fähigkeiten\n\nTaktik Linienwahl\n• Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n•  Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n•  Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n• Teamtaktik im selben Heat\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung / Fähigkeiten\n\nTaktik Linienwahl\n•  Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n•  Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n• Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n• Teamtaktik im selben Heat\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
+       "v": "Wahl der Startposition je nach Rennsituation / Kurssetzung  / Fähigkeiten\n\nTaktik Linienwahl\n• Qualifikation (schnellste Linie)\n• Rennen (optimalste Linie)\n•  Optionen für Linien je nach Heatverlauf\n\nTaktik Heats\n• Überholoptionen anschauen\n• (abgesprochene) Simulation versch. Situationen in einem Heat (an Erster Stelle liegend = Abwehren / Überholmanöver)\n•  Antizipieren: lernen Situationen vorauszusehen (besprechen, was wo passieren könnte)\n• Teamtaktik im selben Heat\n\n• Abwehren >> Situationen simulieren\n\n• Windschatten fahren und Überholen\n\n• Strategie vornehmen und diese auch so fahren",
        "from": 9,
        "to": 9,
        "l": []
@@ -2161,37 +2086,37 @@
        "l": []
       },
       {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n\nMiete bei Bedarf:\n1x Inline Skates",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Inline Skates\n1x Mountainbike (Schuhe/Klick)\n\nMiete bei Bedarf:\n1x Skateboard",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n\nÜbernommenes Material:\nPulsuhr\n\nMiete bei Bedarf:\n1x Inlineskates",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Turnschuhe Outdoor\nHelm\n1x Inline Skates\n1x Mountainbike (Schuhe/Klick)\n\nÜbernommenes Material:\nPulsuhr\n\nMiete bei Bedarf:\n1x Skateboard",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\nPulsuhr\n\nMiete bei Bedarf:\n1x Inlineskates",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Inline Skates\n1x Mountainbike (Schuhe/Klick)\nPulsuhr\n\nMiete bei Bedarf:\n1x Skateboard",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Inline Skates\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Inline Skates\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Skateboard\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
+       "v": "Eigenes Material:\n1x Turnschuhe Indoor\n1x Gewichtheberschuhe\n1x Turnschuhe Outdoor\nHelm\n1x Inline Skates\n1x Mountainbike (Schuhe/Klick)\n1x Rennfahrrad (Schuhe/Klick)\nPulsuhr",
        "from": 9,
        "to": 9,
        "l": []
@@ -2202,136 +2127,72 @@
      "label": "On Snow Allgemein",
      "segs": [
       {
-       "v": "Helm\n\n1x Snowboard\n1x Snowboardschuhe\n\nMaterial kann/soll gemietet oder übernommen werden.",
+       "v": "Helm\nRückenpanzer\n\n1x Stöcke\n1x Skischuhe\n\nMaterial kann/soll gemietet oder übernommen werden.",
        "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "Helm\n\n1x Snowboard\n1x Snowboardschuhe\nRückenpanzer\n\nMaterial kann/soll gemietet oder übernommen werden.",
-       "from": 1,
        "to": 2,
        "l": []
       },
       {
-       "v": "Helm\n\n1x Snowboard Freestyle\n1x Snowboard Rennen\n1x Snowboardschuhe\nRückenpanzer\n\nMaterial kann übernommen werden",
+       "v": "FIS Helm\nGepolsterter Unterziehpulli\nRückenpanzer\n1x Kombi\n\n1x Skischuhe (angepasst von einem Bootfitter)",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "FIS Helm\nGepolsterter Unterziehpulli\nRückenpanzer\n1-2x Kombi\nSchnittfeste Unterwäsche\nUnterarmschoner\n\n1-2x Skischuhe",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "FIS Helm\nGepolsterter Unterziehpulli\nRückenpanzer\n3-4x Kombi\nSchnittfeste Unterwäsche\nUnterarmschoner\n\n1-2x Skischuhe",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "FIS Helm\nGepolsterter Unterziehpulli\nRückenpanzer\n3-4x Kombi\nSchnittfeste Unterwäsche\nUnterarmschoner\n\n1-2x Skischuhe",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "On-Snow Ski",
+     "segs": [
+      {
+       "v": "1x Ski",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "1-2x Skicross Ski (oder RS Ski)",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n2x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\n\nMaterial kann übernommen werden",
+       "v": "1-3x Skicross Ski (oder RS Ski)",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n2x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
+       "v": "2-4x Skicross Ski (oder RS Ski)",
        "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n3x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
-       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n4x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
+       "v": "4-6x Skicross Ski (oder RS Ski)\n\n1x Slalom Ski (kann übernommen werden)\n1x DH Ski (kann übernommen werden)",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "FIS-Helm\n\n1x Snowboard Freestyle\n4x Snowboard Rennen\n2x Snowboardschuhe\nRückenpanzer\nRenndress",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Slalom (SL)",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Riesenslalom (RS)",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Speed (SG/DH)",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
+       "v": "4-6x Skicross Ski (oder RS Ski)\n\n1x Slalom Ski (kann übernommen werden)\n1x DH Ski (kann übernommen werden)",
        "from": 9,
        "to": 9,
        "l": []
@@ -2429,24 +2290,18 @@
       {
        "v": "Skiclub",
        "from": 0,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Skiclub, RLZ (BASE/ BABE)",
-       "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Skiclub, RLZ (BASE/ BABE)",
+       "v": "Sichtungskader Skicross",
        "from": 3,
-       "to": 4,
+       "to": 5,
        "l": []
       },
       {
-       "v": "RLZ (BASE/BABE) Swiss-Ski Kader",
-       "from": 5,
+       "v": "Nationales Sichtungskader, Swiss Ski Kader",
+       "from": 6,
        "to": 6,
        "l": []
       },
@@ -2476,42 +2331,18 @@
       {
        "v": "",
        "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "Lokal",
-       "from": 1,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Lokal/Regional",
-       "from": 2,
        "to": 2,
        "l": []
       },
       {
        "v": "Regional",
        "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "Regional/National",
-       "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "National",
+       "v": "Regional/National",
        "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "National / Elite",
-       "from": 6,
        "to": 6,
        "l": []
       },
@@ -2541,41 +2372,47 @@
       {
        "v": "",
        "from": 0,
-       "to": 1,
+       "to": 0,
        "l": []
       },
       {
-       "v": "Regionale Tour, Swisssnowboard Tour",
-       "from": 2,
+       "v": "Kids Cross / Smartcompetition",
+       "from": 1,
        "to": 2,
        "l": []
       },
       {
-       "v": "Swisssnowboard Speed Tour",
+       "v": "Swissskicross Tour",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "SBX JunFIS & FIS\nSwisssnowboard Speed Tour",
+       "v": "Swissskicross Tour, Skicross Jun FIS",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "SBX JunFIS & FIS & EC",
+       "v": "Skicross Jun FIS, FIS & EC",
        "from": 5,
        "to": 6,
        "l": []
       },
       {
-       "v": "SBX EC & WC",
+       "v": "Skicross EC & WC",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Skicross WC",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "SBX WC",
+       "v": "Skicross Weltcup",
        "from": 9,
        "to": 9,
        "l": []
@@ -2586,49 +2423,55 @@
      "label": "Anzahl Wettkämpfe",
      "segs": [
       {
-       "v": "0 bis 5",
+       "v": "0",
        "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "1-2",
+       "from": 1,
        "to": 1,
        "l": []
       },
       {
-       "v": "5 bis 10",
+       "v": "2-4",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "5 bis 10",
+       "v": "4-6",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "10 bis 15",
+       "v": "6-10",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "10 bis 20",
+       "v": "8-16",
        "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "Je nach Tour oder Wertungen",
-       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Je nach Tour oder Wertungen",
+       "v": "14-18",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "16-20",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Je nach Tour oder Wertungen",
+       "v": "16-20",
        "from": 9,
        "to": 9,
        "l": []
@@ -2651,13 +2494,13 @@
        "l": []
       },
       {
-       "v": "gemäss RV",
+       "v": "",
        "from": 3,
        "to": 4,
        "l": []
       },
       {
-       "v": "gemäss RV und Swiss-Ski",
+       "v": "gemäss Sichtungskader und Swiss-Ski",
        "from": 5,
        "to": 6,
        "l": []
@@ -2878,150 +2721,5 @@
     }
    ]
   }
- ],
- "home": {
-  "intro": {
-   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
-   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
-   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
-   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
-  },
-  "sections": [
-   {
-    "title": "Was trainieren?",
-    "cells": {
-     "F1": {
-      "v": "Umfangreich, vielseitig & erlebnisorientiert Bewegen\nBewegungs- & Spielgrundformen erlernen\n\nOn Snow:\n- Snowboard Basics entdecken\n- spielerisches Erlernen\n- jede Gelegenheit für freies Fahren nutzen\n\nOff Snow:\n- Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.\n- Spielerische Einheiten.",
-      "l": []
-     },
-     "F2": {
-      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\n- Snowboard Basics anwenden und variieren (Schwungformen, Kurzschwingen, Sprungformen auf Piste)\n- spielerisches Erlernen durch Stationen & freies Fahren\n- erste Fahrten in Kids Cross\n- jede Gelegenheit für freies Fahren nutzen\n\nOff Snow:\n- Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.\n- Spielerische Einheiten.",
-      "l": []
-     },
-     "F3": {
-      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\n- Snowboard Basics anwenden und variieren (Schwungformen, Kurzschwingen, Switch, Basic Air)\n- spielerisches Erlernen durch Stationen & freies Fahren\n- Techniklernen mit Toren\n- erste Fahrten in einem Cross\n- freies Fahren im Training implementieren\n- Variation durch Gelände & Schneeverhältnisse\n- Erwerben Snowboardcross Essentials (Start, Geländeübergange, aerodynamische Position, Transition)\n\nOff Snow:\n- Ausdauer: Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen (Umfangreich, vielseitig und herausfordernd).\n- Mobilität/Beweglichkeit: Gelenks- & Muskelbeweglichkeit optimieren.\n- Kraft: Technik und Haltung erlernen.\n- Schnelligkeit/Agilität: Goldenes Alter von 8 bis 13 Jahre. Das Training immer frisch und mit maximaler Intensität durchführen.",
-      "l": []
-     },
-     "T1": {
-      "v": "on snow:\n- Snowboard Basics anwenden und variieren:\n-Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n-Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine, Stabiler Oberkörper\n\n-Snowboardcross Essentials erwerben:\nEinfache Abschnitte in einem Pro Cross fahren, aktives Snowboarden\n\noff snow:\nAusdauer: Belastungsfähigkeit im aeroben Bereich aufbauen und aktiven Alltag pflegen\n\nKraft: Stabilität, Haltung und Technik erwerben &  festigen. Window of opportunity bei Mädchen.\n\nSchnelligkeit/Agilität: Goldenes Alter von 8 bis 13 Jahre. Auf Wachstumsschub in der Adoleszenz aufpassen. Das Training immer frisch und mit maximaler Intensität durchführen.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen kennenlernen & ausprobieren",
-      "l": []
-     },
-     "T2": {
-      "v": "on snow:\n- Snowboard Basics anwenden und variieren:\n-Techniklernen in den Toren mit Hilfsmitteln kombiniert mit freiem Fahren\n-Dynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine, Stabiler Oberkörper\n\n- Snowboardcross Essentials erwerben:\nStart im Startgate, Geländeübergänge, Transition, Aerodynamische Position erlernen\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer stärken\n\nKraft: Stabilität, Haltung und Technik festigen. strukturiertes Krafttraining. Window of opportunity bei Jungen.\n\nSchnelligkeit/Agilität: Auf Wachstumsschub in der Adoleszenz aufpassen. Das Training immer frisch und mit maximaler Intensität durchführen.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen kennenlernen, ausprobieren & implementieren",
-      "l": []
-     },
-     "T3": {
-      "v": "on snow:\n-Gestalten und Ergänzen der Snowboard Basics:\nDynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper, Zentrale Position auf dem Snowboard\n- Techniklernen im SBX mit Hilfsmitteln kombiniert mit freiem Fahren\n- Snowboardcross Essentials anwenden:\nStart im Startgate, Geländeübergänge, Aerodynamische Position\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen implementieren",
-      "l": []
-     },
-     "T4": {
-      "v": "on snow:\n-Gestalten und Ergänzen der Snowboard Basics:\nDynamische Grundposition, Unabhängige Beuge- und Streckbewegung der Beine und der Längsachse, Stabiler Oberkörper, Zentrale Position auf dem Snowboard\n- Techniklernen im SBX mit Hilfsmitteln kombiniert mit freiem Fahren\n- Snowboardcross Essentials anwenden:\nStart im Startgate, Geländeübergänge, Aerodynamische Position festigen\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen implementieren",
-      "l": []
-     },
-     "E1": {
-      "v": "on snow:\n- Snowboard Basics & Snowboardcross Essentials gestalten und ergänzen\n- Kontinuierlicher Belastungsaufbau durch Bewegungsfluss im SBX und im freien Fahren\nRumpfspannung erhöhen\n- Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n- Snowboardcross Essentials gestalten und ergänzen\nStart im Startgate, Geländeübergänge, Aerodynamische Position auf dem SBX\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
-      "l": []
-     },
-     "E2": {
-      "v": "on snow:\n- Snowboard Basics & Snowboardcross Essentials gestalten und ergänzen\n- Kontinuierlicher Belastungsaufbau durch Bewegungsfluss im SBX und im freien Fahren\nRumpfspannung erhöhen\n- Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n- Snowboardcross Essentials gestalten und ergänzen\nStart im Startgate, Geländeübergänge, Aerodynamische Position auf dem SBX\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
-      "l": []
-     },
-     "M": {
-      "v": "on snow:\n- Snowboard Basics & Snowboardcross Essentials gestalten und ergänzen\n- Kontinuierlicher Belastungsaufbau durch Bewegungsfluss im SBX und im freien Fahren\nRumpfspannung erhöhen\n- Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n- Snowboardcross Essentials gestalten und ergänzen\nStart im Startgate, Geländeübergänge, Aerodynamische Position auf dem SBX\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
-      "l": []
-     }
-    }
-   },
-   {
-    "title": "Wie viel trainieren?",
-    "cells": {
-     "F1": {
-      "v": "Aktiven Alltag pflegen\n\nPro Nacht: 9-11h Schlaf",
-      "l": []
-     },
-     "F2": {
-      "v": "Aktiven Alltag pflegen\n\nPro Woche: 1-2 Trainings im Skiclub, in anderen Clubs\nPro Nacht: 9-11h Schlaf",
-      "l": []
-     },
-     "F3": {
-      "v": "Aktiven Alltag pflegen\n\nPro Woche: 1-2 Trainings im Skiclub\nPro Woche: 1-2 Trainings in anderen Clubs\nPro Nacht: 9-11h Schlaf",
-      "l": []
-     },
-     "T1": {
-      "v": "Sommer (Mai - Nov)\n- On Snow: 20-25 Tage\n- Off Snow: 8-10h / Woche\n\nWinter (Dez- Apr)\n- On Snow: 3-5 Tage / Woche\n- Off Snow: 3-6h / Woche",
-      "l": []
-     },
-     "T2": {
-      "v": "Sommer (Mai - Nov)\n- On Snow: 25-30 Tage\n- Off Snow: 8-14h / Woche\n\nWinter (Dez- Apr)\n- On Snow: 3-5 Tage / Woche\n- Off Snow: 4-7h / Woche",
-      "l": []
-     },
-     "T3": {
-      "v": "Sommer (Mai - Nov)\n- On Snow: 30-35Tage\n- Off Snow: ca. 13h / Woche (350-410h)\n\nWinter (Dez- Apr)\n- On Snow: 60-70 Tage\n- Off Snow: 6-8h / Woche",
-      "l": []
-     },
-     "T4": {
-      "v": "Sommer (Mai - Nov)\n- On Snow: 35-40 Tage\n- Off Snow: ca. 13h / Woche (350-410h)\n\nWinter (Dez- Apr)\n- On Snow: 60-70 Tage\n- Off Snow: 6-8h / Woche",
-      "l": []
-     },
-     "E1": {
-      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 15h / Woche (400-480h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
-      "l": []
-     },
-     "E2": {
-      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 13h / Woche (365-435h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
-      "l": []
-     },
-     "M": {
-      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 13h / Woche (365-435h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
-      "l": []
-     }
-    }
-   },
-   {
-    "title": "Struktur & Umfeld",
-    "cells": {
-     "F1": {
-      "v": "Umfeld & Struktur: Familie & Freud:innen\n\nWettkämpfe: Freude teilzunehmen",
-      "l": []
-     },
-     "F2": {
-      "v": "Umfeld & Struktur: Familie, Freud:innen, Sportvereine\n\nWettkämpfe: Freude teilzunehmen",
-      "l": []
-     },
-     "F3": {
-      "v": "Umfeld & Struktur: Familie, Freud:innen, Sportvereine\n\nWettkämpfe: Freude teilzunehmen & sich zu messen\nRegionale Tour Swisssnowboard Tour",
-      "l": []
-     },
-     "T1": {
-      "v": "Familie & Freund:innen\nVolks- oder Sportschule\n\nKader: RLZ (BASE / BABE)\nSwiss Olympic Card: Regional\n\nWettkämpfe: FIS, JUN-FIS, Swisssnowboard Tour",
-      "l": []
-     },
-     "T2": {
-      "v": "Familie & Freund:innen\nVolks- oder Sportschule\n\nKader: RLZ (BASE / BABE)\nSwiss Olympic Card: Regional / National\n\nWettkämpfe: FIS, JUN-FIS, Swisssnowboard Tour",
-      "l": []
-     },
-     "T3": {
-      "v": "Familie & Freund:innen\nBeruf & Schule mit Sportlösung\n\nKader: RLZ (BASE / BABE), Swiss Ski Kader\nSwiss Olympic Card:National\n\nWettkämpfe: Jun FIS, FIS, Europacup",
-      "l": []
-     },
-     "T4": {
-      "v": "Partner:in, Freund:innen & Familie\nBeruf oder Schule mit Sportlösung, Spitzensport-RS/WK\n\nKader:  RLZ (BASE / BABE), Swiss Ski Kader\nSwiss Olympic Card:  National, Elite\n\nWettkämpfe: Jun FIS, FIS, Europacup",
-      "l": []
-     },
-     "E1": {
-      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski Kader\nSwiss Olympic Card: Elite, Bronze, Silber\n\nWettkämpfe: Europacup / Weltcup",
-      "l": []
-     },
-     "E2": {
-      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski\nSwiss Olympic Card: Silber, Gold\n\nWettkämpfe: Weltcup",
-      "l": []
-     },
-     "M": {
-      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski NM\nSwiss Olympic Card: Gold\n\nWettkämpfe: Weltcup",
-      "l": []
-     }
-    }
-   }
-  ]
- }
+ ]
 }

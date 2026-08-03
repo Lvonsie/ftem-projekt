@@ -84,6 +84,48 @@ def struct_prio(title):
         if hit: return i
     return len(tests)
 
+# Spalten des "homepage"-Sheets: 7-9 F1-F3, 11-14 T1-T4, 16-17 E1-E2, 19 M
+HOME_COLS = [("F1",7),("F2",8),("F3",9),("T1",11),("T2",12),("T3",13),("T4",14),("E1",16),("E2",17),("M",19)]
+
+def parse_cell(v):
+    """Text + Links ([[Text|URL]]) aus einer Zelle loesen."""
+    links = [{"text": m.group(1).strip() or "Dokument", "href": m.group(2).strip()}
+             for m in LINK_RE.finditer(v) if m.group(2).strip().startswith("http")]
+    txt = LINK_RE.sub('', v)
+    txt = REF_RE.sub('', txt)
+    txt = re.sub(r'[ \t]+\n', '\n', txt)
+    txt = re.sub(r'\n{3,}', '\n\n', txt).strip()
+    return txt, links
+
+def parse_homepage(wb):
+    """Sheet "homepage" -> Kurz-Zusammenfassung pro Stufe fuer die Startseiten-Popups.
+    Zeile "Einleitung/introduction-home" liefert den Einleitungstext pro Phase (F1/T1/E1/M),
+    die uebrigen Zeilen (WAS/WIE VIEL/Umfeld & Struktur) Texte pro Entwicklungsstufe."""
+    name = next((s for s in wb.sheetnames if s.lower().strip() == "homepage"), None)
+    if not name:
+        return None
+    ws = wb[name]
+    intro = {}
+    sections = []
+    for r in range(2, ws.max_row + 1):
+        sub = clean(ws.cell(r, 5).value)
+        if not sub:
+            continue
+        key = clean(ws.cell(r, 4).value)
+        cells = {}
+        for st, c in HOME_COLS:
+            txt, links = parse_cell(clean(ws.cell(r, c).value))
+            if txt or links:
+                cells[st] = {"v": txt, "l": links}
+        if key == "introduction-home" or (sub == "Einleitung" and not intro):
+            intro = {"f": cells.get("F1", {}).get("v", ""), "t": cells.get("T1", {}).get("v", ""),
+                     "e": cells.get("E1", {}).get("v", ""), "m": cells.get("M", {}).get("v", "")}
+        elif cells:
+            sections.append({"title": sub, "cells": cells})
+    if not intro and not sections:
+        return None
+    return {"intro": intro, "sections": sections}
+
 def convert(xlsx_path, sport_id):
     wb = openpyxl.load_workbook(xlsx_path, data_only=True)
     ws = wb["detail"]
@@ -140,10 +182,14 @@ def convert(xlsx_path, sport_id):
     themes = sa + ma + su + rest
 
     data = {"stages": STAGES, "ages": ages, "themes": themes}
+    home = parse_homepage(wb)
+    if home:
+        data["home"] = home
     out = os.path.join(BASE, "ftem_data_" + sport_id + ".json")
     json.dump(data, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     n_rows = sum(len(t["rows"]) for t in themes)
-    print("written", os.path.basename(out), "| themes:", len(themes), "| rows:", n_rows, "| ages:", bool(ages))
+    print("written", os.path.basename(out), "| themes:", len(themes), "| rows:", n_rows,
+          "| ages:", bool(ages), "| home:", bool(home))
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

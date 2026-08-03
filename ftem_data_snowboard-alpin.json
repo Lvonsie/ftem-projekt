@@ -2531,5 +2531,150 @@
     }
    ]
   }
- ]
+ ],
+ "home": {
+  "intro": {
+   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
+   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
+   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
+   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
+  },
+  "sections": [
+   {
+    "title": "Was trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Umfangreich, vielseitig & erlebnisorientiert Bewegen\nBewegungs- & Spielgrundformen erlernen\n\nOn Snow:\nGrundlagen von Snowboard Alpin entdecken, erwerben und festigen:\nGrundschwung (gerutscht)\n\nOff Snow:\n- Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.\n- Spielerische Einheiten.",
+      "l": []
+     },
+     "F2": {
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\nGrundlagen von Snowboard Alpin anwenden und variieren\n\nOff Snow:\n- Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.\n- Spielerische Einheiten.",
+      "l": []
+     },
+     "F3": {
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\n- spezifische Grundlagen (Snowboard Alpin Essentials 1-) erwerben\n- Fahren in Toren\n- Race - Grundschwung\nBefahren (kurz und lange Schwünge) auf schwierigen Pisten\n- Allgemeine Grundlagen erwerben und festigen\n\nOff Snow:\n- Ausdauer: Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen (Umfangreich, vielseitig und herausfordernd).\n- Mobilität/Beweglichkeit: Gelenks- & Muskelbeweglichkeit optimieren.\n- Kraft: Technik und Haltung erlernen.\n- Schnelligkeit/Agilität: Goldenes Alter von 8 bis 13 Jahre. Das Training immer frisch und mit maximaler Intensität durchführen.",
+      "l": []
+     },
+     "T1": {
+      "v": "on snow:\n- Anwenden der Racing Baisc\n-  Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\noff snow:\nAusdauer: Belastungsfähigkeit im aeroben Bereich aufbauen und aktiven Alltag pflegen\n\nKraft: Stabilität, Haltung und Technik erwerben &  festigen. Window of opportunity bei Mädchen.\n\nSchnelligkeit/Agilität: Goldenes Alter von 8 bis 13 Jahre. Auf Wachstumsschub in der Adoleszenz aufpassen. Das Training immer frisch und mit maximaler Intensität durchführen.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen kennenlernen & ausprobieren",
+      "l": []
+     },
+     "T2": {
+      "v": "on snow:\n- Gestalten und Ergänzen der Racing Basic\n- Erwerben von:\nKontinuirelicher Druckaufbau durch Bewegungsfluss\n- Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer stärken\n\nKraft: Stabilität, Haltung und Technik festigen. strukturiertes Krafttraining. Window of opportunity bei Jungen.\n\nSchnelligkeit/Agilität: Auf Wachstumsschub in der Adoleszenz aufpassen. Das Training immer frisch und mit maximaler Intensität durchführen.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen kennenlernen, ausprobieren & implementieren",
+      "l": []
+     },
+     "T3": {
+      "v": "on snow:\n- Gestalten und Ergänzen der Racing Basic\n- Anwenden von:\nKontinuirelicher Druckaufbau durch Bewegungsfluss\n- Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen implementieren",
+      "l": []
+     },
+     "T4": {
+      "v": "on snow:\n- Gestalten und Ergänzen der Racing Basic\n- Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen implementieren",
+      "l": []
+     },
+     "E1": {
+      "v": "on snow:\n- individuelles Gestalten und Ergänzen der Racing Basic\n- Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n- Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
+      "l": []
+     },
+     "E2": {
+      "v": "on snow:\n- individuelles Gestalten und Ergänzen der Racing Basic\n- Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n- Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
+      "l": []
+     },
+     "M": {
+      "v": "on snow:\n- individuelles Gestalten und Ergänzen der Racing Basic\n- Fokus auf der Automatisierung der Bewegungsabläufe unter Berücksichtigung von individuellen technischen Merkmalen\n- Techniklernen in den Toren mit Hilfsmittel kombiniert mit freiem Fahren\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Wie viel trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Aktiven Alltag pflegen\n\nPro Nacht: 9-11h Schlaf",
+      "l": []
+     },
+     "F2": {
+      "v": "Aktiven Alltag pflegen\n\nPro Woche: 1-2 Trainings im Skiclub, in anderen Clubs\nPro Nacht: 9-11h Schlaf",
+      "l": []
+     },
+     "F3": {
+      "v": "Aktiven Alltag pflegen\n\nPro Woche: 1-2 Trainings im Skiclub\nPro Woche: 1-2 Trainings in anderen Clubs\nPro Nacht: 9-11h Schlaf",
+      "l": []
+     },
+     "T1": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 20-25 Tage\n- Off Snow: 8-10h / Woche\n\nWinter (Dez- Apr)\n- On Snow: 3-5 Tage / Woche\n- Off Snow: 3-6h / Woche",
+      "l": []
+     },
+     "T2": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 25-30 Tage\n- Off Snow: 8-14h / Woche\n\nWinter (Dez- Apr)\n- On Snow: 3-5 Tage / Woche\n- Off Snow: 4-7h / Woche",
+      "l": []
+     },
+     "T3": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 30-35Tage\n- Off Snow: ca. 13h / Woche (350-410h)\n\nWinter (Dez- Apr)\n- On Snow: 60-70 Tage\n- Off Snow: 6-8h / Woche",
+      "l": []
+     },
+     "T4": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-40 Tage\n- Off Snow: ca. 13h / Woche (350-410h)\n\nWinter (Dez- Apr)\n- On Snow: 60-70 Tage\n- Off Snow: 6-8h / Woche",
+      "l": []
+     },
+     "E1": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 15h / Woche (400-480h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
+      "l": []
+     },
+     "E2": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 13h / Woche (365-435h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
+      "l": []
+     },
+     "M": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 13h / Woche (365-435h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Struktur & Umfeld",
+    "cells": {
+     "F1": {
+      "v": "Umfeld & Struktur: Familie & Freud:innen\n\nWettkämpfe: Freude teilzunehmen",
+      "l": []
+     },
+     "F2": {
+      "v": "Umfeld & Struktur: Familie, Freud:innen, Sportvereine\n\nWettkämpfe: Freude teilzunehmen\nSommer: weitere (Spiel)-Sportarten\nWinter:",
+      "l": []
+     },
+     "F3": {
+      "v": "Umfeld & Struktur: Familie, Freud:innen, Sportvereine\n\nWettkämpfe: Freude teilzunehmen & sich zu messen\nSommer: weitere (Spiel)-Sportarten\nWinter:",
+      "l": []
+     },
+     "T1": {
+      "v": "Familie & Freund:innen\nVolks- oder Sportschule\n\nKader: Sporster\nSwiss Olympic Card: Lokal\n\nWettkämpfe: Jun FIS",
+      "l": []
+     },
+     "T2": {
+      "v": "Familie & Freund:innen\nVolks- oder Sportschule\n\nKader: Contender\nSwiss Olympic Card: Lokal/ Regional\n\nWettkämpfe: Jun FIS, FIS",
+      "l": []
+     },
+     "T3": {
+      "v": "Familie & Freund:innen\nBeruf & Schule mit Sportlösung\n\nKader: Performer, Swiss Ski Kader\nSwiss Olympic Card: Regional / National\n\nWettkämpfe:\nSnowboard Alpin  Jun FIS, FIS & EC GS & SL",
+      "l": []
+     },
+     "T4": {
+      "v": "Partner:in, Freund:innen & Familie\nBeruf oder Schule mit Sportlösung, Spitzensport-RS/WK\n\nKader: Swiss Ski Kader\nSwiss Olympic Card: National\n\nWettkämpfe:\nSnowboard Alpin  Jun FIS, FIS & EC GS & SL",
+      "l": []
+     },
+     "E1": {
+      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski Kader\nSwiss Olympic Card: Elite, Bronze\n\nWettkämpfe:\nSnowboard Alpin EC & WC GS & SL",
+      "l": []
+     },
+     "E2": {
+      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski A-Kader\nSwiss Olympic Card: Gold, Silber, Bronze\n\nWettkämpfe:\nSnowboard Alpin EC & WC GS & SL",
+      "l": []
+     },
+     "M": {
+      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski NM\nSwiss Olympic Card: Gold\n\nWettkämpfe:\nSnowboard Alpin WC GS & SL",
+      "l": []
+     }
+    }
+   }
+  ]
+ }
 }

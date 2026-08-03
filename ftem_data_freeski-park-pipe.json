@@ -2169,5 +2169,150 @@
     }
    ]
   }
- ]
+ ],
+ "home": {
+  "intro": {
+   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
+   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
+   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
+   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
+  },
+  "sections": [
+   {
+    "title": "Was trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Coming soon…",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Wie viel trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Coming soon…",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Struktur & Umfeld",
+    "cells": {
+     "F1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Coming soon…",
+      "l": []
+     }
+    }
+   }
+  ]
+ }
 }

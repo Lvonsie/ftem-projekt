@@ -2721,5 +2721,150 @@
     }
    ]
   }
- ]
+ ],
+ "home": {
+  "intro": {
+   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
+   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
+   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
+   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
+  },
+  "sections": [
+   {
+    "title": "Was trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Umfangreich, vielseitig & erlebnisorientiert Bewegen\nBewegungs- & Spielgrundformen erlernen\n\nOn Snow:\n- Element \"Schnee\" spielerisch entdecken.\n- Grundlagen vom Skifahren entdecken, erwerben und festigen.\n- Jede Gelegenheit zum frei Fahren nutzen.\n\nOff Snow:\n- Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.\n- Spielerische Einheiten.",
+      "l": []
+     },
+     "F2": {
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\n- Grundlagen vom Skifahren anwenden und variieren.\n- Jede Gelegenheit zum frei Fahren nutzen und Grundtechnik erleben.\n- erste Fahrten in Kids Cross\n- Basic Air\n\nOff Snow:\n- Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.\n- Spielerische Einheiten.",
+      "l": []
+     },
+     "F3": {
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\n- Spezifische Grundlagen (Racing Basics 1-3) vom Ski Alpin erwerben.\n- allgemeine Grundlagen erwerben & festigen (Basic Air)\n- Fahren in einem Kids Cross.\n\nOff Snow:\n- Ausdauer: Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen (Umfangreich, vielseitig und herausfordernd).\n- Mobilität/Beweglichkeit: Gelenks- & Muskelbeweglichkeit optimieren.\n- Kraft: Technik und Haltung erlernen.\n- Schnelligkeit/Agilität: Goldenes Alter von 8 bis 13 Jahre. Das Training immer frisch und mit maximaler Intensität durchführen.",
+      "l": []
+     },
+     "T1": {
+      "v": "on snow:\n- Anwenden der Racing Basics 1-.3\n- Erwerben Racing Basic 4 (Hauptbelastung Aussenski)\n- einfache Abschnitte in einem Pro Cross fahren\n- Anwenden & Erwerben der Racing Skicross Essentials 1, 3 & 4 (Start, Elemente, aerodynamische Position)\n\noff snow:\nAusdauer: Belastungsfähigkeit im aeroben Bereich aufbauen und aktiven Alltag pflegen\n\nKraft: Stabilität, Haltung und Technik erwerben &  festigen. Window of opportunity bei Mädchen.\n\nSchnelligkeit/Agilität: Goldenes Alter von 8 bis 13 Jahre. Auf Wachstumsschub in der Adoleszenz aufpassen. Das Training immer frisch und mit maximaler Intensität durchführen.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen kennenlernen & ausprobieren",
+      "l": []
+     },
+     "T2": {
+      "v": "on snow:\n- Gestalten und Ergänzen der Racing Basics 1-3\n- Anwenden Racing Basic 4\n- Erwerben Racing Basic 5 (kontinuierlicher Belastungsaufbau)\n- einfache Abschnitte in einem Pro cross fahren erlernen\n- Anwenden Racing Skicross Essentials 1,3 & 4\n- Erwerben Racing Skicross Essentials 2 (SX Schwung, Steilwand-, Negativ- & Wellenkurve)\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer stärken\n\nKraft: Stabilität, Haltung und Technik festigen. strukturiertes Krafttraining. Window of opportunity bei Jungen.\n\nSchnelligkeit/Agilität: Auf Wachstumsschub in der Adoleszenz aufpassen. Das Training immer frisch und mit maximaler Intensität durchführen.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen kennenlernen, ausprobieren & implementieren",
+      "l": []
+     },
+     "T3": {
+      "v": "on snow:\n- Gestalten und Ergänzen Racing Basics 1-4\n- Anwenden Racing Basic 5\n- Techniklernen Skicross mti Hilfsmitteln kombiniert mit freiem Fahren\n- Gestalten und Ergänzen Racing Skicross Essential 1 & 4\n- Anwenden Racing Skicross Essential 2 & 3\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen implementieren",
+      "l": []
+     },
+     "T4": {
+      "v": "on snow:\n- Gestalten & Ergänzen Racing Basic 1-5\n- Techniklernen Skicross mti Hilfsmitteln kombiniert mit freiem Fahren\n- Gestalten & Ergänzen Racing Skicross Essentials 1-4\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Grundtechniken erlernen\n\nRegenerations-& Präventionsmassnahmen implementieren",
+      "l": []
+     },
+     "E1": {
+      "v": "on snow:\n- freies Fahren im Training implementieren als Ein- & Ausfahren für gutes Gefühl und Ritual\n- Gestalten & Ergänzen Racing Basics 1-5\n- Fokus auf Automatisierung der Bewgungsabläufe unter Berücksichtigung von individuellen Merkmalen\n- Techniklernen Skicross mti Hilfsmitteln kombiniert mit freiem Fahren\n- Individuelles Gestalten und Ergänzen der Racing Skicross Essentials 1-4\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
+      "l": []
+     },
+     "E2": {
+      "v": "on snow:\n- freies Fahren im Training implementieren als Ein- & Ausfahren für gutes Gefühl und Ritual\n- Gestalten & Ergänzen Racing Basics 1-5\n- Fokus auf Automatisierung der Bewgungsabläufe unter Berücksichtigung von individuellen Merkmalen\n- Techniklernen Skicross mti Hilfsmitteln kombiniert mit freiem Fahren\n- Individuelles Gestalten und Ergänzen der Racing Skicross Essentials 1-4\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
+      "l": []
+     },
+     "M": {
+      "v": "on snow:\n- freies Fahren im Training implementieren als Ein- & Ausfahren für gutes Gefühl und Ritual\n- Gestalten & Ergänzen Racing Basics 1-5\n- Fokus auf Automatisierung der Bewgungsabläufe unter Berücksichtigung von individuellen Merkmalen\n- Techniklernen Skicross mti Hilfsmitteln kombiniert mit freiem Fahren\n- Individuelles Gestalten und Ergänzen der Racing Skicross Essentials 1-4\n\noff snow:\nAusdauer: aerobe und anaerobe Ausdauer gezielt trainieren und aufrechterhalten\n\nKraft: Strukturiertes und individuelles Krafttraining, welches an Leistungsdiagnostik angepasst ist.\n\nSchnelligkeit/Agilität: Das Training immer frisch und mit maximaler Intensität durchführen. Erholungszeit beachten.\n\nMobilität: Gelenks- & Muskelbeweglichkeit optimieren\n\nTrainingsplanung: Interferenzeffekte minimieren.\n\nPsychologische Techniken implementieren\n\nRegenerations-& Präventionsmassnahmen optimieren",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Wie viel trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Aktiven Alltag pflegen\n\nPro Nacht: 9-11h Schlaf",
+      "l": []
+     },
+     "F2": {
+      "v": "Aktiven Alltag pflegen\n\nPro Woche: 1-2 Trainings im Skiclub, in anderen Clubs\nPro Nacht: 9-11h Schlaf",
+      "l": []
+     },
+     "F3": {
+      "v": "Aktiven Alltag pflegen\n\nPro Woche: 1-2 Trainings im Skiclub\nPro Woche: 1-2 Trainings in anderen Clubs\nPro Nacht: 9-11h Schlaf",
+      "l": []
+     },
+     "T1": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 20-25 Tage\n- Off Snow: 8-10h / Woche\n\nWinter (Dez- Apr)\n- On Snow: 3-5 Tage / Woche\n- Off Snow: 3-6h / Woche",
+      "l": []
+     },
+     "T2": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 25-30 Tage\n- Off Snow: 8-14h / Woche\n\nWinter (Dez- Apr)\n- On Snow: 3-5 Tage / Woche\n- Off Snow: 4-7h / Woche",
+      "l": []
+     },
+     "T3": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 30-35Tage\n- Off Snow: ca. 13h / Woche (350-410h)\n\nWinter (Dez- Apr)\n- On Snow: 60-70 Tage\n- Off Snow: 6-8h / Woche",
+      "l": []
+     },
+     "T4": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-40 Tage\n- Off Snow: ca. 13h / Woche (350-410h)\n\nWinter (Dez- Apr)\n- On Snow: 60-70 Tage\n- Off Snow: 6-8h / Woche",
+      "l": []
+     },
+     "E1": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 15h / Woche (400-480h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
+      "l": []
+     },
+     "E2": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 13h / Woche (365-435h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
+      "l": []
+     },
+     "M": {
+      "v": "Sommer (Mai - Nov)\n- On Snow: 35-45Tage\n- Off Snow: ca. 13h / Woche (365-435h)\n\nWinter (Dez- Apr)\n- On Snow: 75-90 Tage\n- Off Snow: 7-10h / Woche",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Struktur & Umfeld",
+    "cells": {
+     "F1": {
+      "v": "Umfeld & Struktur: Familie & Freud:innen\n\nWettkämpfe: Freude teilzunehmen",
+      "l": []
+     },
+     "F2": {
+      "v": "Umfeld & Struktur: Familie, Freud:innen, Sportvereine\n\nWettkämpfe: Freude teilzunehmen\nSommer: weitere (Spiel)-Sportarten\nWinter: Kids Cross, Smartcompetition",
+      "l": []
+     },
+     "F3": {
+      "v": "Umfeld & Struktur: Familie, Freud:innen, Sportvereine\n\nWettkämpfe: Freude teilzunehmen & sich zu messen\nSommer: weitere (Spiel)-Sportarten\nWinter: Kids Cross, Smartcompetition",
+      "l": []
+     },
+     "T1": {
+      "v": "Familie & Freund:innen\nVolks- oder Sportschule\n\nKader: Sichtungskader Skicross\nSwiss Olympic Card: Regional\n\nWettkämpfe:\nSwissskicross Tour",
+      "l": []
+     },
+     "T2": {
+      "v": "Familie & Freund:innen\nVolks- oder Sportschule\n\nKader: Sichtungskader Skicross\nSwiss Olympic Card: Regional\n\nWettkämpfe:\nSwissskicross Tour, Skicross Jun FIS",
+      "l": []
+     },
+     "T3": {
+      "v": "Familie & Freund:innen\nBeruf & Schule mit Sportlösung\n\nKader: Sichtungskader Skicross\nSwiss Olympic Card: Regional / National\n\nWettkämpfe:\nc",
+      "l": []
+     },
+     "T4": {
+      "v": "Partner:in, Freund:innen & Familie\nBeruf oder Schule mit Sportlösung, Spitzensport-RS/WK\n\nKader: Sichtungskader Skicross, Swiss Ski Kader\nSwiss Olympic Card: Regional / National\n\nWettkämpfe:\nSkicross Jun FIS, FIS & EC",
+      "l": []
+     },
+     "E1": {
+      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski Kader\nSwiss Olympic Card: Elite, Bronze\n\nWettkämpfe:\nSkicross EC & WC",
+      "l": []
+     },
+     "E2": {
+      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski A-Kader\nSwiss Olympic Card: Gold, Silber, Bronze\n\nWettkämpfe:\nSkicross EC & WC",
+      "l": []
+     },
+     "M": {
+      "v": "Partner:in, Freund:innen & Familie\nFernstudium, berufliche WB mit Sportlösung Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski NM\nSwiss Olympic Card: Gold\n\nWettkämpfe:\nSkicross EC & WC",
+      "l": []
+     }
+    }
+   }
+  ]
+ }
 }

@@ -748,7 +748,10 @@ def home_html(datamap, lang):
     go_lbl = {"de": "Zum Athlet:innen-Weg", "fr": "Vers le parcours de l'athlète", "it": "Al percorso dell'atleta"}[lang]
     aw_cta = ('<div class="aw-cta"><button class="aw-btn" type="button">'+esc(aw_lbl)+
               ' <span class="aw-ar">→</span></button></div>')
-    # Stufen-Summaries (Klick auf Zone -> Kurzbeschrieb statt direkt Athletenweg)
+    # Stufen-Summaries (Klick auf Zone -> Kurzbeschrieb statt direkt Athletenweg).
+    # Pro Sportart aus dem "homepage"-Sheet des Excels (data["home"]); generischer
+    # FTEM-Text als Fallback, falls eine Sportart keine Zusammenfassung hat.
+    PH_STAGES = {"f": ["F1","F2","F3"], "t": ["T1","T2","T3","T4"], "e": ["E1","E2"], "m": ["M"]}
     ph_tpls = ""
     for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
         ph_tpls += ('<template id="tpl-ph-'+k+'" data-t="'+esc(pname)+' · '+esc(prng)+'">'
@@ -756,6 +759,41 @@ def home_html(datamap, lang):
                     '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+'</div></div></div>'
                     '<p class="ps-desc">'+pdesc+'</p>'
                     '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
+    for s2 in SPORTS:
+        d2 = datamap.get(s2["id"])
+        hm = (d2 or {}).get("home")
+        if not hm:
+            continue
+        ages2 = {kk: vv for kk, vv in ((d2.get("ages") or {}) if d2 else {}).items() if vv}
+        for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
+            intro2 = (hm.get("intro") or {}).get(k) or pdesc
+            secs = ""
+            for sec in hm.get("sections", []):
+                cols = ""
+                for st in PH_STAGES[k]:
+                    cell = (sec.get("cells") or {}).get(st)
+                    if not cell or not (cell.get("v") or cell.get("l")):
+                        continue
+                    txt = esc(tr(cell.get("v") or "", lang)).replace("\n", "<br>")
+                    lks2 = ""
+                    if cell.get("l"):
+                        lks2 = ('<div class="lks">'
+                                + "".join('<a href="'+esc(l["href"])+'" data-title="'+esc(tr(l["text"], lang))+'">'
+                                          + esc(tr(l["text"], lang)) + '</a>' for l in cell["l"])
+                                + '</div>')
+                    age2 = ages2.get(st, "")
+                    cols += ('<div class="ps-col"><div class="ps-st">'+st
+                             + ('<i>'+esc(age2)+'</i>' if age2 else '') + '</div>'
+                             + ('<p>'+txt+'</p>' if txt else '') + lks2 + '</div>')
+                if cols:
+                    secs += ('<div class="ps-sec"><h4>'+esc(tr(sec["title"], lang))+'</h4>'
+                             '<div class="ps-cols">'+cols+'</div></div>')
+            ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
+                        '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
+                        '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
+                        '<p class="ps-desc">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
+                        + secs +
+                        '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
     fi_links = [
         ({"de":"Übersicht FTEM","fr":"Aperçu FTEM","it":"Panoramica FTEM"}[lang], "https://snowsports.flink.host/s/iFt05YOw/c5lG7vWX"),
@@ -1028,6 +1066,15 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .ph-sum .ps-name{font-size:17px;font-weight:800}
 .ph-sum .ps-rng{font-size:12px;font-weight:700;color:var(--mut)}
 .ph-sum .ps-desc{font-size:13.5px;line-height:1.6;margin:0 0 15px}
+.ph-sum.ph-wide{max-width:840px}
+.ph-sum .ps-sec h4{margin:16px 0 7px;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--acc)}
+.ph-sum .ps-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.ph-sum .ps-col{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--psc,#4a5563);border-radius:9px;padding:8px 11px;font-size:11.5px;line-height:1.5;min-width:0}
+.ph-sum .ps-col p{margin:0;white-space:normal;overflow-wrap:anywhere}
+.ph-sum .ps-st{font-weight:800;font-size:11px;margin-bottom:4px}
+.ph-sum .ps-st i{font-style:normal;color:var(--mut);font-weight:700;font-size:10px;margin-left:6px}
+.ph-sum .ps-desc{white-space:pre-line}
+.ph-sum .ps-sec+.aw-go,.ph-sum .ps-sec:last-of-type{margin-bottom:14px}
 .ph-sum .aw-go{font:inherit;font-size:13px;font-weight:800;color:#fff;background:var(--red);border:none;border-radius:9px;padding:10px 18px;cursor:pointer}
 .ph-sum .aw-go:hover{filter:brightness(1.12)}
 .fi-links{margin-top:16px}
@@ -1832,8 +1879,11 @@ function posAW(){
 }
 window.addEventListener('resize',posAW);posAW();
 document.querySelectorAll('.pband').forEach(bd=>{
-  const open=()=>{const k=bd.dataset.ph;const tpl=document.getElementById('tpl-ph-'+k);
-    if(tpl){openInfo('tpl-ph-'+k, tpl.dataset.t||'');}else{goAW();}};
+  const open=()=>{const k=bd.dataset.ph;
+    const sid=homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0];
+    let id='tpl-ph-'+k+'-'+sid, tpl=document.getElementById(id);
+    if(!tpl){id='tpl-ph-'+k;tpl=document.getElementById(id);}
+    if(tpl){openInfo(id, tpl.dataset.t||'');}else{goAW();}};
   bd.addEventListener('click',open);
   bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
 });

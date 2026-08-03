@@ -2590,5 +2590,150 @@
     }
    ]
   }
- ]
+ ],
+ "home": {
+  "intro": {
+   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
+   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
+   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
+   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
+  },
+  "sections": [
+   {
+    "title": "WAS trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Umfangreich, vielseitig & erlebnisorientiert Bewegen\nBewegungs- & Spielgrundformen erlernen\n\nOn Snow:\n- Element \"Schnee\" spielerisch entdecken.\n- Grundlagen vom Skispringen entdecken, erwerben und festigen.\n- Jede Gelegenheit zum springen nutzen.\n\nOff Snow:\n- Aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.\n- Spielerische Einheiten.",
+      "l": []
+     },
+     "F2": {
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\nLoading...\n\nOff Snow:\nLoading…",
+      "l": []
+     },
+     "F3": {
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\nComing Soon…\n\nOff Snow:\nComing Soon…",
+      "l": []
+     },
+     "T1": {
+      "v": "Psychologische Grundtechniken erlernen\nRegenerations-& Präventionsmassn. ausprobieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon...",
+      "l": []
+     },
+     "T2": {
+      "v": "Psychologische Grundtechniken erlernen\nRegenerations-& Präventionsmassn. ausprobieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon...",
+      "l": []
+     },
+     "T3": {
+      "v": "Optimaler Leistungszustand OLZ identifizieren\nRegenerations-& Präventionsmassn. implementieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Optimaler Leistungszustand OLZ identifizieren\nRegenerations-& Präventionsmassn. implementieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "WIE VIEL trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Aktiven Alltag pflegen\n\nPro Nacht: 9-11h Schlaf",
+      "l": []
+     },
+     "F2": {
+      "v": "Pro Jahr: mindestens 300 Sprünge\n\nPro Nacht: 9-11h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon...",
+      "l": []
+     },
+     "F3": {
+      "v": "Pro Jahr: mindestens 400 Sprünge\n\nPro Nacht: 9-11h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon...",
+      "l": []
+     },
+     "T1": {
+      "v": "Pro Jahr: 450 bis 550 Sprünge\n\nPro Nacht: 9-10h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon...",
+      "l": []
+     },
+     "T2": {
+      "v": "Pro Jahr: 550 bis 650 Sprünge\n\nPro Nacht: 9-10h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon…",
+      "l": []
+     },
+     "T3": {
+      "v": "Pro Jahr:  550 bis 650 Sprünge\n\nPro Nacht: 9-10h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Pro Jahr: 550 bis 650 Sprünge\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Pro Jahr:  Coming Soon...\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Pro Jahr:  Coming Soon...\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Pro Jahr:  Coming Soon...\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nPro Woche: Coming Soon...\n\nSommer:\nPro Woche: Coming Soon…",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Umfeld & Struktur",
+    "cells": {
+     "F1": {
+      "v": "Umfeld & Struktur: Familie & Freunde:innen\n\nKader: Skiclub\nSwiss Olympic Card: keine\n\nWettkämpfe: keine\nWettkampfserie: Animation\n\nSelektionsrichtlinien: keine",
+      "l": []
+     },
+     "F2": {
+      "v": "Umfeld & Struktur: Familie, Freunde:innen, Sportvereine\n\nKader: Skiclub\nSwiss Olympic Card: keine\n\nWettkämpfe: 0-4\nWettkampfserie: Animation\n\nSelektionsrichtlinien: keine",
+      "l": []
+     },
+     "F3": {
+      "v": "Umfeld & Struktur: Familie, Freunde:innen, Sportvereine\n\nKader: Skiclub\nSwiss Olympic Card: keine\n\nWettkämpfe: 6-14\nWettkampfserie: National\n\nSelektionsrichtlinien: keine",
+      "l": []
+     },
+     "T1": {
+      "v": "Umfeld & Struktur: Familie & Freunde:innen\nVolks- oder Sportschule\n\nKader: RLZ, Skiclub\nSwiss Olympic Card: Regional\n\nWettkämpfe: 10-16\nWettkampfserie: International\n\nSelektionsrichtlinien: gemäss RLZ",
+      "l": []
+     },
+     "T2": {
+      "v": "Umfeld & Struktur: Familie & Freunde:innen\nVolks- oder Sportschule\n\nKader: RLZ, NLZ\nSwiss Olympic Card: Regional\n\nWettkämpfe: 14-24\nWettkampfserie: International\n\nSelektionsrichtlinien: gemäss RLZ",
+      "l": []
+     },
+     "T3": {
+      "v": "Umfeld & Struktur: Familie & Freunde:innen\nBeruf & Schule mit Sportlösung\n\nKader: NLZ, Swiss-Ski C-Kader\nSwiss Olympic Card: National/Elite/Bronze\n\nWettkämpfe: 20-30\nWettkampfserie: International, Junioren WM\n\nSelektionsrichtlinien: gemäss NLZ und Swiss-Ski",
+      "l": []
+     },
+     "T4": {
+      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nBeruf oder Schule mit Sportlösung, Spitzensport-RS/WK\n\nKader: Swiss-Ski C/B-Kader\nSwiss Olympic Card: National/Elite/Bronze\n\nWettkämpfe: 26-40\nWettkampfserie: Continental Cup, World Cup\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
+      "l": []
+     },
+     "E1": {
+      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski B/A-Kader\nSwiss Olympic Card: Elite/Bronze\n\nWettkämpfe: 40-52\nWettkampfserie: Continental Cup, World Cup, WM, WM Skifliegen\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
+      "l": []
+     },
+     "E2": {
+      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski A/NM-Kader\nSwiss Olympic Card: Bronze/Silber/Gold\n\nWettkämpfe: 40-52\nWettkampfserie: World Cup, WM, WM Skifliegen, Olympische Spiele\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
+      "l": []
+     },
+     "M": {
+      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nFernstudium, berufliche WB mit Sportlösung\nGrenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski NM-Kader\nSwiss Olympic Card: Gold\n\nWettkämpfe: 40-52\nWettkampfserie: World Cup, WM, WM Skifliegen, Olympische Spiele\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
+      "l": []
+     }
+    }
+   }
+  ]
+ }
 }

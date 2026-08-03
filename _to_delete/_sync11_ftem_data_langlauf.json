@@ -13,15 +13,15 @@
  ],
  "ages": {
   "F1": "U8",
-  "F2": "U8-U10",
-  "F3": "U10-U12",
-  "T1": "U12-U14",
-  "T2": "U14-U16",
-  "T3": "U18-U21",
-  "T4": "U21",
+  "F2": "U10",
+  "F3": "U12",
+  "T1": "U14",
+  "T2": "U16",
+  "T3": "U18",
+  "T4": "U20",
   "E1": "U23",
-  "E2": ">23",
-  "M": ">23"
+  "E2": "> 24",
+  "M": "> 24"
  },
  "themes": [
   {
@@ -97,49 +97,49 @@
        "l": []
       },
       {
-       "v": "ca. 270 - 310h\n(Mittel 290h)\n\nSchüsse:\n1'600 - 2'300\n(Mittel 1'950)",
+       "v": "ca. 260 - 300h\n(Mittel 280h)",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "ca. 350 - 400h\n(Mittel 375h)\n\nSchüsse:\n2'900 - 3'600\n(Mittel 3'250)",
+       "v": "ca. 330 - 370h\n(Mittel 350h)",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "ca. 470 - 560h\n(Mittel 515h)\n\nSchüsse:\n4'800 - 5'800\n(Mittel 5'300)",
+       "v": "ca. 430 - 500h\n(Mittel 465h)",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "ca. 620 - 680h\n(Mittel 650h)\n\nSchüsse:\n6'700 - 7'500\n(Mittel 7'100)",
+       "v": "ca. 550 - 600h\n(Mittel 575h)",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "ca. 630 - 790h\n(Mittel 710h)\n\nSchüsse:\n7'900 - 9'000\n(Mittel 8'450)",
+       "v": "ca. 650 - 700h\n(Mittel 675h)",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "ca. 850 - 930h\n(Mittel 890h)\n\nSchüsse:\n9'800 - 11'800\n(Mittel 10'800)",
+       "v": "ca. 760 - 860h\n(Mittel 810h)",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "ca. 960 - 1000h\n(Mittel 980h)\n\nSchüsse:\n12'000 - 13'600\n(Mittel 12'800)",
+       "v": "ca. 910 - 960h\n(Mittel 935h)",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "ca. 1000 - 1020h\n(Mittel 1100h)\n\nSchüsse:\n14'000 - 14'400\n(Mittel 14'200)",
+       "v": "ca. 980 - 1000h\n(Mittel 990h)",
        "from": 9,
        "to": 9,
        "l": []
@@ -380,43 +380,43 @@
        "l": []
       },
       {
-       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und die Freude an polysportiver Bewegung wiederbeleben.\n\nInhalt:\nUnstrukturierte, spielerische Bewegung im Alltag (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Trainingsumfang und ohne biathlonspezifische Inhalte (Schiessen pausiert).",
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und die Freude an polysportiver Bewegung wiederbeleben.\n\nInhalt:\nUnstrukturierte, spielerische Bewegung im Alltag (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Trainingsumfang und ohne langlaufspezifische Inhalte.",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Ziele:\nErholung von der Wettkampfsaison sichern und mit polysportiver Bewegung die Freude am Sport erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne biathlonspezifische Inhalte (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Umfang; Schiesstraining pausiert.",
+       "v": "Ziele:\nErholung von der Wettkampfsaison sichern und mit polysportiver Bewegung die Freude am Sport erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Umfang.",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und mit polysportiver Bewegung die Trainingsfreude erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne biathlonspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang; Schiesstraining pausiert.",
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und mit polysportiver Bewegung die Trainingsfreude erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang.",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und mit polysportiver Bewegung Belastungsmonotonie vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne biathlonspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität; Schiesstraining pausiert.",
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und mit polysportiver Bewegung Belastungsmonotonie vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und Belastungsmonotonie sowie Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne biathlonspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität; Schiesstraining pausiert.",
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und Belastungsmonotonie sowie Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Ziele:\nKörperliche und mentale Erholung nach der internationalen Wettkampfsaison sichern und Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne biathlonspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität; Schiesstraining pausiert.",
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der internationalen Wettkampfsaison sichern und Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Ziele:\nKörperliche und mentale Erholung nach der Weltcup-Saison sichern und Übertraining auf höchstem Belastungsniveau vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne biathlonspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität; Schiesstraining pausiert.",
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Weltcup-Saison sichern und Übertraining auf höchstem Belastungsniveau vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
        "from": 9,
        "to": 9,
        "l": []
@@ -433,49 +433,49 @@
        "l": []
       },
       {
-       "v": "Ziele:\nBelastungsverträglichkeit umfangreich und vielseitig aufbauen, athletische Grundlagen (Koordination, Beweglichkeit, Grundkraft) festigen sowie spielerisch ans Schiessen heranführen.\n\nInhalt:\nPolysportives Athletiktraining (~6.4 h/Woche) mit Lauf-ABC, Sprüngen, Körpergewichtsübungen, Techniktraining an der Langhantel sowie erste Rollski-Einheiten zur Schulung von Klassisch- und Skating-Grundbewegungen, ergänzt durch spielerische Schiessformen am Luftgewehr.",
+       "v": "Ziele:\nBelastungsverträglichkeit umfangreich und vielseitig aufbauen sowie athletische Grundlagen (Koordination, Beweglichkeit, Grundkraft) festigen.\n\nInhalt:\nPolysportives Athletiktraining (~6.4 h/Woche) mit Lauf-ABC, Sprüngen, Körpergewichtsübungen, Techniktraining an der Langhantel sowie erste Rollski-Einheiten zur Schulung von Klassisch- und Skating-Grundbewegungen.",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Ziele:\nTrainingsgrundlagen breit aufbauen, Volumen und Häufigkeit steigern, sportartübergreifende Vielseitigkeit fördern sowie Schiessgrundtechnik (Anschlag, Atmung, Abzug) am Luftgewehr aufbauen.\n\nInhalt:\nAthletiktraining mit Fokus auf Langhanteltechnik, Rumpfstabilität und erste Sprungformen (~6.2 h/Woche), kombiniert mit Velo, Laufen, Schwimmen und ergänzenden Sportarten wie Leichtathletik oder Turnen sowie regelmässigem Schiesstraining am Luftgewehr im Liegen und Stehen.",
+       "v": "Ziele:\nTrainingsgrundlagen breit aufbauen, Volumen und Häufigkeit steigern sowie sportartübergreifende Vielseitigkeit fördern.\n\nInhalt:\nAthletiktraining mit Fokus auf Langhanteltechnik, Rumpfstabilität und erste Sprungformen (~6.2 h/Woche), kombiniert mit Velo, Laufen, Schwimmen und ergänzenden Sportarten wie Leichtathletik oder Turnen.",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Ziele:\nTrainingsgrundlagen breit aufbauen, Volumen und Häufigkeit auf ein deutlich höheres Niveau steigern und die Schiesstechnik am KK-Gewehr automatisieren.\n\nInhalt:\nPolysportives Athletiktraining mit Langhanteltechnik, Rumpfstabilität und Sprungschule (~7.7 h/Woche), kombiniert mit Velo, Laufen, Schwimmen und ergänzenden Sportarten sowie systematischem Schiesstraining am KK-Gewehr (Anschlag, Druckpunkt, Abzugsverhalten) im Liegen und Stehen.",
+       "v": "Ziele:\nTrainingsgrundlagen breit aufbauen sowie Volumen und Häufigkeit auf ein deutlich höheres Niveau steigern.\n\nInhalt:\nPolysportives Athletiktraining mit Langhanteltechnik, Rumpfstabilität und Sprungschule (~7.7 h/Woche), kombiniert mit Velo, Laufen, Schwimmen und ergänzenden Sportarten wie Bike, Leichtathletik oder Turnen.",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig aufbauen, Volumen und Häufigkeit auf hohem Niveau steigern sowie technische Schiesselemente am KK-Gewehr verfeinern.\n\nInhalt:\nPolysportives Athletiktraining (~9.1 h/Woche) mit Fokus auf funktioneller Effizienz, Langhanteltechnik, Plyometrie und Rumpfkraft, kombiniert mit Grundlagenausdauer auf Velo, im Laufen und auf Rollski bei tiefer bis mittlerer Intensität sowie flüssigem Repetieren und stabilem Abzugsverhalten im Schiesstraining.",
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig aufbauen sowie Volumen und Häufigkeit auf hohem Niveau steigern.\n\nInhalt:\nPolysportives Athletiktraining (~9.1 h/Woche) mit Fokus auf funktioneller Effizienz, Langhanteltechnik, Plyometrie und Rumpfkraft, kombiniert mit Grundlagenausdauer auf Velo, im Laufen und auf Rollski bei tiefer bis mittlerer Intensität.",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig aufbauen, Volumen und Häufigkeit auf hohem Niveau steigern sowie technische Schiesselemente weiter verfeinern.\n\nInhalt:\nUmfangreiches Athletiktraining (~9.8 h/Woche) mit Fokus auf funktioneller Effizienz, Langhanteltechnik, Plyometrie und Rumpfkraft, kombiniert mit Grundlagenausdauer auf Velo, im Laufen und auf Rollski bei tiefer bis mittlerer Intensität sowie Verfeinerung der Schiesstechnik im Liegen und Stehen.",
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig aufbauen sowie Volumen und Häufigkeit auf hohem Niveau steigern.\n\nInhalt:\nUmfangreiches Athletiktraining (~9.8 h/Woche) mit Fokus auf funktioneller Effizienz, Langhanteltechnik, Plyometrie und Rumpfkraft, kombiniert mit Grundlagenausdauer auf Velo, im Laufen und auf Rollski bei tiefer bis mittlerer Intensität.",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf hohem Umfangsniveau (18–22 h/Woche) aufbauen und die technischen Schiesselemente automatisieren.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5), Athletiktraining (~11.7 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft sowie hochfrequentem Schiesstraining zur Automatisierung der Schiesstechnik.",
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf hohem Umfangsniveau (18–22 h/Woche) aufbauen.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5) sowie Athletiktraining (~11.7 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf höchstem Umfangsniveau (18–22 h/Woche) aufbauen und die technischen Schiesselemente automatisieren.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5), Athletiktraining (~13.4 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft sowie hochfrequentem Schiesstraining zur Automatisierung der Schiesstechnik.",
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf höchstem Umfangsniveau (18–22 h/Woche) aufbauen.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5) sowie Athletiktraining (~13.4 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Ziele:\nKonditionelle Grundlagen auf Weltklasseniveau ausbauen, individuelle Bedürfnisse gezielt entwickeln und die Schiesstechnik unter Wettkampfbedingungen automatisieren.\n\nInhalt:\nHochvolumiges Ausdauertraining zu Fuss und auf Rollski mit spezifischen Trainingsgeräten, ergänzt durch Velo, Rudern und Schwimmen, Athletiktraining (~14.2 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft sowie individualisiertem Schiesstraining mit höchster Frequenz.",
+       "v": "Ziele:\nKonditionelle Grundlagen auf Weltklasseniveau ausbauen und individuelle Bedürfnisse gezielt entwickeln.\n\nInhalt:\nHochvolumiges Ausdauertraining zu Fuss und auf Rollski mit spezifischen Trainingsgeräten, ergänzt durch Velo, Rudern und Schwimmen sowie Athletiktraining (~14.2 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.",
        "from": 9,
        "to": 9,
        "l": []
@@ -492,49 +492,49 @@
        "l": []
       },
       {
-       "v": "Ziele:\nSportartspezifische Bewegungsqualität auf Rollski festigen, die Schnelligkeits-/Agilitätsfenster gezielt nutzen sowie die Schiessstellung sicher einnehmen.\n\nInhalt:\nErhöhter Anteil Rollski (klassisch und skating) mit Fokus auf Beinabstoss, Doppelstock und 1:2-Technik, ergänzt durch Sprint-, Koordinations- und Sprungformen, weiterführendes Krafttraining sowie regelmässiges Schiesstraining mit Fokus auf Anschlagstabilität.",
+       "v": "Ziele:\nSportartspezifische Bewegungsqualität auf Rollski festigen und die Schnelligkeits-/Agilitätsfenster gezielt nutzen.\n\nInhalt:\nErhöhter Anteil Rollski (klassisch und skating) mit Fokus auf Beinabstoss, Doppelstock und 1:2-Technik, ergänzt durch Sprint-, Koordinations- und Sprungformen sowie weiterführendes Krafttraining.",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Ziele:\nGrundlagenausdauer (I1) und sportartspezifische Technik festigen, Schnelligkeit und Muskelaufbau gezielt entwickeln sowie das Schiessen zunehmend mit körperlicher Belastung kombinieren.\n\nInhalt:\nStrukturierte Ausdauereinheiten (Berg- und Crosslauf, Velo 60–120'), Rollski mit Technikfokus sowie Muskelaufbau, beginnendes Explosivkrafttraining, Rumpfkraft und Schiesstraining mit ersten Kombiformen Laufen/Schiessen.",
+       "v": "Ziele:\nGrundlagenausdauer (I1) und sportartspezifische Technik festigen sowie Schnelligkeit und Muskelaufbau gezielt entwickeln.\n\nInhalt:\nStrukturierte Ausdauereinheiten (Berg- und Crosslauf, Velo 60–120'), Rollski mit Technikfokus sowie Muskelaufbau, beginnendes Explosivkrafttraining und Rumpfkraft.",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Ziele:\nGrundlagenausdauer (I1), sportartspezifische Technik und Muskelaufbau gezielt entwickeln, die Schnelligkeit gemäss Window of Opportunity (besonders bei den Jungen) nutzen sowie Schiesspräzision unter Belastung verbessern.\n\nInhalt:\nStrukturierte Ausdauereinheiten (Berg- und Crosslauf, Velo 60–120'), Rollski mit Technikfokus, Muskelaufbau, beginnendes Explosivkrafttraining und Rumpfkraft sowie regelmässige Kombitrainings Laufen/Rollski + Schiessen.",
+       "v": "Ziele:\nGrundlagenausdauer (I1), sportartspezifische Technik und Muskelaufbau gezielt entwickeln und die Schnelligkeit gemäss Window of Opportunity (besonders bei den Jungen) nutzen.\n\nInhalt:\nStrukturierte Ausdauereinheiten (Berg- und Crosslauf, Velo 60–120'), Rollski mit Technikfokus sowie Muskelaufbau, beginnendes Explosivkrafttraining und Rumpfkraft.",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Ziele:\nSchwellen-, Kapazitäts- und Maximalkraft gezielt entwickeln, das individuelle Athletenprofil schärfen sowie Schiessgeschwindigkeit und Präzision unter Belastung steigern.\n\nInhalt:\nStrukturierte Schwellenblöcke (I2/I3) ergänzt durch Kapazitätstraining, Muskelhypertrophie und intramuskuläres Koordinationstraining, kombiniert mit Rollski-Technik, ersten Sommerwettkämpfen (Swiss Biathlon Cup) sowie Kombitrainings mit Fokus auf Schiessgeschwindigkeit und 30/30-Präzision.",
+       "v": "Ziele:\nSchwellen-, Kapazitäts- und Maximalkraft gezielt entwickeln und das individuelle Athletenprofil schärfen.\n\nInhalt:\nStrukturierte Schwellenblöcke (I2/I3) ergänzt durch Kapazitätstraining, Muskelhypertrophie und intramuskuläres Koordinationstraining, kombiniert mit Rollski-Technik sowie ersten nationalen Rollski-Rennen.",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Ziele:\nSchwellen-, Kapazitäts- und Maximalkraft gezielt entwickeln, das individuelle Athletenprofil weiter schärfen sowie Schiessgeschwindigkeit und Präzision unter Wettkampfbelastung steigern.\n\nInhalt:\nStrukturierte Schwellenblöcke (I2/I3) ergänzt durch Kapazitätstraining, Muskelhypertrophie und intramuskuläres Koordinationstraining, kombiniert mit Rollski-Technik, Sommerwettkämpfen (Swiss Biathlon Cup, IBU Junior Cup) sowie Kombitrainings mit Schiessgeschwindigkeit und 30/30-Präzision.",
+       "v": "Ziele:\nSchwellen-, Kapazitäts- und Maximalkraft gezielt entwickeln und das individuelle Athletenprofil weiter schärfen.\n\nInhalt:\nStrukturierte Schwellenblöcke (I2/I3) ergänzt durch Kapazitätstraining, Muskelhypertrophie und intramuskuläres Koordinationstraining, kombiniert mit Rollski-Technik sowie 2–4 nationalen Rollski-Rennen und Trainingsrennen Langlauf.",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln, Muskelhypertrophie und Maximalkraft weiter ausbauen sowie die Schiessgeschwindigkeit standardisieren.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch Sommerwettkämpfe (Swiss Biathlon Cup, IBU Cup), intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten sowie hochintensive Kombitrainings (Laufen/Rollski + Schiessen) mit standardisierter Schiessgeschwindigkeit.",
+       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln sowie Muskelhypertrophie und Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch Sommerwettkämpfe (1–2 Rollski-Rennen, Trainingsrennen Langlauf) sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln, Muskelhypertrophie und Maximalkraft weiter ausbauen sowie die Schiessgeschwindigkeit standardisieren.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch nationale/internationale Sommerwettkämpfe (IBU World Cup Sommer, Swiss Biathlon Cup), intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten sowie hochintensive Kombitrainings mit standardisierter Schiessgeschwindigkeit.",
+       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln sowie Muskelhypertrophie und Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch 2–4 nationale/internationale Rollski-Rennen und Trainingsrennen Langlauf sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Ziele:\nVO₂max, Laktattoleranz und Schwellen-Geschwindigkeit auf Weltklasseniveau entwickeln, Muskelhypertrophie sowie Maximalkraft weiter ausbauen und die Schiessgeschwindigkeit unter Weltcup-Bedingungen sichern.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch nationale/internationale Sommerwettkämpfe, intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten sowie individualisierte Kombitrainings mit Weltcup-Schiessgeschwindigkeit.",
+       "v": "Ziele:\nVO₂max, Laktattoleranz und Schwellen-Geschwindigkeit auf Weltklasseniveau entwickeln und Muskelhypertrophie sowie Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch 2–4 nationale/internationale Rollski-Rennen und Trainingsrennen Langlauf sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.",
        "from": 9,
        "to": 9,
        "l": []
@@ -551,49 +551,49 @@
        "l": []
       },
       {
-       "v": "Ziele:\nÜbergang vom Rollski auf Schnee schaffen, spielerisches, sicheres Bewegen auf den Langlaufski (Klassisch und Skating) etablieren sowie den Wechsel vom Laufen zum Schiessen automatisieren.\n\nInhalt:\nErste Schneetrainings mit Spielformen (Elefantenwaschen, Spitalfangis, Skills Park), Grundtechniken (Diagonal, Gräten, Bogentreten, 1:2), Erhaltung der Athletik durch kurze, intensive Einheiten und vielseitige Sprünge sowie erste Kombiformen Skilaufen + Schiessen auf der Biathlonanlage.",
+       "v": "Ziele:\nÜbergang vom Rollski auf Schneeschnee schaffen und spielerisches, sicheres Bewegen auf den Langlaufski (Klassisch und Skating) etablieren.\n\nInhalt:\nErste Schneetrainings mit Spielformen (Elefantenwaschen, Spitalfangis, Skills Park), Grundtechniken (Diagonal, Gräten, Bogentreten, 1:2) sowie Erhaltung der Athletik durch kurze, intensive Einheiten und vielseitige Sprünge.",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Ziele:\nTechnik auf Rollski und Schnee verfeinern, den Übergang zur Schneesaison vorbereiten sowie das Schiessen unter Skibelastung stabilisieren.\n\nInhalt:\nTechnikparcours auf Rollski, Laufen mit Stöcken im kupierten Gelände, Spiele und Staffeln, Explosivkraft- und Rumpfkrafttraining sowie Kombitrainings Skilaufen + Schiessen mit Fokus auf stabiler Anschlagstechnik nach Belastung.",
+       "v": "Ziele:\nTechnik auf Rollski und Schnee verfeinern und den Übergang zur Schneesaison vorbereiten.\n\nInhalt:\nTechnikparcours auf Rollski, Laufen mit Stöcken im kupierten Gelände, Spiele und Staffeln sowie Explosivkraft- und Rumpfkrafttraining.",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Ziele:\nTechnik auf Rollski und Schnee verfeinern, Explosivkraft entwickeln, den Übergang zur Schneesaison vorbereiten sowie die Schiessgeschwindigkeit unter Skibelastung stabilisieren.\n\nInhalt:\nTechnikparcours auf Rollski, Laufen mit Stöcken im kupierten Gelände, Spiele und Staffeln, Explosivkraft- und Rumpfkrafttraining sowie Kombitrainings Skilaufen + Schiessen mit Fokus auf Schiessgeschwindigkeit und Präzision.",
+       "v": "Ziele:\nTechnik auf Rollski und Schnee verfeinern, Explosivkraft entwickeln und den Übergang zur Schneesaison vorbereiten.\n\nInhalt:\nTechnikparcours auf Rollski, Laufen mit Stöcken im kupierten Gelände, Spiele und Staffeln sowie Explosivkraft- und Rumpfkrafttraining.",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Ziele:\nForm über kurze Intervalle steuern, Maximal- sowie Schnellkraft auf das Saisonniveau bringen und die Schiessleistung unter Wettkampfbedingungen sichern.\n\nInhalt:\nFortführung aller Trainingsformen mit Akzent auf kurzen Intervallen, Schnell- und Explosivkraft mit und ohne Zusatzgewicht, Übergang auf Schnee mit Technikfokus sowie wettkampfnahe Kombitrainings mit Fokus auf Schiessstabilität und -geschwindigkeit.",
+       "v": "Ziele:\nCForm über kurze Intervalle steuern und Maximal- sowie Schnellkraft auf das Saisonniveau bringen.\n\nInhalt:\nFortführung aller Trainingsformen mit Akzent auf kurzen Intervallen, Schnell- und Explosivkraft mit und ohne Zusatzgewicht sowie Übergang auf Schnee mit Technikfokus.",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Ziele:\nForm über kurze Intervalle steuern, Maximal- und Schnellkraft auf das Saisonniveau bringen und die Schiessleistung unter Wettkampfbedingungen sichern.\n\nInhalt:\nFortführung aller Trainingsformen mit Akzent auf kurzen Intervallen, Schnell- und Explosivkraft mit und ohne Zusatzgewicht, Übergang auf Schnee mit Technikfokus sowie wettkampfnahe Kombitrainings mit Fokus auf Schiessstabilität und -geschwindigkeit.",
+       "v": "Ziele:\nForm über kurze Intervalle steuern sowie Maximal- und Schnellkraft auf das Saisonniveau bringen.\n\nInhalt:\nFortführung aller Trainingsformen mit Akzent auf kurzen Intervallen, Schnell- und Explosivkraft mit und ohne Zusatzgewicht sowie Übergang auf Schnee mit Technikfokus.",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Ziele:\nRennintensität und VO₂max auf Wettkampfniveau bringen, auf Schnee adaptieren und die Schiessleistung unter Renntempo sichern.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining, Rumpfkraft sowie wettkampfnahe Kombitrainings mit Schiessleistung unter Renntempo.",
+       "v": "Ziele:\nRennintensität und VO₂max auf Wettkampfniveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "Ziele:\nRennintensität und VO₂max auf Weltcup-Niveau bringen, auf Schnee adaptieren und die Schiessleistung unter Weltcup-Bedingungen sichern.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining, Rumpfkraft sowie wettkampfnahe Kombitrainings mit Schiessleistung unter Weltcup-Tempo.",
+       "v": "Ziele:\nRennintensität und VO₂max auf Weltcup-Niveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Ziele:\nTempohärte und Hochgeschwindigkeitstechnik auf Weltcup-Niveau bringen, auf Schnee adaptieren und die Schiessleistung unter Weltcup-Bedingungen konstant halten.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining, Rumpfkraft sowie individualisierte Kombitrainings mit konstanter Schiessleistung unter Weltcup-Tempo.",
+       "v": "Ziele:\nTempohärte und Hochgeschwindigkeitstechnik auf Weltcup-Niveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.",
        "from": 9,
        "to": 9,
        "l": []
@@ -610,49 +610,49 @@
        "l": []
       },
       {
-       "v": "Ziele:\nErste Wettkampferfahrungen in einem freudvollen, lernorientierten Umfeld sammeln, die im Sommer aufgebaute Bewegungsqualität auf Schnee anwenden und das Schiessen im Wettkampf erleben.\n\nInhalt:\nRegelmässiges Schneetraining mit Technikvielfalt, Teilnahme am Swiss Biathlon Cup - Kids und lokalen Animationen, ergänzt durch reduziertes Athletiktraining (~2.6 h/Woche) zur Krafterhaltung und Verletzungsprophylaxe sowie wettkampfnahe Schiessübungen.",
+       "v": "Ziele:\nErste Wettkampferfahrungen in einem freudvollen, lernorientierten Umfeld sammeln und die im Sommer aufgebaute Bewegungsqualität auf Schnee anwenden.\n\nInhalt:\nRegelmässiges Schneetraining mit Technikvielfalt, Teilnahme an lokalen/regionalen Animationen und der Swiss Nordic Trophy, ergänzt durch reduziertes Athletiktraining (~2.6 h/Woche) zur Krafterhaltung und Verletzungsprophylaxe.",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Ziele:\nDie rund sechs Monate Schneezeit intensiv für Technik- und Grundlagentraining nutzen, über regionale Wettkämpfe Erfahrung sammeln sowie das Schiessen im Wettkampf festigen.\n\nInhalt:\nViel Zeit auf Ski mit Fokus auf Technik, Abfahrten, Spiele und Koordination, ergänzt durch erhaltendes Athletik- und Rumpfkrafttraining (~2.6 h/Woche), reduziertes Explosivkrafttraining, Plyometrie sowie Wettkämpfe auf nationaler Stufe.",
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit intensiv für Technik- und Grundlagentraining nutzen und über regionale Wettkämpfe Erfahrung sammeln.\n\nInhalt:\nViel Zeit auf Ski mit Fokus auf Technik, Abfahrten, Spiele und Koordination, ergänzt durch erhaltendes Athletik- und Rumpfkrafttraining (~2.6 h/Woche) sowie reduziertes Explosivkrafttraining und Plyometrie.",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Ziele:\nDie rund sechs Monate Schneezeit intensiv für Technik- und Grundlagentraining nutzen, über regionale sowie internationale Wettkämpfe Erfahrung sammeln und die Schiessleistung im Wettkampf festigen.\n\nInhalt:\nViel Zeit auf Ski mit Fokus auf Technik, Abfahrten, Spiele und Koordination, ergänzt durch erhaltendes Athletik- und Rumpfkrafttraining (~2.6 h/Woche), Explosivkrafttraining und Plyometrie mit reduziertem Volumen sowie Wettkämpfe auf nationaler Stufe und ersten internationalen Starts.",
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit intensiv für Technik- und Grundlagentraining nutzen und über regionale sowie internationale Wettkämpfe Erfahrung sammeln.\n\nInhalt:\nViel Zeit auf Ski mit Fokus auf Technik, Abfahrten, Spiele und Koordination, ergänzt durch erhaltendes Athletik- und Rumpfkrafttraining (~2.6 h/Woche) sowie Explosivkrafttraining und Plyometrie mit reduziertem Volumen.",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Ziele:\nDie rund sechs Monate Schneezeit für Form- und Leistungssteuerung in dichtem Wettkampfkalender nutzen und die Schiessleistung im internationalen Wettkampf stabilisieren.\n\nInhalt:\nViel Zeit auf Ski mit Grundlagen- und Techniktraining trotz Leistungseinbussen, Formsteuerung über kurze und kombinierte Intervalle, erhaltendes Athletik-, Explosiv- und Maximalkrafttraining (~2.6 h/Woche) mit an die Wettkämpfe angepasstem Volumen sowie Starts bei internationalen Wettkämpfen.",
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit für Form- und Leistungssteuerung in dichtem Wettkampfkalender nutzen.\n\nInhalt:\nViel Zeit auf Ski mit Grundlagen- und Techniktraining trotz Leistungseinbussen, Formsteuerung über kurze und kombinierte Intervalle sowie erhaltendes Athletik-, Explosiv- und Maximalkrafttraining (~2.6 h/Woche) mit an die Wettkämpfe angepasstem Volumen.",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Ziele:\nDie rund sechs Monate Schneezeit für gezielte Form- und Leistungssteuerung im dichten internationalen Wettkampfkalender nutzen und die Schiessleistung im internationalen Wettkampf stabilisieren.\n\nInhalt:\nViel Zeit auf Ski mit Grundlagen- und Techniktraining trotz Leistungseinbussen, Formsteuerung über kurze und kombinierte Intervalle, erhaltendes Athletik-, Explosiv- und Maximalkrafttraining (~3.3 h/Woche) mit an die Wettkämpfe angepasstem Volumen sowie Starts bei internationalen Wettkämpfen und Serien.",
+       "v": "Ziele:\nDie rund sechs Monate Schneezeit für gezielte Form- und Leistungssteuerung im dichten internationalen Wettkampfkalender nutzen.\n\nInhalt:\nViel Zeit auf Ski mit Grundlagen- und Techniktraining trotz Leistungseinbussen, Formsteuerung über kurze und kombinierte Intervalle sowie erhaltendes Athletik-, Explosiv- und Maximalkrafttraining (~3.3 h/Woche) mit an die Wettkämpfe angepasstem Volumen.",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Ziele:\nWettkampfleistung im internationalen Kalender abrufen, Form über gezieltes Tapering steuern und die Schiessleistung unter Weltcup-Bedingungen konstant halten.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~3.8 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen sowie Starts im World Cup.",
+       "v": "Ziele:\nWettkampfleistung im internationalen Kalender  abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~3.8 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender abrufen, Form über gezieltes Tapering steuern und die Schiessleistung unter Weltcup-Bedingungen konstant halten.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.3 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen sowie Starts im World Cup, an der WM und an Olympischen Spielen.",
+       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender  abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.3 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender konstant abrufen, Form über gezieltes Tapering steuern und die Schiessleistung unter Weltcup-Bedingungen auf höchstem Niveau abrufen.\n\nInhalt:\nWettkampforientiertes Skitraining mit hochgradig individualisierter Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.6 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen sowie Starts im World Cup, an der WM und an Olympischen Spielen.",
+       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender konstant abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit hochgradig individualisierter Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.6 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.",
        "from": 9,
        "to": 9,
        "l": []
@@ -1807,7 +1807,7 @@
    "group": "Sport & Athlet:in",
    "rows": [
     {
-     "label": "Skills-Checks (SC) und Leistungstests (LT) Technik",
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Technik",
      "segs": [
       {
        "v": "",
@@ -1992,168 +1992,6 @@
    ]
   },
   {
-   "title": "Schiessen",
-   "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Skills-Check (SC) & standartisierte Tests (ST) Schiessen",
-     "segs": [
-      {
-       "v": "SC 1: Stöcke ab- und anziehen während dem Laufen",
-       "from": 0,
-       "to": 0,
-       "l": [
-        {
-         "text": "Skills Check F1",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/JejSc6Wn"
-        }
-       ]
-      },
-      {
-       "v": "SC 1: Laufrichtung und Sicherheitsbestimmungen einhalten\n\nSC2: Luftgewehr selbständig bedienen",
-       "from": 1,
-       "to": 1,
-       "l": [
-        {
-         "text": "Skills Check F2",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/V2yGwL27"
-        }
-       ]
-      },
-      {
-       "v": "SC 1: Überblick am Schiesstand halten\n\nST 1: PISTE Schiesstest im 2. Jahr durchführen",
-       "from": 2,
-       "to": 2,
-       "l": [
-        {
-         "text": "Skills Check F3",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/2maBKGeJ"
-        }
-       ]
-      },
-      {
-       "v": "SC 1: Im Anschlag die Stehndscheibe 1 Minute halten\n\nST 1: PISTE Schiesstest verbessern",
-       "from": 3,
-       "to": 3,
-       "l": [
-        {
-         "text": "Skills Check T1",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/Az3cmPbP"
-        }
-       ]
-      },
-      {
-       "v": "SC 1: Immer gleiche Schiesstellung einnehmen\n\nST 1: PISTE Schiesstest: 400 Punkte\n\nST 2: 60 Schüsse komplex: 50 Treffer",
-       "from": 4,
-       "to": 4,
-       "l": [
-        {
-         "text": "Skills Check T2",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/g2f4V8sA"
-        }
-       ]
-      },
-      {
-       "v": "ST 1: PISTE Schiesstest\n\nST 2: 30/30 Präzision\n\nST 3: 60 Schüsse komplex",
-       "from": 5,
-       "to": 6,
-       "l": [
-        {
-         "text": "Skills Check T3",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/Fdup6x8Z"
-        },
-        {
-         "text": "Skills Check T4",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/ptd5MNkj"
-        }
-       ]
-      },
-      {
-       "v": "ST 1: PISTE Schiesstest\n\nST 2: 30/30 Präzision\n\nST3: 60 Schüsse komplex",
-       "from": 7,
-       "to": 8,
-       "l": [
-        {
-         "text": "Skills Check E-M",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/y1AhORyr"
-        }
-       ]
-      },
-      {
-       "v": "ST 1: PISTE Schiesstest\n\nST 2: 30/30 Präzision\n\nST3: 60 Schüsse komplex",
-       "from": 9,
-       "to": 9,
-       "l": [
-        {
-         "text": "Skills Check E-M",
-         "href": "https://snowsports.flink.host/s/FgjXULkZ/y1AhORyr"
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "label": "Inhalt Schiessen",
-     "segs": [
-      {
-       "v": "• Verschiedene Biathlonelemente spielerisch entdecken\n• Laserschiessen",
-       "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "• Sicherheitsregeln kennen. Sich selbständig in der Liegenstellung positionieren.\n• Kompakte Schussbilder erzielen.\n• Im Wettkampf sicher und selbständig schiessen.",
-       "from": 1,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Sommer\n• Auf der Biathlonanlage jederzeit sicher handlen.\n\nWinter\n• Den Wechsel vom Laufen zum Schiessen automatisieren.",
-       "from": 2,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• Sich selbständig in der Stehendstellung positionieren.\n\nVorbereitungsphase 2\n• Die Schiessstellung immer gleich einnehmen. Gleichmässiger Atemrhythmus.\n\nVorwettkampfphase\n• Den Anlauf der Strecke entsprechend Anpassen. Gleichmässiger Atemrhythmus.\n\nWettkampfphase\n• Den Anlauf der Strecke entsprechend Anpassen. Gleichmässiger Atemrhythmus.",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• KK-Gewehr richtig einstellen und Schiessposition automatisieren.\n• Druckpunkt und Abzugsverhalten.\n\nVorbereitungsphase 2\n• Ab- und Aufschultern automatisieren. • Atemrhythmus.\n\nVorwettkampfphase\n• Angepasstes Anlaufen, flüssige Abläufe, Atemrhythmus.\n\nWettkampfphase\n• Angepasstes Anlaufen, flüssige Abläufe, Atemrhythmus.",
-       "from": 4,
-       "to": 4,
-       "l": []
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• Flüssig repetieren, Druckpunkt und Abzugsverhalten.\n\nVorbereitungsphase 2\n• Flüssiges Ab- und Aufschultern, Atem- und Schiessrhythmus.\n\nVorwettkampfphase\n• Der Situation angepasst schiessen.\n\nWettkampfphase\n• Der Situation angepasst schiessen.",
-       "from": 5,
-       "to": 5,
-       "l": []
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• Technische Elemente verfeinern.\n\nVorbereitungsphase 2\n• Schiessgeschwindigkeit entwickeln.\n\nVorwettkampfphase\n• Sicher und rhythmisch schiessen und kompakte Schussbilder erzielen.\n\nWettkampfphase\n• Sicher und rhythmisch schiessen und kompakte Schussbilder erzielen.",
-       "from": 6,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• Technische Elemente automatisieren.\n\nVorbereitungsphase 2\n• Schiessgeschwindigkeit standardisieren.\n\nVorwettkampfphase\n• Mit Drucksituationen umgehen lernen.\n\nWettkampfphase\n• Mit Drucksituationen umgehen lernen.",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "Vorbereitungsphase 1\n• Technische Elemente automatisieren.\n\nVorbereitungsphase 2\n• Schiessgeschwindigkeit standardisieren.\n\nVorwettkampfphase\n• In Leaderposition agieren.\n\nWettkampfphase\n• In Leaderposition agieren.",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
-  },
-  {
    "title": "Material",
    "group": "Material",
    "rows": [
@@ -2173,7 +2011,7 @@
        "l": []
       },
       {
-       "v": "• Joggingschuhe\n• MTB\n• Helm\n• Stocklaufstöcke\n• (Kombi-) Rollski",
+       "v": "• Joggingschuhe\n• MTB\n• Helm\n• Stocklaufstöcke\n• (Kombi-) Rollski klassisch",
        "from": 2,
        "to": 2,
        "l": []
@@ -2185,13 +2023,13 @@
        "l": []
       },
       {
-       "v": "• Joggingschuhe\n• MTB und Rennvelo\n• Helm\n• Stocklaufstöcke\n• 2× Rollski skating\n• 1× Rollski klassisch",
+       "v": "• Joggingschuhe\n• MTB und Rennvelo\n• Helm\n• Stocklaufstöcke\n• 2× Rollski skating\n• 2× Rollski klassisch",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "• Joggingschuhe\n• MTB und Rennvelo\n• Helm\n• Stocklaufstöcke\n• 2× Rollski skating\n• 1× Rollski klassisch",
+       "v": "• Joggingschuhe\n• MTB und Rennvelo\n• Helm\n• Stocklaufstöcke\n• 2× Rollski skating\n• 2× Rollski klassisch",
        "from": 9,
        "to": 9,
        "l": []
@@ -2208,90 +2046,37 @@
        "l": []
       },
       {
-       "v": "• 1x Ski skating\n• 1x Fellski klassisch\n• 1x Kombischuhe",
+       "v": "• 1x Fellski klassisch\n• 1x Ski skating\n• 1x Kombischuhe",
        "from": 1,
        "to": 2,
        "l": []
       },
       {
-       "v": "• 1x Ski skating\n• 1x Schuh skating",
+       "v": "• 1x Wachsski klassisch\n• 1x Fellski optional\n• 1x Ski skating\n• 1x Schuh klassisch\n• 1x Schuh skating",
        "from": 3,
        "to": 4,
        "l": []
       },
       {
-       "v": "• 3x Ski skating\n• 1x Schuh skating\n\n• 1x Ski klassisch\n• 1x Schuh klassisch",
+       "v": "• 3x Wachsski klassisch\n• 3x Ski skating\n• 1x Schuh klassisch\n• 1x Schuh skating",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "• 4-5x Ski skating\n• 1x Schuh skating\n\n• 1x Ski klassisch\n• 1x Schuh klassisch",
+       "v": "• 4-5x Wachsski klassisch\n• 4-5x Ski skating\n• 1x Schuh klassisch\n• 1x Schuh skating",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "• 8-10× Ski skating\n• 2× Schuhe skating\n\n• 1x Ski klassisch\n• 1x Schuh klassisch",
+       "v": "• 8-10x Wachsski klassisch\n• 8-10× Ski skating\n• 2× Schuhe klassisch\n• 2× Schuhe skating",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "• 8-10× Ski skating\n• 2× Schuhe skating\n\n• 1x Ski klassisch\n• 1x Schuh klassisch",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Schiessen",
-     "segs": [
-      {
-       "v": "• Lasergewehr oder Bälle zum Werfen",
-       "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "• Lasergewehr oder Luftgewehr vom Skiclub",
-       "from": 1,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "• Luftgewehr, persönlich eingestellt",
-       "from": 2,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "• Luftgewehr",
-       "from": 3,
-       "to": 3,
-       "l": []
-      },
-      {
-       "v": "• Kleinkalibergewehr: verstellbarer Schaft",
-       "from": 4,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "• Kleinkalibergewehr: individualisiert",
-       "from": 7,
-       "to": 7,
-       "l": []
-      },
-      {
-       "v": "• Kleinkalibergewehr: individualisiert\n• Ersatzschaft",
-       "from": 8,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "• Kleinkalibergewehr: individualisiert\n• Ersatzschaft",
+       "v": "• 8-10x Wachsski klassisch\n• 8-10× Ski skating\n• 2× Schuhe klassisch\n• 2× Schuhe skating",
        "from": 9,
        "to": 9,
        "l": []
@@ -2506,53 +2291,47 @@
       {
        "v": "Wettkämpfe (und Spiele) in verschiedenen Sportarten",
        "from": 1,
-       "to": 1,
-       "l": []
-      },
-      {
-       "v": "Wettkämpfe (und Spiele) in verschiedenen Sportarten\n• Swiss Biathlon Cup - Kids",
-       "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "• Verschiedene Wettkämpfe in unterschiedlichen Sportarten (Leichtathletik, Laufen, Rad, Spielsportarten)\n• Regionale Rennen\n• Swiss Biathlon Cup - Challenger",
+       "v": "• Verschiedene Wettkämpfe in unterschiedlichen Sportarten (Leichtathletik, Laufen, Rad, Spielsportarten)\n• HNT und regionale Rennen\n• Biathlonrennen",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "• Verschiedene Wettkämpfe in unterschiedlichen Sportarten (Leichtathletik, Laufen, Rad, Spielsportarten)\n• Swiss Biathlon Cup - Elite",
+       "v": "• Verschiedene Wettkämpfe in unterschiedlichen Sportarten (Leichtathletik, Laufen, Rad, Spielsportarten)\n• Rollski (Biathlon)-Rennen\n• HNT und regionale Rennen\n• FESA-Games\n• EYOF",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "• Swiss Biathlon Cup - Elite\n• IBU Junior Cup\n• JWM",
+       "v": "• Nationale Rollski-Rennen, Fussläufe\n• Swiss Cup\n• FESA-Games\n• EYOF",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "• IBU Junior Cup\n• JWM\n• IBU Cup",
+       "v": "• Swiss Cup\n• ausgewählte COC\n• JWM\n• Nationale Rollski-Rennen, Fussläufe",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "• IBU Cup\n• IBU World Cup\n• EM",
+       "v": "• COC\n• ausgewählte WC\n• U23WM\n• WSC\n• Swiss Cup\n• Nationale Rollski-Rennen, Fussläufe",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "• IBU World Cup\n• EM\n• WM\n•OWG",
+       "v": "• WC\n• WSC\n• Swiss Cup\n• Olympische Spiele\n• Nationale/internationale Rollski-Rennen",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "• IBU World Cup\n• WM\n•OWG",
+       "v": "• WC\n• WSC\n• Swiss Cup\n• Olympische Spiele\n• Nationale/internationale Rollski-Rennen",
        "from": 9,
        "to": 9,
        "l": []
@@ -2607,17 +2386,11 @@
       {
        "v": "25 bis 30",
        "from": 7,
-       "to": 7,
-       "l": []
-      },
-      {
-       "v": "25 bis 35",
-       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "25 bis 35",
+       "v": "20 bis 30",
        "from": 9,
        "to": 9,
        "l": []
@@ -2652,7 +2425,7 @@
        "l": [
         {
          "text": "Swiss-Ski 2026/27",
-         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/biathlon/pdf/download/selektionsrichtlinien_de/Selektionsrichtlinien_Biathlon_Kader_2026-27_DE.pdf"
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf"
         }
        ]
       },
@@ -2663,7 +2436,7 @@
        "l": [
         {
          "text": "Swiss-Ski 2026/27",
-         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/biathlon/pdf/download/selektionsrichtlinien_de/Selektionsrichtlinien_Biathlon_Kader_2026-27_DE.pdf"
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf"
         }
        ]
       },
@@ -2674,7 +2447,7 @@
        "l": [
         {
          "text": "Swiss-Ski 2026/27",
-         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/biathlon/pdf/download/selektionsrichtlinien_de/Selektionsrichtlinien_Biathlon_Kader_2026-27_DE.pdf"
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf"
         }
        ]
       },
@@ -2685,7 +2458,7 @@
        "l": [
         {
          "text": "Swiss-Ski 2026/27",
-         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/biathlon/pdf/download/selektionsrichtlinien_de/Selektionsrichtlinien_Biathlon_Kader_2026-27_DE.pdf"
+         "href": "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf"
         }
        ]
       }
@@ -2927,150 +2700,5 @@
     }
    ]
   }
- ],
- "home": {
-  "intro": {
-   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
-   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
-   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
-   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
-  },
-  "sections": [
-   {
-    "title": "WAS trainieren?",
-    "cells": {
-     "F1": {
-      "v": "Umfangreich, vielseitig und erlebnisorientiert bewegen: Bewegungs- und Spielgrundformen erlernen, das Element Schnee spielerisch mit den Langlaufskis entdecken und verschiedene Schnee- und Sportarten kennenlernen.\n\nAktiven Alltag pflegen: Jede Gelegenheit zur Bewegung nutzen, einen aktiven Alltag pflegen und Belastungsverträglichkeit aufbauen.",
-      "l": []
-     },
-     "F2": {
-      "v": "Umfang- und erlebnisorientiert bewegen: Sicher langlaufen und bremsen, verschiedene Schnee- und Sportarten kennenlernen.\n\nAktiven Alltag pflegen: Vielseitig und spielerisch in Bewegung bleiben, Kraft, Beweglichkeit und Schnelligkeit entwickeln sowie Kreativität und Selbständigkeit fördern.",
-      "l": []
-     },
-     "F3": {
-      "v": "Jugendliche ganzheitlich entwickeln: Freude und Motivation fördern, Verantwortung und Selbständigkeit stärken.\n\nBelastungstoleranz und VO₂max entwickeln: Belastbarkeit, Erholung und Ausdauer gezielt aufbauen.\n\nKoordination und Technik entwickeln: Sichere Bewegungen, Technik und Schnelligkeit verbessern.\n\nWochenstruktur\nSOMMER: Vielseitige Ausdauer auf verschiedenen (Schnee)-Sportgeräten, 1-2x Spielsport/Hallentraining\nWINTER: vielseitige Bewegung auf Langlaufskis + erste Rennen",
-      "l": []
-     },
-     "T1": {
-      "v": "Jugendliche ganzheitlich entwickeln: Freude und Motivation fördern, Verantwortung und Selbständigkeit stärken.\n\nBelastungstoleranz und VO₂max entwickeln: Belastbarkeit, Erholung und Ausdauer gezielt aufbauen.\n\nKoordination und Technik entwickeln: Effiziente Bewegungen, Technik und Schnelligkeit verbessern.\n\nWochenstruktur\nSOMMER: 1x lang + 1x kurz/intensiv mit Stocklauf/Rollski, 1-2x vielseitige Ausdauer, 1-2x Spielsport/Hallentraining\nWINTER: vielseitige Bewegung auf Langlaufskis + Rennen.",
-      "l": []
-     },
-     "T2": {
-      "v": "Jugendliche ganzheitlich entwickeln: Motivation, Verantwortung und Selbständigkeit stärken sowie Verbindlichkeit und Zielorientierung entwickeln.\n\nBelastungstoleranz und VO₂max entwickeln: Belastbarkeit, Erholung und Ausdauer gezielt aufbauen.\n\nKoordination und Technik entwickeln: Effiziente Bewegungen, Technik und Schnelligkeit verbessern.\n\nWochenstruktur\nSOMMER: 2x lang + 1x kurz/intensiv mit Stocklauf/Rollski, 1-2x vielseitige Ausdauer, 1-2x Spielsport/Hallentraining\nWINTER: vielseitige Bewegung auf Langlaufskis + Rennen.",
-      "l": []
-     },
-     "T3": {
-      "v": "Jugendliche ganzheitlich entwickeln: Motivation fördern, Verantwortung übernehmen, Selbständigkeit stärken und den Umgang mit Erfolg und Misserfolg lernen.\n\nBelastungstoleranz und VO₂max entwickeln: Belastbarkeit, Erholung und Ausdauer gezielt aufbauen.\n\nKoordination und Technik entwickeln: Effiziente Bewegungen, Technik und Schnelligkeit verbessern.\n\nWochenstruktur\nSOMMER: 2x lang + 1-2x kurz/intensiv mit Stocklauf/Rollski, 2x vielseitige Ausdauer, 1-2x Kraft, Geschicklichkeit und Sprünge.\nWINTER: Formsteuerung über Intervalle und Wettkampfdichte.",
-      "l": []
-     },
-     "T4": {
-      "v": "Jugendliche ganzheitlich entwickeln:  Verantwortung übernehmen, Selbständigkeit stärken und Belastung, Erholung und Leistungszustand besser wahrnehmen.\n\nBelastungstoleranz und VO₂max entwickeln: Belastbarkeit, Erholung und Ausdauer gezielt aufbauen.\n\nKoordination und Technik entwickeln: Effiziente Bewegungen, Technik und Schnelligkeit verbessern.\n\nWochenstruktur\nSOMMER: 3x lang + 2-3 kurz/intensiv mit Stocklauf/Rollski, 1x vielseitige Ausdauer, 1-2x Kraft, Geschicklichkeit und Sprünge.\nWINTER: Formsteuerung über Intervalle und Wettkampfdichte.",
-      "l": []
-     },
-     "E1": {
-      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\n• Rollskibahn: Intervalle & Sommerwettkämpfe\n• Renntempo-Intervalle auf Schnee\n• Wettkampfleistung & Tapering (COC, WC, U23WM)\n\nOff Snow:\n• Hoher Ausdauerumfang (18–22 h/Woche, I4/I5-Einheiten)\n• Langhanteltechnik, Hypertrophie & Maximalkraft\n• VO₂max & Plyometrie/Explosivkraft",
-      "l": []
-     },
-     "E2": {
-      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\n• Rollskibahn: Intervalle & Sommerwettkämpfe\n• Renntempo-Intervalle auf Weltcup-Niveau\n• Wettkampfleistung & Tapering (WC, WSC, Olympia)\n\nOff Snow:\n• Höchster Ausdauerumfang (18–22 h/Woche, I4/I5-Einheiten)\n• Langhanteltechnik, Hypertrophie & Maximalkraft\n• VO₂max & Plyometrie/Explosivkraft",
-      "l": []
-     },
-     "M": {
-      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\n• Rollskibahn: Intervalle & internationale Rennen\n• Tempohärte & Hochgeschwindigkeitstechnik\n• Wettkampfleistung & Tapering (WC, WSC, Olympia)\n\nOff Snow:\n• Hochvolumige Ausdauer auf Weltklasseniveau\n• Langhanteltechnik, Hypertrophie & Maximalkraft\n• VO₂max, Laktattoleranz & Schwellen-Geschwindigkeit",
-      "l": []
-     }
-    }
-   },
-   {
-    "title": "WIE VIEL trainieren?",
-    "cells": {
-     "F1": {
-      "v": "Aktiven Alltag pflegen und möglichst viel bewegen.",
-      "l": []
-     },
-     "F2": {
-      "v": "Aktiven Alltag pflegen und möglichst viel bewegen.",
-      "l": []
-     },
-     "F3": {
-      "v": "Umfang und Regeneration\n• BEWEGUNG an 4 von 7 Tagen\n• ca. 290 h pro Jahr\n• ca. 1'950 Schüsse pro Jahr\n• 6–9 h pro Woche\n• 9–11 h SchlafAktiven Alltag pflegen",
-      "l": []
-     },
-     "T1": {
-      "v": "Umfang und Regeneration\n• BEWEGUNG an 5 von 7 Tagen\n• ca. 350 h pro Jahr\n• ca. 3'250 Schüsse pro Jahr\n• 9-11 h pro Woche\n• 9-10 h Schlaf",
-      "l": []
-     },
-     "T2": {
-      "v": "Umfang und Regeneration\n• BEWEGUNG an 6 von 7 Tagen\n• ca. 465 h pro Jahr\n• ca. 5'300 Schüsse pro Jahr\n• 11-12 h pro Woche\n• 9-10 h Schlaf",
-      "l": []
-     },
-     "T3": {
-      "v": "Umfang und Regeneration\n• TRAINING an 6 von 7 Tagen\n• ca. 575 h Training pro Jahr\n• ca. 7'100 Schüsse pro Jahr\n• 13-15 h Training pro Woche\n• 9-10 h Schlaf",
-      "l": []
-     },
-     "T4": {
-      "v": "Umfang und Regeneration\n• TRAINING an 6 von 7 Tagen\n• ca. 675 h Training pro Jahr\n• ca. 8'450 Schüsse pro Jahr\n• 15-17 h Training pro Woche\n• 9 h Schlaf",
-      "l": []
-     },
-     "E1": {
-      "v": "Umfang und Regeneration\n• Training an 6 von 7 Tagen\n• ca. 810 h Training pro Jahr\n• ca. 10'800 Schüsse pro Jahr\n• 17-20 h Training pro Woche\n• 8-9 h Schlaf pro Nacht",
-      "l": []
-     },
-     "E2": {
-      "v": "Umfang und Regeneration\n• Training an 6 von 7 Tagen\n• ca. 980 h Training pro Jahr\n• ca. 12'800 Schüsse pro Jahr\n• 20-22 h Training pro Woche\n• 8-9 h Schlaf pro Nacht",
-      "l": []
-     },
-     "M": {
-      "v": "Umfang und Regeneration\n• Training an 6 von 7 Tagen\n• ca. 1100 h Training pro Jahr\n• ca. 14'200 Schüsse pro Jahr\n• 21-24 h Training pro Woche\n• 8-9 h Schlaf pro Nacht",
-      "l": []
-     }
-    }
-   },
-   {
-    "title": "Umfeld & Struktur",
-    "cells": {
-     "F1": {
-      "v": "Umfeld & Struktur: Familie, Schule und Sportclubs\n\nKader: Skiclub\nSwiss Olympic Card: keine\n\nWettkämpfe: 0 bis 5\nWettkampfserie: Lokal\n\nSelektionsrichtlinien: keine",
-      "l": []
-     },
-     "F2": {
-      "v": "Umfeld & Struktur: Familie, Freunde:innen, Sportvereine\n\nKader: Skiclub\nSwiss Olympic Card: keine\n\nWettkämpfe: 0 bis 5\nWettkampfserie: Regional\n\nSelektionsrichtlinien: keine",
-      "l": []
-     },
-     "F3": {
-      "v": "Umfeld & Struktur: Familie, Freunde:innen, Sportvereine\n\nKader: Skiclub\nSwiss Olympic Card: keine\n\nWettkämpfe: 5 bis 10\nWettkampfserie: National\n\nSelektionsrichtlinien: keine",
-      "l": []
-     },
-     "T1": {
-      "v": "Umfeld & Struktur: Familie & Freunde:innen\nVolks- oder Sportschule\n\nKader: RLZ, Skiclub\nSwiss Olympic Card: Regional\n\nWettkämpfe: 10 bis 15\nWettkampfserie: National\n\nSelektionsrichtlinien: gemäss RLZ",
-      "l": []
-     },
-     "T2": {
-      "v": "Umfeld & Struktur: Familie & Freunde:innen\nVolks- oder Sportschule\n\nKader: RLZ, NLZ\nSwiss Olympic Card: Regional\n\nWettkämpfe: 15 bis 20\nWettkampfserie: International\n\nSelektionsrichtlinien: gemäss RLZ",
-      "l": []
-     },
-     "T3": {
-      "v": "Umfeld & Struktur: Familie & Freunde:innen\nBeruf & Schule mit Sportlösung\n\nKader: NLZ, Swiss-Ski C-Kader\nSwiss Olympic Card: National/Regional\n\nWettkämpfe: 20 bis 25\nWettkampfserie: International\n\nSelektionsrichtlinien: gemäss NLZ und Swiss-Ski",
-      "l": []
-     },
-     "T4": {
-      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nBeruf oder Schule mit Sportlösung, Spitzensport-RS/WK\n\nKader: Swiss-Ski C/B-Kader\nSwiss Olympic Card: National\n\nWettkämpfe: 20 bis 30\nWettkampfserie: IBU Cup, IBU World Cup\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
-      "l": []
-     },
-     "E1": {
-      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nFernstudium, berufliche WB mit Sportlösung, Grenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski B/A-Kader\nSwiss Olympic Card: Bronze\n\nWettkämpfe: 25 bis 30\nWettkampfserie: IBU World Cup, WM\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
-      "l": []
-     },
-     "E2": {
-      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nFernstudium, berufliche WB mit Sportlösung, Grenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski A/NM-Kader\nSwiss Olympic Card: Silber/Elite\n\nWettkämpfe: 25 bis 35\nWettkampfserie: IBU World Cup, WM, Olympische Spiele\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
-      "l": []
-     },
-     "M": {
-      "v": "Umfeld & Struktur: Partner:in, Freunde:innen & Familie\nFernstudium, berufliche WB mit Sportlösung, Grenzwache, Spitzensport-WK, Zeitmilitär\n\nKader: Swiss-Ski NM-Kader\nSwiss Olympic Card: Gold\n\nWettkämpfe: 25 bis 35\nWettkampfserie: IBU World Cup, WM, Olympische Spiele\n\nSelektionsrichtlinien: gemäss Swiss-Ski",
-      "l": []
-     }
-    }
-   }
-  ]
- }
+ ]
 }

@@ -1562,19 +1562,19 @@
        "l": []
       },
       {
-       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Snowboardschuhe\n• Snowboard plus Bindung\n• Helm",
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Skischuhe\n• Ski plus Bindung plus Stöcke\n• Helm",
        "from": 4,
        "to": 6,
        "l": []
       },
       {
-       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Snowboardschuhe\n• Snowboard plus Bindung\n• Helm",
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Skischuhe\n• Ski plus Bindung plus Stöcke\n• Helm",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Snowboardschuhe\n• Snowboard plus Bindung\n• Helm",
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Skischuhe\n• Ski plus Bindung plus Stöcke\n• Helm",
        "from": 9,
        "to": 9,
        "l": []
@@ -1585,31 +1585,31 @@
      "label": "On Snow Allgemein",
      "segs": [
       {
-       "v": "• Snowboard plus Bindung\n• Snowboardboots\n• Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)\n\n--> Material kann/soll gemietet oder übernommen werden (ausser Helm und Mouthguard)",
+       "v": "• Ski plus Bindung\n• Skischuhe\n• Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)\n\n--> Material kann/soll gemietet oder übernommen werden (ausser Helm und Mouthguard)",
        "from": 0,
        "to": 2,
        "l": []
       },
       {
-       "v": "• Snowboard plus Bindung\n• Snowboardboots\n• Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "v": "• Ski plus Bindung\n• Skischuhe\n• Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
        "from": 3,
        "to": 4,
        "l": []
       },
       {
-       "v": "• mind. 2 Training Snowboard plus Bindung\n• mind. 2 Wettkampf Snowboard plus Bindung\n• 2x Snowboardboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "v": "• mind. 2 Trainings Ski plus Bindung\n• mind. 2 Wettkampf Ski plus Bindung\n• 2x Skiboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
        "from": 5,
        "to": 6,
        "l": []
       },
       {
-       "v": "• mind. 2 Training Snowboard plus Bindung\n• mind. 2 Wettkampf Snowboard plus Bindung\n• 2x Snowboardboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "v": "• mind. 2 Trainings Ski plus Bindung\n• mind. 2 Wettkampf Ski plus Bindung\n• 2x Skiboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "• mind. 2 Training Snowboard plus Bindung\n• mind. 2 Wettkampf Snowboard plus Bindung\n• 2x Snowboardboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "v": "• mind. 2 Trainings Ski plus Bindung\n• mind. 2 Wettkampf Ski plus Bindung\n• 2x Skiboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
        "from": 9,
        "to": 9,
        "l": []
@@ -2169,150 +2169,5 @@
     }
    ]
   }
- ],
- "home": {
-  "intro": {
-   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
-   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
-   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
-   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
-  },
-  "sections": [
-   {
-    "title": "Was trainieren?",
-    "cells": {
-     "F1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "F2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "F3": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T3": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T4": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "E1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "E2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "M": {
-      "v": "Coming soon…",
-      "l": []
-     }
-    }
-   },
-   {
-    "title": "Wie viel trainieren?",
-    "cells": {
-     "F1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "F2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "F3": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T3": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T4": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "E1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "E2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "M": {
-      "v": "Coming soon…",
-      "l": []
-     }
-    }
-   },
-   {
-    "title": "Struktur & Umfeld",
-    "cells": {
-     "F1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "F2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "F3": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T3": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "T4": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "E1": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "E2": {
-      "v": "Coming soon…",
-      "l": []
-     },
-     "M": {
-      "v": "Coming soon…",
-      "l": []
-     }
-    }
-   }
-  ]
- }
+ ]
 }
