@@ -421,6 +421,14 @@ def lang_switch(active):
         out += '<a'+cls+' data-f="'+FILES[l]+'" href="'+FILES[l]+'">'+l.upper()+'</a>'
     return out + '</div>'
 
+def theme_toggle():
+    return ('<button class="themebtn" type="button" onclick="toggleTheme()" '
+            'title="Hell / Dunkel" aria-label="Hell/Dunkel umschalten">'
+            '<svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
+            '<svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/>'
+            '<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+            '</button>')
+
 def stage_bar(stages, lang):
     btns = "".join('<button class="sb ph-'+ph(s)+'" data-si="'+str(i)+'" aria-pressed="false" '
                    'title="'+esc(FULL.get(s,s))+'">'+esc(s)+'</button>' for i, s in enumerate(stages))
@@ -438,7 +446,7 @@ def sport_section(sport, d, lang, edit=False):
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
             '<header class="top"><div class="ht-l">'+back+'<h1>'+esc(name)+' · '+aw+'</h1></div>'
-            '<div class="ht-r">'+lang_switch(lang)+'</div></header>'
+            '<div class="ht-r">'+lang_switch(lang)+theme_toggle()+'</div></header>'
             '<div class="wrap"><div class="placeholder">'
             '<div class="big">'+esc(name)+'</div>'
             +PLACE[lang].format(name=esc(name), file='ftem_data_'+esc(sid)+'.json')+
@@ -451,7 +459,7 @@ def sport_section(sport, d, lang, edit=False):
         '<div class="ht-r"><select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
         '<button class="exp">'+esc(tr("Alle öffnen", lang))+'</button><button class="col">'+esc(tr("Alle schliessen", lang))+'</button>'
         '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
-        +lang_switch(lang)+'</div></header>'
+        +lang_switch(lang)+theme_toggle()+'</div></header>'
         '<div class="wrap">'
         +sections+'</div>'
         +stage_bar(d["stages"], lang)+'</section>')
@@ -589,7 +597,7 @@ def home_html(datamap, lang):
           '</div>')
     return ('<section id="home">'
             '<div class="home-hero">'
-            '<div class="hero-top">'+lang_switch(lang)+fb+'</div>'
+            '<div class="hero-top">'+lang_switch(lang)+theme_toggle()+fb+'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
             '<div class="constellation">'+lines+nodes+'</div>'
@@ -950,59 +958,67 @@ footer{padding:16px;font-size:11px}
 @media(min-width:1800px){
 .wrap{max-width:1720px}
 }
-/* ---------- Dark Mode (automatisch nach Systemeinstellung) ---------- */
-@media(prefers-color-scheme:dark){
-:root{--ink:#e7edf4;--mut:#98a4b3;--line:rgba(255,255,255,.11);--bg:#0d1420;--card:#172231;
+/* ---------- Dark Mode (data-theme, automatisch + manuell umschaltbar) ---------- */
+[data-theme="dark"]{--ink:#e7edf4;--mut:#98a4b3;--line:rgba(255,255,255,.11);--bg:#0d1420;--card:#172231;
  --found-t:#59c6dd;--talent-t:#f0c657;--elite-t:#f0975e;--mast-t:#f07e72;
  --found-bg:rgba(31,143,166,.16);--talent-bg:rgba(226,169,0,.15);--elite-bg:rgba(232,119,46,.15);--mast-bg:rgba(213,43,30,.16);
  --acc:#9aa6b4;--acc-line:rgba(255,255,255,.16);--acc-bg:#212d40;--acc-bg2:#2a3850}
-header.top{background:rgba(16,24,38,.94)}
-header.top input,header.top select,header.top button{background:#1c2740;color:var(--ink)}
-header.top .back:hover{background:#243247;color:var(--ink)}
-.langsw a:hover:not(.active){background:#243247;color:var(--ink)}
-.cell{background:#172231}
-.cell.ph-foundation{background:#152731;--zc:#7fd6e8;--zbg:rgba(31,143,166,.20)}
-.cell.ph-talent{background:#25220f;--zc:#f0cf72;--zbg:rgba(226,169,0,.18)}
-.cell.ph-elite{background:#271c12;--zc:#f0a877;--zbg:rgba(232,119,46,.18)}
-.cell.ph-mastery{background:#271413;--zc:#f09287;--zbg:rgba(213,43,30,.20)}
-.cell.ph-multi{background:#1a2434;--zc:#aeb8c6;--zbg:rgba(255,255,255,.08)}
-.cell.hl-foundation{background:rgba(31,143,166,.22)}
-.cell.hl-talent{background:rgba(226,169,0,.20)}
-.cell.hl-elite{background:rgba(232,119,46,.20)}
-.cell.hl-mastery{background:rgba(213,43,30,.22)}
-.cell::after{background:linear-gradient(180deg,rgba(23,34,49,0),#172231)}
-.cwrap{color:#c2ccd8}
-.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top-color:rgba(255,255,255,.10)}
-.cwrap .zone+.zone{border-top-color:rgba(255,255,255,.10)}
-.cwrap .zk::after{color:#5a6472}
-.cwrap ul.sc .badge{background:#33425c;color:#e7edf4}
-.cwrap .empty{color:#4a5568}
-.more{background:#1c2740;color:var(--found-t);border-color:rgba(255,255,255,.14)}
-.more:hover{background:#243247}
-details.theme>summary:hover{background:#1c2740}
-details.theme:hover{box-shadow:0 5px 16px rgba(0,0,0,.4)}
-.stagebar{background:rgba(13,19,30,.92);border-top-color:rgba(255,255,255,.10)}
-.stagebar .sb{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
-.stagebar .sb:hover{background:#243247}
-mark{color:#1d2630}
-.pp-card{background:#172231}
-.pp-h{color:var(--ink)}
-.pp-b{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
-.pp-b:hover{background:#243247}
-.pp-all{background:#212d40;color:var(--found-t)}
-.pp-x{color:var(--mut)}
-.abar{background:rgba(16,24,38,.96)}
-.cedit{background:#141d2c;color:#e7edf4;border-color:rgba(255,255,255,.16)}
-.cedit.changed{background:#2a1a18;border-color:var(--red)}
-.glostab{background:#172231;border-color:rgba(255,255,255,.10)}
-.glostab th{background:#1c2740;color:#9fb0d6}
-.glostab td{border-top-color:rgba(255,255,255,.08)}
-.glostab tr:hover td{background:#1c2740}
-.glosadd{background:#172231;border-color:rgba(255,255,255,.10)}
-}
+[data-theme="dark"] header.top{background:rgba(16,24,38,.94)}
+[data-theme="dark"] header.top input,[data-theme="dark"] header.top select,[data-theme="dark"] header.top button{background:#1c2740;color:var(--ink)}
+[data-theme="dark"] header.top .back:hover{background:#243247;color:var(--ink)}
+[data-theme="dark"] .langsw a:hover:not(.active){background:#243247;color:var(--ink)}
+[data-theme="dark"] .cell{background:#172231}
+[data-theme="dark"] .cell.ph-foundation{background:#152731;--zc:#7fd6e8;--zbg:rgba(31,143,166,.20)}
+[data-theme="dark"] .cell.ph-talent{background:#25220f;--zc:#f0cf72;--zbg:rgba(226,169,0,.18)}
+[data-theme="dark"] .cell.ph-elite{background:#271c12;--zc:#f0a877;--zbg:rgba(232,119,46,.18)}
+[data-theme="dark"] .cell.ph-mastery{background:#271413;--zc:#f09287;--zbg:rgba(213,43,30,.20)}
+[data-theme="dark"] .cell.ph-multi{background:#1a2434;--zc:#aeb8c6;--zbg:rgba(255,255,255,.08)}
+[data-theme="dark"] .cell.hl-foundation{background:rgba(31,143,166,.22)}
+[data-theme="dark"] .cell.hl-talent{background:rgba(226,169,0,.20)}
+[data-theme="dark"] .cell.hl-elite{background:rgba(232,119,46,.20)}
+[data-theme="dark"] .cell.hl-mastery{background:rgba(213,43,30,.22)}
+[data-theme="dark"] .cell::after{background:linear-gradient(180deg,rgba(23,34,49,0),#172231)}
+[data-theme="dark"] .cwrap{color:#c2ccd8}
+[data-theme="dark"] .cwrap .bh:not(:first-child),[data-theme="dark"] .cwrap .sh:not(:first-child){border-top-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .cwrap .zone+.zone{border-top-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .cwrap .zk::after{color:#5a6472}
+[data-theme="dark"] .cwrap ul.sc .badge{background:#33425c;color:#e7edf4}
+[data-theme="dark"] .cwrap .empty{color:#4a5568}
+[data-theme="dark"] .more{background:#1c2740;color:var(--found-t);border-color:rgba(255,255,255,.14)}
+[data-theme="dark"] .more:hover{background:#243247}
+[data-theme="dark"] details.theme>summary:hover{background:#1c2740}
+[data-theme="dark"] details.theme:hover{box-shadow:0 5px 16px rgba(0,0,0,.4)}
+[data-theme="dark"] .stagebar{background:rgba(13,19,30,.92);border-top-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .stagebar .sb{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
+[data-theme="dark"] .stagebar .sb:hover{background:#243247}
+[data-theme="dark"] mark{color:#1d2630}
+[data-theme="dark"] .pp-card{background:#172231}
+[data-theme="dark"] .pp-h{color:var(--ink)}
+[data-theme="dark"] .pp-b{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
+[data-theme="dark"] .pp-b:hover{background:#243247}
+[data-theme="dark"] .pp-all{background:#212d40;color:var(--found-t)}
+[data-theme="dark"] .pp-x{color:var(--mut)}
+[data-theme="dark"] .abar{background:rgba(16,24,38,.96)}
+[data-theme="dark"] .cedit{background:#141d2c;color:#e7edf4;border-color:rgba(255,255,255,.16)}
+[data-theme="dark"] .cedit.changed{background:#2a1a18;border-color:var(--red)}
+[data-theme="dark"] .glostab{background:#172231;border-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .glostab th{background:#1c2740;color:#9fb0d6}
+[data-theme="dark"] .glostab td{border-top-color:rgba(255,255,255,.08)}
+[data-theme="dark"] .glostab tr:hover td{background:#1c2740}
+[data-theme="dark"] .glosadd{background:#172231;border-color:rgba(255,255,255,.10)}
+/* diskreter Theme-Umschalter */
+.themebtn{background:none;border:1px solid var(--line);border-radius:8px;width:32px;height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mut);transition:color .15s,border-color .15s,background .15s}
+.themebtn:hover{color:var(--ink);border-color:var(--acc-line)}
+.themebtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.themebtn .ic-sun{display:none}
+[data-theme="dark"] .themebtn .ic-sun{display:inline}
+[data-theme="dark"] .themebtn .ic-moon{display:none}
+#home .hero-top .themebtn{color:rgba(255,255,255,.82);border-color:rgba(255,255,255,.28)}
+#home .hero-top .themebtn:hover{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.1)}
 """
 
 JS = r"""
+function toggleTheme(){var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',d);try{localStorage.setItem('ftem-theme',d);}catch(e){}}
 const SPORT_IDS = __SPORT_IDS__;
 const I18N = __I18N__;
 const sections = [...document.querySelectorAll('section.sport')];
@@ -1316,6 +1332,7 @@ ADMIN_TMPL = r'''<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("ftem-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))}catch(e){}</script>
 <style>
 __MAINCSS__
 /* ---- Admin-Zusatz ---- */
@@ -1654,8 +1671,9 @@ for lang in LANGS:
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">'
         '<title>FTEM – '+esc(tr("Athlet:innen-Weg", lang))+'</title>'
         +head_meta+
-        # verhindert Aufblitzen der Startseite, wenn direkt eine Sportart (#hash) geladen wird
-        '<script>if(location.hash)document.documentElement.classList.add("h");'
+        # setzt Theme früh (gespeicherte Wahl oder Systemeinstellung) + verhindert Aufblitzen
+        '<script>try{document.documentElement.setAttribute("data-theme",localStorage.getItem("ftem-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))}catch(e){}'
+        'if(location.hash)document.documentElement.classList.add("h");'
         'try{if(sessionStorage.ftemSeen)document.documentElement.classList.add("noanim");sessionStorage.ftemSeen=1}catch(e){}</script>'
         '<style>'+CSS+'</style></head>'
         '<body>'+body+'<script>'+js+'</script>'
