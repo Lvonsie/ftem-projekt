@@ -25,10 +25,6 @@ FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html"}
 # --- Admin-Bereich -----------------------------------------------------------
 # Passwort fuer den Admin-/Bearbeitungsbereich (dezentes Schloss-Icon unten auf der Startseite)
 ADMIN_PW = "ftem26*"
-# Passwort fuer den versteckten Praesentationsmodus (dezentes ⛶-Symbol unten auf den Sportseiten)
-PRES_PW = "FTEMP"
-PRES_TITLE = {"de": "Präsentationsmodus", "fr": "Mode présentation", "it": "Modalità presentazione"}
-PRES_PWPH = {"de": "Passwort", "fr": "Mot de passe", "it": "Password"}
 # Cloud-Speicher (Supabase) fuer direkt gespeicherte, fuer alle sichtbare Aenderungen.
 # Einmalig eintragen (siehe SETUP-ADMIN.md). Solange leer: Seite laeuft normal,
 # Admin bietet dann Datei-Download als Rueckfall.
@@ -478,12 +474,7 @@ def sport_section(sport, d, lang, edit=False):
         '<span class="hdiv" aria-hidden="true"></span>'
         +lang_switch(lang)+theme_toggle()+'</div></header>'
         '<div class="wrap">'
-        +sections
-        # Versteckter Praesentationsmodus: dezentes Symbol unten (wie Admin-Schloss), Passwort noetig
-        +'<div class="preslink"><button class="presopen" type="button" title="'+esc(PRES_TITLE[lang])+'" aria-label="'+esc(PRES_TITLE[lang])+'">⛶</button>'
-        '<span class="presask" hidden><input class="prespw" type="password" placeholder="'+esc(PRES_PWPH[lang])+'" autocomplete="off">'
-        '<button class="presgo" type="button">OK</button></span></div>'
-        '</div>'
+        +sections+'</div>'
         +stage_bar(d["stages"], lang)+'</section>')
 
 # --- Startseite (Sportart-Auswahl) -----------------------------------------
@@ -617,34 +608,12 @@ def home_html(datamap, lang):
           '<button class="fb-send" type="button" '
           'onclick="location.href=&#39;mailto:forschung@swiss-ski.ch?subject=Feedback%20FTEM&amp;body=&#39;+encodeURIComponent(this.parentNode.querySelector(&#39;.fb-text&#39;).value)">'+esc(fb_send)+'</button>'
           '</div>')
-    # FTEM-Weg als Berg-Schichten (Design "Beispiel 2"): F unten -> M Gipfel, Talent dominant.
-    # Farben bewusst entsaettigt/transparent, damit sie mit dem Bergfoto verschmelzen.
-    band_lbl = {"de": ["FOUNDATION","TALENT","ELITE","MASTERY"],
-                "fr": ["FOUNDATION","TALENT","ELITE","MASTERY"],
-                "it": ["FOUNDATION","TALENT","ELITE","MASTERY"]}[lang]
-    pyr = ('<div class="pyr" role="navigation" aria-label="FTEM-Stufen">'
-           '<div class="pband pf" tabindex="0"><span class="pb-n">'+band_lbl[0]+'</span><span class="pb-s">F1 – F3</span></div>'
-           '<div class="pband pt" tabindex="0"><span class="pb-n">'+band_lbl[1]+'</span><span class="pb-s">T1 – T4</span></div>'
-           '<div class="pband pe" tabindex="0"><span class="pb-n">'+band_lbl[2]+'</span><span class="pb-s">E1 – E2</span></div>'
-           '<div class="pband pm" tabindex="0"><span class="pb-n">'+band_lbl[3]+'</span><span class="pb-s">M</span></div>'
-           '</div>')
-    # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
-    choose_lbl = {"de": "Sportart wählen", "fr": "Choisir un sport", "it": "Scegli lo sport"}[lang]
-    spitems = ""
-    for s2 in SPORTS:
-        nm = tr(s2["name"], lang)
-        ic = s2.get("icon")
-        inner2 = ('<img src="'+esc(ic)+'" alt="" loading="lazy">') if ic else ('<span class="spcode">'+esc(s2["short"])+'</span>')
-        spitems += '<a href="#'+s2["id"]+'">'+inner2+'<b>'+esc(nm)+'</b></a>'
-    spmodal = ('<div class="spmodal" hidden><div class="sp-box">'
-               '<div class="sp-bar"><span>'+esc(choose_lbl)+'</span><button class="sp-x" type="button" aria-label="schliessen">✕</button></div>'
-               '<div class="sp-grid">'+spitems+'</div></div></div>')
     return ('<section id="home">'
             '<div class="home-hero">'
             '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+theme_toggle()+'</div>'+fb+'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            +pyr+spmodal+
+            '<div class="constellation">'+lines+nodes+'</div>'
             '<button class="scrolldown" type="button" aria-label="nach unten scrollen" '
             'onclick="document.querySelector(&#39;.home-info&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">&#9662;</button>'
             '</div>'
@@ -768,64 +737,10 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
-/* FTEM-Weg als Berg-Schichten (Beispiel 2) - Farben mit dem Foto verschmolzen */
-.pyr{position:absolute;inset:0;z-index:3;cursor:pointer}
-.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  transition:filter .25s;mix-blend-mode:hard-light}
-.pyr:hover .pband{filter:brightness(1.12)}
-.pf{top:79%;height:17%;clip-path:polygon(8% 100%,92% 100%,84% 0,16% 0);
-  background:linear-gradient(180deg,rgba(96,168,186,.30),rgba(52,118,136,.52))}
-.pt{top:56%;height:22%;clip-path:polygon(16.3% 100%,83.7% 100%,73% 0,27% 0);
-  background:linear-gradient(180deg,rgba(222,186,96,.34),rgba(196,152,52,.50))}
-.pe{top:43%;height:12%;clip-path:polygon(27.3% 100%,72.7% 100%,65% 0,35% 0);
-  background:linear-gradient(180deg,rgba(224,146,88,.34),rgba(198,112,56,.50))}
-.pm{top:29.5%;height:12.5%;clip-path:polygon(35.4% 100%,64.6% 100%,50% 0);
-  background:linear-gradient(180deg,rgba(220,96,80,.36),rgba(186,58,44,.52))}
-.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.65);font-size:15px}
-.pt .pb-n{font-size:24px}
-.pm .pb-n{margin-top:26px;font-size:14px}
-.pb-s{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6);letter-spacing:.12em}
-.pm .pb-s{font-size:10px}
-/* Stufen-Klick -> Sportarten-Auswahl */
-.pband{cursor:pointer}
-.pband:hover{filter:brightness(1.18)}
-.spmodal{position:fixed;inset:0;z-index:115;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
-.sp-box{width:min(760px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.sp-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em}
-.sp-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;line-height:1}
-.sp-x:hover{color:var(--talent)}
-.sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;padding:14px}
-.sp-grid a{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;text-decoration:none;color:var(--ink)}
-.sp-grid a:hover{border-color:var(--red)}
-.sp-grid a b{font-size:13px}
-.sp-grid img,.sp-grid .spcode{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
-.sp-grid .spcode{display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:10px;font-weight:800}
-@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm .pb-n{margin-top:14px;font-size:9.5px}.pm .pb-s{display:none}}
 .adminlink{text-align:center;margin-top:26px}
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
-/* Versteckter Praesentationsmodus (Symbol unten wie Admin-Schloss, Passwort FTEMP) */
-.preslink{text-align:center;margin-top:26px}
-.presopen{background:none;border:none;font:inherit;font-size:20px;line-height:1;color:var(--mut);opacity:.42;cursor:pointer;transition:opacity .16s,transform .16s;padding:4px 8px}
-.presopen:hover{opacity:1;transform:translateY(-1px)}
-.presask{display:inline-flex;gap:6px;margin-left:8px;vertical-align:middle}
-.presask input{font:inherit;font-size:12.5px;width:120px;padding:5px 9px;border:1px solid var(--line);border-radius:8px}
-.presask input.bad{border-color:var(--red);animation:pshake .3s}
-@keyframes pshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.presask .presgo{font:inherit;font-size:12.5px;font-weight:700;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
-.presask .presgo:hover{background:var(--bg)}
-body.pres{--colw:290px;--lblw:200px}
-body.pres .ht-c,body.pres .chatbtn,body.pres .jump,body.pres .pdf,body.pres .hdiv,body.pres .preslink{display:none!important}
-body.pres section.sport summary .tt{font-size:19px}
-body.pres section.sport details.theme>summary{padding:10px 16px}
-body.pres section.sport .cell .cwrap{font-size:15px;max-height:none}
-body.pres section.sport .cell::after{display:none}
-body.pres section.sport .more{display:none}
-body.pres section.sport .rl{font-size:14px}
-body.pres section.sport .c.hd .st{font-size:16px}
-body.pres section.sport .c.hd .stf{font-size:11px}
-body.pres section.sport h2.grp{font-size:15px}
 /* App-Installations-Hinweis */
 .appinstall{max-width:600px;margin:26px auto 0;display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
 .appinstall .ai-icon{width:60px;height:60px;border-radius:14px;flex:none;box-shadow:0 5px 14px rgba(0,0,0,.16)}
@@ -1520,58 +1435,9 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){ if(!mm.hidden)closeMission(); else closePops(); }
 });
 
-// ---- Stufen-Klick auf der Startseite -> Sportarten-Auswahl ----
-const spm=document.querySelector('.spmodal');
-if(spm){
-  document.querySelectorAll('.pband').forEach(bd=>{
-    bd.addEventListener('click',e=>{e.stopPropagation();spm.hidden=false;});
-    bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();spm.hidden=false;}});
-  });
-  spm.addEventListener('click',e=>{if(e.target===spm||e.target.closest('a'))spm.hidden=true;});
-  spm.querySelector('.sp-x').addEventListener('click',()=>{spm.hidden=true;});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!spm.hidden)spm.hidden=true;});
-}
-
-// ---- Versteckter Praesentationsmodus (Symbol unten, Passwort) ----
-const PRES_PW='__PRES_PW__';
-function presOff(){document.body.classList.remove('pres');if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
-function presOn(){
-  document.body.classList.add('pres');
-  if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});
-  const sec=sections.find(s=>!s.hidden);
-  if(sec){const ths=[...sec.querySelectorAll('details.theme')];ths.forEach((t,i)=>t.open=i===0);if(ths[0])ths[0].scrollIntoView({block:'start'});if(sec.__clamp)setTimeout(sec.__clamp,80);}
-}
-document.querySelectorAll('.preslink').forEach(pl=>{
-  const btn=pl.querySelector('.presopen'), ask=pl.querySelector('.presask'), pw=pl.querySelector('.prespw');
-  btn.addEventListener('click',()=>{ask.hidden=!ask.hidden;if(!ask.hidden){pw.value='';pw.focus();}});
-  function tryGo(){
-    if(pw.value===PRES_PW){ask.hidden=true;presOn();}
-    else{pw.classList.add('bad');setTimeout(()=>pw.classList.remove('bad'),500);pw.select();}
-  }
-  pl.querySelector('.presgo').addEventListener('click',tryGo);
-  pw.addEventListener('keydown',e=>{if(e.key==='Enter')tryGo();});
-});
-document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)document.body.classList.remove('pres');});
-document.addEventListener('keydown',e=>{
-  if(!document.body.classList.contains('pres'))return;
-  if(e.key==='Escape'){presOff();return;}
-  const sec=sections.find(s=>!s.hidden); if(!sec)return;
-  if(['ArrowRight','ArrowDown','PageDown','ArrowLeft','ArrowUp','PageUp'].includes(e.key)){
-    e.preventDefault();
-    const ths=[...sec.querySelectorAll('details.theme')];
-    let idx=ths.findIndex(t=>t.open);
-    const fwd=['ArrowRight','ArrowDown','PageDown'].includes(e.key);
-    idx = idx<0 ? 0 : Math.min(Math.max(idx+(fwd?1:-1),0),ths.length-1);
-    ths.forEach((t,i)=>t.open=i===idx);
-    ths[idx].scrollIntoView({block:'start'});
-    if(sec.__clamp)setTimeout(sec.__clamp,80);
-  }
-});
-
 // ---- Umschalten Startseite <-> Sportart (per #hash, Zurueck-Taste funktioniert) ----
 function show(id){
   closePops();
-  presOff();
   home.hidden = !!id;
   sections.forEach(s=>{s.hidden = s.dataset.sport!==id;});
   window.scrollTo(0,0);
@@ -1896,8 +1762,7 @@ for lang in LANGS:
             "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
-            .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
-            .replace("__PRES_PW__", PRES_PW))
+            .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
     og_title = "FTEM – Athlet:innen-Weg · Swiss-Ski"
     og_desc = {"de":"Der Athlet:innen-Weg von Swiss-Ski: alle Schneesportarten über die zehn FTEM-Entwicklungsstufen F1–M.",
                "fr":"Le parcours des athlètes de Swiss-Ski : tous les sports de neige à travers les dix niveaux de développement FTEM (F1–M).",

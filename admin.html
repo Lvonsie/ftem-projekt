@@ -115,10 +115,64 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 }
 .home-info{max-width:980px;margin:0 auto;padding:42px 24px 30px}
 .ctext{display:contents}
+/* FTEM-Weg als Berg-Schichten (Beispiel 2) - Farben mit dem Foto verschmolzen */
+.pyr{position:absolute;inset:0;z-index:3;cursor:pointer}
+.pband{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  transition:filter .25s;mix-blend-mode:hard-light}
+.pyr:hover .pband{filter:brightness(1.12)}
+.pf{top:79%;height:17%;clip-path:polygon(8% 100%,92% 100%,84% 0,16% 0);
+  background:linear-gradient(180deg,rgba(96,168,186,.30),rgba(52,118,136,.52))}
+.pt{top:56%;height:22%;clip-path:polygon(16.3% 100%,83.7% 100%,73% 0,27% 0);
+  background:linear-gradient(180deg,rgba(222,186,96,.34),rgba(196,152,52,.50))}
+.pe{top:43%;height:12%;clip-path:polygon(27.3% 100%,72.7% 100%,65% 0,35% 0);
+  background:linear-gradient(180deg,rgba(224,146,88,.34),rgba(198,112,56,.50))}
+.pm{top:29.5%;height:12.5%;clip-path:polygon(35.4% 100%,64.6% 100%,50% 0);
+  background:linear-gradient(180deg,rgba(220,96,80,.36),rgba(186,58,44,.52))}
+.pb-n{font-weight:800;letter-spacing:.2em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.65);font-size:15px}
+.pt .pb-n{font-size:24px}
+.pm .pb-n{margin-top:26px;font-size:14px}
+.pb-s{font-size:11px;font-weight:700;color:rgba(255,255,255,.85);text-shadow:0 1px 8px rgba(0,0,0,.6);letter-spacing:.12em}
+.pm .pb-s{font-size:10px}
+/* Stufen-Klick -> Sportarten-Auswahl */
+.pband{cursor:pointer}
+.pband:hover{filter:brightness(1.18)}
+.spmodal{position:fixed;inset:0;z-index:115;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
+.sp-box{width:min(760px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:14px;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.sp-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 15px;background:var(--ink);color:#fff;font-weight:800;font-size:13px;letter-spacing:.06em}
+.sp-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;line-height:1}
+.sp-x:hover{color:var(--talent)}
+.sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;padding:14px}
+.sp-grid a{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;text-decoration:none;color:var(--ink)}
+.sp-grid a:hover{border-color:var(--red)}
+.sp-grid a b{font-size:13px}
+.sp-grid img,.sp-grid .spcode{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
+.sp-grid .spcode{display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;font-size:10px;font-weight:800}
+@media(max-width:760px){.pb-n{font-size:11px}.pt .pb-n{font-size:15px}.pb-s{font-size:8.5px}.pm .pb-n{margin-top:14px;font-size:9.5px}.pm .pb-s{display:none}}
 .adminlink{text-align:center;margin-top:26px}
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
+/* Versteckter Praesentationsmodus (Symbol unten wie Admin-Schloss, Passwort FTEMP) */
+.preslink{text-align:center;margin-top:26px}
+.presopen{background:none;border:none;font:inherit;font-size:20px;line-height:1;color:var(--mut);opacity:.42;cursor:pointer;transition:opacity .16s,transform .16s;padding:4px 8px}
+.presopen:hover{opacity:1;transform:translateY(-1px)}
+.presask{display:inline-flex;gap:6px;margin-left:8px;vertical-align:middle}
+.presask input{font:inherit;font-size:12.5px;width:120px;padding:5px 9px;border:1px solid var(--line);border-radius:8px}
+.presask input.bad{border-color:var(--red);animation:pshake .3s}
+@keyframes pshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.presask .presgo{font:inherit;font-size:12.5px;font-weight:700;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
+.presask .presgo:hover{background:var(--bg)}
+body.pres{--colw:290px;--lblw:200px}
+body.pres .ht-c,body.pres .chatbtn,body.pres .jump,body.pres .pdf,body.pres .hdiv,body.pres .preslink{display:none!important}
+body.pres section.sport summary .tt{font-size:19px}
+body.pres section.sport details.theme>summary{padding:10px 16px}
+body.pres section.sport .cell .cwrap{font-size:15px;max-height:none}
+body.pres section.sport .cell::after{display:none}
+body.pres section.sport .more{display:none}
+body.pres section.sport .rl{font-size:14px}
+body.pres section.sport .c.hd .st{font-size:16px}
+body.pres section.sport .c.hd .stf{font-size:11px}
+body.pres section.sport h2.grp{font-size:15px}
 /* App-Installations-Hinweis */
 .appinstall{max-width:600px;margin:26px auto 0;display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
 .appinstall .ai-icon{width:60px;height:60px;border-radius:14px;flex:none;box-shadow:0 5px 14px rgba(0,0,0,.16)}
