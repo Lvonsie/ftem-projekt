@@ -740,7 +740,7 @@ def home_html(datamap, lang):
         for s2 in SPORTS if s2.get("mission"))
     # "Mission Sportart": oeffnet direkt die Mission der oben vorgewaehlten Sportart
     misp_lbl = {"de": "Mission Sportart", "fr": "Mission du sport", "it": "Missione sport"}[lang]
-    mission_btn = '<button class="news-btn np-sportmission" type="button">'+esc(misp_lbl)+'</button>'
+    mission_btn = '<button class="mp-item mp-mission np-sportmission" type="button">'+esc(misp_lbl)+'</button>'
     # App-Hinweis als eigener Knopf (nicht mehr in den News)
     app_lbl = INSTALL_HINT.get(lang, INSTALL_HINT["de"])["title"]
     # "Athlet:innen Weg"-Knopf oben Mitte (Bjoern-Mock) + Piste im Berg
@@ -805,7 +805,7 @@ def home_html(datamap, lang):
                + '</div>')
     # Unten im Hero: Admin-Schloss + Praesentations-Knopf nebeneinander, gemeinsam
     # zentriert, beide mit demselben Farbverlauf (#adminlk).
-    adminlk = ('<div class="adminlink adminlink-hero preslink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
+    adminlk = ('<div class="adminlink mp-admin preslink"><a href="admin.html" title="Admin-Login" aria-label="Admin-Login">'
             '<svg viewBox="0 0 24 24" fill="none" stroke="url(#adminlk)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
             '<defs><linearGradient id="adminlk" x1="0" y1="0" x2="1" y2="1">'
             '<stop offset="0" stop-color="#1f8fa6"/><stop offset=".4" stop-color="#e2a900"/><stop offset=".7" stop-color="#e8772e"/><stop offset="1" stop-color="#d52b1e"/></linearGradient></defs>'
@@ -825,8 +825,13 @@ def home_html(datamap, lang):
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select></div>'
             +aw_cta+
-            '<div class="hero-top-r">'+mission_btn+
-            (('<div class="news-box" data-open="tpl-news" data-t="'+esc(news_label)+'" role="button" tabindex="0">'
+            '<div class="hero-top-r">'
+            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button>'
+            '<div class="menu-panel" hidden>'+mission_btn+
+            '<button class="mp-item" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button>'
+            '<button class="mp-item" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'
+            +fb+adminlk+'</div>'
+            +(('<div class="news-box" data-open="tpl-news" data-t="'+esc(news_label)+'" role="button" tabindex="0">'
               '<div class="nb-head">'+esc(news_label)+nbadge+'</div>'
               '<ul class="nb-list">'
               + "".join('<li>'+esc(tr(it["title"], lang))+'</li>' for it in NEWS[:3])
@@ -835,7 +840,7 @@ def home_html(datamap, lang):
             +'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            +pyr+adminlk+'<div class="fb-corner">'+fb+'<button class="info-btn" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'+'<button class="info-btn" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button>'+'</div>'+
+            +pyr+
             '</div>'
             '<template id="tpl-news">'+news_html(lang)+'</template>'
             '<template id="tpl-app">'+install_hint(lang)+'</template>'
@@ -995,7 +1000,6 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
 .hcta:hover{background:var(--red);border-color:var(--red)}
 .hcta-sec{background:rgba(255,255,255,.07)}
-.adminlink-hero{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:7;margin:0}
 .imodal{position:fixed;inset:0;z-index:112;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
@@ -1023,12 +1027,6 @@ body.pres .steady{display:none}
 @keyframes pshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .presask .presgo{font:inherit;font-size:12.5px;font-weight:700;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer}
 .presask .presgo:hover{background:var(--bg)}
-/* Schloss + Praesentations-Knopf als zentriertes Paar unten im Hero */
-.adminlink-hero{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:0}
-.adminlink-hero .presopen{display:inline-flex;padding:2px;opacity:.42}
-.adminlink-hero .presopen:hover{opacity:1;transform:translateY(-1px)}
-.adminlink-hero .presopen svg{width:21px;height:21px;display:block}
-.adminlink-hero .presask{margin-left:0}
 a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* News-Badge + News-Overlay-Metadaten */
 .nbadge{display:inline-block;background:#fff;color:var(--red);border-radius:9px;padding:0 6px;margin-left:7px;font-size:10px;font-weight:800;line-height:15px;vertical-align:1px}
@@ -1040,8 +1038,22 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-list li{position:relative;padding-left:14px;font-size:11px;font-weight:600;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#fff}
 /* Feedback unten rechts */
-.fb-corner{position:absolute;right:18px;bottom:16px;z-index:8;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:8px}
-@media(max-width:760px){.news-box{max-width:44vw}.homesport{max-width:160px}.fb-corner{bottom:14px}}
+/* Hamburger-Menue oben rechts */
+.menu-btn{font:inherit;background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
+.menu-btn:hover{filter:brightness(1.12)}
+.menu-panel{display:flex;flex-direction:column;gap:6px;min-width:225px;background:rgba(15,21,32,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:9px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.mp-item{font:inherit;display:block;width:100%;text-align:left;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:12px;border-radius:8px;padding:8px 12px;cursor:pointer}
+.mp-item:hover{background:var(--red);border-color:var(--red)}
+.mp-mission{background:rgba(213,43,30,.85);border-color:rgba(213,43,30,.9)}
+.menu-panel .fb-btn{width:100%;text-align:left;border-radius:8px;padding:8px 12px;font-size:12px;box-shadow:none}
+.menu-panel .fb-panel{width:100%}
+.mp-admin{display:flex;align-items:center;justify-content:center;gap:14px;margin:2px 0 0;padding-top:8px;border-top:1px solid rgba(255,255,255,.15)}
+.mp-admin .presopen{display:inline-flex;padding:2px;opacity:.42}
+.mp-admin .presopen:hover{opacity:1}
+.mp-admin .presopen svg{width:20px;height:20px;display:block}
+.mp-admin .presask{margin-left:0}
+.mp-admin .presask input{width:104px}
+@media(max-width:760px){.news-box{max-width:46vw}.homesport{max-width:160px}.menu-panel{min-width:200px}}
 .news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
 .news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
 .news-date{font-size:10.5px;font-weight:700;color:var(--mut);background:var(--acc-bg);border-radius:5px;padding:2px 7px}
@@ -1082,7 +1094,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 @media(max-width:760px){
   .aw-cta{top:auto;bottom:18px;left:18px;transform:none}
   .aw-btn{font-size:12px;padding:8px 16px}
-  .adminlink-hero{bottom:10px}
   .bottombar{justify-content:flex-start}
 }
 body.pres{--colw:290px;--lblw:200px}
@@ -1866,6 +1877,15 @@ if(steadyBtn)steadyBtn.addEventListener('click',()=>{const sec=sections.find(x=>
 const homeSport=document.querySelector('.homesport');
 function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
 // Knopf exakt ueber der Bergspitze positionieren (Bild-x 1018 bei 1896x986, YMin-Slice)
+// Hamburger-Menue (Mission, Was ist FTEM?, App, Feedback, Admin/Praesentation)
+const menuBtn=document.querySelector('.menu-btn'), menuPanel=document.querySelector('.menu-panel');
+if(menuBtn&&menuPanel){
+  menuBtn.addEventListener('click',e=>{e.stopPropagation();menuPanel.hidden=!menuPanel.hidden;menuBtn.setAttribute('aria-expanded',String(!menuPanel.hidden));});
+  document.addEventListener('click',e=>{if(!menuPanel.hidden&&!e.target.closest('.menu-panel')&&!e.target.closest('.menu-btn')){menuPanel.hidden=true;menuBtn.setAttribute('aria-expanded','false');}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menuPanel.hidden){menuPanel.hidden=true;menuBtn.setAttribute('aria-expanded','false');}});
+  // Eintraege, die ein Overlay oeffnen, schliessen das Menue
+  menuPanel.querySelectorAll('[data-open],.np-sportmission').forEach(b=>b.addEventListener('click',()=>{menuPanel.hidden=true;menuBtn.setAttribute('aria-expanded','false');}));
+}
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero');
 function posAW(){
   if(!awCta||!heroEl)return;
