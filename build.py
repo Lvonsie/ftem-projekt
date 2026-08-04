@@ -113,6 +113,33 @@ FTEM = '<span class="fF">F</span><span class="fT">T</span><span class="fE">E</sp
 
 SC_RE = re.compile(r'^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*(.*)$', re.S)
 
+# Einheitliche Titel-Erkennung (ueber alle Themen/Sportarten/Stufen gleich)
+# "Label: Wert" nur mit Leerzeichen nach dem Doppelpunkt -> schuetzt Gender-Doppelpunkt
+# (z.B. "Trainer:innen", "Athlet:innen" werden NICHT als Label erkannt).
+LABELVAL_RE = re.compile(r'^([^:\n]{2,44}):[ \t\xa0]+(\S.*)$', re.S)
+
+def _is_title_label(lab):
+    lab = (lab or "").strip()
+    if len(lab) < 2 or len(lab) > 44: return False
+    if not (lab[0].isalpha() and lab[0].isupper()): return False   # Titel beginnen gross
+    if lab.endswith((".", "!", "?")) or ". " in lab: return False  # keine ganzen Saetze
+    return True
+
+def _is_head_line(s):
+    s = (s or "").strip()
+    if len(s) < 2 or len(s) > 50: return False
+    if s.endswith((".", ",", ";", "!", "?", ":")): return False
+    if "," in s or ":" in s: return False
+    if not (s[0].isalpha() and s[0].isupper()): return False       # Zahlen/Werte beginnen nicht gross
+    return len(s.split()) <= 6
+
+def _bodyhtml(txt):
+    txt = (txt or "").strip()
+    if not txt: return ""
+    bl = bullets_from_text(txt)
+    if bl: return bl
+    return '<p>'+esc(txt).replace("\n", "<br>")+'</p>'
+
 def render_block(block, link_texts):
     b = block.strip()
     if not b: return ""
@@ -146,28 +173,35 @@ def render_block(block, link_texts):
                 out += '<li>'+esc(ls)+'</li>'
         out += '</ul>'
         return out
-    # heading + body (short first line, no end punctuation, has more lines)
-    if len(lines) >= 2 and lines[0].strip() and len(lines[0].strip()) <= 46 and not lines[0].strip().endswith((".",":",",",";")):
-        head = lines[0].strip()
-        rest = "\n".join(lines[1:]).strip()
-        body_bl = bullets_from_text(rest)
-        if body_bl:
-            return '<p class="bh">'+esc(head)+'</p>'+body_bl
-        return '<p class="bh">'+esc(head)+'</p><p>'+esc(rest).replace("\n","<br>")+'</p>'
-    # label: value (single label line)
-    m = re.match(r'^([^:\n]{2,46}):\s*(.+)$', b, re.S)
-    if m and "\n" not in m.group(1):
-        lab = m.group(1).strip(); val = m.group(2).strip()
-        if len(val) > 55 or "\n" in val:
-            vb = bullets_from_text(val)
-            if vb:
-                return '<p class="sh">'+esc(lab)+'</p>'+vb
-            return '<p class="sh">'+esc(lab)+'</p><p>'+esc(val).replace("\n","<br>")+'</p>'
-        return '<p><span class="lbl">'+esc(lab)+':</span> '+esc(val).replace("\n","<br>")+'</p>'
-    pb = bullets_from_text(b)
-    if pb:
-        return pb
-    return '<p>'+esc(b).replace("\n","<br>")+'</p>'
+    ne = [l.strip() for l in lines if l.strip()]
+    # Fall A: mehrere "Label: Wert"-Zeilen -> jede Zeile Titel + Wert (z.B. Rot/Gelb/Gruen)
+    ms = [LABELVAL_RE.match(l) for l in ne]
+    if len(ne) >= 2 and all(ms) and all(_is_title_label(m.group(1)) for m in ms):
+        out = ""
+        for m in ms:
+            out += '<p class="bh">'+esc(m.group(1).strip())+'</p>'
+            val = m.group(2).strip()
+            if val: out += '<p>'+esc(val)+'</p>'
+        return out
+    first = lines[0].strip()
+    # Fall B: erste Zeile "Label: Wert" -> Titel + (Wert & restliche Zeilen als Text)
+    mf = LABELVAL_RE.match(first)
+    if mf and _is_title_label(mf.group(1)):
+        head = mf.group(1).strip()
+        rest = "\n".join([mf.group(2).strip()] + list(lines[1:])).strip()
+        return '<p class="bh">'+esc(head)+'</p>'+_bodyhtml(rest)
+    # Fall C: erste Zeile endet mit ":" -> reine Titelzeile + Rest
+    if first.endswith(":") and 2 <= len(first) <= 60 and first[:1].isupper():
+        head = first[:-1].strip()
+        if head:
+            return '<p class="bh">'+esc(head)+'</p>'+_bodyhtml("\n".join(lines[1:]))
+    # Fall D: kurze Titelzeile ohne Satzzeichen + Rest als Text
+    if len(lines) >= 2 and _is_head_line(first):
+        return '<p class="bh">'+esc(first)+'</p>'+_bodyhtml("\n".join(lines[1:]))
+    # Fall E: einzelne kurze Titel-Phrase (z.B. "Familie", "Belastungsvertraeglichkeit aufbauen")
+    if len(ne) == 1 and _is_head_line(ne[0]):
+        return '<p class="bh">'+esc(ne[0])+'</p>'
+    return _bodyhtml(b)
 
 def clean_ws(s):
     # nur fuer die Anzeige: Tabs zu Leerzeichen, Mehrfach-Leerzeichen und
@@ -381,7 +415,9 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None):
         body += '<div class="r">'
         body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
         # render segs with spans; we lay out as 10 cells using grid-column span
-        for si, seg in enumerate(r["segs"]):
+        # Gleiche benachbarte Zellen werden ueber Phasen hinweg zu einem Block verbunden
+        # (nicht nur innerhalb F/T/E/M) – so entsteht bei identischem Inhalt eine Spalte.
+        for si, seg in enumerate(merge_same_segs(r["segs"])):
             span = seg["to"] - seg["from"] + 1
             cls = "ph-"+ph(stages[seg["from"]])
             # if seg spans multiple phases, neutral
@@ -396,6 +432,22 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None):
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(title)+'</span>'
             '<span class="tt">'+esc(title)+'</span><span class="tchev"></span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
+
+def merge_same_segs(segs):
+    """Benachbarte Segmente mit identischem Inhalt (Text + Links) zu einem Block
+    zusammenfassen – auch ueber Phasengrenzen (F/T/E/M) hinweg."""
+    out = []
+    for s in segs:
+        if out:
+            p = out[-1]
+            same_v = (p.get("v") or "").strip() == (s.get("v") or "").strip()
+            pl = [(l.get("href"), l.get("text")) for l in (p.get("l") or [])]
+            sl = [(l.get("href"), l.get("text")) for l in (s.get("l") or [])]
+            if same_v and pl == sl:
+                out[-1] = {"v": p.get("v"), "from": p["from"], "to": s["to"], "l": p.get("l") or []}
+                continue
+        out.append(dict(s))
+    return out
 
 def build_sections(d, prefix, lang, edit=False):
     themes = d["themes"]
