@@ -41,16 +41,15 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 #home .home-hero .langsw a{color:rgba(255,255,255,.82)}
 #home .home-hero .langsw a.active{background:#fff;color:#1d2630}
 #home .home-hero .langsw a:hover:not(.active){background:rgba(255,255,255,.22);color:#fff}
-#home .hero-head{position:relative;z-index:6;text-align:left;padding:150px 0 0 30px;pointer-events:none}
-#home .hero-head h1{font-size:clamp(46px,9vw,92px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
+#home .hero-head{position:relative;z-index:6;text-align:left;padding:20px 0 0 28px;pointer-events:none}
+#home .hero-head h1{font-size:clamp(56px,10vw,118px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
 #home .hero-head h1 b{color:#fff;font-weight:800}
-#home .hero-head h1 .fF,#home .hero-head h1 .fT,#home .hero-head h1 .fE,#home .hero-head h1 .fM{animation:ftemglow 3.2s ease-in-out infinite}
 #home .hero-head h1 .fF{color:#57cce4;text-shadow:0 0 12px rgba(87,204,228,.9),0 0 26px rgba(87,204,228,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fT{color:#ffd45c;text-shadow:0 0 12px rgba(255,212,92,.9),0 0 26px rgba(255,212,92,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fE{color:#ff9b57;text-shadow:0 0 12px rgba(255,155,87,.9),0 0 26px rgba(255,155,87,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fM{color:#ff6d60;text-shadow:0 0 12px rgba(255,109,96,.95),0 0 26px rgba(255,109,96,.65),0 2px 24px rgba(0,0,0,.5)}
 @keyframes ftemglow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
-#home .hero-logo{display:block;margin:-12px 0 0 8px;width:clamp(96px,14vw,150px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
+#home .hero-logo{display:block;margin:-14px 0 0 10px;width:clamp(104px,15vw,168px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
 .constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
 .clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
@@ -130,8 +129,6 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
 @media(min-aspect-ratio:19/10){
-  #home .hero-head{padding-top:140px}
-  #home .hero-head h1{font-size:clamp(38px,4.6vw,66px)}
   #home .hero-logo{width:clamp(78px,8.5vw,116px);margin-top:4px}
 }
 .spmodal{position:fixed;inset:0;z-index:115;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
@@ -150,7 +147,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
-.homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);min-width:210px;max-width:250px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);min-width:170px;max-width:230px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .homesport{color-scheme:dark}
 .homesport option{color:#1d2630;background:#fff}
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
@@ -235,9 +232,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
 .aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.heromt .awpath{opacity:0;transition:opacity .35s ease;pointer-events:none}
-.heromt.awhover .awpath{opacity:1}
-.heromt .awpath circle{stroke:rgba(255,255,255,.85);stroke-width:2}
 .mr-row{display:flex;gap:8px;align-items:stretch;justify-content:flex-end}
 @media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
@@ -351,7 +345,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:170px}#home .hero-head h1{font-size:40px}#home .hero-logo{width:78px;margin:-6px 0 0 6px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:180px;padding-left:18px}#home .hero-head h1{font-size:46px}#home .hero-logo{width:84px;margin:-4px 0 0 4px}}
 @media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
 @media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */

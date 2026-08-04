@@ -743,17 +743,6 @@ def home_html(datamap, lang):
                 '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0" clip-path="url(#mtclip)"/>'
                 '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
                 '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
-    # Athlet:innen-Weg als "Piste": erscheint beim Hover auf dem AW-Knopf
-    aw_pts = [("M",1042,258),("E2",1130,420),("E1",1180,500),("T4",1122,590),("T3",1185,650),
-              ("T2",1126,707),("T1",1180,762),("F3",1122,830),("F2",1178,880),("F1",1140,930)]
-    aw_col = {"F":"#57cce4","T":"#f2c85f","E":"#f2a06a","M":"#f28578"}
-    aw_path_d = "M"+" L".join(str(x)+","+str(y) for _, x, y in aw_pts)
-    aw_dots = "".join('<circle cx="'+str(x)+'" cy="'+str(y)+'" r="8" fill="'+aw_col[s[0]]+'">'
-                      '<title>'+esc(FULL[s])+'</title></circle>' for s, x, y in aw_pts)
-    awpath = ('<g class="awpath" aria-hidden="true">'
-              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="24" stroke-linejoin="round" stroke-linecap="round"/>'
-              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-dasharray="8 7" stroke-linejoin="round"/>'
-              + aw_dots + '</g>')
     hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
@@ -786,7 +775,6 @@ def home_html(datamap, lang):
         + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", "e")
         + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", "t")
         + band(790, 196, 866, 894, band_lbl[0], "F1 – F3", "f")
-        + awpath
         + '</svg>')
     pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
@@ -918,18 +906,31 @@ def home_html(datamap, lang):
     pres_web = ('<template id="tpl-pres-web"><div class="pd-web"><h2>'+esc(web_head[0])+'</h2>'
                 '<p class="lead">'+esc(web_head[1])+' <b>ftemschneesport.netlify.app</b></p>'
                 '<div class="pd-feats">'+_wf+'</div></div></template>')
+    # Schwarze Fusszeile: sportartuebergreifende Grundlagen (oeffnen als iframe-Overlay)
+    foot_links = [
+        ("FAPS", "FAPS – Strategie Swiss-Ski", "https://snowsports.flink.host/s/psBIwCuB"),
+        ({"de": "Schneesport 2050", "fr": "Sports de neige 2050", "it": "Sport sulla neve 2050"}[lang],
+         "Schneesport 2050", "https://snowsports.flink.host/s/soSSzlmC"),
+        ({"de": "Ethik-Kompass", "fr": "Boussole éthique", "it": "Bussola etica"}[lang],
+         "Ethik-Kompass für die Schneesport-Praxis", "https://snowsports.flink.host/s/NxOLBkit"),
+        ({"de": "Nachhaltigkeit", "fr": "Durabilité", "it": "Sostenibilità"}[lang],
+         "Nachhaltigkeit im Schneesport", "https://tool.jugendundsport.ch/modules/654e2b8784846dba7a0ad962?lang=de"),
+    ]
+    footbar = ('<div class="bottombar">'
+               + "".join('<a class="bb-item np-mission" href="'+esc(u)+'" data-title="'+esc(t)+'">'+esc(l)+'</a>'
+                         for l, t, u in foot_links)
+               + '</div>')
     nbadge = ('<span class="nbadge">'+str(len(NEWS))+'</span>') if NEWS else ''
     return ('<section id="home">'
             '<div class="home-hero">'
-            '<div class="hero-top">'
-            '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
-            + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
-            + '</select></div>'
             +aw_cta+
             
             '<div class="hero-top-r">'
             '<div class="mr-row"><div class="lsrow">'+lang_switch(lang)+'</div>'
-            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button></div>'
+            '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
+            + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
+            + '</select></div>'
+            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button>'
             '<div class="menu-panel" hidden>'
             '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
             +mission_btn+
@@ -946,11 +947,7 @@ def home_html(datamap, lang):
             +'</div>'
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
-            +pyr+
-            '<div class="bottombar">'
-            +(('<a class="bb-item np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission <b>swiss</b>ski</a>') if MISSION_URL else
-              ('<button class="bb-item" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission <b>swiss</b>ski</button>'))
-            +'</div>'
+            +pyr+footbar+
             '</div>'
             +pres_web+
             '<template id="tpl-news">'+news_html(lang)+'</template>'
@@ -997,16 +994,15 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 #home .home-hero .langsw a{color:rgba(255,255,255,.82)}
 #home .home-hero .langsw a.active{background:#fff;color:#1d2630}
 #home .home-hero .langsw a:hover:not(.active){background:rgba(255,255,255,.22);color:#fff}
-#home .hero-head{position:relative;z-index:6;text-align:left;padding:150px 0 0 30px;pointer-events:none}
-#home .hero-head h1{font-size:clamp(46px,9vw,92px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
+#home .hero-head{position:relative;z-index:6;text-align:left;padding:20px 0 0 28px;pointer-events:none}
+#home .hero-head h1{font-size:clamp(56px,10vw,118px);margin:0;font-weight:800;letter-spacing:1px;text-shadow:0 3px 26px rgba(0,0,0,.6)}
 #home .hero-head h1 b{color:#fff;font-weight:800}
-#home .hero-head h1 .fF,#home .hero-head h1 .fT,#home .hero-head h1 .fE,#home .hero-head h1 .fM{animation:ftemglow 3.2s ease-in-out infinite}
 #home .hero-head h1 .fF{color:#57cce4;text-shadow:0 0 12px rgba(87,204,228,.9),0 0 26px rgba(87,204,228,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fT{color:#ffd45c;text-shadow:0 0 12px rgba(255,212,92,.9),0 0 26px rgba(255,212,92,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fE{color:#ff9b57;text-shadow:0 0 12px rgba(255,155,87,.9),0 0 26px rgba(255,155,87,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fM{color:#ff6d60;text-shadow:0 0 12px rgba(255,109,96,.95),0 0 26px rgba(255,109,96,.65),0 2px 24px rgba(0,0,0,.5)}
 @keyframes ftemglow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
-#home .hero-logo{display:block;margin:-12px 0 0 8px;width:clamp(96px,14vw,150px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
+#home .hero-logo{display:block;margin:-14px 0 0 10px;width:clamp(104px,15vw,168px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
 .constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
 .clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
@@ -1086,8 +1082,6 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
 @media(min-aspect-ratio:19/10){
-  #home .hero-head{padding-top:140px}
-  #home .hero-head h1{font-size:clamp(38px,4.6vw,66px)}
   #home .hero-logo{width:clamp(78px,8.5vw,116px);margin-top:4px}
 }
 .spmodal{position:fixed;inset:0;z-index:115;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
@@ -1106,7 +1100,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
-.homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);min-width:210px;max-width:250px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);min-width:170px;max-width:230px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .homesport{color-scheme:dark}
 .homesport option{color:#1d2630;background:#fff}
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
@@ -1191,9 +1185,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
 .aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.heromt .awpath{opacity:0;transition:opacity .35s ease;pointer-events:none}
-.heromt.awhover .awpath{opacity:1}
-.heromt .awpath circle{stroke:rgba(255,255,255,.85);stroke-width:2}
 .mr-row{display:flex;gap:8px;align-items:stretch;justify-content:flex-end}
 @media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
@@ -1307,7 +1298,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:170px}#home .hero-head h1{font-size:40px}#home .hero-logo{width:78px;margin:-6px 0 0 6px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:180px;padding-left:18px}#home .hero-head h1{font-size:46px}#home .hero-logo{width:84px;margin:-4px 0 0 4px}}
 @media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
 @media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */
@@ -2122,11 +2113,7 @@ function posAW(){
   awCta.style.top=Math.max(10,Math.round(227*s-awCta.offsetHeight-12))+'px';
 }
 window.addEventListener('resize',posAW);posAW();
-if(awCta&&heroSvg){
-  const on=()=>heroSvg.classList.add('awhover'), off=()=>heroSvg.classList.remove('awhover');
-  awCta.addEventListener('mouseenter',on);awCta.addEventListener('mouseleave',off);
-  awCta.addEventListener('focusin',on);awCta.addEventListener('focusout',off);
-}
+
 // Knopf exakt ueber der Bergspitze positionieren (Bild-x 1018 bei 1896x986, YMin-Slice)
 // Hamburger-Menue (Mission, Was ist FTEM?, App, Feedback, Admin/Praesentation)
 const menuBtn=document.querySelector('.menu-btn'), menuPanel=document.querySelector('.menu-panel');
