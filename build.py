@@ -1000,6 +1000,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
 .heromt .pband:hover,.heromt .pband:focus-visible{filter:brightness(1.28)}
+.heromt .pb-n,.heromt .pb-s{transform-box:fill-box;transform-origin:center;transition:transform .18s ease}
+.heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n{transform:scale(1.22)}
+.heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{transform:scale(1.12)}
 .heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:22px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:3px;stroke-linejoin:round}
 .heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
