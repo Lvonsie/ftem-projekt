@@ -194,12 +194,16 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#fff}
 /* Feedback unten rechts */
 /* Hamburger-Menue oben rechts */
-.menu-btn{font:inherit;background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
-.menu-btn:hover{filter:brightness(1.12)}
-.menu-panel{display:flex;flex-direction:column;gap:6px;min-width:225px;background:rgba(15,21,32,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:9px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.menu-btn{font:inherit;background:rgba(15,21,32,.55);color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(6px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.menu-btn:hover{background:rgba(15,21,32,.75);border-color:rgba(255,255,255,.6)}
+.menu-panel{position:relative;display:flex;flex-direction:column;gap:6px;min-width:225px;background:rgba(15,21,32,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:30px 9px 9px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.mp-x{position:absolute;top:4px;right:7px;background:none;border:none;color:rgba(255,255,255,.75);font-size:18px;line-height:1;cursor:pointer;padding:3px 7px}
+.mp-x:hover{color:#fff}
 .mp-item{font:inherit;display:block;width:100%;text-align:left;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:12px;border-radius:8px;padding:8px 12px;cursor:pointer}
 .mp-item:hover{background:var(--red);border-color:var(--red)}
 .mp-mission{background:rgba(213,43,30,.85);border-color:rgba(213,43,30,.9)}
+.mp-app{display:none}
+@media(max-width:760px){.mp-app{display:block}}
 .menu-panel .fb-btn{width:100%;text-align:left;border-radius:8px;padding:8px 12px;font-size:12px;box-shadow:none}
 .menu-panel .fb-panel{width:100%}
 .mp-admin{display:flex;align-items:center;justify-content:center;gap:14px;margin:2px 0 0;padding-top:8px;border-top:1px solid rgba(255,255,255,.15)}
@@ -219,7 +223,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .fb-x:hover{color:#fff}
 .fb-panel .fb-text{margin-top:14px}
 /* "Athlet:innen Weg"-Knopf oben Mitte */
-.aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.45);color:#fff;font-weight:800;font-size:13px;border-radius:22px;padding:9px 20px;cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
 .aw-btn .aw-ar{display:inline-flex;width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.22);align-items:center;justify-content:center;font-size:12px}
@@ -236,7 +239,12 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .ph-sum .ps-sec h4{margin:16px 0 7px;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--acc)}
 .ph-sum .ps-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
 .ph-sum .ps-col{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--psc,#4a5563);border-radius:9px;padding:8px 11px;font-size:11.5px;line-height:1.5;min-width:0}
-.ph-sum .ps-col p{margin:0;white-space:normal;overflow-wrap:anywhere}
+.ph-sum .ps-col .cwrap{font-size:11.5px;line-height:1.5;color:#33404d;overflow-wrap:anywhere}
+[data-theme="dark"] .ph-sum .ps-col .cwrap{color:#c2ccd8}
+.ps-f .ps-col{--zc:#0d5e6e;--zbg:#e1f0f3}
+.ps-t .ps-col{--zc:#8a6a00;--zbg:#f7edcf}
+.ps-e .ps-col{--zc:#a8511a;--zbg:#f8e2d3}
+.ps-m .ps-col{--zc:#9c1d14;--zbg:#f6dcd8}
 .ph-sum .ps-st{font-weight:800;font-size:11px;margin-bottom:4px}
 .ph-sum .ps-st i{font-style:normal;color:var(--mut);font-weight:700;font-size:10px;margin-left:6px}
 .ph-sum .ps-desc{white-space:pre-line}
@@ -247,7 +255,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* Zebra im Darkmode: leicht aufhellen statt abdunkeln */
 [data-theme="dark"] .grid .r:nth-child(odd):not(.head) .cell,[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045))}
 @media(max-width:760px){
-  .aw-cta{top:auto;bottom:18px;left:18px;transform:none}
   .aw-btn{font-size:12px;padding:8px 16px}
   .bottombar{justify-content:flex-start}
 }
