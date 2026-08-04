@@ -1,4 +1,4 @@
-const CACHE="ftem-11f0829359";
+const CACHE="ftem-24ada9fb7c";
 const CORE=["./", "./index.html", "./fr.html", "./it.html", "./admin.html", "./manifest.webmanifest", "./assets/favicon.svg", "./assets/icon-192.png", "./assets/icon-512.png", "./assets/icon-180.png", "./assets/hero.jpg", "./assets/og-image.jpg", "./assets/swiss-ski-logo.svg", "./assets/sporticons/reserve-moguls.png", "./assets/sporticons/freeski-park-pipe.png", "./assets/sporticons/skicross.png", "./assets/sporticons/biathlon.png", "./assets/sporticons/ski-alpin.png", "./assets/sporticons/skispringen.png", "./assets/sporticons/snowboard-park-pipe.png", "./assets/sporticons/reserve-telemark.png", "./assets/sporticons/langlauf.png", "./assets/sporticons/reserve-aerials.png", "./assets/sporticons/nordische-kombination.png"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});

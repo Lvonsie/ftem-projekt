@@ -781,8 +781,12 @@ def home_html(datamap, lang):
                              + ('<i>'+esc(age2)+'</i>' if age2 else '') + '</div>'
                              + '<div class="cwrap">'+body2+'</div></div>')
                 if cols:
-                    secs += ('<div class="ps-sec"><h4>'+esc(tr(sec["title"], lang))+'</h4>'
-                             '<div class="ps-cols">'+cols+'</div></div>')
+                    # wie im Athlet:innen-Weg: einklappbare Themenzeile, standardmaessig zu
+                    secs += ('<details class="theme ps-theme">'
+                             '<summary><span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">'
+                             + theme_icon(sec["title"]) + '</span>'
+                             '<span class="tt">'+esc(tr(sec["title"], lang))+'</span><span class="tchev"></span></summary>'
+                             '<div class="ps-secbody"><div class="ps-cols">'+cols+'</div></div></details>')
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                         '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
@@ -826,7 +830,7 @@ def home_html(datamap, lang):
             '<div class="menu-panel" hidden>'
             '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
             +mission_btn+
-            '<button class="mp-item" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button>'
+            '<button class="mp-item mp-mission" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button>'
             +fb+
             '<button class="mp-item mp-app" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'
             +adminlk+'</div>'
@@ -1067,7 +1071,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .fb-x:hover{color:#fff}
 .fb-panel .fb-text{margin-top:14px}
 /* "Athlet:innen Weg"-Knopf oben Mitte */
-.aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.45);color:#fff;font-weight:800;font-size:13px;border-radius:22px;padding:9px 20px;cursor:pointer;backdrop-filter:blur(6px);letter-spacing:.02em;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);color:#fff;font-weight:700;font-size:12.5px;border-radius:8px;padding:7px 10px;cursor:pointer;backdrop-filter:blur(6px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
 .aw-btn .aw-ar{display:inline-flex;width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.22);align-items:center;justify-content:center;font-size:12px}
 /* Stufen-Summary-Overlay */
@@ -1080,7 +1084,10 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .ph-sum .ps-rng{font-size:12px;font-weight:700;color:var(--mut)}
 .ph-sum .ps-desc{font-size:13.5px;line-height:1.6;margin:0 0 15px}
 .ph-sum.ph-wide{max-width:840px}
-.ph-sum .ps-sec h4{margin:16px 0 7px;font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--acc)}
+.ph-sum .ps-theme{border-left-color:#4a5563;margin-bottom:6px}
+.ph-sum .ps-theme>summary{padding:8px 12px}
+.ph-sum .ps-secbody{padding:4px 10px 10px}
+.ph-sum .ps-desc{margin-bottom:14px}
 .ph-sum .ps-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
 .ph-sum .ps-col{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--psc,#4a5563);border-radius:9px;padding:8px 11px;font-size:11.5px;line-height:1.5;min-width:0}
 .ph-sum .ps-col .cwrap{font-size:11.5px;line-height:1.5;color:#33404d;overflow-wrap:anywhere}
