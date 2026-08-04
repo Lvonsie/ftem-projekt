@@ -19,8 +19,8 @@ try:
     TR = json.load(open(os.path.join(BASE, "translations.json"), encoding="utf-8"))
 except FileNotFoundError:
     TR = {}
-LANGS = ["de", "fr", "it"]
-FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html"}
+LANGS = ["de", "fr", "it", "en"]
+FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html", "en": "en.html"}
 
 # --- Admin-Bereich -----------------------------------------------------------
 # Passwort fuer den Admin-/Bearbeitungsbereich (dezentes Schloss-Icon unten auf der Startseite)
@@ -30,8 +30,8 @@ PRES_PW = "FTEMP"
 # Uebergeordnete Mission-Seite (Link folgt). Solange leer, oeffnet der Mission-Button
 # eine Auswahl der Sportarten-Missionen (aus ftem_sports.json).
 MISSION_URL = ""
-PRES_TITLE = {"de": "Präsentationsmodus", "fr": "Mode présentation", "it": "Modalità presentazione"}
-PRES_PWPH = {"de": "Passwort", "fr": "Mot de passe", "it": "Password"}
+PRES_TITLE = {"de": "Präsentationsmodus", "fr": "Mode présentation", "it": "Modalità presentazione", "en": "Presentation mode"}
+PRES_PWPH = {"de": "Passwort", "fr": "Mot de passe", "it": "Password", "en": "Password"}
 # Cloud-Speicher (Supabase) fuer direkt gespeicherte, fuer alle sichtbare Aenderungen.
 # Einmalig eintragen (siehe SETUP-ADMIN.md). Solange leer: Seite laeuft normal,
 # Admin bietet dann Datei-Download als Rueckfall.
@@ -43,9 +43,29 @@ SUPABASE_ANON_KEY = "sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_"
 # Leer lassen = relative URL (funktioniert bei vielen, aber nicht allen Diensten).
 SITE_URL = "https://ftemschneesport.netlify.app"
 
+# Englische UI-Texte fuer tr()-Aufrufe (Inhalte aus den Excels bleiben vorerst deutsch)
+TR_EN_UI = {
+    "Athlet:innen-Weg": "Athlete pathway",
+    "Zu Thema springen…": "Jump to topic…",
+    "mehr ▾": "more ▾",
+    "weniger ▴": "less ▴",
+    "Spalte hervorheben": "Highlight column",
+    "Stufe hervorheben": "Highlight stage",
+    "Drucken / als PDF speichern": "Print / save as PDF",
+    "Quelle:": "Source:",
+    "aufbereitet am": "prepared on",
+    "Themen mit Treffern": "Topics with hits",
+    "Themen · F1–M": "Topics · F1–M",
+    "Sport & Athlet:in": "Sport & athlete",
+    "Material": "Equipment",
+    "Strukturen & Umfeld": "Structures & environment",
+}
+
 def tr(s, lang):
     if lang == "de" or s is None:
         return s
+    if lang == "en":
+        return TR_EN_UI.get(s, TR.get("en", {}).get(s, s))
     return TR.get(lang, {}).get(s, s)
 
 # Kurzbeschrieb "Was ist FTEM?" auf der Auswahlseite (mit Swiss Olympic)
@@ -80,25 +100,37 @@ FTEM_INFO = {
      ("M","Mastery","M","Segnare l&#x27;élite mondiale: successi duraturi al massimo livello per anni."),
    ],
  },
+ "en": {
+   "title": "What is FTEM?",
+   "lead": 'FTEM is the shared framework of <b>Swiss Olympic</b> and <b>Swiss-Ski</b> for long-term athlete and sport development in snow sports. It describes the entire journey – from the first contact with snow to the world class – in four key phases and ten development stages (F1–M).',
+   "phases": [
+     ("F","Foundation","F1–F3","Building the foundation: acquiring, applying and consolidating versatile movement and snow-sport basics."),
+     ("T","Talent","T1–T4","Showing and developing potential: talents confirm themselves, train purposefully and achieve the breakthrough."),
+     ("E","Elite","E1–E2","Representing Switzerland internationally: World Cup, World Championships and Olympic Games at elite level."),
+     ("M","Mastery","M","Shaping the world class: sustained success at the highest level over years."),
+   ],
+ },
 }
 PLACE = {
  "de": 'Der Athlet:innen-Weg für <b>{name}</b> ist noch nicht erfasst – Inhalte folgen.<br><br>Sobald die Daten vorliegen, kommen sie in die Datei <code>{file}</code> und die Seite wird mit <code>python3 build.py</code> neu erzeugt.',
  "fr": 'Le parcours de l&#x27;athlète pour <b>{name}</b> n&#x27;est pas encore saisi – contenus à venir.<br><br>Dès que les données seront disponibles, elles seront ajoutées au fichier <code>{file}</code> et la page sera régénérée avec <code>python3 build.py</code>.',
  "it": 'Il percorso dell&#x27;atleta per <b>{name}</b> non è ancora disponibile – contenuti in arrivo.<br><br>Non appena i dati saranno disponibili, verranno inseriti nel file <code>{file}</code> e la pagina sarà rigenerata con <code>python3 build.py</code>.',
+ "en": 'The athlete pathway for <b>{name}</b> is not yet available – content coming soon.<br><br>Once the data is available, it will be added to <code>{file}</code> and the page rebuilt with <code>python3 build.py</code>.',
 }
 HOME_SUB = {
  "de": "Swiss-Ski Entwicklungsstufen F1–M · Sportart auswählen",
  "fr": "Niveaux de développement Swiss-Ski F1–M · Choisir un sport",
  "it": "Livelli di sviluppo Swiss-Ski F1–M · Scegliere lo sport",
+ "en": "Swiss-Ski development stages F1–M · Choose a sport",
 }
-NODATA = {"de": "Inhalte folgen", "fr": "Contenus à venir", "it": "Contenuti in arrivo"}
-BACK = {"de": "← Sportarten", "fr": "← Sports", "it": "← Sport"}
-BACK_TITLE = {"de": "Zurück zur Auswahl", "fr": "Retour à la sélection", "it": "Torna alla selezione"}
-SEARCH_PH = {"de": "Suche…", "fr": "Rechercher…", "it": "Cerca…"}
-EXPAND_ALL = {"de": "Alle öffnen", "fr": "Tout ouvrir", "it": "Apri tutto"}
-COLLAPSE_ALL = {"de": "Alle schliessen", "fr": "Tout fermer", "it": "Chiudi tutto"}
-CLEAR_LBL = {"de": "Leeren", "fr": "Effacer", "it": "Cancella"}
-CHAT_BTN = {"de": "FTEM-Coach (KI)", "fr": "Coach FTEM (IA)", "it": "Coach FTEM (IA)"}
+NODATA = {"de": "Inhalte folgen", "fr": "Contenus à venir", "it": "Contenuti in arrivo", "en": "Content coming soon"}
+BACK = {"de": "← Sportarten", "fr": "← Sports", "it": "← Sport", "en": "← Sports"}
+BACK_TITLE = {"de": "Zurück zur Auswahl", "fr": "Retour à la sélection", "it": "Torna alla selezione", "en": "Back to selection"}
+SEARCH_PH = {"de": "Suche…", "fr": "Rechercher…", "it": "Cerca…", "en": "Search…"}
+EXPAND_ALL = {"de": "Alle öffnen", "fr": "Tout ouvrir", "it": "Apri tutto", "en": "Open all"}
+COLLAPSE_ALL = {"de": "Alle schliessen", "fr": "Tout fermer", "it": "Chiudi tutto", "en": "Close all"}
+CLEAR_LBL = {"de": "Leeren", "fr": "Effacer", "it": "Cancella", "en": "Clear"}
+CHAT_BTN = {"de": "FTEM-Coach (KI)", "fr": "Coach FTEM (IA)", "it": "Coach FTEM (IA)", "en": "FTEM Coach (AI)"}
 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 # Fallback, falls eine Datendatei keine "ages" enthaelt (Alterskategorien pro Sportart)
@@ -404,7 +436,7 @@ def theme_icon(title):
             return '<svg viewBox="0 0 24 24" aria-hidden="true">'+_ICONS[name]+'</svg>'
     return '<svg viewBox="0 0 24 24" aria-hidden="true">'+_ICONS["list"]+'</svg>'
 
-def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None):
+def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=False):
     title = tr(t["title"], lang)
     bar, chip = group_accent(group)
     # header row
@@ -432,7 +464,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None):
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
     opn = ' open' if edit else ''
-    return ('<details class="theme'+(' edit' if edit else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
+    return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(title)+'</span>'
             '<span class="tt">'+esc(title)+'</span><span class="tchev"></span></summary>'
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
@@ -465,8 +497,9 @@ def build_sections(d, prefix, lang, edit=False):
         if not items: continue
         gbar, gchip = group_accent(g)
         sections += '<h2 class="grp" style="--gc:'+gbar+'">'+esc(tr(g, lang))+'</h2>'
-        for i,t in items:
-            sections += theme_html(t,i,stages,prefix,lang,ages,edit,g)
+        for k2,(i,t) in enumerate(items):
+            # Zebra startet pro Bereich neu; einzelne Themen bleiben weiss (Kontrast)
+            sections += theme_html(t,i,stages,prefix,lang,ages,edit,g, alt=(len(items)>1 and k2%2==1))
     jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
     return sections, jump
 
@@ -590,8 +623,8 @@ NEWS = [
 def news_html(lang):
     if not NEWS:
         return ""
-    heading = {"de":"News","fr":"Actualités","it":"Notizie"}.get(lang, "News")
-    upd = {"de":"Aktualisiert am ","fr":"Mis à jour le ","it":"Aggiornato il "}.get(lang, "Aktualisiert am ")
+    heading = {"de":"News","fr":"Actualités","it":"Notizie","en":"News"}.get(lang, "News")
+    upd = {"de":"Aktualisiert am ","fr":"Mis à jour le ","it":"Aggiornato il ","en":"Updated on "}.get(lang, "Aktualisiert am ")
     cards = ""
     for i, it in enumerate(NEWS):
         body = "".join('<p>'+esc(tr(p, lang))+'</p>' for p in it.get("body", []))
@@ -616,6 +649,10 @@ INSTALL_HINT = {
         "body": "Cette page s'enregistre comme une app – sans téléchargement.<br>"
                 "<b>iPhone (Safari) :</b> « Partager » <span class=\"ai-i\">&#8593;</span> → « Sur l'écran d'accueil ».<br>"
                 "<b>Android (Chrome) :</b> menu ⋮ → « Installer l'application »."},
+ "en": {"title": "Add as an app",
+        "body": "This page can be saved like an app – no download needed.<br>"
+                "<b>iPhone (Safari):</b> \u201cShare\u201d <span class=\"ai-i\">&#8593;</span> \u2192 \u201cAdd to Home Screen\u201d.<br>"
+                "<b>Android (Chrome):</b> menu \u22ee \u2192 \u201cInstall app\u201d."},
  "it": {"title": "Aggiungi come app",
         "body": "Questa pagina si salva come un'app – senza download.<br>"
                 "<b>iPhone (Safari):</b> « Condividi » <span class=\"ai-i\">&#8593;</span> → « Aggiungi a Home ».<br>"
@@ -674,7 +711,8 @@ def home_html(datamap, lang):
     # "Was ist FTEM?" als aufsteigender Weg (F1 -> M) mit allen 10 Entwicklungsstufen (Luca)
     WEG_ENDS = {"de": ("Erster Schneekontakt", "Weltspitze"),
                 "fr": ("Premier contact neige", "Élite mondiale"),
-                "it": ("Primo contatto neve", "Élite mondiale")}[lang]
+                "it": ("Primo contatto neve", "Élite mondiale"),
+                "en": ("First snow contact", "World class")}[lang]
     PH_HEX = {"F": "#1f8fa6", "T": "#e2a900", "E": "#e8772e", "M": "#d52b1e"}
     weg_stages = ["F1", "F2", "F3", "T1", "T2", "T3", "T4", "E1", "E2", "M"]
     def _nx(i): return 60 + i * (840 / 9.0)
@@ -711,8 +749,8 @@ def home_html(datamap, lang):
                  '<p class="lead">' + info["lead"] + '</p>'
                  '<div class="fweg-wrap">' + weg_svg + '</div>'
                  '<div class="fweg-desc">' + _desc + '</div></div>')
-    fb_ph = {"de":"Dein Feedback …","fr":"Votre commentaire …","it":"Il tuo feedback …"}.get(lang, "Dein Feedback …")
-    fb_send = {"de":"Senden","fr":"Envoyer","it":"Invia"}.get(lang, "Senden")
+    fb_ph = {"de":"Dein Feedback …","fr":"Votre commentaire …","it":"Il tuo feedback …","en":"Your feedback …"}.get(lang, "Dein Feedback …")
+    fb_send = {"de":"Senden","fr":"Envoyer","it":"Invia","en":"Send"}.get(lang, "Senden")
     fb = ('<button class="fb-btn" type="button" '
           'onclick="var p=this.nextElementSibling;p.hidden=!p.hidden;if(!p.hidden)p.querySelector(&#39;textarea&#39;).focus()">Feedback</button>'
           '<div class="fb-panel" hidden>'
@@ -726,7 +764,8 @@ def home_html(datamap, lang):
     # Farben bewusst entsaettigt/transparent, damit sie mit dem Bergfoto verschmelzen.
     band_lbl = {"de": ["FOUNDATION","TALENT","ELITE","MASTERY"],
                 "fr": ["FOUNDATION","TALENT","ELITE","MASTERY"],
-                "it": ["FOUNDATION","TALENT","ELITE","MASTERY"]}[lang]
+                "it": ["FOUNDATION","TALENT","ELITE","MASTERY"],
+                "en": ["FOUNDATION","TALENT","ELITE","MASTERY"]}[lang]
     # FTEM-Zonen folgen der echten Bergsilhouette: SVG mit Foto + ClipPath auf der Kammlinie.
     # Die Farbbaender sind Hoehenzonen des Bergs (M = Gipfel, F = Basis).
     # Beschriftungen liegen IM SVG (gleiche Bildkoordinaten) -> sie sitzen bei jeder
@@ -778,7 +817,7 @@ def home_html(datamap, lang):
         + '</svg>')
     pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
-    choose_lbl = {"de": "Sportart wählen", "fr": "Choisir un sport", "it": "Scegli lo sport"}[lang]
+    choose_lbl = {"de": "Sportart wählen", "fr": "Choisir un sport", "it": "Scegli lo sport", "en": "Choose a sport"}[lang]
     spitems = ""
     for s2 in SPORTS:
         nm = tr(s2["name"], lang)
@@ -790,20 +829,20 @@ def home_html(datamap, lang):
                '<div class="sp-grid">'+spitems+'</div></div></div>')
     # Meeting-Paket: News-Button oben rechts, Mission-Button unter dem Logo,
     # Startseite ohne Scrollen (News/Infos als Overlays), Admin-Schloss unten im Hero.
-    news_label = {"de": "News", "fr": "Actualités", "it": "Notizie"}[lang]
+    news_label = {"de": "News", "fr": "Actualités", "it": "Notizie", "en": "News"}[lang]
     info_label = FTEM_INFO[lang]["title"].replace("&#x27;", "'")
     mission_items = "".join(
         '<a class="mission-item" href="'+esc(s2["mission"])+'" data-title="'+esc(tr(s2["name"], lang))+' – Mission Swiss-Ski">'
         + esc(tr(s2["name"], lang)) + '</a>'
         for s2 in SPORTS if s2.get("mission"))
     # "Mission Sportart": oeffnet direkt die Mission der oben vorgewaehlten Sportart
-    misp_lbl = {"de": "Mission Sportart", "fr": "Mission du sport", "it": "Missione sport"}[lang]
+    misp_lbl = {"de": "Mission Sportart", "fr": "Mission du sport", "it": "Missione sport", "en": "Sport mission"}[lang]
     mission_btn = '<button class="mp-item mp-mission np-sportmission" type="button">'+esc(misp_lbl)+'</button>'
     # App-Hinweis als eigener Knopf (nicht mehr in den News)
     app_lbl = INSTALL_HINT.get(lang, INSTALL_HINT["de"])["title"]
     # "Athlet:innen Weg"-Knopf oben Mitte (Bjoern-Mock) + Piste im Berg
     aw_lbl = tr("Athlet:innen-Weg", lang)
-    go_lbl = {"de": "Zum Athlet:innen-Weg", "fr": "Vers le parcours de l'athlète", "it": "Al percorso dell'atleta"}[lang]
+    go_lbl = {"de": "Zum Athlet:innen-Weg", "fr": "Vers le parcours de l'athlète", "it": "Al percorso dell'atleta", "en": "To the athlete pathway"}[lang]
     aw_cta = ('<div class="aw-cta"><button class="aw-btn" type="button">'+esc(aw_lbl)+
               ' <span class="aw-ar">→</span></button></div>')
     # Stufen-Summaries (Klick auf Zone -> Kurzbeschrieb statt direkt Athletenweg).
@@ -853,9 +892,9 @@ def home_html(datamap, lang):
                         '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
     fi_links = [
-        ({"de":"Übersicht FTEM","fr":"Aperçu FTEM","it":"Panoramica FTEM"}[lang], "https://snowsports.flink.host/s/iFt05YOw/c5lG7vWX"),
+        ({"de":"Übersicht FTEM","fr":"Aperçu FTEM","it":"Panoramica FTEM","en":"FTEM overview"}[lang], "https://snowsports.flink.host/s/iFt05YOw/c5lG7vWX"),
         ("How to use FTEM", "https://snowsports.flink.host/s/iFt05YOw/CVg0efTY"),
-        ({"de":"Leitsätze der Athlet:innen-Entwicklung","fr":"Principes du développement des athlètes","it":"Principi dello sviluppo degli atleti"}[lang], "https://snowsports.flink.host/s/Ur9yhq2P/"),
+        ({"de":"Leitsätze der Athlet:innen-Entwicklung","fr":"Principes du développement des athlètes","it":"Principi dello sviluppo degli atleti","en":"Guiding principles of athlete development"}[lang], "https://snowsports.flink.host/s/Ur9yhq2P/"),
     ]
     fi_html = ('<div class="mlist fi-links">'
                + "".join('<a class="mission-item" href="'+esc(u2)+'" data-title="'+esc(t2)+'">'+esc(t2)+'</a>' for t2, u2 in fi_links)
@@ -877,7 +916,8 @@ def home_html(datamap, lang):
     # Folie "Die Website" fuer den Praesentationsmodus
     web_head = {"de": ("Die Website", "Alles zur Athlet:innen-Entwicklung im Schneesport – auf einer Seite:"),
                 "fr": ("Le site web", "Tout sur le développement des athlètes dans les sports de neige – sur une seule page :"),
-                "it": ("Il sito web", "Tutto sullo sviluppo degli atleti negli sport sulla neve – su un'unica pagina:")}[lang]
+                "it": ("Il sito web", "Tutto sullo sviluppo degli atleti negli sport sulla neve – su un'unica pagina:"),
+                "en": ("The website", "Everything about athlete development in snow sports – on one page:")}[lang]
     web_feats = {"de": [
         ("Athlet:innen-Weg", "Alle 10 Sportarten im Detail – Themen und Inhalte über die Stufen F1–M, mit Suche, Stufen-Fokus und PDF-Export."),
         ("Stufen-Überblick", "Kurz-Zusammenfassung pro Phase (Foundation, Talent, Elite, Mastery) direkt auf dem Titelberg – pro Sportart."),
@@ -899,6 +939,13 @@ def home_html(datamap, lang):
         ("Notizie & documenti", "Notizie sulla formazione con data e documenti collegati direttamente dai contenuti."),
         ("Coach FTEM (IA)", "Risponde alle domande sul percorso dell'atleta dello sport scelto – 24 ore su 24."),
         ("3 lingue & app", "Completamente in tedesco, francese e italiano – installabile come app sul telefono."),
+    ], "en": [
+        ("Athlete pathway", "All 10 sports in detail – topics and content across stages F1–M, with search, stage focus and PDF export."),
+        ("Stage overview", "Short summary per phase (Foundation, Talent, Elite, Mastery) directly on the mountain – per sport."),
+        ("Mission Swiss-Ski", "Each sport's mission as an integrated view, plus fundamentals such as the FTEM overview and guiding principles."),
+        ("News & documents", "Current education news with dates, and linked documents directly from the content."),
+        ("FTEM Coach (AI)", "Answers questions about the selected sport's athlete pathway – around the clock."),
+        ("4 languages & app", "In German, French, Italian and English – installable as an app on your phone."),
     ]}[lang]
     _wf = ""
     for i, (ft, fd) in enumerate(web_feats):
@@ -909,11 +956,11 @@ def home_html(datamap, lang):
     # Schwarze Fusszeile: sportartuebergreifende Grundlagen (oeffnen als iframe-Overlay)
     foot_links = [
         ("FAPS", "FAPS – Strategie Swiss-Ski", "https://snowsports.flink.host/s/psBIwCuB"),
-        ({"de": "Schneesport 2050", "fr": "Sports de neige 2050", "it": "Sport sulla neve 2050"}[lang],
+        ({"de": "Schneesport 2050", "fr": "Sports de neige 2050", "it": "Sport sulla neve 2050", "en": "Snow sports 2050"}[lang],
          "Schneesport 2050", "https://snowsports.flink.host/s/soSSzlmC"),
-        ({"de": "Ethik-Kompass", "fr": "Boussole éthique", "it": "Bussola etica"}[lang],
+        ({"de": "Ethik-Kompass", "fr": "Boussole éthique", "it": "Bussola etica", "en": "Ethics compass"}[lang],
          "Ethik-Kompass für die Schneesport-Praxis", "https://snowsports.flink.host/s/NxOLBkit"),
-        ({"de": "Nachhaltigkeit", "fr": "Durabilité", "it": "Sostenibilità"}[lang],
+        ({"de": "Nachhaltigkeit im Schneesport", "fr": "Durabilité dans les sports de neige", "it": "Sostenibilità negli sport sulla neve", "en": "Sustainability in snow sports"}[lang],
          "Nachhaltigkeit im Schneesport", "https://tool.jugendundsport.ch/modules/654e2b8784846dba7a0ad962?lang=de"),
     ]
     footbar = ('<div class="bottombar">'
@@ -926,11 +973,11 @@ def home_html(datamap, lang):
             +aw_cta+
             
             '<div class="hero-top-r">'
-            '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
+            '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport","en":"Choose a sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
             '<div class="mr-row"><div class="lsrow">'+lang_switch(lang)+'</div>'
-            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button></div>'
+            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu", "en": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu", "en": "Menu"}[lang])+'</button></div>'
             '<div class="menu-panel" hidden>'
             '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
             +mission_btn+
@@ -1344,8 +1391,8 @@ body.pres section.sport h2.grp{font-size:15px}
 /* Athlet:innen-Weg: Bergfoto dezent im Hintergrund (Vorschlag 2, abgeschwaecht) */
 section.sport{background:linear-gradient(rgba(238,241,244,.94),rgba(238,241,244,.94)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 section.sport details.theme{background:rgba(255,255,255,.88);backdrop-filter:blur(2px)}
-section.sport details.theme:nth-of-type(even){background:rgba(233,238,243,.90)}
-[data-theme="dark"] section.sport details.theme:nth-of-type(even){background:rgba(30,43,60,.92)}
+section.sport details.theme.alt{background:rgba(233,238,243,.90)}
+[data-theme="dark"] section.sport details.theme.alt{background:rgba(30,43,60,.92)}
 section.sport .rl,section.sport .r.head .rl.corner{background:rgba(255,255,255,.94)}
 [data-theme="dark"] section.sport{background:linear-gradient(rgba(13,20,32,.95),rgba(13,20,32,.95)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 [data-theme="dark"] section.sport details.theme{background:rgba(23,34,49,.90)}
@@ -2561,7 +2608,7 @@ datamap = {s["id"]: sport_data(s) for s in SPORTS}
 ids_with_data = [s["id"] for s in SPORTS if datamap[s["id"]] is not None]
 
 for lang in LANGS:
-    open_ext = {"de": "Im neuen Tab öffnen", "fr": "Ouvrir dans un nouvel onglet", "it": "Aprire in una nuova scheda"}[lang]
+    open_ext = {"de": "Im neuen Tab öffnen", "fr": "Ouvrir dans un nouvel onglet", "it": "Aprire in una nuova scheda", "en": "Open in new tab"}[lang]
     mmodal = ('<div class="mmodal" hidden><div class="mm-box">'
               '<div class="mm-bar"><span class="mm-t"></span>'
               '<a class="mm-ext" href="#" target="_blank" rel="noopener">'+esc(open_ext)+' ↗</a>'
@@ -2572,23 +2619,23 @@ for lang in LANGS:
               '<div class="im-bar"><span class="im-t"></span>'
               '<button class="im-x" type="button" aria-label="schliessen">✕</button></div>'
               '<div class="im-body"></div></div></div>')
-    assist_lbl = {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM"}[lang]
+    assist_lbl = {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM", "en": "FTEM Coach"}[lang]
     steady_btn = '<button class="steady" type="button" hidden>💬 '+esc(assist_lbl)+'</button>'
     body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS) + mmodal + imodal + steady_btn
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
             "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang),
-            "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati"}[lang],
-            "noHits": {"de": "keine Treffer", "fr": "aucun résultat", "it": "nessun risultato"}[lang],
-            "printPick": {"de": "Stufe für das Dossier wählen", "fr": "Choisir le niveau pour le dossier", "it": "Scegli il livello per il dossier"}[lang],
-            "printAll": {"de": "Ganze Sportart (Querformat)", "fr": "Tout le sport (paysage)", "it": "Tutto lo sport (orizzontale)"}[lang],
-            "printClose": {"de": "Schliessen", "fr": "Fermer", "it": "Chiudi"}[lang],
-            "dossier": {"de": "Stufendossier", "fr": "Dossier de niveau", "it": "Dossier di livello"}[lang],
-            "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier."}[lang],
-            "chatTitle": {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM"}[lang],
-            "chatPh": {"de": "Frage zum Athlet:innen-Weg…", "fr": "Question sur le parcours…", "it": "Domanda sul percorso…"}[lang],
-            "chatWelcome": {"de": "Hallo! Ich beantworte Fragen zum Athlet:innen-Weg dieser Sportart und verweise dich auf passende verlinkte Dokumente. Was möchtest du wissen?", "fr": "Bonjour ! Je réponds aux questions sur le parcours des athlètes de ce sport et vous oriente vers les documents liés pertinents. Que voulez-vous savoir ?", "it": "Ciao! Rispondo alle domande sul percorso degli atleti di questo sport e ti indico i documenti collegati pertinenti. Cosa vuoi sapere?"}[lang],
-            "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi."}[lang],
-            "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati."}[lang]}
+            "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati", "en": "hits"}[lang],
+            "noHits": {"de": "keine Treffer", "fr": "aucun résultat", "it": "nessun risultato", "en": "no hits"}[lang],
+            "printPick": {"de": "Stufe für das Dossier wählen", "fr": "Choisir le niveau pour le dossier", "it": "Scegli il livello per il dossier", "en": "Choose the stage for the dossier"}[lang],
+            "printAll": {"de": "Ganze Sportart (Querformat)", "fr": "Tout le sport (paysage)", "it": "Tutto lo sport (orizzontale)", "en": "Entire sport (landscape)"}[lang],
+            "printClose": {"de": "Schliessen", "fr": "Fermer", "it": "Chiudi", "en": "Close"}[lang],
+            "dossier": {"de": "Stufendossier", "fr": "Dossier de niveau", "it": "Dossier di livello", "en": "Stage dossier"}[lang],
+            "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier.", "en": "Please allow pop-ups for this page to print the dossier."}[lang],
+            "chatTitle": {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM", "en": "FTEM Coach"}[lang],
+            "chatPh": {"de": "Frage zum Athlet:innen-Weg…", "fr": "Question sur le parcours…", "it": "Domanda sul percorso…", "en": "Question about the pathway…"}[lang],
+            "chatWelcome": {"de": "Hallo! Ich beantworte Fragen zum Athlet:innen-Weg dieser Sportart und verweise dich auf passende verlinkte Dokumente. Was möchtest du wissen?", "fr": "Bonjour ! Je réponds aux questions sur le parcours des athlètes de ce sport et vous oriente vers les documents liés pertinents. Que voulez-vous savoir ?", "it": "Ciao! Rispondo alle domande sul percorso degli atleti di questo sport e ti indico i documenti collegati pertinenti. Cosa vuoi sapere?", "en": "Hello! I answer questions about this sport's athlete pathway and point you to the relevant linked documents. What would you like to know?"}[lang],
+            "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi.", "en": "Something went wrong. Please try again later."}[lang],
+            "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati.", "en": "Answers are based on this sport's FTEM content and the linked documents."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: s.get("mission","") for s in SPORTS}))
             .replace("__SPORT_NAMES__", json.dumps({s["id"]: tr(s["name"], lang) for s in SPORTS}, ensure_ascii=False))
@@ -2602,6 +2649,9 @@ for lang in LANGS:
                 "it": {"concept": "Il concetto FTEM", "web": "Il sito web", "aw": "Percorso dell'atleta",
                        "awhint": "Avanti (→) apre i temi del percorso – navigazione con le frecce, Esc per terminare.",
                        "sport": "Sport"},
+                "en": {"concept": "The FTEM framework", "web": "The website", "aw": "Athlete pathway",
+                       "awhint": "Next (→) opens the pathway topics – navigate with the arrow keys, Esc to end.",
+                       "sport": "Sport"},
             }[lang], ensure_ascii=False))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
@@ -2609,9 +2659,10 @@ for lang in LANGS:
     og_title = "FTEM – Athlet:innen-Weg · Swiss-Ski"
     og_desc = {"de":"Der Athlet:innen-Weg von Swiss-Ski: alle Schneesportarten über die zehn FTEM-Entwicklungsstufen F1–M.",
                "fr":"Le parcours des athlètes de Swiss-Ski : tous les sports de neige à travers les dix niveaux de développement FTEM (F1–M).",
-               "it":"Il percorso degli atleti di Swiss-Ski: tutti gli sport sulla neve lungo i dieci livelli di sviluppo FTEM (F1–M)."}[lang]
+               "it":"Il percorso degli atleti di Swiss-Ski: tutti gli sport sulla neve lungo i dieci livelli di sviluppo FTEM (F1–M).",
+               "en":"The Swiss-Ski athlete pathway: all snow sports across the ten FTEM development stages (F1–M)."}[lang]
     og_img = (SITE_URL.rstrip("/")+"/assets/og-image.jpg") if SITE_URL else "assets/og-image.jpg"
-    og_locales = {"de":"de_CH","fr":"fr_CH","it":"it_CH"}
+    og_locales = {"de":"de_CH","fr":"fr_CH","it":"it_CH","en":"en_GB"}
     base = SITE_URL.rstrip("/") if SITE_URL else ""
     # hreflang: verlinkt die drei Sprachvarianten gegenseitig (+ x-default)
     alt_links = ""
@@ -2668,11 +2719,11 @@ def _write_pwa_seo():
     import hashlib, glob as _glob
     # Cache-Version aus Inhalts-Hash -> bricht Cache bei jedem echten Deploy
     h = hashlib.sha1()
-    for f in ["index.html","fr.html","it.html"]:
+    for f in ["index.html","fr.html","it.html","en.html"]:
         p = os.path.join(BASE, f)
         if os.path.exists(p): h.update(open(p,"rb").read())
     ver = h.hexdigest()[:10]
-    core = ["./","./index.html","./fr.html","./it.html","./admin.html",
+    core = ["./","./index.html","./fr.html","./it.html","./en.html","./admin.html",
             "./manifest.webmanifest","./assets/favicon.svg","./assets/icon-192.png",
             "./assets/icon-512.png","./assets/icon-180.png","./assets/hero.jpg",
             "./assets/og-image.jpg","./assets/swiss-ski-logo.svg"]
