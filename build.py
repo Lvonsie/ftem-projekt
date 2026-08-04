@@ -816,6 +816,38 @@ def home_html(datamap, lang):
             '<path d="M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>'
             '<span class="presask" hidden><input class="prespw" type="password" placeholder="'+esc(PRES_PWPH[lang])+'" autocomplete="off">'
             '<button class="presgo" type="button">OK</button></span></div>')
+    # Folie "Die Website" fuer den Praesentationsmodus
+    web_head = {"de": ("Die Website", "Alles zur Athlet:innen-Entwicklung im Schneesport – auf einer Seite:"),
+                "fr": ("Le site web", "Tout sur le développement des athlètes dans les sports de neige – sur une seule page :"),
+                "it": ("Il sito web", "Tutto sullo sviluppo degli atleti negli sport sulla neve – su un'unica pagina:")}[lang]
+    web_feats = {"de": [
+        ("Athlet:innen-Weg", "Alle 10 Sportarten im Detail – Themen und Inhalte über die Stufen F1–M, mit Suche, Stufen-Fokus und PDF-Export."),
+        ("Stufen-Überblick", "Kurz-Zusammenfassung pro Phase (Foundation, Talent, Elite, Mastery) direkt auf dem Titelberg – pro Sportart."),
+        ("Mission Swiss-Ski", "Die Mission jeder Sportart als integrierte Ansicht, plus Grundlagen wie Übersicht FTEM und Leitsätze."),
+        ("News & Dokumente", "Aktuelle Ausbildungsnews mit Datum sowie verlinkte Dokumente direkt aus den Inhalten heraus."),
+        ("FTEM-Coach (KI)", "Beantwortet Fragen zum Athlet:innen-Weg der gewählten Sportart – rund um die Uhr."),
+        ("3 Sprachen & App", "Komplett auf Deutsch, Französisch und Italienisch – und als App auf dem Handy installierbar."),
+    ], "fr": [
+        ("Parcours de l'athlète", "Les 10 sports en détail – thèmes et contenus sur les niveaux F1–M, avec recherche, focus par niveau et export PDF."),
+        ("Aperçu des niveaux", "Résumé par phase (Foundation, Talent, Elite, Mastery) directement sur la montagne – par sport."),
+        ("Mission Swiss-Ski", "La mission de chaque sport en vue intégrée, plus les bases comme l'aperçu FTEM et les principes."),
+        ("Actualités & documents", "Actualités de la formation avec date et documents liés directement depuis les contenus."),
+        ("Coach FTEM (IA)", "Répond aux questions sur le parcours de l'athlète du sport choisi – 24h/24."),
+        ("3 langues & app", "Entièrement en allemand, français et italien – installable comme app sur le téléphone."),
+    ], "it": [
+        ("Percorso dell'atleta", "Tutti i 10 sport nel dettaglio – temi e contenuti sui livelli F1–M, con ricerca, focus per livello ed export PDF."),
+        ("Panoramica dei livelli", "Riassunto per fase (Foundation, Talent, Elite, Mastery) direttamente sulla montagna – per sport."),
+        ("Missione Swiss-Ski", "La missione di ogni sport in vista integrata, più le basi come panoramica FTEM e principi."),
+        ("Notizie & documenti", "Notizie sulla formazione con data e documenti collegati direttamente dai contenuti."),
+        ("Coach FTEM (IA)", "Risponde alle domande sul percorso dell'atleta dello sport scelto – 24 ore su 24."),
+        ("3 lingue & app", "Completamente in tedesco, francese e italiano – installabile come app sul telefono."),
+    ]}[lang]
+    _wf = ""
+    for i, (ft, fd) in enumerate(web_feats):
+        _wf += '<div class="fwd fwd-'+["f","t","e","m"][i % 4]+'"><span class="fwd-h"><b>'+esc(ft)+'</b></span><p>'+esc(fd)+'</p></div>'
+    pres_web = ('<template id="tpl-pres-web"><div class="pd-web"><h2>'+esc(web_head[0])+'</h2>'
+                '<p class="lead">'+esc(web_head[1])+' <b>ftemschneesport.netlify.app</b></p>'
+                '<div class="pd-feats">'+_wf+'</div></div></template>')
     nbadge = ('<span class="nbadge">'+str(len(NEWS))+'</span>') if NEWS else ''
     return ('<section id="home">'
             '<div class="home-hero">'
@@ -845,6 +877,7 @@ def home_html(datamap, lang):
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
             +pyr+
             '</div>'
+            +pres_web+
             '<template id="tpl-news">'+news_html(lang)+'</template>'
             '<template id="tpl-app">'+install_hint(lang)+'</template>'
             '<template id="tpl-info">'+ftem_info+fi_html+'</template>'
@@ -992,7 +1025,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
 .homesport{font:inherit;font-size:12.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:8px;padding:7px 10px;backdrop-filter:blur(6px);max-width:190px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
-.homesport option{color:var(--ink)}
+.homesport{color-scheme:dark}
+.homesport option{color:#1d2630;background:#fff}
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
 .news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
 .news-btn:hover{filter:brightness(1.12)}
@@ -1005,11 +1039,12 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta-sec{background:rgba(255,255,255,.07)}
 .imodal{position:fixed;inset:0;z-index:112;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.imodal.wide .im-box{width:min(1300px,96vw);height:92vh}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
 .im-x:hover{color:var(--talent)}
-.im-body{padding:16px;overflow:auto}
+.im-body{padding:16px;overflow:auto;position:relative}
 .im-body .news-h{display:none}
 .im-body .ftem-info{margin-top:0}
 .mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
@@ -1109,6 +1144,43 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
   .aw-btn{font-size:12px;padding:8px 16px}
   .bottombar{justify-content:flex-start}
 }
+/* Praesentations-Deck (Vollbild-Folien) */
+.presdeck{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column}
+.pd-top{display:flex;align-items:center;gap:14px;padding:9px 16px;background:#1d2630;color:#fff;flex:none}
+.pd-name{font-weight:800;font-size:15px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pd-sportsel{font:inherit;font-size:13px;font-weight:700;padding:6px 10px;border-radius:8px;border:none;background:#2a3644;color:#fff;cursor:pointer}
+.pd-count{font-size:12.5px;font-weight:700;opacity:.75}
+.pd-x{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:2px 8px;line-height:1}
+.pd-x:hover{color:var(--talent)}
+.pd-body{flex:1;overflow:auto;padding:34px 7vw 70px}
+.pd-body .ftem-info{max-width:1100px;margin:0 auto}
+.pd-body .ftem-info h2{font-size:26px}
+.pd-body .ftem-info .lead{font-size:16px;line-height:1.65}
+.pd-body .fwd-h{font-size:14px}
+.pd-body .fwd p{font-size:13px;line-height:1.55}
+.pd-body .ph-sum,.pd-body .ph-sum.ph-wide{max-width:1200px;margin:0 auto}
+.pd-body .ph-sum .ps-name{font-size:26px}
+.pd-body .ph-sum .ps-rng{font-size:14px}
+.pd-body .ph-sum .ps-badge{width:56px;height:56px;font-size:29px}
+.pd-body .ph-sum .ps-desc{font-size:16.5px;line-height:1.6}
+.pd-body .ph-sum .ps-col .cwrap{font-size:12.5px}
+.pd-body .ph-sum .tt{font-size:15px}
+.pd-body .aw-go{display:none}
+.pd-web{max-width:1050px;margin:0 auto}
+.pd-web h2{font-size:26px;margin:0 0 6px}
+.pd-web .lead{color:var(--mut);font-size:16px;margin:0 0 22px}
+.pd-web .lead b{color:var(--ink)}
+.pd-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+.pd-feats .fwd{padding:13px 15px}
+.pd-awslide{max-width:900px;margin:16vh auto 0;text-align:center}
+.pd-awslide h2{font-size:32px;margin:0 0 12px}
+.pd-awslide p{font-size:15px;color:var(--mut)}
+.pd-prev,.pd-next{position:fixed;top:50%;transform:translateY(-50%);z-index:201;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:26px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.presdeck[hidden]~.pd-prev{display:none}
+.pd-prev{left:12px}.pd-next{right:12px}
+.pd-prev:hover,.pd-next:hover{background:var(--acc-bg)}
+body.deckon{overflow:hidden}
+@media(max-width:760px){.pd-body{padding:22px 16px 60px}.pd-prev,.pd-next{width:38px;height:38px;font-size:21px;bottom:12px;top:auto;transform:none}}
 body.pres{--colw:290px;--lblw:200px}
 body.pres .ht-c,body.pres .chatbtn,body.pres .jump,body.pres .pdf,body.pres .hdiv,body.pres .preslink{display:none!important}
 body.pres section.sport summary .tt{font-size:19px}
@@ -1183,6 +1255,13 @@ body.pres section.sport h2.grp{font-size:15px}
 .p-e{border-top-color:var(--elite)}.p-e .pl{color:var(--elite)}
 .p-m{border-top-color:var(--mast)}.p-m .pl{color:var(--mast)}
 /* Sport-Ansicht */
+/* Athlet:innen-Weg: Bergfoto dezent im Hintergrund (Vorschlag 2, abgeschwaecht) */
+section.sport{background:linear-gradient(rgba(238,241,244,.94),rgba(238,241,244,.94)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
+section.sport details.theme{background:rgba(255,255,255,.88);backdrop-filter:blur(2px)}
+section.sport .rl,section.sport .r.head .rl.corner{background:rgba(255,255,255,.94)}
+[data-theme="dark"] section.sport{background:linear-gradient(rgba(13,20,32,.95),rgba(13,20,32,.95)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
+[data-theme="dark"] section.sport details.theme{background:rgba(23,34,49,.90)}
+[data-theme="dark"] section.sport .rl,[data-theme="dark"] section.sport .r.head .rl.corner{background:rgba(23,34,49,.96)}
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:nowrap;gap:10px 14px;align-items:center;height:var(--top)}
 header.top .back{flex:none;width:33px;height:33px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0}
 header.top .back svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -1862,8 +1941,34 @@ const im=document.querySelector('.imodal');
 function openInfo(tplId,title){
   im.querySelector('.im-t').textContent=title;
   im.querySelector('.im-body').innerHTML=document.getElementById(tplId).innerHTML;
+  im.classList.toggle('wide', tplId.indexOf('tpl-ph-')===0);
   im.hidden=false;
 }
+// Stufen-Popup: Akkordeon + automatisch so skalieren, dass der offene
+// Abschnitt ohne Scrollen komplett sichtbar ist
+function fitSec(d){
+  const cols=d.querySelector('.ps-cols'), body=d.querySelector('.ps-secbody');
+  if(!cols||!body)return;
+  cols.style.transform='';cols.style.width='';body.style.height='';body.style.overflow='';
+  const imb=im.querySelector('.im-body');
+  const avail=imb.clientHeight - d.querySelector('summary').getBoundingClientRect().height - 64;
+  const need=cols.scrollHeight;
+  if(need>avail&&avail>120){
+    const r=Math.max(.5, avail/need);
+    cols.style.transformOrigin='top left';
+    cols.style.transform='scale('+r+')';
+    cols.style.width=(100/r)+'%';
+    body.style.height=Math.ceil(need*r+8)+'px';
+    body.style.overflow='hidden';
+  }
+  setTimeout(()=>{imb.scrollTo({top:Math.max(0,d.offsetTop-10),behavior:'smooth'});},40);
+}
+im&&im.addEventListener('toggle',e=>{
+  const d=e.target;
+  if(!d.matches||!d.matches('.im-body details.ps-theme')||!d.open)return;
+  im.querySelectorAll('.im-body details.ps-theme').forEach(o=>{if(o!==d)o.open=false;});
+  fitSec(d);
+},true);
 function closeInfo(){im.hidden=true;}
 if(im){
   im.addEventListener('click',e=>{if(e.target===im)closeInfo();});
@@ -1932,17 +2037,80 @@ function presOn(){
   const sec=sections.find(s=>!s.hidden);
   if(sec){const ths=[...sec.querySelectorAll('details.theme')];ths.forEach((t,i)=>t.open=i===0);if(ths[0])ths[0].scrollIntoView({block:'start'});if(sec.__clamp)setTimeout(sec.__clamp,80);}
 }
+// ---- Praesentations-Deck: Konzept -> Website -> Stufen -> Athlet:innen-Weg ----
+const PDLBL=__PDLBL__;
+const deck=document.createElement('div');deck.className='presdeck';deck.hidden=true;
+deck.innerHTML='<div class="pd-top"><span class="pd-name"></span>'
+ +'<select class="pd-sportsel" aria-label="'+_esc(PDLBL.sport)+'">'+SPORT_IDS.map(id=>'<option value="'+id+'">'+_esc(SPORT_NAMES[id]||id)+'</option>').join('')+'</select>'
+ +'<span class="pd-count"></span><button class="pd-x" type="button" aria-label="Ende">&times;</button></div>'
+ +'<div class="pd-body"></div>'
+ +'<button class="pd-prev" type="button" aria-label="zurueck">&#8249;</button>'
+ +'<button class="pd-next" type="button" aria-label="weiter">&#8250;</button>';
+document.body.appendChild(deck);
+const pdBody=deck.querySelector('.pd-body'),pdName=deck.querySelector('.pd-name'),
+      pdCount=deck.querySelector('.pd-count'),pdSport=deck.querySelector('.pd-sportsel');
+let pdIdx=0;
+function deckSlides(){
+  const sid=pdSport.value;
+  const ph=['f','t','e','m'].map(k=>{
+    const el=document.getElementById('tpl-ph-'+k+'-'+sid)||document.getElementById('tpl-ph-'+k);
+    return {id:el?el.id:null,t:el?(el.dataset.t||''):''};
+  }).filter(s=>s.id);
+  return [{id:'tpl-info',t:PDLBL.concept},{id:'tpl-pres-web',t:PDLBL.web}]
+    .concat(ph)
+    .concat([{aw:true,t:PDLBL.aw+' \u2013 '+(SPORT_NAMES[sid]||sid)}]);
+}
+function pdRender(){
+  const sl=deckSlides(),n=sl.length;
+  if(pdIdx<0)pdIdx=0;
+  if(pdIdx>=n){ // letzter Schritt: in den Athlet:innen-Weg wechseln (Themen mit Pfeiltasten)
+    closeDeck(false);
+    location.hash='#'+pdSport.value;
+    setTimeout(presOn,250);
+    return;
+  }
+  const s=sl[pdIdx];
+  if(s.aw){
+    pdBody.innerHTML='<div class="pd-awslide"><h2>'+_esc(s.t)+'</h2><p>'+_esc(PDLBL.awhint)+'</p></div>';
+  }else{
+    pdBody.innerHTML=document.getElementById(s.id).innerHTML;
+    pdBody.querySelectorAll('details').forEach(d=>d.open=true);
+  }
+  pdName.textContent=s.t;
+  pdCount.textContent=(pdIdx+1)+' / '+n;
+  pdBody.scrollTop=0;
+}
+function openDeck(){
+  pdSport.value=(homeSport&&homeSport.value)?homeSport.value:SPORT_IDS[0];
+  pdIdx=0;deck.hidden=false;document.body.classList.add('deckon');
+  if(document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});
+  pdRender();
+}
+function closeDeck(exitFs){
+  deck.hidden=true;document.body.classList.remove('deckon');
+  if(exitFs&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+}
+deck.querySelector('.pd-x').addEventListener('click',()=>closeDeck(true));
+deck.querySelector('.pd-prev').addEventListener('click',()=>{pdIdx--;pdRender();});
+deck.querySelector('.pd-next').addEventListener('click',()=>{pdIdx++;pdRender();});
+pdSport.addEventListener('change',pdRender);
+document.addEventListener('keydown',e=>{
+  if(deck.hidden)return;
+  if(e.target&&(e.target.tagName==='SELECT'||e.target.tagName==='INPUT'))return;
+  if(e.key==='Escape'){closeDeck(true);return;}
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();pdIdx++;pdRender();}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();pdIdx--;pdRender();}
+});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&!deck.hidden)closeDeck(false);});
+
 document.querySelectorAll('.preslink').forEach(pl=>{
   const btn=pl.querySelector('.presopen'), ask=pl.querySelector('.presask'), pw=pl.querySelector('.prespw');
   btn.addEventListener('click',()=>{ask.hidden=!ask.hidden;if(!ask.hidden){pw.value='';pw.focus();}});
   function tryGo(){
     if(pw.value===PRES_PW){
       ask.hidden=true;
-      if(sections.some(s=>!s.hidden)){presOn();}
-      else{ // auf der Startseite: zuerst zum Athlet:innen-Weg der vorgewaehlten Sportart
-        location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);
-        setTimeout(presOn,250);
-      }
+      if(typeof menuPanel!=='undefined'&&menuPanel){menuPanel.hidden=true;}
+      openDeck();
     }
     else{pw.classList.add('bad');setTimeout(()=>pw.classList.remove('bad'),500);pw.select();}
   }
@@ -2303,6 +2471,17 @@ for lang in LANGS:
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: s.get("mission","") for s in SPORTS}))
             .replace("__SPORT_NAMES__", json.dumps({s["id"]: tr(s["name"], lang) for s in SPORTS}, ensure_ascii=False))
+            .replace("__PDLBL__", json.dumps({
+                "de": {"concept": "Das Konzept FTEM", "web": "Die Website", "aw": "Athlet:innen-Weg",
+                       "awhint": "Weiter (→) öffnet die Themen des Athlet:innen-Wegs – Navigation mit den Pfeiltasten, Esc beendet.",
+                       "sport": "Sportart"},
+                "fr": {"concept": "Le concept FTEM", "web": "Le site web", "aw": "Parcours de l'athlète",
+                       "awhint": "Continuer (→) ouvre les thèmes du parcours – navigation avec les flèches, Esc pour terminer.",
+                       "sport": "Sport"},
+                "it": {"concept": "Il concetto FTEM", "web": "Il sito web", "aw": "Percorso dell'atleta",
+                       "awhint": "Avanti (→) apre i temi del percorso – navigazione con le frecce, Esc per terminare.",
+                       "sport": "Sport"},
+            }[lang], ensure_ascii=False))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
             .replace("__PRES_PW__", PRES_PW))
