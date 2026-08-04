@@ -374,6 +374,9 @@ _ICONS = {
  "box": '<path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/>',
  "trophy": '<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5.5a2 2 0 0 0 2.5 3M16 6h2.5a2 2 0 0 1-2.5 3"/><path d="M10 15h4M9 20h6M11 15l-1 5M13 15l1 5"/>',
  "flag": '<path d="M6 21V4M6 4h12l-2.5 4L18 12H6"/>',
+ "carve": '<path d="M8.5 3c7.5 2.5-7.5 6.5 0 9s-7.5 6.5 0 9"/><path d="M17 4.5v6.5"/><path d="M17 4.5l4 1.5-4 1.6"/>',
+ "funnel": '<path d="M4 5h16l-6.2 7v5.6l-3.6 2.4v-8L4 5z"/>',
+ "podium": '<rect x="9" y="9" width="6" height="11"/><rect x="3" y="13" width="6" height="7"/><rect x="15" y="15" width="6" height="5"/><path d="M12 3v3M10.6 4.5h2.8"/>',
  "users": '<circle cx="9" cy="8" r="3"/><path d="M4 20c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M15 5.5a3 3 0 0 1 0 5M20 20c0-2-1.1-3.7-2.7-4.5"/>',
  "list": '<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/>',
 }
@@ -386,11 +389,12 @@ _KEYMAP = [
  (("ausdauer","kondition","kapazit"),"activity"),
  (("mobilit","beweglich","flexib"),"rotate"),
  (("kraft","explosiv","power"),"barbell"),
- (("technik","taktik"),"target"),
+ (("technik","taktik"),"carve"),
  (("schnellig","agilit","speed"),"bolt"),
  (("material","ausrüst","ausruest"),"box"),
  (("förderge","foerderge","gefäss","gefaess","kader","talentpool"),"trophy"),
- (("wettkampf","wettkämpf","wettkaempf","selekt","rennen"),"flag"),
+ (("selekt",),"funnel"),
+ (("förderstruktur","foerderstruktur","wettkampf","wettkämpf","wettkaempf","rennen"),"podium"),
  (("umfeld","eltern","schule","beruf","management","betreu"),"users"),
 ]
 def theme_icon(title):
@@ -739,6 +743,17 @@ def home_html(datamap, lang):
                 '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0" clip-path="url(#mtclip)"/>'
                 '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
                 '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
+    # Athlet:innen-Weg als "Piste": erscheint beim Hover auf dem AW-Knopf
+    aw_pts = [("M",1042,258),("E2",1130,420),("E1",1180,500),("T4",1122,590),("T3",1185,650),
+              ("T2",1126,707),("T1",1180,762),("F3",1122,830),("F2",1178,880),("F1",1140,930)]
+    aw_col = {"F":"#57cce4","T":"#f2c85f","E":"#f2a06a","M":"#f28578"}
+    aw_path_d = "M"+" L".join(str(x)+","+str(y) for _, x, y in aw_pts)
+    aw_dots = "".join('<circle cx="'+str(x)+'" cy="'+str(y)+'" r="8" fill="'+aw_col[s[0]]+'">'
+                      '<title>'+esc(FULL[s])+'</title></circle>' for s, x, y in aw_pts)
+    awpath = ('<g class="awpath" aria-hidden="true">'
+              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.20)" stroke-width="24" stroke-linejoin="round" stroke-linecap="round"/>'
+              '<path d="'+aw_path_d+'" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-dasharray="8 7" stroke-linejoin="round"/>'
+              + aw_dots + '</g>')
     hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
@@ -771,6 +786,7 @@ def home_html(datamap, lang):
         + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", "e")
         + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", "t")
         + band(790, 196, 866, 894, band_lbl[0], "F1 – F3", "f")
+        + awpath
         + '</svg>')
     pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
@@ -800,8 +816,8 @@ def home_html(datamap, lang):
     # "Athlet:innen Weg"-Knopf oben Mitte (Bjoern-Mock) + Piste im Berg
     aw_lbl = tr("Athlet:innen-Weg", lang)
     go_lbl = {"de": "Zum Athlet:innen-Weg", "fr": "Vers le parcours de l'athlète", "it": "Al percorso dell'atleta"}[lang]
-    aw_cta = ('<button class="aw-btn" type="button">'+esc(aw_lbl)+
-              ' <span class="aw-ar">→</span></button>')
+    aw_cta = ('<div class="aw-cta"><button class="aw-btn" type="button">'+esc(aw_lbl)+
+              ' <span class="aw-ar">→</span></button></div>')
     # Stufen-Summaries (Klick auf Zone -> Kurzbeschrieb statt direkt Athletenweg).
     # Pro Sportart aus dem "homepage"-Sheet des Excels (data["home"]); generischer
     # FTEM-Text als Fallback, falls eine Sportart keine Zusammenfassung hat.
@@ -905,14 +921,15 @@ def home_html(datamap, lang):
     nbadge = ('<span class="nbadge">'+str(len(NEWS))+'</span>') if NEWS else ''
     return ('<section id="home">'
             '<div class="home-hero">'
-            '<div class="hero-top"><div class="lsrow">'+lang_switch(lang)+'</div>'
+            '<div class="hero-top">'
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
-            + '</select>'
-            +aw_cta+'</div>'
+            + '</select></div>'
+            +aw_cta+
             
             '<div class="hero-top-r">'
-            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button>'
+            '<div class="mr-row"><div class="lsrow">'+lang_switch(lang)+'</div>'
+            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button></div>'
             '<div class="menu-panel" hidden>'
             '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
             +mission_btn+
@@ -930,6 +947,10 @@ def home_html(datamap, lang):
             '<div class="hero-head"><h1>'+FTEM+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
             +pyr+
+            '<div class="bottombar">'
+            +(('<a class="bb-item np-mission" href="'+esc(MISSION_URL)+'" data-title="Mission Swiss-Ski">Mission <b>swiss</b>ski</a>') if MISSION_URL else
+              ('<button class="bb-item" type="button" data-open="tpl-missions" data-t="Mission Swiss-Ski">Mission <b>swiss</b>ski</button>'))
+            +'</div>'
             '</div>'
             +pres_web+
             '<template id="tpl-news">'+news_html(lang)+'</template>'
@@ -1057,9 +1078,10 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
 .heromt .pb-hl{opacity:0;transition:opacity .2s ease}
 .heromt .pband:hover .pb-hl,.heromt .pband:focus-visible .pb-hl{opacity:.17}
-.heromt .pb-n,.heromt .pb-s{transform-box:fill-box;transform-origin:center;transition:transform .18s ease}
-.heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n{transform:scale(1.22)}
-.heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{transform:scale(1.12)}
+.heromt .pb-n{transform-box:fill-box;transform-origin:50% 100%;transition:transform .18s ease}
+.heromt .pb-s{transform-box:fill-box;transform-origin:50% 0%;transition:transform .18s ease}
+.heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n{transform:scale(1.14)}
+.heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{transform:scale(1.06)}
 .heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:22px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:3px;stroke-linejoin:round}
 .heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
@@ -1084,7 +1106,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
-.homesport{font:inherit;font-size:12.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:8px;padding:7px 10px;backdrop-filter:blur(6px);max-width:190px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);min-width:210px;max-width:250px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .homesport{color-scheme:dark}
 .homesport option{color:#1d2630;background:#fff}
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
@@ -1127,11 +1149,11 @@ body.pres .steady{display:none}
 .presask .presgo:hover{background:var(--bg)}
 a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* News-Badge + News-Overlay-Metadaten */
-.nbadge{display:inline-block;background:#fff;color:var(--red);border-radius:9px;padding:0 6px;margin-left:7px;font-size:10px;font-weight:800;line-height:15px;vertical-align:1px}
+.nbadge{display:inline-block;background:var(--red);color:#fff;border-radius:9px;padding:0 6px;margin-left:7px;font-size:10px;font-weight:800;line-height:15px;vertical-align:1px}
 /* News-Box: Knopf + Teaser-Titel in einem Feld */
 .news-box{max-width:265px;background:rgba(15,21,32,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;transition:border-color .15s}
 .news-box:hover{border-color:rgba(255,255,255,.55)}
-.news-box .nb-head{background:var(--red);color:#fff;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:6px 13px}
+.news-box .nb-head{background:#1d2630;color:#fff;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:6px 13px}
 .news-box .nb-list{list-style:none;margin:7px 0 9px;padding:0 12px;color:#fff}
 .news-box .nb-list li{position:relative;padding-left:14px;font-size:11px;font-weight:600;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#fff}
@@ -1155,7 +1177,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .mp-admin .presopen svg{width:20px;height:20px;display:block}
 .mp-admin .presask{margin-left:0}
 .mp-admin .presask input{width:104px}
-@media(max-width:760px){.news-box{max-width:46vw}.homesport{max-width:160px}.menu-panel{min-width:200px}}
+@media(max-width:760px){.news-box{max-width:46vw}.homesport{min-width:0;max-width:160px;font-size:12.5px;padding:7px 10px}.menu-panel{min-width:200px}}
 .news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
 .news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
 .news-date{font-size:10.5px;font-weight:700;color:var(--mut);background:var(--acc-bg);border-radius:5px;padding:2px 7px}
@@ -1166,9 +1188,21 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .fb-x:hover{color:#fff}
 .fb-panel .fb-text{margin-top:14px}
 /* "Athlet:innen Weg"-Knopf oben Mitte */
-.aw-btn{font:inherit;display:flex;align-items:center;gap:8px;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);color:#fff;font-weight:700;font-size:12.5px;border-radius:8px;padding:7px 10px;cursor:pointer;backdrop-filter:blur(6px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
+.aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
+.aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.heromt .awpath{opacity:0;transition:opacity .35s ease;pointer-events:none}
+.heromt.awhover .awpath{opacity:1}
+.heromt .awpath circle{stroke:rgba(255,255,255,.85);stroke-width:2}
+.mr-row{display:flex;gap:8px;align-items:stretch;justify-content:flex-end}
+@media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
+/* schlanke Fusszeile mit Mission Swiss-Ski */
+.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;justify-content:center;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
+.bb-item{font:inherit;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12.5px;padding:9px 22px;cursor:pointer;text-decoration:none;letter-spacing:.03em}
+.bb-item b{color:var(--red);font-weight:800;margin-left:4px}
+.bb-item:hover{background:rgba(255,255,255,.10);color:#fff}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
-.aw-btn .aw-ar{display:inline-flex;width:19px;height:19px;border-radius:50%;background:rgba(255,255,255,.22);align-items:center;justify-content:center;font-size:12px}
+.aw-btn .aw-ar{display:inline-flex;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.25);align-items:center;justify-content:center;font-size:13px}
 /* Stufen-Summary-Overlay */
 .ph-sum{max-width:560px;margin:0 auto}
 .ph-sum .ps-head{display:flex;align-items:center;gap:13px;margin-bottom:11px}
@@ -1318,6 +1352,8 @@ body.pres section.sport h2.grp{font-size:15px}
 /* Athlet:innen-Weg: Bergfoto dezent im Hintergrund (Vorschlag 2, abgeschwaecht) */
 section.sport{background:linear-gradient(rgba(238,241,244,.94),rgba(238,241,244,.94)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 section.sport details.theme{background:rgba(255,255,255,.88);backdrop-filter:blur(2px)}
+section.sport details.theme:nth-of-type(even){background:rgba(233,238,243,.90)}
+[data-theme="dark"] section.sport details.theme:nth-of-type(even){background:rgba(30,43,60,.92)}
 section.sport .rl,section.sport .r.head .rl.corner{background:rgba(255,255,255,.94)}
 [data-theme="dark"] section.sport{background:linear-gradient(rgba(13,20,32,.95),rgba(13,20,32,.95)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 [data-theme="dark"] section.sport details.theme{background:rgba(23,34,49,.90)}
@@ -1777,7 +1813,19 @@ function initSport(sec){
   if(pdfBtn)pdfBtn.onclick=()=>openPrintPicker(sec);
   const chatBtn=sec.querySelector('.chatbtn');
   if(chatBtn)chatBtn.onclick=()=>openChat(sec);
-  sec.querySelector('.jump').onchange=e=>{const el=document.getElementById(e.target.value);if(el){el.open=true;setTimeout(()=>el.scrollIntoView(),30);}e.target.selectedIndex=0;};
+  sec.querySelector('.jump').onchange=e=>{
+    const el=document.getElementById(e.target.value);
+    if(el){
+      el.open=true;
+      const go=()=>{
+        const hh=(sec.querySelector('header.top')||{offsetHeight:54}).offsetHeight;
+        const y=el.getBoundingClientRect().top+window.scrollY-hh-12;
+        window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+      };
+      setTimeout(go,80);setTimeout(go,550);  // zweiter Sprung nach dem Clamp-Layout
+    }
+    e.target.selectedIndex=0;
+  };
   themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
   window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
   // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart
@@ -2063,6 +2111,22 @@ if(steadyBtn)steadyBtn.addEventListener('click',()=>{const sec=sections.find(x=>
 // ---- Startseite: Stufen-Klick -> Kurz-Summary; Piste/AW-Knopf -> Athlet:innen-Weg ----
 const homeSport=document.querySelector('.homesport');
 function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
+// AW-Knopf exakt ueber der Bergspitze; Hover blendet die Piste ein
+const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero'), heroSvg=document.querySelector('.heromt');
+function posAW(){
+  if(!awCta||!heroEl)return;
+  if(window.innerWidth<=760){awCta.style.left='';awCta.style.top='';return;}
+  const w=heroEl.clientWidth,h=heroEl.clientHeight;
+  const s=Math.max(w/1896,h/986),ox=(w-1896*s)/2;
+  awCta.style.left=Math.round(1018*s+ox)+'px';
+  awCta.style.top=Math.max(10,Math.round(227*s-awCta.offsetHeight-12))+'px';
+}
+window.addEventListener('resize',posAW);posAW();
+if(awCta&&heroSvg){
+  const on=()=>heroSvg.classList.add('awhover'), off=()=>heroSvg.classList.remove('awhover');
+  awCta.addEventListener('mouseenter',on);awCta.addEventListener('mouseleave',off);
+  awCta.addEventListener('focusin',on);awCta.addEventListener('focusout',off);
+}
 // Knopf exakt ueber der Bergspitze positionieren (Bild-x 1018 bei 1896x986, YMin-Slice)
 // Hamburger-Menue (Mission, Was ist FTEM?, App, Feedback, Admin/Praesentation)
 const menuBtn=document.querySelector('.menu-btn'), menuPanel=document.querySelector('.menu-panel');
