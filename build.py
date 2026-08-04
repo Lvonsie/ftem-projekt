@@ -682,6 +682,8 @@ def home_html(datamap, lang):
     def band(y, h, name_y, sub_y, name, sub, key, cls=""):
         # Klickflaeche nur innerhalb der Bergsilhouette (mtclip), nicht ueber die ganze Breite
         return ('<g class="pband" tabindex="0" role="button" data-ph="'+key+'" aria-label="'+esc(name)+'">'
+                # Highlight-Flaeche: hellt beim Hover die ganze Farbzone im Berg auf
+                '<rect class="pb-hl" x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" clip-path="url(#mtclip)" pointer-events="none"/>'
                 '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0" clip-path="url(#mtclip)"/>'
                 '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
                 '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
@@ -964,9 +966,11 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .npop a{display:block;text-align:center;background:rgba(255,255,255,.10);color:#fff;text-decoration:none;font-size:12.5px;font-weight:700;border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:8px 10px;line-height:1.25}
 .npop a:hover{background:var(--red);border-color:var(--red)}
 /* Mission-Iframe-Overlay */
-.mmodal{position:fixed;inset:0;z-index:120;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
+.mmodal{position:fixed;inset:0;z-index:120;background:rgba(8,12,20,.78);display:flex;align-items:center;justify-content:center;padding:18px}
 .mm-box{width:min(1240px,96vw);height:min(880px,92vh);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
 .mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#1d2630;color:#fff}
+.mm-frame{opacity:0;transition:opacity .3s ease;background:#fff}
+.mm-frame.ld{opacity:1}
 .mm-t{font-weight:800;font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mm-ext{color:#fff;text-decoration:none;font-weight:700;font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.4);border-radius:16px;white-space:nowrap}
 .mm-ext:hover{background:rgba(255,255,255,.15)}
@@ -999,7 +1003,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 /* FTEM-Zonen in der echten Bergsilhouette (SVG); Labels im SVG = immer exakt auf der Zone */
 .heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
-.heromt .pband:hover,.heromt .pband:focus-visible{filter:brightness(1.28)}
+.heromt .pb-hl{opacity:0;transition:opacity .2s ease}
+.heromt .pband:hover .pb-hl,.heromt .pband:focus-visible .pb-hl{opacity:.17}
 .heromt .pb-n,.heromt .pb-s{transform-box:fill-box;transform-origin:center;transition:transform .18s ease}
 .heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n{transform:scale(1.22)}
 .heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{transform:scale(1.12)}
@@ -1394,10 +1399,9 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cell.expanded::after{opacity:0}
 /* farbige Zellen-Oberkanten entfernt (nur noch dezente Grundlinie) */
 .cwrap p{margin:0 0 5px;line-height:1.5}.cwrap p:last-child{margin-bottom:0}
-.cwrap .bh,.cwrap .sh{font-weight:700;color:var(--acc);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
-.cwrap .bh:first-child,.cwrap .sh:first-child{margin-top:0}
-.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child){border-top:1px solid #e3e8ee;padding-top:10px}
-.cwrap .bi{font-weight:700;color:var(--ink);font-size:11.5px;margin:0 0 3px;line-height:1.4}
+.cwrap .bh,.cwrap .sh,.cwrap .bi{font-weight:700;color:var(--acc);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
+.cwrap .bh:first-child,.cwrap .sh:first-child,.cwrap .bi:first-child{margin-top:0}
+.cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child),.cwrap .bi:not(:first-child){border-top:1px solid #e3e8ee;padding-top:10px}
 /* Off-Snow / On-Snow Zonen */
 .cwrap .zone{margin-top:11px}.cwrap .zone:first-child{margin-top:0}
 .cwrap .zone+.zone{border-top:1px solid #e3e8ee;padding-top:10px}
@@ -1530,7 +1534,7 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .cell.hl-mastery{background:rgba(213,43,30,.22)}
 [data-theme="dark"] .cell::after{background:linear-gradient(180deg,rgba(23,34,49,0),#172231)}
 [data-theme="dark"] .cwrap{color:#c2ccd8}
-[data-theme="dark"] .cwrap .bh:not(:first-child),[data-theme="dark"] .cwrap .sh:not(:first-child){border-top-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .cwrap .bh:not(:first-child),[data-theme="dark"] .cwrap .sh:not(:first-child),[data-theme="dark"] .cwrap .bi:not(:first-child){border-top-color:rgba(255,255,255,.10)}
 [data-theme="dark"] .cwrap .zone+.zone{border-top-color:rgba(255,255,255,.10)}
 [data-theme="dark"] .cwrap .zk::after{color:#5a6472}
 [data-theme="dark"] .cwrap ul.sc .badge{background:#33425c;color:#e7edf4}
@@ -1648,7 +1652,14 @@ function initSport(sec){
       if(!w||!btn)return;
       if(w.scrollHeight>w.clientHeight+6){cell.classList.add('clamped');btn.hidden=false;}
       else{cell.classList.remove('clamped');btn.hidden=true;}
-      btn.onclick=()=>{const ex=cell.classList.toggle('expanded');btn.textContent=ex?I18N.less:I18N.more;};
+      btn.onclick=()=>{
+        const ex=!cell.classList.contains('expanded');
+        const row=cell.closest('.r')||cell.parentElement;
+        row.querySelectorAll('.cell').forEach(c=>{
+          c.classList.toggle('expanded',ex&&c.classList.contains('clamped'));
+          const b2=c.querySelector('.more');if(b2&&!b2.hidden)b2.textContent=ex?I18N.less:I18N.more;
+        });
+      };
     });
   }
   sec.__clamp = setupClamp;
@@ -1925,7 +1936,10 @@ const mm=document.querySelector('.mmodal');
 function openMission(url,title){
   mm.querySelector('.mm-t').textContent=title;
   mm.querySelector('.mm-ext').href=url;
-  mm.querySelector('.mm-frame').src=url;
+  const fr=mm.querySelector('.mm-frame');
+  fr.classList.remove('ld');            // weich einblenden, sobald geladen (kein Flackern)
+  fr.onload=()=>fr.classList.add('ld');
+  fr.src=url;
   mm.hidden=false;document.body.style.overflow='hidden';
 }
 function closeMission(){mm.hidden=true;mm.querySelector('.mm-frame').src='about:blank';document.body.style.overflow='';}
