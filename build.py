@@ -743,7 +743,7 @@ def home_html(datamap, lang):
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
         '<linearGradient id="herodark" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="rgba(9,14,24,.34)"/><stop offset=".45" stop-color="rgba(12,17,28,.30)"/><stop offset="1" stop-color="rgba(7,11,20,.82)"/></linearGradient>'
+        '<stop offset="0" stop-color="rgba(9,14,24,.10)"/><stop offset=".45" stop-color="rgba(12,17,28,.08)"/><stop offset="1" stop-color="rgba(7,11,20,.30)"/></linearGradient>'
         '</defs>'
         '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
@@ -753,10 +753,10 @@ def home_html(datamap, lang):
         '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad)"/>'
         '</g>'
         '<linearGradient id="zonegrad" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="rgba(216,72,58,.46)"/><stop offset=".355" stop-color="rgba(216,72,58,.46)"/>'
-        '<stop offset=".406" stop-color="rgba(222,140,80,.46)"/><stop offset=".522" stop-color="rgba(222,140,80,.46)"/>'
-        '<stop offset=".573" stop-color="rgba(222,184,88,.48)"/><stop offset=".755" stop-color="rgba(222,184,88,.48)"/>'
-        '<stop offset=".848" stop-color="rgba(86,158,178,.48)"/><stop offset="1" stop-color="rgba(86,158,178,.48)"/>'
+        '<stop offset="0" stop-color="rgba(216,72,58,.40)"/><stop offset=".355" stop-color="rgba(216,72,58,.40)"/>'
+        '<stop offset=".406" stop-color="rgba(222,140,80,.40)"/><stop offset=".522" stop-color="rgba(222,140,80,.40)"/>'
+        '<stop offset=".573" stop-color="rgba(222,184,88,.42)"/><stop offset=".755" stop-color="rgba(222,184,88,.42)"/>'
+        '<stop offset=".848" stop-color="rgba(86,158,178,.42)"/><stop offset="1" stop-color="rgba(86,158,178,.42)"/>'
         '</linearGradient>'
         # Kammlinie mit weichem Farbverlauf entlang der Hoehenzonen (statt harter Wechsel)
         '<linearGradient id="linegrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="986">'
@@ -960,7 +960,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
 /* Startseite - Neon-Konstellation */
 #home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
-  background:linear-gradient(180deg,rgba(9,14,24,.34),rgba(12,17,28,.30) 45%,rgba(7,11,20,.82)),url("assets/hero.jpg") center 32%/cover no-repeat}
+  background:linear-gradient(180deg,rgba(9,14,24,.10),rgba(12,17,28,.08) 45%,rgba(7,11,20,.30)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 #home .hero-top .lsrow{display:flex;align-items:stretch;gap:8px}
 #home .hero-top .lsrow .themebtn{width:33px;height:auto;align-self:stretch}
