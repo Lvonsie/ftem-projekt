@@ -926,11 +926,11 @@ def home_html(datamap, lang):
             +aw_cta+
             
             '<div class="hero-top-r">'
-            '<div class="mr-row"><div class="lsrow">'+lang_switch(lang)+'</div>'
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
-            + '</select></div>'
-            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button>'
+            + '</select>'
+            '<div class="mr-row"><div class="lsrow">'+lang_switch(lang)+'</div>'
+            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu"}[lang])+'</button></div>'
             '<div class="menu-panel" hidden>'
             '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
             +mission_btn+
@@ -1100,13 +1100,13 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
-.homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);min-width:170px;max-width:230px;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);width:100%;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .homesport{color-scheme:dark}
 .homesport option{color:#1d2630;background:#fff}
 .hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
 .news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
 .news-btn:hover{filter:brightness(1.12)}
-.hero-top-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.hero-top-r{display:flex;flex-direction:column;align-items:stretch;gap:8px;width:265px}
 .info-btn{font:inherit;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);color:#fff;font-weight:800;font-size:11.5px;border-radius:8px;padding:6px 13px;cursor:pointer;backdrop-filter:blur(6px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .info-btn:hover{background:var(--red);border-color:var(--red)}
 .hero-cta{display:flex;gap:10px;justify-content:center;margin-top:14px;pointer-events:auto}
@@ -1145,7 +1145,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* News-Badge + News-Overlay-Metadaten */
 .nbadge{display:inline-block;background:var(--red);color:#fff;border-radius:9px;padding:0 6px;margin-left:7px;font-size:10px;font-weight:800;line-height:15px;vertical-align:1px}
 /* News-Box: Knopf + Teaser-Titel in einem Feld */
-.news-box{max-width:265px;background:rgba(15,21,32,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;transition:border-color .15s}
+.news-box{width:100%;background:rgba(15,21,32,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;transition:border-color .15s}
 .news-box:hover{border-color:rgba(255,255,255,.55)}
 .news-box .nb-head{background:#1d2630;color:#fff;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:6px 13px}
 .news-box .nb-list{list-style:none;margin:7px 0 9px;padding:0 12px;color:#fff}
@@ -1155,7 +1155,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* Hamburger-Menue oben rechts */
 .menu-btn{font:inherit;background:rgba(15,21,32,.55);color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(6px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .menu-btn:hover{background:rgba(15,21,32,.75);border-color:rgba(255,255,255,.6)}
-.menu-panel{position:relative;display:flex;flex-direction:column;gap:6px;min-width:225px;background:rgba(15,21,32,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:30px 9px 9px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.menu-panel{position:relative;display:flex;flex-direction:column;gap:6px;width:100%;background:rgba(15,21,32,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:30px 9px 9px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
 .mp-x{position:absolute;top:4px;right:7px;background:none;border:none;color:rgba(255,255,255,.75);font-size:18px;line-height:1;cursor:pointer;padding:3px 7px}
 .mp-x:hover{color:#fff}
 .mp-item{font:inherit;display:block;width:100%;text-align:left;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:12px;border-radius:8px;padding:8px 12px;cursor:pointer}
@@ -1171,7 +1171,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .mp-admin .presopen svg{width:20px;height:20px;display:block}
 .mp-admin .presask{margin-left:0}
 .mp-admin .presask input{width:104px}
-@media(max-width:760px){.news-box{max-width:46vw}.homesport{min-width:0;max-width:160px;font-size:12.5px;padding:7px 10px}.menu-panel{min-width:200px}}
+@media(max-width:760px){.hero-top-r{width:205px}.homesport{font-size:12.5px;padding:7px 10px}}
 .news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
 .news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
 .news-date{font-size:10.5px;font-weight:700;color:var(--mut);background:var(--acc-bg);border-radius:5px;padding:2px 7px}
@@ -1185,7 +1185,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
 .aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.mr-row{display:flex;gap:8px;align-items:stretch;justify-content:flex-end}
+.mr-row{display:flex;gap:8px;align-items:stretch}
+.mr-row .menu-btn{flex:1}
 @media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;justify-content:center;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
