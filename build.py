@@ -1024,7 +1024,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .langsw a.active{background:#3f4650;color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
 /* Startseite - Neon-Konstellation */
-#home .home-hero{position:relative;min-height:100vh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
+#home .home-hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;color:#fff;display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(9,14,24,.10),rgba(12,17,28,.08) 45%,rgba(7,11,20,.30)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 #home .hero-top .lsrow{display:flex;align-items:stretch;gap:8px}
@@ -1161,8 +1161,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta:hover{background:var(--red);border-color:var(--red)}
 .hcta-sec{background:rgba(255,255,255,.07)}
 .imodal{position:fixed;inset:0;z-index:112;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
-.im-box{width:min(900px,94vw);max-height:92vh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.imodal.wide .im-box{width:min(1300px,96vw);height:92vh}
+.im-box{width:min(900px,94vw);max-height:92vh;max-height:92svh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
+.imodal.wide .im-box{width:min(1300px,96vw);height:92vh;height:92svh}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
@@ -1218,7 +1218,17 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .mp-admin .presopen svg{width:20px;height:20px;display:block}
 .mp-admin .presask{margin-left:0}
 .mp-admin .presask input{width:104px}
-@media(max-width:760px){.hero-top-r{width:205px}.homesport{font-size:12.5px;padding:7px 10px}}
+@media(max-width:760px){
+  .hero-top-r{width:232px}
+  .hero-top-r .langsw a{padding:4px 7px}
+  .homesport{font-size:12.5px;padding:7px 10px}
+  .bottombar{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}
+  .bottombar::-webkit-scrollbar{display:none}
+  .bb-item{padding:9px 14px;font-size:11.5px}
+  .imodal{align-items:flex-start;padding:10px}
+  .im-box{max-height:calc(100vh - 20px);max-height:calc(100svh - 20px)}
+  .imodal.wide .im-box{height:calc(100vh - 20px);height:calc(100svh - 20px)}
+}
 .news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
 .news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
 .news-date{font-size:10.5px;font-weight:700;color:var(--mut);background:var(--acc-bg);border-radius:5px;padding:2px 7px}
@@ -1237,7 +1247,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 @media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;justify-content:center;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
-.bb-item{font:inherit;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12.5px;padding:9px 22px;cursor:pointer;text-decoration:none;letter-spacing:.03em}
+.bb-item{font:inherit;flex:none;white-space:nowrap;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12.5px;padding:9px 22px;cursor:pointer;text-decoration:none;letter-spacing:.03em}
 .bb-item b{color:var(--red);font-weight:800;margin-left:4px}
 .bb-item:hover{background:rgba(255,255,255,.10);color:#fff}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
@@ -1346,7 +1356,7 @@ body.pres section.sport h2.grp{font-size:15px}
 .news-body li{margin:2px 0}
 .news-link{align-self:flex-start;margin-top:auto;background:var(--red);color:#fff;text-decoration:none;font-weight:800;font-size:12px;border-radius:20px;padding:6px 15px;transition:filter .15s}
 .news-link:hover{filter:brightness(1.12)}
-@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:180px;padding-left:18px}#home .hero-head h1{font-size:46px}#home .hero-logo{width:84px;margin:-4px 0 0 4px}}
+@media(max-width:640px){.node .nicon{width:58px;height:58px}.node .nhover{width:96px}.node .nlabel{font-size:12px}#home .hero-head{padding-top:14px;padding-left:16px}#home .hero-head h1{font-size:42px}#home .hero-logo{width:80px;margin:-4px 0 0 4px}}
 @media(max-width:480px){.node{padding:9px}.node .nlabel{font-size:10.5px;max-width:70px}.node .nhover{width:84px}.node .nicon{width:48px;height:48px}.node .dot{width:11px;height:11px}}
 @media(max-width:350px){.node .nlabel{font-size:9.5px;max-width:60px}.node .dot{width:10px;height:10px}}
 /* "Was ist FTEM?" */
@@ -1611,13 +1621,14 @@ header.top .sicon{width:28px;height:28px}
 /* Header genau 2 Zeilen: 1) Zurueck+Icon+Sportart+Sprachen  2) Suche+Springen+Chat */
 .ht-r{display:contents}
 .ht-l{order:1;flex:1 1 0;min-width:0}
-header.top .sportsel2{flex:1 1 0;width:100%;min-width:0;font-size:14px;max-width:none}
+header.top .sportsel2{flex:1 1 0;width:100%;min-width:118px;font-size:13.5px;max-width:none}
+.ht-r .langsw a{padding:4px 6px;font-size:10.5px}
 .ht-r .langsw{order:2;flex:none}
 .ht-r .themebtn{order:2;flex:none}
 .ht-c{flex:1 1 55%;order:3}
 .ht-c .qbox{width:100%}
 .ht-c input.q{font-size:16px;padding:0 56px 0 30px}
-.ht-r select.jump{order:4;flex:1 1 26%;width:auto;min-width:0;font-size:13px}
+.ht-r select.jump{order:4;flex:1 1 38%;width:auto;min-width:158px;font-size:12px}
 .ht-r .chatbtn{order:5;flex:none}
 .ht-r .toggleall,.ht-r .pdf,.ht-r .hdiv{display:none}
 .wrap{padding:10px 10px 60px}
@@ -2393,6 +2404,12 @@ __MAINCSS__
 .cedit{width:100%;min-height:42px;border:1px solid #d4dae1;border-radius:6px;background:#fff;padding:6px 7px;font:inherit;font-size:11.5px;line-height:1.42;color:#1d2630;resize:vertical;overflow:hidden}
 .cedit:focus{outline:none;border-color:#d52b1e;box-shadow:0 0 0 2px rgba(213,43,30,.14)}
 .cedit.changed{border-color:#d52b1e;background:#fff8f7}
+.cedit.curchg{box-shadow:0 0 0 3px rgba(213,43,30,.35);border-color:#d52b1e}
+.chgnav{display:inline-flex;align-items:center;gap:5px}
+.chgnav button{font:inherit;font-size:12px;font-weight:700;border:1px solid #d4dae1;border-radius:7px;background:#fff;padding:4px 9px;cursor:pointer}
+.chgnav button:hover{background:#f2f4f6}
+.chgnav #chgpos{font-size:12px;font-weight:800;color:#d52b1e;min-width:44px;text-align:center}
+.chgnav #chgundo{color:#d52b1e;border-color:rgba(213,43,30,.4)}
 </style></head>
 <body>
 <div id="gate">
@@ -2426,6 +2443,12 @@ __MAINCSS__
     <label>Sportart: <select id="sportsel">__SPORT_OPTIONS__</select></label>
     <span class="sp"></span>
     <span id="astatus" class="astatus"></span>
+    <span id="chgnav" class="chgnav" hidden>
+      <button id="chgprev" type="button" title="Vorherige Änderung">&#9650;</button>
+      <span id="chgpos"></span>
+      <button id="chgnext" type="button" title="Nächste Änderung">&#9660;</button>
+      <button id="chgundo" type="button" title="Diese Änderung rückgängig machen">&#8634; Rückgängig</button>
+    </span>
     <button id="asave" class="asave" disabled>Speichern</button>
     <button id="glossbtn" class="agloss" type="button">Glossar</button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
@@ -2538,13 +2561,53 @@ function changed(){
   });
   return out;
 }
-function updateCount(){const n=changed().length;saveBtn.disabled=n===0;statusEl.textContent=n?(n+' ungespeichert'):'Alles gespeichert';}
+function changedTas(){
+  return Array.prototype.filter.call(app.querySelectorAll('.cedit[data-cid]'),function(ta){return (base[ta.dataset.cid]||'')!==ta.value;});
+}
+let chgIdx=-1;
+const chgNav=document.getElementById('chgnav'),chgPos=document.getElementById('chgpos');
+function updateCount(){
+  // Markierung mit dem echten Zustand synchronisieren (auch fuer geladene Cloud-Abweichungen)
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){ta.classList.toggle('changed',(base[ta.dataset.cid]||'')!==ta.value);});
+  const n=changed().length;saveBtn.disabled=n===0;
+  statusEl.textContent=n?(n+' ungespeichert'):'Alles gespeichert';
+  chgNav.hidden=n===0;
+  const tas=changedTas();
+  if(chgIdx>=tas.length)chgIdx=tas.length-1;
+  chgPos.textContent=n?((chgIdx>=0?(chgIdx+1):'–')+' / '+n):'';
+}
+function gotoChg(step){
+  const tas=changedTas();if(!tas.length)return;
+  chgIdx=(chgIdx+step+tas.length*99)%tas.length;
+  const ta=tas[chgIdx];
+  // Sportart der Aenderung einblenden (cid beginnt mit "<sportid>|...")
+  const sec=ta.closest('section.sport');
+  if(sec&&sec.hidden){sel.value=sec.dataset.sport;showSport(sec.dataset.sport);}
+  app.querySelectorAll('.cedit.curchg').forEach(function(t){t.classList.remove('curchg');});
+  ta.classList.add('curchg');
+  ta.scrollIntoView({block:'center',behavior:'smooth'});
+  chgPos.textContent=(chgIdx+1)+' / '+tas.length;
+}
+function undoCur(){
+  const tas=changedTas();if(!tas.length)return;
+  if(chgIdx<0||chgIdx>=tas.length)chgIdx=0;
+  const ta=tas[chgIdx];
+  ta.value=base[ta.dataset.cid]||'';
+  ta.classList.remove('changed','curchg');
+  autosize(ta);
+  updateCount();
+  // zur naechsten verbleibenden Aenderung springen
+  if(changedTas().length){chgIdx=chgIdx%changedTas().length;gotoChg(0);}else{chgIdx=-1;}
+}
 function init(){
   sel.addEventListener('change',function(){showSport(sel.value);});
   app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
     ta.addEventListener('input',function(){autosize(ta);ta.classList.toggle('changed',(base[ta.dataset.cid]||'')!==ta.value);updateCount();});
   });
   saveBtn.addEventListener('click',save);
+  document.getElementById('chgprev').addEventListener('click',function(){gotoChg(-1);});
+  document.getElementById('chgnext').addEventListener('click',function(){gotoChg(1);});
+  document.getElementById('chgundo').addEventListener('click',undoCur);
   document.getElementById('glossbtn').addEventListener('click',toggleGloss);
   if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
