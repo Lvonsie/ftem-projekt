@@ -948,8 +948,10 @@ def home_html(datamap, lang):
         ("4 languages & app", "In German, French, Italian and English – installable as an app on your phone."),
     ]}[lang]
     _wf = ""
+    _acts = ["aw", "stages", "mission", "news", "coach", "app"]
     for i, (ft, fd) in enumerate(web_feats):
-        _wf += '<div class="fwd fwd-'+["f","t","e","m"][i % 4]+'"><span class="fwd-h"><b>'+esc(ft)+'</b></span><p>'+esc(fd)+'</p></div>'
+        _wf += ('<button type="button" class="fwd fwd-'+["f","t","e","m"][i % 4]+' pdw" data-act="'+_acts[i]+'" data-t="'+esc(ft)+'">'
+                '<span class="fwd-h"><b>'+esc(ft)+'</b></span><p>'+esc(fd)+'</p></button>')
     pres_web = ('<template id="tpl-pres-web"><div class="pd-web"><h2>'+esc(web_head[0])+'</h2>'
                 '<p class="lead">'+esc(web_head[1])+' <b>ftemschneesport.netlify.app</b></p>'
                 '<div class="pd-feats">'+_wf+'</div></div></template>')
@@ -1160,7 +1162,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta{font:inherit;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:800;font-size:13px;border-radius:20px;padding:8px 17px;cursor:pointer;backdrop-filter:blur(6px);text-decoration:none}
 .hcta:hover{background:var(--red);border-color:var(--red)}
 .hcta-sec{background:rgba(255,255,255,.07)}
-.imodal{position:fixed;inset:0;z-index:112;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
+.imodal{position:fixed;inset:0;z-index:290;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;max-height:92svh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
 .imodal.wide .im-box{width:min(1300px,96vw);height:92vh;height:92svh}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
@@ -1317,6 +1319,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .pd-web .lead b{color:var(--ink)}
 .pd-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
 .pd-feats .fwd{padding:13px 15px}
+.pdw{font:inherit;text-align:left;width:100%;cursor:pointer;appearance:none;-webkit-appearance:none;transition:transform .14s,box-shadow .14s}
+.pdw:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.10)}
 .pd-awslide{max-width:900px;margin:16vh auto 0;text-align:center}
 .pd-awslide h2{font-size:32px;margin:0 0 12px}
 .pd-awslide p{font-size:15px;color:var(--mut)}
@@ -1576,7 +1580,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .pp-x{position:absolute;top:9px;right:12px;background:none;border:none;font-size:22px;line-height:1;color:var(--mut);cursor:pointer;padding:2px 6px}
 .pp-x:hover{color:var(--ink)}
 /* KI-Assistent Chat-Panel */
-.chatpanel{position:fixed;inset:0;z-index:70;background:rgba(15,22,34,.42);display:flex;justify-content:flex-end}
+.chatpanel{position:fixed;inset:0;z-index:310;background:rgba(15,22,34,.42);display:flex;justify-content:flex-end}
 .chatpanel[hidden]{display:none}
 .cp-card{width:min(430px,100%);height:100%;background:var(--card);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.28);animation:cpIn .25s ease}
 @keyframes cpIn{from{transform:translateX(34px);opacity:.5}to{transform:none;opacity:1}}
@@ -2025,7 +2029,7 @@ function openChat(sec){chatSec=sec;chatPanel.hidden=false;document.documentEleme
   setTimeout(()=>cpIn.focus(),60);}
 function closeChat(){chatPanel.hidden=true;document.documentElement.style.overflow='';}
 chatPanel.addEventListener('click',e=>{if(e.target===chatPanel||e.target.closest('.cp-x'))closeChat();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatPanel.hidden)closeChat();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatPanel.hidden){closeChat();e._ovl=true;}});
 function linkify(t){var d=document.createElement('div');d.textContent=t;var h=d.innerHTML;
   h=h.replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>');
   h=h.replace(/^\s*#{1,6}\s*(.+)$/gm,'<strong>$1</strong>');
@@ -2102,7 +2106,7 @@ document.querySelectorAll('.np-mission').forEach(a=>a.addEventListener('click',e
   openMission(a.getAttribute('href'), a.dataset.title||'Mission Swiss-Ski');
 }));
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){ if(!mm.hidden)closeMission(); else closePops(); }
+  if(e.key==='Escape'){ if(!mm.hidden){closeMission();e._ovl=true;} else closePops(); }
 });
 
 // ---- Inhalts-Overlay (News, Was ist FTEM?, Missions-Auswahl) ----
@@ -2153,7 +2157,7 @@ document.addEventListener('click',e=>{
   if(im&&!im.hidden)closeInfo();
   openMission(a.getAttribute('href'), a.dataset.title||a.textContent.replace('↗','').trim());
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&im&&!im.hidden)closeInfo();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&im&&!im.hidden){closeInfo();e._ovl=true;}});
 
 // ---- Sportarten-Dropdown im Titel + Steady-Chat-Knopf ----
 sections.forEach(s=>{const ss=s.querySelector('.sportsel2');if(ss)ss.addEventListener('change',e=>{location.hash='#'+e.target.value;});});
@@ -2271,12 +2275,26 @@ function closeDeck(exitFs){
   deck.hidden=true;document.body.classList.remove('deckon');
   if(exitFs&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});
 }
+pdBody.addEventListener('click',e=>{
+  const c=e.target.closest('.pdw');if(!c)return;
+  const sid=pdSport.value,name=SPORT_NAMES[sid]||sid,t=c.dataset.t||'';
+  const self=(location.pathname.split('/').pop()||'index.html');
+  const act=c.dataset.act;
+  if(act==='aw'){openMission(self+'#'+sid, t+' \u2013 '+name);}
+  else if(act==='stages'){openMission(self, t);}
+  else if(act==='mission'){const u=SPORT_MISSIONS[sid];u?openMission(u,name+' \u2013 Mission Swiss-Ski'):openInfo('tpl-missions','Mission Swiss-Ski');}
+  else if(act==='news'){openInfo('tpl-news',t);}
+  else if(act==='coach'){const sec=sections.find(s=>s.dataset.sport===sid);if(sec)openChat(sec);}
+  else if(act==='app'){openInfo('tpl-app',t);}
+});
 deck.querySelector('.pd-x').addEventListener('click',()=>closeDeck(true));
 deck.querySelector('.pd-prev').addEventListener('click',()=>{pdIdx--;pdRender();});
 deck.querySelector('.pd-next').addEventListener('click',()=>{pdIdx++;pdRender();});
 pdSport.addEventListener('change',pdRender);
 document.addEventListener('keydown',e=>{
   if(deck.hidden)return;
+  if(e._ovl)return; // Escape hat soeben ein Overlay geschlossen -> Deck bleibt offen
+  if((typeof chatPanel!=='undefined'&&!chatPanel.hidden)||(im&&!im.hidden)||(mm&&!mm.hidden))return;
   if(e.target&&(e.target.tagName==='SELECT'||e.target.tagName==='INPUT'))return;
   if(e.key==='Escape'){closeDeck(true);return;}
   if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();pdIdx++;pdRender();}
