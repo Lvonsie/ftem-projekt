@@ -1082,7 +1082,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .npop a{display:block;text-align:center;background:rgba(255,255,255,.10);color:#fff;text-decoration:none;font-size:12.5px;font-weight:700;border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:8px 10px;line-height:1.25}
 .npop a:hover{background:var(--red);border-color:var(--red)}
 /* Mission-Iframe-Overlay */
-.mmodal{position:fixed;inset:0;z-index:120;background:rgba(8,12,20,.78);display:flex;align-items:center;justify-content:center;padding:18px}
+.mmodal{position:fixed;inset:0;z-index:300;background:rgba(8,12,20,.78);display:flex;align-items:center;justify-content:center;padding:18px}
 .mm-box{width:min(1240px,96vw);height:min(880px,92vh);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
 .mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#1d2630;color:#fff}
 .mm-frame{opacity:0;transition:opacity .3s ease;background:#fff}
@@ -1309,6 +1309,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .pd-body .ph-sum .ps-col .cwrap{font-size:12.5px}
 .pd-body .ph-sum .tt{font-size:15px}
 .pd-body .aw-go{display:none}
+.pd-body .fi-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:22px}
+.pd-body .fi-links .mission-item{flex:0 0 auto;min-width:210px;padding:15px 22px;font-size:13.5px}
 .pd-web{max-width:1050px;margin:0 auto}
 .pd-web h2{font-size:26px;margin:0 0 6px}
 .pd-web .lead{color:var(--mut);font-size:16px;margin:0 0 22px}
