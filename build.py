@@ -949,28 +949,28 @@ def home_html(datamap, lang):
         ("Stufen-Überblick", "Kurz-Zusammenfassung pro Phase (Foundation, Talent, Elite, Mastery) direkt auf dem Titelberg – pro Sportart."),
         ("Mission Swiss-Ski", "Die Mission jeder Sportart als integrierte Ansicht, plus Grundlagen wie Übersicht FTEM und Leitsätze."),
         ("News & Dokumente", "Aktuelle Ausbildungsnews mit Datum sowie verlinkte Dokumente direkt aus den Inhalten heraus."),
-        ("FTEM-Coach (KI)", "Beantwortet Fragen zum Athlet:innen-Weg der gewählten Sportart – rund um die Uhr."),
+        ("FTEM-Coach (KI)", "Dein KI-Coach – fragt, erklärt, findet. Z. B. «Material in F3?», «Kraft-Ziele in T2?», «Welche Kader?»."),
         ("3 Sprachen & App", "Komplett auf Deutsch, Französisch und Italienisch – und als App auf dem Handy installierbar."),
     ], "fr": [
         ("Parcours de l'athlète", "Les 10 sports en détail – thèmes et contenus sur les niveaux F1–M, avec recherche, focus par niveau et export PDF."),
         ("Aperçu des niveaux", "Résumé par phase (Foundation, Talent, Elite, Mastery) directement sur la montagne – par sport."),
         ("Mission Swiss-Ski", "La mission de chaque sport en vue intégrée, plus les bases comme l'aperçu FTEM et les principes."),
         ("Actualités & documents", "Actualités de la formation avec date et documents liés directement depuis les contenus."),
-        ("Coach FTEM (IA)", "Répond aux questions sur le parcours de l'athlète du sport choisi – 24h/24."),
+        ("Coach FTEM (IA)", "Ton coach IA – demande, explique, trouve. Ex. « Matériel en F3 ? », « Objectifs de force en T2 ? », « Quels cadres ? »."),
         ("3 langues & app", "Entièrement en allemand, français et italien – installable comme app sur le téléphone."),
     ], "it": [
         ("Percorso dell'atleta", "Tutti i 10 sport nel dettaglio – temi e contenuti sui livelli F1–M, con ricerca, focus per livello ed export PDF."),
         ("Panoramica dei livelli", "Riassunto per fase (Foundation, Talent, Elite, Mastery) direttamente sulla montagna – per sport."),
         ("Missione Swiss-Ski", "La missione di ogni sport in vista integrata, più le basi come panoramica FTEM e principi."),
         ("Notizie & documenti", "Notizie sulla formazione con data e documenti collegati direttamente dai contenuti."),
-        ("Coach FTEM (IA)", "Risponde alle domande sul percorso dell'atleta dello sport scelto – 24 ore su 24."),
+        ("Coach FTEM (IA)", "Il tuo coach IA – chiedi, spiega, trova. Es. «Materiale in F3?», «Obiettivi di forza in T2?», «Quali quadri?»."),
         ("3 lingue & app", "Completamente in tedesco, francese e italiano – installabile come app sul telefono."),
     ], "en": [
         ("Athlete pathway", "All 10 sports in detail – topics and content across stages F1–M, with search, stage focus and PDF export."),
         ("Stage overview", "Short summary per phase (Foundation, Talent, Elite, Mastery) directly on the mountain – per sport."),
         ("Mission Swiss-Ski", "Each sport's mission as an integrated view, plus fundamentals such as the FTEM overview and guiding principles."),
         ("News & documents", "Current education news with dates, and linked documents directly from the content."),
-        ("FTEM Coach (AI)", "Answers questions about the selected sport's athlete pathway – around the clock."),
+        ("FTEM Coach (AI)", "Your AI coach – ask, explain, find. E.g. 'Gear in F3?', 'Strength goals in T2?', 'Which squads?'."),
         ("4 languages & app", "In German, French, Italian and English – installable as an app on your phone."),
     ]}[lang]
     _wf = ""
@@ -1008,8 +1008,12 @@ def home_html(datamap, lang):
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport","en":"Choose a sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
-            '<div class="mr-row"><div class="lsrow">'+lang_switch(lang)+'</div>'
-            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu", "en": "Menu"}[lang])+'">☰&nbsp; '+esc({"de": "Menü", "fr": "Menu", "it": "Menu", "en": "Menu"}[lang])+'</button></div>'
+            '<div class="mr-row">'
+            '<div class="lang-ic"><button class="lang-ic-btn" type="button" aria-expanded="false" aria-label="'+esc({"de":"Sprache","fr":"Langue","it":"Lingua","en":"Language"}[lang])+'">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg></button>'
+            '<div class="lang-ic-menu" hidden>'+lang_switch(lang)+'</div></div>'
+            '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu", "en": "Menu"}[lang])+'">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div>'
             '<div class="menu-panel" hidden>'
             '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
             +mission_btn+
@@ -1155,10 +1159,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
 .heromt .pb-hl{opacity:0;transition:opacity .2s ease}
 .heromt .pband:hover .pb-hl,.heromt .pband:focus-visible .pb-hl{opacity:.17}
-.heromt .pb-n{transform-box:fill-box;transform-origin:50% 100%;transition:transform .18s ease}
-.heromt .pb-s{transform-box:fill-box;transform-origin:50% 0%;transition:transform .18s ease}
-.heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n{transform:scale(1.14)}
-.heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{transform:scale(1.06)}
+.heromt .pb-n,.heromt .pb-s{transition:filter .18s ease}
+.heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n,.heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{filter:brightness(1.12)}
 .heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:22px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:3px;stroke-linejoin:round}
 .heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
@@ -1236,8 +1238,14 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#fff}
 /* Feedback unten rechts */
 /* Hamburger-Menue oben rechts */
-.menu-btn{font:inherit;background:rgba(15,21,32,.55);color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;backdrop-filter:blur(6px);text-shadow:0 1px 4px rgba(0,0,0,.4)}
-.menu-btn:hover{background:rgba(15,21,32,.75);border-color:rgba(255,255,255,.6)}
+.menu-btn,.lang-ic-btn{width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,21,32,.55);color:#fff;border:1px solid rgba(255,255,255,.42);border-radius:9px;cursor:pointer;backdrop-filter:blur(6px);flex:none}
+.menu-btn svg,.lang-ic-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.menu-btn:hover,.lang-ic-btn:hover{background:rgba(15,21,32,.78);border-color:rgba(255,255,255,.6)}
+.lang-ic{position:relative}
+.lang-ic-menu{position:absolute;top:calc(100% + 6px);left:0;z-index:9;background:rgba(15,21,32,.92);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:5px;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.lang-ic-menu[hidden]{display:none}
+.lang-ic-menu .langsw{background:none;border:none;padding:0;flex-direction:column;gap:2px}
+.lang-ic-menu .langsw a{padding:6px 18px;text-align:center;border-radius:6px}
 .menu-panel{position:relative;display:flex;flex-direction:column;gap:6px;width:100%;background:rgba(15,21,32,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:30px 9px 9px;box-shadow:0 16px 40px rgba(0,0,0,.45)}
 .mp-x{position:absolute;top:4px;right:7px;background:none;border:none;color:rgba(255,255,255,.75);font-size:18px;line-height:1;cursor:pointer;padding:3px 7px}
 .mp-x:hover{color:#fff}
@@ -1279,8 +1287,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
 .aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.mr-row{display:flex;gap:8px;align-items:stretch}
-.mr-row .menu-btn{flex:1}
+.mr-row{display:flex;gap:8px;align-items:center}
 @media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;justify-content:center;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
@@ -1640,6 +1647,9 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cp-send:hover{filter:brightness(1.08)}
 .cp-send:disabled{opacity:.5;cursor:default}
 .cp-note{font-size:10px;color:var(--mut);padding:2px 16px 10px;text-align:center;line-height:1.4}
+.cp-chips{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 2px;align-self:flex-start;max-width:96%}
+.cp-chip{font:inherit;font-size:12px;font-weight:600;color:var(--red);background:var(--acc-bg);border:1px solid var(--line);border-radius:16px;padding:6px 12px;cursor:pointer;text-align:left;line-height:1.3;transition:background .12s,color .12s,border-color .12s}
+.cp-chip:hover{background:var(--red);color:#fff;border-color:var(--red)}
 @media(max-width:520px){.cp-card{width:100%}}
 mark{background:#ffe08a;border-radius:2px;padding:0 1px}
 /* Lange Woerter (z. B. Belastungsverträglichkeit) trennen statt abschneiden */
@@ -2076,8 +2086,14 @@ const cpMsgs=chatPanel.querySelector('.cp-msgs'),cpForm=chatPanel.querySelector(
 let chatSec=null,chatBusy=false;const chatHist=[];const chatWelcomed=new Set();
 function openChat(sec){chatSec=sec;chatPanel.hidden=false;document.documentElement.style.overflow='hidden';
   const id=sec.dataset.sport;
-  if(!chatWelcomed.has(id)){cpMsgs.innerHTML='';chatHist.length=0;addMsg('a',I18N.chatWelcome);chatWelcomed.add(id);}
+  if(!chatWelcomed.has(id)){cpMsgs.innerHTML='';chatHist.length=0;addMsg('a',I18N.chatWelcome);addExamples();chatWelcomed.add(id);}
   setTimeout(()=>cpIn.focus(),60);}
+function addExamples(){var ex=I18N.chatExamples||[];if(!ex.length)return;
+  var wrap=document.createElement('div');wrap.className='cp-chips';
+  ex.forEach(function(q){var b=document.createElement('button');b.type='button';b.className='cp-chip';b.textContent=q;
+    b.onclick=function(){cpIn.value=q;if(cpForm.requestSubmit)cpForm.requestSubmit();else cpForm.dispatchEvent(new Event('submit',{cancelable:true}));};
+    wrap.appendChild(b);});
+  cpMsgs.appendChild(wrap);cpMsgs.scrollTop=cpMsgs.scrollHeight;}
 function closeChat(){chatPanel.hidden=true;document.documentElement.style.overflow='';}
 chatPanel.addEventListener('click',e=>{if(e.target===chatPanel||e.target.closest('.cp-x'))closeChat();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatPanel.hidden){closeChat();e._ovl=true;}});
@@ -2108,6 +2124,7 @@ function gatherChatContext(sec){
 }
 cpForm.addEventListener('submit',function(e){e.preventDefault();if(chatBusy||!chatSec)return;
   const qv=cpIn.value.trim();if(!qv)return;
+  var _ch=cpMsgs.querySelector('.cp-chips');if(_ch)_ch.remove();
   addMsg('u',qv);chatHist.push({role:'user',content:qv});cpIn.value='';
   chatBusy=true;cpSend.disabled=true;const thinking=addMsg('a','…',true);
   const ctx=gatherChatContext(chatSec);
@@ -2270,6 +2287,12 @@ if(menuBtn&&menuPanel){
   menuPanel.querySelectorAll('[data-open],.np-sportmission').forEach(b=>b.addEventListener('click',()=>{menuPanel.hidden=true;menuBtn.setAttribute('aria-expanded','false');}));
   const mpx=menuPanel.querySelector('.mp-x');
   if(mpx)mpx.addEventListener('click',()=>{menuPanel.hidden=true;menuBtn.setAttribute('aria-expanded','false');});
+}
+const langBtn=document.querySelector('.lang-ic-btn'), langMenu=document.querySelector('.lang-ic-menu');
+if(langBtn&&langMenu){
+  langBtn.addEventListener('click',e=>{e.stopPropagation();langMenu.hidden=!langMenu.hidden;langBtn.setAttribute('aria-expanded',String(!langMenu.hidden));});
+  document.addEventListener('click',e=>{if(!langMenu.hidden&&!e.target.closest('.lang-ic')){langMenu.hidden=true;langBtn.setAttribute('aria-expanded','false');}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!langMenu.hidden){langMenu.hidden=true;langBtn.setAttribute('aria-expanded','false');}});
 }
 document.querySelectorAll('.pband').forEach(bd=>{
   const open=()=>{const k=bd.dataset.ph;
@@ -2806,7 +2829,8 @@ for lang in LANGS:
             "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier.", "en": "Please allow pop-ups for this page to print the dossier."}[lang],
             "chatTitle": {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM", "en": "FTEM Coach"}[lang],
             "chatPh": {"de": "Frage zum Athlet:innen-Weg…", "fr": "Question sur le parcours…", "it": "Domanda sul percorso…", "en": "Question about the pathway…"}[lang],
-            "chatWelcome": {"de": "Hallo! Ich beantworte Fragen zum Athlet:innen-Weg dieser Sportart und verweise dich auf passende verlinkte Dokumente. Was möchtest du wissen?", "fr": "Bonjour ! Je réponds aux questions sur le parcours des athlètes de ce sport et vous oriente vers les documents liés pertinents. Que voulez-vous savoir ?", "it": "Ciao! Rispondo alle domande sul percorso degli atleti di questo sport e ti indico i documenti collegati pertinenti. Cosa vuoi sapere?", "en": "Hello! I answer questions about this sport's athlete pathway and point you to the relevant linked documents. What would you like to know?"}[lang],
+            "chatWelcome": {"de": "Hallo! Frag mich alles zum Athlet:innen-Weg dieser Sportart – zum Beispiel:", "fr": "Bonjour ! Pose-moi toutes tes questions sur le parcours de ce sport – par exemple :", "it": "Ciao! Chiedimi tutto sul percorso di questo sport – per esempio:", "en": "Hi! Ask me anything about this sport's athlete pathway – for example:"}[lang],
+            "chatExamples": {"de": ["Welches Material brauche ich in F3?", "Kraft-Ziele in Stufe T2?", "Welche Kader gibt es?", "Trainingsphasen im Überblick"], "fr": ["Quel matériel en F3 ?", "Objectifs de force en T2 ?", "Quels cadres existe-t-il ?", "Aperçu des phases d'entraînement"], "it": ["Quale materiale in F3?", "Obiettivi di forza in T2?", "Quali quadri esistono?", "Panoramica delle fasi"], "en": ["What gear do I need in F3?", "Strength goals in T2?", "Which squads exist?", "Overview of training phases"]}[lang],
             "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi.", "en": "Something went wrong. Please try again later."}[lang],
             "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati.", "en": "Answers are based on this sport's FTEM content and the linked documents."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
