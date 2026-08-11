@@ -1423,8 +1423,8 @@ body.pres section.sport h2.grp{font-size:15px}
 /* Athlet:innen-Weg: Bergfoto dezent im Hintergrund (Vorschlag 2, abgeschwaecht) */
 section.sport{background:linear-gradient(rgba(238,241,244,.94),rgba(238,241,244,.94)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 section.sport details.theme{background:rgba(255,255,255,.88);backdrop-filter:blur(2px)}
-section.sport details.theme.alt{background:rgba(247,245,241,.90)}
-[data-theme="dark"] section.sport details.theme.alt{background:rgba(29,38,50,.92)}
+section.sport details.theme.alt{background:rgba(251,250,247,.90)}
+[data-theme="dark"] section.sport details.theme.alt{background:rgba(26,37,52,.91)}
 section.sport .rl,section.sport .r.head .rl.corner{background:rgba(255,255,255,.94)}
 [data-theme="dark"] section.sport{background:linear-gradient(rgba(13,20,32,.95),rgba(13,20,32,.95)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 [data-theme="dark"] section.sport details.theme{background:rgba(23,34,49,.90)}
@@ -1931,7 +1931,13 @@ function initSport(sec){
   function toggleStage(i){const had=active.has(i);active.clear();if(!had)active.add(i);applyHl();}
   sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>toggleStage(+h.dataset.idx)));
   function scrollToStage(i){
-    const h=sec.querySelector('details.theme[open] .c.hd[data-idx="'+i+'"]');
+    const d=sec.querySelector('details.theme[open]');
+    if(!d)return;
+    // Auch verbundene Zellen komplett zeigen: fruehester Spaltenstart aller
+    // Zellen, die Stufe i enthalten (z. B. F1-2 -> beim Sprung auf F2 ab F1)
+    let j=i;
+    d.querySelectorAll('.cell').forEach(c=>{const f=+c.dataset.from,t=+c.dataset.to;if(i>=f&&i<=t&&f<j)j=f;});
+    const h=d.querySelector('.c.hd[data-idx="'+j+'"]');
     if(!h)return;
     const sc=h.closest('.scroller');if(!sc)return;
     const x=Math.max(0, sc.scrollLeft + h.getBoundingClientRect().left - sc.getBoundingClientRect().left
@@ -2166,6 +2172,17 @@ im&&im.addEventListener('toggle',e=>{
   im.querySelectorAll('.im-body details.ps-theme').forEach(o=>{if(o!==d)o.open=false;});
   fitSec(d);
 },true);
+// Themen/Abschnitte: Auf-/Zuklappen zuverlaessig ueber die GESAMTE Balkenbreite
+// (delegiert, gilt auch fuer nachgeladene Inhalte in Popups und Praesentation)
+document.addEventListener('click',e=>{
+  const su=e.target.closest('summary');
+  if(!su)return;
+  const d=su.parentElement;
+  if(!d||!d.matches||!d.matches('details.theme,details.ps-theme'))return;
+  if(e.target.closest('a,button,select,input'))return;
+  e.preventDefault();
+  d.open=!d.open;
+});
 function closeInfo(){im.hidden=true;}
 if(im){
   im.addEventListener('click',e=>{if(e.target===im)closeInfo();});
