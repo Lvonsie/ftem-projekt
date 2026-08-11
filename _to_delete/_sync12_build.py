@@ -456,22 +456,12 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
         for si, seg in enumerate(merge_same_segs(r["segs"])):
             span = seg["to"] - seg["from"] + 1
             cls = "ph-"+ph(stages[seg["from"]])
-            # Phasenuebergreifende Zellen: Farbverlauf ueber die enthaltenen Phasen
+            # if seg spans multiple phases, neutral
             phs = set(ph(stages[i]) for i in range(seg["from"], seg["to"]+1))
-            grad = ""
-            if len(phs) > 1:
-                cls = "ph-multi"
-                PHR = [("foundation",0,2,"--phf"),("talent",3,6,"--pht"),("elite",7,8,"--phe"),("mastery",9,9,"--phm")]
-                a, b = seg["from"], seg["to"]; w = float(b - a + 1)
-                stops = []
-                for _nm, s0, s1, var in PHR:
-                    if s1 < a or s0 > b: continue
-                    cen = ((max(s0, a) + min(s1, b)) / 2.0 - a + 0.5) / w * 100.0
-                    stops.append("var("+var+") %.0f%%" % cen)
-                grad = "--mg:linear-gradient(90deg,"+",".join(stops)+");"
+            if len(phs) > 1: cls = "ph-multi"
             cid = prefix+"|"+str(idx)+"|"+str(ri)+"|"+str(si)
             more = '' if edit else '<button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button>'
-            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
+            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
     opn = ' open' if edit else ''
     return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
@@ -959,12 +949,8 @@ def home_html(datamap, lang):
     ]}[lang]
     _wf = ""
     _acts = ["aw", "stages", "mission", "news", "coach", "app"]
-    # Reihenfolge der Kacheln (hochkant, eine Spalte): Mission, Stufen, Weg, News, Coach
-    # "Sprachen & App" entfaellt auf dieser Folie.
-    _order = [2, 1, 0, 3, 4]
-    for n, i in enumerate(_order):
-        ft, fd = web_feats[i]
-        _wf += ('<button type="button" class="fwd fwd-'+["f","t","e","m"][n % 4]+' pdw" data-act="'+_acts[i]+'" data-t="'+esc(ft)+'">'
+    for i, (ft, fd) in enumerate(web_feats):
+        _wf += ('<button type="button" class="fwd fwd-'+["f","t","e","m"][i % 4]+' pdw" data-act="'+_acts[i]+'" data-t="'+esc(ft)+'">'
                 '<span class="fwd-h"><b>'+esc(ft)+'</b></span><p>'+esc(fd)+'</p></button>')
     pres_web = ('<template id="tpl-pres-web"><div class="pd-web"><h2>'+esc(web_head[0])+'</h2>'
                 '<p class="lead">'+esc(web_head[1])+' <b>ftemschneesport.netlify.app</b></p>'
@@ -1023,8 +1009,6 @@ def home_html(datamap, lang):
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
---phf:#f4faf8;--pht:#fcf8ee;--phe:#fdf5ef;--phm:#fcefef;
---mg:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0));
 --found:#1f8fa6;--found-t:#0d5e6e;--found-bg:#ecf6f8;
 --talent:#e2a900;--talent-t:#8a6a00;--talent-bg:#fdf7e4;
 --elite:#e8772e;--elite-t:#a8511a;--elite-bg:#fdefe5;
@@ -1240,13 +1224,12 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
   .hero-top-r{width:232px}
   .hero-top-r .langsw a{padding:4px 7px}
   .homesport{font-size:12.5px;padding:7px 10px}
-  .bottombar{justify-content:center;flex-wrap:wrap;gap:0 4px}
-  .bb-item{padding:8px 10px;font-size:11px}
-  .imodal{align-items:flex-start;padding:0}
-  .im-box{width:100vw;max-height:100vh;max-height:100svh;border-radius:0}
-  .imodal.wide .im-box{width:100vw;height:100vh;height:100svh}
-  .im-bar{padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top))}
-  .im-x{font-size:22px;padding:8px 12px;margin:-6px -8px -6px 0}
+  .bottombar{justify-content:flex-start;overflow-x:auto;scrollbar-width:none}
+  .bottombar::-webkit-scrollbar{display:none}
+  .bb-item{padding:9px 14px;font-size:11.5px}
+  .imodal{align-items:flex-start;padding:10px}
+  .im-box{max-height:calc(100vh - 20px);max-height:calc(100svh - 20px)}
+  .imodal.wide .im-box{height:calc(100vh - 20px);height:calc(100svh - 20px)}
 }
 .news-upd{font-size:11px;color:var(--mut);font-weight:600;margin:-2px 0 10px}
 .news-meta{display:flex;align-items:center;gap:7px;margin-bottom:4px}
@@ -1301,9 +1284,10 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .ph-sum .aw-go:hover{filter:brightness(1.12)}
 .fi-links{margin-top:16px}
 /* Zebra im Darkmode: leicht aufhellen statt abdunkeln */
-[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .cell,[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045)),var(--mg)}
+[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .cell,[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045))}
 @media(max-width:760px){
   .aw-btn{font-size:12px;padding:8px 16px}
+  .bottombar{justify-content:flex-start}
 }
 /* Praesentations-Deck (Vollbild-Folien) */
 .presdeck{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column}
@@ -1333,7 +1317,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .pd-web h2{font-size:26px;margin:0 0 6px}
 .pd-web .lead{color:var(--mut);font-size:16px;margin:0 0 22px}
 .pd-web .lead b{color:var(--ink)}
-.pd-feats{display:grid;grid-template-columns:1fr;gap:12px;max-width:640px}
+.pd-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
 .pd-feats .fwd{padding:13px 15px}
 .pdw{font:inherit;text-align:left;width:100%;cursor:pointer;appearance:none;-webkit-appearance:none;transition:transform .14s,box-shadow .14s}
 .pdw:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.10)}
@@ -1423,8 +1407,8 @@ body.pres section.sport h2.grp{font-size:15px}
 /* Athlet:innen-Weg: Bergfoto dezent im Hintergrund (Vorschlag 2, abgeschwaecht) */
 section.sport{background:linear-gradient(rgba(238,241,244,.94),rgba(238,241,244,.94)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 section.sport details.theme{background:rgba(255,255,255,.88);backdrop-filter:blur(2px)}
-section.sport details.theme.alt{background:rgba(247,245,241,.90)}
-[data-theme="dark"] section.sport details.theme.alt{background:rgba(29,38,50,.92)}
+section.sport details.theme.alt{background:rgba(233,238,243,.90)}
+[data-theme="dark"] section.sport details.theme.alt{background:rgba(30,43,60,.92)}
 section.sport .rl,section.sport .r.head .rl.corner{background:rgba(255,255,255,.94)}
 [data-theme="dark"] section.sport{background:linear-gradient(rgba(13,20,32,.95),rgba(13,20,32,.95)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 [data-theme="dark"] section.sport details.theme{background:rgba(23,34,49,.90)}
@@ -1527,7 +1511,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .c.hd[data-idx]:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 .c.hd.active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.45)}
 /* dezente Phasen-Toenung je Spalte - Orientierung F1-M beim Scrollen */
-.cell.ph-foundation{background:#f4faf8;--zc:#0d5e6e;--zbg:#e1f0f3}.cell.ph-talent{background:#fcf8ee;--zc:#8a6a00;--zbg:#f7edcf}.cell.ph-elite{background:#fdf5ef;--zc:#a8511a;--zbg:#f8e2d3}.cell.ph-mastery{background:#fcefef;--zc:#9c1d14;--zbg:#f6dcd8}.cell.ph-multi{background-color:#f7f8fa;background-image:var(--mg);--zc:#5a6472;--zbg:#eceff3}
+.cell.ph-foundation{background:#f4faf8;--zc:#0d5e6e;--zbg:#e1f0f3}.cell.ph-talent{background:#fcf8ee;--zc:#8a6a00;--zbg:#f7edcf}.cell.ph-elite{background:#fdf5ef;--zc:#a8511a;--zbg:#f8e2d3}.cell.ph-mastery{background:#fcefef;--zc:#9c1d14;--zbg:#f6dcd8}.cell.ph-multi{background:#f7f8fa;--zc:#5a6472;--zbg:#eceff3}
 .cell.hl-foundation{background:#d6edf1;box-shadow:inset 0 0 0 2px var(--found)}
 .cell.hl-talent{background:#faeab4;box-shadow:inset 0 0 0 2px var(--talent)}
 .cell.hl-elite{background:#fbdcc6;box-shadow:inset 0 0 0 2px var(--elite)}
@@ -1549,7 +1533,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cell{color:var(--ink)}
 .cell{background:#fff;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;align-self:stretch}
 /* Zebra: jede zweite Inhaltszeile dezent abgedunkelt (Bjoern-Feedback) */
-.grid .r:nth-child(odd):not(.head) .cell,.grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(29,38,48,.035),rgba(29,38,48,.035)),var(--mg)}
+.grid .r:nth-child(odd):not(.head) .cell,.grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(29,38,48,.035),rgba(29,38,48,.035))}
 .cell .cwrap{padding:9px 11px;font-size:11.5px;line-height:1.5;color:#33404d;max-height:212px;overflow:hidden;transition:max-height .25s ease}
 .cell.clamped .cwrap,.cell.expanded .cwrap{padding-bottom:34px}
 .cell.expanded .cwrap{max-height:4000px}
@@ -1622,9 +1606,6 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cp-note{font-size:10px;color:var(--mut);padding:2px 16px 10px;text-align:center;line-height:1.4}
 @media(max-width:520px){.cp-card{width:100%}}
 mark{background:#ffe08a;border-radius:2px;padding:0 1px}
-/* Lange Woerter (z. B. Belastungsverträglichkeit) trennen statt abschneiden */
-body{overflow-wrap:break-word}
-.cwrap,.cwrap li,.rl,.ps-col,.im-body p,.im-body li,.fwd p,.phase p,.news-body,.mlist .mission-item,summary .tt{hyphens:auto;-webkit-hyphens:auto}
 .hidden{display:none!important}
 footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
 footer a{color:var(--red)}
@@ -1645,15 +1626,15 @@ header.top .back{width:34px;height:34px;padding:0}
 header.top .sicon{width:28px;height:28px}
 /* Header genau 2 Zeilen: 1) Zurueck+Icon+Sportart+Sprachen  2) Suche+Springen+Chat */
 .ht-r{display:contents}
-.ht-l{order:1;flex:1 1 auto;min-width:0}
+.ht-l{order:1;flex:1 1 0;min-width:0}
 header.top .sportsel2{flex:1 1 0;width:100%;min-width:118px;font-size:13.5px;max-width:none}
 .ht-r .langsw a{padding:4px 6px;font-size:10.5px}
 .ht-r .langsw{order:2;flex:none}
 .ht-r .themebtn{order:2;flex:none}
-.ht-c{flex:1 1 44%;order:3;min-width:0}
+.ht-c{flex:1 1 55%;order:3}
 .ht-c .qbox{width:100%}
 .ht-c input.q{font-size:16px;padding:0 56px 0 30px}
-.ht-r select.jump{order:4;flex:1 1 44%;width:auto;min-width:172px;font-size:12px}
+.ht-r select.jump{order:4;flex:1 1 38%;width:auto;min-width:158px;font-size:12px}
 .ht-r .chatbtn{order:5;flex:none}
 .ht-r .toggleall,.ht-r .pdf,.ht-r .hdiv{display:none}
 .wrap{padding:10px 10px 60px}
@@ -1690,8 +1671,7 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .cell.ph-talent{background:#25220f;--zc:#f0cf72;--zbg:rgba(226,169,0,.18)}
 [data-theme="dark"] .cell.ph-elite{background:#271c12;--zc:#f0a877;--zbg:rgba(232,119,46,.18)}
 [data-theme="dark"] .cell.ph-mastery{background:#271413;--zc:#f09287;--zbg:rgba(213,43,30,.20)}
-[data-theme="dark"] .cell.ph-multi{background-color:#1a2434;background-image:var(--mg);--zc:#aeb8c6;--zbg:rgba(255,255,255,.08)}
-[data-theme="dark"]{--phf:#152731;--pht:#25220f;--phe:#271c12;--phm:#271413}
+[data-theme="dark"] .cell.ph-multi{background:#1a2434;--zc:#aeb8c6;--zbg:rgba(255,255,255,.08)}
 [data-theme="dark"] .cell.hl-foundation{background:rgba(31,143,166,.22)}
 [data-theme="dark"] .cell.hl-talent{background:rgba(226,169,0,.20)}
 [data-theme="dark"] .cell.hl-elite{background:rgba(232,119,46,.20)}
@@ -1921,14 +1901,10 @@ function initSport(sec){
     sec.querySelectorAll('.cell').forEach(c=>{
       c.classList.remove('hl-foundation','hl-talent','hl-elite','hl-mastery');
       const f=+c.dataset.from,t=+c.dataset.to;
-      let hl=false;
-      for(const i of active){if(i>=f&&i<=t){c.classList.add('hl-'+phaseIdx(i));hl=true;break;}}
-      // Phasenuebergreifende Zellen: Farbverlauf bei Hervorhebung ausblenden
-      if(c.__mg===undefined)c.__mg=c.style.getPropertyValue('--mg')||null;
-      if(c.__mg)c.style.setProperty('--mg',hl?'linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0))':c.__mg);
+      for(const i of active){if(i>=f&&i<=t){c.classList.add('hl-'+phaseIdx(i));break;}}
     });
   }
-  function toggleStage(i){const had=active.has(i);active.clear();if(!had)active.add(i);applyHl();}
+  function toggleStage(i){active.has(i)?active.delete(i):active.add(i);applyHl();}
   sec.querySelectorAll('.c.hd[data-idx]').forEach(h=>h.addEventListener('click',()=>toggleStage(+h.dataset.idx)));
   function scrollToStage(i){
     const h=sec.querySelector('details.theme[open] .c.hd[data-idx="'+i+'"]');
@@ -2197,7 +2173,6 @@ function posAW(){
   if(!awCta||!heroEl)return;
   if(window.innerWidth<=760){awCta.style.left='';awCta.style.top='';return;}
   const w=heroEl.clientWidth,h=heroEl.clientHeight;
-  if(!w||!h)return; // Startseite ausgeblendet (Sportart offen) -> keine falschen Positionen setzen
   const s=Math.max(w/1896,h/986),ox=(w-1896*s)/2;
   awCta.style.left=Math.round(1018*s+ox)+'px';
   awCta.style.top=Math.max(10,Math.round(227*s-awCta.offsetHeight-12))+'px';
@@ -2266,9 +2241,9 @@ function deckSlides(){
     const el=document.getElementById('tpl-ph-'+k+'-'+sid)||document.getElementById('tpl-ph-'+k);
     return {id:el?el.id:null,t:el?(el.dataset.t||''):''};
   }).filter(s=>s.id);
-  // Letzte Seite = direkt der Athlet:innen-Weg (kein Zwischenschritt mit Pfeil)
   return [{id:'tpl-info',t:PDLBL.concept},{id:'tpl-pres-web',t:PDLBL.web}]
-    .concat(ph);
+    .concat(ph)
+    .concat([{aw:true,t:PDLBL.aw+' \u2013 '+(SPORT_NAMES[sid]||sid)}]);
 }
 function pdRender(){
   const sl=deckSlides(),n=sl.length;
@@ -2284,8 +2259,7 @@ function pdRender(){
     pdBody.innerHTML='<div class="pd-awslide"><h2>'+_esc(s.t)+'</h2><p>'+_esc(PDLBL.awhint)+'</p></div>';
   }else{
     pdBody.innerHTML=document.getElementById(s.id).innerHTML;
-    // Phasen-Folien: Bereiche (WAS/WIE VIEL/Umfeld) starten zugeklappt
-    pdBody.querySelectorAll('details:not(.ps-theme)').forEach(d=>d.open=true);
+    pdBody.querySelectorAll('details').forEach(d=>d.open=true);
   }
   pdName.textContent=s.t;
   pdCount.textContent=(pdIdx+1)+' / '+n;
@@ -2368,8 +2342,6 @@ function show(id){
   home.hidden = !!id;
   sections.forEach(s=>{s.hidden = s.dataset.sport!==id;});
   window.scrollTo(0,0);
-  // Zurueck auf die Startseite: AW-Knopf neu ueber der Bergspitze positionieren
-  if(!id)requestAnimationFrame(posAW);
   if(id){
     const sec=sections.find(s=>s.dataset.sport===id);
     if(sec&&sec.__clamp)setTimeout(sec.__clamp,60);
