@@ -613,12 +613,24 @@ CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9)]
 #   "url"     : Link -> wird als "Link"-Button gezeigt (leer lassen = kein Button)
 NEWS = [
     {
-        "title": "Neue Ausbildungsstruktur Ski Alpin",
+        "title": "Neue Ausbildungsstruktur",
         "date": "Juli 2026",
         "body": ["Die Übersichtsseite zur neuen Ausbildungsstruktur ist live!",
                  "Entdecke den Ausbildungsweg bis hin zum «Swiss-Ski Trainer:in Spitzensport»."],
         "bullets": [],
-        "url": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027/",
+        # Link je nach gewaehlter Sportart ("default" = Ski Alpin, gilt auch fuer NoKo & Co.)
+        "url": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
+        "urls": {
+            "default": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
+            "langlauf": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/langlauf-ab-2027-1-1/",
+            "biathlon": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/biathlon-ab-2027-1-1/",
+            "skispringen": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen/",
+            "skicross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
+            "freeski-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
+            "snowboard-alpin": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
+            "snowboard-cross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
+            "snowboard-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
+        },
     },
     {
         "title": "Swiss-Ski Ausbildungsnews Juli 26",
@@ -626,7 +638,7 @@ NEWS = [
         "body": ["Verschiedene News in folgenden Bereichen:"],
         "bullets": ["Gut zu wissen",
                     "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen"],
-        "url": "https://www.swiss-ski.ch/globale-datensammlung/mailings-neu/ausbildungsnews/saison-2026-2027/ausbildungsnews-juli-2026/",
+        "url": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/ausbildungsnews/",
     },
 ]
 
@@ -640,7 +652,8 @@ def news_html(lang):
         body = "".join('<p>'+esc(tr(p, lang))+'</p>' for p in it.get("body", []))
         if it.get("bullets"):
             body += '<ul>'+"".join('<li>'+esc(tr(b, lang))+'</li>' for b in it["bullets"])+'</ul>'
-        link = ('<a class="news-link" href="'+esc(it["url"])+'" target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
+        _urls = (' data-urls=\''+json.dumps(it["urls"], ensure_ascii=False)+'\'') if it.get("urls") else ''
+        link = ('<a class="news-link" href="'+esc(it["url"])+'"'+_urls+' target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
         date = ('<span class="news-date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
         new_badge = '<span class="news-new">NEU</span>' if i == 0 else ''
         cards += ('<article class="news-card"><div class="news-meta">'+date+new_badge+'</div>'
@@ -2198,8 +2211,19 @@ document.addEventListener('click',e=>{
   const a=e.target.closest('.lks a, .news-link, .np-mission, .mission-item');
   if(!a)return;
   e.preventDefault();
+  let href=a.getAttribute('href')||'';
+  // Sportart-abhaengige News-Links (data-urls: {sportId: url, default: url})
+  if(a.dataset.urls){try{
+    const m=JSON.parse(a.dataset.urls);
+    const sec=sections.find(s=>!s.hidden);
+    const sid=sec?sec.dataset.sport:((typeof homeSport!=='undefined'&&homeSport&&homeSport.value)?homeSport.value:'');
+    href=m[sid]||m['default']||href;
+  }catch(_){}}
+  // www.swiss-ski.ch verbietet Einbettung (X-Frame-Options: deny) -> neuer Tab statt iframe
+  let host='';try{host=new URL(href,location.href).hostname;}catch(_){}
+  if(host==='www.swiss-ski.ch'||host==='swiss-ski.ch'){window.open(href,'_blank','noopener');return;}
   if(im&&!im.hidden)closeInfo();
-  openMission(a.getAttribute('href'), a.dataset.title||a.textContent.replace('↗','').trim());
+  openMission(href, a.dataset.title||a.textContent.replace('↗','').trim());
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&im&&!im.hidden){closeInfo();e._ovl=true;}});
 
