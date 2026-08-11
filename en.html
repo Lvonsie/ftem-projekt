@@ -921,7 +921,8 @@ function initSport(sec){
     const h=d.querySelector('.c.hd[data-idx="'+j+'"]');
     if(!h)return;
     const sc=h.closest('.scroller');if(!sc)return;
-    const x=Math.max(0, sc.scrollLeft + h.getBoundingClientRect().left - sc.getBoundingClientRect().left
+    // Erste Spalte: ganz nach links (kein Restversatz)
+    const x=j===0?0:Math.max(0, sc.scrollLeft + h.getBoundingClientRect().left - sc.getBoundingClientRect().left
       - (sec.querySelector('.rl')?sec.querySelector('.rl').getBoundingClientRect().width:146) - 14);
     scrollers.forEach(o=>{o.scrollTo({left:x,behavior:'smooth'});});
     sec.__sx=x;
