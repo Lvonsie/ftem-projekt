@@ -473,7 +473,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
             more = '' if edit else '<button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button>'
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
-    opn = ' open' if edit else ''
+    opn = ''  # auch im Bearbeitungsmodus eingeklappt starten (schnelleres Navigieren)
     return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(title)+'</span>'
             '<span class="tt">'+esc(title)+'</span><span class="tchev"></span></summary>'
@@ -2685,6 +2685,9 @@ function gotoChg(step){
   // Sportart der Aenderung einblenden (cid beginnt mit "<sportid>|...")
   const sec=ta.closest('section.sport');
   if(sec&&sec.hidden){sel.value=sec.dataset.sport;showSport(sec.dataset.sport);}
+  // Thema der Aenderung aufklappen (Themen starten eingeklappt)
+  const dth=ta.closest('details.theme');
+  if(dth&&!dth.open){dth.open=true;dth.querySelectorAll('.cedit').forEach(autosize);}
   app.querySelectorAll('.cedit.curchg').forEach(function(t){t.classList.remove('curchg');});
   ta.classList.add('curchg');
   ta.scrollIntoView({block:'center',behavior:'smooth'});
@@ -2703,6 +2706,11 @@ function undoCur(){
 }
 function init(){
   sel.addEventListener('change',function(){showSport(sel.value);});
+  // Beim Aufklappen eines Themas die Textfelder korrekt dimensionieren
+  app.addEventListener('toggle',function(e){
+    const d=e.target;
+    if(d&&d.matches&&d.matches('details.theme')&&d.open)d.querySelectorAll('.cedit').forEach(autosize);
+  },true);
   app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
     ta.addEventListener('input',function(){autosize(ta);ta.classList.toggle('changed',(base[ta.dataset.cid]||'')!==ta.value);updateCount();});
   });
