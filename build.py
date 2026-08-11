@@ -1005,6 +1005,7 @@ def home_html(datamap, lang):
             +aw_cta+
             
             '<div class="hero-top-r">'
+            '<div class="top-row">'
             '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport","en":"Choose a sport"}[lang])+'">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
@@ -1014,6 +1015,7 @@ def home_html(datamap, lang):
             '<div class="lang-ic-menu" hidden>'+lang_switch(lang)+'</div></div>'
             '<button class="menu-btn" type="button" aria-expanded="false" aria-label="'+esc({"de": "Menü", "fr": "Menu", "it": "Menu", "en": "Menu"}[lang])+'">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div>'
+            '</div>'
             '<div class="menu-panel" hidden>'
             '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
             +mission_btn+
@@ -1287,7 +1289,9 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
 .aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
-.mr-row{display:flex;gap:8px;align-items:center}
+.top-row{display:flex;gap:8px;align-items:stretch;width:100%}
+.top-row .homesport{flex:1;min-width:0}
+.mr-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:none}
 @media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;justify-content:center;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
