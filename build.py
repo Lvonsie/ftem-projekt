@@ -639,6 +639,7 @@ NEWS = [
         "bullets": ["Gut zu wissen",
                     "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen"],
         "url": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/ausbildungsnews/",
+        "foot": "Im Archiv auf der verlinkten Webseite findest du alle bereits verschickten Newsletter.",
     },
 ]
 
@@ -652,6 +653,8 @@ def news_html(lang):
         body = "".join('<p>'+esc(tr(p, lang))+'</p>' for p in it.get("body", []))
         if it.get("bullets"):
             body += '<ul>'+"".join('<li>'+esc(tr(b, lang))+'</li>' for b in it["bullets"])+'</ul>'
+        if it.get("foot"):
+            body += '<p>'+esc(tr(it["foot"], lang))+'</p>'
         _urls = (' data-urls=\''+json.dumps(it["urls"], ensure_ascii=False)+'\'') if it.get("urls") else ''
         link = ('<a class="news-link" href="'+esc(it["url"])+'"'+_urls+' target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
         date = ('<span class="news-date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
@@ -1193,7 +1196,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta-sec{background:rgba(255,255,255,.07)}
 .imodal{position:fixed;inset:0;z-index:290;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;max-height:92svh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.imodal.wide .im-box{width:min(1300px,96vw);height:92vh;height:92svh}
+.imodal.wide .im-box{width:min(1300px,96vw)}
+/* Stufen-Popup: standardmaessig nur so hoch wie noetig; waechst beim Ausklappen */
+.imodal.wide .im-box.grown{height:92vh;height:92svh}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
@@ -2161,6 +2166,7 @@ function openInfo(tplId,title){
   im.querySelector('.im-t').textContent=title;
   im.querySelector('.im-body').innerHTML=document.getElementById(tplId).innerHTML;
   im.classList.toggle('wide', tplId.indexOf('tpl-ph-')===0);
+  im.querySelector('.im-box').classList.remove('grown'); // frisch geoeffnet = kompakt
   im.hidden=false;
 }
 // Stufen-Popup: Akkordeon + automatisch so skalieren, dass der offene
@@ -2184,8 +2190,13 @@ function fitSec(d){
 }
 im&&im.addEventListener('toggle',e=>{
   const d=e.target;
-  if(!d.matches||!d.matches('.im-body details.ps-theme')||!d.open)return;
-  im.querySelectorAll('.im-body details.ps-theme').forEach(o=>{if(o!==d)o.open=false;});
+  if(!d.matches||!d.matches('.im-body details.ps-theme'))return;
+  // Fenster nur so gross wie noetig: waechst, sobald ein Abschnitt offen ist
+  const box=im.querySelector('.im-box');
+  if(d.open)im.querySelectorAll('.im-body details.ps-theme').forEach(o=>{if(o!==d)o.open=false;});
+  const anyOpen=!!im.querySelector('.im-body details.ps-theme[open]');
+  if(box)box.classList.toggle('grown',anyOpen);
+  if(!d.open)return;
   fitSec(d);
 },true);
 // Themen/Abschnitte: Auf-/Zuklappen zuverlaessig ueber die GESAMTE Balkenbreite

@@ -164,7 +164,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta-sec{background:rgba(255,255,255,.07)}
 .imodal{position:fixed;inset:0;z-index:290;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;max-height:92svh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.imodal.wide .im-box{width:min(1300px,96vw);height:92vh;height:92svh}
+.imodal.wide .im-box{width:min(1300px,96vw)}
+/* Stufen-Popup: standardmaessig nur so hoch wie noetig; waechst beim Ausklappen */
+.imodal.wide .im-box.grown{height:92vh;height:92svh}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
