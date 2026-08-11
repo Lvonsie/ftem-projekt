@@ -291,6 +291,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .pd-x{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:2px 8px;line-height:1}
 .pd-x:hover{color:var(--talent)}
 .pd-body{flex:1;overflow:auto;padding:34px 7vw 70px}
+.pd-body.pd-hasifr{padding:0;overflow:hidden}
+.pd-ifr{display:block;width:100%;height:100%;border:0;background:#fff}
 .pd-body .ftem-info{max-width:1100px;margin:0 auto}
 .pd-body .ftem-info h2{font-size:26px}
 .pd-body .ftem-info .lead{font-size:16px;line-height:1.65}
@@ -1265,22 +1267,20 @@ function deckSlides(){
     const el=document.getElementById('tpl-ph-'+k+'-'+sid)||document.getElementById('tpl-ph-'+k);
     return {id:el?el.id:null,t:el?(el.dataset.t||''):''};
   }).filter(s=>s.id);
-  // Letzte Seite = direkt der Athlet:innen-Weg (kein Zwischenschritt mit Pfeil)
+  // Letzte Seite = Athlet:innen-Weg als iframe IM Praesentationsmodus
   return [{id:'tpl-info',t:PDLBL.concept},{id:'tpl-pres-web',t:PDLBL.web}]
-    .concat(ph);
+    .concat(ph)
+    .concat([{ifr:true,t:PDLBL.aw+' – '+(SPORT_NAMES[sid]||sid)}]);
 }
 function pdRender(){
   const sl=deckSlides(),n=sl.length;
   if(pdIdx<0)pdIdx=0;
-  if(pdIdx>=n){ // letzter Schritt: in den Athlet:innen-Weg wechseln (Themen mit Pfeiltasten)
-    closeDeck(false);
-    location.hash='#'+pdSport.value;
-    setTimeout(presOn,250);
-    return;
-  }
+  if(pdIdx>=n)pdIdx=n-1; // letzte Seite: bleiben (Esc oder X beendet)
   const s=sl[pdIdx];
-  if(s.aw){
-    pdBody.innerHTML='<div class="pd-awslide"><h2>'+_esc(s.t)+'</h2><p>'+_esc(PDLBL.awhint)+'</p></div>';
+  pdBody.classList.toggle('pd-hasifr',!!s.ifr);
+  if(s.ifr){
+    const self=(location.pathname.split('/').pop()||'index.html');
+    pdBody.innerHTML='<iframe class="pd-ifr" src="'+self+'#'+pdSport.value+'" title="'+_esc(s.t)+'"></iframe>';
   }else{
     pdBody.innerHTML=document.getElementById(s.id).innerHTML;
     // Phasen-Folien: Bereiche (WAS/WIE VIEL/Umfeld) starten zugeklappt
@@ -1364,8 +1364,9 @@ function show(id){
   presOff();
   sections.forEach(s=>{const sel=s.querySelector('.sportsel2');if(sel)sel.value=s.dataset.sport;});
   const stb=document.querySelector('.steady');if(stb)stb.hidden=!id;
-  home.hidden = !!id;
-  sections.forEach(s=>{s.hidden = s.dataset.sport!==id;});
+  if(home.hidden!==!!id)home.hidden = !!id;
+  // Nur Sektionen anfassen, deren Zustand wirklich wechselt (grosses DOM -> weniger Ruckeln)
+  sections.forEach(s=>{const w=s.dataset.sport!==id;if(s.hidden!==w)s.hidden=w;});
   window.scrollTo(0,0);
   // Zurueck auf die Startseite: AW-Knopf neu ueber der Bergspitze positionieren
   if(!id)requestAnimationFrame(posAW);
