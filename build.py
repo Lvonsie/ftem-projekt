@@ -909,6 +909,7 @@ def home_html(datamap, lang):
             secs = ""
             for sec in hm.get("sections", []):
                 cols = ""
+                ncols = 0
                 for st in PH_STAGES[k]:
                     cell = (sec.get("cells") or {}).get(st)
                     if not cell or not (cell.get("v") or cell.get("l")):
@@ -916,6 +917,7 @@ def home_html(datamap, lang):
                     # gleiche Aufbereitung wie die Zellen im Athlet:innen-Weg
                     body2 = render_cell({"v": cell.get("v") or "", "l": cell.get("l") or []}, lang)
                     age2 = ages2.get(st, "")
+                    ncols += 1
                     cols += ('<div class="ps-col"><div class="ps-st">'+st
                              + ('<i>'+esc(age2)+'</i>' if age2 else '') + '</div>'
                              + '<div class="cwrap">'+body2+'</div></div>')
@@ -925,7 +927,7 @@ def home_html(datamap, lang):
                              '<summary><span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">'
                              + theme_icon(sec["title"]) + '</span>'
                              '<span class="tt">'+esc(tr(sec["title"], lang))+'</span><span class="tchev"></span></summary>'
-                             '<div class="ps-secbody"><div class="ps-cols">'+cols+'</div></div></details>')
+                             '<div class="ps-secbody"><div class="ps-cols" style="--nc:'+str(ncols)+'">'+cols+'</div></div></details>')
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                         '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
@@ -1290,7 +1292,15 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .hcta-sec{background:rgba(255,255,255,.07)}
 .imodal{position:fixed;inset:0;z-index:290;background:rgba(8,12,20,.68);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px}
 .im-box{width:min(900px,94vw);max-height:92vh;max-height:92svh;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.imodal.wide .im-box{width:min(1300px,96vw)}
+.imodal.wide{background:rgba(8,12,20,.35)}
+.imodal.wide .im-box{width:fit-content;min-width:min(640px,94vw);max-width:min(1300px,96vw);
+  background:rgba(240,244,248,.58);backdrop-filter:blur(16px) saturate(1.15);-webkit-backdrop-filter:blur(16px) saturate(1.15);
+  border:1.5px solid rgba(255,255,255,.55)}
+.imodal.wide .im-body .ph-sum.ph-wide{max-width:none}
+.imodal.wide .ps-theme{background:rgba(255,255,255,.6)}
+.imodal.wide .ps-cols{grid-template-columns:repeat(var(--nc,1),minmax(220px,258px))}
+[data-theme="dark"] .imodal.wide .im-box{background:rgba(20,30,44,.66);border-color:rgba(255,255,255,.18)}
+[data-theme="dark"] .imodal.wide .ps-theme{background:rgba(23,34,49,.72)}
 /* Stufen-Popup: standardmaessig nur so hoch wie noetig; waechst beim Ausklappen */
 .imodal.wide .im-box.grown{height:92vh;height:92svh}
 .im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
@@ -1431,15 +1441,18 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .ph-sum .ps-secbody{padding:4px 10px 10px}
 .ph-sum .ps-desc{margin-bottom:14px}
 .ph-sum .ps-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
-.ph-sum .ps-col{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--psc,#4a5563);border-radius:9px;padding:8px 11px;font-size:11.5px;line-height:1.5;min-width:0}
-.ph-sum .ps-col .cwrap{font-size:11.5px;line-height:1.5;color:#33404d;overflow-wrap:anywhere}
+.ph-sum .ps-col{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.75);border-radius:9px;padding:0;font-size:11.5px;line-height:1.5;min-width:0;overflow:hidden}
+.ph-sum .ps-col .cwrap{font-size:11.5px;line-height:1.5;color:#33404d;overflow-wrap:anywhere;padding:8px 11px 10px}
+[data-theme="dark"] .ph-sum .ps-col{background:rgba(23,34,49,.85);border-color:rgba(255,255,255,.12)}
 [data-theme="dark"] .ph-sum .ps-col .cwrap{color:#c2ccd8}
 .ps-f .ps-col{--zc:#0d5e6e;--zbg:#e1f0f3}
 .ps-t .ps-col{--zc:#8a6a00;--zbg:#f7edcf}
 .ps-e .ps-col{--zc:#a8511a;--zbg:#f8e2d3}
 .ps-m .ps-col{--zc:#9c1d14;--zbg:#f6dcd8}
-.ph-sum .ps-st{font-weight:800;font-size:11px;margin-bottom:4px}
-.ph-sum .ps-st i{font-style:normal;color:var(--mut);font-weight:700;font-size:10px;margin-left:6px}
+.ph-sum .ps-st{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;
+  background:var(--psc,#4a5563);color:#fff;font-weight:800;font-size:13.5px;text-align:center;padding:6px 6px}
+.ph-sum .ps-st i{font-style:normal;color:rgba(255,255,255,.92);font-weight:600;font-size:9px;margin-left:0}
+.ps-t .ps-st{color:#3b2e00}.ps-t .ps-st i{color:rgba(59,46,0,.85)}
 .ph-sum .ps-desc{white-space:pre-line}
 .ph-sum .ps-sec+.aw-go,.ph-sum .ps-sec:last-of-type{margin-bottom:14px}
 .ph-sum .aw-go{font:inherit;font-size:13px;font-weight:800;color:#fff;background:var(--red);border:none;border-radius:9px;padding:10px 18px;cursor:pointer}
