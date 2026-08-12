@@ -995,10 +995,10 @@ def home_html(datamap, lang):
         ({"de": "Nachhaltigkeit im Schneesport", "fr": "Durabilité dans les sports de neige", "it": "Sostenibilità negli sport sulla neve", "en": "Sustainability in snow sports"}[lang],
          "Nachhaltigkeit im Schneesport", "https://tool.jugendundsport.ch/modules/654e2b8784846dba7a0ad962?lang=de"),
     ]
-    foot_intro = {"de": "Sportartübergreifende Grundlagen:",
-                  "fr": "Bases transversales à tous les sports :",
-                  "it": "Basi trasversali a tutti gli sport:",
-                  "en": "Cross-sport foundations:"}[lang]
+    foot_intro = {"de": "Sportartübergreifende Grundlagen für den ganzen Schneesport:",
+                  "fr": "Bases transversales pour tous les sports de neige :",
+                  "it": "Basi trasversali per tutti gli sport sulla neve:",
+                  "en": "Cross-sport foundations for all snow sports:"}[lang]
     footbar = ('<div class="bottombar">'
                '<span class="bb-intro">'+esc(foot_intro)+'</span>'
                '<div class="bb-links">'
@@ -1006,13 +1006,45 @@ def home_html(datamap, lang):
                          for l, t, u in foot_links)
                + '</div></div>')
     nbadge = ('<span class="nbadge">'+str(len(NEWS))+'</span>') if NEWS else ''
+    # Sportartspezifische Mini-Icons (monoline) fuer den Home-Sportpicker
+    SPORT_ICONS = {
+        "ski-alpin": '<path d="M4 20h16"/><path d="M8 20V5"/><path d="M8 5l7 2-7 2"/>',
+        "langlauf": '<path d="M3 16.5 19 7"/><path d="M5 19 21 9.5"/><path d="M19 7l1.6 1.2"/>',
+        "biathlon": '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/>',
+        "skispringen": '<path d="M3 20c8 0 13-5 17-16"/><path d="M11 12l6 3"/>',
+        "nordische-kombination": '<path d="M2 19c6 0 10-4 13-11"/><circle cx="18" cy="15" r="3.4"/>',
+        "skicross": '<path d="M6 20V6l5 1.6L6 9.2"/><path d="M15 20V6l5 1.6L15 9.2"/>',
+        "freeski-park-pipe": '<path d="M5 4v9a7 5 0 0 0 14 0V4"/>',
+        "snowboard-alpin": '<rect x="9.5" y="3" width="5" height="18" rx="2.5" transform="rotate(32 12 12)"/>',
+        "snowboard-cross": '<rect x="8.5" y="4" width="4.6" height="15" rx="2.2" transform="rotate(32 11 12)"/><path d="M18 4v6"/><path d="M18 4l3 1-3 1"/>',
+        "snowboard-park-pipe": '<rect x="7" y="4" width="4.6" height="15" rx="2.2" transform="rotate(32 9.5 12)"/><path d="M15 6v4a3 2.4 0 0 0 6 0V6"/>',
+    }
+    def sport_icon(sid):
+        return ('<svg class="sp-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+                'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+                + SPORT_ICONS.get(sid, '<circle cx="12" cy="12" r="8"/>') + '</svg>')
+    _sp0 = SPORTS[0]
+    sportpick = ('<div class="sportpick">'
+                 '<button class="sp-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="'
+                 + esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport","en":"Choose a sport"}[lang]) + '">'
+                 '<span class="sp-cur-ic">' + sport_icon(_sp0["id"]) + '</span>'
+                 '<span class="sp-lbl">' + esc(tr(_sp0["name"], lang)) + '</span>'
+                 '<svg class="sp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>'
+                 '</button>'
+                 '<ul class="sp-list" role="listbox" hidden>'
+                 + "".join('<li class="sp-opt" role="option" data-val="'+x["id"]+'"'
+                           + (' aria-selected="true"' if x is _sp0 else '') + '>'
+                           + sport_icon(x["id"]) + '<span>' + esc(tr(x["name"], lang)) + '</span></li>'
+                           for x in SPORTS)
+                 + '</ul></div>')
     return ('<section id="home">'
             '<div class="home-hero">'
             +aw_cta+
             
             '<div class="hero-top-r">'
             '<div class="top-row">'
-            '<select class="homesport" aria-label="'+esc({"de":"Sportart wählen","fr":"Choisir un sport","it":"Scegli lo sport","en":"Choose a sport"}[lang])+'">'
+            + sportpick +
+            '<select class="homesport sr-only" tabindex="-1" aria-hidden="true">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
             '<div class="mr-row">'
@@ -1298,13 +1330,33 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
 .aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .top-row{display:flex;gap:8px;align-items:stretch;width:100%}
-.top-row .homesport{flex:1;min-width:0}
+.top-row .sportpick{flex:1;min-width:0}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.sportpick{position:relative}
+.sp-btn{display:flex;align-items:center;gap:9px;width:100%;font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 12px;backdrop-filter:blur(6px);cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.sp-btn:hover{background:rgba(15,21,32,.72);border-color:rgba(255,255,255,.6)}
+.sp-cur-ic{display:flex;flex:none}
+.sp-ic{width:19px;height:19px;flex:none}
+.sp-lbl{flex:1;min-width:0;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sp-chev{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.sp-list{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:10;list-style:none;margin:0;padding:5px;max-height:58vh;overflow:auto;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:11px;box-shadow:0 16px 42px rgba(0,0,0,.32)}
+.sp-list[hidden]{display:none}
+.sp-opt{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;color:#1d2630;font-size:13px;font-weight:600;cursor:pointer}
+.sp-opt .sp-ic{width:20px;height:20px;color:#586474}
+.sp-opt:hover,.sp-opt[aria-selected="true"]{background:var(--acc-bg,#eef2f6);color:var(--red)}
+.sp-opt:hover .sp-ic,.sp-opt[aria-selected="true"] .sp-ic{color:var(--red)}
+[data-theme="dark"] .sp-list{background:#1c2740;border-color:rgba(255,255,255,.14)}
+[data-theme="dark"] .sp-opt{color:#e7edf5}
+[data-theme="dark"] .sp-opt .sp-ic{color:#aeb8c6}
+header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6672' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:13px;padding-right:34px}
+[data-theme="dark"] header.top select,[data-theme="dark"] .sportsel2,[data-theme="dark"] select.jump,[data-theme="dark"] .pd-sportsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2ccd8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
 .mr-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:none}
 @media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
-.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:10px 18px;padding:0 22px;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
-.bb-intro{flex:none;margin-right:auto;color:rgba(255,255,255,.62);font-size:11.5px;font-weight:600;letter-spacing:.02em;white-space:nowrap}
-.bb-links{display:flex;align-items:center}
+.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 22px;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
+.bottombar::after{content:"";flex:1 1 0}
+.bb-intro{flex:1 1 0;color:rgba(255,255,255,.72);font-size:12px;font-weight:600;letter-spacing:.02em;line-height:1.3}
+.bb-links{display:flex;align-items:center;flex:none}
 .bb-item{font:inherit;flex:none;white-space:nowrap;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12.5px;padding:9px 22px;cursor:pointer;text-decoration:none;letter-spacing:.03em}
 .bb-item b{color:var(--red);font-weight:800;margin-left:4px}
 .bb-item:hover{background:rgba(255,255,255,.10);color:#fff}
@@ -2276,6 +2328,24 @@ if(steadyBtn)steadyBtn.addEventListener('click',()=>{const sec=sections.find(x=>
 
 // ---- Startseite: Stufen-Klick -> Kurz-Summary; Piste/AW-Knopf -> Athlet:innen-Weg ----
 const homeSport=document.querySelector('.homesport');
+document.querySelectorAll('.sportpick').forEach(sp=>{
+  const btn=sp.querySelector('.sp-btn'), list=sp.querySelector('.sp-list'),
+        lbl=sp.querySelector('.sp-lbl'), curic=sp.querySelector('.sp-cur-ic'),
+        sel=sp.parentNode.querySelector('.homesport');
+  const closeL=()=>{list.hidden=true;btn.setAttribute('aria-expanded','false');};
+  btn.addEventListener('click',e=>{e.stopPropagation();const o=list.hidden;list.hidden=!o;btn.setAttribute('aria-expanded',String(o));});
+  list.querySelectorAll('.sp-opt').forEach(li=>li.addEventListener('click',()=>{
+    const v=li.dataset.val;
+    if(sel){sel.value=v;sel.dispatchEvent(new Event('change'));}
+    lbl.textContent=li.querySelector('span').textContent;
+    curic.innerHTML=li.querySelector('.sp-ic').outerHTML;
+    list.querySelectorAll('.sp-opt').forEach(x=>x.setAttribute('aria-selected','false'));
+    li.setAttribute('aria-selected','true');
+    closeL();
+  }));
+  document.addEventListener('click',e=>{if(!list.hidden&&!sp.contains(e.target))closeL();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeL();});
+});
 function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
 // AW-Knopf exakt ueber der Bergspitze; Hover blendet die Piste ein
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero'), heroSvg=document.querySelector('.heromt');
