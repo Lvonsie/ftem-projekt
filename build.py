@@ -799,7 +799,8 @@ def home_html(datamap, lang):
     # preserveAspectRatio "YMin": bei breiten/flachen Fenstern wird unten (Wald) statt
     # oben (Himmel) beschnitten -> der Titel ueberlappt den Gipfel nicht mehr.
     # Labels auf der Vertikalen der Bergspitze (x=1018 im Bild), nicht in der Bildmitte.
-    hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" aria-hidden="true">'
+    # viewBox oben um 110px beschnitten: in den Berg gezoomt, weniger Himmel sichtbar
+    hero_svg = ('<svg class="heromt" viewBox="0 110 1896 876" preserveAspectRatio="xMidYMin slice" aria-hidden="true">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
         '<linearGradient id="herodark" x1="0" y1="0" x2="0" y2="1">'
@@ -807,10 +808,10 @@ def home_html(datamap, lang):
         # Durchgehender weicher FTEM-Verlauf ueber dem Berg (M Gipfel -> F Basis).
         # Die Stop-Offsets werden beim Hover ueber die FTEM-Knoepfe animiert (Zone waechst).
         '<linearGradient id="zonegrad" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="rgba(216,72,58,.50)"/><stop offset=".355" stop-color="rgba(216,72,58,.50)"/>'
-        '<stop offset=".406" stop-color="rgba(222,140,80,.50)"/><stop offset=".522" stop-color="rgba(222,140,80,.50)"/>'
-        '<stop offset=".573" stop-color="rgba(222,184,88,.50)"/><stop offset=".755" stop-color="rgba(222,184,88,.50)"/>'
-        '<stop offset=".848" stop-color="rgba(86,158,178,.50)"/><stop offset="1" stop-color="rgba(86,158,178,.50)"/>'
+        '<stop offset="0" stop-color="rgba(238,110,96,.48)"/><stop offset=".355" stop-color="rgba(238,110,96,.48)"/>'
+        '<stop offset=".406" stop-color="rgba(246,166,104,.48)"/><stop offset=".522" stop-color="rgba(246,166,104,.48)"/>'
+        '<stop offset=".573" stop-color="rgba(247,212,116,.48)"/><stop offset=".755" stop-color="rgba(247,212,116,.48)"/>'
+        '<stop offset=".848" stop-color="rgba(118,196,216,.46)"/><stop offset="1" stop-color="rgba(118,196,216,.46)"/>'
         '</linearGradient>'
         '<linearGradient id="linegrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="986">'
         '<stop offset="0" stop-color="#ff6d60"/><stop offset=".355" stop-color="#ff6d60"/>'
@@ -2382,9 +2383,10 @@ function posAW(){
   if(window.innerWidth<=760){awCta.style.left='';awCta.style.top='';return;}
   const w=heroEl.clientWidth,h=heroEl.clientHeight;
   if(!w||!h)return; // Startseite ausgeblendet (Sportart offen) -> keine falschen Positionen setzen
-  const s=Math.max(w/1896,h/986),ox=(w-1896*s)/2;
+  // viewBox "0 110 1896 876": Gipfel-Bildkoordinate 227 liegt bei (227-110) im Ausschnitt
+  const s=Math.max(w/1896,h/876),ox=(w-1896*s)/2;
   awCta.style.left=Math.round(1018*s+ox)+'px';
-  awCta.style.top=Math.max(10,Math.round(227*s-awCta.offsetHeight-12))+'px';
+  awCta.style.top=Math.max(10,Math.round((227-110)*s-awCta.offsetHeight-12))+'px';
 }
 window.addEventListener('resize',posAW);posAW();
 
