@@ -1064,7 +1064,8 @@ def home_html(datamap, lang):
               + '</ul></div>') if NEWS else
              ('<button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button>'))
             +'</div>'
-            '<div class="hero-head"><h1>'+FTEM+'</h1>'
+            # FTEM-Schriftzug entfernt (Knoepfe + Berg tragen die Farben); h1 bleibt fuer SEO unsichtbar
+            '<div class="hero-head"><h1 class="sr-only">FTEM – '+esc({"de":"Athlet:innen-Weg Schneesport","fr":"Parcours de l’athlète sports de neige","it":"Percorso dell’atleta sport sulla neve","en":"Athlete pathway snow sports"}[lang])+'</h1>'
             '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
             +pyr+footbar+
             '</div>'
@@ -1123,7 +1124,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 #home .hero-head h1 .fE{color:#ff9b57;text-shadow:0 0 12px rgba(255,155,87,.9),0 0 26px rgba(255,155,87,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fM{color:#ff6d60;text-shadow:0 0 12px rgba(255,109,96,.95),0 0 26px rgba(255,109,96,.65),0 2px 24px rgba(0,0,0,.5)}
 @keyframes ftemglow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
-#home .hero-logo{display:block;margin:-14px 0 0 10px;width:clamp(104px,15vw,168px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
+#home .hero-logo{display:block;margin:6px 0 0 4px;width:clamp(104px,15vw,168px);height:auto;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5))}
 .constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
 .clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
@@ -1197,14 +1198,14 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtnw{pointer-events:auto;position:absolute;transform:translateX(-50%);background:none;border:none;padding:0;cursor:pointer;text-align:center;font:inherit}
 /* Frosted-Glass-Knoepfe, Buchstaben in der Titel-Typografie (Glow) */
 .fb3d{display:flex;align-items:center;justify-content:center;margin:0 auto;border-radius:24%;font-weight:800;line-height:1;letter-spacing:1px;
-  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.55);
+  background:linear-gradient(180deg,rgba(19,28,42,.42),rgba(19,28,42,.30));border:1.5px solid rgba(255,255,255,.55);
   backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
-  box-shadow:0 10px 30px rgba(8,20,34,.35),inset 0 1px 0 rgba(255,255,255,.5);
+  box-shadow:0 10px 30px rgba(8,20,34,.38),inset 0 1px 0 rgba(255,255,255,.28);
   transition:transform .28s cubic-bezier(.2,.8,.3,1.15),box-shadow .28s ease,border-color .28s ease}
-.fb-f{color:#57cce4;text-shadow:0 0 10px rgba(87,204,228,.9),0 0 22px rgba(87,204,228,.55)}
-.fb-t{color:#ffd45c;text-shadow:0 0 10px rgba(255,212,92,.9),0 0 22px rgba(255,212,92,.55)}
-.fb-e{color:#ff9b57;text-shadow:0 0 10px rgba(255,155,87,.9),0 0 22px rgba(255,155,87,.55)}
-.fb-m{color:#ff6d60;text-shadow:0 0 10px rgba(255,109,96,.95),0 0 22px rgba(255,109,96,.6)}
+.fb-f{color:#57cce4;text-shadow:0 1px 3px rgba(5,12,22,.7),0 0 10px rgba(87,204,228,.9),0 0 22px rgba(87,204,228,.55)}
+.fb-t{color:#ffd45c;text-shadow:0 1px 3px rgba(5,12,22,.7),0 0 10px rgba(255,212,92,.9),0 0 22px rgba(255,212,92,.55)}
+.fb-e{color:#ff9b57;text-shadow:0 1px 3px rgba(5,12,22,.7),0 0 10px rgba(255,155,87,.9),0 0 22px rgba(255,155,87,.55)}
+.fb-m{color:#ff6d60;text-shadow:0 1px 3px rgba(5,12,22,.7),0 0 10px rgba(255,109,96,.95),0 0 22px rgba(255,109,96,.6)}
 /* Hover/Fokus: farbiger Leucht-Rahmen (Ghost-Stil) am aktiven Knopf */
 .fbtns.hv-f .w-f .fb3d{border-color:#57cce4;box-shadow:0 0 20px rgba(87,204,228,.55),inset 0 0 14px rgba(87,204,228,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-t .w-t .fb3d{border-color:#ffd45c;box-shadow:0 0 20px rgba(255,212,92,.55),inset 0 0 14px rgba(255,212,92,.16),0 10px 30px rgba(8,20,34,.35)}
