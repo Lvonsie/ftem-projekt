@@ -1202,7 +1202,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fb-t{color:var(--talent);background:linear-gradient(180deg,#fffbe8,#f9f0cf)}
 .fb-e{color:var(--elite);background:linear-gradient(180deg,#fff1e4,#fbe2cc)}
 .fb-m{color:var(--mast);background:linear-gradient(180deg,#ffe9e7,#f8d5d1)}
-.w-f{left:17%;top:63%}.w-t{left:38%;top:59%}.w-e{left:59%;top:55%}.w-m{left:79%;top:50.5%}
+.w-f{left:17%;top:72%}.w-t{left:38%;top:65%}.w-e{left:59%;top:58%}.w-m{left:79%;top:50.5%}
 .w-f .fb3d{width:84px;height:84px;font-size:39px}
 .w-t .fb3d{width:74px;height:74px;font-size:35px}
 .w-e .fb3d{width:64px;height:64px;font-size:30px}
@@ -1215,7 +1215,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtns.hv-e .fbtnw:not(.w-e) .fb3d,.fbtns.hv-m .fbtnw:not(.w-m) .fb3d{transform:scale(.78)}
 .fbtnw:focus-visible .fb3d{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
 @media(max-width:760px){
-  .w-f{left:16%;top:57%}.w-t{left:39%;top:53.5%}.w-e{left:62%;top:50%}.w-m{left:85%;top:46.5%}
+  .w-f{left:16%;top:62%}.w-t{left:39%;top:57%}.w-e{left:62%;top:52%}.w-m{left:85%;top:46.5%}
   .w-f .fb3d{width:56px;height:56px;font-size:26px}
   .w-t .fb3d{width:50px;height:50px;font-size:23px}
   .w-e .fb3d{width:44px;height:44px;font-size:20px}
@@ -1374,7 +1374,7 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 22px;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
 .bottombar::after{content:"";flex:1 1 0}
-.bb-intro{flex:1 1 0;color:rgba(255,255,255,.72);font-size:12px;font-weight:600;letter-spacing:.02em;line-height:1.3}
+.bb-intro{flex:1 1 0;color:rgba(255,255,255,.95);font-size:12px;font-weight:800;letter-spacing:.03em;line-height:1.3}
 .bb-links{display:flex;align-items:center;flex:none}
 .bb-item{font:inherit;flex:none;white-space:nowrap;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12.5px;padding:9px 22px;cursor:pointer;text-decoration:none;letter-spacing:.03em}
 .bb-item b{color:var(--red);font-weight:800;margin-left:4px}
