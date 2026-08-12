@@ -799,45 +799,49 @@ def home_html(datamap, lang):
     # preserveAspectRatio "YMin": bei breiten/flachen Fenstern wird unten (Wald) statt
     # oben (Himmel) beschnitten -> der Titel ueberlappt den Gipfel nicht mehr.
     # Labels auf der Vertikalen der Bergspitze (x=1018 im Bild), nicht in der Bildmitte.
-    hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" aria-hidden="true">'
+    LBLX = "1018"
+    def band(y, h, name_y, sub_y, name, sub, key, cls=""):
+        # Klickflaeche nur innerhalb der Bergsilhouette (mtclip), nicht ueber die ganze Breite
+        return ('<g class="pband" tabindex="0" role="button" data-ph="'+key+'" aria-label="'+esc(name)+'">'
+                # Highlight-Flaeche: hellt beim Hover die ganze Farbzone im Berg auf
+                '<rect class="pb-hl" x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" clip-path="url(#mtclip)" pointer-events="none"/>'
+                '<rect x="0" y="'+str(y)+'" width="1896" height="'+str(h)+'" fill="#fff" fill-opacity="0" clip-path="url(#mtclip)"/>'
+                '<text class="pb-n'+cls+'" x="'+LBLX+'" y="'+str(name_y)+'">'+esc(name)+'</text>'
+                '<text class="pb-s" x="'+LBLX+'" y="'+str(sub_y)+'">'+esc(sub)+'</text></g>')
+    hero_svg = ('<svg class="heromt" viewBox="0 0 1896 986" preserveAspectRatio="xMidYMin slice" role="navigation" aria-label="FTEM-Stufen">'
         '<defs>'
         '<clipPath id="mtclip"><path d="'+RIDGE_PATH+'"/></clipPath>'
         '<linearGradient id="herodark" x1="0" y1="0" x2="0" y2="1">'
         '<stop offset="0" stop-color="rgba(9,14,24,.10)"/><stop offset=".45" stop-color="rgba(12,17,28,.08)"/><stop offset="1" stop-color="rgba(7,11,20,.30)"/></linearGradient>'
-        # Durchgehender weicher FTEM-Verlauf ueber dem Berg (M Gipfel -> F Basis).
-        # Die Stop-Offsets werden beim Hover ueber die FTEM-Knoepfe animiert (Zone waechst).
+        '</defs>'
+        '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
+        '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
+        '<g clip-path="url(#mtclip)">'
+        # Ein senkrechter Verlauf statt harter Kanten: an den Zonen-Grenzen (375/540/790)
+        # gehen die Farben ueber +-25px weich ineinander ueber.
+        '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad)"/>'
+        '</g>'
         '<linearGradient id="zonegrad" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="rgba(216,72,58,.50)"/><stop offset=".355" stop-color="rgba(216,72,58,.50)"/>'
-        '<stop offset=".406" stop-color="rgba(222,140,80,.50)"/><stop offset=".522" stop-color="rgba(222,140,80,.50)"/>'
-        '<stop offset=".573" stop-color="rgba(222,184,88,.50)"/><stop offset=".755" stop-color="rgba(222,184,88,.50)"/>'
-        '<stop offset=".848" stop-color="rgba(86,158,178,.50)"/><stop offset="1" stop-color="rgba(86,158,178,.50)"/>'
+        '<stop offset="0" stop-color="rgba(216,72,58,.40)"/><stop offset=".355" stop-color="rgba(216,72,58,.40)"/>'
+        '<stop offset=".406" stop-color="rgba(222,140,80,.40)"/><stop offset=".522" stop-color="rgba(222,140,80,.40)"/>'
+        '<stop offset=".573" stop-color="rgba(222,184,88,.42)"/><stop offset=".755" stop-color="rgba(222,184,88,.42)"/>'
+        '<stop offset=".848" stop-color="rgba(86,158,178,.42)"/><stop offset="1" stop-color="rgba(86,158,178,.42)"/>'
         '</linearGradient>'
+        # Kammlinie mit weichem Farbverlauf entlang der Hoehenzonen (statt harter Wechsel)
         '<linearGradient id="linegrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="986">'
         '<stop offset="0" stop-color="#ff6d60"/><stop offset=".355" stop-color="#ff6d60"/>'
         '<stop offset=".406" stop-color="#ff9b57"/><stop offset=".522" stop-color="#ff9b57"/>'
         '<stop offset=".573" stop-color="#ffd45c"/><stop offset=".776" stop-color="#ffd45c"/>'
         '<stop offset=".827" stop-color="#57cce4"/><stop offset="1" stop-color="#57cce4"/>'
         '</linearGradient>'
-        '</defs>'
-        '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
-        '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
-        '<g clip-path="url(#mtclip)">'
-        '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad)"/>'
-        '</g>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="5" stroke-linejoin="round" opacity=".3"/>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="url(#linegrad)" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
+        + band(0, 375, 338, 364, band_lbl[3], "M", "m")
+        + band(375, 165, 450, 478, band_lbl[2], "E1 – E2", "e")
+        + band(540, 250, 658, 692, band_lbl[1], "T1 – T4", "t")
+        + band(790, 196, 866, 894, band_lbl[0], "F1 – F3", "f")
         + '</svg>')
-    # Die vier 3D-FTEM-Knoepfe (Wiedererkennung zur alten Landingpage): aufsteigend
-    # von unten links nach oben rechts, F/T groesser als E/M; Klick -> Stufen-Popup.
-    _fb = [("f", "Foundation", "F1–F3"), ("t", "Talent", "T1–T4"),
-           ("e", "Elite", "E1–E2"), ("m", "Mastery", "M")]
-    fbtns = '<div class="fbtns" role="navigation" aria-label="FTEM-Stufen">'
-    for _k, _n, _r in _fb:
-        fbtns += ('<button class="fbtnw w-'+_k+'" type="button" data-ph="'+_k+'" aria-label="'+_n+' '+_r+'">'
-                  '<span class="fb3d fb-'+_k+'">'+_k.upper()+'</span>'
-                  '<span class="fbl">'+_n+'<small>'+_r+'</small></span></button>')
-    fbtns += '</div>'
-    pyr = hero_svg + fbtns
+    pyr = hero_svg
     # Klick auf eine Stufe -> Sportarten-Auswahl -> Athlet:innen-Weg der Sportart
     choose_lbl = {"de": "Sportart wählen", "fr": "Choisir un sport", "it": "Scegli lo sport", "en": "Choose a sport"}[lang]
     spitems = ""
@@ -1192,36 +1196,13 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .ctext{display:contents}
 /* FTEM-Zonen in der echten Bergsilhouette (SVG); Labels im SVG = immer exakt auf der Zone */
 .heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-/* 3D-FTEM-Knoepfe (Wiedererkennung zur alten Landingpage) */
-.fbtns{position:absolute;inset:0;z-index:6;pointer-events:none}
-.fbtnw{pointer-events:auto;position:absolute;transform:translateX(-50%);background:none;border:none;padding:0;cursor:pointer;text-align:center;font:inherit}
-.fb3d{display:flex;align-items:center;justify-content:center;margin:0 auto;border-radius:22%;font-weight:900;line-height:1;
-  box-shadow:0 7px 0 rgba(150,168,180,.85),0 16px 24px rgba(10,25,40,.42);
-  transition:transform .28s cubic-bezier(.2,.8,.3,1.15)}
-.fb-f{color:var(--found);background:linear-gradient(180deg,#eafcff,#d8f3f8)}
-.fb-t{color:var(--talent);background:linear-gradient(180deg,#fffbe8,#f9f0cf)}
-.fb-e{color:var(--elite);background:linear-gradient(180deg,#fff1e4,#fbe2cc)}
-.fb-m{color:var(--mast);background:linear-gradient(180deg,#ffe9e7,#f8d5d1)}
-.w-f{left:17%;top:63%}.w-t{left:38%;top:59%}.w-e{left:59%;top:55%}.w-m{left:79%;top:50.5%}
-.w-f .fb3d{width:84px;height:84px;font-size:39px}
-.w-t .fb3d{width:74px;height:74px;font-size:35px}
-.w-e .fb3d{width:64px;height:64px;font-size:30px}
-.w-m .fb3d{width:54px;height:54px;font-size:25px}
-.fbl{display:block;margin-top:10px;font-size:12.5px;font-weight:800;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55);letter-spacing:.02em}
-.fbl small{display:block;font-size:10.5px;font-weight:700;opacity:.92}
-/* Hover/Fokus: eigener Knopf waechst, die anderen schrumpfen (wie die Bergfarben) */
-.fbtns.hv-f .w-f .fb3d,.fbtns.hv-t .w-t .fb3d,.fbtns.hv-e .w-e .fb3d,.fbtns.hv-m .w-m .fb3d{transform:scale(1.16)}
-.fbtns.hv-f .fbtnw:not(.w-f) .fb3d,.fbtns.hv-t .fbtnw:not(.w-t) .fb3d,
-.fbtns.hv-e .fbtnw:not(.w-e) .fb3d,.fbtns.hv-m .fbtnw:not(.w-m) .fb3d{transform:scale(.78)}
-.fbtnw:focus-visible .fb3d{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
-@media(max-width:760px){
-  .w-f{left:16%;top:57%}.w-t{left:39%;top:53.5%}.w-e{left:62%;top:50%}.w-m{left:85%;top:46.5%}
-  .w-f .fb3d{width:56px;height:56px;font-size:26px}
-  .w-t .fb3d{width:50px;height:50px;font-size:23px}
-  .w-e .fb3d{width:44px;height:44px;font-size:20px}
-  .w-m .fb3d{width:40px;height:40px;font-size:18px}
-  .fbl{font-size:10px;margin-top:7px}.fbl small{font-size:8.5px}
-}
+.heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
+.heromt .pb-hl{opacity:0;transition:opacity .2s ease}
+.heromt .pband:hover .pb-hl,.heromt .pband:focus-visible .pb-hl{opacity:.17}
+.heromt .pb-n,.heromt .pb-s{transition:filter .18s ease}
+.heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n,.heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{filter:brightness(1.12)}
+.heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:22px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:3px;stroke-linejoin:round}
+.heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
 @media(min-aspect-ratio:19/10){
   #home .hero-logo{width:clamp(78px,8.5vw,116px);margin-top:4px}
@@ -1370,7 +1351,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6672' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:13px;padding-right:34px}
 [data-theme="dark"] header.top select,[data-theme="dark"] .sportsel2,[data-theme="dark"] select.jump,[data-theme="dark"] .pd-sportsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2ccd8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
 .mr-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:none}
-@media(max-width:760px){.aw-cta{top:auto;bottom:88px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
+@media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 22px;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
 .bottombar::after{content:"";flex:1 1 0}
@@ -2397,45 +2378,14 @@ if(langBtn&&langMenu){
   document.addEventListener('click',e=>{if(!langMenu.hidden&&!e.target.closest('.lang-ic')){langMenu.hidden=true;langBtn.setAttribute('aria-expanded','false');}});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!langMenu.hidden){langMenu.hidden=true;langBtn.setAttribute('aria-expanded','false');}});
 }
-// FTEM-Knoepfe: Klick -> Stufen-Popup; Hover -> Zone am Berg waechst, andere Knoepfe schrumpfen
-const fbtns=document.querySelector('.fbtns');
-const zstops=[...document.querySelectorAll('#zonegrad stop')];
-const ZN=[0,.355,.406,.522,.573,.755,.848,1];
-function ztarget(k){
-  const t=ZN.slice();
-  if(k==='m'){t[1]=.455;t[2]=.506;}
-  else if(k==='e'){t[1]=.245;t[2]=.296;t[3]=.632;t[4]=.683;}
-  else if(k==='t'){t[3]=.412;t[4]=.463;t[5]=.848;t[6]=.905;}
-  else if(k==='f'){t[5]=.652;t[6]=.718;}
-  return t;
-}
-let zcur=ZN.slice(),zraf=0;
-function zoneAnim(k){
-  if(!zstops.length)return;
-  const tgt=ztarget(k),from=zcur.slice(),t0=performance.now();
-  cancelAnimationFrame(zraf);
-  const step=n=>{
-    const p=Math.min(1,(n-t0)/280),e=1-Math.pow(1-p,3);
-    zcur=from.map((v,i)=>v+(tgt[i]-v)*e);
-    zstops.forEach((s,i)=>s.setAttribute('offset',zcur[i].toFixed(4)));
-    if(p<1)zraf=requestAnimationFrame(step);
-  };
-  zraf=requestAnimationFrame(step);
-}
-document.querySelectorAll('.fbtnw').forEach(bd=>{
-  const k=bd.dataset.ph;
-  const open=()=>{
+document.querySelectorAll('.pband').forEach(bd=>{
+  const open=()=>{const k=bd.dataset.ph;
     const sid=homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0];
     let id='tpl-ph-'+k+'-'+sid, tpl=document.getElementById(id);
     if(!tpl){id='tpl-ph-'+k;tpl=document.getElementById(id);}
     if(tpl){openInfo(id, tpl.dataset.t||'');}else{goAW();}};
   bd.addEventListener('click',open);
-  const on=()=>{if(fbtns)fbtns.className='fbtns hv-'+k;zoneAnim(k);};
-  const off=()=>{if(fbtns)fbtns.className='fbtns';zoneAnim(null);};
-  bd.addEventListener('mouseenter',on);
-  bd.addEventListener('mouseleave',off);
-  bd.addEventListener('focus',on);
-  bd.addEventListener('blur',off);
+  bd.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
 });
 document.querySelectorAll('.aw-btn').forEach(el=>{
   el.addEventListener('click',goAW);

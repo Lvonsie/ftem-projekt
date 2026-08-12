@@ -120,13 +120,36 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .ctext{display:contents}
 /* FTEM-Zonen in der echten Bergsilhouette (SVG); Labels im SVG = immer exakt auf der Zone */
 .heromt{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.heromt .pband{pointer-events:auto;cursor:pointer;outline:none}
-.heromt .pb-hl{opacity:0;transition:opacity .2s ease}
-.heromt .pband:hover .pb-hl,.heromt .pband:focus-visible .pb-hl{opacity:.17}
-.heromt .pb-n,.heromt .pb-s{transition:filter .18s ease}
-.heromt .pband:hover .pb-n,.heromt .pband:focus-visible .pb-n,.heromt .pband:hover .pb-s,.heromt .pband:focus-visible .pb-s{filter:brightness(1.12)}
-.heromt .pb-n{fill:#fff;font-weight:800;letter-spacing:.2em;font-size:22px;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.38);stroke-width:3px;stroke-linejoin:round}
-.heromt .pb-s{fill:rgba(255,255,255,.88);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-anchor:middle;paint-order:stroke;stroke:rgba(0,0,0,.32);stroke-width:2px;stroke-linejoin:round}
+/* 3D-FTEM-Knoepfe (Wiedererkennung zur alten Landingpage) */
+.fbtns{position:absolute;inset:0;z-index:6;pointer-events:none}
+.fbtnw{pointer-events:auto;position:absolute;transform:translateX(-50%);background:none;border:none;padding:0;cursor:pointer;text-align:center;font:inherit}
+.fb3d{display:flex;align-items:center;justify-content:center;margin:0 auto;border-radius:22%;font-weight:900;line-height:1;
+  box-shadow:0 7px 0 rgba(150,168,180,.85),0 16px 24px rgba(10,25,40,.42);
+  transition:transform .28s cubic-bezier(.2,.8,.3,1.15)}
+.fb-f{color:var(--found);background:linear-gradient(180deg,#eafcff,#d8f3f8)}
+.fb-t{color:var(--talent);background:linear-gradient(180deg,#fffbe8,#f9f0cf)}
+.fb-e{color:var(--elite);background:linear-gradient(180deg,#fff1e4,#fbe2cc)}
+.fb-m{color:var(--mast);background:linear-gradient(180deg,#ffe9e7,#f8d5d1)}
+.w-f{left:17%;top:63%}.w-t{left:38%;top:59%}.w-e{left:59%;top:55%}.w-m{left:79%;top:50.5%}
+.w-f .fb3d{width:84px;height:84px;font-size:39px}
+.w-t .fb3d{width:74px;height:74px;font-size:35px}
+.w-e .fb3d{width:64px;height:64px;font-size:30px}
+.w-m .fb3d{width:54px;height:54px;font-size:25px}
+.fbl{display:block;margin-top:10px;font-size:12.5px;font-weight:800;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55);letter-spacing:.02em}
+.fbl small{display:block;font-size:10.5px;font-weight:700;opacity:.92}
+/* Hover/Fokus: eigener Knopf waechst, die anderen schrumpfen (wie die Bergfarben) */
+.fbtns.hv-f .w-f .fb3d,.fbtns.hv-t .w-t .fb3d,.fbtns.hv-e .w-e .fb3d,.fbtns.hv-m .w-m .fb3d{transform:scale(1.16)}
+.fbtns.hv-f .fbtnw:not(.w-f) .fb3d,.fbtns.hv-t .fbtnw:not(.w-t) .fb3d,
+.fbtns.hv-e .fbtnw:not(.w-e) .fb3d,.fbtns.hv-m .fbtnw:not(.w-m) .fb3d{transform:scale(.78)}
+.fbtnw:focus-visible .fb3d{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
+@media(max-width:760px){
+  .w-f{left:16%;top:57%}.w-t{left:39%;top:53.5%}.w-e{left:62%;top:50%}.w-m{left:85%;top:46.5%}
+  .w-f .fb3d{width:56px;height:56px;font-size:26px}
+  .w-t .fb3d{width:50px;height:50px;font-size:23px}
+  .w-e .fb3d{width:44px;height:44px;font-size:20px}
+  .w-m .fb3d{width:40px;height:40px;font-size:18px}
+  .fbl{font-size:10px;margin-top:7px}.fbl small{font-size:8.5px}
+}
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
 @media(min-aspect-ratio:19/10){
   #home .hero-logo{width:clamp(78px,8.5vw,116px);margin-top:4px}
@@ -275,7 +298,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6672' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:13px;padding-right:34px}
 [data-theme="dark"] header.top select,[data-theme="dark"] .sportsel2,[data-theme="dark"] select.jump,[data-theme="dark"] .pd-sportsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2ccd8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
 .mr-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:none}
-@media(max-width:760px){.aw-cta{top:auto;bottom:52px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
+@media(max-width:760px){.aw-cta{top:auto;bottom:88px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 22px;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
 .bottombar::after{content:"";flex:1 1 0}
