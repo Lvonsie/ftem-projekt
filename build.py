@@ -807,11 +807,18 @@ def home_html(datamap, lang):
         '<stop offset="0" stop-color="rgba(9,14,24,.10)"/><stop offset=".45" stop-color="rgba(12,17,28,.08)"/><stop offset="1" stop-color="rgba(7,11,20,.30)"/></linearGradient>'
         # Durchgehender weicher FTEM-Verlauf ueber dem Berg (M Gipfel -> F Basis).
         # Die Stop-Offsets werden beim Hover ueber die FTEM-Knoepfe animiert (Zone waechst).
+        # Zwei Ebenen wie im Mockup: kraeftige Farben im Overlay-Blend + leichte Deckschicht
         '<linearGradient id="zonegrad" x1="0" y1="0" x2="0" y2="1">'
-        '<stop offset="0" stop-color="rgba(238,110,96,.48)"/><stop offset=".355" stop-color="rgba(238,110,96,.48)"/>'
-        '<stop offset=".406" stop-color="rgba(246,166,104,.48)"/><stop offset=".522" stop-color="rgba(246,166,104,.48)"/>'
-        '<stop offset=".573" stop-color="rgba(247,212,116,.48)"/><stop offset=".755" stop-color="rgba(247,212,116,.48)"/>'
-        '<stop offset=".848" stop-color="rgba(118,196,216,.46)"/><stop offset="1" stop-color="rgba(118,196,216,.46)"/>'
+        '<stop offset="0" stop-color="rgba(213,43,30,.72)"/><stop offset=".355" stop-color="rgba(213,43,30,.72)"/>'
+        '<stop offset=".406" stop-color="rgba(232,119,46,.72)"/><stop offset=".522" stop-color="rgba(232,119,46,.72)"/>'
+        '<stop offset=".573" stop-color="rgba(226,169,0,.72)"/><stop offset=".755" stop-color="rgba(226,169,0,.72)"/>'
+        '<stop offset=".848" stop-color="rgba(31,143,166,.68)"/><stop offset="1" stop-color="rgba(31,143,166,.68)"/>'
+        '</linearGradient>'
+        '<linearGradient id="zonegrad2" x1="0" y1="0" x2="0" y2="1">'
+        '<stop offset="0" stop-color="rgba(213,43,30,.20)"/><stop offset=".355" stop-color="rgba(213,43,30,.20)"/>'
+        '<stop offset=".406" stop-color="rgba(232,119,46,.20)"/><stop offset=".522" stop-color="rgba(232,119,46,.20)"/>'
+        '<stop offset=".573" stop-color="rgba(226,169,0,.20)"/><stop offset=".755" stop-color="rgba(226,169,0,.20)"/>'
+        '<stop offset=".848" stop-color="rgba(31,143,166,.20)"/><stop offset="1" stop-color="rgba(31,143,166,.20)"/>'
         '</linearGradient>'
         '<linearGradient id="linegrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="986">'
         '<stop offset="0" stop-color="#ff6d60"/><stop offset=".355" stop-color="#ff6d60"/>'
@@ -823,7 +830,8 @@ def home_html(datamap, lang):
         '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
         '<g clip-path="url(#mtclip)">'
-        '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad)"/>'
+        '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad)" style="mix-blend-mode:overlay"/>'
+        '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad2)"/>'
         '</g>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="5" stroke-linejoin="round" opacity=".3"/>'
         '<path d="'+RIDGE_PATH+'" fill="none" stroke="url(#linegrad)" stroke-width="2.4" stroke-linejoin="round" opacity=".95"/>'
@@ -1213,10 +1221,10 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtns.hv-e .w-e .fb3d{border-color:#ff9b57;box-shadow:0 0 20px rgba(255,155,87,.55),inset 0 0 14px rgba(255,155,87,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-m .w-m .fb3d{border-color:#ff6d60;box-shadow:0 0 20px rgba(255,109,96,.6),inset 0 0 14px rgba(255,109,96,.16),0 10px 30px rgba(8,20,34,.35)}
 .w-f{left:17%;top:72%}.w-t{left:38%;top:65%}.w-e{left:59%;top:58%}.w-m{left:79%;top:50.5%}
-.w-f .fb3d{width:84px;height:84px;font-size:39px}
-.w-t .fb3d{width:74px;height:74px;font-size:35px}
-.w-e .fb3d{width:64px;height:64px;font-size:30px}
-.w-m .fb3d{width:54px;height:54px;font-size:25px}
+.w-f .fb3d{width:104px;height:104px;font-size:49px}
+.w-t .fb3d{width:92px;height:92px;font-size:43px}
+.w-e .fb3d{width:80px;height:80px;font-size:37px}
+.w-m .fb3d{width:68px;height:68px;font-size:32px}
 .fbl{display:block;margin-top:10px;font-size:12.5px;font-weight:800;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55);letter-spacing:.02em}
 .fbl small{display:block;font-size:10.5px;font-weight:700;opacity:.92}
 /* Hover/Fokus: eigener Knopf waechst, die anderen schrumpfen (wie die Bergfarben) */
@@ -1226,10 +1234,10 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtnw:focus-visible .fb3d{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
 @media(max-width:760px){
   .w-f{left:16%;top:62%}.w-t{left:39%;top:57%}.w-e{left:62%;top:52%}.w-m{left:85%;top:46.5%}
-  .w-f .fb3d{width:56px;height:56px;font-size:26px}
-  .w-t .fb3d{width:50px;height:50px;font-size:23px}
-  .w-e .fb3d{width:44px;height:44px;font-size:20px}
-  .w-m .fb3d{width:40px;height:40px;font-size:18px}
+  .w-f .fb3d{width:66px;height:66px;font-size:31px}
+  .w-t .fb3d{width:58px;height:58px;font-size:27px}
+  .w-e .fb3d{width:51px;height:51px;font-size:24px}
+  .w-m .fb3d{width:45px;height:45px;font-size:21px}
   .fbl{font-size:10px;margin-top:7px}.fbl small{font-size:8.5px}
 }
 /* Breite, flache Fenster: Titel+Logo kompakter, damit sie den Gipfel nicht ueberlappen */
@@ -1320,7 +1328,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .mp-x:hover{color:#fff}
 .mp-item{font:inherit;display:block;width:100%;text-align:left;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:12px;border-radius:8px;padding:8px 12px;cursor:pointer}
 .mp-item:hover{background:var(--red);border-color:var(--red)}
-.mp-mission{background:rgba(213,43,30,.85);border-color:rgba(213,43,30,.9)}
+.mp-mission{background:rgba(213,43,30,.85);border-color:rgba(213,43,30,.72)}
 .mp-app{display:none}
 @media(max-width:760px){.mp-app{display:block}}
 .menu-panel .fb-btn{width:100%;text-align:left;border-radius:8px;padding:8px 12px;font-size:12px;box-shadow:none}
@@ -2410,7 +2418,7 @@ if(langBtn&&langMenu){
 }
 // FTEM-Knoepfe: Klick -> Stufen-Popup; Hover -> Zone am Berg waechst, andere Knoepfe schrumpfen
 const fbtns=document.querySelector('.fbtns');
-const zstops=[...document.querySelectorAll('#zonegrad stop')];
+const zstops=[...document.querySelectorAll('#zonegrad stop')],zstops2=[...document.querySelectorAll('#zonegrad2 stop')];
 const ZN=[0,.355,.406,.522,.573,.755,.848,1];
 function ztarget(k){
   const t=ZN.slice();
@@ -2429,6 +2437,7 @@ function zoneAnim(k){
     const p=Math.min(1,(n-t0)/280),e=1-Math.pow(1-p,3);
     zcur=from.map((v,i)=>v+(tgt[i]-v)*e);
     zstops.forEach((s,i)=>s.setAttribute('offset',zcur[i].toFixed(4)));
+    zstops2.forEach((s,i)=>s.setAttribute('offset',zcur[i].toFixed(4)));
     if(p<1)zraf=requestAnimationFrame(step);
   };
   zraf=requestAnimationFrame(step);
