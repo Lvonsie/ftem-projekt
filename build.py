@@ -4,6 +4,17 @@ import json, re, html, datetime
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 
+def asset_v(rel):
+    """Asset-URL mit Inhalts-Hash (?v=...) - netlify.toml cached /assets/* ein Jahr
+    "immutable"; ohne neuen URL-Parameter kaemen geaenderte Bilder nie bei den Nutzern an."""
+    import hashlib as _hl
+    p = os.path.join(BASE, rel)
+    try:
+        return rel + "?v=" + _hl.sha1(open(p, "rb").read()).hexdigest()[:8]
+    except OSError:
+        return rel
+
+
 # ---------------------------------------------------------------------------
 # Sportarten-Konfiguration: ftem_sports.json
 #   id    -> interner Schluessel (auch fuer #hash-Navigation) und Standard-Datendatei
@@ -827,7 +838,7 @@ def home_html(datamap, lang):
         '<stop offset=".827" stop-color="#57cce4"/><stop offset="1" stop-color="#57cce4"/>'
         '</linearGradient>'
         '</defs>'
-        '<image href="assets/hero.jpg" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
+        '<image href="'+asset_v('assets/hero.jpg')+'" x="0" y="0" width="1896" height="986" preserveAspectRatio="none"/>'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#herodark)"/>'
         '<g clip-path="url(#mtclip)">'
         '<rect x="0" y="0" width="1896" height="986" fill="url(#zonegrad)" style="mix-blend-mode:overlay"/>'
@@ -1027,7 +1038,7 @@ def home_html(datamap, lang):
     def sport_icon(sid):
         # Piktogramm-Figuren aus dem Athletenweg (schwarz, transparenter Hintergrund);
         # auf dem dunklen Knopf per CSS-Filter weiss invertiert.
-        return '<img class="sp-ic" src="assets/sporticons/mono-'+sid+'.png" alt="" loading="lazy">'
+        return '<img class="sp-ic" src="'+asset_v('assets/sporticons/mono-'+sid+'.png')+'" alt="" loading="lazy">'
     _sp0 = SPORTS[0]
     sportpick = ('<div class="sportpick">'
                  '<button class="sp-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="'
@@ -1075,7 +1086,7 @@ def home_html(datamap, lang):
             +'</div>'
             # FTEM-Schriftzug entfernt (Knoepfe + Berg tragen die Farben); h1 bleibt fuer SEO unsichtbar
             '<div class="hero-head"><h1 class="sr-only">FTEM – '+esc({"de":"Athlet:innen-Weg Schneesport","fr":"Parcours de l’athlète sports de neige","it":"Percorso dell’atleta sport sulla neve","en":"Athlete pathway snow sports"}[lang])+'</h1>'
-            '<img class="hero-logo" src="assets/swiss-ski-logo.svg" alt="Swiss-Ski"></div>'
+            '<img class="hero-logo" src="'+asset_v('assets/swiss-ski-logo.svg')+'" alt="Swiss-Ski"></div>'
             +pyr+footbar+
             '</div>'
             +pres_web+
@@ -3090,7 +3101,7 @@ def _write_pwa_seo():
             "./manifest.webmanifest","./assets/favicon.svg","./assets/icon-192.png",
             "./assets/icon-512.png","./assets/icon-180.png","./assets/hero.jpg",
             "./assets/og-image.jpg","./assets/swiss-ski-logo.svg"]
-    core += ["./"+p.replace("\\","/") for p in _glob.glob("assets/sporticons/*.png")]
+    core += ["./"+asset_v(p.replace("\\","/")) for p in _glob.glob("assets/sporticons/*.png")]
     sw = (
         'const CACHE="ftem-'+ver+'";\n'
         'const CORE='+json.dumps(core)+';\n'
