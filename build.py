@@ -1089,7 +1089,7 @@ def home_html(datamap, lang):
 
 CSS = r"""
 :root{--red:#d52b1e;--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--bg:#eef1f4;--card:#fff;
---phf:#f4faf8;--pht:#fcf8ee;--phe:#fdf5ef;--phm:#fcefef;
+--phf:#d9ecf0;--pht:#faf0d0;--phe:#fbe6d7;--phm:#f8dbd7;
 --mg:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0));
 --found:#1f8fa6;--found-t:#0d5e6e;--found-bg:#ecf6f8;
 --talent:#e2a900;--talent-t:#8a6a00;--talent-bg:#fdf7e4;
@@ -1650,9 +1650,9 @@ summary .tt{font-size:12.5px;font-weight:700;flex:1;min-width:0}
 summary .tchev{flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .18s;margin-right:3px}
 details[open]>summary .tchev{transform:rotate(45deg)}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
-.grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
+.grid{min-width:max-content;display:flex;flex-direction:column;gap:0}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:stretch}
-.rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2);min-width:0;overflow:hidden;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
+.rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:0;border:1px solid var(--line);box-shadow:-14px 0 0 0 var(--card),9px 0 9px -6px rgba(0,0,0,.2);min-width:0;overflow:hidden;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 .rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
 .r.head{position:relative;z-index:2}
 .r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--card);border:none}
@@ -1663,7 +1663,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .c.hd[data-idx]:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
 .c.hd.active{box-shadow:inset 0 0 0 3px rgba(0,0,0,.45)}
 /* dezente Phasen-Toenung je Spalte - Orientierung F1-M beim Scrollen */
-.cell.ph-foundation{background:#f4faf8;--zc:#0d5e6e;--zbg:#e1f0f3}.cell.ph-talent{background:#fcf8ee;--zc:#8a6a00;--zbg:#f7edcf}.cell.ph-elite{background:#fdf5ef;--zc:#a8511a;--zbg:#f8e2d3}.cell.ph-mastery{background:#fcefef;--zc:#9c1d14;--zbg:#f6dcd8}.cell.ph-multi{background-color:#f7f8fa;background-image:var(--mg);--zc:#5a6472;--zbg:#eceff3}
+.cell.ph-foundation{background:#d9ecf0;--zc:#0d5e6e;--zbg:#c8e3e9}.cell.ph-talent{background:#faf0d0;--zc:#8a6a00;--zbg:#f4e6b6}.cell.ph-elite{background:#fbe6d7;--zc:#a8511a;--zbg:#f8dac2}.cell.ph-mastery{background:#f8dbd7;--zc:#9c1d14;--zbg:#f4cbc6}.cell.ph-multi{background-color:#f7f8fa;background-image:var(--mg);--zc:#5a6472;--zbg:#eceff3}
 .cell.hl-foundation{background:#d6edf1;box-shadow:inset 0 0 0 2px var(--found)}
 .cell.hl-talent{background:#faeab4;box-shadow:inset 0 0 0 2px var(--talent)}
 .cell.hl-elite{background:#fbdcc6;box-shadow:inset 0 0 0 2px var(--elite)}
@@ -1683,7 +1683,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 /* Phasenfarben NUR fuer die Stufen-Koepfe - Inhaltszellen behalten dunkle Schrift */
 .c.hd.ph-foundation{background:var(--found);color:#fff}.c.hd.ph-talent{background:var(--talent);color:#3b2e00}.c.hd.ph-elite{background:var(--elite);color:#fff}.c.hd.ph-mastery{background:var(--mast);color:#fff}
 .cell{color:var(--ink)}
-.cell{background:#fff;border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;align-self:stretch}
+.cell{background:#fff;border:1px solid rgba(255,255,255,.65);border-radius:0;position:relative;overflow:hidden;align-self:stretch}
 /* Zebra: jede zweite Inhaltszeile dezent abgedunkelt (Bjoern-Feedback) */
 .grid .r:nth-child(odd):not(.head) .cell,.grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(29,38,48,.035),rgba(29,38,48,.035)),var(--mg)}
 .cell .cwrap{padding:9px 11px;font-size:11.5px;line-height:1.5;color:#33404d;max-height:212px;overflow:hidden;transition:max-height .25s ease}
@@ -1798,7 +1798,7 @@ header.top .sportsel2{flex:1 1 0;width:100%;min-width:118px;font-size:13.5px;max
 .wrap{padding:10px 10px 60px}
 .scroller{padding:0 8px 10px}
 .rl{font-size:9.5px;padding:6px 6px;line-height:1.25;font-weight:600}
-.rl{box-shadow:0 0 0 6px var(--card),-12px 0 0 6px var(--card),7px 0 8px -5px rgba(0,0,0,.22)}
+.rl{box-shadow:-12px 0 0 0 var(--card),7px 0 8px -5px rgba(0,0,0,.22)}
 .cell .cwrap{font-size:11px}
 .stagebar{gap:3px;padding:5px 8px;padding-bottom:calc(5px + env(safe-area-inset-bottom))}
 .stagebar .sb{font-size:10.5px;padding:6px 1px;border-bottom-width:2px;max-width:none}
@@ -3078,6 +3078,12 @@ def _write_pwa_seo():
     h = hashlib.sha1()
     for f in ["index.html","fr.html","it.html","en.html"]:
         p = os.path.join(BASE, f)
+        if os.path.exists(p): h.update(open(p,"rb").read())
+    # Auch Assets einrechnen: sonst bleibt der Cache-Name bei reinen Bild-Updates
+    # gleich und der Service Worker liefert alte Bilder aus (z. B. Sport-Icons)
+    for p in sorted(_glob.glob(os.path.join(BASE, "assets", "sporticons", "*.png"))) + \
+             [os.path.join(BASE, "assets", x) for x in
+              ("hero.jpg","swiss-ski-logo.svg","favicon.svg","og-image.jpg")]:
         if os.path.exists(p): h.update(open(p,"rb").read())
     ver = h.hexdigest()[:10]
     core = ["./","./index.html","./fr.html","./it.html","./en.html","./admin.html",
