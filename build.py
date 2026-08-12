@@ -188,6 +188,10 @@ def render_block(block, link_texts):
     if not b: return ""
     if b in link_texts:  # pure link-label token, shown as button instead
         return ""
+    # "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip wie im Athlet:innen-Weg
+    _l0 = b.split("\n", 1)
+    if _SNOW_RE.match(_l0[0].strip()):
+        return _snow_zone_html(_l0[0].strip(), _l0[1] if len(_l0) > 1 else "")
     lines = [l for l in b.split("\n")]
     nonempty = [l.strip() for l in lines if l.strip()]
     # bullet list
@@ -255,6 +259,27 @@ def clean_ws(s):
 
 # Off-Snow / On-Snow Zonen-Gruppierung: "Ziele Off-Snow: ..." -> Zone "Off-Snow"
 ZONE_RE = re.compile(r'^(.{1,20}?)\s+(Off-Snow|On-Snow)\s*[:.]\s*(.*)$', re.S)
+
+# "ON SNOW"/"OFF SNOW" als eigenstaendige Kopfzeile (Startseiten-Popups) -> gleicher Chip-Look
+_SNOW_RE = re.compile(r'^(on|off)[\s -]?snow:?$', re.I)
+
+def _snow_zone_html(first, rest):
+    lab = 'On-Snow' if first.strip().lower().startswith('on') else 'Off-Snow'
+    items, other = [], []
+    for l in (rest or "").split("\n"):
+        ls = l.strip()
+        if not ls: continue
+        if ls[:1] in "-–•":
+            items.append(ls.lstrip("-–•").strip())
+        elif items:
+            items[-1] += " " + ls      # Zeilenumbruch innerhalb eines Punkts
+        else:
+            other.append(ls)
+    body = ""
+    if other: body += '<p>'+esc(" ".join(other))+'</p>'
+    if items: body += '<ul class="bl">'+"".join('<li>'+esc(i)+'</li>' for i in items if i)+'</ul>'
+    if not body and (rest or "").strip(): body = _bodyhtml(rest)
+    return '<div class="zone"><span class="zlab">'+lab+'</span>'+body+'</div>'
 
 # Mehrsatz-Fliesstext -> Stichpunkte (ein Satz = ein Bullet), mit Abkuerzungs-Schutz
 _ABBR = ["z.B.","z. B.","u.a.","u. a.","d.h.","d. h.","u.v.m.","o.ä.","u.ä.","ca.","bzw.",
