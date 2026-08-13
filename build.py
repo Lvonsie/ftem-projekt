@@ -1258,16 +1258,16 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtns.hv-t .w-t .fb3d{border-color:#ffd45c;box-shadow:0 0 20px rgba(255,212,92,.55),inset 0 0 14px rgba(255,212,92,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-e .w-e .fb3d{border-color:#ff9b57;box-shadow:0 0 20px rgba(255,155,87,.55),inset 0 0 14px rgba(255,155,87,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-m .w-m .fb3d{border-color:#ff6d60;box-shadow:0 0 20px rgba(255,109,96,.6),inset 0 0 14px rgba(255,109,96,.16),0 10px 30px rgba(8,20,34,.35)}
-.w-f{left:14%;top:74%}.w-t{left:27%;top:58%}.w-e{left:40%;top:42%}.w-m{left:53%;top:26%}
+.w-f{left:26%;top:74%}.w-t{left:38.5%;top:58%}.w-e{left:51%;top:42%}.w-m{left:63.5%;top:26%}
 .fb3d .fl{font-style:normal;display:block}
 .w-f .fb3d{width:146px}.w-f .fl{font-size:58px}
-.w-t .fb3d{width:130px}.w-t .fl{font-size:51px}
-.w-e .fb3d{width:112px}.w-e .fl{font-size:43px}
-.w-m .fb3d{width:98px}.w-m .fl{font-size:36px}
+.w-t .fb3d{width:146px}.w-t .fl{font-size:58px}
+.w-e .fb3d{width:116px}.w-e .fl{font-size:44px}
+.w-m .fb3d{width:92px}.w-m .fl{font-size:33px}
 .fbl{display:block;font-size:14.5px;font-weight:800;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55);letter-spacing:.02em;line-height:1.25}
 .fbl small{display:block;font-size:12px;font-weight:700;opacity:.92}
-.w-e .fbl{font-size:13px}.w-e .fbl small{font-size:11px}
-.w-m .fbl{font-size:12px}.w-m .fbl small{font-size:10px}
+.w-e .fbl{font-size:12.5px}.w-e .fbl small{font-size:10.5px}
+.w-m .fbl{font-size:11px}.w-m .fbl small{font-size:9.5px}
 /* Hover/Fokus: eigener Knopf waechst, die anderen schrumpfen (wie die Bergfarben) */
 .fbtns.hv-f .w-f .fb3d,.fbtns.hv-t .w-t .fb3d,.fbtns.hv-e .w-e .fb3d,.fbtns.hv-m .w-m .fb3d{transform:scale(1.16)}
 .fbtns.hv-f .fbtnw:not(.w-f) .fb3d,.fbtns.hv-t .fbtnw:not(.w-t) .fb3d,
@@ -1276,9 +1276,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 @media(max-width:760px){
   .w-f{left:15%;top:73%}.w-t{left:28%;top:63%}.w-e{left:41%;top:53%}.w-m{left:54%;top:42%}
   .w-f .fb3d{width:94px}.w-f .fl{font-size:33px}
-  .w-t .fb3d{width:84px}.w-t .fl{font-size:29px}
-  .w-e .fb3d{width:74px}.w-e .fl{font-size:25px}
-  .w-m .fb3d{width:68px}.w-m .fl{font-size:22px}
+  .w-t .fb3d{width:94px}.w-t .fl{font-size:33px}
+  .w-e .fb3d{width:76px}.w-e .fl{font-size:26px}
+  .w-m .fb3d{width:64px}.w-m .fl{font-size:21px}
   .fbl{font-size:9.5px}.fbl small{font-size:8px}
   .w-e .fbl{font-size:9px}.w-m .fbl{font-size:8.5px}
 }
@@ -2453,8 +2453,10 @@ function posAW(){
   awCta.style.bottom='';
   const w=heroEl.clientWidth,h=heroEl.clientHeight;
   if(!w||!h)return; // Startseite ausgeblendet (Sportart offen) -> keine falschen Positionen setzen
-  // viewBox "0 110 1896 876": Gipfel-Bildkoordinate 227 liegt bei (227-110) im Ausschnitt
-  const s=Math.max(w/1896,h/876),ox=(w-1896*s)/2;
+  // Desktop: rechts beschnittene viewBox (1600) -> Gipfel ruecken in die Mitte; Mobil volle Breite
+  const VBW=window.innerWidth<=760?1896:1600;
+  if(heroSvg)heroSvg.setAttribute('viewBox','0 110 '+VBW+' 876');
+  const s=Math.max(w/VBW,h/876),ox=(w-VBW*s)/2;
   awCta.style.left=Math.round(1018*s+ox)+'px';
   awCta.style.top=Math.max(10,Math.round((227-110)*s-awCta.offsetHeight-12))+'px';
 }
