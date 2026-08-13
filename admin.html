@@ -138,7 +138,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtns.hv-t .w-t .fb3d{border-color:#ffd45c;box-shadow:0 0 20px rgba(255,212,92,.55),inset 0 0 14px rgba(255,212,92,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-e .w-e .fb3d{border-color:#ff9b57;box-shadow:0 0 20px rgba(255,155,87,.55),inset 0 0 14px rgba(255,155,87,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-m .w-m .fb3d{border-color:#ff6d60;box-shadow:0 0 20px rgba(255,109,96,.6),inset 0 0 14px rgba(255,109,96,.16),0 10px 30px rgba(8,20,34,.35)}
-.w-f{left:17%;top:72%}.w-t{left:38%;top:65%}.w-e{left:59%;top:58%}.w-m{left:79%;top:50.5%}
+.w-f{left:14%;top:74%}.w-t{left:27%;top:58%}.w-e{left:40%;top:42%}.w-m{left:53%;top:26%}
 .fb3d .fl{font-style:normal;display:block}
 .w-f .fb3d{width:146px}.w-f .fl{font-size:58px}
 .w-t .fb3d{width:130px}.w-t .fl{font-size:51px}
@@ -154,7 +154,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtns.hv-e .fbtnw:not(.w-e) .fb3d,.fbtns.hv-m .fbtnw:not(.w-m) .fb3d{transform:scale(.78)}
 .fbtnw:focus-visible .fb3d{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
 @media(max-width:760px){
-  .w-f{left:16%;top:62%}.w-t{left:39%;top:57%}.w-e{left:62%;top:52%}.w-m{left:85%;top:46.5%}
+  .w-f{left:15%;top:73%}.w-t{left:28%;top:63%}.w-e{left:41%;top:53%}.w-m{left:54%;top:42%}
   .w-f .fb3d{width:94px}.w-f .fl{font-size:33px}
   .w-t .fb3d{width:84px}.w-t .fl{font-size:29px}
   .w-e .fb3d{width:74px}.w-e .fl{font-size:25px}
@@ -219,8 +219,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .mlist .mission-item{display:block;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 10px;font-weight:800;font-size:13px;color:var(--ink);text-decoration:none}
 .mlist .mission-item:hover{border-color:var(--red);color:var(--red)}
 header.top .sportsel2{font:inherit;font-size:15px;font-weight:800;color:var(--ink);max-width:280px;padding:6px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card)}
-.steady{position:fixed;right:18px;bottom:74px;z-index:95;display:flex;align-items:center;gap:9px;background:var(--red);color:#fff;border:none;border-radius:30px;padding:11px 19px;font:inherit;font-size:13.5px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.28);animation:steadybob 3s ease-in-out infinite}
-.steady:hover{filter:brightness(1.12)}
+.steady{position:fixed;right:18px;bottom:74px;z-index:95;display:flex;align-items:center;gap:11px;background:var(--red);color:#fff;border:none;border-radius:36px;padding:16px 27px;font:inherit;font-size:16.5px;font-weight:800;letter-spacing:.01em;cursor:pointer;box-shadow:0 12px 32px rgba(0,0,0,.36),0 0 0 5px rgba(213,43,30,.16);animation:steadybob 3s ease-in-out infinite}
+.steady:hover{filter:brightness(1.12);transform:translateY(-1px)}
+@media(max-width:760px){.steady{padding:13px 21px;font-size:14.5px;bottom:66px}}
 @keyframes steadybob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 body.pres .steady{display:none}
 /* Versteckter Praesentationsmodus (Symbol unten wie Admin-Schloss, Passwort FTEMP) */
