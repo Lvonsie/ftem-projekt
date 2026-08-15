@@ -1245,9 +1245,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtnw{pointer-events:auto;position:absolute;transform:translateX(-50%);background:none;border:none;padding:0;cursor:pointer;text-align:center;font:inherit}
 /* Frosted-Glass-Knoepfe, Buchstaben in der Titel-Typografie (Glow); Beschriftung im Knopf */
 .fb3d{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;margin:0 auto;border-radius:20%;font-weight:800;line-height:1;letter-spacing:1px;padding:10px 8px 9px;
-  background:rgba(255,255,255,.16);border:1.5px solid rgba(255,255,255,.55);
+  background:rgba(255,255,255,.11);border:1.5px solid rgba(255,255,255,.68);
   backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
-  box-shadow:0 10px 30px rgba(8,20,34,.35),inset 0 1px 0 rgba(255,255,255,.5);
+  box-shadow:0 8px 22px rgba(8,20,34,.22),inset 0 1px 0 rgba(255,255,255,.55);
   transition:transform .28s cubic-bezier(.2,.8,.3,1.15),box-shadow .28s ease,border-color .28s ease}
 .fb-f{color:#57cce4;text-shadow:0 1px 3px rgba(5,12,22,.7),0 0 10px rgba(87,204,228,.9),0 0 22px rgba(87,204,228,.55)}
 .fb-t{color:#ffd45c;text-shadow:0 1px 3px rgba(5,12,22,.7),0 0 10px rgba(255,212,92,.9),0 0 22px rgba(255,212,92,.55)}
@@ -1258,12 +1258,12 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtns.hv-t .w-t .fb3d{border-color:#ffd45c;box-shadow:0 0 20px rgba(255,212,92,.55),inset 0 0 14px rgba(255,212,92,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-e .w-e .fb3d{border-color:#ff9b57;box-shadow:0 0 20px rgba(255,155,87,.55),inset 0 0 14px rgba(255,155,87,.16),0 10px 30px rgba(8,20,34,.35)}
 .fbtns.hv-m .w-m .fb3d{border-color:#ff6d60;box-shadow:0 0 20px rgba(255,109,96,.6),inset 0 0 14px rgba(255,109,96,.16),0 10px 30px rgba(8,20,34,.35)}
-.w-f{left:26%;top:74%}.w-t{left:38.5%;top:58%}.w-e{left:51%;top:42%}.w-m{left:63.5%;top:26%}
+.w-f{left:26%;top:68%}.w-t{left:38.5%;top:52%}.w-e{left:51%;top:37%}.w-m{left:63.5%;top:24%}
 .fb3d .fl{font-style:normal;display:block}
 .w-f .fb3d{width:146px}.w-f .fl{font-size:58px}
 .w-t .fb3d{width:146px}.w-t .fl{font-size:58px}
-.w-e .fb3d{width:116px}.w-e .fl{font-size:44px}
-.w-m .fb3d{width:92px}.w-m .fl{font-size:33px}
+.w-e .fb3d{width:102px}.w-e .fl{font-size:38px}
+.w-m .fb3d{width:80px}.w-m .fl{font-size:28px}
 .fbl{display:block;font-size:14.5px;font-weight:800;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55);letter-spacing:.02em;line-height:1.25}
 .fbl small{display:block;font-size:12px;font-weight:700;opacity:.92}
 .w-e .fbl{font-size:12.5px}.w-e .fbl small{font-size:10.5px}
@@ -1274,11 +1274,11 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtns.hv-e .fbtnw:not(.w-e) .fb3d,.fbtns.hv-m .fbtnw:not(.w-m) .fb3d{transform:scale(.78)}
 .fbtnw:focus-visible .fb3d{outline:3px solid rgba(255,255,255,.9);outline-offset:3px}
 @media(max-width:760px){
-  .w-f{left:15%;top:73%}.w-t{left:28%;top:63%}.w-e{left:41%;top:53%}.w-m{left:54%;top:42%}
+  .w-f{left:15%;top:69%}.w-t{left:28%;top:59%}.w-e{left:41%;top:49.5%}.w-m{left:54%;top:41%}
   .w-f .fb3d{width:94px}.w-f .fl{font-size:33px}
   .w-t .fb3d{width:94px}.w-t .fl{font-size:33px}
-  .w-e .fb3d{width:76px}.w-e .fl{font-size:26px}
-  .w-m .fb3d{width:64px}.w-m .fl{font-size:21px}
+  .w-e .fb3d{width:68px}.w-e .fl{font-size:23px}
+  .w-m .fb3d{width:57px}.w-m .fl{font-size:18px}
   .fbl{font-size:9.5px}.fbl small{font-size:8px}
   .w-e .fbl{font-size:9px}.w-m .fbl{font-size:8.5px}
 }
