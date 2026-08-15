@@ -1108,7 +1108,9 @@ def home_html(datamap, lang):
               '<div class="nb-head">'+esc(news_label)+nbadge+'</div>'
               '<ul class="nb-list">'
               + "".join('<li>'+esc(tr(it["title"], lang))+'</li>' for it in NEWS[:3])
-              + '</ul></div>') if NEWS else
+              + '</ul>'
+              '<span class="nb-more">'+esc({"de":"Alle News ansehen","fr":"Voir toutes les actualités","it":"Vedi tutte le notizie","en":"See all news"}[lang])+' →</span>'
+              '</div>') if NEWS else
              ('<button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button>'))
             +'</div>'
             # FTEM-Schriftzug entfernt (Knoepfe + Berg tragen die Farben); h1 bleibt fuer SEO unsichtbar
@@ -1358,11 +1360,15 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* News-Badge + News-Overlay-Metadaten */
 .nbadge{display:inline-block;background:var(--red);color:#fff;border-radius:9px;padding:0 6px;margin-left:7px;font-size:10px;font-weight:800;line-height:15px;vertical-align:1px}
 /* News-Box: Knopf + Teaser-Titel in einem Feld */
-.news-box{width:100%;background:rgba(15,21,32,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;transition:border-color .15s}
+/* News-Box (Vorschlag 5B): breiter, groessere Schrift, CTA-Balken im FTEM-Verlauf */
+.news-box{width:308px;align-self:flex-end;background:rgba(15,21,32,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);border-radius:10px;overflow:hidden;cursor:pointer;text-align:left;transition:border-color .15s;box-shadow:0 10px 26px rgba(0,0,0,.28)}
 .news-box:hover{border-color:rgba(255,255,255,.55)}
-.news-box .nb-head{background:#1d2630;color:#fff;font-weight:800;font-size:11.5px;letter-spacing:.04em;padding:6px 13px}
-.news-box .nb-list{list-style:none;margin:7px 0 9px;padding:0 12px;color:#fff}
-.news-box .nb-list li{position:relative;padding-left:14px;font-size:11px;font-weight:600;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.news-box .nb-head{background:#1d2630;color:#fff;font-weight:800;font-size:13px;letter-spacing:.04em;padding:8px 13px}
+.news-box .nb-list{list-style:none;margin:8px 0 9px;padding:0 12px;color:#fff}
+.news-box .nb-list li{position:relative;padding-left:15px;font-size:12px;font-weight:600;margin:4px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.news-box .nb-more{display:block;text-align:center;font-weight:800;font-size:12px;color:#fff;padding:7px 10px;letter-spacing:.02em;text-shadow:0 1px 3px rgba(0,0,0,.35);background:linear-gradient(90deg,#1f8fa6,#e2a900 38%,#e8772e 70%,#d52b1e);transition:filter .15s}
+.news-box:hover .nb-more{filter:brightness(1.1)}
+@media(max-width:760px){.news-box{width:100%;align-self:stretch}.news-box .nb-more{font-size:11px;padding:6px 8px}}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:5px;height:5px;border-radius:50%;background:#fff}
 /* Feedback unten rechts */
 /* Hamburger-Menue oben rechts */
