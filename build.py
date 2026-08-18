@@ -569,9 +569,13 @@ def lang_switch(active):
         out += '<a'+cls+' data-f="'+FILES[l]+'" href="'+FILES[l]+'">'+l.upper()+'</a>'
     return out + '</div>'
 
-def theme_toggle():
+CLOSE_W = {"de": "schliessen", "fr": "fermer", "it": "chiudi", "en": "close"}
+
+def theme_toggle(lang="de"):
+    tt = {"de": "Hell / Dunkel", "fr": "Clair / Sombre", "it": "Chiaro / Scuro", "en": "Light / Dark"}[lang]
+    ta = {"de": "Hell/Dunkel umschalten", "fr": "Basculer clair/sombre", "it": "Commuta chiaro/scuro", "en": "Toggle light/dark"}[lang]
     return ('<button class="themebtn" type="button" onclick="toggleTheme()" '
-            'title="Hell / Dunkel" aria-label="Hell/Dunkel umschalten">'
+            'title="'+esc(tt)+'" aria-label="'+esc(ta)+'">'
             '<svg class="ic-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>'
             '<svg class="ic-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/>'
             '<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
@@ -596,11 +600,12 @@ def sport_section(sport, d, lang, edit=False):
     # Sportarten-Wechsel direkt im Titel (Dropdown statt fixer Ueberschrift)
     sport_opts = "".join('<option value="'+x["id"]+'"'+(' selected' if x["id"] == sid else '')+'>'
                          + esc(tr(x["name"], lang)) + '</option>' for x in SPORTS)
-    title_sel = '<select class="sportsel2" aria-label="Sportart wechseln">'+sport_opts+'</select>'
+    _chg = {"de": "Sportart wechseln", "fr": "Changer de sport", "it": "Cambia sport", "en": "Change sport"}[lang]
+    title_sel = '<select class="sportsel2" aria-label="'+esc(_chg)+'">'+sport_opts+'</select>'
     if d is None:
         return ('<section class="sport" data-sport="'+sid+'" hidden>'
             '<header class="top"><div class="ht-l">'+back+title_sel+'</div>'
-            '<div class="ht-r">'+lang_switch(lang)+theme_toggle()+'</div></header>'
+            '<div class="ht-r">'+lang_switch(lang)+theme_toggle(lang)+'</div></header>'
             '<div class="wrap"><div class="placeholder">'
             '<div class="big">'+esc(name)+'</div>'
             +PLACE[lang].format(name=esc(name), file='ftem_data_'+esc(sid)+'.json')+
@@ -619,7 +624,7 @@ def sport_section(sport, d, lang, edit=False):
         '<button class="toggleall" type="button" title="'+esc(EXPAND_ALL[lang])+'" aria-label="'+esc(EXPAND_ALL[lang])+'" data-open="'+esc(EXPAND_ALL[lang])+'" data-close="'+esc(COLLAPSE_ALL[lang])+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13l5 5 5-5"/><path d="M7 6l5 5 5-5"/></svg></button>'
         '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
         '<span class="hdiv" aria-hidden="true"></span>'
-        +lang_switch(lang)+theme_toggle()+'</div></header>'
+        +lang_switch(lang)+theme_toggle(lang)+'</div></header>'
         '<div class="wrap">'
         +sections
         # Praesentationsmodus nur noch ueber den ⛶-Knopf auf der Startseite
@@ -828,7 +833,7 @@ def home_html(datamap, lang):
     fb = ('<button class="fb-btn" type="button" '
           'onclick="var p=this.nextElementSibling;p.hidden=!p.hidden;if(!p.hidden)p.querySelector(&#39;textarea&#39;).focus()">Feedback</button>'
           '<div class="fb-panel" hidden>'
-          '<button class="fb-x" type="button" aria-label="schliessen" '
+          '<button class="fb-x" type="button" aria-label="'+esc(CLOSE_W[lang])+'" '
           'onclick="this.closest(&#39;.fb-panel&#39;).hidden=true">&times;</button>'
           '<textarea class="fb-text" placeholder="'+esc(fb_ph)+'"></textarea>'
           '<button class="fb-send" type="button" '
@@ -914,7 +919,7 @@ def home_html(datamap, lang):
         inner2 = ('<img src="'+esc(ic)+'" alt="" loading="lazy">') if ic else ('<span class="spcode">'+esc(s2["short"])+'</span>')
         spitems += '<a href="#'+s2["id"]+'">'+inner2+'<b>'+esc(nm)+'</b></a>'
     spmodal = ('<div class="spmodal" hidden><div class="sp-box">'
-               '<div class="sp-bar"><span>'+esc(choose_lbl)+'</span><button class="sp-x" type="button" aria-label="schliessen">✕</button></div>'
+               '<div class="sp-bar"><span>'+esc(choose_lbl)+'</span><button class="sp-x" type="button" aria-label="'+esc(CLOSE_W[lang])+'">✕</button></div>'
                '<div class="sp-grid">'+spitems+'</div></div></div>')
     # Meeting-Paket: News-Button oben rechts, Mission-Button unter dem Logo,
     # Startseite ohne Scrollen (News/Infos als Overlays), Admin-Schloss unten im Hero.
@@ -1119,7 +1124,7 @@ def home_html(datamap, lang):
             '<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div>'
             '</div>'
             '<div class="menu-panel" hidden>'
-            '<button class="mp-x" type="button" aria-label="schliessen">&times;</button>'
+            '<button class="mp-x" type="button" aria-label="'+esc(CLOSE_W[lang])+'">&times;</button>'
             +mission_btn+
             '<button class="mp-item mp-mission" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'+info_label+'</button>'
             +fb+
@@ -2288,9 +2293,9 @@ const chatPanel=document.createElement('div');
 chatPanel.className='chatpanel';chatPanel.hidden=true;
 chatPanel.innerHTML='<div class="cp-card" role="dialog" aria-modal="true" aria-label="'+_esc(I18N.chatTitle)+'">'
  +'<div class="cp-head"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M12 7.6l.85 2.05L15 10.5l-2.15.85L12 13.4l-.85-2.05L9 10.5l2.15-.85z"/></svg></span>'
- +'<span class="cp-t">'+_esc(I18N.chatTitle)+'</span><button class="cp-x" type="button" aria-label="Schliessen">&times;</button></div>'
+ +'<span class="cp-t">'+_esc(I18N.chatTitle)+'</span><button class="cp-x" type="button" aria-label="'+_esc(I18N.printClose)+'">&times;</button></div>'
  +'<div class="cp-msgs"></div>'
- +'<form class="cp-form"><input class="cp-in" type="text" autocomplete="off" placeholder="'+_esc(I18N.chatPh)+'"><button class="cp-send" type="submit" aria-label="Senden">&#10148;</button></form>'
+ +'<form class="cp-form"><input class="cp-in" type="text" autocomplete="off" placeholder="'+_esc(I18N.chatPh)+'"><button class="cp-send" type="submit" aria-label="'+_esc(I18N.send)+'">&#10148;</button></form>'
  +'<div class="cp-note">'+_esc(I18N.chatNote)+'</div></div>';
 document.body.appendChild(chatPanel);
 const cpMsgs=chatPanel.querySelector('.cp-msgs'),cpForm=chatPanel.querySelector('.cp-form'),cpIn=chatPanel.querySelector('.cp-in'),cpSend=chatPanel.querySelector('.cp-send');
@@ -2602,8 +2607,8 @@ deck.innerHTML='<div class="pd-top"><span class="pd-name"></span>'
  +'<select class="pd-sportsel" aria-label="'+_esc(PDLBL.sport)+'">'+SPORT_IDS.map(id=>'<option value="'+id+'">'+_esc(SPORT_NAMES[id]||id)+'</option>').join('')+'</select>'
  +'<span class="pd-count"></span><button class="pd-x" type="button" aria-label="Ende">&times;</button></div>'
  +'<div class="pd-body"></div>'
- +'<button class="pd-prev" type="button" aria-label="zurueck">&#8249;</button>'
- +'<button class="pd-next" type="button" aria-label="weiter">&#8250;</button>';
+ +'<button class="pd-prev" type="button" aria-label="'+_esc(I18N.navPrev)+'">&#8249;</button>'
+ +'<button class="pd-next" type="button" aria-label="'+_esc(I18N.navNext)+'">&#8250;</button>';
 document.body.appendChild(deck);
 const pdBody=deck.querySelector('.pd-body'),pdName=deck.querySelector('.pd-name'),
       pdCount=deck.querySelector('.pd-count'),pdSport=deck.querySelector('.pd-sportsel');
@@ -3135,12 +3140,12 @@ for lang in LANGS:
     mmodal = ('<div class="mmodal" hidden><div class="mm-box">'
               '<div class="mm-bar"><span class="mm-t"></span>'
               '<a class="mm-ext" href="#" target="_blank" rel="noopener">'+esc(open_ext)+' ↗</a>'
-              '<button class="mm-x" type="button" aria-label="schliessen">✕</button></div>'
+              '<button class="mm-x" type="button" aria-label="'+esc(CLOSE_W[lang])+'">✕</button></div>'
               '<iframe class="mm-frame" src="about:blank" title="Mission Swiss-Ski"></iframe>'
               '</div></div>')
     imodal = ('<div class="imodal" hidden><div class="im-box">'
               '<div class="im-bar"><span class="im-t"></span>'
-              '<button class="im-x" type="button" aria-label="schliessen">✕</button></div>'
+              '<button class="im-x" type="button" aria-label="'+esc(CLOSE_W[lang])+'">✕</button></div>'
               '<div class="im-body"></div></div></div>')
     assist_lbl = {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM", "en": "FTEM Coach"}[lang]
     steady_btn = '<button class="steady" type="button" hidden>💬 '+esc(assist_lbl)+'</button>'
@@ -3154,6 +3159,9 @@ for lang in LANGS:
             "printClose": {"de": "Schliessen", "fr": "Fermer", "it": "Chiudi", "en": "Close"}[lang],
             "dossier": {"de": "Stufendossier", "fr": "Dossier de niveau", "it": "Dossier di livello", "en": "Stage dossier"}[lang],
             "popupBlocked": {"de": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "fr": "Veuillez autoriser les pop-ups pour imprimer le dossier.", "it": "Consenti i pop-up per stampare il dossier.", "en": "Please allow pop-ups for this page to print the dossier."}[lang],
+            "send": {"de": "Senden", "fr": "Envoyer", "it": "Invia", "en": "Send"}[lang],
+            "navPrev": {"de": "zurück", "fr": "précédent", "it": "indietro", "en": "back"}[lang],
+            "navNext": {"de": "weiter", "fr": "suivant", "it": "avanti", "en": "next"}[lang],
             "chatTitle": {"de": "FTEM-Coach", "fr": "Coach FTEM", "it": "Coach FTEM", "en": "FTEM Coach"}[lang],
             "chatPh": {"de": "Frage zum Athlet:innen-Weg…", "fr": "Question sur le parcours…", "it": "Domanda sul percorso…", "en": "Question about the pathway…"}[lang],
             "chatWelcome": {"de": "Hallo! Frag mich alles zum Athlet:innen-Weg dieser Sportart – zum Beispiel:", "fr": "Bonjour ! Pose-moi toutes tes questions sur le parcours de ce sport – par exemple :", "it": "Ciao! Chiedimi tutto sul percorso di questo sport – per esempio:", "en": "Hi! Ask me anything about this sport's athlete pathway – for example:"}[lang],
@@ -3180,7 +3188,7 @@ for lang in LANGS:
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
             .replace("__PRES_PW__", PRES_PW))
-    og_title = "FTEM – Athlet:innen-Weg · Swiss-Ski"
+    og_title = "FTEM – "+tr("Athlet:innen-Weg", lang)+" · Swiss-Ski"
     og_desc = {"de":"Der Athlet:innen-Weg von Swiss-Ski: alle Schneesportarten über die zehn FTEM-Entwicklungsstufen F1–M.",
                "fr":"Le parcours des athlètes de Swiss-Ski : tous les sports de neige à travers les dix niveaux de développement FTEM (F1–M).",
                "it":"Il percorso degli atleti di Swiss-Ski: tutti gli sport sulla neve lungo i dieci livelli di sviluppo FTEM (F1–M).",

@@ -1431,7 +1431,20 @@
   "Verschiedene News in folgenden Bereichen:": "Diverses nouvelles dans les domaines suivants :",
   "Gut zu wissen": "Bon à savoir",
   "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen": "Cours : ski alpin | ski de fond | biathlon | ski freestyle / snowboard | saut à ski | randonnée",
-  "Im Archiv auf der verlinkten Webseite findest du alle bereits verschickten Newsletter.": "Dans les archives du site web lié, tu trouveras toutes les newsletters déjà envoyées."
+  "Im Archiv auf der verlinkten Webseite findest du alle bereits verschickten Newsletter.": "Dans les archives du site web lié, tu trouveras toutes les newsletters déjà envoyées.",
+  "Ski Alpin": "Ski alpin",
+  "Langlauf": "Ski de fond",
+  "Biathlon": "Biathlon",
+  "Skispringen": "Saut à ski",
+  "Nordische Kombination": "Combiné nordique",
+  "Skicross": "Skicross",
+  "Freeski Park & Pipe": "Freeski Park & Pipe",
+  "Snowboard Alpin": "Snowboard alpin",
+  "Snowboard Cross": "Snowboard cross",
+  "Snowboard Park & Pipe": "Snowboard Park & Pipe",
+  "Drucken / als PDF speichern": "Imprimer / enregistrer en PDF",
+  "Spalte hervorheben": "Mettre la colonne en évidence",
+  "Stufe hervorheben": "Mettre le niveau en évidence"
  },
  "it": {
   "Athlet:innen-Weg": "Percorso dell'atleta",
@@ -2865,7 +2878,20 @@
   "Verschiedene News in folgenden Bereichen:": "Diverse novità nei seguenti ambiti:",
   "Gut zu wissen": "Buono a sapersi",
   "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen": "Corsi: sci alpino | sci di fondo | biathlon | sci freestyle / snowboard | salto con gli sci | scialpinismo",
-  "Im Archiv auf der verlinkten Webseite findest du alle bereits verschickten Newsletter.": "Nell'archivio del sito web collegato trovi tutte le newsletter già inviate."
+  "Im Archiv auf der verlinkten Webseite findest du alle bereits verschickten Newsletter.": "Nell'archivio del sito web collegato trovi tutte le newsletter già inviate.",
+  "Ski Alpin": "Sci alpino",
+  "Langlauf": "Sci di fondo",
+  "Biathlon": "Biathlon",
+  "Skispringen": "Salto con gli sci",
+  "Nordische Kombination": "Combinata nordica",
+  "Skicross": "Skicross",
+  "Freeski Park & Pipe": "Freeski Park & Pipe",
+  "Snowboard Alpin": "Snowboard alpino",
+  "Snowboard Cross": "Snowboard cross",
+  "Snowboard Park & Pipe": "Snowboard Park & Pipe",
+  "Drucken / als PDF speichern": "Stampare / salvare come PDF",
+  "Spalte hervorheben": "Evidenzia la colonna",
+  "Stufe hervorheben": "Evidenzia il livello"
  },
  "en": {
   "Trainingsstunden und Entwicklungsfokus": "Training hours and development focus",
@@ -4266,6 +4292,16 @@
   "Verschiedene News in folgenden Bereichen:": "Various news in the following areas:",
   "Gut zu wissen": "Good to know",
   "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen": "Courses: alpine skiing | cross-country | biathlon | freestyle skiing / snowboard | ski jumping | ski touring",
-  "Im Archiv auf der verlinkten Webseite findest du alle bereits verschickten Newsletter.": "In the archive on the linked website you will find all previously sent newsletters."
+  "Im Archiv auf der verlinkten Webseite findest du alle bereits verschickten Newsletter.": "In the archive on the linked website you will find all previously sent newsletters.",
+  "Ski Alpin": "Alpine Skiing",
+  "Langlauf": "Cross-Country Skiing",
+  "Biathlon": "Biathlon",
+  "Skispringen": "Ski Jumping",
+  "Nordische Kombination": "Nordic Combined",
+  "Skicross": "Ski Cross",
+  "Freeski Park & Pipe": "Freeski Park & Pipe",
+  "Snowboard Alpin": "Alpine Snowboard",
+  "Snowboard Cross": "Snowboard Cross",
+  "Snowboard Park & Pipe": "Snowboard Park & Pipe"
  }
 }

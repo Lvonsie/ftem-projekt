@@ -819,7 +819,7 @@ function toggleTheme(){var r=document.documentElement;var d=r.getAttribute('data
 const SPORT_IDS = ["ski-alpin", "langlauf", "biathlon", "skispringen", "nordische-kombination", "skicross", "freeski-park-pipe", "snowboard-alpin", "snowboard-cross", "snowboard-park-pipe"];
 const SPORT_MISSIONS = {"ski-alpin": "https://snowsports.flink.host/s/iFt05YOw/", "langlauf": "https://snowsports.flink.host/s/0QOLfudd/", "biathlon": "https://snowsports.flink.host/s/DUs2W0eD/", "skispringen": "https://snowsports.flink.host/s/FBDQQ9AP/", "nordische-kombination": "", "skicross": "https://snowsports.flink.host/s/8RhLL4D6/", "freeski-park-pipe": "https://snowsports.flink.host/s/R7EVNr6x/", "snowboard-alpin": "https://snowsports.flink.host/s/1nwko22K/", "snowboard-cross": "https://snowsports.flink.host/s/0q2Deqp2/", "snowboard-park-pipe": "https://snowsports.flink.host/s/R7EVNr6x/"};
 const SPORT_NAMES = {"ski-alpin": "Ski Alpin", "langlauf": "Langlauf", "biathlon": "Biathlon", "skispringen": "Skispringen", "nordische-kombination": "Nordische Kombination", "skicross": "Skicross", "freeski-park-pipe": "Freeski Park & Pipe", "snowboard-alpin": "Snowboard Alpin", "snowboard-cross": "Snowboard Cross", "snowboard-park-pipe": "Snowboard Park & Pipe"};
-const I18N = {"more": "mehr ▾", "less": "weniger ▴", "themes": "Themen · F1–M", "hits": "Themen mit Treffern", "hitsWord": "Treffer", "noHits": "keine Treffer", "printPick": "Stufe für das Dossier wählen", "printAll": "Ganze Sportart (Querformat)", "printClose": "Schliessen", "dossier": "Stufendossier", "popupBlocked": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "chatTitle": "FTEM-Coach", "chatPh": "Frage zum Athlet:innen-Weg…", "chatWelcome": "Hallo! Frag mich alles zum Athlet:innen-Weg dieser Sportart – zum Beispiel:", "chatExamples": ["Welches Material brauche ich in F3?", "Kraft-Ziele in Stufe T2?", "Welche Kader gibt es?", "Trainingsphasen im Überblick"], "chatErr": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "chatNote": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung."};
+const I18N = {"more": "mehr ▾", "less": "weniger ▴", "themes": "Themen · F1–M", "hits": "Themen mit Treffern", "hitsWord": "Treffer", "noHits": "keine Treffer", "printPick": "Stufe für das Dossier wählen", "printAll": "Ganze Sportart (Querformat)", "printClose": "Schliessen", "dossier": "Stufendossier", "popupBlocked": "Bitte Pop-ups für diese Seite erlauben, um das Dossier zu drucken.", "send": "Senden", "navPrev": "zurück", "navNext": "weiter", "chatTitle": "FTEM-Coach", "chatPh": "Frage zum Athlet:innen-Weg…", "chatWelcome": "Hallo! Frag mich alles zum Athlet:innen-Weg dieser Sportart – zum Beispiel:", "chatExamples": ["Welches Material brauche ich in F3?", "Kraft-Ziele in Stufe T2?", "Welche Kader gibt es?", "Trainingsphasen im Überblick"], "chatErr": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "chatNote": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung."};
 const sections = [...document.querySelectorAll('section.sport')];
 const home = document.getElementById('home');
 
@@ -1142,9 +1142,9 @@ const chatPanel=document.createElement('div');
 chatPanel.className='chatpanel';chatPanel.hidden=true;
 chatPanel.innerHTML='<div class="cp-card" role="dialog" aria-modal="true" aria-label="'+_esc(I18N.chatTitle)+'">'
  +'<div class="cp-head"><span class="cp-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/><path d="M12 7.6l.85 2.05L15 10.5l-2.15.85L12 13.4l-.85-2.05L9 10.5l2.15-.85z"/></svg></span>'
- +'<span class="cp-t">'+_esc(I18N.chatTitle)+'</span><button class="cp-x" type="button" aria-label="Schliessen">&times;</button></div>'
+ +'<span class="cp-t">'+_esc(I18N.chatTitle)+'</span><button class="cp-x" type="button" aria-label="'+_esc(I18N.printClose)+'">&times;</button></div>'
  +'<div class="cp-msgs"></div>'
- +'<form class="cp-form"><input class="cp-in" type="text" autocomplete="off" placeholder="'+_esc(I18N.chatPh)+'"><button class="cp-send" type="submit" aria-label="Senden">&#10148;</button></form>'
+ +'<form class="cp-form"><input class="cp-in" type="text" autocomplete="off" placeholder="'+_esc(I18N.chatPh)+'"><button class="cp-send" type="submit" aria-label="'+_esc(I18N.send)+'">&#10148;</button></form>'
  +'<div class="cp-note">'+_esc(I18N.chatNote)+'</div></div>';
 document.body.appendChild(chatPanel);
 const cpMsgs=chatPanel.querySelector('.cp-msgs'),cpForm=chatPanel.querySelector('.cp-form'),cpIn=chatPanel.querySelector('.cp-in'),cpSend=chatPanel.querySelector('.cp-send');
@@ -1456,8 +1456,8 @@ deck.innerHTML='<div class="pd-top"><span class="pd-name"></span>'
  +'<select class="pd-sportsel" aria-label="'+_esc(PDLBL.sport)+'">'+SPORT_IDS.map(id=>'<option value="'+id+'">'+_esc(SPORT_NAMES[id]||id)+'</option>').join('')+'</select>'
  +'<span class="pd-count"></span><button class="pd-x" type="button" aria-label="Ende">&times;</button></div>'
  +'<div class="pd-body"></div>'
- +'<button class="pd-prev" type="button" aria-label="zurueck">&#8249;</button>'
- +'<button class="pd-next" type="button" aria-label="weiter">&#8250;</button>';
+ +'<button class="pd-prev" type="button" aria-label="'+_esc(I18N.navPrev)+'">&#8249;</button>'
+ +'<button class="pd-next" type="button" aria-label="'+_esc(I18N.navNext)+'">&#8250;</button>';
 document.body.appendChild(deck);
 const pdBody=deck.querySelector('.pd-body'),pdName=deck.querySelector('.pd-name'),
       pdCount=deck.querySelector('.pd-count'),pdSport=deck.querySelector('.pd-sportsel');
