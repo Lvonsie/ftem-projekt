@@ -97,43 +97,43 @@
        "l": []
       },
       {
-       "v": "ca. 440 - 540h (Mittel 490h)",
+       "v": "ca. 440 - 540 h (Mittel 490 h)",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "ca. 570 - 670h (Mittel 620h)",
+       "v": "ca. 570 - 670 h (Mittel 620 h)",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "ca. 750 - 880h (Mittel 815h)",
+       "v": "ca. 750 - 880 h (Mittel 815 h)",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "ca. 770 - 900h (Mittel 835h)",
+       "v": "ca. 770 - 900 h (Mittel 835 h)",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "ca. 790 - 930h (Mittel 860h)",
+       "v": "ca. 790 - 930 h (Mittel 860 h)",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "ca. 870 - 1030h (Mittel 950h)",
+       "v": "ca. 870 - 1030 h (Mittel 950 h)",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "ca. 870 - 1030h (Mittel 950h)",
+       "v": "ca. 870 - 1030 h (Mittel 950 h)",
        "from": 9,
        "to": 9,
        "l": []
@@ -209,49 +209,49 @@
      "label": "Sommer Off-Snow",
      "segs": [
       {
-       "v": "Geführte Trainings: 0.75-2h/Woche\n\nAllgemein Sportliche Aktivität: 2-4h/Woche",
+       "v": "Geführte Trainings: 0.75-2h/Woche\n\nAllgemein Sportliche Aktivität: 2-4 h/Woche",
        "from": 0,
        "to": 1,
        "l": []
       },
       {
-       "v": "Geführte Trainings: 2-4h/Woche\n\nAllgemein Sportliche Aktivität: 4-6h/Woche",
+       "v": "Geführte Trainings: 2-4 h/Woche\n\nAllgemein Sportliche Aktivität: 4-6 h/Woche",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Geführte Trainings: 4-8h/Woche\n\nAllgemein Sportliche Aktivität: 4-6h/Woche",
+       "v": "Geführte Trainings: 4-8 h/Woche\n\nAllgemein Sportliche Aktivität: 4-6 h/Woche",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Geführte Trainings: 6-10h/Woche\n\nAllgemein Sportliche Aktivität: 2-4h/Woche",
+       "v": "Geführte Trainings: 6-10 h/Woche\n\nAllgemein Sportliche Aktivität: 2-4 h/Woche",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 350 - 410h (380h = 13h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3h/Wo.)",
+       "v": "Geführte Trainings: ca. 350 - 410 h (380h = 13 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3 h/Wo.)",
        "from": 5,
        "to": 6,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 400 - 480h (440h = 15h / Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3h/Wo.)",
+       "v": "Geführte Trainings: ca. 400 - 480 h (440 h = 15 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3 h/Wo.)",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 365 - 435h (400h = 13h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3h/Wo.)",
+       "v": "Geführte Trainings: ca. 365 - 435 h (400 h = 13 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3 h/Wo.)",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 365 - 435h (400h =13h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3h/Wo.)",
+       "v": "Geführte Trainings: ca. 365 - 435 h (400 h =13 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-3 h/Wo.)",
        "from": 9,
        "to": 9,
        "l": []
@@ -315,43 +315,43 @@
      "label": "Winter Off-Snow",
      "segs": [
       {
-       "v": "Geführte Trainings: 0-2h/Woche\n\nAllgemein Sportliche Aktivität: 2-4h/Woche",
+       "v": "Geführte Trainings: 0-2 h/Woche\n\nAllgemein Sportliche Aktivität: 2-4 h/Woche",
        "from": 0,
        "to": 2,
        "l": []
       },
       {
-       "v": "Geführte Trainings: 1-3h/Woche\n\nAllgemein Sportliche Aktivität: 2-3h/Woche",
+       "v": "Geführte Trainings: 1-3 h/Woche\n\nAllgemein Sportliche Aktivität: 2-3 h/Woche",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Geführte Trainings: 2-4h/Woche\n\nAllgemein Sportliche Aktivität: 2-3h/Woche",
+       "v": "Geführte Trainings: 2-4 h/Woche\n\nAllgemein Sportliche Aktivität: 2-3 h/Woche",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 165 - 195h (180h = 8h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2h/Wo.)",
+       "v": "Geführte Trainings: ca. 165 - 195 h (180 h = 8 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)",
        "from": 5,
        "to": 6,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 180 - 220h (200h = 9h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2h/Wo.)",
+       "v": "Geführte Trainings: ca. 180 - 220 h (200 h = 9 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)",
        "from": 7,
        "to": 7,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 200 - 240h (220h = 10h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2h/Wo.)",
+       "v": "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)",
        "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Geführte Trainings: ca. 200 - 240h (220h = 10h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2h/Wo.)",
+       "v": "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)",
        "from": 9,
        "to": 9,
        "l": []
@@ -3122,7 +3122,7 @@
        "l": []
       },
       {
-       "v": "gemäss RV\n\nOST\n•\n•\n•\n•\n\nMITTE\n•\n•\n•\n•\n\nWEST\n•\n•\n•\n\nOTHER\n•",
+       "v": "gemäss RV",
        "from": 3,
        "to": 4,
        "l": [
@@ -3177,7 +3177,7 @@
        ]
       },
       {
-       "v": "gemäss RV |Swiss-Ski\n\nOST\n•\n•\n•\n•\n\nMITTE\n•\n•\n•\n•\n\nWEST\n•\n•\n•\n\nOTHER\n•\n\nSwiss-Ski\n•\n•",
+       "v": "gemäss RV |Swiss-Ski",
        "from": 5,
        "to": 6,
        "l": [

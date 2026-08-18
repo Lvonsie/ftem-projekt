@@ -390,6 +390,19 @@ def render_zone_groups(blocks):
         out += '</div>'
     return out
 
+def fnv36(s):
+    """FNV-1a (32 Bit, base36) - identisch zur JS-Version (Math.imul). Fingerabdruck
+    des deutschen Quelltexts: Overrides, die dem Quelltext entsprechen, werden im
+    Frontend ignoriert (sie wuerden sonst die Uebersetzungen ueberdecken)."""
+    h = 0x811C9DC5
+    for _c in s:
+        h ^= ord(_c)
+        h = (h * 0x01000193) & 0xFFFFFFFF
+    if h == 0: return "0"
+    _d = "0123456789abcdefghijklmnopqrstuvwxyz"; _r = ""
+    while h: _r = _d[h % 36] + _r; h //= 36
+    return _r
+
 def render_cell(seg, lang, cid=None, edit=False):
     if edit:
         raw = seg.get("v") or ""
@@ -406,7 +419,7 @@ def render_cell(seg, lang, cid=None, edit=False):
             parts = [render_block(bl, link_texts) for bl in blocks]
             inner = "".join(p for p in parts if p)
     text_html = inner or '<div class="empty">–</div>'
-    cidattr = (' data-cid="'+esc(cid)+'"') if cid else ''
+    cidattr = (' data-cid="'+esc(cid)+'" data-bh="'+fnv36(seg.get("v") or "")+'"') if cid else ''
     out = '<div class="ctext"'+cidattr+'>'+text_html+'</div>'
     if seg["l"]:
         seen=set(); btns=""
@@ -985,7 +998,7 @@ def home_html(datamap, lang):
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                         '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
-                        '<p class="ps-desc ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|intro">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
+                        '<p class="ps-desc ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|intro" data-bh="'+fnv36(intro2)+'">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
                         + secs +
                         '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
@@ -2030,17 +2043,25 @@ function loadOverrides(){
   return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
     .then(r=>r.ok?r.json():[]).then(rows=>{const m={};(rows||[]).forEach(x=>m[x.cid]=x.txt);return m;}).catch(()=>({}));
 }
+function _fnv36(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return h.toString(36);}
 function applyOverrides(map){
   // Klartext-Ziele (Titel, Einleitungen, News): nur Text ersetzen, <b>/<i> erlaubt
   function plain(v){return _esc(v).replace(/&lt;(\/?)(b|i)&gt;/g,'<$1$2>').replace(/\n/g,'<br>');}
+  // Override anwenden? Nur wenn er sich vom deutschen Quelltext unterscheidet
+  // (data-bh) - sonst wuerde er auf FR/IT/EN die Uebersetzung ueberdecken.
+  function use(el,v){
+    if(v==null)return false;
+    const bh=el.dataset.bh;
+    return !(bh&&_fnv36(v)===bh);
+  }
   function patch(root){
     root.querySelectorAll('.ctext[data-cid]').forEach(el=>{
       const v=map[el.dataset.cid];
-      if(v!=null){el.innerHTML=structCell(v);}
+      if(use(el,v)){el.innerHTML=structCell(v);}
     });
     root.querySelectorAll('.ovr-txt[data-cid]').forEach(el=>{
       const v=map[el.dataset.cid];
-      if(v!=null){el.innerHTML=plain(v);}
+      if(use(el,v)){el.innerHTML=plain(v);}
     });
   }
   patch(document);
