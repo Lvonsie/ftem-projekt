@@ -586,7 +586,8 @@ def sport_section(sport, d, lang, edit=False):
     sid = sport["id"]; name = tr(sport["name"], lang)
     if edit and d is not None:
         sections, _ = build_sections(d, sid, lang, edit=True)
-        return '<section class="sport" data-sport="'+sid+'" hidden><div class="wrap">'+sections+'</div></section>'
+        return ('<section class="sport" data-sport="'+sid+'" hidden><div class="wrap">'
+                + home_edit_html(sport, d) + sections + '</div></section>')
     aw = esc(tr("Athlet:innen-Weg", lang))
     back = ('<a class="back" href="#" title="'+esc(BACK_TITLE[lang])+'" aria-label="'+esc(BACK_TITLE[lang])+'">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>')
@@ -679,6 +680,12 @@ NEWS = [
     },
 ]
 
+# Einleitungssatz der schwarzen Fusszeile (im Admin editierbar: cid "start|footintro")
+FOOT_INTRO = {"de": "Sportartübergreifende Grundlagen für den ganzen Schneesport:",
+              "fr": "Bases transversales pour tous les sports de neige :",
+              "it": "Basi trasversali per tutti gli sport sulla neve:",
+              "en": "Cross-sport foundations for all snow sports:"}
+
 def news_html(lang):
     if not NEWS:
         return ""
@@ -686,17 +693,20 @@ def news_html(lang):
     upd = {"de":"Aktualisiert am ","fr":"Mis à jour le ","it":"Aggiornato il ","en":"Updated on "}.get(lang, "Aktualisiert am ")
     cards = ""
     for i, it in enumerate(NEWS):
-        body = "".join('<p>'+esc(tr(p, lang))+'</p>' for p in it.get("body", []))
+        # Texte tragen data-cid -> im Admin-Bereich editierbar (Links/Struktur nicht)
+        body = "".join('<p class="ovr-txt" data-cid="news|'+str(i)+'|b'+str(j)+'">'+esc(tr(p, lang))+'</p>'
+                       for j, p in enumerate(it.get("body", [])))
         if it.get("bullets"):
-            body += '<ul>'+"".join('<li>'+esc(tr(b, lang))+'</li>' for b in it["bullets"])+'</ul>'
+            body += '<ul>'+"".join('<li class="ovr-txt" data-cid="news|'+str(i)+'|u'+str(j)+'">'+esc(tr(b, lang))+'</li>'
+                                   for j, b in enumerate(it["bullets"]))+'</ul>'
         if it.get("foot"):
-            body += '<p>'+esc(tr(it["foot"], lang))+'</p>'
+            body += '<p class="ovr-txt" data-cid="news|'+str(i)+'|foot">'+esc(tr(it["foot"], lang))+'</p>'
         _urls = (' data-urls=\''+json.dumps(it["urls"], ensure_ascii=False)+'\'') if it.get("urls") else ''
         link = ('<a class="news-link" href="'+esc(it["url"])+'"'+_urls+' target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
-        date = ('<span class="news-date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
+        date = ('<span class="news-date ovr-txt" data-cid="news|'+str(i)+'|date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
         new_badge = '<span class="news-new">NEU</span>' if i == 0 else ''
         cards += ('<article class="news-card"><div class="news-meta">'+date+new_badge+'</div>'
-                  '<h3>'+esc(tr(it["title"], lang))+'</h3>'
+                  '<h3 class="ovr-txt" data-cid="news|'+str(i)+'|title">'+esc(tr(it["title"], lang))+'</h3>'
                   '<div class="news-body">'+body+'</div>'+link+'</article>')
     return ('<section class="news"><h2 class="news-h">'+esc(heading)+'</h2>'
             '<div class="news-upd">'+esc(upd)+datestr+'</div>'
@@ -805,10 +815,10 @@ def home_html(datamap, lang):
                + _gondel + _plabels + _nodes + _ends + '</svg>')
     pc2 = {"F": "f", "T": "t", "E": "e", "M": "m"}
     _desc = "".join('<div class="fwd fwd-' + pc2[pk] + '"><span class="fwd-h"><b>' + pn + '</b> ' + pr + '</span>'
-                    '<p>' + desc + '</p></div>' for pk, pn, pr, desc in info["phases"])
+                    '<p class="ovr-txt" data-cid="info|ph|' + pc2[pk] + '">' + desc + '</p></div>' for pk, pn, pr, desc in info["phases"])
     ftem_info = ('<div class="ftem-info">'
                  '<h2>' + info["title"] + '</h2>'
-                 '<p class="lead">' + info["lead"] + '</p>'
+                 '<p class="lead ovr-txt" data-cid="info|lead">' + info["lead"] + '</p>'
                  '<div class="fweg-wrap">' + weg_svg + '</div>'
                  '<div class="fweg-desc">' + _desc + '</div></div>')
     fb_ph = {"de":"Dein Feedback …","fr":"Votre commentaire …","it":"Il tuo feedback …","en":"Your feedback …"}.get(lang, "Dein Feedback …")
@@ -921,7 +931,7 @@ def home_html(datamap, lang):
         ph_tpls += ('<template id="tpl-ph-'+k+'" data-t="'+esc(pname)+' · '+esc(prng)+'">'
                     '<div class="ph-sum ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                     '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+'</div></div></div>'
-                    '<p class="ps-desc">'+pdesc+'</p>'
+                    '<p class="ps-desc ovr-txt" data-cid="info|ph|'+k+'">'+pdesc+'</p>'
                     '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     for s2 in SPORTS:
         d2 = datamap.get(s2["id"])
@@ -932,7 +942,7 @@ def home_html(datamap, lang):
         for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
             intro2 = (hm.get("intro") or {}).get(k) or pdesc
             secs = ""
-            for sec in hm.get("sections", []):
+            for si2, sec in enumerate(hm.get("sections", [])):
                 cols = ""
                 ncols = 0
                 for st in PH_STAGES[k]:
@@ -940,7 +950,9 @@ def home_html(datamap, lang):
                     if not cell or not (cell.get("v") or cell.get("l")):
                         continue
                     # gleiche Aufbereitung wie die Zellen im Athlet:innen-Weg
-                    body2 = render_cell({"v": cell.get("v") or "", "l": cell.get("l") or []}, lang)
+                    # (data-cid -> im Admin-Bereich als Startseiten-Inhalt editierbar)
+                    body2 = render_cell({"v": cell.get("v") or "", "l": cell.get("l") or []}, lang,
+                                        cid="home|"+s2["id"]+"|"+str(si2)+"|"+st)
                     age2 = ages2.get(st, "")
                     ncols += 1
                     cols += ('<div class="ps-col"><div class="ps-st">'+st
@@ -956,7 +968,7 @@ def home_html(datamap, lang):
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                         '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
-                        '<p class="ps-desc">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
+                        '<p class="ps-desc ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|intro">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
                         + secs +
                         '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
@@ -1038,12 +1050,9 @@ def home_html(datamap, lang):
         ({"de": "Nachhaltigkeit im Schneesport", "fr": "Durabilité dans les sports de neige", "it": "Sostenibilità negli sport sulla neve", "en": "Sustainability in snow sports"}[lang],
          "Nachhaltigkeit im Schneesport", "https://tool.jugendundsport.ch/modules/654e2b8784846dba7a0ad962?lang=de"),
     ]
-    foot_intro = {"de": "Sportartübergreifende Grundlagen für den ganzen Schneesport:",
-                  "fr": "Bases transversales pour tous les sports de neige :",
-                  "it": "Basi trasversali per tutti gli sport sulla neve:",
-                  "en": "Cross-sport foundations for all snow sports:"}[lang]
+    foot_intro = FOOT_INTRO[lang]
     footbar = ('<div class="bottombar">'
-               '<span class="bb-intro">'+esc(foot_intro)+'</span>'
+               '<span class="bb-intro ovr-txt" data-cid="start|footintro">'+esc(foot_intro)+'</span>'
                '<div class="bb-links">'
                + "".join('<a class="bb-item np-mission" href="'+esc(u)+'" data-title="'+esc(t)+'">'+esc(l)+'</a>'
                          for l, t, u in foot_links)
@@ -1107,7 +1116,8 @@ def home_html(datamap, lang):
             +(('<div class="news-box" data-open="tpl-news" data-t="'+esc(news_label)+'" role="button" tabindex="0">'
               '<div class="nb-head">'+esc(news_label)+nbadge+'</div>'
               '<ul class="nb-list">'
-              + "".join('<li>'+esc(tr(it["title"], lang))+'</li>' for it in NEWS[:3])
+              + "".join('<li class="ovr-txt" data-cid="news|'+str(i9)+'|title">'+esc(tr(it["title"], lang))+'</li>'
+                        for i9, it in enumerate(NEWS[:3]))
               + '</ul>'
               '<span class="nb-more">'+esc({"de":"Alle News ansehen","fr":"Voir toutes les actualités","it":"Vedi tutte le notizie","en":"See all news"}[lang])+' →</span>'
               '</div>') if NEWS else
@@ -1991,10 +2001,21 @@ function loadOverrides(){
     .then(r=>r.ok?r.json():[]).then(rows=>{const m={};(rows||[]).forEach(x=>m[x.cid]=x.txt);return m;}).catch(()=>({}));
 }
 function applyOverrides(map){
-  document.querySelectorAll('.ctext[data-cid]').forEach(el=>{
-    const v=map[el.dataset.cid];
-    if(v!=null){el.innerHTML=structCell(v);}
-  });
+  // Klartext-Ziele (Titel, Einleitungen, News): nur Text ersetzen, <b>/<i> erlaubt
+  function plain(v){return _esc(v).replace(/&lt;(\/?)(b|i)&gt;/g,'<$1$2>').replace(/\n/g,'<br>');}
+  function patch(root){
+    root.querySelectorAll('.ctext[data-cid]').forEach(el=>{
+      const v=map[el.dataset.cid];
+      if(v!=null){el.innerHTML=structCell(v);}
+    });
+    root.querySelectorAll('.ovr-txt[data-cid]').forEach(el=>{
+      const v=map[el.dataset.cid];
+      if(v!=null){el.innerHTML=plain(v);}
+    });
+  }
+  patch(document);
+  // Inhalte in <template> (Stufen-Popups, News-Overlay, "Was ist FTEM?") ebenfalls patchen
+  document.querySelectorAll('template').forEach(t=>patch(t.content));
 }
 
 // Sprachwechsel behaelt die aktuelle Sportart (#hash) bei
@@ -2759,6 +2780,15 @@ __MAINCSS__
 .chgnav button:hover{background:#f2f4f6}
 .chgnav #chgpos{font-size:12px;font-weight:800;color:#d52b1e;min-width:44px;text-align:center}
 .chgnav #chgundo{color:#d52b1e;border-color:rgba(213,43,30,.4)}
+/* Startseiten-Inhalte im Admin (Landingpage-Texte) */
+.adm-home{padding:12px 14px 16px;display:flex;flex-direction:column;gap:12px}
+.adm-field label{display:block;font-size:10.5px;font-weight:800;color:#546a8c;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
+.adm-field label .adm-hint{display:block;font-style:normal;text-transform:none;letter-spacing:0;font-weight:600;color:#98a1ad;font-size:10.5px;margin-top:1px}
+.adm-field .cedit{font-size:12.5px}
+.adm-sec{border:1px solid #e4e8ec;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:10px;background:#fafbfc}
+.adm-sect{font-size:12.5px;font-weight:800;color:#1d2630}
+.adm-tag{font-size:10.5px;font-weight:700;color:#697080;background:#eef1f4;border-radius:20px;padding:2px 9px;margin-left:8px;letter-spacing:.02em;vertical-align:2px}
+.adm-note{margin:0;font-size:12px;color:#8a6a00;background:#fdf7e4;border:1px solid #f0e2ad;border-radius:8px;padding:7px 10px}
 </style></head>
 <body>
 <div id="gate">
@@ -2998,8 +3028,94 @@ function save(){
 }
 </script></body></html>'''
 
+# --- Startseiten-Inhalte im Admin -------------------------------------------
+# Gleiche Mechanik wie der Athlet:innen-Weg: nur TEXTE sind editierbar (textarea
+# mit data-cid), die Struktur (Abschnitte, Links, Reihenfolge) bleibt fix.
+PH_STAGES_ADM = {"f": ["F1","F2","F3"], "t": ["T1","T2","T3","T4"], "e": ["E1","E2"], "m": ["M"]}
+
+def _adm_field(label, cid, val, hint=""):
+    return ('<div class="adm-field"><label>'+esc(label)
+            + ('<i class="adm-hint">'+esc(hint)+'</i>' if hint else '')
+            + '</label><textarea class="cedit" data-cid="'+esc(cid)+'">'+esc(val or "")+'</textarea></div>')
+
+def home_edit_html(sport, d):
+    """Editierbare Startseiten-Popups (Stufen-Überblick F/T/E/M) einer Sportart."""
+    hm = (d or {}).get("home")
+    if not hm:
+        return ""
+    info = FTEM_INFO["de"]
+    out = ('<h2 class="grp" style="--gc:#1f8fa6">Startseite &ndash; Stufen-Überblick '
+           '<span class="adm-tag">Popups der FTEM-Knöpfe</span></h2>')
+    for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
+        intro = (hm.get("intro") or {}).get(k) or pdesc
+        blocks = _adm_field("Einleitung", "home|"+sport["id"]+"|"+k+"|intro", intro)
+        for si, sec in enumerate(hm.get("sections", [])):
+            cols = ""
+            for st in PH_STAGES_ADM[k]:
+                cell = (sec.get("cells") or {}).get(st)
+                if not cell or not (cell.get("v") or cell.get("l")):
+                    continue
+                cols += _adm_field(st, "home|"+sport["id"]+"|"+str(si)+"|"+st, cell.get("v") or "")
+            if cols:
+                blocks += '<div class="adm-sec"><div class="adm-sect">'+esc(sec["title"])+'</div>'+cols+'</div>'
+        out += ('<details class="theme"><summary>'
+                '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">'+letter+'</span>'
+                '<span class="tt">'+esc(pname)+' &middot; '+esc(prng)+'</span><span class="tchev"></span></summary>'
+                '<div class="adm-home">'+blocks+'</div></details>')
+    return out
+
+def start_edit_html(orig):
+    """Allgemeine Startseiten-Texte (Was ist FTEM?, News, Fusszeile) + orig-Registrierung."""
+    info = FTEM_INFO["de"]
+    out = '<section class="sport" data-sport="__start" hidden><div class="wrap">'
+    out += '<h2 class="grp" style="--gc:#1f8fa6">Startseite &ndash; Allgemeine Texte</h2>'
+    # "Was ist FTEM?"
+    body = _adm_field("Einleitung", "info|lead", info["lead"], "Fett mit <b>…</b> möglich")
+    orig["info|lead"] = info["lead"]
+    for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
+        body += _adm_field(pname+" ("+prng+")", "info|ph|"+k, pdesc,
+                           "erscheint im Overlay «Was ist FTEM?» und in den Stufen-Popups ohne Sportart-Inhalt")
+        orig["info|ph|"+k] = pdesc
+    out += ('<details class="theme"><summary>'
+            '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">?</span>'
+            '<span class="tt">«Was ist FTEM?» &ndash; Einleitung &amp; Phasen</span><span class="tchev"></span></summary>'
+            '<div class="adm-home">'+body+'</div></details>')
+    # News
+    nbody = ""
+    for i, it in enumerate(NEWS):
+        fields = _adm_field("Titel", "news|"+str(i)+"|title", it.get("title",""))
+        orig["news|"+str(i)+"|title"] = it.get("title","")
+        if it.get("date"):
+            fields += _adm_field("Datum", "news|"+str(i)+"|date", it["date"])
+            orig["news|"+str(i)+"|date"] = it["date"]
+        for j, p in enumerate(it.get("body", [])):
+            fields += _adm_field("Absatz "+str(j+1), "news|"+str(i)+"|b"+str(j), p)
+            orig["news|"+str(i)+"|b"+str(j)] = p
+        for j, b in enumerate(it.get("bullets") or []):
+            fields += _adm_field("Aufzählungspunkt "+str(j+1), "news|"+str(i)+"|u"+str(j), b)
+            orig["news|"+str(i)+"|u"+str(j)] = b
+        if it.get("foot"):
+            fields += _adm_field("Fusszeile", "news|"+str(i)+"|foot", it["foot"])
+            orig["news|"+str(i)+"|foot"] = it["foot"]
+        nbody += '<div class="adm-sec"><div class="adm-sect">News '+str(i+1)+('&nbsp;&middot;&nbsp;NEU' if i==0 else '')+'</div>'+fields+'</div>'
+    out += ('<details class="theme"><summary>'
+            '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">N</span>'
+            '<span class="tt">News</span><span class="tchev"></span></summary>'
+            '<div class="adm-home"><p class="adm-note">Links der News-Meldungen werden hier nicht bearbeitet &ndash; sie bleiben wie hinterlegt.</p>'+nbody+'</div></details>')
+    # Fusszeile
+    orig["start|footintro"] = FOOT_INTRO["de"]
+    out += ('<details class="theme"><summary>'
+            '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">F</span>'
+            '<span class="tt">Schwarze Fusszeile</span><span class="tchev"></span></summary>'
+            '<div class="adm-home">'+_adm_field("Einleitungssatz", "start|footintro", FOOT_INTRO["de"])+'</div></details>')
+    out += '</div></section>'
+    return out
+
 def admin_html(datamap):
     secs = ""; opts = ""; orig = {}
+    # Startseite als erster Eintrag im Auswahlmenue
+    secs += start_edit_html(orig)
+    opts += '<option value="__start">Startseite (Landingpage)</option>'
     for s in SPORTS:
         d = datamap[s["id"]]
         if not d: continue
@@ -3007,8 +3123,20 @@ def admin_html(datamap):
         opts += '<option value="'+esc(s["id"])+'">'+esc(tr(s["name"], "de"))+'</option>'
         for ti, t in enumerate(d["themes"]):
             for ri, r in enumerate(t["rows"]):
-                for si, seg in enumerate(r["segs"]):
+                # WICHTIG: gleiche Nummerierung wie theme_html (zusammengefuehrte
+                # Segmente) – sonst zeigen Zellen nach Verschmelzungen faelschlich
+                # "ungespeichert" an (Index-Verschiebung).
+                for si, seg in enumerate(merge_same_segs(r["segs"])):
                     orig[s["id"]+"|"+str(ti)+"|"+str(ri)+"|"+str(si)] = seg.get("v") or ""
+        # Startseiten-Popup-Inhalte dieser Sportart (Stufen-Überblick)
+        hm = d.get("home")
+        if hm:
+            for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], FTEM_INFO["de"]["phases"]):
+                orig["home|"+s["id"]+"|"+k+"|intro"] = (hm.get("intro") or {}).get(k) or pdesc
+            for si, sec in enumerate(hm.get("sections", [])):
+                for st, cell in (sec.get("cells") or {}).items():
+                    if cell and (cell.get("v") or cell.get("l")):
+                        orig["home|"+s["id"]+"|"+str(si)+"|"+st] = cell.get("v") or ""
     orig_js = json.dumps(orig, ensure_ascii=False).replace("</", "<\\/")
     gloss = []
     gpath = os.path.join(BASE, "glossary.json")
