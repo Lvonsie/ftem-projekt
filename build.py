@@ -694,19 +694,17 @@ def news_html(lang):
     cards = ""
     for i, it in enumerate(NEWS):
         # Texte tragen data-cid -> im Admin-Bereich editierbar (Links/Struktur nicht)
-        body = "".join('<p class="ovr-txt" data-cid="news|'+str(i)+'|b'+str(j)+'">'+esc(tr(p, lang))+'</p>'
-                       for j, p in enumerate(it.get("body", [])))
+        body = "".join('<p>'+esc(tr(p, lang))+'</p>' for p in it.get("body", []))
         if it.get("bullets"):
-            body += '<ul>'+"".join('<li class="ovr-txt" data-cid="news|'+str(i)+'|u'+str(j)+'">'+esc(tr(b, lang))+'</li>'
-                                   for j, b in enumerate(it["bullets"]))+'</ul>'
+            body += '<ul>'+"".join('<li>'+esc(tr(b, lang))+'</li>' for b in it["bullets"])+'</ul>'
         if it.get("foot"):
-            body += '<p class="ovr-txt" data-cid="news|'+str(i)+'|foot">'+esc(tr(it["foot"], lang))+'</p>'
+            body += '<p>'+esc(tr(it["foot"], lang))+'</p>'
         _urls = (' data-urls=\''+json.dumps(it["urls"], ensure_ascii=False)+'\'') if it.get("urls") else ''
         link = ('<a class="news-link" href="'+esc(it["url"])+'"'+_urls+' target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
-        date = ('<span class="news-date ovr-txt" data-cid="news|'+str(i)+'|date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
+        date = ('<span class="news-date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
         new_badge = '<span class="news-new">NEU</span>' if i == 0 else ''
         cards += ('<article class="news-card"><div class="news-meta">'+date+new_badge+'</div>'
-                  '<h3 class="ovr-txt" data-cid="news|'+str(i)+'|title">'+esc(tr(it["title"], lang))+'</h3>'
+                  '<h3>'+esc(tr(it["title"], lang))+'</h3>'
                   '<div class="news-body">'+body+'</div>'+link+'</article>')
     return ('<section class="news"><h2 class="news-h">'+esc(heading)+'</h2>'
             '<div class="news-upd">'+esc(upd)+datestr+'</div>'
@@ -815,10 +813,10 @@ def home_html(datamap, lang):
                + _gondel + _plabels + _nodes + _ends + '</svg>')
     pc2 = {"F": "f", "T": "t", "E": "e", "M": "m"}
     _desc = "".join('<div class="fwd fwd-' + pc2[pk] + '"><span class="fwd-h"><b>' + pn + '</b> ' + pr + '</span>'
-                    '<p class="ovr-txt" data-cid="info|ph|' + pc2[pk] + '">' + desc + '</p></div>' for pk, pn, pr, desc in info["phases"])
+                    '<p>' + desc + '</p></div>' for pk, pn, pr, desc in info["phases"])
     ftem_info = ('<div class="ftem-info">'
                  '<h2>' + info["title"] + '</h2>'
-                 '<p class="lead ovr-txt" data-cid="info|lead">' + info["lead"] + '</p>'
+                 '<p class="lead">' + info["lead"] + '</p>'
                  '<div class="fweg-wrap">' + weg_svg + '</div>'
                  '<div class="fweg-desc">' + _desc + '</div></div>')
     fb_ph = {"de":"Dein Feedback …","fr":"Votre commentaire …","it":"Il tuo feedback …","en":"Your feedback …"}.get(lang, "Dein Feedback …")
@@ -931,7 +929,7 @@ def home_html(datamap, lang):
         ph_tpls += ('<template id="tpl-ph-'+k+'" data-t="'+esc(pname)+' · '+esc(prng)+'">'
                     '<div class="ph-sum ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                     '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+'</div></div></div>'
-                    '<p class="ps-desc ovr-txt" data-cid="info|ph|'+k+'">'+pdesc+'</p>'
+                    '<p class="ps-desc">'+pdesc+'</p>'
                     '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     for s2 in SPORTS:
         d2 = datamap.get(s2["id"])
@@ -1052,7 +1050,7 @@ def home_html(datamap, lang):
     ]
     foot_intro = FOOT_INTRO[lang]
     footbar = ('<div class="bottombar">'
-               '<span class="bb-intro ovr-txt" data-cid="start|footintro">'+esc(foot_intro)+'</span>'
+               '<span class="bb-intro">'+esc(foot_intro)+'</span>'
                '<div class="bb-links">'
                + "".join('<a class="bb-item np-mission" href="'+esc(u)+'" data-title="'+esc(t)+'">'+esc(l)+'</a>'
                          for l, t, u in foot_links)
@@ -1116,8 +1114,7 @@ def home_html(datamap, lang):
             +(('<div class="news-box" data-open="tpl-news" data-t="'+esc(news_label)+'" role="button" tabindex="0">'
               '<div class="nb-head">'+esc(news_label)+nbadge+'</div>'
               '<ul class="nb-list">'
-              + "".join('<li class="ovr-txt" data-cid="news|'+str(i9)+'|title">'+esc(tr(it["title"], lang))+'</li>'
-                        for i9, it in enumerate(NEWS[:3]))
+              + "".join('<li>'+esc(tr(it["title"], lang))+'</li>' for it in NEWS[:3])
               + '</ul>'
               '<span class="nb-more">'+esc({"de":"Alle News ansehen","fr":"Voir toutes les actualités","it":"Vedi tutte le notizie","en":"See all news"}[lang])+' →</span>'
               '</div>') if NEWS else
@@ -1962,11 +1959,25 @@ const home = document.getElementById('home');
 const SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
 function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*([\s\S]*)$/;
+const SNOW_RE=/^(on|off)[\s-]?snow:?$/i;
 function structBlock(b){
   b=b.replace(/\s+$/,'');
   if(!b.trim())return '';
   const lines=b.split('\n');
   const nonempty=lines.map(l=>l.trim()).filter(Boolean);
+  // "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip (gleich wie beim Seiten-Build)
+  if(SNOW_RE.test(lines[0].trim())){
+    const lab=/^on/i.test(lines[0].trim())?'On-Snow':'Off-Snow';
+    const items=[],other=[];
+    lines.slice(1).forEach(l=>{const ls=l.trim();if(!ls)return;
+      if('-–•'.indexOf(ls[0])>=0)items.push(ls.replace(/^[-–•]+/,'').trim());
+      else if(items.length)items[items.length-1]+=' '+ls;
+      else other.push(ls);});
+    let body='';
+    if(other.length)body+='<p>'+_esc(other.join(' '))+'</p>';
+    if(items.length)body+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';
+    return '<div class="zone"><span class="zlab">'+lab+'</span>'+body+'</div>';
+  }
   if(lines.some(l=>l.trim().startsWith('•'))){
     const intro=[],items=[];
     lines.forEach(l=>{const ls=l.trim();if(ls.startsWith('•'))items.push(ls.replace(/^•+/,'').trim());else if(ls){items.length?items.push(ls):intro.push(ls);}});
@@ -3064,58 +3075,8 @@ def home_edit_html(sport, d):
                 '<div class="adm-home">'+blocks+'</div></details>')
     return out
 
-def start_edit_html(orig):
-    """Allgemeine Startseiten-Texte (Was ist FTEM?, News, Fusszeile) + orig-Registrierung."""
-    info = FTEM_INFO["de"]
-    out = '<section class="sport" data-sport="__start" hidden><div class="wrap">'
-    out += '<h2 class="grp" style="--gc:#1f8fa6">Startseite &ndash; Allgemeine Texte</h2>'
-    # "Was ist FTEM?"
-    body = _adm_field("Einleitung", "info|lead", info["lead"], "Fett mit <b>…</b> möglich")
-    orig["info|lead"] = info["lead"]
-    for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
-        body += _adm_field(pname+" ("+prng+")", "info|ph|"+k, pdesc,
-                           "erscheint im Overlay «Was ist FTEM?» und in den Stufen-Popups ohne Sportart-Inhalt")
-        orig["info|ph|"+k] = pdesc
-    out += ('<details class="theme"><summary>'
-            '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">?</span>'
-            '<span class="tt">«Was ist FTEM?» &ndash; Einleitung &amp; Phasen</span><span class="tchev"></span></summary>'
-            '<div class="adm-home">'+body+'</div></details>')
-    # News
-    nbody = ""
-    for i, it in enumerate(NEWS):
-        fields = _adm_field("Titel", "news|"+str(i)+"|title", it.get("title",""))
-        orig["news|"+str(i)+"|title"] = it.get("title","")
-        if it.get("date"):
-            fields += _adm_field("Datum", "news|"+str(i)+"|date", it["date"])
-            orig["news|"+str(i)+"|date"] = it["date"]
-        for j, p in enumerate(it.get("body", [])):
-            fields += _adm_field("Absatz "+str(j+1), "news|"+str(i)+"|b"+str(j), p)
-            orig["news|"+str(i)+"|b"+str(j)] = p
-        for j, b in enumerate(it.get("bullets") or []):
-            fields += _adm_field("Aufzählungspunkt "+str(j+1), "news|"+str(i)+"|u"+str(j), b)
-            orig["news|"+str(i)+"|u"+str(j)] = b
-        if it.get("foot"):
-            fields += _adm_field("Fusszeile", "news|"+str(i)+"|foot", it["foot"])
-            orig["news|"+str(i)+"|foot"] = it["foot"]
-        nbody += '<div class="adm-sec"><div class="adm-sect">News '+str(i+1)+('&nbsp;&middot;&nbsp;NEU' if i==0 else '')+'</div>'+fields+'</div>'
-    out += ('<details class="theme"><summary>'
-            '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">N</span>'
-            '<span class="tt">News</span><span class="tchev"></span></summary>'
-            '<div class="adm-home"><p class="adm-note">Links der News-Meldungen werden hier nicht bearbeitet &ndash; sie bleiben wie hinterlegt.</p>'+nbody+'</div></details>')
-    # Fusszeile
-    orig["start|footintro"] = FOOT_INTRO["de"]
-    out += ('<details class="theme"><summary>'
-            '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">F</span>'
-            '<span class="tt">Schwarze Fusszeile</span><span class="tchev"></span></summary>'
-            '<div class="adm-home">'+_adm_field("Einleitungssatz", "start|footintro", FOOT_INTRO["de"])+'</div></details>')
-    out += '</div></section>'
-    return out
-
 def admin_html(datamap):
     secs = ""; opts = ""; orig = {}
-    # Startseite als erster Eintrag im Auswahlmenue
-    secs += start_edit_html(orig)
-    opts += '<option value="__start">Startseite (Landingpage)</option>'
     for s in SPORTS:
         d = datamap[s["id"]]
         if not d: continue
