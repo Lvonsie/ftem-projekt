@@ -1166,8 +1166,7 @@ def home_html(datamap, lang):
                   # Direktlink klein im Eintrag (oeffnet extern, ohne News-Overlay-Umweg)
                   + (('<a class="nb-lnk" href="'+esc(it["url"])+'"'
                       + ((" data-urls='"+json.dumps(it["urls"], ensure_ascii=False).replace("'","&#39;")+"'") if it.get("urls") else '')
-                      + ' target="_blank" rel="noopener">'
-                      + esc(it["url"].split('/')[2].replace('www.',''))+' ↗</a>') if it.get("url") else '')
+                      + ' target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else '')
                   + '</li>'
                   for it in NEWS[:3])
               + '</ul>'
@@ -1442,9 +1441,10 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* News-Eintraege als helle Pill-Knoepfe (Feedback Bjoern) */
 .news-box .nb-list{list-style:none;margin:4px 0 2px;padding:0 12px;color:#39424e}
 .news-box .nb-list li{position:relative;padding:7px 14px 7px 26px;font-size:12px;font-weight:700;margin:6px 0;background:#fff;border:1px solid rgba(29,38,48,.14);border-radius:16px;box-shadow:0 2px 8px rgba(29,38,48,.06);transition:border-color .15s,color .15s}
-.news-box .nb-t{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.news-box .nb-lnk{display:inline-block;margin-top:2px;font-size:10.5px;font-weight:700;color:var(--red);text-decoration:none;letter-spacing:.01em}
-.news-box .nb-lnk:hover{text-decoration:underline}
+.news-box .nb-list li{display:flex;align-items:center;gap:8px}
+.news-box .nb-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.news-box .nb-lnk{flex:none;font-size:10.5px;font-weight:800;color:var(--red);text-decoration:none;letter-spacing:.01em;border:1px solid rgba(213,43,30,.45);border-radius:999px;padding:3px 10px;background:#fff;transition:background .15s,border-color .15s}
+.news-box .nb-lnk:hover{background:#fdf3f2;border-color:var(--red)}
 .news-box:hover .nb-list li{border-color:rgba(213,43,30,.40)}
 .news-box .nb-more{display:inline-block;font-weight:800;font-size:12px;color:var(--red);margin:4px 12px 12px;padding:6px 15px;border:1px solid rgba(213,43,30,.45);border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(29,38,48,.06);letter-spacing:.02em;transition:background .15s,border-color .15s}
 .news-box:hover .nb-more{background:#fdf3f2;border-color:var(--red)}
