@@ -964,9 +964,7 @@ def home_html(datamap, lang):
     aw_lbl = tr("Athlet:innen-Weg", lang)
     go_lbl = {"de": "Zum Athlet:innen-Weg", "fr": "Vers le parcours de l'athlète", "it": "Al percorso dell'atleta", "en": "To the athlete pathway"}[lang]
     aw_cta = ('<div class="aw-cta"><button class="aw-btn" type="button">'+esc(aw_lbl)+
-              ' <span class="aw-ar">→</span></button></div>'
-              # "Was ist FTEM?" als schlichter Info-Knopf (ohne Beschriftung) unten rechts
-              '<button class="aw-info" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'" title="'+esc(info_label)+'" aria-label="'+esc(info_label)+'">i</button>')
+              ' <span class="aw-ar">→</span></button></div>')
     # Stufen-Summaries (Klick auf Zone -> Kurzbeschrieb statt direkt Athletenweg).
     # Pro Sportart aus dem "homepage"-Sheet des Excels (data["home"]); generischer
     # FTEM-Text als Fallback, falls eine Sportart keine Zusammenfassung hat.
@@ -1101,7 +1099,10 @@ def home_html(datamap, lang):
                '<div class="bb-links">'
                + "".join('<a class="bb-item np-mission" href="'+esc(u)+'" data-title="'+esc(t)+'">'+esc(l)+'</a>'
                          for l, t, u in foot_links)
-               + '</div></div>')
+               + '</div>'
+               # "Was ist FTEM?"-Info-Knopf rechts in der Fusszeile
+               '<button class="aw-info" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'" title="'+esc(info_label)+'" aria-label="'+esc(info_label)+'">i</button>'
+               '</div>')
     nbadge = ('<span class="nbadge">'+str(len(NEWS))+'</span>') if NEWS else ''
     # Sportartspezifische Mini-Icons (monoline) fuer den Home-Sportpicker
     SPORT_ICONS = {
@@ -1160,7 +1161,15 @@ def home_html(datamap, lang):
             +(('<div class="news-box" data-open="tpl-news" data-t="'+esc(news_label)+'" role="button" tabindex="0">'
               '<div class="nb-head">'+esc(news_label)+nbadge+'</div>'
               '<ul class="nb-list">'
-              + "".join('<li>'+esc(tr(it["title"], lang))+'</li>' for it in NEWS[:3])
+              + "".join(
+                  '<li><span class="nb-t">'+esc(tr(it["title"], lang))+'</span>'
+                  # Direktlink klein im Eintrag (oeffnet extern, ohne News-Overlay-Umweg)
+                  + (('<a class="nb-lnk" href="'+esc(it["url"])+'"'
+                      + ((" data-urls='"+json.dumps(it["urls"], ensure_ascii=False).replace("'","&#39;")+"'") if it.get("urls") else '')
+                      + ' target="_blank" rel="noopener">'
+                      + esc(it["url"].split('/')[2].replace('www.',''))+' ↗</a>') if it.get("url") else '')
+                  + '</li>'
+                  for it in NEWS[:3])
               + '</ul>'
               '<span class="nb-more">'+esc({"de":"Alle News ansehen","fr":"Voir toutes les actualités","it":"Vedi tutte le notizie","en":"See all news"}[lang])+' →</span>'
               '</div>') if NEWS else
@@ -1432,7 +1441,10 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-head{color:var(--ink);font-weight:800;font-size:13.5px;letter-spacing:.03em;padding:11px 14px 3px}
 /* News-Eintraege als helle Pill-Knoepfe (Feedback Bjoern) */
 .news-box .nb-list{list-style:none;margin:4px 0 2px;padding:0 12px;color:#39424e}
-.news-box .nb-list li{position:relative;padding:7px 14px 7px 26px;font-size:12px;font-weight:700;margin:6px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#fff;border:1px solid rgba(29,38,48,.14);border-radius:999px;box-shadow:0 2px 8px rgba(29,38,48,.06);transition:border-color .15s,color .15s}
+.news-box .nb-list li{position:relative;padding:7px 14px 7px 26px;font-size:12px;font-weight:700;margin:6px 0;background:#fff;border:1px solid rgba(29,38,48,.14);border-radius:16px;box-shadow:0 2px 8px rgba(29,38,48,.06);transition:border-color .15s,color .15s}
+.news-box .nb-t{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.news-box .nb-lnk{display:inline-block;margin-top:2px;font-size:10.5px;font-weight:700;color:var(--red);text-decoration:none;letter-spacing:.01em}
+.news-box .nb-lnk:hover{text-decoration:underline}
 .news-box:hover .nb-list li{border-color:rgba(213,43,30,.40)}
 .news-box .nb-more{display:inline-block;font-weight:800;font-size:12px;color:var(--red);margin:4px 12px 12px;padding:6px 15px;border:1px solid rgba(213,43,30,.45);border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(29,38,48,.06);letter-spacing:.02em;transition:background .15s,border-color .15s}
 .news-box:hover .nb-more{background:#fdf3f2;border-color:var(--red)}
@@ -1493,14 +1505,14 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .fb-panel .fb-text{margin-top:14px}
 /* "Athlet:innen Weg"-Knopf oben Mitte */
 .aw-cta{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:7;display:flex;align-items:center;gap:10px}
-/* Info-Knopf unten rechts (ueber der Fusszeile) */
-.aw-info{position:absolute;right:18px;bottom:58px;z-index:9}
-@media(max-width:760px){.aw-info{right:14px}}
+/* Info-Knopf rechts in der Fusszeile */
+.aw-info{position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:9}
+@media(max-width:760px){.aw-info{right:10px;top:6px;transform:none}}
 .aw-btn{font:inherit;display:flex;align-items:center;gap:9px;background:var(--red);border:none;color:#fff;font-weight:800;font-size:13.5px;border-radius:24px;padding:10px 21px;cursor:pointer;box-shadow:0 8px 24px rgba(213,43,30,.35);letter-spacing:.02em;transition:transform .15s,filter .15s}
 .aw-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
 /* "Was ist FTEM?"-Info-Knopf (ohne Beschriftung) neben dem Athlet:innen-Weg */
-.aw-info{width:40px;height:40px;border-radius:50%;background:#fff;border:1.5px solid rgba(213,43,30,.55);color:var(--red);font-weight:800;font-size:17px;font-family:Georgia,'Times New Roman',serif;font-style:italic;cursor:pointer;box-shadow:0 4px 14px rgba(29,38,48,.16);display:flex;align-items:center;justify-content:center;line-height:1;transition:transform .15s,border-color .15s}
-.aw-info:hover{transform:translateY(-1px);border-color:var(--red)}
+.aw-info{width:32px;height:32px;border-radius:50%;background:#fff;border:1.5px solid rgba(213,43,30,.55);color:var(--red);font-weight:800;font-size:14.5px;font-family:Georgia,'Times New Roman',serif;font-style:italic;cursor:pointer;box-shadow:0 2px 8px rgba(29,38,48,.12);display:flex;align-items:center;justify-content:center;line-height:1;transition:border-color .15s,background .15s}
+.aw-info:hover{border-color:var(--red);background:#fdf3f2}
 .top-row{display:flex;gap:8px;align-items:stretch;width:100%}
 .top-row .sportpick{flex:1;min-width:0}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -2525,6 +2537,17 @@ if(im){
   im.querySelector('.im-x').addEventListener('click',closeInfo);
 }
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>{if(document.getElementById(b.dataset.open))openInfo(b.dataset.open,b.dataset.t||'');}));
+// Direktlinks in der News-Box: extern oeffnen, ohne das News-Overlay auszuloesen
+document.querySelectorAll('.news-box .nb-lnk').forEach(a=>a.addEventListener('click',e=>{
+  e.stopPropagation();e.preventDefault();
+  let href=a.getAttribute('href')||'';
+  if(a.dataset.urls){try{
+    const m=JSON.parse(a.dataset.urls);
+    const sid=(typeof homeSport!=='undefined'&&homeSport&&homeSport.value)?homeSport.value:'';
+    href=m[sid]||m['default']||href;
+  }catch(_){}}
+  window.open(href,'_blank','noopener');
+}));
 
 // Alle externen Links (Dokumente, News, Missionen) im Iframe-Overlay oeffnen
 document.addEventListener('click',e=>{
@@ -2577,15 +2600,12 @@ function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SP
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero'), heroSvg=document.querySelector('.heromt');
 function posAW(){
   if(!awCta||!heroEl)return;
-  const infoBtn=document.querySelector('.aw-info');
   if(window.innerWidth<=760){
     awCta.style.left='';awCta.style.top='';
     const bb=document.querySelector('.bottombar');
     awCta.style.bottom=bb?(bb.offsetHeight+14)+'px':'';
-    if(infoBtn)infoBtn.style.bottom=bb?(bb.offsetHeight+14)+'px':'';
     return;
   }
-  if(infoBtn)infoBtn.style.bottom='';
   awCta.style.bottom='';
   const w=heroEl.clientWidth,h=heroEl.clientHeight;
   if(!w||!h)return; // Startseite ausgeblendet (Sportart offen) -> keine falschen Positionen setzen
