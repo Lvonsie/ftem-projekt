@@ -2002,6 +2002,7 @@ const SPORT_IDS = __SPORT_IDS__;
 const SPORT_MISSIONS = __SPORT_MISSIONS__;
 const SPORT_NAMES = __SPORT_NAMES__;
 const I18N = __I18N__;
+const PAGELANG="__PAGELANG__";
 const sections = [...document.querySelectorAll('section.sport')];
 const home = document.getElementById('home');
 
@@ -2065,21 +2066,33 @@ function _fnv36(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(
 function applyOverrides(map){
   // Klartext-Ziele (Titel, Einleitungen, News): nur Text ersetzen, <b>/<i> erlaubt
   function plain(v){return _esc(v).replace(/&lt;(\/?)(b|i)&gt;/g,'<$1$2>').replace(/\n/g,'<br>');}
-  // Override anwenden? Nur wenn er sich vom deutschen Quelltext unterscheidet
-  // (data-bh) - sonst wuerde er auf FR/IT/EN die Uebersetzung ueberdecken.
-  function use(el,v){
-    if(v==null)return false;
+  // Sprachspezifische Overrides ("cid|fr" usw.) haben Vorrang und gelten nur auf
+  // der jeweiligen Sprachseite. Deutsche Overrides (ohne Suffix) gelten als
+  // Fallback auf allen Seiten - aber nur, wenn sie sich vom deutschen Quelltext
+  // unterscheiden (data-bh), sonst wuerden sie die Uebersetzungen ueberdecken.
+  const lm={},gm={};
+  Object.keys(map).forEach(c=>{
+    const m2=c.match(/^(.*)\|(fr|it|en)$/);
+    if(m2){ if(m2[2]===PAGELANG) lm[m2[1]]=map[c]; }
+    else gm[c]=map[c];
+  });
+  function pick(el){
+    const cid=el.dataset.cid;
+    if(lm[cid]!=null)return lm[cid];
+    const v=gm[cid];
+    if(v==null)return null;
     const bh=el.dataset.bh;
-    return !(bh&&_fnv36(v)===bh);
+    if(bh&&_fnv36(v)===bh)return null;
+    return v;
   }
   function patch(root){
     root.querySelectorAll('.ctext[data-cid]').forEach(el=>{
-      const v=map[el.dataset.cid];
-      if(use(el,v)){el.innerHTML=structCell(v);}
+      const v=pick(el);
+      if(v!=null){el.innerHTML=structCell(v);}
     });
     root.querySelectorAll('.ovr-txt[data-cid]').forEach(el=>{
-      const v=map[el.dataset.cid];
-      if(use(el,v)){el.innerHTML=plain(v);}
+      const v=pick(el);
+      if(v!=null){el.innerHTML=plain(v);}
     });
   }
   patch(document);
@@ -2894,6 +2907,7 @@ __MAINCSS__
   <header class="abar">
     <h1><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#d52b1e" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px" aria-hidden="true"><rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.4"/><path d="M8 10.4V7.4a4 4 0 0 1 8 0v3"/></svg>FTEM &ndash; Inhalte bearbeiten</h1>
     <label>Sportart: <select id="sportsel">__SPORT_OPTIONS__</select></label>
+    <label>Sprache: <select id="langsel"><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="en">English</option></select></label>
     <span class="sp"></span>
     <span id="astatus" class="astatus"></span>
     <span id="chgnav" class="chgnav" hidden>
@@ -2921,7 +2935,9 @@ __MAINCSS__
   <div id="editwrap">__ADMIN_SECTIONS__</div>
 </div>
 <script>
-const ORIG=__ADMIN_ORIG__, GLOSS=__GLOSSARY__, PW="__ADMIN_PW__", SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
+const ORIGS=__ADMIN_ORIG__, GLOSS=__GLOSSARY__, PW="__ADMIN_PW__", SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
+const ALANGS=['de','fr','it','en'], ALABEL={de:'DE',fr:'FR',it:'IT',en:'EN'};
+let LNG='de';
 const gate=document.getElementById('gate'),app=document.getElementById('app');
 function gesc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function renderGloss(q){
@@ -2965,8 +2981,19 @@ function toggleGloss(){
     document.getElementById('glosq').addEventListener('input',function(e){renderGloss(e.target.value);});
     document.getElementById('gaddbtn').addEventListener('click',addGloss);}
 }
-const statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave'),sel=document.getElementById('sportsel');
-const base=Object.assign({},ORIG);
+const statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave'),sel=document.getElementById('sportsel'),langSel=document.getElementById('langsel');
+// Basiswerte pro Sprache (deutscher Quelltext bzw. dessen Uebersetzung; wird
+// durch geladene Cloud-Overrides ersetzt) + ungespeicherte Eingaben pro Sprache
+const base={}; ALANGS.forEach(function(l){base[l]=Object.assign({},ORIGS[l]);});
+const edits={de:{},fr:{},it:{},en:{}};
+function curVal(cid){return edits[LNG][cid]!==undefined?edits[LNG][cid]:(base[LNG][cid]||'');}
+function refreshValues(){
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+    ta.value=curVal(ta.dataset.cid);
+  });
+  const vis=app.querySelector('section.sport:not([hidden])');
+  if(vis)vis.querySelectorAll('.cedit').forEach(autosize);
+}
 function autosize(ta){ta.style.height='auto';ta.style.height=(ta.scrollHeight+2)+'px';}
 // Spruch des Tages (nach Kalendertag rotierend)
 var FTEM_QUOTES=[
@@ -3008,26 +3035,43 @@ function showSport(id){
   window.scrollTo(0,0);
 }
 function changed(){
+  // Alle ungespeicherten Aenderungen ueber ALLE Sprachen (fuer Speichern/Zaehler).
+  // Deutsche Overrides ohne Suffix, andere Sprachen mit "|fr"/"|it"/"|en".
   const out=[];
-  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
-    const cid=ta.dataset.cid;if((base[cid]||'')!==ta.value)out.push({cid:cid,txt:ta.value});
+  ALANGS.forEach(function(l){
+    Object.keys(edits[l]).forEach(function(cid){
+      if((base[l][cid]||'')!==edits[l][cid])out.push({cid:(l==='de'?cid:cid+'|'+l),txt:edits[l][cid]});
+    });
   });
   return out;
 }
 function changedTas(){
-  return Array.prototype.filter.call(app.querySelectorAll('.cedit[data-cid]'),function(ta){return (base[ta.dataset.cid]||'')!==ta.value;});
+  // Nur Felder der AKTUELL angezeigten Sprache (fuer die Sprung-Navigation)
+  return Array.prototype.filter.call(app.querySelectorAll('.cedit[data-cid]'),function(ta){
+    const cid=ta.dataset.cid;
+    return edits[LNG][cid]!==undefined&&(base[LNG][cid]||'')!==edits[LNG][cid];
+  });
 }
 let chgIdx=-1;
 const chgNav=document.getElementById('chgnav'),chgPos=document.getElementById('chgpos');
 function updateCount(){
-  // Markierung mit dem echten Zustand synchronisieren (auch fuer geladene Cloud-Abweichungen)
-  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){ta.classList.toggle('changed',(base[ta.dataset.cid]||'')!==ta.value);});
+  // Markierung mit dem echten Zustand synchronisieren (aktuelle Sprache)
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+    const cid=ta.dataset.cid;
+    ta.classList.toggle('changed',edits[LNG][cid]!==undefined&&(base[LNG][cid]||'')!==edits[LNG][cid]);
+  });
   const n=changed().length;saveBtn.disabled=n===0;
-  statusEl.textContent=n?(n+' ungespeichert'):'Alles gespeichert';
-  chgNav.hidden=n===0;
+  // Aufschluesselung pro Sprache, falls Aenderungen in mehreren Sprachen offen sind
+  const parts=[];
+  ALANGS.forEach(function(l){
+    let c=0;Object.keys(edits[l]).forEach(function(cid){if((base[l][cid]||'')!==edits[l][cid])c++;});
+    if(c)parts.push(ALABEL[l]+' '+c);
+  });
+  statusEl.textContent=n?(n+' ungespeichert'+(parts.length>1?' ('+parts.join(' · ')+')':'')):'Alles gespeichert';
+  chgNav.hidden=changedTas().length===0;
   const tas=changedTas();
   if(chgIdx>=tas.length)chgIdx=tas.length-1;
-  chgPos.textContent=n?((chgIdx>=0?(chgIdx+1):'–')+' / '+n):'';
+  chgPos.textContent=tas.length?((chgIdx>=0?(chgIdx+1):'–')+' / '+tas.length):'';
 }
 function gotoChg(step){
   const tas=changedTas();if(!tas.length)return;
@@ -3048,7 +3092,8 @@ function undoCur(){
   const tas=changedTas();if(!tas.length)return;
   if(chgIdx<0||chgIdx>=tas.length)chgIdx=0;
   const ta=tas[chgIdx];
-  ta.value=base[ta.dataset.cid]||'';
+  delete edits[LNG][ta.dataset.cid];
+  ta.value=base[LNG][ta.dataset.cid]||'';
   ta.classList.remove('changed','curchg');
   autosize(ta);
   updateCount();
@@ -3063,7 +3108,16 @@ function init(){
     if(d&&d.matches&&d.matches('details.theme')&&d.open)d.querySelectorAll('.cedit').forEach(autosize);
   },true);
   app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
-    ta.addEventListener('input',function(){autosize(ta);ta.classList.toggle('changed',(base[ta.dataset.cid]||'')!==ta.value);updateCount();});
+    ta.addEventListener('input',function(){
+      autosize(ta);
+      const cid=ta.dataset.cid;
+      if(ta.value===(base[LNG][cid]||''))delete edits[LNG][cid];else edits[LNG][cid]=ta.value;
+      updateCount();
+    });
+  });
+  langSel.addEventListener('change',function(){
+    LNG=langSel.value;chgIdx=-1;
+    refreshValues();updateCount();
   });
   saveBtn.addEventListener('click',save);
   document.getElementById('chgprev').addEventListener('click',function(){gotoChg(-1);});
@@ -3073,8 +3127,11 @@ function init(){
   if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
       .then(function(r){return r.ok?r.json():[];}).then(function(rows){
-        const m={};(rows||[]).forEach(function(x){m[x.cid]=x.txt;});
-        app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){const cid=ta.dataset.cid;if(m[cid]!=null){ta.value=m[cid];base[cid]=m[cid];}});
+        (rows||[]).forEach(function(x){
+          const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
+          if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
+        });
+        refreshValues();
         showSport(sel.value);updateCount();
       }).catch(function(){});
   }else{
@@ -3095,7 +3152,11 @@ function save(){
     headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
     body:JSON.stringify(ch)})
    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);
-     ch.forEach(function(x){base[x.cid]=x.txt;});
+     ch.forEach(function(x){
+       const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
+       if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
+     });
+     ALANGS.forEach(function(l){edits[l]={};});
      app.querySelectorAll('.cedit.changed').forEach(function(t){t.classList.remove('changed');});
      statusEl.textContent='Gespeichert ✓ – Änderungen sind jetzt live.';saveBtn.disabled=true;
    }).catch(function(err){statusEl.textContent='Fehler beim Speichern: '+err.message;saveBtn.disabled=false;});
@@ -3177,7 +3238,12 @@ def admin_html(datamap):
                 for st, cell in (sec.get("cells") or {}).items():
                     if cell and (cell.get("v") or cell.get("l")):
                         orig["home|"+s["id"]+"|"+str(si)+"|"+st] = cell.get("v") or ""
-    orig_js = json.dumps(orig, ensure_ascii=False).replace("</", "<\\/")
+    # Basiswerte pro Sprache: DE = Quelltext, FR/IT/EN = dessen Uebersetzung
+    # (gleiche Logik wie auf den Live-Seiten: tr() ganzer Zellen)
+    origs = {"de": orig}
+    for _L in ("fr", "it", "en"):
+        origs[_L] = {c: tr(v, _L) for c, v in orig.items()}
+    orig_js = json.dumps(origs, ensure_ascii=False).replace("</", "<\\/")
     gloss = []
     gpath = os.path.join(BASE, "glossary.json")
     if os.path.exists(gpath):
@@ -3246,6 +3312,7 @@ for lang in LANGS:
                        "sport": "Sport"},
             }[lang], ensure_ascii=False))
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
+            .replace("__PAGELANG__", lang)
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
             .replace("__PRES_PW__", PRES_PW))
     og_title = "FTEM – "+tr("Athlet:innen-Weg", lang)+" · Swiss-Ski"

@@ -820,6 +820,7 @@ const SPORT_IDS = ["ski-alpin", "langlauf", "biathlon", "skispringen", "nordisch
 const SPORT_MISSIONS = {"ski-alpin": "https://snowsports.flink.host/s/iFt05YOw/", "langlauf": "https://snowsports.flink.host/s/0QOLfudd/", "biathlon": "https://snowsports.flink.host/s/DUs2W0eD/", "skispringen": "https://snowsports.flink.host/s/FBDQQ9AP/", "nordische-kombination": "", "skicross": "https://snowsports.flink.host/s/8RhLL4D6/", "freeski-park-pipe": "https://snowsports.flink.host/s/R7EVNr6x/", "snowboard-alpin": "https://snowsports.flink.host/s/1nwko22K/", "snowboard-cross": "https://snowsports.flink.host/s/0q2Deqp2/", "snowboard-park-pipe": "https://snowsports.flink.host/s/R7EVNr6x/"};
 const SPORT_NAMES = {"ski-alpin": "Sci alpino", "langlauf": "Sci di fondo", "biathlon": "Biathlon", "skispringen": "Salto con gli sci", "nordische-kombination": "Combinata nordica", "skicross": "Skicross", "freeski-park-pipe": "Freeski Park & Pipe", "snowboard-alpin": "Snowboard alpino", "snowboard-cross": "Snowboard cross", "snowboard-park-pipe": "Snowboard Park & Pipe"};
 const I18N = {"more": "altro ▾", "less": "meno ▴", "themes": "temi · F1–M", "hits": "temi con risultati", "hitsWord": "risultati", "noHits": "nessun risultato", "printPick": "Scegli il livello per il dossier", "printAll": "Tutto lo sport (orizzontale)", "printClose": "Chiudi", "dossier": "Dossier di livello", "popupBlocked": "Consenti i pop-up per stampare il dossier.", "send": "Invia", "navPrev": "indietro", "navNext": "avanti", "chatTitle": "Coach FTEM", "chatPh": "Domanda sul percorso…", "chatWelcome": "Ciao! Chiedimi tutto sul percorso di questo sport – per esempio:", "chatExamples": ["Quale materiale in F3?", "Obiettivi di forza in T2?", "Quali quadri esistono?", "Panoramica delle fasi"], "chatErr": "Si è verificato un problema. Riprova più tardi.", "chatNote": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati."};
+const PAGELANG="it";
 const sections = [...document.querySelectorAll('section.sport')];
 const home = document.getElementById('home');
 
@@ -883,21 +884,33 @@ function _fnv36(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(
 function applyOverrides(map){
   // Klartext-Ziele (Titel, Einleitungen, News): nur Text ersetzen, <b>/<i> erlaubt
   function plain(v){return _esc(v).replace(/&lt;(\/?)(b|i)&gt;/g,'<$1$2>').replace(/\n/g,'<br>');}
-  // Override anwenden? Nur wenn er sich vom deutschen Quelltext unterscheidet
-  // (data-bh) - sonst wuerde er auf FR/IT/EN die Uebersetzung ueberdecken.
-  function use(el,v){
-    if(v==null)return false;
+  // Sprachspezifische Overrides ("cid|fr" usw.) haben Vorrang und gelten nur auf
+  // der jeweiligen Sprachseite. Deutsche Overrides (ohne Suffix) gelten als
+  // Fallback auf allen Seiten - aber nur, wenn sie sich vom deutschen Quelltext
+  // unterscheiden (data-bh), sonst wuerden sie die Uebersetzungen ueberdecken.
+  const lm={},gm={};
+  Object.keys(map).forEach(c=>{
+    const m2=c.match(/^(.*)\|(fr|it|en)$/);
+    if(m2){ if(m2[2]===PAGELANG) lm[m2[1]]=map[c]; }
+    else gm[c]=map[c];
+  });
+  function pick(el){
+    const cid=el.dataset.cid;
+    if(lm[cid]!=null)return lm[cid];
+    const v=gm[cid];
+    if(v==null)return null;
     const bh=el.dataset.bh;
-    return !(bh&&_fnv36(v)===bh);
+    if(bh&&_fnv36(v)===bh)return null;
+    return v;
   }
   function patch(root){
     root.querySelectorAll('.ctext[data-cid]').forEach(el=>{
-      const v=map[el.dataset.cid];
-      if(use(el,v)){el.innerHTML=structCell(v);}
+      const v=pick(el);
+      if(v!=null){el.innerHTML=structCell(v);}
     });
     root.querySelectorAll('.ovr-txt[data-cid]').forEach(el=>{
-      const v=map[el.dataset.cid];
-      if(use(el,v)){el.innerHTML=plain(v);}
+      const v=pick(el);
+      if(v!=null){el.innerHTML=plain(v);}
     });
   }
   patch(document);
