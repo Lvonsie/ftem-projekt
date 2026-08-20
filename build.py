@@ -1103,7 +1103,7 @@ def home_html(datamap, lang):
                # "Was ist FTEM?"-Info-Knopf rechts in der Fusszeile
                '<button class="aw-info" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'" title="'+esc(info_label)+'" aria-label="'+esc(info_label)+'">i</button>'
                '</div>')
-    nbadge = ('<span class="nbadge">'+str(len(NEWS))+'</span>') if NEWS else ''
+    nbadge = ''  # Zaehler-Badge entfernt (Wunsch Michael)
     # Sportartspezifische Mini-Icons (monoline) fuer den Home-Sportpicker
     SPORT_ICONS = {
         "ski-alpin": '<path d="M4 20h16"/><path d="M8 20V5"/><path d="M8 5l7 2-7 2"/>',
