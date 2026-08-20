@@ -541,7 +541,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
         tt_span = ('<span class="tt ovr-txt" data-cid="'+prefix+'|'+str(idx)+'|title" data-bh="'+fnv36(t["title"] or "")+'">'+esc(title)+'</span>')
         tfield = ''
     return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
-            '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(title)+'</span>'
+            '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(t["title"])+'</span>'
             + tt_span + '<span class="tchev"></span></summary>'
             + tfield +
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
@@ -1015,7 +1015,7 @@ def home_html(datamap, lang):
                              '<div class="ps-secbody"><div class="ps-cols" style="--nc:'+str(ncols)+'">'+cols+'</div></div></details>')
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
-                        '<div><div class="ps-name">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
+                        '<div><div class="ps-name ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|ptitle" data-bh="'+fnv36(pname)+'">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
                         '<p class="ps-desc ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|intro" data-bh="'+fnv36(intro2)+'">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
                         + secs +
                         '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
@@ -2435,8 +2435,13 @@ document.addEventListener('keydown',e=>{
 // ---- Inhalts-Overlay (News, Was ist FTEM?, Missions-Auswahl) ----
 const im=document.querySelector('.imodal');
 function openInfo(tplId,title){
-  im.querySelector('.im-t').textContent=title;
   im.querySelector('.im-body').innerHTML=document.getElementById(tplId).innerHTML;
+  // Stufen-Popups: Titel aus dem (ggf. per Admin-Override angepassten) Inhalt ableiten
+  if(tplId.indexOf('tpl-ph-')===0){
+    const nm=im.querySelector('.im-body .ps-name'),rg=im.querySelector('.im-body .ps-rng');
+    if(nm&&rg)title=nm.textContent.trim()+' · '+rg.textContent.trim();
+  }
+  im.querySelector('.im-t').textContent=title;
   im.classList.toggle('wide', tplId.indexOf('tpl-ph-')===0);
   im.querySelector('.im-box').classList.remove('grown'); // frisch geoeffnet = kompakt
   im.hidden=false;
@@ -3128,7 +3133,9 @@ def home_edit_html(sport, d):
                 '<div class="adm-home">'+tblocks+'</div></details>')
     for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
         intro = (hm.get("intro") or {}).get(k) or pdesc
-        blocks = _adm_field("Einleitung", "home|"+sport["id"]+"|"+k+"|intro", intro)
+        blocks = _adm_field("Titel der Stufe", "home|"+sport["id"]+"|"+k+"|ptitle", pname,
+                            "Der Stufen-Bereich ("+prng+") bleibt automatisch stehen")
+        blocks += _adm_field("Einleitung", "home|"+sport["id"]+"|"+k+"|intro", intro)
         for si, sec in enumerate(hm.get("sections", [])):
             cols = ""
             for st in PH_STAGES_ADM[k]:
@@ -3163,6 +3170,7 @@ def admin_html(datamap):
         hm = d.get("home")
         if hm:
             for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], FTEM_INFO["de"]["phases"]):
+                orig["home|"+s["id"]+"|"+k+"|ptitle"] = pname
                 orig["home|"+s["id"]+"|"+k+"|intro"] = (hm.get("intro") or {}).get(k) or pdesc
             for si, sec in enumerate(hm.get("sections", [])):
                 orig["home|"+s["id"]+"|"+str(si)+"|title"] = sec["title"] or ""
