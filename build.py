@@ -448,7 +448,7 @@ _ICONS = {
  "moon": '<path d="M12 3a6.5 6.5 0 0 0 9 9 9 9 0 1 1-9-9z"/>',
  "mood": '<circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M9 14.5c.9 1 2 1 3 1s2.1 0 3-1"/>',
  "activity": '<path d="M3 12h4l2.5 6 4-13 2.5 7H21"/>',
- "rotate": '<path d="M4.5 12a7.5 7.5 0 0 1 12.5-5.5L20 9M19.5 12a7.5 7.5 0 0 1-12.5 5.5L4 15"/><path d="M20 5v4h-4M4 19v-4h4"/>',
+ "rom": '<path d="M12 19 5 12.5M12 19l7-6.5"/><path d="M5.5 10.5a9 9 0 0 1 13 0"/><path d="M5.5 10.5l.2-2.7M5.5 10.5l2.7.4M18.5 10.5l-.2-2.7M18.5 10.5l-2.7.4"/><circle cx="12" cy="19" r="1.4" fill="currentColor" stroke="none"/>',
  "barbell": '<path d="M2 12h2M20 12h2M4 9v6M20 9v6M7 7.5v9M17 7.5v9M7 12h10"/>',
  "bolt": '<path d="M13 3 4 14h6l-1 7 9-11h-6l1-7z"/>',
  "target": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/>',
@@ -456,6 +456,9 @@ _ICONS = {
  "trophy": '<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5.5a2 2 0 0 0 2.5 3M16 6h2.5a2 2 0 0 1-2.5 3"/><path d="M10 15h4M9 20h6M11 15l-1 5M13 15l1 5"/>',
  "flag": '<path d="M6 21V4M6 4h12l-2.5 4L18 12H6"/>',
  "carve": '<path d="M8.5 3c7.5 2.5-7.5 6.5 0 9s-7.5 6.5 0 9"/><path d="M17 4.5v6.5"/><path d="M17 4.5l4 1.5-4 1.6"/>',
+ "slzigzag": '<path d="M6 4l12 4L6 12l12 4-12 4"/>',
+ "gscurve": '<path d="M5 4c13 2 13 6.5 7 8s-6 6.5 7 8"/>',
+ "speedarrow": '<path d="M6 5l13 11.5"/><path d="M19 16.5l-3.7-.2M19 16.5l-.2-3.7"/><path d="M4 11.5l3.6 3.2M3.5 16.2l2.7 2.4"/>',
  "funnel": '<path d="M4 5h16l-6.2 7v5.6l-3.6 2.4v-8L4 5z"/>',
  "podium": '<rect x="9" y="9" width="6" height="11"/><rect x="3" y="13" width="6" height="7"/><rect x="15" y="15" width="6" height="5"/><path d="M12 3v3M10.6 4.5h2.8"/>',
  "users": '<circle cx="9" cy="8" r="3"/><path d="M4 20c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M15 5.5a3 3 0 0 1 0 5M20 20c0-2-1.1-3.7-2.7-4.5"/>',
@@ -468,8 +471,13 @@ _KEYMAP = [
  (("schlaf","regenerat","erholung","recovery"),"moon"),
  (("psyche","mental","kopf"),"mood"),
  (("ausdauer","kondition","kapazit"),"activity"),
- (("mobilit","beweglich","flexib"),"rotate"),
+ (("mobilit","beweglich","flexib"),"rom"),
  (("kraft","explosiv","power"),"barbell"),
+ # Disziplin-spezifische Technik-&-Taktik-Themen VOR dem generischen carve-Icon
+ # ("riesenslalom" vor "slalom" pruefen – der String enthaelt "slalom"!)
+ (("riesenslalom",),"gscurve"),
+ (("slalom",),"slzigzag"),
+ (("sg/dh","speed (sg"),"speedarrow"),
  (("technik","taktik"),"carve"),
  (("schnellig","agilit","speed"),"bolt"),
  (("material","ausrüst","ausruest"),"box"),
@@ -523,9 +531,19 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
     opn = ''  # auch im Bearbeitungsmodus eingeklappt starten (schnelleres Navigieren)
+    if edit:
+        # Titel des Abschnitts im Admin als eigenes Feld (cid: sport|ti|title)
+        tt_span = '<span class="tt">'+esc(title)+'</span>'
+        tfield = ('<div class="adm-home adm-title">'
+                  + _adm_field("Titel des Abschnitts", prefix+"|"+str(idx)+"|title", t["title"])
+                  + '</div>')
+    else:
+        tt_span = ('<span class="tt ovr-txt" data-cid="'+prefix+'|'+str(idx)+'|title" data-bh="'+fnv36(t["title"] or "")+'">'+esc(title)+'</span>')
+        tfield = ''
     return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(title)+'</span>'
-            '<span class="tt">'+esc(title)+'</span><span class="tchev"></span></summary>'
+            + tt_span + '<span class="tchev"></span></summary>'
+            + tfield +
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
 
 def merge_same_segs(segs):
@@ -703,10 +721,10 @@ NEWS = [
 ]
 
 # Einleitungssatz der schwarzen Fusszeile (im Admin editierbar: cid "start|footintro")
-FOOT_INTRO = {"de": "Sportartübergreifende Grundlagen für den ganzen Schneesport:",
-              "fr": "Bases transversales pour tous les sports de neige :",
-              "it": "Basi trasversali per tutti gli sport sulla neve:",
-              "en": "Cross-sport foundations for all snow sports:"}
+FOOT_INTRO = {"de": "Sportartübergreifende Grundlagen:",
+              "fr": "Bases transversales :",
+              "it": "Basi trasversali:",
+              "en": "Cross-sport foundations:"}
 
 def news_html(lang):
     if not NEWS:
@@ -993,7 +1011,7 @@ def home_html(datamap, lang):
                     secs += ('<details class="theme ps-theme">'
                              '<summary><span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">'
                              + theme_icon(sec["title"]) + '</span>'
-                             '<span class="tt">'+esc(tr(sec["title"], lang))+'</span><span class="tchev"></span></summary>'
+                             '<span class="tt ovr-txt" data-cid="home|'+s2["id"]+'|'+str(si2)+'|title" data-bh="'+fnv36(sec["title"] or "")+'">'+esc(tr(sec["title"], lang))+'</span><span class="tchev"></span></summary>'
                              '<div class="ps-secbody"><div class="ps-cols" style="--nc:'+str(ncols)+'">'+cols+'</div></div></details>')
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
@@ -1439,10 +1457,10 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
   .hero-top-r{width:232px}
   .hero-top-r .langsw a{padding:4px 7px}
   .homesport{font-size:12.5px;padding:7px 10px}
-  .bottombar{flex-direction:column;justify-content:center;gap:1px;padding:5px 10px}
+  .bottombar{flex-direction:column;justify-content:center;gap:4px;padding:6px 10px}
   .bb-intro{margin-right:0;text-align:center;font-size:9.5px;line-height:1.25}
-  .bb-links{flex-wrap:wrap;justify-content:center;gap:0 4px}
-  .bb-item{padding:5px 8px;font-size:10.5px}
+  .bb-links{flex-wrap:wrap;justify-content:center;gap:4px}
+  .bb-item{padding:4px 10px;font-size:10.5px}
   .imodal{align-items:flex-start;padding:0}
   .im-box{width:100vw;max-height:100vh;max-height:100svh;border-radius:0}
   .imodal.wide .im-box{width:100vw;height:100vh;height:100svh}
@@ -1488,13 +1506,13 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .mr-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:none}
 @media(max-width:760px){.aw-cta{top:auto;bottom:88px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
-.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:14px;padding:0 22px;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
+.bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;justify-content:center;gap:14px;padding:9px 22px;background:rgba(8,12,19,.72);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.12)}
 .bottombar::after{content:"";flex:1 1 0}
 .bb-intro{flex:1 1 0;color:rgba(255,255,255,.95);font-size:12px;font-weight:800;letter-spacing:.03em;line-height:1.3}
-.bb-links{display:flex;align-items:center;flex:none}
-.bb-item{font:inherit;flex:none;white-space:nowrap;background:none;border:none;color:rgba(255,255,255,.92);font-weight:700;font-size:12.5px;padding:9px 22px;cursor:pointer;text-decoration:none;letter-spacing:.03em}
+.bb-links{display:flex;align-items:center;flex:none;gap:10px}
+.bb-item{font:inherit;flex:none;white-space:nowrap;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.32);border-radius:999px;color:#fff;font-weight:700;font-size:12.5px;padding:7px 16px;cursor:pointer;text-decoration:none;letter-spacing:.03em;transition:background .15s,border-color .15s,transform .15s}
 .bb-item b{color:var(--red);font-weight:800;margin-left:4px}
-.bb-item:hover{background:rgba(255,255,255,.10);color:#fff}
+.bb-item:hover{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.55);color:#fff;transform:translateY(-1px)}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
 .aw-btn .aw-ar{display:inline-flex;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.25);align-items:center;justify-content:center;font-size:13px}
 /* Stufen-Summary-Overlay */
@@ -3097,6 +3115,17 @@ def home_edit_html(sport, d):
     info = FTEM_INFO["de"]
     out = ('<h2 class="grp" style="--gc:#1f8fa6">Startseite &ndash; Stufen-Überblick '
            '<span class="adm-tag">Popups der FTEM-Knöpfe</span></h2>')
+    # Abschnitts-Titel: gelten fuer alle Stufen, darum nur EINMAL editierbar
+    # (doppelte cids wuerden die Aenderungs-Anzeige durcheinanderbringen)
+    tblocks = ""
+    for si, sec in enumerate(hm.get("sections", [])):
+        tblocks += _adm_field("Abschnitt "+str(si+1), "home|"+sport["id"]+"|"+str(si)+"|title", sec["title"])
+    if tblocks:
+        out += ('<details class="theme"><summary>'
+                '<span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)">✎</span>'
+                '<span class="tt">Abschnitts-Titel <span class="adm-tag">gelten für alle Stufen F&ndash;M</span></span>'
+                '<span class="tchev"></span></summary>'
+                '<div class="adm-home">'+tblocks+'</div></details>')
     for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
         intro = (hm.get("intro") or {}).get(k) or pdesc
         blocks = _adm_field("Einleitung", "home|"+sport["id"]+"|"+k+"|intro", intro)
@@ -3123,6 +3152,7 @@ def admin_html(datamap):
         secs += sport_section(s, d, "de", edit=True)
         opts += '<option value="'+esc(s["id"])+'">'+esc(tr(s["name"], "de"))+'</option>'
         for ti, t in enumerate(d["themes"]):
+            orig[s["id"]+"|"+str(ti)+"|title"] = t["title"] or ""
             for ri, r in enumerate(t["rows"]):
                 # WICHTIG: gleiche Nummerierung wie theme_html (zusammengefuehrte
                 # Segmente) – sonst zeigen Zellen nach Verschmelzungen faelschlich
@@ -3135,6 +3165,7 @@ def admin_html(datamap):
             for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], FTEM_INFO["de"]["phases"]):
                 orig["home|"+s["id"]+"|"+k+"|intro"] = (hm.get("intro") or {}).get(k) or pdesc
             for si, sec in enumerate(hm.get("sections", [])):
+                orig["home|"+s["id"]+"|"+str(si)+"|title"] = sec["title"] or ""
                 for st, cell in (sec.get("cells") or {}).items():
                     if cell and (cell.get("v") or cell.get("l")):
                         orig["home|"+s["id"]+"|"+str(si)+"|"+st] = cell.get("v") or ""
