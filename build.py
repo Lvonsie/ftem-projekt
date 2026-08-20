@@ -1168,7 +1168,8 @@ def home_html(datamap, lang):
             +'</div>'
             # FTEM-Schriftzug entfernt (Knoepfe + Berg tragen die Farben); h1 bleibt fuer SEO unsichtbar
             '<div class="hero-head"><h1 class="sr-only">FTEM – '+esc({"de":"Athlet:innen-Weg Schneesport","fr":"Parcours de l’athlète sports de neige","it":"Percorso dell’atleta sport sulla neve","en":"Athlete pathway snow sports"}[lang])+'</h1>'
-            '<img class="hero-logo" src="'+asset_v('assets/swiss-ski-logo.svg')+'" alt="Swiss-Ski"></div>'
+            '<a class="hero-logo-lnk" href="https://www.swiss-ski.ch/" target="_blank" rel="noopener" aria-label="swiss-ski.ch">'
+            '<img class="hero-logo" src="'+asset_v('assets/swiss-ski-logo.svg')+'" alt="Swiss-Ski"></a></div>'
             +pyr+footbar+
             '</div>'
             +pres_web+
@@ -1226,7 +1227,9 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 #home .hero-head h1 .fE{color:#ff9b57;text-shadow:0 0 12px rgba(255,155,87,.9),0 0 26px rgba(255,155,87,.6),0 2px 24px rgba(0,0,0,.5)}
 #home .hero-head h1 .fM{color:#ff6d60;text-shadow:0 0 12px rgba(255,109,96,.95),0 0 26px rgba(255,109,96,.65),0 2px 24px rgba(0,0,0,.5)}
 @keyframes ftemglow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
-#home .hero-logo{display:block;margin:6px 0 0 4px;width:clamp(104px,15vw,168px);height:auto;filter:drop-shadow(0 1px 6px rgba(255,255,255,.65))}
+#home .hero-logo-lnk{pointer-events:auto;display:inline-block;cursor:pointer}
+#home .hero-logo{display:block;margin:6px 0 0 4px;width:clamp(104px,15vw,168px);height:auto;filter:drop-shadow(0 1px 6px rgba(255,255,255,.65));transition:transform .15s}
+#home .hero-logo-lnk:hover .hero-logo{transform:translateY(-1px)}
 .constellation{position:absolute;inset:0;z-index:3;will-change:transform;transition:transform .3s ease-out}
 .clines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .clines .cl{fill:none;stroke:rgba(255,255,255,.30);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:5 9;animation:flow 24s linear infinite}
@@ -1261,7 +1264,14 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 /* Mission-Iframe-Overlay */
 .mmodal{position:fixed;inset:0;z-index:300;background:rgba(8,12,20,.78);display:flex;align-items:center;justify-content:center;padding:18px}
 .mm-box{width:min(1240px,96vw);height:min(880px,92vh);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#1d2630;color:#fff}
+.mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
+.mm-bar .mm-ext{color:var(--ink);border-color:rgba(29,38,48,.25)}
+.mm-bar .mm-ext:hover{background:#f2f4f6}
+.mm-bar .mm-x{color:#98a1ad}
+.mm-bar .mm-x:hover{color:var(--red)}
+[data-theme="dark"] .mm-bar{background:#1d2630;color:#fff;border-bottom-color:transparent}
+[data-theme="dark"] .mm-bar .mm-ext{color:#fff;border-color:rgba(255,255,255,.4)}
+[data-theme="dark"] .mm-bar .mm-x{color:rgba(255,255,255,.8)}
 .mm-frame{opacity:0;transition:opacity .3s ease;background:#fff}
 .mm-frame.ld{opacity:1}
 .mm-t{font-weight:800;font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -1324,10 +1334,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbl small{display:block;font-size:12px;font-weight:700;color:var(--mut)}
 .w-e .fbl{font-size:12.5px}.w-e .fbl small{font-size:10.5px}
 .w-m .fbl{font-size:11px}.w-m .fbl small{font-size:9.5px}
-/* Hover/Fokus: eigener Knopf waechst, die anderen schrumpfen (wie die Bergfarben) */
-.fbtns.hv-f .w-f .fb3d,.fbtns.hv-t .w-t .fb3d,.fbtns.hv-e .w-e .fb3d,.fbtns.hv-m .w-m .fb3d{transform:scale(1.16)}
-.fbtns.hv-f .fbtnw:not(.w-f) .fb3d,.fbtns.hv-t .fbtnw:not(.w-t) .fb3d,
-.fbtns.hv-e .fbtnw:not(.w-e) .fb3d,.fbtns.hv-m .fbtnw:not(.w-m) .fb3d{transform:scale(.78)}
+/* Hover/Fokus: nur der eigene Knopf waechst (die anderen bleiben ruhig) */
+.fbtns.hv-f .w-f .fb3d,.fbtns.hv-t .w-t .fb3d,.fbtns.hv-e .w-e .fb3d,.fbtns.hv-m .w-m .fb3d{transform:scale(1.12)}
 .fbtnw:focus-visible .fb3d{outline:3px solid rgba(31,143,166,.85);outline-offset:3px}
 @media(max-width:760px){
   /* etwas hoeher, damit der F-Knopf nicht mit dem Athlet:innen-Weg-Knopf kollidiert */
@@ -1385,10 +1393,13 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 [data-theme="dark"] .imodal.wide .ps-theme{background:rgba(23,34,49,.72)}
 /* Stufen-Popup: standardmaessig nur so hoch wie noetig; waechst beim Ausklappen */
 .imodal.wide .im-box.grown{height:92vh;height:92svh}
-.im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#1d2630;color:#fff}
+.im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
 .im-t{font-weight:800;font-size:13px;flex:1}
-.im-x{background:none;border:none;color:#fff;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
-.im-x:hover{color:var(--talent)}
+.im-x{background:none;border:none;color:#98a1ad;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
+.im-x:hover{color:var(--red)}
+[data-theme="dark"] .im-bar{background:#1d2630;color:#fff;border-bottom-color:transparent}
+[data-theme="dark"] .im-x{color:rgba(255,255,255,.75)}
+[data-theme="dark"] .im-x:hover{color:var(--talent)}
 .im-body{padding:16px;overflow:auto;position:relative}
 .im-body .news-h{display:none}
 .im-body .ftem-info{margin-top:0}
@@ -2926,8 +2937,8 @@ __MAINCSS__
   </header>
   <div id="note" class="note"></div>
   <div id="glosspanel" hidden>
-    <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (Deutsch oder Französisch) …"><span id="gloscount" class="astatus"></span></div>
-    <p class="glosnote">Feste Übersetzungen DE&nbsp;&rarr;&nbsp;FR. Diese Begriffe werden bei der Übersetzung der Inhalte einheitlich verwendet.</p>
+    <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (DE, FR, IT oder EN) …"><span id="gloscount" class="astatus"></span></div>
+    <p class="glosnote">Feste Übersetzungen DE&nbsp;&rarr;&nbsp;FR/IT/EN. Diese Begriffe werden bei der Übersetzung der Inhalte einheitlich verwendet. (Neue Begriffe unten werden vorerst nur mit DE/FR gespeichert.)</p>
     <div class="glosadd">
       <input id="gde" type="text" placeholder="Deutsch">
       <input id="gfr" type="text" placeholder="Français">
@@ -2946,10 +2957,13 @@ const gate=document.getElementById('gate'),app=document.getElementById('app');
 function gesc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
 function renderGloss(q){
   q=(q||'').trim().toLowerCase();
-  const rows=GLOSS.filter(function(g){return !q||g.de.toLowerCase().indexOf(q)>=0||g.fr.toLowerCase().indexOf(q)>=0;});
+  const rows=GLOSS.filter(function(g){
+    if(!q)return true;
+    return ['de','fr','it','en'].some(function(l){return (g[l]||'').toLowerCase().indexOf(q)>=0;});
+  });
   document.getElementById('gloscount').textContent=rows.length+' Begriffe';
-  let h='<table class="glostab"><thead><tr><th>Deutsch</th><th>Français</th></tr></thead><tbody>';
-  rows.forEach(function(g){h+='<tr><td>'+gesc(g.de)+'</td><td>'+gesc(g.fr)+'</td></tr>';});
+  let h='<table class="glostab"><thead><tr><th>Deutsch</th><th>Français</th><th>Italiano</th><th>English</th></tr></thead><tbody>';
+  rows.forEach(function(g){h+='<tr><td>'+gesc(g.de)+'</td><td>'+gesc(g.fr)+'</td><td>'+gesc(g.it||'')+'</td><td>'+gesc(g.en||'')+'</td></tr>';});
   document.getElementById('glostable').innerHTML=h+'</tbody></table>';
 }
 const glosDe=new Set(GLOSS.map(function(g){return g.de;}));
