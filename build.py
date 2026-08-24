@@ -3033,10 +3033,12 @@ __MAINCSS__
   <div id="note" class="note"></div>
   <div id="glosspanel" hidden>
     <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (DE, FR, IT oder EN) …"><span id="gloscount" class="astatus"></span></div>
-    <p class="glosnote">Feste Übersetzungen DE&nbsp;&rarr;&nbsp;FR/IT/EN. Diese Begriffe werden bei der Übersetzung der Inhalte einheitlich verwendet. (Neue Begriffe unten werden vorerst nur mit DE/FR gespeichert.)</p>
+    <p class="glosnote">Feste Übersetzungen DE&nbsp;&rarr;&nbsp;FR/IT/EN. Diese Begriffe werden bei der Übersetzung der Inhalte einheitlich verwendet. Neue Begriffe: Deutsch plus mindestens eine Übersetzung angeben – fehlende Sprachen können später ergänzt werden.</p>
     <div class="glosadd">
       <input id="gde" type="text" placeholder="Deutsch">
       <input id="gfr" type="text" placeholder="Français">
+      <input id="git" type="text" placeholder="Italiano">
+      <input id="gen" type="text" placeholder="English">
       <button id="gaddbtn" type="button">Hinzufügen</button>
       <span id="gaddmsg" class="astatus"></span>
     </div>
@@ -3064,24 +3066,43 @@ function renderGloss(q){
 const glosDe=new Set(GLOSS.map(function(g){return g.de;}));
 function loadGlossAdditions(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve();
-  return fetch(SUPA_URL+'/rest/v1/ftem_glossary?select=de,fr',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-    .then(function(r){return r.ok?r.json():[];}).then(function(rows){
-      (rows||[]).forEach(function(x){ if(!glosDe.has(x.de)){glosDe.add(x.de);GLOSS.unshift({de:x.de,fr:x.fr});} });
+  // erst mit IT/EN versuchen; falls die Spalten in Supabase (noch) fehlen: nur DE/FR
+  function grab(sel){
+    return fetch(SUPA_URL+'/rest/v1/ftem_glossary?select='+sel,{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}});
+  }
+  return grab('de,fr,it,en').then(function(r){return r.ok?r.json():grab('de,fr').then(function(r2){return r2.ok?r2.json():[];});})
+    .then(function(rows){
+      (rows||[]).forEach(function(x){
+        if(glosDe.has(x.de)){
+          GLOSS.forEach(function(g){if(g.de===x.de){if(x.fr)g.fr=x.fr;if(x.it)g.it=x.it;if(x.en)g.en=x.en;}});
+        }else{glosDe.add(x.de);GLOSS.unshift({de:x.de,fr:x.fr||'',it:x.it||'',en:x.en||''});}
+      });
     }).catch(function(){});
 }
 function addGloss(){
-  const de=document.getElementById('gde').value.trim(), fr=document.getElementById('gfr').value.trim();
+  const de=document.getElementById('gde').value.trim(), fr=document.getElementById('gfr').value.trim(),
+        it=document.getElementById('git').value.trim(), en=document.getElementById('gen').value.trim();
   const msg=document.getElementById('gaddmsg');
-  if(!de||!fr){msg.textContent='Bitte beide Felder ausfüllen.';return;}
+  if(!de||!(fr||it||en)){msg.textContent='Bitte Deutsch plus mindestens eine Übersetzung ausfüllen.';return;}
   if(!SUPA_URL||!SUPA_KEY){msg.textContent='Cloud-Speicher nicht eingerichtet – Begriff kann nicht gespeichert werden.';return;}
   msg.textContent='Speichere …';
-  fetch(SUPA_URL+'/rest/v1/ftem_glossary',{method:'POST',
-    headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-    body:JSON.stringify([{de:de,fr:fr}])})
-   .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);
-     if(glosDe.has(de)){GLOSS.forEach(function(g){if(g.de===de)g.fr=fr;});}else{glosDe.add(de);GLOSS.unshift({de:de,fr:fr});}
-     document.getElementById('gde').value='';document.getElementById('gfr').value='';
-     msg.textContent='✓ hinzugefügt';renderGloss(document.getElementById('glosq').value);
+  const row={de:de};if(fr)row.fr=fr;if(it)row.it=it;if(en)row.en=en;
+  function post(body){
+    return fetch(SUPA_URL+'/rest/v1/ftem_glossary',{method:'POST',
+      headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
+      body:JSON.stringify([body])});
+  }
+  post(row).then(function(r){
+    if(r.ok)return {full:true};
+    // Fallback: Supabase-Tabelle hat evtl. noch keine it/en-Spalten
+    if((it||en)&&fr){return post({de:de,fr:fr}).then(function(r2){if(!r2.ok)throw new Error('HTTP '+r2.status);return {full:false};});}
+    throw new Error('HTTP '+r.status);
+  }).then(function(res){
+     if(glosDe.has(de)){GLOSS.forEach(function(g){if(g.de===de){if(fr)g.fr=fr;if(res.full){if(it)g.it=it;if(en)g.en=en;}}});}
+     else{glosDe.add(de);GLOSS.unshift({de:de,fr:fr,it:res.full?it:'',en:res.full?en:''});}
+     ['gde','gfr','git','gen'].forEach(function(i){document.getElementById(i).value='';});
+     msg.textContent=res.full?'✓ hinzugefügt':'✓ DE/FR gespeichert – für IT/EN fehlen in Supabase noch die Spalten (siehe Michael)';
+     renderGloss(document.getElementById('glosq').value);
    }).catch(function(e){msg.textContent='Fehler: '+e.message;});
 }
 function toggleGloss(){
