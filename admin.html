@@ -12404,18 +12404,22 @@ function renderGloss(q){
   document.getElementById('glostable').innerHTML=h+'</tbody></table>';
 }
 const glosDe=new Set(GLOSS.map(function(g){return g.de;}));
+// Neue Glossar-Begriffe liegen in der bestehenden ftem_overrides-Tabelle
+// (cid = "gloss|Begriff", txt = JSON {fr,it,en}) - keine eigene Tabelle noetig.
+function _glossMerge(de,fr,it,en){
+  if(glosDe.has(de)){GLOSS.forEach(function(g){if(g.de===de){if(fr)g.fr=fr;if(it)g.it=it;if(en)g.en=en;}});}
+  else{glosDe.add(de);GLOSS.unshift({de:de,fr:fr||'',it:it||'',en:en||''});}
+}
 function loadGlossAdditions(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve();
-  // erst mit IT/EN versuchen; falls die Spalten in Supabase (noch) fehlen: nur DE/FR
-  function grab(sel){
-    return fetch(SUPA_URL+'/rest/v1/ftem_glossary?select='+sel,{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}});
-  }
-  return grab('de,fr,it,en').then(function(r){return r.ok?r.json():grab('de,fr').then(function(r2){return r2.ok?r2.json():[];});})
+  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=like.gloss%7C*',
+      {headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+    .then(function(r){return r.ok?r.json():[];})
     .then(function(rows){
       (rows||[]).forEach(function(x){
-        if(glosDe.has(x.de)){
-          GLOSS.forEach(function(g){if(g.de===x.de){if(x.fr)g.fr=x.fr;if(x.it)g.it=x.it;if(x.en)g.en=x.en;}});
-        }else{glosDe.add(x.de);GLOSS.unshift({de:x.de,fr:x.fr||'',it:x.it||'',en:x.en||''});}
+        var de=x.cid.slice(6),tr={};
+        try{tr=JSON.parse(x.txt)||{};}catch(e){}
+        _glossMerge(de,tr.fr||'',tr.it||'',tr.en||'');
       });
     }).catch(function(){});
 }
@@ -12426,22 +12430,17 @@ function addGloss(){
   if(!de||!(fr||it||en)){msg.textContent='Bitte Deutsch plus mindestens eine Übersetzung ausfüllen.';return;}
   if(!SUPA_URL||!SUPA_KEY){msg.textContent='Cloud-Speicher nicht eingerichtet – Begriff kann nicht gespeichert werden.';return;}
   msg.textContent='Speichere …';
-  const row={de:de};if(fr)row.fr=fr;if(it)row.it=it;if(en)row.en=en;
-  function post(body){
-    return fetch(SUPA_URL+'/rest/v1/ftem_glossary',{method:'POST',
-      headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-      body:JSON.stringify([body])});
-  }
-  post(row).then(function(r){
-    if(r.ok)return {full:true};
-    // Fallback: Supabase-Tabelle hat evtl. noch keine it/en-Spalten
-    if((it||en)&&fr){return post({de:de,fr:fr}).then(function(r2){if(!r2.ok)throw new Error('HTTP '+r2.status);return {full:false};});}
-    throw new Error('HTTP '+r.status);
-  }).then(function(res){
-     if(glosDe.has(de)){GLOSS.forEach(function(g){if(g.de===de){if(fr)g.fr=fr;if(res.full){if(it)g.it=it;if(en)g.en=en;}}});}
-     else{glosDe.add(de);GLOSS.unshift({de:de,fr:fr,it:res.full?it:'',en:res.full?en:''});}
+  // bestehende Uebersetzungen des Begriffs nicht verlieren (Felder ergaenzen sich)
+  var old=null;GLOSS.forEach(function(g){if(g.de===de)old=g;});
+  const tr={fr:fr||(old&&old.fr)||'',it:it||(old&&old.it)||'',en:en||(old&&old.en)||''};
+  fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
+    headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
+    body:JSON.stringify([{cid:'gloss|'+de,txt:JSON.stringify(tr)}])})
+   .then(function(r){
+     if(!r.ok)throw new Error('HTTP '+r.status);
+     _glossMerge(de,tr.fr,tr.it,tr.en);
      ['gde','gfr','git','gen'].forEach(function(i){document.getElementById(i).value='';});
-     msg.textContent=res.full?'✓ hinzugefügt':'✓ DE/FR gespeichert – für IT/EN fehlen in Supabase noch die Spalten (siehe Michael)';
+     msg.textContent='✓ hinzugefügt';
      renderGloss(document.getElementById('glosq').value);
    }).catch(function(e){msg.textContent='Fehler: '+e.message;});
 }
