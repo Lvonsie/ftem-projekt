@@ -441,6 +441,11 @@ GROUP_COLORS = {
 def group_accent(g):
     return GROUP_COLORS.get(g, ("#7a828c", "rgba(122,130,140,.15)"))
 
+def mission_url(s, lang):
+    """Missions-Link einer Sportart, sprachspezifisch falls vorhanden
+    (ftem_sports.json: "missions": {"fr": ...}); sonst deutsche Version."""
+    return ((s.get("missions") or {}).get(lang)) or s.get("mission")
+
 _ICONS = {
  "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
  "calendar": '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/>',
@@ -797,7 +802,7 @@ def home_html(datamap, lang):
         neigh = ([CONS_POS[i-1][1]] if i > 0 else []) + ([CONS_POS[i+1][1]] if i+1 < n else [])
         up = bool(neigh) and y < min(neigh)
         # Klick-Popup: Wahl zwischen Athlet:innen-Weg (intern) und Mission Swiss-Ski (FTEM-Tool)
-        mission = s.get("mission")
+        mission = mission_url(s, lang)
         pop = ('<span class="npop">'
                '<a href="#'+s["id"]+'">'+esc(tr("Athlet:innen-Weg", lang))+'</a>'
                + (('<a class="np-mission" href="'+esc(mission)+'" data-title="'+esc(name)+' – Mission Swiss-Ski">Mission Swiss-Ski</a>') if mission else '')
@@ -959,9 +964,9 @@ def home_html(datamap, lang):
     news_label = {"de": "News", "fr": "Actualités", "it": "Notizie", "en": "News"}[lang]
     info_label = FTEM_INFO[lang]["title"].replace("&#x27;", "'")
     mission_items = "".join(
-        '<a class="mission-item" href="'+esc(s2["mission"])+'" data-title="'+esc(tr(s2["name"], lang))+' – Mission Swiss-Ski">'
+        '<a class="mission-item" href="'+esc(mission_url(s2, lang))+'" data-title="'+esc(tr(s2["name"], lang))+' – Mission Swiss-Ski">'
         + esc(tr(s2["name"], lang)) + '</a>'
-        for s2 in SPORTS if s2.get("mission"))
+        for s2 in SPORTS if mission_url(s2, lang))
     # "Mission Sportart": oeffnet direkt die Mission der oben vorgewaehlten Sportart
     misp_lbl = {"de": "Mission Sportart", "fr": "Mission du sport", "it": "Missione sport", "en": "Sport mission"}[lang]
     mission_btn = '<button class="mp-item mp-mission np-sportmission" type="button">'+esc(misp_lbl)+'</button>'
@@ -3403,7 +3408,7 @@ for lang in LANGS:
             "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi.", "en": "Something went wrong. Please try again later."}[lang],
             "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati.", "en": "Answers are based on this sport's FTEM content and the linked documents."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
-            .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: s.get("mission","") for s in SPORTS}))
+            .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: (mission_url(s, lang) or "") for s in SPORTS}))
             .replace("__SPORT_NAMES__", json.dumps({s["id"]: tr(s["name"], lang) for s in SPORTS}, ensure_ascii=False))
             .replace("__PDLBL__", json.dumps({
                 "de": {"concept": "Das Konzept FTEM", "web": "Die Website", "aw": "Athlet:innen-Weg",
