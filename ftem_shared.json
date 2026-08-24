@@ -156,7 +156,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "alle Sportarten"
   },
   {
    "id": "schlaf",
@@ -277,7 +278,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "alle Sportarten"
   },
   {
    "id": "umfeld",
@@ -549,7 +551,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "alle Sportarten"
   },
   {
    "id": "ausdauer-nordisch",
@@ -740,7 +743,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "Nordisch (3)"
   },
   {
    "id": "ausdauer",
@@ -942,7 +946,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "übrige Sportarten (7)"
   },
   {
    "id": "ernaehrung-nordisch",
@@ -1122,7 +1127,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "Nordisch inkl. Skispringen (4)"
   },
   {
    "id": "ernaehrung",
@@ -1254,7 +1260,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "übrige Sportarten (6)"
   },
   {
    "id": "makro-alpin",
@@ -1425,7 +1432,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "Alpin & Cross (4)"
   },
   {
    "id": "makro-pp",
@@ -1552,7 +1560,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "Park & Pipe (2)"
   },
   {
    "id": "mobilitaet-nordisch",
@@ -1735,7 +1744,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "Nordisch (3)"
   },
   {
    "id": "mobilitaet",
@@ -1894,7 +1904,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "übrige Sportarten (7)"
   },
   {
    "id": "schnelligkeit-nordisch",
@@ -2081,7 +2092,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "Nordisch (3)"
   },
   {
    "id": "schnelligkeit",
@@ -2272,7 +2284,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "übrige Sportarten (7)"
   },
   {
    "id": "kraft-nordisch",
@@ -2445,7 +2458,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "Nordisch (3)"
   },
   {
    "id": "kraft",
@@ -2630,7 +2644,8 @@
       }
      ]
     }
-   ]
+   ],
+   "label": "übrige Sportarten (7)"
   }
  ]
 }

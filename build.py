@@ -550,8 +550,10 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
     opn = ''  # auch im Bearbeitungsmodus eingeklappt starten (schnelleres Navigieren)
     if edit:
         # Titel des Abschnitts im Admin als eigenes Feld (cid: sport|ti|title)
-        tt_span = '<span class="tt">'+esc(title)+'</span>'
-        tfield = ('<div class="adm-home adm-title">'
+        _tag = ('<span class="adm-tag adm-shtag">'+esc(t["_shlbl"])+'</span>') if t.get("_shlbl") else ''
+        tt_span = '<span class="tt">'+esc(title)+_tag+'</span>'
+        _who = ('<div class="adm-shwho">gilt für: '+esc(t["_shwho"])+'</div>') if t.get("_shwho") else ''
+        tfield = ('<div class="adm-home adm-title">'+_who
                   + _adm_field("Titel des Abschnitts", cidb+"|title", t["title"])
                   + '</div>')
     else:
@@ -3045,7 +3047,8 @@ __MAINCSS__
 .adm-sect{font-size:12.5px;font-weight:800;color:#1d2630}
 .adm-tag{font-size:10.5px;font-weight:700;color:#697080;background:#eef1f4;border-radius:20px;padding:2px 9px;margin-left:8px;letter-spacing:.02em;vertical-align:2px}
 .adm-shnote{margin:0;font-size:12.5px;color:#697080;line-height:1.5}
-.adm-shwho{font-size:11px;font-weight:700;color:#1f8fa6;margin:14px 2px -6px;letter-spacing:.02em}
+.adm-shwho{font-size:12px;font-weight:600;color:#1f8fa6;background:rgba(31,143,166,.08);border:1px solid rgba(31,143,166,.25);border-radius:9px;padding:7px 11px;line-height:1.45}
+.adm-shtag{color:#1f8fa6;background:rgba(31,143,166,.12)}
 .adm-note{margin:0;font-size:12px;color:#8a6a00;background:#fdf7e4;border:1px solid #f0e2ad;border-radius:8px;padding:7px 10px}
 </style></head>
 <body>
@@ -3423,12 +3426,14 @@ def _shared_admin_section(datamap):
             '<h2 class="grp" style="--gc:#1f8fa6">Sportartübergreifende Inhalte '
             '<span class="adm-tag">eine Änderung wirkt in allen aufgeführten Sportarten (alle Sprachen wie gewohnt)</span></h2>')
     orig = {}
+    # Gleiche Themen zusammen gruppieren (alphabetisch, Varianten direkt untereinander)
+    used.sort(key=lambda bid: (SHARED_BLOCKS[bid]["title"].lower(), SHARED_BLOCKS[bid].get("label", "")))
     for i, bid in enumerate(used):
         b = SHARED_BLOCKS[bid]
-        t = {"title": b["title"], "group": b["group"], "rows": b["rows"], "_sh": bid}
         who = ", ".join(sportname.get(x, x) for x in b.get("sports", []))
-        html += ('<div class="adm-shwho">gilt für: '+esc(who)+'</div>'
-                 + theme_html(t, i, stages, "shared-adm", "de", ages, edit=True, group=b["group"]))
+        t = {"title": b["title"], "group": b["group"], "rows": b["rows"], "_sh": bid,
+             "_shlbl": b.get("label", ""), "_shwho": who}
+        html += theme_html(t, i, stages, "shared-adm", "de", ages, edit=True, group=b["group"])
         orig["shared|"+bid+"|title"] = b["title"] or ""
         for ri, r in enumerate(b["rows"]):
             for si, seg in enumerate(merge_same_segs(r["segs"])):
