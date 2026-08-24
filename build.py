@@ -1600,6 +1600,11 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
   .imodal{align-items:flex-start;padding:0}
   .im-box{width:100vw;max-height:100vh;max-height:100svh;border-radius:0}
   .imodal.wide .im-box{width:100vw;height:100vh;height:100svh}
+  /* Stufen-Popup: Spalten seitlich wischbar (statt verkleinert/abgeschnitten) */
+  .imodal.wide .ps-secbody{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .imodal.wide .ps-cols{grid-template-columns:repeat(var(--nc,1),minmax(210px,230px));width:max-content}
+  /* iOS zoomt bei Eingabefeldern unter 16px automatisch hinein - verhindern */
+  .fb-panel .fb-text{font-size:16px}
   .im-bar{padding:10px 14px;padding-top:max(10px,env(safe-area-inset-top))}
   .im-x{font-size:22px;padding:8px 12px;margin:-6px -8px -6px 0}
 }
@@ -2060,7 +2065,8 @@ header.top .sicon+.sportsel2{flex:none;width:44px;height:34px;min-width:0;max-wi
 .ht-r .chatbtn{order:5;flex:none}
 .ht-r .toggleall,.ht-r .pdf,.ht-r .hdiv{display:none}
 .wrap{padding:10px 10px 60px}
-.scroller{padding:0 8px 10px}
+.scroller{padding:0 8px 10px;will-change:scroll-position}
+.grid{transform:translateZ(0)}
 .rl{font-size:9.5px;padding:6px 6px;line-height:1.25;font-weight:600}
 .rl{box-shadow:0 0 0 6px var(--card),-12px 0 0 6px var(--card),7px 0 8px -5px rgba(0,0,0,.22)}
 .cell .cwrap{font-size:11px}
@@ -2577,6 +2583,7 @@ document.addEventListener('click',e=>{if(!e.target.closest('.node'))closePops();
 // ---- Mission Swiss-Ski im Iframe-Overlay ----
 const mm=document.querySelector('.mmodal');
 function openMission(url,title){
+  if(extMobile(url))return;
   mm.querySelector('.mm-t').textContent=title;
   mm.querySelector('.mm-ext').href=url;
   const fr=mm.querySelector('.mm-frame');
@@ -2592,6 +2599,12 @@ document.querySelectorAll('.np-mission').forEach(a=>a.addEventListener('click',e
   e.preventDefault();e.stopPropagation();closePops();
   openMission(a.getAttribute('href'), a.dataset.title||'Mission Swiss-Ski');
 }));
+// Handy: externe Inhalte im neuen Tab statt im Overlay oeffnen - so bleibt die
+// Startseite erhalten und man kommt sicher zurueck (auch als installierte App)
+function extMobile(href){
+  if(!window.matchMedia('(max-width:760px)').matches)return false;
+  window.open(href,'_blank','noopener');return true;
+}
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){ if(!mm.hidden){closeMission();e._ovl=true;} else closePops(); }
 });
@@ -2617,6 +2630,13 @@ function fitSec(d){
   if(!cols||!body)return;
   cols.style.transform='';cols.style.width='';body.style.height='';body.style.overflow='';
   const imb=im.querySelector('.im-body');
+  if(window.matchMedia('(max-width:760px)').matches){
+    // Handy: nicht verkleinern (wuerde die Spalten abschneiden), sondern
+    // seitlich wischbar machen
+    body.style.overflowX='auto';
+    setTimeout(()=>{imb.scrollTo({top:Math.max(0,d.offsetTop-10),behavior:'smooth'});},40);
+    return;
+  }
   const avail=imb.clientHeight - d.querySelector('summary').getBoundingClientRect().height - 64;
   const need=cols.scrollHeight;
   if(need>avail&&avail>120){
@@ -3049,6 +3069,9 @@ __MAINCSS__
 .adm-shnote{margin:0;font-size:12.5px;color:#697080;line-height:1.5}
 .adm-shwho{font-size:12px;font-weight:600;color:#1f8fa6;background:rgba(31,143,166,.08);border:1px solid rgba(31,143,166,.25);border-radius:9px;padding:7px 11px;line-height:1.45}
 .adm-shtag{color:#1f8fa6;background:rgba(31,143,166,.12)}
+.adm-shsep{display:flex;align-items:center;gap:10px;margin:22px 2px 4px;color:#8a94a1;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.adm-shsep:after{content:"";flex:1;height:1px;background:rgba(90,100,114,.22)}
+.adm-shsep:first-of-type{margin-top:8px}
 .adm-note{margin:0;font-size:12px;color:#8a6a00;background:#fdf7e4;border:1px solid #f0e2ad;border-radius:8px;padding:7px 10px}
 </style></head>
 <body>
@@ -3428,8 +3451,13 @@ def _shared_admin_section(datamap):
     orig = {}
     # Gleiche Themen zusammen gruppieren (alphabetisch, Varianten direkt untereinander)
     used.sort(key=lambda bid: (SHARED_BLOCKS[bid]["title"].lower(), SHARED_BLOCKS[bid].get("label", "")))
+    _last_title = None
     for i, bid in enumerate(used):
         b = SHARED_BLOCKS[bid]
+        if b["title"] != _last_title:
+            # kleine Unterteilung zwischen den Themen-Bloecken
+            html += '<div class="adm-shsep"><span>'+esc(b["title"])+'</span></div>'
+            _last_title = b["title"]
         who = ", ".join(sportname.get(x, x) for x in b.get("sports", []))
         t = {"title": b["title"], "group": b["group"], "rows": b["rows"], "_sh": bid,
              "_shlbl": b.get("label", ""), "_shwho": who}
