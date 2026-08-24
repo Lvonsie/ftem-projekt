@@ -40,15 +40,18 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbc-ic{flex:none;width:34px;height:34px;border-radius:10px;background:rgba(213,43,30,.09);color:var(--red);display:flex;align-items:center;justify-content:center}
 .fbc-ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .fbc-tx{display:flex;flex-direction:column;gap:1px}
+.fbc-short{display:none}
 .fbc-tx b{font-size:13px;font-weight:800;color:var(--ink)}
 .fbc-tx small{font-size:10.5px;font-weight:600;color:var(--mut)}
 .fbc-ar{flex:none;color:var(--red);font-weight:800;font-size:15px;margin-left:4px}
 .fb-wrap .fb-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:20}
 @media(max-width:760px){
   .fb-wrap{left:14px;top:66px}
-  .fb-card{padding:6px;border-radius:50%;gap:0}
-  .fbc-ic{width:28px;height:28px;background:none}
-  .fbc-tx,.fbc-ar{display:none}
+  .fb-card{padding:6px 12px 6px 8px;border-radius:999px;gap:6px}
+  .fbc-ic{width:22px;height:22px;background:none}
+  .fbc-ic svg{width:15px;height:15px}
+  .fbc-full,.fbc-tx small,.fbc-ar{display:none}
+  .fbc-short{display:inline;font-size:11px}
   .fb-wrap .fb-panel{width:min(270px,calc(100vw - 28px))}
 }
 .fb-panel{display:flex;flex-direction:column;gap:8px;width:270px;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border:1px solid rgba(29,38,48,.10);border-radius:14px;padding:11px;box-shadow:0 16px 40px rgba(29,38,48,.20)}
@@ -181,7 +184,8 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbtnw:focus-visible .fb3d{outline:3px solid rgba(31,143,166,.85);outline-offset:3px}
 @media(max-width:760px){
   /* etwas hoeher, damit der F-Knopf nicht mit dem Athlet:innen-Weg-Knopf kollidiert */
-  .w-f{left:15%;top:55%}.w-t{left:28%;top:47%}.w-e{left:41%;top:39.5%}.w-m{left:54%;top:32.5%}
+  /* deutlich entzerrt: keine Ueberlappungen mehr */
+  .w-f{left:15%;top:53%}.w-t{left:44%;top:46%}.w-e{left:67%;top:38%}.w-m{left:87%;top:31%}
   .w-f .fb3d{width:94px}.w-f .fl{font-size:33px}
   .w-t .fb3d{width:94px}.w-t .fl{font-size:33px}
   .w-e .fb3d{width:68px}.w-e .fl{font-size:23px}
@@ -328,14 +332,24 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
   .hero-top-r{width:232px}
   .hero-top-r .langsw a{padding:4px 7px}
   .homesport{font-size:12.5px;padding:7px 10px}
-  .bottombar{flex-wrap:wrap;justify-content:center;gap:4px 8px;padding:6px 10px}
+  /* Sportwahl kompakt: nur Piktogramm + Pfeil */
+  .top-row{justify-content:flex-end}
+  .hero-top-r .top-row .sportpick{flex:none}
+  .top-row .sp-btn{width:auto;padding:9px 11px}
+  .sp-btn .sp-lbl{display:none}
+  .sportpick .sp-list{left:auto;right:0;min-width:230px}
+  /* Admin & Praesentation nur am Laptop */
+  .bb-tools .mp-admin{display:none}
+  /* Fusszeile mobil: Label, Grundlagen-Knoepfe, dann Mission + FTEM-Erklaerung */
+  .bottombar{flex-wrap:wrap;justify-content:center;gap:6px 6px;padding:8px 10px 10px}
   .bb-div{display:none}
-  .bb-intro{order:1;width:100%;text-align:center}
-  .bb-links{order:2;flex:none;justify-content:center;width:100%}
-  .bb-app{display:inline-block;order:3;font-size:10.5px;padding:4px 10px}
-  .bb-mission{order:4;padding:4px 12px}
+  .bb-intro{order:1;width:100%;text-align:center;font-size:10.5px}
+  .bb-links{order:2;flex:none;justify-content:center;width:100%;gap:6px}
+  .bb-item{font-size:11px;padding:5px 12px;letter-spacing:.01em}
+  .bb-mission{order:3;padding:5px 12px}
   .bb-mission b{font-size:11px}
-  .bb-tools{order:5;margin-left:0}
+  .bb-tools{order:4;margin-left:0;gap:6px}
+  .bb-app{display:inline-block;order:5;width:auto}
   .bb-intro{margin-right:0;text-align:center;font-size:9.5px;line-height:1.25}
   .bb-links{flex-wrap:wrap;justify-content:center;gap:4px}
   .bb-item{padding:4px 10px;font-size:10.5px}
@@ -789,7 +803,9 @@ header.top .sicon{width:28px;height:28px}
 /* Header genau 2 Zeilen: 1) Zurueck+Icon+Sportart+Sprachen  2) Suche+Springen+Chat */
 .ht-r{display:contents}
 .ht-l{order:1;flex:1 1 auto;min-width:0}
-header.top .sportsel2{flex:1 1 0;width:100%;min-width:118px;font-size:13.5px;max-width:none}
+/* Sportartenauswahl nur ueber das Symbol: unsichtbares Select liegt ueber dem Icon */
+header.top .sicon+.sportsel2{flex:none;width:44px;height:34px;min-width:0;max-width:none;margin-left:-44px;padding:0;opacity:0;position:relative;z-index:2}
+.ht-l::after{content:"";flex:none;width:7px;height:7px;border-right:2px solid #98a1ad;border-bottom:2px solid #98a1ad;transform:rotate(45deg);margin:-2px 0 0 -14px;pointer-events:none}
 .ht-r .langsw a{padding:4px 6px;font-size:10.5px}
 .ht-r .langsw{order:2;flex:none}
 .ht-r .themebtn{order:2;flex:none}
