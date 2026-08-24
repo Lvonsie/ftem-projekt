@@ -1123,7 +1123,9 @@ def home_html(datamap, lang):
                # "Als App installieren" nur auf dem Handy sichtbar
                '<button class="bb-item bb-app" type="button" data-open="tpl-app" data-t="'+esc(app_lbl)+'">'+esc(app_lbl)+'</button>'
                '<div class="bb-tools">'+adminlk+
-               '<button class="aw-info" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'" title="'+esc(info_label)+'" aria-label="'+esc(info_label)+'">i</button>'
+               # "FTEM kurz erklärt" statt Info-Symbol (oeffnet das "Was ist FTEM?"-Overlay)
+               '<button class="bb-item bb-ftem" type="button" data-open="tpl-info" data-t="'+esc(info_label)+'">'
+               +esc({"de":"FTEM kurz erklärt","fr":"FTEM en bref","it":"FTEM in breve","en":"FTEM in a nutshell"}.get(lang,"FTEM kurz erklärt"))+'</button>'
                '</div></div>')
     nbadge = ''  # Zaehler-Badge entfernt (Wunsch Michael)
     # Sportartspezifische Mini-Icons (monoline) fuer den Home-Sportpicker
@@ -1600,6 +1602,8 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .bb-links{display:flex;align-items:center;flex:1;gap:10px;flex-wrap:wrap}
 .bb-app{display:none}
 .bb-tools{flex:none;display:flex;align-items:center;gap:10px;margin-left:auto}
+.bb-tools .bb-ftem{color:var(--red);border-color:rgba(213,43,30,.45)}
+.bb-tools .bb-ftem:hover{background:#fdf3f2;color:var(--red)}
 .bb-tools .presask input{width:96px}
 .bb-item{font:inherit;flex:none;white-space:nowrap;background:#fff;border:1px solid rgba(29,38,48,.14);border-radius:999px;color:var(--ink);font-weight:700;font-size:12.5px;padding:7px 16px;cursor:pointer;text-decoration:none;letter-spacing:.03em;box-shadow:0 2px 8px rgba(29,38,48,.06);transition:background .15s,border-color .15s,color .15s,transform .15s}
 .bb-item b{color:var(--red);font-weight:800;margin-left:4px}
