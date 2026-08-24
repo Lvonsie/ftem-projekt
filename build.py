@@ -1104,9 +1104,10 @@ def home_html(datamap, lang):
     # Fusszeile (Bjoern-Mock, aber in bestehender Farbwelt und mit bestehenden Labels):
     # Mission Sportart links · Grundlagen-Knoepfe · rechts Admin/Praesentation + Info
     footbar = ('<div class="bottombar">'
+               # Label zeigt die aktuell gewaehlte Sportart ("Mission Ski Alpin" usw.)
                '<button class="bb-mission np-sportmission" type="button">'
-               '<b>'+esc(misp_lbl)+'</b>'
-               '<img class="bb-mlogo" src="'+asset_v('assets/swiss-ski-logo.svg')+'" alt="Swiss-Ski">'
+               '<b>'+esc({"de":"Mission","fr":"Mission","it":"Missione","en":"Mission"}.get(lang,"Mission"))
+               +' <span class="bb-msport">'+esc(tr(SPORTS[0]["name"], lang))+'</span></b>'
                '</button>'
                '<span class="bb-div" aria-hidden="true"></span>'
                '<span class="bb-intro">'+esc(foot_intro)+'</span>'
@@ -1528,9 +1529,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
   .bb-intro{order:1;width:100%;text-align:center}
   .bb-links{order:2;flex:none;justify-content:center;width:100%}
   .bb-app{display:inline-block;order:3;font-size:10.5px;padding:4px 10px}
-  .bb-mission{order:4;flex-direction:row;align-items:center;gap:7px;padding:3px 7px}
-  .bb-mission b{font-size:11.5px}
-  .bb-mission .bb-mlogo{height:10px}
+  .bb-mission{order:4;padding:4px 12px}
+  .bb-mission b{font-size:11px}
   .bb-tools{order:5;margin-left:0}
   .bb-intro{margin-right:0;text-align:center;font-size:9.5px;line-height:1.25}
   .bb-links{flex-wrap:wrap;justify-content:center;gap:4px}
@@ -1585,10 +1585,10 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;gap:14px;padding:8px 18px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);border-top:1px solid rgba(29,38,48,.08)}
 /* Mission Sportart links in der Fusszeile (Bjoern-Mock, Farben wie gehabt) */
-.bb-mission{font:inherit;flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:none;border:none;padding:4px 8px;cursor:pointer;border-radius:10px;transition:background .15s}
-.bb-mission b{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:.01em}
-.bb-mission .bb-mlogo{height:12px;width:auto;display:block}
-.bb-mission:hover{background:rgba(213,43,30,.06)}
+.bb-mission{font:inherit;flex:none;display:flex;align-items:center;background:#fff;border:1px solid rgba(29,38,48,.14);border-radius:999px;padding:7px 16px;cursor:pointer;box-shadow:0 2px 8px rgba(29,38,48,.06);transition:border-color .15s,transform .15s}
+.bb-mission b{font-size:12.5px;font-weight:700;color:var(--ink);letter-spacing:.03em;white-space:nowrap}
+.bb-mission b .bb-msport{font-weight:800}
+.bb-mission:hover{border-color:var(--red);transform:translateY(-1px)}
 .bb-mission:hover b{color:var(--red)}
 .bb-div{flex:none;width:1px;height:30px;background:rgba(29,38,48,.14)}
 .bb-intro{flex:none;color:#55606d;font-size:12px;font-weight:800;letter-spacing:.03em;line-height:1.3}
@@ -2649,6 +2649,15 @@ document.querySelectorAll('.sportpick').forEach(sp=>{
   document.addEventListener('click',e=>{if(!list.hidden&&!sp.contains(e.target))closeL();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeL();});
 });
+// "Mission <Sportart>" in der Fusszeile folgt der gewaehlten Sportart
+function updMissionLbl(){
+  const el=document.querySelector('.bb-msport');
+  if(!el)return;
+  const sid=(homeSport&&homeSport.value)?homeSport.value:SPORT_IDS[0];
+  el.textContent=SPORT_NAMES[sid]||sid;
+}
+if(homeSport)homeSport.addEventListener('change',updMissionLbl);
+updMissionLbl();
 function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
 // AW-Knopf exakt ueber der Bergspitze; Hover blendet die Piste ein
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero'), heroSvg=document.querySelector('.heromt');
