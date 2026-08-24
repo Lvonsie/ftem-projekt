@@ -507,7 +507,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
     if edit and t.get("_sh") and prefix != "shared-adm":
         # Im Admin erscheint das Thema nur im zentralen Bereich (keine
         # doppelten cids im DOM - sonst Geister-"ungespeichert"-Anzeigen).
-        return ('<details class="theme edit" id="'+prefix+'-t'+str(idx)+'" style="border-left-color:'+bar+'">'
+        return ('<details class="theme edit shref" id="'+prefix+'-t'+str(idx)+'" style="border-left-color:'+bar+'">'
                 '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(t["title"])+'</span>'
                 '<span class="tt">'+esc(title)+' <span class="adm-tag">sportartübergreifend</span></span>'
                 '<span class="tchev"></span></summary>'
@@ -2359,14 +2359,23 @@ function initSport(sec){
   };
   themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
   window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
-  // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart
+  // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart.
+  // WICHTIG fuers Handy: programmatisch gesetzte Positionen loesen selbst
+  // scroll-Events aus ("Echos"). Wuerden die zurueck in den gerade gewischten
+  // Scroller schreiben, stoppt dessen Traegheits-Scrollen abrupt. Darum werden
+  // Echos markiert (__prog) und ignoriert; synchronisiert werden nur offene Themen.
   const scrollers=[...sec.querySelectorAll('.scroller')];
-  sec.__sx=0;let sy=false;
+  sec.__sx=0;
   scrollers.forEach(s=>s.addEventListener('scroll',()=>{
-    if(sy)return;sy=true;sec.__sx=s.scrollLeft;
-    scrollers.forEach(o=>{if(o!==s&&o.scrollLeft!==sec.__sx)o.scrollLeft=sec.__sx;});
-    requestAnimationFrame(()=>{sy=false;});
-  }));
+    if(s.__prog!==undefined){delete s.__prog;return;}
+    sec.__sx=s.scrollLeft;
+    scrollers.forEach(o=>{
+      if(o===s)return;
+      const d=o.closest('details.theme');
+      if(d&&!d.open)return;                      // zugeklappt: erst beim Oeffnen syncen
+      if(Math.abs(o.scrollLeft-sec.__sx)>1){o.__prog=sec.__sx;o.scrollLeft=sec.__sx;}
+    });
+  },{passive:true}));
   // Stufen-Spalten hervorheben
   const active=new Set();
   function phaseIdx(i){return i<3?'foundation':i<7?'talent':i<9?'elite':'mastery';}
@@ -3067,6 +3076,9 @@ __MAINCSS__
 .adm-sect{font-size:12.5px;font-weight:800;color:#1d2630}
 .adm-tag{font-size:10.5px;font-weight:700;color:#697080;background:#eef1f4;border-radius:20px;padding:2px 9px;margin-left:8px;letter-spacing:.02em;vertical-align:2px}
 .adm-shnote{margin:0;font-size:12.5px;color:#697080;line-height:1.5}
+/* Verweis-Karten (zentral gepflegte Themen) in der Sport-Ansicht: halbtransparent */
+details.theme.shref{opacity:.55}
+details.theme.shref:hover,details.theme.shref[open]{opacity:1}
 .adm-shwho{font-size:12px;font-weight:600;color:#1f8fa6;background:rgba(31,143,166,.08);border:1px solid rgba(31,143,166,.25);border-radius:9px;padding:7px 11px;line-height:1.45}
 .adm-shtag{color:#1f8fa6;background:rgba(31,143,166,.12)}
 .adm-shsep{display:flex;align-items:center;gap:10px;margin:22px 2px 4px;color:#8a94a1;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}

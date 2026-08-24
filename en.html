@@ -1112,14 +1112,23 @@ function initSport(sec){
   };
   themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
   window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
-  // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart
+  // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart.
+  // WICHTIG fuers Handy: programmatisch gesetzte Positionen loesen selbst
+  // scroll-Events aus ("Echos"). Wuerden die zurueck in den gerade gewischten
+  // Scroller schreiben, stoppt dessen Traegheits-Scrollen abrupt. Darum werden
+  // Echos markiert (__prog) und ignoriert; synchronisiert werden nur offene Themen.
   const scrollers=[...sec.querySelectorAll('.scroller')];
-  sec.__sx=0;let sy=false;
+  sec.__sx=0;
   scrollers.forEach(s=>s.addEventListener('scroll',()=>{
-    if(sy)return;sy=true;sec.__sx=s.scrollLeft;
-    scrollers.forEach(o=>{if(o!==s&&o.scrollLeft!==sec.__sx)o.scrollLeft=sec.__sx;});
-    requestAnimationFrame(()=>{sy=false;});
-  }));
+    if(s.__prog!==undefined){delete s.__prog;return;}
+    sec.__sx=s.scrollLeft;
+    scrollers.forEach(o=>{
+      if(o===s)return;
+      const d=o.closest('details.theme');
+      if(d&&!d.open)return;                      // zugeklappt: erst beim Oeffnen syncen
+      if(Math.abs(o.scrollLeft-sec.__sx)>1){o.__prog=sec.__sx;o.scrollLeft=sec.__sx;}
+    });
+  },{passive:true}));
   // Stufen-Spalten hervorheben
   const active=new Set();
   function phaseIdx(i){return i<3?'foundation':i<7?'talent':i<9?'elite':'mastery';}
