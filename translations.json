@@ -1465,7 +1465,8 @@
   "Geführte Trainings: 2-4 h/Woche\n\nAllgemein Sportliche Aktivität: 2-3 h/Woche": "Entraînements encadrés : 2-4 h/semaine\n\nActivité sportive générale : 2-3 h/semaine",
   "Geführte Trainings: ca. 165 - 195 h (180 h = 8 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Entraînements encadrés : env. 165 - 195 h (180 h = 8 h/semaine)\n\nActivité sportive générale : individuelle selon les réserves de temps et d'énergie (0-2 h/sem.)",
   "Geführte Trainings: ca. 180 - 220 h (200 h = 9 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Entraînements encadrés : env. 180 - 220 h (200 h = 9 h/semaine)\n\nActivité sportive générale : individuelle selon les réserves de temps et d'énergie (0-2 h/sem.)",
-  "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Entraînements encadrés : env. 200 - 240 h (220 h = 10 h/semaine)\n\nActivité sportive générale : individuelle selon les réserves de temps et d'énergie (0-2 h/sem.)"
+  "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Entraînements encadrés : env. 200 - 240 h (220 h = 10 h/semaine)\n\nActivité sportive générale : individuelle selon les réserves de temps et d'énergie (0-2 h/sem.)",
+  "Mental": "Mental"
  },
  "it": {
   "Athlet:innen-Weg": "Percorso dell'atleta",
@@ -2933,7 +2934,8 @@
   "Geführte Trainings: 2-4 h/Woche\n\nAllgemein Sportliche Aktivität: 2-3 h/Woche": "Allenamenti guidati: 2-4 h/settimana\n\nAttività sportiva generale: 2-3 h/settimana",
   "Geführte Trainings: ca. 165 - 195 h (180 h = 8 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Allenamenti guidati: ca. 165 - 195 h (180 h = 8 h/settimana)\n\nAttività sportiva generale: individuale secondo le riserve di tempo ed energia (0-2 h/sett.)",
   "Geführte Trainings: ca. 180 - 220 h (200 h = 9 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Allenamenti guidati: ca. 180 - 220 h (200 h = 9 h/settimana)\n\nAttività sportiva generale: individuale secondo le riserve di tempo ed energia (0-2 h/sett.)",
-  "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Allenamenti guidati: ca. 200 - 240 h (220 h = 10 h/settimana)\n\nAttività sportiva generale: individuale secondo le riserve di tempo ed energia (0-2 h/sett.)"
+  "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Allenamenti guidati: ca. 200 - 240 h (220 h = 10 h/settimana)\n\nAttività sportiva generale: individuale secondo le riserve di tempo ed energia (0-2 h/sett.)",
+  "Mental": "Mentale"
  },
  "en": {
   "Trainingsstunden und Entwicklungsfokus": "Training hours and development focus",
@@ -4365,6 +4367,7 @@
   "Geführte Trainings: 2-4 h/Woche\n\nAllgemein Sportliche Aktivität: 2-3 h/Woche": "Guided training: 2-4 h/week\n\nGeneral sporting activity: 2-3 h/week",
   "Geführte Trainings: ca. 165 - 195 h (180 h = 8 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Guided training: approx. 165 - 195 h (180 h = 8 h/week)\n\nGeneral sporting activity: individual according to time and energy reserves (0-2 h/wk)",
   "Geführte Trainings: ca. 180 - 220 h (200 h = 9 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Guided training: approx. 180 - 220 h (200 h = 9 h/week)\n\nGeneral sporting activity: individual according to time and energy reserves (0-2 h/wk)",
-  "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Guided training: approx. 200 - 240 h (220 h = 10 h/week)\n\nGeneral sporting activity: individual according to time and energy reserves (0-2 h/wk)"
+  "Geführte Trainings: ca. 200 - 240 h (220h = 10 h/Woche)\n\nAllgemein Sportliche Aktivität: Individuell nach Zeit- und Energiereserven (0-2 h/Wo.)": "Guided training: approx. 200 - 240 h (220 h = 10 h/week)\n\nGeneral sporting activity: individual according to time and energy reserves (0-2 h/wk)",
+  "Mental": "Mental"
  }
 }

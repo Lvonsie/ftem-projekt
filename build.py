@@ -501,6 +501,18 @@ def theme_icon(title):
 def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=False):
     title = tr(t["title"], lang)
     bar, chip = group_accent(group)
+    # cid-Basis: sportuebergreifende Themen bekommen eine sportunabhaengige
+    # Kennung, damit EIN Override in allen betroffenen Sportarten wirkt.
+    cidb = ("shared|"+t["_sh"]) if t.get("_sh") else (prefix+"|"+str(idx))
+    if edit and t.get("_sh") and prefix != "shared-adm":
+        # Im Admin erscheint das Thema nur im zentralen Bereich (keine
+        # doppelten cids im DOM - sonst Geister-"ungespeichert"-Anzeigen).
+        return ('<details class="theme edit" id="'+prefix+'-t'+str(idx)+'" style="border-left-color:'+bar+'">'
+                '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(t["title"])+'</span>'
+                '<span class="tt">'+esc(title)+' <span class="adm-tag">sportartübergreifend</span></span>'
+                '<span class="tchev"></span></summary>'
+                '<div class="adm-home"><p class="adm-shnote">Dieser Abschnitt gilt für mehrere Sportarten und wird zentral bearbeitet: '
+                'oben bei der Sportart «Sportartübergreifend» auswählen. Änderungen dort wirken hier automatisch.</p></div></details>')
     # header row
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(stages):
@@ -531,7 +543,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
                     cen = ((max(s0, a) + min(s1, b)) / 2.0 - a + 0.5) / w * 100.0
                     stops.append("var("+var+") %.0f%%" % cen)
                 grad = "--mg:linear-gradient(90deg,"+",".join(stops)+");"
-            cid = prefix+"|"+str(idx)+"|"+str(ri)+"|"+str(si)
+            cid = cidb+"|"+str(ri)+"|"+str(si)
             more = '' if edit else '<button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button>'
             body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
@@ -540,10 +552,10 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
         # Titel des Abschnitts im Admin als eigenes Feld (cid: sport|ti|title)
         tt_span = '<span class="tt">'+esc(title)+'</span>'
         tfield = ('<div class="adm-home adm-title">'
-                  + _adm_field("Titel des Abschnitts", prefix+"|"+str(idx)+"|title", t["title"])
+                  + _adm_field("Titel des Abschnitts", cidb+"|title", t["title"])
                   + '</div>')
     else:
-        tt_span = ('<span class="tt ovr-txt" data-cid="'+prefix+'|'+str(idx)+'|title" data-bh="'+fnv36(t["title"] or "")+'">'+esc(title)+'</span>')
+        tt_span = ('<span class="tt ovr-txt" data-cid="'+cidb+'|title" data-bh="'+fnv36(t["title"] or "")+'">'+esc(title)+'</span>')
         tfield = ''
     return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(t["title"])+'</span>'
@@ -585,11 +597,38 @@ def build_sections(d, prefix, lang, edit=False):
     jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
     return sections, jump
 
+# --- Sportartuebergreifende Themenbloecke -----------------------------------
+# ftem_shared.json enthaelt zentral gepflegte Themen (id, title, group, rows,
+# sports). In den Sport-Dateien steht an der jeweiligen Position nur noch ein
+# Verweis {"shared": "<id>"}. Beim Laden wird er aufgeloest; das Thema erhaelt
+# _sh=<id>, wodurch seine cids sportunabhaengig werden ("shared|<id>|...") und
+# eine Admin-Korrektur automatisch in allen betroffenen Sportarten wirkt.
+SHARED_BLOCKS = {}
+_shp = os.path.join(BASE, "ftem_shared.json")
+if os.path.exists(_shp):
+    SHARED_BLOCKS = {b["id"]: b for b in json.load(open(_shp, encoding="utf-8"))["blocks"]}
+
+def _resolve_shared(d):
+    if not d:
+        return d
+    out = []
+    for t in d.get("themes", []):
+        if "shared" in t:
+            b = SHARED_BLOCKS.get(t["shared"])
+            if b:
+                out.append({"title": b["title"], "group": b["group"],
+                            "rows": b["rows"], "_sh": b["id"]})
+            # unbekannte Referenz: Thema still weglassen (statt Absturz)
+        else:
+            out.append(t)
+    d["themes"] = out
+    return d
+
 def sport_data(sport):
     f = sport.get("file") or ("ftem_data_"+sport["id"]+".json")
     path = os.path.join(BASE, f)
     if os.path.exists(path):
-        return json.load(open(path, encoding="utf-8"))
+        return _resolve_shared(json.load(open(path, encoding="utf-8")))
     return None
 
 datestr = datetime.date.today().strftime("%d.%m.%Y")
@@ -3005,6 +3044,8 @@ __MAINCSS__
 .adm-sec{border:1px solid #e4e8ec;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:10px;background:#fafbfc}
 .adm-sect{font-size:12.5px;font-weight:800;color:#1d2630}
 .adm-tag{font-size:10.5px;font-weight:700;color:#697080;background:#eef1f4;border-radius:20px;padding:2px 9px;margin-left:8px;letter-spacing:.02em;vertical-align:2px}
+.adm-shnote{margin:0;font-size:12.5px;color:#697080;line-height:1.5}
+.adm-shwho{font-size:11px;font-weight:700;color:#1f8fa6;margin:14px 2px -6px;letter-spacing:.02em}
 .adm-note{margin:0;font-size:12px;color:#8a6a00;background:#fdf7e4;border:1px solid #f0e2ad;border-radius:8px;padding:7px 10px}
 </style></head>
 <body>
@@ -3365,14 +3406,50 @@ def home_edit_html(sport, d):
                 '<div class="adm-home">'+blocks+'</div></details>')
     return out
 
+def _shared_admin_section(datamap):
+    """Zentrale Admin-Maske: jeder sportartuebergreifende Block genau EINMAL."""
+    used = []
+    for s in SPORTS:
+        d = datamap.get(s["id"])
+        for t in (d or {}).get("themes", []):
+            if t.get("_sh") and t["_sh"] not in used:
+                used.append(t["_sh"])
+    if not used:
+        return "", {}
+    stages = ["F1","F2","F3","T1","T2","T3","T4","E1","E2","M"]
+    ages = {k: v for k, v in AGE.items() if v}
+    sportname = {s["id"]: s["name"] for s in SPORTS}
+    html = ('<section class="sport" data-sport="__shared" hidden><div class="wrap">'
+            '<h2 class="grp" style="--gc:#1f8fa6">Sportartübergreifende Inhalte '
+            '<span class="adm-tag">eine Änderung wirkt in allen aufgeführten Sportarten (alle Sprachen wie gewohnt)</span></h2>')
+    orig = {}
+    for i, bid in enumerate(used):
+        b = SHARED_BLOCKS[bid]
+        t = {"title": b["title"], "group": b["group"], "rows": b["rows"], "_sh": bid}
+        who = ", ".join(sportname.get(x, x) for x in b.get("sports", []))
+        html += ('<div class="adm-shwho">gilt für: '+esc(who)+'</div>'
+                 + theme_html(t, i, stages, "shared-adm", "de", ages, edit=True, group=b["group"]))
+        orig["shared|"+bid+"|title"] = b["title"] or ""
+        for ri, r in enumerate(b["rows"]):
+            for si, seg in enumerate(merge_same_segs(r["segs"])):
+                orig["shared|"+bid+"|"+str(ri)+"|"+str(si)] = seg.get("v") or ""
+    return html + "</div></section>", orig
+
 def admin_html(datamap):
     secs = ""; opts = ""; orig = {}
+    sh_html, sh_orig = _shared_admin_section(datamap)
+    if sh_html:
+        secs += sh_html
+        opts += '<option value="__shared">★ Sportartübergreifend</option>'
+        orig.update(sh_orig)
     for s in SPORTS:
         d = datamap[s["id"]]
         if not d: continue
         secs += sport_section(s, d, "de", edit=True)
         opts += '<option value="'+esc(s["id"])+'">'+esc(tr(s["name"], "de"))+'</option>'
         for ti, t in enumerate(d["themes"]):
+            if t.get("_sh"):
+                continue  # zentral erfasst (siehe _shared_admin_section)
             orig[s["id"]+"|"+str(ti)+"|title"] = t["title"] or ""
             for ri, r in enumerate(t["rows"]):
                 # WICHTIG: gleiche Nummerierung wie theme_html (zusammengefuehrte
