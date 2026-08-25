@@ -463,6 +463,12 @@ _ICONS = {
  "carve": '<path d="M8.5 3c7.5 2.5-7.5 6.5 0 9s-7.5 6.5 0 9"/><path d="M17 4.5v6.5"/><path d="M17 4.5l4 1.5-4 1.6"/>',
  "slzigzag": '<path d="M6 4l12 4L6 12l12 4-12 4"/>',
  "gscurve": '<path d="M5 4c13 2 13 6.5 7 8s-6 6.5 7 8"/>',
+ # Skicross/Boardercross: Startmaschine (45 Grad), Schwung um SX-Flaggen,
+ # Wellen+Sprungelement, Linienwahl ums Tor (mehrere Linien)
+ "sxstart": '<path d="M7 4v10M17 6.5v8"/><path d="M7 4l10 2.5"/><path d="M4 15.5l16-3"/><path d="M7 14l-3.5 6.5M17 12.5l3.5 6"/>',
+ "sxturn": '<path d="M18 3.5v5h5z"/><path d="M10 13v5h5z"/><path d="M16 2c-8 3-8 7 0 10s8 6 0 9"/>',
+ "sxwaves": '<path d="M1 19c2-6.5 5-6.5 7 0"/><path d="M8 19c2-6.5 5-6.5 7 0"/><path d="M15 19l3.5-9.5L22 19"/>',
+ "sxlines": '<path d="M14 3v6h7z"/><path d="M4 21c9-2 8-9 10-14"/><path d="M2 17c7-2 6-7 8.5-11" stroke-opacity=".45"/><path d="M8 22c8-3 10-6 13-9" stroke-opacity=".45"/>',
  "speedarrow": '<path d="M6 5l13 11.5"/><path d="M19 16.5l-3.7-.2M19 16.5l-.2-3.7"/><path d="M4 11.5l3.6 3.2M3.5 16.2l2.7 2.4"/>',
  "funnel": '<path d="M4 5h16l-6.2 7v5.6l-3.6 2.4v-8L4 5z"/>',
  "podium": '<rect x="9" y="9" width="6" height="11"/><rect x="3" y="13" width="6" height="7"/><rect x="15" y="15" width="6" height="5"/><path d="M12 3v3M10.6 4.5h2.8"/>',
@@ -482,6 +488,12 @@ _KEYMAP = [
  # ("riesenslalom" vor "slalom" pruefen – der String enthaelt "slalom"!)
  (("riesenslalom",),"gscurve"),
  (("slalom",),"slzigzag"),
+ # Skicross & Snowboard Cross ("cross start" trifft auch "Skicross Start" usw.);
+ # "strategie" muss VOR dem generischen ("technik","taktik")-Eintrag stehen
+ (("cross start",),"sxstart"),
+ (("cross schwung",),"sxturn"),
+ (("elemente, gel",),"sxwaves"),
+ (("strategie",),"sxlines"),
  (("sg/dh","speed (sg"),"speedarrow"),
  (("technik","taktik"),"carve"),
  (("schnellig","agilit","speed"),"bolt"),
