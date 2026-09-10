@@ -58,8 +58,19 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fb-text{width:100%;min-height:84px;resize:vertical;border-radius:7px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:8px;font:inherit;font-size:12.5px;line-height:1.4}
 .fb-text::placeholder{color:#98a1ad}
 .fb-text:focus{outline:none;border-color:var(--red)}
+.fb-anon{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#39424e;cursor:pointer;user-select:none}
+.fb-anon input{width:15px;height:15px;accent-color:var(--red);cursor:pointer}
+.fb-id{display:flex;flex-direction:column;gap:6px}
+.fb-id.hide{display:none}
+.fb-name,.fb-verband,.fb-email{width:100%;border-radius:7px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 8px;font:inherit;font-size:12.5px}
+.fb-name::placeholder,.fb-verband::placeholder,.fb-email::placeholder{color:#98a1ad}
+.fb-name:focus,.fb-verband:focus,.fb-email:focus{outline:none;border-color:var(--red)}
 .fb-send{align-self:flex-end;background:var(--red);color:#fff;border:none;border-radius:7px;padding:7px 16px;font-weight:800;font-size:12px;cursor:pointer;transition:filter .15s}
 .fb-send:hover{filter:brightness(1.12)}
+.fb-send:disabled{opacity:.6;cursor:default}
+.fb-msg{font-size:11.5px;font-weight:600;line-height:1.35}
+.fb-msg.ok{color:#1f8f4d}
+.fb-msg.bad{color:var(--red)}
 #home .home-hero .langsw{background:none;border-color:transparent}
 #home .home-hero .langsw a{color:#39424e}
 #home .home-hero .langsw a.active{background:#243b53;color:#fff}
@@ -940,7 +951,7 @@ footer{padding:16px;font-size:11px}
 .abar{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid #e4e8ec;padding:9px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .abar h1{font-size:15px;margin:0;font-weight:800}
 .abar label{font-size:12.5px;font-weight:700;display:flex;align-items:center;gap:6px}
-.abar select{padding:6px 9px;border:1px solid #cfd6dd;border-radius:8px;font-size:13px;font-weight:700}
+.abar select{padding:6px 32px 6px 10px;border:1px solid #cfd6dd;border-radius:8px;font-size:13px;font-weight:700}
 .abar .sp{flex:1}
 .astatus{font-size:12.5px;color:#697080}
 .asave{background:#d52b1e;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:800;font-size:13px;cursor:pointer}
@@ -949,6 +960,31 @@ footer{padding:16px;font-size:11px}
 .agloss:hover{filter:brightness(1.08)}
 .asite{text-decoration:none;font-size:13px;font-weight:700;color:#d52b1e}
 #glosspanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
+#fbpanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
+.fbbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:6px;border-radius:9px;background:#d52b1e;color:#fff;font-size:10.5px;font-weight:800;vertical-align:1px}
+.fbfilter{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:#546a8c;cursor:pointer}
+.fbfilter input{width:15px;height:15px;accent-color:#d52b1e}
+.fbcard{border:1px solid #e4e8ec;border-left:4px solid #d52b1e;border-radius:10px;background:#fff;padding:11px 13px;margin:9px 0;display:flex;gap:12px;align-items:flex-start}
+.fbcard.done{border-left-color:#9fb0a5;opacity:.62}
+.fbcard .fbc-main{flex:1;min-width:0}
+.fbcard .fbc-msg{font-size:13.5px;line-height:1.5;color:#1d2630;white-space:pre-wrap;overflow-wrap:anywhere}
+.fbcard .fbc-meta{margin-top:6px;font-size:11.5px;color:#7a8698;display:flex;flex-wrap:wrap;gap:4px 12px}
+.fbcard .fbc-meta b{color:#546a8c;font-weight:700}
+.fbcard .fbc-meta a{color:#d52b1e;text-decoration:none}
+.fbcard .fbc-act{display:flex;flex-direction:column;gap:6px;flex:none}
+.fbcard .fbc-act button{font:inherit;font-size:11.5px;font-weight:700;border:1px solid #d4dae1;border-radius:7px;background:#fff;padding:5px 9px;cursor:pointer;white-space:nowrap}
+.fbcard .fbc-act button:hover{background:#f2f4f6}
+.fbtag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:20px;background:#eef2f6;color:#546a8c}
+.fbtag.anon{background:#f0ece2;color:#8a6d2f}
+.fbtoast{position:fixed;right:18px;bottom:18px;z-index:2000;display:flex;align-items:center;gap:12px;max-width:370px;background:#1d2630;color:#fff;padding:13px 14px;border-radius:12px;box-shadow:0 16px 44px rgba(0,0,0,.42);transform:translateY(14px);opacity:0;transition:transform .25s,opacity .25s}
+.fbtoast.show{transform:none;opacity:1}
+.fbtoast-ic{flex:none;display:flex}
+.fbtoast-tx{flex:1;min-width:0}
+.fbtoast-tx b{font-size:13.5px}
+.fbtoast-sub{font-size:11.5px;color:#aab4c2;margin-top:1px}
+.fbtoast-go{flex:none;font:inherit;font-size:12px;font-weight:800;background:#d52b1e;color:#fff;border:0;border-radius:8px;padding:7px 12px;cursor:pointer}
+.fbtoast-go:hover{filter:brightness(1.1)}
+.fbtoast-x{flex:none;background:none;border:0;color:#aab4c2;font-size:19px;line-height:1;cursor:pointer;padding:0 2px}
 .glosbar{display:flex;align-items:center;gap:12px;margin:10px 0 6px}
 .glosbar input{flex:1;padding:9px 12px;border:1px solid #cfd6dd;border-radius:9px;font-size:14px}
 .glosnote{font-size:12.5px;color:#697080;margin:0 0 10px}
@@ -974,9 +1010,17 @@ footer{padding:16px;font-size:11px}
 .revflag{position:absolute;top:5px;right:5px;z-index:5;border:0;background:none;padding:0;margin:0;cursor:help;font:inherit;line-height:0}
 .revdot{display:flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#e0932c;color:#fff;font-size:12px;font-weight:800;line-height:1;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .revflag:hover .revdot,.revflag:focus-visible .revdot{background:#c67c18}
-.revtip{position:absolute;top:calc(100% + 6px);right:0;width:236px;background:#1d2630;color:#fff;font-size:11px;font-weight:500;line-height:1.4;padding:9px 11px;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.32);opacity:0;visibility:hidden;transform:translateY(-3px);transition:opacity .14s,transform .14s,visibility .14s;pointer-events:none;text-align:left;white-space:normal}
-.revtip b{color:#f4c983}
-.revflag:hover .revtip,.revflag:focus-visible .revtip{opacity:1;visibility:visible;transform:none}
+.revtip{position:fixed;z-index:9999;display:none;width:290px;max-width:calc(100vw - 20px);background:#1d2630;color:#eef1f5;font-size:11.5px;font-weight:500;line-height:1.45;padding:11px 12px;border-radius:9px;box-shadow:0 12px 32px rgba(0,0,0,.36);text-align:left;white-space:normal;pointer-events:none}
+.revtip b{display:block;color:#f4c983;font-weight:800;margin-bottom:7px;line-height:1.3}
+.rt-sec{margin-top:7px}
+.rt-lb{display:block;font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#8b97a6;margin-bottom:2px}
+.rt-tx{background:rgba(255,255,255,.06);border-radius:6px;padding:5px 7px;max-height:150px;overflow:auto}
+.rt-tx.rt-old{opacity:.85}
+.rt-tx ins{background:rgba(90,190,120,.32);color:#c7f2d4;text-decoration:none;border-radius:2px}
+.rt-tx.rt-old del{background:rgba(216,72,58,.34);color:#f7c6bf;text-decoration:line-through;border-radius:2px}
+.rt-tx del{display:none}
+.rt-old ins{display:none}
+.rt-hint{margin-top:8px;font-size:10px;color:#9aa5b3;font-style:italic}
 [data-theme="dark"] .cedit.needs-review{background:#2c2413;border-color:#e0932c}
 .chgnav{display:inline-flex;align-items:center;gap:5px}
 .chgnav button{font:inherit;font-size:12px;font-weight:700;border:1px solid #d4dae1;border-radius:7px;background:#fff;padding:4px 9px;cursor:pointer}
@@ -1043,9 +1087,15 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     </span>
     <button id="asave" class="asave" disabled>Speichern</button>
     <button id="glossbtn" class="agloss" type="button">Glossar</button>
+    <button id="fbbtn" class="agloss" type="button">Feedback<span id="fbbadge" class="fbbadge" hidden>0</span></button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
   <div id="note" class="note"></div>
+  <div id="fbpanel" hidden>
+    <div class="glosbar"><b style="font-size:14px">Feedback-Eingänge</b><span id="fbcount" class="astatus"></span>
+      <label class="fbfilter"><input id="fbopen" type="checkbox"> nur offene</label></div>
+    <div id="fbtable"></div>
+  </div>
   <div id="glosspanel" hidden>
     <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (DE, FR, IT oder EN) …"><span id="gloscount" class="astatus"></span></div>
     <p class="glosnote">Feste Übersetzungen DE&nbsp;&rarr;&nbsp;FR/IT/EN. Diese Begriffe werden bei der Übersetzung der Inhalte einheitlich verwendet. Neue Begriffe: Deutsch plus mindestens eine Übersetzung angeben – fehlende Sprachen können später ergänzt werden.</p>
@@ -7722,26 +7772,103 @@ function toggleGloss(){
   const show=gp.hidden;
   gp.hidden=!show; ew.hidden=show; sw.style.visibility=show?'hidden':'';
   document.getElementById('glossbtn').textContent=show?'← Bearbeiten':'Glossar';
+  if(show){document.getElementById('fbpanel').hidden=true;var fbb0=document.getElementById('fbbtn');if(fbb0)fbb0.firstChild.textContent='Feedback';}
   if(show&&!gp.dataset.done){gp.dataset.done='1';renderGloss('');
     loadGlossAdditions().then(function(){renderGloss(document.getElementById('glosq').value);});
     document.getElementById('glosq').addEventListener('input',function(e){renderGloss(e.target.value);});
     document.getElementById('gaddbtn').addEventListener('click',addGloss);}
+}
+// --- Feedback-Verwaltung im Admin ---
+var FEEDBACK=null;
+function fbEsc(s){return String(s==null?'':s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+function fbFetch(){
+  if(!SUPA_URL||!SUPA_KEY)return Promise.resolve([]);
+  return fetch(SUPA_URL+'/rest/v1/ftem_feedback?select=*&order=created_at.desc',
+      {headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+    .then(function(r){return r.ok?r.json():[];}).catch(function(){return [];});
+}
+function fbBadge(){
+  var open=(FEEDBACK||[]).filter(function(f){return !f.done;}).length;
+  var b=document.getElementById('fbbadge');
+  if(b){b.textContent=open;b.hidden=(open===0);}
+}
+function renderFeedback(){
+  var onlyOpen=document.getElementById('fbopen').checked;
+  var rows=(FEEDBACK||[]).filter(function(f){return onlyOpen?!f.done:true;});
+  document.getElementById('fbcount').textContent=rows.length+(rows.length===1?' Eintrag':' Einträge');
+  if(!rows.length){document.getElementById('fbtable').innerHTML='<p class="glosnote">Keine '+(onlyOpen?'offenen ':'')+'Feedbacks vorhanden.</p>';return;}
+  var h='';
+  rows.forEach(function(f){
+    var d=f.created_at?new Date(f.created_at):null;
+    var ds=d?d.toLocaleString('de-CH',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+    var who=f.anonymous?'<span class="fbtag anon">anonym</span>':'<span class="fbtag">'+(fbEsc(f.name)||'ohne Namen')+'</span>';
+    var meta=['<span><b>'+ds+'</b></span>','<span>'+String(f.lang||'de').toUpperCase()+'</span>'];
+    if(!f.anonymous){
+      if(f.verband)meta.push('<span><b>Verband:</b> '+fbEsc(f.verband)+'</span>');
+      if(f.email)meta.push('<span><b>E-Mail:</b> <a href="mailto:'+fbEsc(f.email)+'">'+fbEsc(f.email)+'</a></span>');
+    }
+    if(f.page)meta.push('<span><b>Seite:</b> '+fbEsc(f.page)+'</span>');
+    h+='<div class="fbcard'+(f.done?' done':'')+'"><div class="fbc-main">'
+      +'<div class="fbc-msg">'+fbEsc(f.message)+'</div>'
+      +'<div class="fbc-meta">'+who+meta.join('')+'</div></div>'
+      +'<div class="fbc-act"><button data-fbdone="'+fbEsc(f.id)+'">'+(f.done?'↺ Wieder öffnen':'✓ Erledigt')+'</button></div></div>';
+  });
+  var t=document.getElementById('fbtable');t.innerHTML=h;
+  t.querySelectorAll('[data-fbdone]').forEach(function(btn){btn.addEventListener('click',function(){markDone(btn.getAttribute('data-fbdone'));});});
+}
+function markDone(id){
+  var f=(FEEDBACK||[]).filter(function(x){return String(x.id)===String(id);})[0]; if(!f)return;
+  var nv=!f.done; f.done=nv; renderFeedback(); fbBadge();
+  if(SUPA_URL&&SUPA_KEY){
+    fetch(SUPA_URL+'/rest/v1/ftem_feedback?id=eq.'+encodeURIComponent(id),{method:'PATCH',
+      headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify({done:nv})}).catch(function(){});
+  }
+}
+function toggleFb(){
+  var fp=document.getElementById('fbpanel'),gp=document.getElementById('glosspanel'),ew=document.getElementById('editwrap'),sw=document.getElementById('sportsel').parentNode;
+  var show=fp.hidden;
+  fp.hidden=!show;
+  if(show){gp.hidden=true;document.getElementById('glossbtn').textContent='Glossar';}
+  ew.hidden=show; sw.style.visibility=show?'hidden':'';
+  document.getElementById('fbbtn').firstChild.textContent=show?'← Bearbeiten':'Feedback';
+  if(show)renderFeedback();
+}
+function showFbToast(n){
+  var t=document.createElement('div');t.className='fbtoast';
+  t.innerHTML='<span class="fbtoast-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>'
+    +'<div class="fbtoast-tx"><b>'+n+(n===1?' neues Feedback':' neue Feedbacks')+'</b><div class="fbtoast-sub">Es gibt offene Rückmeldungen.</div></div>'
+    +'<button type="button" class="fbtoast-go">Ansehen</button><button type="button" class="fbtoast-x" aria-label="schliessen">&times;</button>';
+  document.body.appendChild(t);
+  requestAnimationFrame(function(){t.classList.add('show');});
+  function close(){t.classList.remove('show');setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},250);}
+  t.querySelector('.fbtoast-go').addEventListener('click',function(){close();var fp=document.getElementById('fbpanel');if(!fp||fp.hidden)toggleFb();});
+  t.querySelector('.fbtoast-x').addEventListener('click',close);
+  setTimeout(close,10000);
+}
+function fbInit(){
+  var op=document.getElementById('fbopen'); if(op)op.addEventListener('change',renderFeedback);
+  document.getElementById('fbbtn').addEventListener('click',toggleFb);
+  fbFetch().then(function(rows){FEEDBACK=rows||[];fbBadge();
+    var open=FEEDBACK.filter(function(f){return !f.done;});
+    if(open.length)showFbToast(open.length);
+  });
 }
 const statusEl=document.getElementById('astatus'),saveBtn=document.getElementById('asave'),sel=document.getElementById('sportsel'),langSel=document.getElementById('langsel');
 // Basiswerte pro Sprache (deutscher Quelltext bzw. dessen Uebersetzung; wird
 // durch geladene Cloud-Overrides ersetzt) + ungespeicherte Eingaben pro Sprache
 const base={}; ALANGS.forEach(function(l){base[l]=Object.assign({},ORIGS[l]);});
 const edits={de:{},fr:{},it:{},en:{}};
-// Review-Zustand: gegen welchen deutschen Text wurde eine Uebersetzung zuletzt geprueft
-// (Hash). cid ohne Suffix; pro Sprache. Persistiert als "rev|<cid>|<lang>"-Zeilen.
+// Review-Zustand: gegen welchen deutschen Text wurde eine Uebersetzung zuletzt geprueft.
+// Gespeichert wird der deutsche TEXT (Baseline), damit der Hinweis zeigen kann, was sich
+// geaendert hat. cid ohne Suffix; pro Sprache. Persistiert als "rev|<cid>|<lang>"-Zeilen.
 const reviewed={fr:{},it:{},en:{}};
-function jhash(s){var h=2166136261;s=String(s==null?'':s);for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=(h*16777619)>>>0;}return h.toString(36);}
 function curDe(cid){return edits.de[cid]!==undefined?edits.de[cid]:(base.de[cid]||'');}
+function reviewedDe(l,cid){return (reviewed[l]&&reviewed[l][cid]!==undefined)?reviewed[l][cid]:(base.de[cid]||'');}
 function isStale(l,cid){
   if(l==='de')return false;
   var de=curDe(cid); if(!de)return false;
-  var baseline=(reviewed[l]&&reviewed[l][cid]!==undefined)?reviewed[l][cid]:jhash(base.de[cid]||'');
-  return baseline!==jhash(de);
+  return reviewedDe(l,cid)!==de;
 }
 function updateReview(){
   var show=(LNG!=='de');
@@ -7753,15 +7880,50 @@ function updateReview(){
 }
 function markReviewed(cid){
   if(LNG==='de')return;
-  var h=jhash(curDe(cid));
-  reviewed[LNG]=reviewed[LNG]||{}; reviewed[LNG][cid]=h;
-  updateReview();
+  var t=curDe(cid);
+  reviewed[LNG]=reviewed[LNG]||{}; reviewed[LNG][cid]=t;
+  revTipHide(); updateReview();
   if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
       headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-      body:JSON.stringify([{cid:'rev|'+cid+'|'+LNG,txt:h}])}).catch(function(){});
+      body:JSON.stringify([{cid:'rev|'+cid+'|'+LNG,txt:t}])}).catch(function(){});
   }
 }
+// Wort-Diff (LCS) -> markiert Ergaenzungen/Aenderungen im neuen Text
+function _tok(s){return String(s==null?'':s).split(/(\s+)/);}
+function wordDiff(oldS,newS){
+  var a=_tok(oldS),b=_tok(newS),n=a.length,m=b.length;
+  var dp=[];for(var i=0;i<=n;i++){dp[i]=new Array(m+1).fill(0);}
+  for(var i=n-1;i>=0;i--)for(var j=m-1;j>=0;j--)dp[i][j]=a[i]===b[j]?dp[i+1][j+1]+1:Math.max(dp[i+1][j],dp[i][j+1]);
+  var oh='',nh='',i2=0,j2=0;
+  function esc2(s){return s.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  while(i2<n&&j2<m){
+    if(a[i2]===b[j2]){oh+=esc2(a[i2]);nh+=esc2(b[j2]);i2++;j2++;}
+    else if(dp[i2+1][j2]>=dp[i2][j2+1]){oh+='<del>'+esc2(a[i2])+'</del>';i2++;}
+    else{nh+='<ins>'+esc2(b[j2])+'</ins>';j2++;}
+  }
+  while(i2<n){oh+='<del>'+esc2(a[i2])+'</del>';i2++;}
+  while(j2<m){nh+='<ins>'+esc2(b[j2])+'</ins>';j2++;}
+  return {oldHtml:oh,newHtml:nh};
+}
+var _revTip=null;
+function _revTipEl(){if(!_revTip){_revTip=document.createElement('div');_revTip.className='revtip';document.body.appendChild(_revTip);}return _revTip;}
+function revTipShow(b){
+  var cid=b.__cid,l=LNG;
+  var oldDe=reviewedDe(l,cid),newDe=curDe(cid);
+  var d=wordDiff(oldDe,newDe);
+  var t=_revTipEl();
+  t.innerHTML='<b>Im Deutschen wurde dieser Inhalt geändert – bitte Übersetzung prüfen.</b>'
+    +'<div class="rt-sec"><span class="rt-lb">Deutsch jetzt</span><div class="rt-tx">'+(d.newHtml||'—')+'</div></div>'
+    +(oldDe&&oldDe!==newDe?'<div class="rt-sec"><span class="rt-lb">Deutsch vorher</span><div class="rt-tx rt-old">'+(d.oldHtml||'—')+'</div></div>':'')
+    +'<div class="rt-hint">Klick auf das Zeichen = ohne Änderung als geprüft markieren.</div>';
+  t.style.display='block';
+  var r=b.getBoundingClientRect(),tw=t.offsetWidth,th=t.offsetHeight;
+  var left=r.right-tw;if(left<8)left=8;if(left+tw>window.innerWidth-8)left=window.innerWidth-8-tw;
+  var top=r.bottom+7;if(top+th>window.innerHeight-8)top=r.top-th-7;if(top<8)top=8;
+  t.style.left=left+'px';t.style.top=top+'px';
+}
+function revTipHide(){if(_revTip)_revTip.style.display='none';}
 function curVal(cid){return edits[LNG][cid]!==undefined?edits[LNG][cid]:(base[LNG][cid]||'');}
 function refreshValues(){
   app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
@@ -7890,8 +8052,13 @@ function init(){
     ta.parentNode.insertBefore(w,ta); w.appendChild(ta);
     var b=document.createElement('button'); b.type='button'; b.className='revflag'; b.hidden=true;
     b.setAttribute('aria-label','Übersetzung prüfen');
-    b.innerHTML='<span class="revdot">!</span><span class="revtip"><b>Im Deutschen wurde dieser Inhalt geändert.</b><br>Bitte die Übersetzung kontrollieren und anpassen. Klicken, um ohne Änderung als geprüft zu markieren.</span>';
+    b.innerHTML='<span class="revdot">!</span>';
+    b.__cid=ta.dataset.cid;
     b.addEventListener('click',function(e){e.preventDefault();markReviewed(ta.dataset.cid);});
+    b.addEventListener('mouseenter',function(){revTipShow(b);});
+    b.addEventListener('mouseleave',revTipHide);
+    b.addEventListener('focus',function(){revTipShow(b);});
+    b.addEventListener('blur',revTipHide);
     w.appendChild(b); ta.__revflag=b;
     ta.addEventListener('input',function(){
       autosize(ta);
@@ -7909,6 +8076,7 @@ function init(){
   document.getElementById('chgnext').addEventListener('click',function(){gotoChg(1);});
   document.getElementById('chgundo').addEventListener('click',undoCur);
   document.getElementById('glossbtn').addEventListener('click',toggleGloss);
+  fbInit();
   if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
       .then(function(r){return r.ok?r.json():[];}).then(function(rows){
@@ -7935,7 +8103,7 @@ function save(){
   // geändertes Deutsch = alte Fassung als Prüf-Baseline einfrieren (nur wo noch keine da ist),
   // damit die Übersetzungen als "zu prüfen" markiert werden.
   var revMap={};
-  ch.forEach(function(x){var mt=x.cid.match(/^(.*)\|(fr|it|en)$/);if(mt){revMap['rev|'+mt[1]+'|'+mt[2]]=jhash(curDe(mt[1]));}});
+  ch.forEach(function(x){var mt=x.cid.match(/^(.*)\|(fr|it|en)$/);if(mt){revMap['rev|'+mt[1]+'|'+mt[2]]=curDe(mt[1]);}});
   ch.forEach(function(x){
     if(/\|(fr|it|en)$/.test(x.cid))return;
     var oldde=base.de[x.cid]||'';
@@ -7943,7 +8111,7 @@ function save(){
       var rc='rev|'+x.cid+'|'+l;
       if(revMap[rc]!==undefined)return;
       if(reviewed[l]&&reviewed[l][x.cid]!==undefined)return;
-      revMap[rc]=jhash(oldde);
+      revMap[rc]=oldde;
     });
   });
   var revs=Object.keys(revMap).map(function(k){return {cid:k,txt:revMap[k]};});

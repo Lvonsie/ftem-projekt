@@ -41,6 +41,24 @@ internen Kreis von 5–10 Personen ist das ok; das Passwort ist technisch im Sei
    create policy "g_read"   on ftem_glossary for select using (true);
    create policy "g_write"  on ftem_glossary for insert with check (true);
    create policy "g_update" on ftem_glossary for update using (true) with check (true);
+
+   -- Feedback (Rückmeldungen von der Startseite; anonym oder mit Name/Verband/E-Mail)
+   create table if not exists ftem_feedback (
+     id uuid primary key default gen_random_uuid(),
+     created_at timestamptz default now(),
+     message text not null,
+     anonymous boolean default true,
+     name text,
+     verband text,
+     email text,
+     lang text,
+     page text,
+     done boolean default false
+   );
+   alter table ftem_feedback enable row level security;
+   create policy "f_insert" on ftem_feedback for insert with check (true);
+   create policy "f_read"   on ftem_feedback for select using (true);
+   create policy "f_update" on ftem_feedback for update using (true) with check (true);
    ```
 
 3. Links **Project Settings → API** öffnen und zwei Werte kopieren:
@@ -76,3 +94,29 @@ gespeichert.
 
 Bearbeitet wird der deutsche Grundtext. Eine geänderte Zelle erscheint (bis zu einer separaten
 Übersetzung) auf allen Sprachversionen mit dem bearbeiteten deutschen Text.
+
+## Übersetzungen prüfen (Markierung)
+
+Wird eine Zelle im **Deutschen** geändert und gespeichert, erscheint dieselbe Zelle beim Umschalten
+auf FR/IT/EN **orange markiert** – als Erinnerung, die Übersetzung zu kontrollieren. Beim Hovern über
+das orange „!" wird direkt angezeigt, **was** sich im Deutschen geändert hat (grün = neu, rot
+durchgestrichen = entfernt), ohne die Sprache wechseln zu müssen. Nach dem Anpassen und Speichern der
+Übersetzung verschwindet die Markierung; ist die Übersetzung trotz der Änderung noch korrekt, klickt
+man auf das „!" („als geprüft markieren"). Dieser Prüf-Status wird in der bestehenden
+`ftem_overrides`-Tabelle mitgespeichert (Zeilen mit `cid` = `rev|…`) – keine zusätzliche Tabelle nötig.
+
+## Feedback-Eingänge
+
+Das Feedback-Formular auf der Startseite speichert Rückmeldungen direkt in Supabase
+(Tabelle `ftem_feedback`) – **kein Mailprogramm** mehr. Besucher:innen können **anonym** senden oder
+optional **Name, Verband und E-Mail** angeben.
+
+Im Admin-Bereich gibt es oben den Knopf **„Feedback"** (mit rotem Zähler offener Einträge). Dort sind
+alle Rückmeldungen chronologisch gelistet. Jeder Eintrag lässt sich per **„✓ Erledigt"** als bearbeitet
+markieren bzw. mit **„↺ Wieder öffnen"** zurücksetzen; mit dem Filter **„nur offene"** blendet man
+erledigte aus. Beim **Einloggen** erscheint zudem ein kurzes **Pop-up**, wenn offene (noch nicht
+erledigte) Feedbacks vorliegen.
+
+Datenschutz-Hinweis: Wie beim übrigen Cloud-Speicher wird für Lesen/Schreiben der öffentliche
+`anon`-Schlüssel verwendet. Feedback-Einträge (inkl. optional angegebener Kontaktdaten) sind damit
+technisch über diesen Schlüssel lesbar – bewusst keine hochsensiblen Daten dort ablegen.
