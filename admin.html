@@ -968,6 +968,16 @@ footer{padding:16px;font-size:11px}
 .cedit:focus{outline:none;border-color:#d52b1e;box-shadow:0 0 0 2px rgba(213,43,30,.14)}
 .cedit.changed{border-color:#d52b1e;background:#fff8f7}
 .cedit.curchg{box-shadow:0 0 0 3px rgba(213,43,30,.35);border-color:#d52b1e}
+/* Uebersetzung-pruefen-Markierung: Deutsch wurde geaendert */
+.cedit-wrap{position:relative}
+.cedit.needs-review{border-color:#e0932c;background:#fffaf1}
+.revflag{position:absolute;top:5px;right:5px;z-index:5;border:0;background:none;padding:0;margin:0;cursor:help;font:inherit;line-height:0}
+.revdot{display:flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#e0932c;color:#fff;font-size:12px;font-weight:800;line-height:1;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.revflag:hover .revdot,.revflag:focus-visible .revdot{background:#c67c18}
+.revtip{position:absolute;top:calc(100% + 6px);right:0;width:236px;background:#1d2630;color:#fff;font-size:11px;font-weight:500;line-height:1.4;padding:9px 11px;border-radius:8px;box-shadow:0 10px 28px rgba(0,0,0,.32);opacity:0;visibility:hidden;transform:translateY(-3px);transition:opacity .14s,transform .14s,visibility .14s;pointer-events:none;text-align:left;white-space:normal}
+.revtip b{color:#f4c983}
+.revflag:hover .revtip,.revflag:focus-visible .revtip{opacity:1;visibility:visible;transform:none}
+[data-theme="dark"] .cedit.needs-review{background:#2c2413;border-color:#e0932c}
 .chgnav{display:inline-flex;align-items:center;gap:5px}
 .chgnav button{font:inherit;font-size:12px;font-weight:700;border:1px solid #d4dae1;border-radius:7px;background:#fff;padding:4px 9px;cursor:pointer}
 .chgnav button:hover{background:#f2f4f6}
@@ -7722,6 +7732,36 @@ const statusEl=document.getElementById('astatus'),saveBtn=document.getElementByI
 // durch geladene Cloud-Overrides ersetzt) + ungespeicherte Eingaben pro Sprache
 const base={}; ALANGS.forEach(function(l){base[l]=Object.assign({},ORIGS[l]);});
 const edits={de:{},fr:{},it:{},en:{}};
+// Review-Zustand: gegen welchen deutschen Text wurde eine Uebersetzung zuletzt geprueft
+// (Hash). cid ohne Suffix; pro Sprache. Persistiert als "rev|<cid>|<lang>"-Zeilen.
+const reviewed={fr:{},it:{},en:{}};
+function jhash(s){var h=2166136261;s=String(s==null?'':s);for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=(h*16777619)>>>0;}return h.toString(36);}
+function curDe(cid){return edits.de[cid]!==undefined?edits.de[cid]:(base.de[cid]||'');}
+function isStale(l,cid){
+  if(l==='de')return false;
+  var de=curDe(cid); if(!de)return false;
+  var baseline=(reviewed[l]&&reviewed[l][cid]!==undefined)?reviewed[l][cid]:jhash(base.de[cid]||'');
+  return baseline!==jhash(de);
+}
+function updateReview(){
+  var show=(LNG!=='de');
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+    var st=show&&isStale(LNG,ta.dataset.cid);
+    ta.classList.toggle('needs-review',st);
+    if(ta.__revflag)ta.__revflag.hidden=!st;
+  });
+}
+function markReviewed(cid){
+  if(LNG==='de')return;
+  var h=jhash(curDe(cid));
+  reviewed[LNG]=reviewed[LNG]||{}; reviewed[LNG][cid]=h;
+  updateReview();
+  if(SUPA_URL&&SUPA_KEY){
+    fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
+      headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
+      body:JSON.stringify([{cid:'rev|'+cid+'|'+LNG,txt:h}])}).catch(function(){});
+  }
+}
 function curVal(cid){return edits[LNG][cid]!==undefined?edits[LNG][cid]:(base[LNG][cid]||'');}
 function refreshValues(){
   app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
@@ -7808,6 +7848,7 @@ function updateCount(){
   const tas=changedTas();
   if(chgIdx>=tas.length)chgIdx=tas.length-1;
   chgPos.textContent=tas.length?((chgIdx>=0?(chgIdx+1):'–')+' / '+tas.length):'';
+  updateReview();
 }
 function gotoChg(step){
   const tas=changedTas();if(!tas.length)return;
@@ -7844,6 +7885,14 @@ function init(){
     if(d&&d.matches&&d.matches('details.theme')&&d.open)d.querySelectorAll('.cedit').forEach(autosize);
   },true);
   app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+    // Wrapper + Prüf-Markierung (Info bei geänderter deutscher Quelle)
+    var w=document.createElement('div'); w.className='cedit-wrap';
+    ta.parentNode.insertBefore(w,ta); w.appendChild(ta);
+    var b=document.createElement('button'); b.type='button'; b.className='revflag'; b.hidden=true;
+    b.setAttribute('aria-label','Übersetzung prüfen');
+    b.innerHTML='<span class="revdot">!</span><span class="revtip"><b>Im Deutschen wurde dieser Inhalt geändert.</b><br>Bitte die Übersetzung kontrollieren und anpassen. Klicken, um ohne Änderung als geprüft zu markieren.</span>';
+    b.addEventListener('click',function(e){e.preventDefault();markReviewed(ta.dataset.cid);});
+    w.appendChild(b); ta.__revflag=b;
     ta.addEventListener('input',function(){
       autosize(ta);
       const cid=ta.dataset.cid;
@@ -7864,6 +7913,9 @@ function init(){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
       .then(function(r){return r.ok?r.json():[];}).then(function(rows){
         (rows||[]).forEach(function(x){
+          if(x.cid.indexOf('gloss|')===0)return;
+          var mr=x.cid.match(/^rev\|(.*)\|(fr|it|en)$/);
+          if(mr){reviewed[mr[2]][mr[1]]=x.txt;return;}
           const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
           if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
         });
@@ -7879,6 +7931,23 @@ function init(){
 }
 function save(){
   const ch=changed();if(!ch.length)return;
+  // Review-Zeilen bestimmen: geänderte Übersetzungen = geprüft ggü. aktuellem Deutsch;
+  // geändertes Deutsch = alte Fassung als Prüf-Baseline einfrieren (nur wo noch keine da ist),
+  // damit die Übersetzungen als "zu prüfen" markiert werden.
+  var revMap={};
+  ch.forEach(function(x){var mt=x.cid.match(/^(.*)\|(fr|it|en)$/);if(mt){revMap['rev|'+mt[1]+'|'+mt[2]]=jhash(curDe(mt[1]));}});
+  ch.forEach(function(x){
+    if(/\|(fr|it|en)$/.test(x.cid))return;
+    var oldde=base.de[x.cid]||'';
+    ['fr','it','en'].forEach(function(l){
+      var rc='rev|'+x.cid+'|'+l;
+      if(revMap[rc]!==undefined)return;
+      if(reviewed[l]&&reviewed[l][x.cid]!==undefined)return;
+      revMap[rc]=jhash(oldde);
+    });
+  });
+  var revs=Object.keys(revMap).map(function(k){return {cid:k,txt:revMap[k]};});
+  const payload=ch.concat(revs);
   if(!SUPA_URL||!SUPA_KEY){
     const blob=new Blob([JSON.stringify(ch,null,2)],{type:'application/json'});
     const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ftem-aenderungen.json';a.click();return;
@@ -7886,14 +7955,16 @@ function save(){
   saveBtn.disabled=true;statusEl.textContent='Speichere …';
   fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
     headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-    body:JSON.stringify(ch)})
+    body:JSON.stringify(payload)})
    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);
      ch.forEach(function(x){
        const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
        if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
      });
+     revs.forEach(function(rv){var m=rv.cid.match(/^rev\|(.*)\|(fr|it|en)$/);if(m){reviewed[m[2]]=reviewed[m[2]]||{};reviewed[m[2]][m[1]]=rv.txt;}});
      ALANGS.forEach(function(l){edits[l]={};});
      app.querySelectorAll('.cedit.changed').forEach(function(t){t.classList.remove('changed');});
+     updateReview();
      statusEl.textContent='Gespeichert ✓ – Änderungen sind jetzt live.';saveBtn.disabled=true;
    }).catch(function(err){statusEl.textContent='Fehler beim Speichern: '+err.message;saveBtn.disabled=false;});
 }
