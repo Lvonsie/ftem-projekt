@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FTEM · «Pro Nacht»-Bereinigung der Cloud-Korrekturen</title>
+<style>
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#eef1f5;color:#1d2630;margin:0;padding:28px 16px 60px}
+.wrap{max-width:960px;margin:0 auto}
+h1{font-size:19px;margin:0 0 6px}
+p.sub{font-size:13px;color:#5b6472;line-height:1.55;margin:0 0 18px}
+button{font:inherit;font-weight:700;border-radius:9px;padding:9px 16px;cursor:pointer;border:1px solid #d4dae1;background:#fff}
+#run{background:#d52b1e;color:#fff;border-color:#d52b1e}
+#run:disabled{opacity:.5;cursor:default}
+.it{background:#fff;border:1px solid #e3e7ec;border-radius:12px;padding:12px 14px;margin:10px 0}
+.cid{font-size:11px;font-weight:800;color:#1f8fa6;margin-bottom:6px;word-break:break-all}
+.cols{display:flex;gap:12px;flex-wrap:wrap}
+.col{flex:1 1 300px}
+.col b{display:block;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#8a93a0;margin-bottom:3px}
+pre{margin:0;background:#f7f8fa;border-radius:8px;padding:8px 10px;font-size:11.5px;white-space:pre-wrap;font-family:inherit;line-height:1.45}
+pre mark{background:#ffd9d4;border-radius:3px}
+.del{font-size:11.5px;color:#b3731a;font-weight:700;margin-top:6px}
+#status{font-size:13px;font-weight:700;margin:14px 0}
+.ok{color:#1c7c3c}.err{color:#d52b1e}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>«Pro Nacht»-Bereinigung der gespeicherten Admin-Korrekturen</h1>
+<p class="sub">Dieses Werkzeug sucht in den <b>Cloud-Korrekturen</b> (Supabase) nach Zeilen wie «Pro Nacht: 9-10h Schlaf» (auch «Par nuit», «Per notte», «Per night») und entfernt genau diese Zeilen – der Rest jeder Korrektur bleibt unverändert. Wird eine Korrektur dadurch leer, wird sie gelöscht, damit wieder der (bereinigte) Grundtext erscheint. Zuerst wird nur ANGEZEIGT, was passieren würde – gelöscht/gespeichert wird erst nach Klick auf «Jetzt bereinigen». Datei bitte nicht ins Repo legen.</p>
+<button id="scan">1 · Prüfen (nur anzeigen)</button>
+<button id="run" disabled>2 · Jetzt bereinigen</button>
+<div id="status"></div>
+<div id="list"></div>
+</div>
+<script>
+const URL0="https://xphbwnzyebbejsdeqled.supabase.co/rest/v1/ftem_overrides";
+const KEY="sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_";
+const H={apikey:KEY,Authorization:"Bearer "+KEY};
+const PN=/^\s*(Pro Nacht|Par nuit|Per notte|Per night)\s*:/i;
+let plan=[];
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function clean(v){
+  const lines=v.split('\n');
+  const out=lines.filter(l=>!PN.test(l));
+  if(out.length===lines.length)return null;
+  return out.join('\n').replace(/\n{3,}/g,'\n\n').trim();
+}
+document.getElementById('scan').onclick=async()=>{
+  const st=document.getElementById('status'),list=document.getElementById('list');
+  st.textContent='Lade Korrekturen …';st.className='';list.innerHTML='';plan=[];
+  try{
+    const r=await fetch(URL0+'?select=cid,txt',{headers:H});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const rows=await r.json();
+    rows.forEach(x=>{
+      if(!x.txt||x.cid.indexOf('gloss|')===0||x.cid.indexOf('rev|')===0)return;
+      const c=clean(x.txt);
+      if(c===null)return;
+      plan.push({cid:x.cid,old:x.txt,neu:c});
+    });
+    if(!plan.length){st.textContent='Keine «Pro Nacht»-Zeilen in den Cloud-Korrekturen gefunden. Falls du sie noch auf der Seite siehst: neuen Stand committen/pushen, Netlify-Build abwarten und die Seite hart neu laden (Ctrl+F5).';st.className='ok';return;}
+    st.textContent=plan.length+' Korrektur(en) betroffen – Vorschau unten. Noch nichts geändert.';
+    list.innerHTML=plan.map(p=>'<div class="it"><div class="cid">'+esc(p.cid)+'</div><div class="cols">'
+      +'<div class="col"><b>Vorher</b><pre>'+esc(p.old).replace(/^(\s*(Pro Nacht|Par nuit|Per notte|Per night)\s*:.*)$/gim,'<mark>$1</mark>')+'</pre></div>'
+      +'<div class="col"><b>Nachher</b><pre>'+(p.neu?esc(p.neu):'<i>– wird gelöscht (Grundtext erscheint wieder) –</i>')+'</pre></div>'
+      +'</div>'+(p.neu?'':'<div class="del">Diese Korrektur wird gelöscht.</div>')+'</div>').join('');
+    document.getElementById('run').disabled=false;
+  }catch(e){st.textContent='Fehler: '+e.message;st.className='err';}
+};
+document.getElementById('run').onclick=async()=>{
+  const st=document.getElementById('status');
+  document.getElementById('run').disabled=true;
+  let ok=0,fail=[];
+  for(const p of plan){
+    try{
+      if(p.neu){
+        const r=await fetch(URL0,{method:'POST',headers:{...H,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify([{cid:p.cid,txt:p.neu}])});
+        if(!r.ok)throw new Error('HTTP '+r.status);
+      }else{
+        const r=await fetch(URL0+'?cid=eq.'+encodeURIComponent(p.cid),{method:'DELETE',headers:H});
+        if(!r.ok)throw new Error('HTTP '+r.status+' (Löschen evtl. nicht erlaubt)');
+      }
+      ok++;
+    }catch(e){fail.push(p.cid+': '+e.message);}
+  }
+  if(!fail.length){st.textContent='Fertig ✓ – '+ok+' Korrektur(en) bereinigt. Webseite neu laden.';st.className='ok';}
+  else{st.innerHTML='Teilweise fertig: '+ok+' ok, '+fail.length+' fehlgeschlagen:<br>'+fail.map(esc).join('<br>')+'<br>Falls Löschen nicht erlaubt ist: Luca kann in Supabase einmalig ausführen:<br><code>create policy "overrides loeschen" on public.ftem_overrides for delete using (true);</code>';st.className='err';}
+};
+</script>
+</body>
+</html>
