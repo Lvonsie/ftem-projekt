@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pendenzensystem · Ablauf</title>
+<style>
+:root{--red:#d52b1e;--ink:#1d2630;--mut:#5b6472;--teal:#1f8fa6;--org:#e0932c;--line:#e3e7ec}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#eef1f5;color:var(--ink);margin:0;padding:30px 16px 60px}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-size:20px;margin:0 0 4px}
+p.sub{font-size:13px;color:var(--mut);margin:0 0 24px;line-height:1.5}
+.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px 16px 64px;margin:0 0 34px;box-shadow:0 3px 10px rgba(29,38,48,.05)}
+.step:after{content:"";position:absolute;left:50%;bottom:-27px;width:2px;height:20px;background:#b9c2cc}
+.step:before{content:"";position:absolute;left:50%;bottom:-29px;width:8px;height:8px;border-right:2px solid #b9c2cc;border-bottom:2px solid #b9c2cc;transform:translateX(-55%) rotate(45deg)}
+.step:last-of-type:after,.step:last-of-type:before{display:none}
+.num{position:absolute;left:16px;top:16px;width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+.step h2{font-size:14.5px;margin:2px 0 6px}
+.step p{font-size:12.5px;color:#39424e;margin:0;line-height:1.55}
+.step p+p{margin-top:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{font-size:11px;font-weight:700;border-radius:999px;padding:4px 11px;border:1px solid var(--line);background:#f7f8fa;color:var(--mut)}
+.chip.de{border-color:rgba(213,43,30,.4);color:var(--red);background:#fdf5f4}
+.chip.warn{border-color:rgba(224,147,44,.5);color:#b3731a;background:#fffaf1}
+.chip.ok{border-color:rgba(31,143,166,.45);color:var(--teal);background:#f0f8fa}
+.split{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.opt{flex:1 1 240px;border:1px dashed #c8d0d9;border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.5;color:#39424e}
+.opt b{display:block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);margin-bottom:3px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:#3c4757;color:#fff;font-size:11.5px;font-weight:700;border-radius:8px;padding:5px 10px}
+.badge i{font-style:normal;background:var(--red);border-radius:99px;min-width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;font-size:10.5px}
+.dot{display:inline-flex;width:16px;height:16px;border-radius:50%;background:var(--org);color:#fff;font-size:11px;font-weight:800;align-items:center;justify-content:center;vertical-align:-3px}
+.rules{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:12px;padding:14px 18px;margin-top:6px}
+.rules h3{font-size:13px;margin:0 0 8px;color:var(--teal)}
+.rules p{font-size:12.5px;margin:0 0 7px;line-height:1.55;color:#39424e}
+.rules p:last-child{margin:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Pendenzensystem – Ablauf einer Änderung</h1>
+<p class="sub">Beispiel: Jemand passt im Admin einen deutschen Text an. Dieselbe Mechanik gilt pro Textzelle – für Sportarten-Inhalte, sportartübergreifende Blöcke und Startseiten-Popups.</p>
+
+<div class="step"><span class="num">1</span>
+  <h2>Deutsche Änderung wird gespeichert</h2>
+  <p>Der neue deutsche Text ist sofort live. Im Hintergrund friert das System die <b>alte</b> deutsche Fassung als Prüf-Referenz für FR/IT/EN ein – daran erkennt es später, was sich inhaltlich geändert hat.</p>
+  <div class="chips"><span class="chip de">DE: neuer Text live</span><span class="chip">Referenz «Deutsch vorher» gespeichert</span></div>
+</div>
+
+<div class="step"><span class="num">2</span>
+  <h2>Übergangszustand auf den Sprachseiten</h2>
+  <p>FR/IT/EN zeigen in dieser Zelle vorübergehend den <b>neuen deutschen</b> Text statt der alten Übersetzung – so steht nie Veraltetes auf der Seite. Existiert für die Zelle bereits eine von Hand gespeicherte Sprach-Korrektur, bleibt diese unangetastet stehen.</p>
+  <div class="chips"><span class="chip warn">FR/IT/EN: deutscher Text als Platzhalter</span></div>
+</div>
+
+<div class="step"><span class="num">3</span>
+  <h2>Die Zelle wird zur Pendenz</h2>
+  <p>Im Admin steigt der Zähler <span class="badge">Pendenzen <i>3</i></span> (je eine Pendenz pro nachzuführender Sprache). In der Liste steht, wo die Zelle liegt (Sportart · Thema · Zeile) und wie der deutsche Text jetzt lautet. Zusätzlich ist das Feld in der FR/IT/EN-Ansicht orange markiert <span class="dot">!</span> – der Hinweis zeigt den Unterschied «Deutsch vorher / jetzt» Wort für Wort.</p>
+</div>
+
+<div class="step"><span class="num">4</span>
+  <h2>Übersetzer:in führt nach</h2>
+  <p>«Öffnen» in der Pendenzen-Liste springt direkt zur Zelle – Sprache, Sportart und Thema werden automatisch eingestellt. Dann gibt es zwei Wege:</p>
+  <div class="split">
+    <div class="opt"><b>Übersetzung anpassen</b>Neuen Text in der Sprache eintragen und speichern – gilt nur für diese Sprache und ist sofort live.</div>
+    <div class="opt"><b>Ohne Änderung bestätigen</b>Passt die bestehende Übersetzung noch? Klick auf das <span class="dot">!</span> markiert sie als geprüft.</div>
+  </div>
+</div>
+
+<div class="step"><span class="num">5</span>
+  <h2>Pendenz erledigt</h2>
+  <p>Beides setzt die Prüf-Referenz auf den aktuellen deutschen Stand: Die Pendenz verschwindet aus Liste und Zähler, und die Sprachseite zeigt wieder die Übersetzung statt des deutschen Platzhalters. Ändert später jemand den deutschen Text erneut, beginnt der Kreislauf von vorn.</p>
+  <div class="chips"><span class="chip ok">FR/IT/EN: Übersetzung aktuell</span><span class="chip ok">Pendenzen −1</span></div>
+</div>
+
+<div class="rules">
+  <h3>Warum sich die Sprachen dabei nie gegenseitig überschreiben</h3>
+  <p><b>Zellgenau &amp; sprachgetrennt:</b> Jede Sprache hat pro Zelle ihren eigenen Speicherplatz – eine FR-Korrektur kann DE/IT/EN technisch nicht verändern, und umgekehrt.</p>
+  <p><b>Sprach-Korrektur gewinnt:</b> Auf der FR-Seite schlägt eine gespeicherte FR-Korrektur den deutschen Platzhalter immer – eine spätere DE-Änderung blendet sie nie aus, sie erzeugt nur eine neue Pendenz.</p>
+  <p><b>Unveränderte DE-Speicherungen sind harmlos:</b> Wird Deutsch ohne inhaltliche Änderung gespeichert, erkennt das System das und lässt Übersetzungen und Pendenzen in Ruhe.</p>
+  <p><b>Einzige Restlücke:</b> Bearbeiten zwei Personen gleichzeitig dieselbe Zelle in derselben Sprache, gewinnt die zuletzt gespeicherte Fassung.</p>
+</div>
+</div>
+</body>
+</html>

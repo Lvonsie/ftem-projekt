@@ -3109,6 +3109,13 @@ __MAINCSS__
 .agloss:hover{filter:brightness(1.08)}
 .asite{text-decoration:none;font-size:13px;font-weight:700;color:#d52b1e}
 #glosspanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
+#pendpanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
+.pend-l{font-size:13.5px;margin:22px 0 8px;color:#1d2630}
+.pend-it{background:#fff;border:1px solid #e3e7ec;border-radius:10px;padding:10px 12px;margin-bottom:8px;display:grid;grid-template-columns:1fr auto;gap:3px 14px;align-items:center}
+.pend-meta{font-size:11px;font-weight:800;color:#1f8fa6;grid-column:1;letter-spacing:.01em}
+.pend-tx{font-size:12px;color:#39424e;grid-column:1;line-height:1.45}
+.pend-go{grid-column:2;grid-row:1/3;font:inherit;font-size:12px;font-weight:700;border:1px solid rgba(213,43,30,.4);color:#d52b1e;background:#fff;border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+.pend-go:hover{background:#fdf5f4}
 #fbpanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
 .fbbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:6px;border-radius:9px;background:#d52b1e;color:#fff;font-size:10.5px;font-weight:800;vertical-align:1px}
 .fbfilter{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:#546a8c;cursor:pointer}
@@ -3236,6 +3243,7 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     </span>
     <button id="asave" class="asave" disabled>Speichern</button>
     <button id="glossbtn" class="agloss" type="button">Glossar</button>
+    <button id="pendbtn" class="agloss" type="button">Pendenzen<span id="pendbadge" class="fbbadge" hidden>0</span></button>
     <button id="fbbtn" class="agloss" type="button">Feedback<span id="fbbadge" class="fbbadge" hidden>0</span></button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
@@ -3257,6 +3265,11 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
       <span id="gaddmsg" class="astatus"></span>
     </div>
     <div id="glostable"></div>
+  </div>
+  <div id="pendpanel" hidden>
+    <div class="glosbar"><b style="font-size:14px">Pendenzen &ndash; Übersetzungen nachführen</b><span id="pendcount" class="astatus"></span></div>
+    <p class="glosnote">Hier stehen alle Textfelder, deren <b>deutscher</b> Inhalt geändert wurde und deren Übersetzung noch nicht nachgeführt oder geprüft ist. Bis dahin zeigen die FR/IT/EN-Seiten dort den aktuellen deutschen Text (damit nie Veraltetes steht). «Öffnen» springt direkt zum Feld in der richtigen Sprache &ndash; dort die Übersetzung anpassen und speichern, oder mit Klick auf das orange «!» ohne Änderung als geprüft markieren. Danach verschwindet die Pendenz.</p>
+    <div id="pendtable"></div>
   </div>
   <div id="editwrap">__ADMIN_SECTIONS__</div>
 </div>
@@ -3323,11 +3336,94 @@ function toggleGloss(){
   const show=gp.hidden;
   gp.hidden=!show; ew.hidden=show; sw.style.visibility=show?'hidden':'';
   document.getElementById('glossbtn').textContent=show?'← Bearbeiten':'Glossar';
-  if(show){document.getElementById('fbpanel').hidden=true;var fbb0=document.getElementById('fbbtn');if(fbb0)fbb0.firstChild.textContent='Feedback';}
+  if(show){document.getElementById('fbpanel').hidden=true;var fbb0=document.getElementById('fbbtn');if(fbb0)fbb0.firstChild.textContent='Feedback';
+    document.getElementById('pendpanel').hidden=true;var pb0=document.getElementById('pendbtn');if(pb0)pb0.firstChild.textContent='Pendenzen';}
   if(show&&!gp.dataset.done){gp.dataset.done='1';renderGloss('');
     loadGlossAdditions().then(function(){renderGloss(document.getElementById('glosq').value);});
     document.getElementById('glosq').addEventListener('input',function(e){renderGloss(e.target.value);});
     document.getElementById('gaddbtn').addEventListener('click',addGloss);}
+}
+// --- Pendenzen: Uebersetzungen, die dem geaenderten deutschen Text hinterherhinken ---
+// Grundlage ist der Review-Zustand (isStale): Deutsch wurde inhaltlich geaendert,
+// und die Sprache wurde seither weder korrigiert noch als geprueft markiert.
+function pendList(){
+  var out=[];
+  ['fr','it','en'].forEach(function(l){
+    Object.keys(ORIGS.de).forEach(function(cid){
+      if(isStale(l,cid))out.push({l:l,cid:cid});
+    });
+  });
+  return out;
+}
+function pendBadge(){
+  var b=document.getElementById('pendbadge');
+  if(!b)return;
+  var n=pendList().length;
+  b.textContent=n;b.hidden=(n===0);
+}
+function pendLoc(cid){
+  var ta=app.querySelector('.cedit[data-cid="'+cid+'"]');
+  if(!ta)return null;
+  var sec=ta.closest('section.sport'),sid=sec?sec.dataset.sport:'';
+  var sname;
+  if(sid==='__shared'){sname='Sportartübergreifend';}
+  else{var o=sel.querySelector('option[value="'+sid+'"]');sname=o?o.textContent:sid;}
+  var tt='';
+  var th=ta.closest('details.theme');
+  if(th){var t2=th.querySelector('summary .tt');
+    if(t2){var c=t2.cloneNode(true);c.querySelectorAll('.adm-tag').forEach(function(x){x.parentNode.removeChild(x);});tt=c.textContent.trim();}}
+  var row=ta.closest('.r'),rl=row?((row.querySelector('.rl')||{}).textContent||''):'';
+  var fld=ta.closest('.adm-field'),fl=fld?((fld.querySelector('label')||{}).textContent||''):'';
+  return {ta:ta,sec:sec,sname:sname,theme:tt,row:(rl||fl||'').trim()};
+}
+function renderPend(){
+  var items=pendList(),tb=document.getElementById('pendtable');
+  document.getElementById('pendcount').textContent=items.length+(items.length===1?' Pendenz':' Pendenzen');
+  if(!items.length){tb.innerHTML='<p class="glosnote" style="margin-top:14px">Keine Pendenzen – alle Übersetzungen sind auf dem Stand des deutschen Texts.</p>';return;}
+  var LN={fr:'Français',it:'Italiano',en:'English'},h='';
+  ['fr','it','en'].forEach(function(l){
+    var its=items.filter(function(x){return x.l===l;});
+    if(!its.length)return;
+    h+='<h3 class="pend-l">'+LN[l]+' <span class="adm-tag">'+its.length+'</span></h3>';
+    its.forEach(function(x){
+      var lo=pendLoc(x.cid);if(!lo)return;
+      var de=curDe(x.cid),sn=de.length>120?de.slice(0,120)+'…':de;
+      h+='<div class="pend-it"><div class="pend-meta">'+fbEsc(lo.sname)
+        +(lo.theme?' · '+fbEsc(lo.theme):'')+(lo.row?' · '+fbEsc(lo.row):'')+'</div>'
+        +'<div class="pend-tx">'+fbEsc(sn)+'</div>'
+        +'<button type="button" class="pend-go" data-cid="'+fbEsc(x.cid)+'" data-l="'+l+'">Öffnen &rarr;</button></div>';
+    });
+  });
+  tb.innerHTML=h;
+  tb.querySelectorAll('.pend-go').forEach(function(b){
+    b.addEventListener('click',function(){pendOpen(b.dataset.cid,b.dataset.l);});
+  });
+}
+function pendOpen(cid,l){
+  togglePend(); // Panel schliessen, zurueck zur Bearbeitung
+  langSel.value=l;langSel.dispatchEvent(new Event('change'));
+  var lo=pendLoc(cid);if(!lo)return;
+  sel.value=lo.sec.dataset.sport;showSport(sel.value);
+  var p=lo.ta.parentElement;
+  while(p){if(p.tagName==='DETAILS')p.open=true;p=p.parentElement;}
+  lo.sec.querySelectorAll('.cedit').forEach(autosize);
+  setTimeout(function(){
+    lo.ta.scrollIntoView({block:'center',behavior:'smooth'});
+    lo.ta.classList.add('curchg');
+    setTimeout(function(){lo.ta.classList.remove('curchg');},2600);
+    lo.ta.focus({preventScroll:true});
+  },140);
+}
+function togglePend(){
+  var pp=document.getElementById('pendpanel'),ew=document.getElementById('editwrap'),sw=document.getElementById('sportsel').parentNode;
+  var show=pp.hidden;
+  pp.hidden=!show; ew.hidden=show; sw.style.visibility=show?'hidden':'';
+  document.getElementById('pendbtn').firstChild.textContent=show?'← Bearbeiten':'Pendenzen';
+  if(show){
+    document.getElementById('glosspanel').hidden=true;document.getElementById('glossbtn').textContent='Glossar';
+    document.getElementById('fbpanel').hidden=true;var fbb=document.getElementById('fbbtn');if(fbb)fbb.firstChild.textContent='Feedback';
+    renderPend();
+  }
 }
 // --- Feedback-Verwaltung im Admin ---
 var FEEDBACK=null;
@@ -3380,7 +3476,8 @@ function toggleFb(){
   var fp=document.getElementById('fbpanel'),gp=document.getElementById('glosspanel'),ew=document.getElementById('editwrap'),sw=document.getElementById('sportsel').parentNode;
   var show=fp.hidden;
   fp.hidden=!show;
-  if(show){gp.hidden=true;document.getElementById('glossbtn').textContent='Glossar';}
+  if(show){gp.hidden=true;document.getElementById('glossbtn').textContent='Glossar';
+    document.getElementById('pendpanel').hidden=true;var pb1=document.getElementById('pendbtn');if(pb1)pb1.firstChild.textContent='Pendenzen';}
   ew.hidden=show; sw.style.visibility=show?'hidden':'';
   document.getElementById('fbbtn').firstChild.textContent=show?'← Bearbeiten':'Feedback';
   if(show)renderFeedback();
@@ -3428,6 +3525,7 @@ function updateReview(){
     ta.classList.toggle('needs-review',st);
     if(ta.__revflag)ta.__revflag.hidden=!st;
   });
+  if(typeof pendBadge==='function')pendBadge();
 }
 function markReviewed(cid){
   if(LNG==='de')return;
@@ -3627,6 +3725,7 @@ function init(){
   document.getElementById('chgnext').addEventListener('click',function(){gotoChg(1);});
   document.getElementById('chgundo').addEventListener('click',undoCur);
   document.getElementById('glossbtn').addEventListener('click',toggleGloss);
+  document.getElementById('pendbtn').addEventListener('click',togglePend);
   fbInit();
   if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
