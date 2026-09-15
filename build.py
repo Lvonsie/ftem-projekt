@@ -3231,6 +3231,10 @@ __MAINCSS__
 .cedit-wrap{position:relative}
 .cedit.needs-review{border-color:#e0932c;background:#fffaf1}
 .revflag{position:absolute;top:5px;right:5px;z-index:5;border:0;background:none;padding:0;margin:0;cursor:help;font:inherit;line-height:0}
+.revflag.aisugg{right:28px;cursor:pointer}
+.revdot.ai{background:#1f8fa6;font-size:11px}
+.revflag.aisugg:hover .revdot{background:#16768a}
+.revflag.aisugg[disabled]{opacity:.6;cursor:wait}
 .revdot{display:flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#e0932c;color:#fff;font-size:12px;font-weight:800;line-height:1;box-shadow:0 1px 4px rgba(0,0,0,.25)}
 .revflag:hover .revdot,.revflag:focus-visible .revdot{background:#c67c18}
 .revtip{position:fixed;z-index:9999;display:none;width:290px;max-width:calc(100vw - 20px);background:#1d2630;color:#eef1f5;font-size:11.5px;font-weight:500;line-height:1.45;padding:11px 12px;border-radius:9px;box-shadow:0 12px 32px rgba(0,0,0,.36);text-align:left;white-space:normal;pointer-events:none}
@@ -3335,7 +3339,7 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
   </div>
   <div id="pendpanel" hidden>
     <div class="glosbar"><b style="font-size:14px">Pendenzen &ndash; Übersetzungen nachführen</b><span id="pendcount" class="astatus"></span></div>
-    <p class="glosnote">Hier stehen alle Textfelder, deren <b>deutscher</b> Inhalt geändert wurde und deren Übersetzung noch nicht nachgeführt oder geprüft ist. Bis dahin zeigen die FR/IT/EN-Seiten dort den aktuellen deutschen Text (damit nie Veraltetes steht). «Öffnen» springt direkt zum Feld in der richtigen Sprache &ndash; dort die Übersetzung anpassen und speichern, oder mit Klick auf das orange «!» ohne Änderung als geprüft markieren. Danach verschwindet die Pendenz.</p>
+    <p class="glosnote">Hier stehen alle Textfelder, deren <b>deutscher</b> Inhalt geändert wurde und deren Übersetzung noch nicht nachgeführt oder geprüft ist. Bis dahin zeigen die FR/IT/EN-Seiten dort den aktuellen deutschen Text (damit nie Veraltetes steht). «Öffnen» springt direkt zum Feld in der richtigen Sprache. Dort gibt es drei Wege: den blauen <b>«Ü»</b>-Knopf am Feld klicken (KI-Vorschlag mit Glossar – einsetzen, anpassen, speichern), die Übersetzung von Hand anpassen und speichern, oder mit Klick auf das orange «!» die bestehende ohne Änderung als geprüft markieren. Danach verschwindet die Pendenz.</p>
     <div id="pendtable"></div>
   </div>
   <div id="editwrap">__ADMIN_SECTIONS__</div>
@@ -3591,8 +3595,45 @@ function updateReview(){
     var st=show&&isStale(LNG,ta.dataset.cid);
     ta.classList.toggle('needs-review',st);
     if(ta.__revflag)ta.__revflag.hidden=!st;
+    if(ta.__aisugg)ta.__aisugg.hidden=!st;
   });
   if(typeof pendBadge==='function')pendBadge();
+}
+// KI-Uebersetzungsvorschlag: neuen deutschen Text (samt Glossar + bisheriger
+// Uebersetzung als Referenz) an die Netlify-Funktion schicken; das Resultat
+// landet als ungespeicherte Aenderung im Feld und kann angepasst werden.
+function aiSuggest(ta,btn){
+  if(LNG==='de')return;
+  var cid=ta.dataset.cid;
+  var deNew=curDe(cid);
+  if(!deNew){statusEl.textContent='Kein deutscher Text vorhanden.';return;}
+  var gl=[];
+  try{
+    var low=deNew.toLowerCase();
+    GLOSS.forEach(function(g){
+      if(g.de&&g[LNG]&&low.indexOf(g.de.toLowerCase())>=0)gl.push({de:g.de,tr:g[LNG]});
+    });
+  }catch(_){}
+  var dot=btn.querySelector('.revdot');
+  dot.textContent='…';btn.disabled=true;statusEl.textContent='Hole Übersetzungsvorschlag …';
+  fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({mode:'translate',target:LNG,de_new:deNew,
+      de_old:reviewedDe(LNG,cid),current:curVal(cid),glossary:gl.slice(0,60)})})
+   .then(function(r){return r.json().catch(function(){return {};}).then(function(d){
+      if(!r.ok)throw new Error((d&&d.message)||('HTTP '+r.status));return d;});})
+   .then(function(d){
+      var t=(d.answer||'').trim();
+      if(!t)throw new Error('leerer Vorschlag');
+      ta.value=t;
+      ta.dispatchEvent(new Event('input',{bubbles:true}));
+      autosize(ta);ta.focus();
+      statusEl.textContent='KI-Vorschlag eingesetzt – bitte prüfen/anpassen, dann «Speichern». («Rückgängig» stellt den alten Text wieder her.)';
+   })
+   .catch(function(e){
+      statusEl.textContent='KI-Vorschlag nicht verfügbar: '+e.message
+        +(location.protocol==='file:'?' – funktioniert nur auf der veröffentlichten Admin-Seite.':'');
+   })
+   .then(function(){dot.textContent='Ü';btn.disabled=false;});
 }
 function markReviewed(cid){
   if(LNG==='de')return;
@@ -3776,6 +3817,13 @@ function init(){
     b.addEventListener('focus',function(){revTipShow(b);});
     b.addEventListener('blur',revTipHide);
     w.appendChild(b); ta.__revflag=b;
+    // Zweiter Knopf: KI-Uebersetzungsvorschlag (nur bei "Uebersetzung pruefen" sichtbar)
+    var tb=document.createElement('button'); tb.type='button'; tb.className='revflag aisugg'; tb.hidden=true;
+    tb.setAttribute('aria-label','KI-Vorschlag für die Übersetzung');
+    tb.title='KI-Vorschlag: neuen deutschen Text automatisch übersetzen (Glossar wird berücksichtigt)';
+    tb.innerHTML='<span class="revdot ai">Ü</span>';
+    tb.addEventListener('click',function(e){e.preventDefault();aiSuggest(ta,tb);});
+    w.appendChild(tb); ta.__aisugg=tb;
     ta.addEventListener('input',function(){
       autosize(ta);
       const cid=ta.dataset.cid;

@@ -16,6 +16,56 @@ exports.handler = async (event) => {
   try { body = JSON.parse(event.body || '{}'); }
   catch { return json(400, { error: 'bad_request' }); }
 
+  // ---- Modus "translate": KI-Uebersetzungsvorschlag fuer den Admin-Bereich ----
+  // Eingabe: target (fr/it/en), de_new (neuer deutscher Text), optional de_old
+  // (deutscher Text, gegen den die bisherige Uebersetzung geprueft war),
+  // current (bisherige Uebersetzung) und glossary [{de,tr}].
+  if (body.mode === 'translate') {
+    const target = String(body.target || '').slice(0, 2);
+    const tname = { fr: 'Französisch', it: 'Italienisch', en: 'Englisch' }[target];
+    const deNew = String(body.de_new || '').slice(0, 6000).trim();
+    const deOld = String(body.de_old || '').slice(0, 6000).trim();
+    const cur   = String(body.current || '').slice(0, 6000).trim();
+    const gl    = Array.isArray(body.glossary) ? body.glossary.slice(0, 60) : [];
+    if (!tname || !deNew) return json(400, { error: 'bad_request' });
+    const glList = gl.map(g => `- ${String(g.de || '').slice(0,120)} → ${String(g.tr || '').slice(0,120)}`).join('\n');
+    const tsystem =
+`Du übersetzt Fachinhalte des Swiss-Ski «Athlet:innen-Wegs» (FTEM, Schneesport) von Deutsch nach ${tname}.
+Regeln:
+- Halte dich STRIKT an das GLOSSAR (verbindliche Begriffe).
+- Behalte Struktur und Formatierung exakt bei: Zeilenumbrüche, Leerzeilen, Aufzählungszeichen (•, -), "Label:"-Zeilen, Kürzel (SC, LT, ST, RS, SL, OLZ, On-Snow, Off-Snow) und Zahlen/Einheiten unverändert.
+- Ist eine BISHERIGE ÜBERSETZUNG angegeben: übernimm deren Formulierungen überall, wo der deutsche Text gleich geblieben ist (vergleiche DEUTSCH VORHER mit DEUTSCH NEU), und übersetze nur die geänderten Stellen neu.
+- Links in der Form [Text](URL): Text übersetzen, URL unverändert lassen.
+- Gib NUR den übersetzten Text aus – keine Erklärungen, keine Anführungszeichen darum.
+
+GLOSSAR (Deutsch → ${tname}):
+${glList || '(keines)'}`;
+    const tuser = 'DEUTSCH NEU:\n' + deNew
+      + (deOld && deOld !== deNew ? '\n\nDEUTSCH VORHER:\n' + deOld : '')
+      + (cur ? '\n\nBISHERIGE ÜBERSETZUNG:\n' + cur : '');
+    try {
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'x-api-key': KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
+        body: JSON.stringify({
+          model: process.env.CHAT_MODEL || 'claude-haiku-4-5-20251001',
+          max_tokens: 1600,
+          system: tsystem,
+          messages: [{ role: 'user', content: tuser }]
+        })
+      });
+      const data = await r.json();
+      if (!r.ok) {
+        return json(502, { error: 'upstream',
+          message: (data && data.error && data.error.message) || 'Fehler beim Sprachmodell.' });
+      }
+      const answer = (data.content || []).map(c => c.text || '').join('').trim();
+      return json(200, { answer });
+    } catch (e) {
+      return json(500, { error: 'server', message: 'Serverfehler bei der Übersetzung.' });
+    }
+  }
+
   const question = String(body.question || '').slice(0, 1500).trim();
   const context  = String(body.context  || '').slice(0, 120000);
   const sport    = String(body.sport    || '').slice(0, 80);
