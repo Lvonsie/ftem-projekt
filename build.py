@@ -403,6 +403,31 @@ def fnv36(s):
     while h: _r = _d[h % 36] + _r; h //= 36
     return _r
 
+_MDLNK_RE = re.compile(r'\[([^\[\]]+)\]\((https?://[^\s<>"\')]+)\)')
+_URL_RE = re.compile(r'(^|[\s>(])(https?://[^\s<>"\']+)')
+
+def linkify_html(h):
+    """Gegenstueck zu linkifyHtml() im Frontend: "[Text](https://…)" und nackte
+    http(s)-Adressen in bereits escapetem HTML klickbar machen. Nur http/https;
+    Anfuehrungszeichen sind in der URL nicht erlaubt (kein Attribut-Ausbruch)."""
+    keep = []
+    def _md(m):
+        keep.append('<a class="txtlnk" href="'+m.group(2)+'" target="_blank" rel="noopener">'+m.group(1)+'</a>')
+        return ''+str(len(keep)-1)+''
+    h = _MDLNK_RE.sub(_md, h)
+    def _bare(m):
+        u = m.group(2); tail = ''
+        m2 = re.search(r'[.,;:!?)]+$', u)
+        if m2:
+            tail = m2.group(0); u = u[:-len(tail)]
+        lbl = re.sub(r'^https?://', '', u)
+        if not lbl:
+            return m.group(0)
+        keep.append('<a class="txtlnk" href="'+u+'" target="_blank" rel="noopener">'+lbl+'</a>')
+        return m.group(1)+''+str(len(keep)-1)+''+tail
+    h = _URL_RE.sub(_bare, h)
+    return re.sub(r'(\d+)', lambda m: keep[int(m.group(1))], h)
+
 def render_cell(seg, lang, cid=None, edit=False):
     if edit:
         raw = seg.get("v") or ""
@@ -418,6 +443,7 @@ def render_cell(seg, lang, cid=None, edit=False):
         else:
             parts = [render_block(bl, link_texts) for bl in blocks]
             inner = "".join(p for p in parts if p)
+        inner = linkify_html(inner)
     text_html = inner or '<div class="empty">–</div>'
     cidattr = (' data-cid="'+esc(cid)+'" data-bh="'+fnv36(seg.get("v") or "")+'"') if cid else ''
     out = '<div class="ctext"'+cidattr+'>'+text_html+'</div>'
@@ -1096,8 +1122,8 @@ def home_html(datamap, lang):
                         '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
     fi_links = [
-        ({"de":"Übersicht FTEM","fr":"Aperçu FTEM","it":"Panoramica FTEM","en":"FTEM overview"}[lang], "https://snowsports.flink.host/s/iFt05YOw/c5lG7vWX"),
-        ("How to use FTEM", "https://snowsports.flink.host/s/iFt05YOw/CVg0efTY"),
+        ({"de":"Übersicht FTEM","fr":"Aperçu FTEM","it":"Panoramica FTEM","en":"FTEM overview"}[lang], "https://snowsports.flink.host/s/MmP6sY7Z"),
+        ("How to use FTEM", "https://snowsports.flink.host/s/3FPbJJwC"),
         ({"de":"Leitsätze der Athlet:innen-Entwicklung","fr":"Principes du développement des athlètes","it":"Principi dello sviluppo degli atleti","en":"Guiding principles of athlete development"}[lang], "https://snowsports.flink.host/s/Ur9yhq2P/"),
     ]
     fi_html = ('<div class="mlist fi-links">'
@@ -2018,6 +2044,9 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap ul.sc .badge{display:inline-block;background:var(--ink);color:#fff;font-size:9.5px;font-weight:700;border-radius:4px;padding:1px 5px;margin-right:4px}
 .cwrap .empty{color:#c2c8d0;text-align:center;font-size:14px}
 .lks{margin-top:7px;display:flex;flex-direction:column;gap:4px}
+/* Links im Fliesstext (Admin-Syntax "[Text](https://…)" oder nackte URL) */
+a.txtlnk{color:var(--red);font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;overflow-wrap:anywhere}
+a.txtlnk:hover{text-decoration-thickness:2px}
 .lks a{font-size:11px;color:#39424e;text-decoration:none;font-weight:700;background:var(--acc-bg);padding:5px 8px;border-radius:6px;display:flex;align-items:center;gap:5px}
 .lks a::before{content:'📄'}
 .lks a:hover{background:var(--acc-bg2)}
@@ -2247,10 +2276,28 @@ function structBlock(b){
   }
   return '<p>'+_esc(b).replace(/\n/g,'<br>')+'</p>';
 }
+function linkifyHtml(h){
+  // Links im Fliesstext: "[Text](https://…)" und nackte http(s)-Adressen werden
+  // klickbar. Laeuft auf bereits ESCAPETEM HTML; Platzhalter verhindern, dass
+  // ein Link doppelt verarbeitet wird. Nur http/https, keine Anfuehrungszeichen
+  // in der URL (kein Ausbruch aus dem href-Attribut moeglich).
+  var keep=[];
+  h=h.replace(/\[([^\[\]]+)\]\((https?:\/\/[^\s<>"')]+)\)/g,function(_,t,u){
+    keep.push('<a class="txtlnk" href="'+u+'" target="_blank" rel="noopener">'+t+'</a>');
+    return ''+(keep.length-1)+'';
+  });
+  h=h.replace(/(^|[\s>(])(https?:\/\/[^\s<>"']+)/g,function(_,pre,u){
+    var tail='';var m=u.match(/[.,;:!?)]+$/);if(m){tail=m[0];u=u.slice(0,u.length-tail.length);}
+    if(!u.replace(/^https?:\/\//,''))return _;
+    keep.push('<a class="txtlnk" href="'+u+'" target="_blank" rel="noopener">'+u.replace(/^https?:\/\//,'')+'</a>');
+    return pre+''+(keep.length-1)+''+tail;
+  });
+  return h.replace(/(\d+)/g,function(_,i){return keep[+i];});
+}
 function structCell(txt){
   txt=(txt||'').trim();
   if(!txt)return '<div class="empty">–</div>';
-  return txt.split(/\n\s*\n/).map(structBlock).filter(Boolean).join('')||'<div class="empty">–</div>';
+  return linkifyHtml(txt.split(/\n\s*\n/).map(structBlock).filter(Boolean).join(''))||'<div class="empty">–</div>';
 }
 function loadOverrides(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
@@ -2639,7 +2686,12 @@ function openMission(url,title){
   fr.src=url;
   mm.hidden=false;document.body.style.overflow='hidden';
 }
-function closeMission(){mm.hidden=true;mm.querySelector('.mm-frame').src='about:blank';document.body.style.overflow='';}
+function closeMission(){mm.hidden=true;mm.querySelector('.mm-frame').src='about:blank';document.body.style.overflow='';
+  // Kam man aus einem Info-Popup (z. B. «Was ist FTEM?»), dorthin zurueckkehren
+  if(typeof mmReturn!=='undefined'&&mmReturn&&mmReturn.tpl&&document.getElementById(mmReturn.tpl)){
+    const r=mmReturn;mmReturn=null;openInfo(r.tpl,r.t||'');
+  }
+}
 mm.addEventListener('click',e=>{if(e.target===mm)closeMission();});
 mm.querySelector('.mm-x').addEventListener('click',closeMission);
 document.querySelectorAll('.np-mission').forEach(a=>a.addEventListener('click',e=>{
@@ -2658,7 +2710,9 @@ document.addEventListener('keydown',e=>{
 
 // ---- Inhalts-Overlay (News, Was ist FTEM?, Missions-Auswahl) ----
 const im=document.querySelector('.imodal');
+let mmReturn=null; // Ruecksprung: welches Info-Popup war offen, als das Iframe-Overlay aufging
 function openInfo(tplId,title){
+  im.__tpl=tplId;im.__title=title;
   im.querySelector('.im-body').innerHTML=document.getElementById(tplId).innerHTML;
   // Stufen-Popups: Titel aus dem (ggf. per Admin-Override angepassten) Inhalt ableiten
   if(tplId.indexOf('tpl-ph-')===0){
@@ -2752,10 +2806,10 @@ document.addEventListener('click',e=>{
   // www.swiss-ski.ch verbietet Einbettung (X-Frame-Options: deny) -> neuer Tab statt iframe
   let host='';try{host=new URL(href,location.href).hostname;}catch(_){}
   if(host==='www.swiss-ski.ch'||host==='swiss-ski.ch'){window.open(href,'_blank','noopener');return;}
-  if(im&&!im.hidden)closeInfo();
+  if(im&&!im.hidden){mmReturn={tpl:im.__tpl,t:im.__title};closeInfo();}else{mmReturn=null;}
   openMission(href, a.dataset.title||a.textContent.replace('↗','').trim());
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&im&&!im.hidden){closeInfo();e._ovl=true;}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e._ovl&&im&&!im.hidden){closeInfo();e._ovl=true;}});
 
 // ---- Sportarten-Dropdown im Titel + Steady-Chat-Knopf ----
 sections.forEach(s=>{const ss=s.querySelector('.sportsel2');if(ss)ss.addEventListener('change',e=>{location.hash='#'+e.target.value;});});
