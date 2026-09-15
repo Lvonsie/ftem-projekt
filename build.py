@@ -1160,7 +1160,7 @@ def home_html(datamap, lang):
         ("FTEM-Coach (KI)", "Dein KI-Coach – fragt, erklärt, findet. Z. B. «Material in F3?», «Kraft-Ziele in T2?», «Welche Kader?»."),
         ("3 Sprachen & App", "Komplett auf Deutsch, Französisch und Italienisch – und als App auf dem Handy installierbar."),
     ], "fr": [
-        ("Parcours de l'athlète", "Les 10 sports en détail – thèmes et contenus sur les niveaux F1–M, avec recherche, focus par niveau et export PDF."),
+        ("Chemin des athlètes", "Les 10 sports en détail – thèmes et contenus sur les niveaux F1–M, avec recherche, focus par niveau et export PDF."),
         ("Aperçu des niveaux", "Résumé par phase (Foundation, Talent, Elite, Mastery) directement sur la montagne – par sport."),
         ("Mission Swiss-Ski", "La mission de chaque sport en vue intégrée, plus les bases comme l'aperçu FTEM et les principes."),
         ("Actualités & documents", "Actualités de la formation avec date et documents liés directement depuis les contenus."),
@@ -1292,7 +1292,7 @@ def home_html(datamap, lang):
              ('<button class="news-btn" type="button" data-open="tpl-news" data-t="'+esc(news_label)+'">'+esc(news_label)+'</button>'))
             +'</div>'
             # FTEM-Schriftzug entfernt (Knoepfe + Berg tragen die Farben); h1 bleibt fuer SEO unsichtbar
-            '<div class="hero-head"><h1 class="sr-only">FTEM – '+esc({"de":"Athlet:innen-Weg Schneesport","fr":"Parcours de l’athlète sports de neige","it":"Percorso dell’atleta sport sulla neve","en":"Athlete pathway snow sports"}[lang])+'</h1>'
+            '<div class="hero-head"><h1 class="sr-only">FTEM – '+esc({"de":"Athlet:innen-Weg Schneesport","fr":"Chemin des athlètes sports de neige","it":"Percorso dell’atleta sport sulla neve","en":"Athlete pathway snow sports"}[lang])+'</h1>'
             '<a class="hero-logo-lnk" href="https://www.swiss-ski.ch/" target="_blank" rel="noopener" aria-label="swiss-ski.ch">'
             '<img class="hero-logo" src="'+asset_v('assets/swiss-ski-logo.svg')+'" alt="Swiss-Ski"></a></div>'
             +pyr+footbar+
@@ -4084,7 +4084,7 @@ for lang in LANGS:
                 "de": {"concept": "Das Konzept FTEM", "web": "Die Website", "aw": "Athlet:innen-Weg",
                        "awhint": "Weiter (→) öffnet die Themen des Athlet:innen-Wegs – Navigation mit den Pfeiltasten, Esc beendet.",
                        "sport": "Sportart"},
-                "fr": {"concept": "Le concept FTEM", "web": "Le site web", "aw": "Parcours de l'athlète",
+                "fr": {"concept": "Le concept FTEM", "web": "Le site web", "aw": "Chemin des athlètes",
                        "awhint": "Continuer (→) ouvre les thèmes du parcours – navigation avec les flèches, Esc pour terminer.",
                        "sport": "Sport"},
                 "it": {"concept": "Il concetto FTEM", "web": "Il sito web", "aw": "Percorso dell'atleta",
