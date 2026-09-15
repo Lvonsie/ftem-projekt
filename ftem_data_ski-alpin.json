@@ -2121,43 +2121,43 @@
     "title": "WIE VIEL trainieren?",
     "cells": {
      "F1": {
-      "v": "Aktiven Alltag pflegen\n\nPro Nacht: 9-11h Schlaf",
+      "v": "Aktiven Alltag pflegen",
       "l": []
      },
      "F2": {
-      "v": "Aktiven Alltag pflegen\n\nPro Nacht: 9-11h Schlaf\n\nWinter:\nPro Woche: 1-2 Trainings im Ski-Club, in anderen Clubs.\n\nSommer:\nGenerell: 0-5 Schneetage.\nPro Woche: 1-2 Trainings im Ski-Club, in anderen Clubs.",
+      "v": "Aktiven Alltag pflegen\n\nWinter:\nPro Woche: 1-2 Trainings im Ski-Club, in anderen Clubs.\n\nSommer:\nGenerell: 0-5 Schneetage.\nPro Woche: 1-2 Trainings im Ski-Club, in anderen Clubs.",
       "l": []
      },
      "F3": {
-      "v": "Aktiven Alltag pflegen\n\nPro Nacht: 9-11h Schlaf\n\nWinter:\nPro Woche: 2-4 Trainings im Ski-Club, in anderen Clubs.\n\nSommer:\nGenerell: 5-15 Schneeatge.\nPro Woche: 1-2 Trainings im Ski-Club.\nPro Woche: 1-2 Trainings in anderen Clubs.",
+      "v": "Aktiven Alltag pflegen\n\nWinter:\nPro Woche: 2-4 Trainings im Ski-Club, in anderen Clubs.\n\nSommer:\nGenerell: 5-15 Schneeatge.\nPro Woche: 1-2 Trainings im Ski-Club.\nPro Woche: 1-2 Trainings in anderen Clubs.",
       "l": []
      },
      "T1": {
-      "v": "Pro Jahr: 440-540 h Trainingszeit\n\nPro Nacht: 9-10h Schlaf\n\nWinter:\nOn-Snow (Geführte Trainings): 3-5/Woche.\nOff-Snow (Geführte Trainings): 1-3h/Woche.\nAllgemein sportliche Aktivitäten: 2-3h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 20-25 Schneetage.\nOff-Snow (Geführte Trainings): 4-8h/Woche.\nAllgemein sportliche Aktivitäten: 4-6h/Woche.",
+      "v": "Pro Jahr: 440-540 h Trainingszeit\n\nWinter:\nOn-Snow (Geführte Trainings): 3-5/Woche.\nOff-Snow (Geführte Trainings): 1-3h/Woche.\nAllgemein sportliche Aktivitäten: 2-3h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 20-25 Schneetage.\nOff-Snow (Geführte Trainings): 4-8h/Woche.\nAllgemein sportliche Aktivitäten: 4-6h/Woche.",
       "l": []
      },
      "T2": {
-      "v": "Pro Jahr: 570-670h Trainingszeit\n\nPro Nacht: 9-10h Schlaf\n\nWinter:\nOn-Snow (Geführte Trainings): 3-5/Woche.\nOff-Snow (Geführte Trainings): 2-4h/Woche.\nAllgemein sportliche Aktivitäten: 2-3h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 25-35 Schneetage.\nOff-Snow (Geführte Trainings): 6-10h/Woche.\nAllgemein sportliche Aktivitäten: 2-4h/Woche.",
+      "v": "Pro Jahr: 570-670h Trainingszeit\n\nWinter:\nOn-Snow (Geführte Trainings): 3-5/Woche.\nOff-Snow (Geführte Trainings): 2-4h/Woche.\nAllgemein sportliche Aktivitäten: 2-3h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 25-35 Schneetage.\nOff-Snow (Geführte Trainings): 6-10h/Woche.\nAllgemein sportliche Aktivitäten: 2-4h/Woche.",
       "l": []
      },
      "T3": {
-      "v": "Pro Jahr: 750-880h Trainingszeit\n\nPro Nacht: 9-10h Schlaf\n\nWinter:\nOn-Snow (Geführte Trainings): 60-70 Tage.\nOff-Snow (Geführte Trainings): 165-195h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 40-50 Schneetage.\nOff-Snow (Geführte Trainings): 350-410h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
+      "v": "Pro Jahr: 750-880h Trainingszeit\n\nWinter:\nOn-Snow (Geführte Trainings): 60-70 Tage.\nOff-Snow (Geführte Trainings): 165-195h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 40-50 Schneetage.\nOff-Snow (Geführte Trainings): 350-410h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
       "l": []
      },
      "T4": {
-      "v": "Pro Jahr: 770-900h Trainingszeit\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nOn-Snow (Geführte Trainings): 60-70 Tage.\nOff-Snow (Geführte Trainings): 165-195h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 45-55 Schneetage.\nOff-Snow (Geführte Trainings): 350-410h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
+      "v": "Pro Jahr: 770-900h Trainingszeit\n\nWinter:\nOn-Snow (Geführte Trainings): 60-70 Tage.\nOff-Snow (Geführte Trainings): 165-195h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 45-55 Schneetage.\nOff-Snow (Geführte Trainings): 350-410h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
       "l": []
      },
      "E1": {
-      "v": "Pro Jahr: 790-930h Trainingszeit\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nOn-Snow (Geführte Trainings): 60-70 Tage.\nOff-Snow (Geführte Trainings): 180-220h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 45-55 Schneetage.\nOff-Snow (Geführte Trainings): 400-480h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
+      "v": "Pro Jahr: 790-930h Trainingszeit\n\nWinter:\nOn-Snow (Geführte Trainings): 60-70 Tage.\nOff-Snow (Geführte Trainings): 180-220h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 45-55 Schneetage.\nOff-Snow (Geführte Trainings): 400-480h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
       "l": []
      },
      "E2": {
-      "v": "Pro Jahr: 870-1030h Trainingszeit\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nOn-Snow (Geführte Trainings): 45-65 Tage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 200-240h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 35-55 Schneetage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 365-435h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
+      "v": "Pro Jahr: 870-1030h Trainingszeit\n\nWinter:\nOn-Snow (Geführte Trainings): 45-65 Tage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 200-240h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 35-55 Schneetage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 365-435h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
       "l": []
      },
      "M": {
-      "v": "Pro Jahr: 870-1030h Trainingszeit\n\nPro Nacht: 8-9h Schlaf\n\nWinter:\nOn-Snow (Geführte Trainings): 45-65 Tage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 200-240h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 35-55 Schneetage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 365-435h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
+      "v": "Pro Jahr: 870-1030h Trainingszeit\n\nWinter:\nOn-Snow (Geführte Trainings): 45-65 Tage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 200-240h.\nAllgemein sportliche Aktivitäten: 0-2h/Woche.\n\nSommer:\nOn-Snow (Geführte Trainings): 35-55 Schneetage (je nach Spezialisierung).\nOff-Snow (Geführte Trainings): 365-435h.\nAllgemein sportliche Aktivitäten: 0-3h/Woche.",
       "l": []
      }
     }

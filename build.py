@@ -242,8 +242,12 @@ def render_block(block, link_texts):
         head = first[:-1].strip()
         if head:
             return '<p class="bh">'+esc(head)+'</p>'+_bodyhtml("\n".join(lines[1:]))
-    # Fall D: kurze Titelzeile ohne Satzzeichen + Rest als Text
-    if len(lines) >= 2 and _is_head_line(first):
+    # Fall D: kurze Titelzeile ohne Satzzeichen + Rest als Text.
+    # ABER: sieht die Folgezeile selbst wie ein Titel aus (gleichartige kurze
+    # Phrasen untereinander, z.B. "Psychologische Grundtechniken erlernen"/
+    # "Regenerations-& Präventionsmassn. ausprobieren"), dann ist es eine
+    # Aufzaehlung gleichwertiger Zeilen -> alles in einheitlicher Schrift.
+    if len(lines) >= 2 and _is_head_line(first) and not _is_head_line(lines[1].strip()):
         return '<p class="bh">'+esc(first)+'</p>'+_bodyhtml("\n".join(lines[1:]))
     # Fall E: einzelne kurze Titel-Phrase (z.B. "Familie", "Belastungsvertraeglichkeit aufbauen")
     if len(ne) == 1 and _is_head_line(ne[0]):
@@ -2235,6 +2239,15 @@ const SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
 function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*([\s\S]*)$/;
 const SNOW_RE=/^(on|off)[\s-]?snow:?$/i;
+// Gleiche Logik wie _is_head_line im Generator: sieht die Zeile wie ein Titel aus?
+function _headln(s){
+  s=(s||'').trim();
+  if(s.length<2||s.length>50)return false;
+  if(/[.,;:!?]$/.test(s))return false;
+  if(s.indexOf(',')>=0||s.indexOf(':')>=0)return false;
+  if(!/^[A-ZÄÖÜ]/.test(s))return false;
+  return s.split(/\s+/).length<=6;
+}
 function structBlock(b){
   b=b.replace(/\s+$/,'');
   if(!b.trim())return '';
@@ -2265,7 +2278,7 @@ function structBlock(b){
     nonempty.forEach(ls=>{const m=ls.match(SC_RE);if(m)out+='<li><span class="badge">'+_esc(m[1].trim())+'</span> '+_esc(m[2].trim())+'</li>';else out+='<li>'+_esc(ls)+'</li>';});
     return out+'</ul>';
   }
-  if(lines.length>=2&&lines[0].trim()&&lines[0].trim().length<=46&&!/[.:,;]$/.test(lines[0].trim())){
+  if(lines.length>=2&&lines[0].trim()&&lines[0].trim().length<=46&&!/[.:,;]$/.test(lines[0].trim())&&!_headln(lines[1])){
     return '<p class="bh">'+_esc(lines[0].trim())+'</p><p>'+_esc(lines.slice(1).join('\n').trim()).replace(/\n/g,'<br>')+'</p>';
   }
   const m=b.match(/^([^:\n]{2,46}):\s*([\s\S]+)$/);
