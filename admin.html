@@ -351,19 +351,6 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
   .sportpick .sp-list{left:auto;right:0;min-width:230px}
   /* Admin & Praesentation nur am Laptop */
   .bb-tools .mp-admin{display:none}
-  /* Fusszeile mobil: Label, Grundlagen-Knoepfe, dann Mission + FTEM-Erklaerung */
-  .bottombar{flex-wrap:wrap;justify-content:center;gap:6px 6px;padding:8px 10px 10px}
-  .bb-div{display:none}
-  .bb-intro{order:1;width:100%;text-align:center;font-size:10.5px}
-  .bb-links{order:2;flex:none;justify-content:center;width:100%;gap:6px}
-  .bb-item{font-size:11px;padding:5px 12px;letter-spacing:.01em}
-  .bb-mission{order:3;padding:5px 12px}
-  .bb-mission b{font-size:11px}
-  .bb-tools{order:4;margin-left:0;gap:6px}
-  .bb-app{display:inline-block;order:5;width:auto}
-  .bb-intro{margin-right:0;text-align:center;font-size:9.5px;line-height:1.25}
-  .bb-links{flex-wrap:wrap;justify-content:center;gap:4px}
-  .bb-item{padding:4px 10px;font-size:10.5px}
   .imodal{align-items:flex-start;padding:0}
   .im-box{width:100vw;max-height:100vh;max-height:100svh;border-radius:0}
   .imodal.wide .im-box{width:100vw;height:100vh;height:100svh}
@@ -435,6 +422,21 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .bb-item{font:inherit;flex:none;white-space:nowrap;background:#fff;border:1px solid rgba(29,38,48,.14);border-radius:999px;color:var(--ink);font-weight:700;font-size:12.5px;padding:7px 16px;cursor:pointer;text-decoration:none;letter-spacing:.03em;box-shadow:0 2px 8px rgba(29,38,48,.06);transition:background .15s,border-color .15s,color .15s,transform .15s}
 .bb-item b{color:var(--red);font-weight:800;margin-left:4px}
 .bb-item:hover{border-color:var(--red);color:var(--red);transform:translateY(-1px)}
+/* Fusszeile mobil: sauberes 2-Spalten-Raster (NACH den Grundregeln, damit es gewinnt).
+   Zeile 1: Titel · Zeile 2/3: die 4 Grundlagen · Zeile 4: Mission + FTEM kurz erklaert */
+@media(max-width:760px){
+  .bottombar{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+  .bb-div{display:none}
+  .bb-intro{order:0;grid-column:1/-1;text-align:center;font-size:9.5px;line-height:1.25}
+  .bb-links{display:contents}
+  .bb-links .bb-item{order:1}
+  .bb-item{width:100%;text-align:center;font-size:10.5px;padding:7px 8px;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box}
+  .bb-mission{order:2;width:100%;justify-content:center;text-align:center;padding:7px 8px;box-sizing:border-box;min-width:0}
+  .bb-mission b{font-size:10.5px;overflow:hidden;text-overflow:ellipsis}
+  .bb-tools{order:3;margin-left:0;gap:0;display:flex;min-width:0}
+  .bb-tools .bb-ftem{flex:1 1 auto}
+  .bb-app{display:block;order:4;grid-column:1/-1;width:auto;text-align:center}
+}
 .aw-btn:hover{background:var(--red);border-color:var(--red)}
 .aw-btn .aw-ar{display:inline-flex;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.25);align-items:center;justify-content:center;font-size:13px}
 /* Stufen-Summary-Overlay */
@@ -815,7 +817,7 @@ details.theme{scroll-margin-top:118px}
 }
 /* ---------- Responsive: Handy ---------- */
 @media(max-width:760px){
-:root{--colw:158px;--lblw:86px}
+:root{--colw:158px;--lblw:68px}
 header.top{gap:6px 8px}
 header.top .back{width:34px;height:34px;padding:0}
 header.top .sicon{width:28px;height:28px}
@@ -837,10 +839,12 @@ header.top .sicon+.sportsel2{flex:none;width:44px;height:34px;min-width:0;max-wi
 .wrap{padding:10px 10px 60px}
 .scroller{padding:0 8px 10px;will-change:scroll-position}
 .grid{transform:translateZ(0)}
-.rl{font-size:9.5px;padding:6px 6px;line-height:1.25;font-weight:600}
+.rl{font-size:9px;padding:5px 5px;line-height:1.25;font-weight:600}
 .rl{box-shadow:0 0 0 6px var(--card),-12px 0 0 6px var(--card),7px 0 8px -5px rgba(0,0,0,.22)}
 .cell .cwrap{font-size:11px}
-.stagebar{gap:3px;padding:5px 8px;padding-bottom:calc(5px + env(safe-area-inset-bottom))}
+.stagebar{gap:3px;padding:5px 8px;padding-bottom:calc(5px + env(safe-area-inset-bottom));transition:opacity .22s,transform .22s}
+/* Beim Scrollen tritt die F1-M-Leiste zurueck und gibt den Inhalt frei */
+body.is-scrolling .stagebar{opacity:0;transform:translateY(8px);pointer-events:none}
 .stagebar .sb{font-size:10.5px;padding:6px 1px;border-bottom-width:2px;max-width:none}
 summary .tt{font-size:13px}
 details.theme{scroll-margin-top:170px}
