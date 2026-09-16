@@ -173,6 +173,14 @@ ${context || '(kein Kontext übermittelt)'}`;
         message: (data && data.error && data.error.message) || 'Fehler beim Sprachmodell.' });
     }
     const answer = (data.content || []).map(c => c.text || '').join('').trim();
+    // Statistik: 1 Zeile pro beantworteter Frage (serverseitig -> nicht verfaelschbar).
+    // Fehlt die Tabelle ftem_stats, passiert still nichts.
+    try {
+      await fetch(QUOTA_URL.replace('ftem_overrides', 'ftem_stats'), { method: 'POST',
+        headers: { apikey: QUOTA_KEY, Authorization: 'Bearer ' + QUOTA_KEY,
+          'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ kind: 'ki_frage', meta: lang }) });
+    } catch (_) {}
     return json(200, { answer: answer || 'Dazu habe ich leider keine Antwort gefunden.' });
   } catch (e) {
     return json(500, { error: 'server', message: 'Serverfehler beim KI-Assistenten.' });

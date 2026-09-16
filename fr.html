@@ -1803,7 +1803,29 @@ function route(){
   document.documentElement.classList.remove('h'); // ab jetzt steuert JS die Sichtbarkeit
   const id=decodeURIComponent(location.hash.replace('#',''));
   show(SPORT_IDS.includes(id)?id:'');
+  if(SPORT_IDS.includes(id)&&window.__statSport)window.__statSport(id);
 }
+// ---- anonyme Nutzungsstatistik (Tabelle ftem_stats) ----
+// 1 "zugriff" pro Browser-Sitzung (sessionStorage-Waechter, wie Feedback/Club-App),
+// 1 "sport|<id>" pro Sitzung und angeschauter Sportart. Keine Cookies, keine IDs,
+// keine IP-Adressen. Fehlt die Tabelle, passiert still nichts (try/catch).
+(function(){
+  if(!SUPA_URL||!SUPA_KEY)return;
+  function ev(kind,meta){
+    try{
+      var k='ftem-st-'+kind+(meta?'-'+meta:'');
+      if(sessionStorage.getItem(k))return;
+      sessionStorage.setItem(k,'1');
+    }catch(_){return;} // ohne sessionStorage lieber gar nicht zaehlen (sonst Doppelzaehlung)
+    try{
+      fetch(SUPA_URL+'/rest/v1/ftem_stats',{method:'POST',
+        headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
+        body:JSON.stringify({kind:kind,meta:meta||null})}).catch(function(){});
+    }catch(_){}
+  }
+  ev('zugriff',PAGELANG);
+  window.__statSport=function(sid){ev('sport',sid);};
+})();
 window.addEventListener('hashchange',route);
 route();
 loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});

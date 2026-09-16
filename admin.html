@@ -964,6 +964,32 @@ footer{padding:16px;font-size:11px}
 .asite{text-decoration:none;font-size:13px;font-weight:700;color:#d52b1e}
 #glosspanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
 #pendpanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
+#statspanel{max-width:980px;margin:0 auto;padding:8px 18px 60px}
+.stat-card{background:#fff;border:1px solid #e3e7ec;border-radius:14px;padding:16px 18px;margin:14px 0}
+.stat-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.stat-h b{font-size:15px}
+.stat-pill{font-size:11px;font-weight:800;color:#fff;background:#d52b1e;border-radius:999px;padding:3px 10px}
+.stat-sub{font-size:11.5px;color:#697080;margin:4px 0 12px}
+.stat-kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.stat-kpi{flex:1 1 118px;min-width:118px;background:#f7f8fa;border:1px solid #e9edf1;border-radius:10px;padding:10px 12px}
+.stat-kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.15}
+.stat-kpi span{font-size:10.5px;color:#697080;font-weight:700}
+.stat-cht-t{font-size:11px;font-weight:800;color:#4a5563;margin:12px 0 4px;letter-spacing:.02em;text-transform:uppercase}
+.stat-cht{position:relative;display:flex;align-items:flex-end;gap:2px;height:120px;padding-right:36px;border-bottom:1px solid #e9edf1}
+.stat-col{flex:1 1 0;display:flex;flex-direction:column-reverse;min-width:3px;height:100%;border-radius:2px 2px 0 0;overflow:hidden}
+.stat-seg{width:100%;flex:none}
+.stat-max{position:absolute;right:0;top:0;font-size:10px;color:#98a1ad;font-variant-numeric:tabular-nums}
+.stat-x{display:flex;gap:2px;padding-right:36px;margin-top:3px}
+.stat-x i{flex:1 1 0;font-style:normal;font-size:9px;color:#98a1ad;text-align:center;min-width:3px;overflow:visible;white-space:nowrap}
+.stat-leg{display:flex;gap:14px;font-size:11px;color:#4a5563;margin-top:9px;flex-wrap:wrap;font-weight:600}
+.stat-leg i{font-style:normal;display:inline-flex;align-items:center;gap:5px}
+.stat-leg .dot{width:9px;height:9px;border-radius:3px;display:inline-block}
+.stat-foot{font-size:10.5px;color:#8a93a0;margin-top:10px;line-height:1.5}
+.stat-err{background:#fdf2f1;border:1px solid rgba(213,43,30,.35);color:#a2231a;border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.6;margin-top:14px}
+.stat-err code{background:#fff;border-radius:5px;padding:2px 6px;font-size:10.5px;display:inline-block;margin-top:3px;color:#1d2630}
+table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
+.stat-top th{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#8a93a0;text-align:left;padding:5px 8px;border-bottom:1px solid #e9edf1}
+.stat-top td{font-size:12.5px;padding:7px 8px;border-bottom:1px solid #f0f2f5;font-variant-numeric:tabular-nums}
 .pend-l{font-size:13.5px;margin:22px 0 8px;color:#1d2630}
 .pend-it{background:#fff;border:1px solid #e3e7ec;border-radius:10px;padding:10px 12px;margin-bottom:8px;display:grid;grid-template-columns:1fr auto;gap:3px 14px;align-items:center}
 .pend-meta{font-size:11px;font-weight:800;color:#1f8fa6;grid-column:1;letter-spacing:.01em}
@@ -1102,6 +1128,7 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     <button id="asave" class="asave" disabled>Speichern</button>
     <button id="glossbtn" class="agloss" type="button">Glossar</button>
     <button id="pendbtn" class="agloss" type="button">Pendenzen<span id="pendbadge" class="fbbadge" hidden>0</span></button>
+    <button id="statbtn" class="agloss" type="button">Statistik</button>
     <button id="fbbtn" class="agloss" type="button">Feedback<span id="fbbadge" class="fbbadge" hidden>0</span></button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
@@ -1128,6 +1155,10 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     <div class="glosbar"><b style="font-size:14px">Pendenzen &ndash; Übersetzungen nachführen</b><span id="pendcount" class="astatus"></span></div>
     <p class="glosnote">Hier stehen alle Textfelder, deren <b>deutscher</b> Inhalt geändert wurde und deren Übersetzung noch nicht nachgeführt oder geprüft ist. Bis dahin zeigen die FR/IT/EN-Seiten dort den aktuellen deutschen Text (damit nie Veraltetes steht). «Öffnen» springt direkt zum Feld in der richtigen Sprache. Dort gibt es drei Wege: den blauen <b>«Ü»</b>-Knopf am Feld klicken (KI-Vorschlag mit Glossar – einsetzen, anpassen, speichern), die Übersetzung von Hand anpassen und speichern, oder mit Klick auf das orange «!» die bestehende ohne Änderung als geprüft markieren. Danach verschwindet die Pendenz.</p>
     <div id="pendtable"></div>
+  </div>
+  <div id="statspanel" hidden>
+    <div class="glosbar"><b style="font-size:14px">Statistik &ndash; Nutzung der Webseite</b><span id="statinfo" class="astatus"></span></div>
+    <div id="statsbody"></div>
   </div>
   <div id="editwrap"><section class="sport" data-sport="__shared" hidden><div class="wrap"><h2 class="grp" style="--gc:#1f8fa6">Sportartübergreifende Inhalte <span class="adm-tag">eine Änderung wirkt in allen aufgeführten Sportarten (alle Sprachen wie gewohnt)</span></h2><div class="adm-shsep"><span>Ausdauer</span></div><details class="theme edit" id="shared-adm-t0" data-title="ausdauer" style="border-left-color:#4a5563"><summary><span class="ticon" style="color:#4a5563;background:rgba(74,85,99,.13)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2.5 6 4-13 2.5 7H21"/></svg></span><span class="tt">Ausdauer<span class="adm-tag adm-shtag">Langlauf · Biathlon · Nordische Kombination</span></span><span class="tchev"></span></summary><div class="adm-home adm-title"><div class="adm-shwho">gilt für: Langlauf, Biathlon, Nordische Kombination</div><div class="adm-field"><label>Titel des Abschnitts</label><textarea class="cedit" data-cid="shared|ausdauer-nordisch|title">Ausdauer</textarea></div></div><div class="scroller"><div class="grid"><div class="r head"><div class="rl corner"></div><div class="c hd ph-foundation" data-idx="0" title="Spalte hervorheben"><span class="st">Foundation 1</span><span class="stf">U8</span></div><div class="c hd ph-foundation" data-idx="1" title="Spalte hervorheben"><span class="st">Foundation 2</span><span class="stf">U8–U10</span></div><div class="c hd ph-foundation" data-idx="2" title="Spalte hervorheben"><span class="st">Foundation 3</span><span class="stf">U10–U12</span></div><div class="c hd ph-talent" data-idx="3" title="Spalte hervorheben"><span class="st">Talent 1</span><span class="stf">U12–U14</span></div><div class="c hd ph-talent" data-idx="4" title="Spalte hervorheben"><span class="st">Talent 2</span><span class="stf">U14–U16</span></div><div class="c hd ph-talent" data-idx="5" title="Spalte hervorheben"><span class="st">Talent 3</span><span class="stf">U16+</span></div><div class="c hd ph-talent" data-idx="6" title="Spalte hervorheben"><span class="st">Talent 4</span><span class="stf">U18+</span></div><div class="c hd ph-elite" data-idx="7" title="Spalte hervorheben"><span class="st">Elite 1</span></div><div class="c hd ph-elite" data-idx="8" title="Spalte hervorheben"><span class="st">Elite 2</span></div><div class="c hd ph-mastery" data-idx="9" title="Spalte hervorheben"><span class="st">Mastery</span></div></div><div class="r"><div class="rl">Skills-Checks (SC) &amp; Leistungstests (LT) Ausdauer</div><div class="c cell ph-foundation" data-from="0" data-to="1" style="grid-column: span 2"><div class="cwrap"><textarea class="cedit" data-cid="shared|ausdauer-nordisch|0|0">Off Snow Skills F1-2
 
@@ -7721,7 +7752,8 @@ function toggleGloss(){
   gp.hidden=!show; ew.hidden=show; sw.style.visibility=show?'hidden':'';
   document.getElementById('glossbtn').textContent=show?'← Bearbeiten':'Glossar';
   if(show){document.getElementById('fbpanel').hidden=true;var fbb0=document.getElementById('fbbtn');if(fbb0)fbb0.firstChild.textContent='Feedback';
-    document.getElementById('pendpanel').hidden=true;var pb0=document.getElementById('pendbtn');if(pb0)pb0.firstChild.textContent='Pendenzen';}
+    document.getElementById('pendpanel').hidden=true;var pb0=document.getElementById('pendbtn');if(pb0)pb0.firstChild.textContent='Pendenzen';
+    document.getElementById('statspanel').hidden=true;document.getElementById('statbtn').textContent='Statistik';}
   if(show&&!gp.dataset.done){gp.dataset.done='1';renderGloss('');
     loadGlossAdditions().then(function(){renderGloss(document.getElementById('glosq').value);});
     document.getElementById('glosq').addEventListener('input',function(e){renderGloss(e.target.value);});
@@ -7806,7 +7838,102 @@ function togglePend(){
   if(show){
     document.getElementById('glosspanel').hidden=true;document.getElementById('glossbtn').textContent='Glossar';
     document.getElementById('fbpanel').hidden=true;var fbb=document.getElementById('fbbtn');if(fbb)fbb.firstChild.textContent='Feedback';
+    document.getElementById('statspanel').hidden=true;document.getElementById('statbtn').textContent='Statistik';
     renderPend();
+  }
+}
+// --- Statistik: Nutzungszahlen der Webseite (Tabelle ftem_stats) -------------
+// Bausteine nach der Club-App-Vorlage: KPI-Kacheln, CSS-Saeulenchart (gestapelt),
+// Top-5-Tabelle. Aggregiert wird im Browser (rohe Zeilen der letzten 30 Tage).
+function _dkey(d){function p(n){return (n<10?'0':'')+n;}return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
+function tagesChart(reihen,tage,farben,einheit){
+  var days=[],m={};
+  for(var i=tage-1;i>=0;i--){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-i);var k=_dkey(d);days.push({k:k,d:d});m[k]={};}
+  reihen.forEach(function(r){var k=_dkey(new Date(r.ts));if(m[k])m[k][r.key]=(m[k][r.key]||0)+1;});
+  var keys=Object.keys(farben),max=0;
+  days.forEach(function(dy){var s=0;keys.forEach(function(kk){s+=m[dy.k][kk]||0;});dy.sum=s;if(s>max)max=s;});
+  var mx=max||1,cols='',xs='';
+  days.forEach(function(dy){
+    var segs='',tip=[];
+    keys.forEach(function(kk){var n=m[dy.k][kk]||0;
+      if(n>0){segs+='<span class="stat-seg" style="height:'+(n/mx*100)+'%;background:'+farben[kk]+'"></span>';
+        if(keys.length>1)tip.push(kk+': '+n);}});
+    var dd=dy.d.getDate(),mm=dy.d.getMonth()+1;
+    var title=dd+'.'+mm+'. · '+dy.sum+' '+einheit+(tip.length?' ('+tip.join(', ')+')':'');
+    cols+='<span class="stat-col" title="'+fbEsc(title)+'">'+segs+'</span>';
+    xs+='<i>'+((tage<=14)?String(dd):([1,5,10,15,20,25].indexOf(dd)>=0?dd+'.':''))+'</i>';
+  });
+  return '<div class="stat-cht">'+cols+'<span class="stat-max">'+max+'</span></div><div class="stat-x">'+xs+'</div>';
+}
+function _statKpi(v,lbl){return '<div class="stat-kpi"><b>'+v+'</b><span>'+lbl+'</span></div>';}
+function renderStats(rows){
+  var body=document.getElementById('statsbody');
+  var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5;
+  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={};
+  rows.forEach(function(x){
+    var t=new Date(x.created_at).getTime();
+    if(x.kind==='ki_frage'){ki.push({ts:x.created_at,key:'KI-Fragen'});if(t>=t0)kiToday++;if(t>=t7)ki7++;}
+    else if(x.kind==='zugriff'){var l=String(x.meta||'de').toUpperCase().slice(0,2);
+      zu.push({ts:x.created_at,key:l});zuLang[l]=(zuLang[l]||0)+1;if(t>=t0)zuToday++;if(t>=t7)zu7++;}
+    else if(x.kind==='sport'&&x.meta){var s=sports[x.meta]||{n:0,last:x.created_at};
+      s.n++;if(x.created_at>s.last)s.last=x.created_at;sports[x.meta]=s;}
+  });
+  var LFARBEN={'DE':'#d52b1e','FR':'#1f8fa6','IT':'#e2a900','EN':'#e8772e'};
+  // Karte B: Zugriffe
+  var leg='';Object.keys(LFARBEN).forEach(function(l){if(zuLang[l])leg+='<i><span class="dot" style="background:'+LFARBEN[l]+'"></span>'+l+' · '+zuLang[l]+'</i>';});
+  var spName={};for(var oi=0;oi<sel.options.length;oi++){var o=sel.options[oi];if(o.value!=='__shared')spName[o.value]=o.textContent;}
+  var top=Object.keys(sports).map(function(k){return {id:k,n:sports[k].n,last:sports[k].last};})
+    .sort(function(a,b){return b.n-a.n;}).slice(0,5);
+  function fdate(iso){var d=new Date(iso);function p(n){return (n<10?'0':'')+n;}
+    return p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());}
+  var topHtml=top.length?('<div class="stat-cht-t">Meistbesuchte Sportarten (30 Tage)</div>'
+    +'<table class="stat-top"><thead><tr><th>Sportart</th><th>Aufrufe</th><th>zuletzt</th></tr></thead><tbody>'
+    +top.map(function(x){return '<tr><td>'+fbEsc(spName[x.id]||x.id)+'</td><td>'+x.n+'</td><td>'+fdate(x.last)+'</td></tr>';}).join('')
+    +'</tbody></table>'):'';
+  var hZu='<div class="stat-card"><div class="stat-h"><b>Zugriffe</b><span class="stat-pill">'+zu.length+' in 30 Tagen</span></div>'
+    +'<div class="stat-sub">Ein Zugriff = eine Browser-Sitzung (einmal pro Besuch gezählt, ohne Cookies, IDs oder IP-Adressen).</div>'
+    +'<div class="stat-kpis">'+_statKpi(zuToday,'Heute')+_statKpi(zu7,'7 Tage')+_statKpi(zu.length,'30 Tage')+_statKpi((zu.length/30).toFixed(1).replace('.',','),'Ø pro Tag · 30 T')+'</div>'
+    +'<div class="stat-cht-t">Zugriffe pro Tag (30 Tage) · gestapelt nach Sprache</div>'
+    +tagesChart(zu,30,LFARBEN,'Zugriffe')
+    +(leg?'<div class="stat-leg">'+leg+'</div>':'')
+    +topHtml+'</div>';
+  // Karte A: KI-Fragen
+  var hKi='<div class="stat-card"><div class="stat-h"><b>KI-Fragen (FTEM-Coach)</b><span class="stat-pill">'+ki.length+' in 30 Tagen</span></div>'
+    +'<div class="stat-sub">Eine Frage = eine beantwortete Frage an den FTEM-Coach (serverseitig gezählt, Limite 10/Tag pro IP).</div>'
+    +'<div class="stat-kpis">'+_statKpi(kiToday,'Heute')+_statKpi(ki7,'7 Tage')+_statKpi(ki.length,'30 Tage')+_statKpi((ki.length/30).toFixed(1).replace('.',','),'Ø pro Tag · 30 T')+'</div>'
+    +'<div class="stat-cht-t">Fragen pro Tag (14 Tage)</div>'
+    +tagesChart(ki,14,{'KI-Fragen':'#d52b1e'},'Fragen')+'</div>';
+  var intro=rows.length?'':'<p class="glosnote" style="margin-top:14px">Noch keine Daten – die Zählung beginnt, sobald der neue Stand veröffentlicht ist und die ersten Besuche eintreffen.</p>';
+  body.innerHTML=intro+hZu+hKi;
+  document.getElementById('statinfo').textContent='letzte 30 Tage · aktualisiert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});
+}
+function loadStats(){
+  var body=document.getElementById('statsbody');
+  body.innerHTML='<p class="glosnote" style="margin-top:14px">Lade Statistik …</p>';
+  var since=new Date(Date.now()-30*864e5).toISOString();
+  fetch(SUPA_URL+'/rest/v1/ftem_stats?select=created_at,kind,meta&created_at=gte.'+encodeURIComponent(since)+'&order=created_at.desc&limit=5000',
+    {headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+   .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+   .then(function(rows){renderStats(rows||[]);})
+   .catch(function(e){
+     body.innerHTML='<div class="stat-err"><b>Statistik-Tabelle noch nicht eingerichtet</b> ('+fbEsc(e.message)+').<br>'
+      +'Luca kann sie in Supabase (SQL-Editor) einmalig anlegen:<br>'
+      +'<code>create table if not exists public.ftem_stats (id bigint generated always as identity primary key, created_at timestamptz not null default now(), kind text not null, meta text);</code><br>'
+      +'<code>alter table public.ftem_stats enable row level security;</code><br>'
+      +'<code>create policy "stats einfuegen" on public.ftem_stats for insert with check (true);</code><br>'
+      +'<code>create policy "stats lesen" on public.ftem_stats for select using (true);</code></div>';
+   });
+}
+function toggleStats(){
+  var sp=document.getElementById('statspanel'),ew=document.getElementById('editwrap'),sw=document.getElementById('sportsel').parentNode;
+  var show=sp.hidden;
+  sp.hidden=!show; ew.hidden=show; sw.style.visibility=show?'hidden':'';
+  document.getElementById('statbtn').textContent=show?'← Bearbeiten':'Statistik';
+  if(show){
+    document.getElementById('glosspanel').hidden=true;document.getElementById('glossbtn').textContent='Glossar';
+    document.getElementById('fbpanel').hidden=true;var fbb=document.getElementById('fbbtn');if(fbb)fbb.firstChild.textContent='Feedback';
+    document.getElementById('pendpanel').hidden=true;var pb=document.getElementById('pendbtn');if(pb)pb.firstChild.textContent='Pendenzen';
+    loadStats();
   }
 }
 // --- Feedback-Verwaltung im Admin ---
@@ -7861,7 +7988,8 @@ function toggleFb(){
   var show=fp.hidden;
   fp.hidden=!show;
   if(show){gp.hidden=true;document.getElementById('glossbtn').textContent='Glossar';
-    document.getElementById('pendpanel').hidden=true;var pb1=document.getElementById('pendbtn');if(pb1)pb1.firstChild.textContent='Pendenzen';}
+    document.getElementById('pendpanel').hidden=true;var pb1=document.getElementById('pendbtn');if(pb1)pb1.firstChild.textContent='Pendenzen';
+    document.getElementById('statspanel').hidden=true;document.getElementById('statbtn').textContent='Statistik';}
   ew.hidden=show; sw.style.visibility=show?'hidden':'';
   document.getElementById('fbbtn').firstChild.textContent=show?'← Bearbeiten':'Feedback';
   if(show)renderFeedback();
@@ -8154,6 +8282,7 @@ function init(){
   document.getElementById('chgundo').addEventListener('click',undoCur);
   document.getElementById('glossbtn').addEventListener('click',toggleGloss);
   document.getElementById('pendbtn').addEventListener('click',togglePend);
+  document.getElementById('statbtn').addEventListener('click',toggleStats);
   fbInit();
   if(SUPA_URL&&SUPA_KEY){
     fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
