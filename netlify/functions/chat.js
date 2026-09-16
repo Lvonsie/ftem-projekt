@@ -2,6 +2,46 @@
 // Der API-Key liegt NUR hier (Netlify-Umgebungsvariable ANTHROPIC_API_KEY),
 // niemals im Browser. Optional: CHAT_MODEL (Standard: claude-3-5-haiku-latest).
 
+// --- Tageslimite pro IP -----------------------------------------------------
+// Zaehler liegen in der bestehenden Supabase-Tabelle ftem_overrides
+// (cid = "chatq|<hash>", txt = {"day":"YYYY-MM-DD","n":N}). Gespeichert wird
+// nur ein Kurz-Hash der IP (keine Klartext-IPs). Die Seiten laden diese Zeilen
+// nicht (cid=not.like.chatq|*). Faellt die Pruefung aus, laeuft der Chat weiter.
+const QUOTA_URL = 'https://xphbwnzyebbejsdeqled.supabase.co/rest/v1/ftem_overrides';
+const QUOTA_KEY = 'sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_';
+const CHAT_LIMIT = parseInt(process.env.CHAT_DAILY_LIMIT || '10', 10);       // Fragen/Tag/IP
+// Der Admin-Bereich (Modus "translate", KI-Uebersetzungsvorschlaege) hat KEINE Limite.
+const LIMIT_MSG = {
+  de: 'Tageslimite erreicht: Der FTEM-Coach beantwortet pro Tag maximal ' + CHAT_LIMIT + ' Fragen. Morgen geht es weiter – die Inhalte findest du jederzeit direkt auf dieser Seite.',
+  fr: 'Limite quotidienne atteinte : le coach FTEM répond à ' + CHAT_LIMIT + ' questions par jour au maximum. À demain – les contenus restent disponibles directement sur cette page.',
+  it: 'Limite giornaliero raggiunto: il coach FTEM risponde al massimo a ' + CHAT_LIMIT + ' domande al giorno. A domani – i contenuti restano disponibili direttamente su questa pagina.',
+  en: 'Daily limit reached: the FTEM coach answers up to ' + CHAT_LIMIT + ' questions per day. See you tomorrow – all content remains available right on this page.'
+};
+
+async function ipQuota(event, kind, limit) {
+  try {
+    const crypto = require('crypto');
+    const ip = String(event.headers['x-nf-client-connection-ip']
+      || event.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+    const day = new Date().toISOString().slice(0, 10);
+    const cid = 'chatq|' + crypto.createHash('sha256').update(kind + '|' + ip).digest('hex').slice(0, 20);
+    const H = { apikey: QUOTA_KEY, Authorization: 'Bearer ' + QUOTA_KEY };
+    let n = 0;
+    const r = await fetch(QUOTA_URL + '?select=txt&cid=eq.' + encodeURIComponent(cid), { headers: H });
+    if (r.ok) {
+      const rows = await r.json();
+      if (rows && rows[0] && rows[0].txt) {
+        try { const q = JSON.parse(rows[0].txt); if (q.day === day) n = q.n || 0; } catch (_) {}
+      }
+    }
+    if (n >= limit) return true;   // blockiert
+    await fetch(QUOTA_URL, { method: 'POST',
+      headers: { ...H, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify([{ cid, txt: JSON.stringify({ day, n: n + 1 }) }]) });
+    return false;
+  } catch (_) { return false; }    // Limit-Pruefung darf den Chat nie lahmlegen
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return json(405, { error: 'method_not_allowed' });
@@ -73,6 +113,9 @@ ${glList || '(keines)'}`;
   const links    = Array.isArray(body.links) ? body.links.slice(0, 60) : [];
   const history  = Array.isArray(body.history) ? body.history.slice(-6) : [];
   if (!question) return json(400, { error: 'no_question' });
+  if (await ipQuota(event, 'chat', CHAT_LIMIT)) {
+    return json(429, { error: 'limit', message: LIMIT_MSG[lang] || LIMIT_MSG.de });
+  }
 
   const linkList = links.map(l => `- ${String(l.t || '').slice(0,160)}: ${String(l.u || '').slice(0,300)}`).join('\n');
 

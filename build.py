@@ -2314,7 +2314,7 @@ function structCell(txt){
 }
 function loadOverrides(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
-  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
     .then(r=>r.ok?r.json():[]).then(rows=>{const m={};(rows||[]).forEach(x=>m[x.cid]=x.txt);return m;}).catch(()=>({}));
 }
 function _fnv36(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return h.toString(36);}
@@ -2654,8 +2654,22 @@ function gatherChatContext(sec){
   const name=(((sec.querySelector('header.top h1')||{}).textContent)||'').split('·')[0].trim();
   return {text:text,links:links,sport:name};
 }
+// Tageslimite: max. Fragen pro Tag und Browser (localStorage; Datum = Tageswechsel)
+var CHAT_DAILY_LIMIT=10;
+function chatQuota(){
+  var today=new Date().toISOString().slice(0,10);
+  try{
+    var q=JSON.parse(localStorage.getItem('ftem-chatq')||'{}');
+    if(q.day!==today)return {day:today,n:0};
+    return {day:today,n:q.n||0};
+  }catch(_){return {day:today,n:0};}
+}
+function chatQuotaInc(){
+  try{var q=chatQuota();q.n++;localStorage.setItem('ftem-chatq',JSON.stringify(q));}catch(_){}
+}
 cpForm.addEventListener('submit',function(e){e.preventDefault();if(chatBusy||!chatSec)return;
   const qv=cpIn.value.trim();if(!qv)return;
+  if(chatQuota().n>=CHAT_DAILY_LIMIT){addMsg('a',I18N.chatLimit);return;}
   var _ch=cpMsgs.querySelector('.cp-chips');if(_ch)_ch.remove();
   addMsg('u',qv);chatHist.push({role:'user',content:qv});cpIn.value='';
   chatBusy=true;cpSend.disabled=true;const thinking=addMsg('a','…',true);
@@ -2664,7 +2678,7 @@ cpForm.addEventListener('submit',function(e){e.preventDefault();if(chatBusy||!ch
     body:JSON.stringify({question:qv,context:ctx.text,links:ctx.links,sport:ctx.sport,lang:document.documentElement.lang,history:chatHist.slice(0,-1)})})
    .then(r=>r.json().then(j=>({ok:r.ok,j:j})).catch(()=>({ok:false,j:{}})))
    .then(function(res){thinking.remove();
-     if(res.ok&&res.j.answer){addMsg('a',res.j.answer);chatHist.push({role:'assistant',content:res.j.answer});}
+     if(res.ok&&res.j.answer){addMsg('a',res.j.answer);chatHist.push({role:'assistant',content:res.j.answer});chatQuotaInc();}
      else{addMsg('a',(res.j&&res.j.message)||I18N.chatErr);}})
    .catch(function(){thinking.remove();addMsg('a',I18N.chatErr);})
    .then(function(){chatBusy=false;cpSend.disabled=false;cpIn.focus();});
@@ -3267,7 +3281,7 @@ __MAINCSS__
 details.theme.shref{opacity:.55}
 details.theme.shref:hover,details.theme.shref[open]{opacity:1}
 .adm-shwho{font-size:12px;font-weight:600;color:#1f8fa6;background:rgba(31,143,166,.08);border:1px solid rgba(31,143,166,.25);border-radius:9px;padding:7px 11px;line-height:1.45}
-.adm-shtag{color:#1f8fa6;background:rgba(31,143,166,.12)}
+.adm-shtag{color:#1f8fa6;background:rgba(31,143,166,.12);white-space:normal;line-height:1.6;text-transform:none;letter-spacing:0}
 .adm-shsep{display:flex;align-items:center;gap:10px;margin:22px 2px 4px;color:#8a94a1;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
 .adm-shsep:after{content:"";flex:1;height:1px;background:rgba(90,100,114,.22)}
 .adm-shsep:first-of-type{margin-top:8px}
@@ -3843,7 +3857,7 @@ function init(){
   document.getElementById('pendbtn').addEventListener('click',togglePend);
   fbInit();
   if(SUPA_URL&&SUPA_KEY){
-    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
       .then(function(r){return r.ok?r.json():[];}).then(function(rows){
         (rows||[]).forEach(function(x){
           if(x.cid.indexOf('gloss|')===0)return;
@@ -3979,8 +3993,12 @@ def _shared_admin_section(datamap):
             html += '<div class="adm-shsep"><span>'+esc(b["title"])+'</span></div>'
             _last_title = b["title"]
         who = ", ".join(sportname.get(x, x) for x in b.get("sports", []))
+        # Sportarten direkt im Titel ausschreiben (uebersichtlicher als Kurz-Label);
+        # bei allen 10 genuegt "alle Sportarten"
+        lbl = "alle Sportarten" if len(b.get("sports", [])) >= len(SPORTS) else " · ".join(
+            sportname.get(x, x) for x in b.get("sports", []))
         t = {"title": b["title"], "group": b["group"], "rows": b["rows"], "_sh": bid,
-             "_shlbl": b.get("label", ""), "_shwho": who}
+             "_shlbl": lbl, "_shwho": who}
         html += theme_html(t, i, stages, "shared-adm", "de", ages, edit=True, group=b["group"])
         orig["shared|"+bid+"|title"] = b["title"] or ""
         for ri, r in enumerate(b["rows"]):
@@ -4076,6 +4094,7 @@ for lang in LANGS:
             "chatWelcome": {"de": "Hallo! Frag mich alles zum Athlet:innen-Weg dieser Sportart – zum Beispiel:", "fr": "Bonjour ! Pose-moi toutes tes questions sur le parcours de ce sport – par exemple :", "it": "Ciao! Chiedimi tutto sul percorso di questo sport – per esempio:", "en": "Hi! Ask me anything about this sport's athlete pathway – for example:"}[lang],
             "chatExamples": {"de": ["Welches Material brauche ich in F3?", "Kraft-Ziele in Stufe T2?", "Welche Kader gibt es?", "Trainingsphasen im Überblick"], "fr": ["Quel matériel en F3 ?", "Objectifs de force en T2 ?", "Quels cadres existe-t-il ?", "Aperçu des phases d'entraînement"], "it": ["Quale materiale in F3?", "Obiettivi di forza in T2?", "Quali quadri esistono?", "Panoramica delle fasi"], "en": ["What gear do I need in F3?", "Strength goals in T2?", "Which squads exist?", "Overview of training phases"]}[lang],
             "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi.", "en": "Something went wrong. Please try again later."}[lang],
+            "chatLimit": {"de": "Tageslimite erreicht: Der FTEM-Coach beantwortet pro Tag maximal 10 Fragen. Morgen geht es weiter – die Inhalte findest du jederzeit direkt auf dieser Seite.", "fr": "Limite quotidienne atteinte : le coach FTEM répond à 10 questions par jour au maximum. À demain – les contenus restent disponibles directement sur cette page.", "it": "Limite giornaliero raggiunto: il coach FTEM risponde al massimo a 10 domande al giorno. A domani – i contenuti restano disponibili direttamente su questa pagina.", "en": "Daily limit reached: the FTEM coach answers up to 10 questions per day. See you tomorrow – all content remains available right on this page."}[lang],
             "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati.", "en": "Answers are based on this sport's FTEM content and the linked documents."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: (mission_url(s, lang) or "") for s in SPORTS}))
