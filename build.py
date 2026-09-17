@@ -1602,7 +1602,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-more{display:block;text-align:center;font-weight:800;font-size:12px;color:var(--red);margin:6px 14px 13px;padding:8px 14px;border:1px solid rgba(29,38,48,.14);border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(29,38,48,.06);letter-spacing:.02em;transition:background .15s,border-color .15s}
 .news-box:hover .nb-more{background:#fdf3f2;border-color:rgba(213,43,30,.5)}
 @media(max-width:760px){
-  .news-box{width:100%;align-self:stretch}
+  .news-box{width:100%;align-self:stretch;position:absolute;right:0;bottom:calc(143px - 100vh);bottom:calc(143px - 100svh)}
+  .news-box .nb-more{display:none}
   .news-box .nb-teaser{display:none}
   .news-box .nb-list li{padding:6px 0 6px 15px}
   .news-box .nb-item{flex-direction:row;align-items:baseline;gap:8px}
@@ -1703,7 +1704,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6672' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:13px;padding-right:34px}
 [data-theme="dark"] header.top select,[data-theme="dark"] .sportsel2,[data-theme="dark"] select.jump,[data-theme="dark"] .pd-sportsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2ccd8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
 .mr-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:none}
-@media(max-width:760px){.aw-cta{top:auto;bottom:88px;left:18px;transform:none}.aw-btn{font-size:12px;padding:8px 16px}}
+@media(max-width:760px){.aw-cta{top:118px;left:50%;transform:translateX(-50%)}.aw-btn{font-size:13px;padding:9px 18px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;gap:14px;padding:8px 18px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);border-top:1px solid rgba(29,38,48,.08)}
 /* Mission Sportart links in der Fusszeile (Bjoern-Mock, Farben wie gehabt) */
@@ -2882,9 +2883,8 @@ const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.h
 function posAW(){
   if(!awCta||!heroEl)return;
   if(window.innerWidth<=760){
-    awCta.style.left='';awCta.style.top='';
-    const bb=document.querySelector('.bottombar');
-    awCta.style.bottom=bb?(bb.offsetHeight+14)+'px':'';
+    // Mobil: Position kommt rein aus dem CSS (Knopf oben zentriert, News unten)
+    awCta.style.left='';awCta.style.top='';awCta.style.bottom='';
     return;
   }
   awCta.style.bottom='';
@@ -3144,6 +3144,19 @@ function route(){
     if(t)clearTimeout(t);
     t=setTimeout(function(){document.body.classList.remove('is-scrolling');},320);
   },{passive:true});
+})();
+// "Als App aufs Handy legen" ausblenden, wenn die Seite bereits als App laeuft
+// (Standalone-Modus) oder die Installation erkannt wurde (appinstalled-Event,
+// gemerkt im localStorage). iOS-Safari im Browser-Tab kann eine bestehende
+// Installation nicht erkennen - dort verschwindet der Knopf erst nach dem
+// ersten Oeffnen ueber das App-Icon.
+(function(){
+  function hideApp(){document.querySelectorAll('.bb-app,.mp-app').forEach(function(e){e.style.display='none';});}
+  var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
+  var flag=false;try{flag=localStorage.getItem('ftem-installed')==='1';}catch(_){}
+  if(standalone){try{localStorage.setItem('ftem-installed','1');}catch(_){}}
+  if(standalone||flag)hideApp();
+  window.addEventListener('appinstalled',function(){try{localStorage.setItem('ftem-installed','1');}catch(_){}hideApp();});
 })();
 window.addEventListener('hashchange',route);
 route();
@@ -4261,7 +4274,7 @@ for lang in LANGS:
             "chatExamples": {"de": ["Welches Material brauche ich in F3?", "Kraft-Ziele in Stufe T2?", "Welche Kader gibt es?", "Trainingsphasen im Überblick"], "fr": ["Quel matériel en F3 ?", "Objectifs de force en T2 ?", "Quels cadres existe-t-il ?", "Aperçu des phases d'entraînement"], "it": ["Quale materiale in F3?", "Obiettivi di forza in T2?", "Quali quadri esistono?", "Panoramica delle fasi"], "en": ["What gear do I need in F3?", "Strength goals in T2?", "Which squads exist?", "Overview of training phases"]}[lang],
             "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi.", "en": "Something went wrong. Please try again later."}[lang],
             "chatLimit": {"de": "Tageslimite erreicht: Der FTEM-Coach beantwortet pro Tag maximal 10 Fragen. Morgen geht es weiter – die Inhalte findest du jederzeit direkt auf dieser Seite.", "fr": "Limite quotidienne atteinte : le coach FTEM répond à 10 questions par jour au maximum. À demain – les contenus restent disponibles directement sur cette page.", "it": "Limite giornaliero raggiunto: il coach FTEM risponde al massimo a 10 domande al giorno. A domani – i contenuti restano disponibili direttamente su questa pagina.", "en": "Daily limit reached: the FTEM coach answers up to 10 questions per day. See you tomorrow – all content remains available right on this page."}[lang],
-            "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Keine Rechtsberatung.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati.", "en": "Answers are based on this sport's FTEM content and the linked documents."}[lang]}
+            "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Max. 10 Fragen pro Tag.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés. Max. 10 questions par jour.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati. Max. 10 domande al giorno.", "en": "Answers are based on this sport's FTEM content and the linked documents. Max. 10 questions per day."}[lang]}
     js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: (mission_url(s, lang) or "") for s in SPORTS}))
             .replace("__SPORT_NAMES__", json.dumps({s["id"]: tr(s["name"], lang) for s in SPORTS}, ensure_ascii=False))
