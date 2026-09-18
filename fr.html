@@ -1210,9 +1210,15 @@ function initSport(sec){
     const h=d.querySelector('.c.hd[data-idx="'+j+'"]');
     if(!h)return;
     const sc=h.closest('.scroller');if(!sc)return;
-    // Erste Spalte: ganz nach links (kein Restversatz)
-    const x=j===0?0:Math.max(0, sc.scrollLeft + h.getBoundingClientRect().left - sc.getBoundingClientRect().left
-      - (sec.querySelector('.rl')?sec.querySelector('.rl').getBoundingClientRect().width:146) - 14);
+    // Erste Spalte: ganz nach links (kein Restversatz).
+    // Sonst: Spalte j beginnt 10px rechts der Kante der Beschriftungsbox. Deren weisser
+    // Rand (box-shadow, 6-7px) verdeckt so die Vorgaenger-Spalte, ohne dass Spalte j
+    // angeschnitten wird. Wichtig: ab der Box-Kante rechnen (nicht Scroller-Kante +
+    // Breite), sonst fehlt der Raster-Innenabstand und die Spalte rutscht unter die
+    // Beschriftung (abgeschnittener linker Rand).
+    const rlb=d.querySelector('.rl');
+    const redge=rlb?rlb.getBoundingClientRect().right:(sc.getBoundingClientRect().left+158);
+    const x=j===0?0:Math.max(0, sc.scrollLeft + h.getBoundingClientRect().left - redge - 10);
     scrollers.forEach(o=>{o.scrollTo({left:x,behavior:'smooth'});});
     sec.__sx=x;
   }
