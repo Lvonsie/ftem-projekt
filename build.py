@@ -2326,8 +2326,21 @@ function structCell(txt){
 }
 function loadOverrides(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
-  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-    .then(r=>r.ok?r.json():[]).then(rows=>{const m={};(rows||[]).forEach(x=>m[x.cid]=x.txt);return m;}).catch(()=>({}));
+  // Lastarm & ausfallsicher: nur die fuer die Seite relevanten Zeilen laden
+  // (ohne Zaehler chatq|, Pruef-Referenzen rev| und Glossar gloss| - die braucht
+  // nur der Admin-Bereich). Ergebnis 5 Min. im sessionStorage zwischenspeichern;
+  // ist Supabase langsam oder nicht erreichbar, wird der letzte bekannte Stand
+  // verwendet (egal wie alt) - die Seite selbst laeuft auch ganz ohne Korrekturen.
+  const CK='ftem-ovr', TTL=5*60*1000;
+  let cached=null;
+  try{cached=JSON.parse(sessionStorage.getItem(CK)||'null');}catch(_){}
+  if(cached&&cached.t&&(Date.now()-cached.t)<TTL&&cached.m)return Promise.resolve(cached.m);
+  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*&cid=not.like.rev%7C*&cid=not.like.gloss%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+    .then(r=>{if(!r.ok)throw 0;return r.json();})
+    .then(rows=>{const m={};(rows||[]).forEach(x=>m[x.cid]=x.txt);
+      try{sessionStorage.setItem(CK,JSON.stringify({t:Date.now(),m:m}));}catch(_){}
+      return m;})
+    .catch(()=>((cached&&cached.m)||{}));
 }
 function _fnv36(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return h.toString(36);}
 function applyOverrides(map){
@@ -3830,7 +3843,7 @@ function aiSuggest(ta,btn){
   var dot=btn.querySelector('.revdot');
   dot.textContent='…';btn.disabled=true;statusEl.textContent='Hole Übersetzungsvorschlag …';
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({mode:'translate',target:LNG,de_new:deNew,
+    body:JSON.stringify({mode:'translate',target:LNG,de_new:deNew,key:window.__admkey||'',
       de_old:reviewedDe(LNG,cid),current:curVal(cid),glossary:gl.slice(0,60)})})
    .then(function(r){return r.json().catch(function(){return {};}).then(function(d){
       if(!r.ok)throw new Error((d&&d.message)||('HTTP '+r.status));return d;});})
@@ -3934,7 +3947,7 @@ var FTEM_QUOTES=[
 })();
 document.getElementById('gateform').addEventListener('submit',function(e){
   e.preventDefault();
-  if(document.getElementById('gatepw').value===PW){gate.style.display='none';app.hidden=false;init();}
+  if(document.getElementById('gatepw').value===PW){window.__admkey=document.getElementById('gatepw').value;gate.style.display='none';app.hidden=false;init();}
   else document.getElementById('gateerr').textContent='Falsches Passwort.';
 });
 function showSport(id){

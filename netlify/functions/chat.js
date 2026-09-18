@@ -61,6 +61,14 @@ exports.handler = async (event) => {
   // (deutscher Text, gegen den die bisherige Uebersetzung geprueft war),
   // current (bisherige Uebersetzung) und glossary [{de,tr}].
   if (body.mode === 'translate') {
+    // Schutz gegen Fremdnutzung: Ist die Netlify-Umgebungsvariable ADMIN_API_KEY
+    // gesetzt, akzeptiert der Uebersetzungsmodus nur Anfragen aus dem Admin-Bereich
+    // (der schickt das beim Login eingegebene Passwort mit). Ohne gesetzte Variable
+    // verhaelt sich alles wie bisher.
+    const NEED = process.env.ADMIN_API_KEY || '';
+    if (NEED && String(body.key || '') !== NEED) {
+      return json(401, { error: 'unauthorized', message: 'Nicht berechtigt (Admin-Anmeldung erforderlich).' });
+    }
     const target = String(body.target || '').slice(0, 2);
     const tname = { fr: 'Französisch', it: 'Italienisch', en: 'Englisch' }[target];
     const deNew = String(body.de_new || '').slice(0, 6000).trim();

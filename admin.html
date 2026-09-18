@@ -8031,7 +8031,7 @@ function aiSuggest(ta,btn){
   var dot=btn.querySelector('.revdot');
   dot.textContent='…';btn.disabled=true;statusEl.textContent='Hole Übersetzungsvorschlag …';
   fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({mode:'translate',target:LNG,de_new:deNew,
+    body:JSON.stringify({mode:'translate',target:LNG,de_new:deNew,key:window.__admkey||'',
       de_old:reviewedDe(LNG,cid),current:curVal(cid),glossary:gl.slice(0,60)})})
    .then(function(r){return r.json().catch(function(){return {};}).then(function(d){
       if(!r.ok)throw new Error((d&&d.message)||('HTTP '+r.status));return d;});})
@@ -8135,7 +8135,7 @@ var FTEM_QUOTES=[
 })();
 document.getElementById('gateform').addEventListener('submit',function(e){
   e.preventDefault();
-  if(document.getElementById('gatepw').value===PW){gate.style.display='none';app.hidden=false;init();}
+  if(document.getElementById('gatepw').value===PW){window.__admkey=document.getElementById('gatepw').value;gate.style.display='none';app.hidden=false;init();}
   else document.getElementById('gateerr').textContent='Falsches Passwort.';
 });
 function showSport(id){
