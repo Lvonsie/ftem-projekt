@@ -1602,14 +1602,21 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-more{display:block;text-align:center;font-weight:800;font-size:12px;color:var(--red);margin:6px 14px 13px;padding:8px 14px;border:1px solid rgba(29,38,48,.14);border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(29,38,48,.06);letter-spacing:.02em;transition:background .15s,border-color .15s}
 .news-box:hover .nb-more{background:#fdf3f2;border-color:rgba(213,43,30,.5)}
 @media(max-width:760px){
-  .news-box{width:100%;align-self:stretch;position:absolute;right:0;bottom:calc(143px - 100vh);bottom:calc(143px - 100svh)}
+  /* Mobil: News-Box im freien Bereich rechts unten im Panorama (JS setzt die exakte
+     Hoehe knapp ueber der Fusszeile; die svh-Angabe ist nur der Startwert). */
+  .news-box{width:100%;align-self:stretch;position:absolute;right:0;top:52vh;top:52svh}
+  .news-box .nb-list li:nth-child(n+3){display:none}
   .news-box .nb-more{display:none}
   .news-box .nb-teaser{display:none}
   .news-box .nb-list li{padding:6px 0 6px 15px}
   .news-box .nb-item{flex-direction:row;align-items:baseline;gap:8px}
   .news-box .nb-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11.5px}
   .news-box .nb-lnk{align-self:auto;flex:none}
-  .news-box .nb-more{font-size:11px;padding:6px 12px;margin:4px 12px 10px}
+}
+/* Sehr kleine Handys: nur die neueste Meldung zeigen, damit die News-Box
+   zwischen Talent-Kachel und Fusszeile Platz findet. */
+@media(max-width:760px) and (max-height:700px){
+  .news-box .nb-list li:nth-child(n+2){display:none}
 }
 /* Feedback unten rechts */
 /* Hamburger-Menue oben rechts */
@@ -1899,10 +1906,10 @@ body.pres section.sport h2.grp{font-size:15px}
 section.sport{background:linear-gradient(rgba(238,241,244,.94),rgba(238,241,244,.94)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 /* Alle Themenzeilen einheitlich weiss (kein Zebra mehr) */
 section.sport details.theme{background:rgba(255,255,255,.97);backdrop-filter:blur(2px)}
-section.sport .rl,section.sport .r.head .rl.corner{background:rgba(255,255,255,.94)}
+section.sport .rl,section.sport .r.head .rl.corner{background:var(--card)}
 [data-theme="dark"] section.sport{background:linear-gradient(rgba(13,20,32,.95),rgba(13,20,32,.95)),url("assets/hero.jpg") center 30%/cover fixed no-repeat}
 [data-theme="dark"] section.sport details.theme{background:rgba(23,34,49,.90)}
-[data-theme="dark"] section.sport .rl,[data-theme="dark"] section.sport .r.head .rl.corner{background:rgba(23,34,49,.96)}
+[data-theme="dark"] section.sport .rl,[data-theme="dark"] section.sport .r.head .rl.corner{background:var(--card)}
 header.top{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:10px 18px;display:flex;flex-wrap:nowrap;gap:10px 14px;align-items:center;height:var(--top)}
 header.top .back{flex:none;width:33px;height:33px;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:0}
 header.top .back svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
@@ -2880,13 +2887,21 @@ updMissionLbl();
 function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
 // AW-Knopf exakt ueber der Bergspitze; Hover blendet die Piste ein
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero'), heroSvg=document.querySelector('.heromt');
+const heroNews=document.querySelector('.hero-top-r .news-box');
 function posAW(){
   if(!awCta||!heroEl)return;
   if(window.innerWidth<=760){
-    // Mobil: Position kommt rein aus dem CSS (Knopf oben zentriert, News unten)
+    // Mobil: Knopf oben zentriert (CSS); News-Box rechts unten im Panorama,
+    // knapp ueber der Fusszeile (deren Hoehe je nach Sprache/Umbruch variiert).
     awCta.style.left='';awCta.style.top='';awCta.style.bottom='';
+    if(heroNews&&heroEl.clientHeight){
+      const bb=heroEl.querySelector('.bottombar');
+      const t=heroEl.clientHeight-(bb?bb.offsetHeight:120)-12-heroNews.offsetHeight-16; // 16 = top der .hero-top-r
+      heroNews.style.top=Math.max(150,Math.round(t))+'px';
+    }
     return;
   }
+  if(heroNews)heroNews.style.top='';
   awCta.style.bottom='';
   const w=heroEl.clientWidth,h=heroEl.clientHeight;
   if(!w||!h)return; // Startseite ausgeblendet (Sportart offen) -> keine falschen Positionen setzen

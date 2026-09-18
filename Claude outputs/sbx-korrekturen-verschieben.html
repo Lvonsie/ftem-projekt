@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FTEM · Snowboard-Cross: Korrekturen an neue Themen-Nummern anpassen</title>
+<style>
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#eef1f5;color:#1d2630;margin:0;padding:28px 16px 60px}
+.wrap{max-width:960px;margin:0 auto}
+h1{font-size:19px;margin:0 0 6px}
+p.sub{font-size:13px;color:#5b6472;line-height:1.55;margin:0 0 18px}
+button{font:inherit;font-weight:700;border-radius:9px;padding:9px 16px;cursor:pointer;border:1px solid #d4dae1;background:#fff}
+#run{background:#d52b1e;color:#fff;border-color:#d52b1e}
+#run:disabled{opacity:.5;cursor:default}
+.it{background:#fff;border:1px solid #e3e7ec;border-radius:12px;padding:10px 14px;margin:8px 0;font-size:12px}
+.cid{font-size:11px;font-weight:800;color:#1f8fa6;word-break:break-all}
+.arrow{color:#8a93a0;margin:0 6px}
+.del{color:#b3731a;font-weight:700}
+#status{font-size:13px;font-weight:700;margin:14px 0}
+.ok{color:#1c7c3c}.err{color:#d52b1e}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Snowboard-Cross: gespeicherte Korrekturen an die neuen Themen-Nummern anpassen</h1>
+<p class="sub">Bei Snowboard-Cross wurden die Themen «Technik &amp; Taktik Slalom (SL)» und «Technik &amp; Taktik Riesenslalom (RS)» entfernt. Dadurch rücken die nachfolgenden Themen (Cross Start, Cross Schwung, … Selektionen) um zwei Nummern nach vorn. Dieses Werkzeug verschiebt allfällige im Admin gespeicherte <b>Cloud-Korrekturen</b> dieser Themen auf die neuen Nummern und löscht Korrekturen der zwei entfernten Themen. Andere Sportarten sind nicht betroffen. Zuerst nur prüfen – geändert wird erst nach Klick auf «Jetzt ausführen». Diese Datei bitte <b>nicht ins Repo</b> legen. Erst ausführen, wenn der neue Stand auf Netlify live ist.</p>
+<button id="scan">1 · Prüfen (nur anzeigen)</button>
+<button id="run" disabled>2 · Jetzt ausführen</button>
+<div id="status"></div>
+<div id="list"></div>
+</div>
+<script>
+const URL0="https://xphbwnzyebbejsdeqled.supabase.co/rest/v1/ftem_overrides";
+const KEY="sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_";
+const H={apikey:KEY,Authorization:"Bearer "+KEY};
+// cid-Formen: snowboard-cross|<themaNr>|...  und  rev|snowboard-cross|<themaNr>|...
+const RX=/^(rev\|)?snowboard-cross\|(\d+)\|(.*)$/;
+let plan=[];
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+document.getElementById('scan').onclick=async()=>{
+  const st=document.getElementById('status'),list=document.getElementById('list');
+  st.textContent='Lade Korrekturen …';st.className='';list.innerHTML='';plan=[];
+  try{
+    const r=await fetch(URL0+'?select=cid,txt&cid=not.like.chatq%7C*',{headers:H});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    const rows=await r.json();
+    rows.forEach(x=>{
+      const m=RX.exec(x.cid||'');
+      if(!m)return;
+      const n=parseInt(m[2],10);
+      if(n===10||n===11)plan.push({cid:x.cid,txt:x.txt,neu:null});                  // entferntes Thema -> loeschen
+      else if(n>=12)plan.push({cid:x.cid,txt:x.txt,neu:(m[1]||'')+'snowboard-cross|'+(n-2)+'|'+m[3]});
+    });
+    if(!plan.length){st.textContent='Nichts zu tun: keine gespeicherten Korrekturen in den betroffenen Snowboard-Cross-Themen gefunden.';st.className='ok';return;}
+    st.textContent=plan.length+' Eintrag/Einträge betroffen – Vorschau unten. Noch nichts geändert.';
+    list.innerHTML=plan.map(p=>'<div class="it"><span class="cid">'+esc(p.cid)+'</span>'
+      +(p.neu?'<span class="arrow">→</span><span class="cid">'+esc(p.neu)+'</span>'
+             :'<span class="arrow">→</span><span class="del">wird gelöscht (Thema existiert nicht mehr)</span>')
+      +'</div>').join('');
+    document.getElementById('run').disabled=false;
+  }catch(e){st.textContent='Fehler: '+e.message;st.className='err';}
+};
+document.getElementById('run').onclick=async()=>{
+  const st=document.getElementById('status');
+  document.getElementById('run').disabled=true;
+  let ok=0,fail=[];
+  // Wichtig: erst alle neuen Zeilen anlegen, dann die alten loeschen
+  for(const p of plan){
+    if(!p.neu)continue;
+    try{
+      const r=await fetch(URL0,{method:'POST',headers:{...H,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify([{cid:p.neu,txt:p.txt}])});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+    }catch(e){fail.push(p.cid+' (anlegen): '+e.message);}
+  }
+  for(const p of plan){
+    try{
+      const r=await fetch(URL0+'?cid=eq.'+encodeURIComponent(p.cid),{method:'DELETE',headers:H});
+      if(!r.ok)throw new Error('HTTP '+r.status+' (Löschen evtl. nicht erlaubt)');
+      ok++;
+    }catch(e){fail.push(p.cid+' (löschen): '+e.message);}
+  }
+  if(!fail.length){st.textContent='Fertig ✓ – '+ok+' Eintrag/Einträge angepasst. Webseite und Admin neu laden.';st.className='ok';}
+  else{st.innerHTML='Teilweise fertig: '+ok+' ok, '+fail.length+' fehlgeschlagen:<br>'+fail.map(esc).join('<br>')+'<br>Falls Löschen nicht erlaubt ist, kann Luca in Supabase einmalig ausführen:<br><code>create policy "overrides loeschen" on public.ftem_overrides for delete using (true);</code>';st.className='err';}
+};
+</script>
+</body>
+</html>
