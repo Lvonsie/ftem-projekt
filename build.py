@@ -432,6 +432,44 @@ def linkify_html(h):
     h = _URL_RE.sub(_bare, h)
     return re.sub(r'(\d+)', lambda m: keep[int(m.group(1))], h)
 
+
+# --- Geschlechtsspezifische Hinweise hervorheben (Icon + dezenter Rahmen) -----
+# Uebergangsloesung (Entscheid Michael/Marine): Der Text bleibt stehen, wird aber
+# markiert. Zwei Formen, rein aus der Darstellung abgeleitet (Quelldaten und
+# Uebersetzungen bleiben unveraendert, keine neuen Pendenzen):
+#  1) Stern-Absaetze ("* Window of Opportunity bei Maedchen T1" usw.) werden zum
+#     Kasten mit Icon und Titelzeile - aber nur, wenn sie Geschlechts-/Adoleszenz-
+#     Begriffe enthalten ("*Windows of Opportunity 8-13 Jahre" bleibt normal).
+#  2) "Window of Opportunity" im Fliesstext (Makroplanung, Startseiten-Popups)
+#     bekommt eine kleine Inline-Markierung mit Icon.
+GSD_CAP = {"de": "Geschlechtsspezifische Unterschiede", "fr": "Diff\u00e9rences li\u00e9es au sexe",
+           "it": "Differenze legate al sesso", "en": "Sex-specific differences"}
+_GSD_KW = re.compile(r'M[\u00e4a]dchen|Jungen|Knaben|filles|gar[c\u00e7]ons|ragazz[ei]|girls|boys|Adoleszenz|adolescence|adolescenza', re.I)
+_GSD_P  = re.compile(r'<p>(\*(?:(?!</p>).)*)</p>', re.S)
+_GSD_INL = re.compile(r'(?<!\w)[Ww]indow of [Oo]pportunity(?!s)')
+
+def _gsd_icon(cls):
+    return '<img class="'+cls+'" src="'+asset_v("assets/gsd-icon.png")+'" alt="" loading="lazy">'
+
+def gsd_wrap(html, lang):
+    if 'pportunity' not in html and not _GSD_KW.search(html):
+        return html
+    cap = GSD_CAP.get(lang, GSD_CAP["de"])
+    hold = []
+    def _box(m):
+        body = m.group(1)
+        if not _GSD_KW.search(body):
+            return m.group(0)
+        lines = [re.sub(r'^\*\s*', '', l.strip()) for l in body.split('<br>')]
+        hold.append('<div class="gsdbox">'+_gsd_icon("gsd-ic")
+                    + '<span class="gsd-tx"><b class="gsd-cap">'+esc(cap)+'</b>'
+                    + '<br>'.join(lines)+'</span></div>')
+        return '\x02'+str(len(hold)-1)+'\x02'
+    html = _GSD_P.sub(_box, html)
+    html = _GSD_INL.sub(lambda m: '<span class="gsdinl">'+_gsd_icon("gsd-ici")+m.group(0)+'</span>', html)
+    return re.sub('\x02(\\d+)\x02', lambda m: hold[int(m.group(1))], html)
+
+
 def render_cell(seg, lang, cid=None, edit=False):
     if edit:
         raw = seg.get("v") or ""
@@ -447,7 +485,7 @@ def render_cell(seg, lang, cid=None, edit=False):
         else:
             parts = [render_block(bl, link_texts) for bl in blocks]
             inner = "".join(p for p in parts if p)
-        inner = linkify_html(inner)
+        inner = gsd_wrap(linkify_html(inner), lang)
     text_html = inner or '<div class="empty">–</div>'
     cidattr = (' data-cid="'+esc(cid)+'" data-bh="'+fnv36(seg.get("v") or "")+'"') if cid else ''
     out = '<div class="ctext"'+cidattr+'>'+text_html+'</div>'
@@ -2005,6 +2043,22 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:stretch}
 .rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2);min-width:0;overflow:hidden;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 .rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
+/* Geschlechtsspezifische Hinweise: Kasten mit Icon (dezenter Rahmen im Seiten-Gelb) */
+.gsdbox{display:flex;gap:9px;align-items:flex-start;margin:8px 0 4px;background:#fffdf4;border:1.5px solid #e2a900;border-radius:10px;padding:7px 10px 7px 8px;box-shadow:0 1px 5px rgba(29,38,48,.07)}
+.gsdbox .gsd-ic{width:26px;height:26px;border-radius:50%;flex:none;margin-top:1px}
+.gsdbox .gsd-tx{min-width:0;line-height:1.5}
+.gsdbox .gsd-cap{display:block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#8a6d00;margin-bottom:1px;font-weight:800}
+.gsdinl{display:inline;background:#fffdf4;border:1px solid rgba(226,169,0,.6);border-radius:999px;padding:0 7px 1px 2px;font-weight:700;white-space:nowrap;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.gsdinl .gsd-ici{width:15px;height:15px;border-radius:50%;vertical-align:-3px;margin-right:3px}
+[data-theme="dark"] .gsdbox{background:rgba(226,169,0,.10);border-color:rgba(240,198,87,.55)}
+[data-theme="dark"] .gsdbox .gsd-cap{color:#f2c85f}
+[data-theme="dark"] .gsdinl{background:rgba(226,169,0,.12);border-color:rgba(240,198,87,.5)}
+@media(max-width:760px){
+  .gsdbox{gap:7px;padding:6px 8px}
+  .gsdbox .gsd-ic{width:21px;height:21px}
+  .gsdinl{white-space:normal}
+}
+
 .r.head{position:relative;z-index:2}
 .r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--card);border:none}
 .c.hd{border-radius:8px;padding:6px 6px;text-align:center;display:flex;flex-direction:column;gap:0;justify-content:center}
@@ -2269,6 +2323,9 @@ function _headln(s){
 function structBlock(b){
   b=b.replace(/\s+$/,'');
   if(!b.trim())return '';
+  // Stern-Absaetze ("* Window of Opportunity ...") wie im Seiten-Build als
+  // schlichten <p> ausgeben - gsdWrap macht daraus ggf. den markierten Kasten.
+  if(/^\*/.test(b.trim())){return '<p>'+_esc(b.trim()).replace(/\n/g,'<br>')+'</p>';}
   const lines=b.split('\n');
   const nonempty=lines.map(l=>l.trim()).filter(Boolean);
   // "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip (gleich wie beim Seiten-Build)
@@ -2328,7 +2385,26 @@ function linkifyHtml(h){
 function structCell(txt){
   txt=(txt||'').trim();
   if(!txt)return '<div class="empty">–</div>';
-  return linkifyHtml(txt.split(/\n\s*\n/).map(structBlock).filter(Boolean).join(''))||'<div class="empty">–</div>';
+  return gsdWrap(linkifyHtml(txt.split(/\n\s*\n/).map(structBlock).filter(Boolean).join('')))||'<div class="empty">–</div>';
+}
+// Geschlechtsspezifische Hinweise markieren - Gegenstueck zu gsd_wrap() im
+// Generator, damit im Admin gespeicherte Korrekturen dieselbe Optik behalten.
+const GSD_ICON="__GSD_ICON__", GSD_CAP="__GSD_CAP__";
+const GSD_KW=/M[äa]dchen|Jungen|Knaben|filles|gar[cç]ons|ragazz[ei]|girls|boys|Adoleszenz|adolescence|adolescenza/i;
+function gsdWrap(h){
+  if(h.indexOf('pportunity')<0&&!GSD_KW.test(h))return h;
+  var hold=[];
+  h=h.replace(/<p>(\*(?:(?!<\/p>)[\s\S])*)<\/p>/g,function(all,body){
+    if(!GSD_KW.test(body))return all;
+    var lines=body.split('<br>').map(function(l){return l.trim().replace(/^\*\s*/,'');});
+    hold.push('<div class="gsdbox"><img class="gsd-ic" src="'+GSD_ICON+'" alt="" loading="lazy">'
+      +'<span class="gsd-tx"><b class="gsd-cap">'+GSD_CAP+'</b>'+lines.join('<br>')+'</span></div>');
+    return '\x02'+(hold.length-1)+'\x02';
+  });
+  h=h.replace(/(^|[^\w])[Ww]indow of [Oo]pportunity(?!s)/g,function(all,pre){
+    return pre+'<span class="gsdinl"><img class="gsd-ici" src="'+GSD_ICON+'" alt="">'+all.slice(pre.length)+'</span>';
+  });
+  return h.replace(/\x02(\d+)\x02/g,function(_,i){return hold[+i];});
 }
 function loadOverrides(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
@@ -4315,7 +4391,9 @@ for lang in LANGS:
             "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi.", "en": "Something went wrong. Please try again later."}[lang],
             "chatLimit": {"de": "Tageslimite erreicht: Der FTEM-Coach beantwortet pro Tag maximal 10 Fragen. Morgen geht es weiter – die Inhalte findest du jederzeit direkt auf dieser Seite.", "fr": "Limite quotidienne atteinte : le coach FTEM répond à 10 questions par jour au maximum. À demain – les contenus restent disponibles directement sur cette page.", "it": "Limite giornaliero raggiunto: il coach FTEM risponde al massimo a 10 domande al giorno. A domani – i contenuti restano disponibili direttamente su questa pagina.", "en": "Daily limit reached: the FTEM coach answers up to 10 questions per day. See you tomorrow – all content remains available right on this page."}[lang],
             "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Max. 10 Fragen pro Tag.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés. Max. 10 questions par jour.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati. Max. 10 domande al giorno.", "en": "Answers are based on this sport's FTEM content and the linked documents. Max. 10 questions per day."}[lang]}
-    js = (JS.replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
+    js = (JS.replace("__GSD_ICON__", asset_v("assets/gsd-icon.png"))
+            .replace("__GSD_CAP__", GSD_CAP.get(lang, GSD_CAP["de"]))
+            .replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: (mission_url(s, lang) or "") for s in SPORTS}))
             .replace("__SPORT_NAMES__", json.dumps({s["id"]: tr(s["name"], lang) for s in SPORTS}, ensure_ascii=False))
             .replace("__PDLBL__", json.dumps({

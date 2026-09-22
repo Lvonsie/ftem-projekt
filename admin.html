@@ -698,6 +698,22 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:stretch}
 .rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2);min-width:0;overflow:hidden;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 .rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
+/* Geschlechtsspezifische Hinweise: Kasten mit Icon (dezenter Rahmen im Seiten-Gelb) */
+.gsdbox{display:flex;gap:9px;align-items:flex-start;margin:8px 0 4px;background:#fffdf4;border:1.5px solid #e2a900;border-radius:10px;padding:7px 10px 7px 8px;box-shadow:0 1px 5px rgba(29,38,48,.07)}
+.gsdbox .gsd-ic{width:26px;height:26px;border-radius:50%;flex:none;margin-top:1px}
+.gsdbox .gsd-tx{min-width:0;line-height:1.5}
+.gsdbox .gsd-cap{display:block;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#8a6d00;margin-bottom:1px;font-weight:800}
+.gsdinl{display:inline;background:#fffdf4;border:1px solid rgba(226,169,0,.6);border-radius:999px;padding:0 7px 1px 2px;font-weight:700;white-space:nowrap;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.gsdinl .gsd-ici{width:15px;height:15px;border-radius:50%;vertical-align:-3px;margin-right:3px}
+[data-theme="dark"] .gsdbox{background:rgba(226,169,0,.10);border-color:rgba(240,198,87,.55)}
+[data-theme="dark"] .gsdbox .gsd-cap{color:#f2c85f}
+[data-theme="dark"] .gsdinl{background:rgba(226,169,0,.12);border-color:rgba(240,198,87,.5)}
+@media(max-width:760px){
+  .gsdbox{gap:7px;padding:6px 8px}
+  .gsdbox .gsd-ic{width:21px;height:21px}
+  .gsdinl{white-space:normal}
+}
+
 .r.head{position:relative;z-index:2}
 .r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--card);border:none}
 .c.hd{border-radius:8px;padding:6px 6px;text-align:center;display:flex;flex-direction:column;gap:0;justify-content:center}
