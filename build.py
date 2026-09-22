@@ -1195,7 +1195,13 @@ def home_html(datamap, lang):
                 '<div class="pd-feats">'+_wf+'</div></div></template>')
     # Schwarze Fusszeile: sportartuebergreifende Grundlagen (oeffnen als iframe-Overlay)
     foot_links = [
-        ("FAPS", "FAPS – Strategie Swiss-Ski", "https://snowsports.flink.host/s/psBIwCuB"),
+        # FAPS-Strategie: eigene Fassungen DE und FR; IT/EN nutzen die deutsche (Regel:
+        # ohne expliziten Link in der Sprache gilt der deutsche).
+        ("FAPS", "FAPS – Strategie Swiss-Ski",
+         {"de": "https://snowsports.flink.host/s/uJTS6lOF",
+          "fr": "https://snowsports.flink.host/s/keI3qQVw",
+          "it": "https://snowsports.flink.host/s/uJTS6lOF",
+          "en": "https://snowsports.flink.host/s/uJTS6lOF"}[lang]),
         ({"de": "Schneesport 2050", "fr": "Sports de neige 2050", "it": "Sport sulla neve 2050", "en": "Snow sports 2050"}[lang],
          "Schneesport 2050", "https://snowsports.flink.host/s/soSSzlmC"),
         ({"de": "Ethik-Kompass", "fr": "Boussole éthique", "it": "Bussola etica", "en": "Ethics compass"}[lang],
