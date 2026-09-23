@@ -2285,6 +2285,40 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .glostab td{border-top-color:rgba(255,255,255,.08)}
 [data-theme="dark"] .glostab tr:hover td{background:#1c2740}
 [data-theme="dark"] .glosadd{background:#172231;border-color:rgba(255,255,255,.10)}
+/* Landingpage im Dunkelmodus (Feedback Bjoern: Schrift war zu hell auf hellen
+   Boxen - die Startseite hatte nie eigene Dunkel-Regeln) */
+[data-theme="dark"] .heromt{filter:brightness(.8) saturate(.92)}
+[data-theme="dark"] .fb3d{background:rgba(20,29,44,.92);box-shadow:0 12px 34px -6px color-mix(in srgb,currentColor 45%,transparent),0 2px 8px rgba(0,0,0,.35)}
+[data-theme="dark"] .fbl{color:#e7edf4}
+[data-theme="dark"] .fbl small{color:#aab4c0}
+[data-theme="dark"] .fb-card{background:rgba(23,34,49,.94);border-color:rgba(255,255,255,.14)}
+[data-theme="dark"] .fb-panel{background:rgba(23,34,49,.97);border-color:rgba(255,255,255,.12)}
+[data-theme="dark"] .fb-text{background:#141d2c;border-color:rgba(255,255,255,.16);color:#e7edf4}
+[data-theme="dark"] .news-box{background:rgba(23,34,49,.94);border-color:rgba(255,255,255,.12)}
+[data-theme="dark"] .news-box .nb-teaser{color:#aab4c0}
+[data-theme="dark"] .news-box .nb-list{color:#c2ccd8}
+[data-theme="dark"] .news-box .nb-list li+li{border-top-color:rgba(255,255,255,.09)}
+[data-theme="dark"] .news-box .nb-more{background:#1c2740;border-color:rgba(255,255,255,.16)}
+[data-theme="dark"] .news-box:hover .nb-more{background:#2a1e1c}
+[data-theme="dark"] .sp-btn{background:rgba(23,34,49,.92);color:#e7edf4;border-color:rgba(255,255,255,.18)}
+[data-theme="dark"] .sp-list{background:#172231;border-color:rgba(255,255,255,.12)}
+[data-theme="dark"] .sp-cur-ic .sp-ic{filter:invert(1) brightness(1.4)}
+[data-theme="dark"] .menu-btn,[data-theme="dark"] .lang-ic-btn{background:rgba(23,34,49,.92);color:#e7edf4;border-color:rgba(255,255,255,.2)}
+[data-theme="dark"] .menu-btn:hover,[data-theme="dark"] .lang-ic-btn:hover{background:#1c2740;border-color:rgba(255,255,255,.35)}
+[data-theme="dark"] .lang-ic-menu{background:rgba(23,34,49,.97);border-color:rgba(255,255,255,.12)}
+[data-theme="dark"] .menu-panel{background:rgba(23,34,49,.97);border-color:rgba(255,255,255,.1)}
+[data-theme="dark"] .mp-item{background:#1c2740;border-color:rgba(255,255,255,.14);color:#e7edf4}
+[data-theme="dark"] .mp-item:hover{border-color:var(--red);color:#f28578;background:#241b22}
+[data-theme="dark"] .menu-panel .fb-btn{background:#1c2740;border-color:rgba(255,255,255,.14);color:#e7edf4}
+[data-theme="dark"] .bottombar{background:rgba(13,19,30,.9);border-top-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .bb-item,[data-theme="dark"] .bb-mission{background:#1c2740;border-color:rgba(255,255,255,.16)}
+[data-theme="dark"] .bb-item:hover{color:#f28578;border-color:rgba(240,126,114,.6)}
+[data-theme="dark"] .bb-mission:hover{border-color:rgba(240,126,114,.6)}
+[data-theme="dark"] .bb-mission:hover b{color:#f28578}
+[data-theme="dark"] .bb-intro{color:#aab4c0}
+[data-theme="dark"] .bb-div{background:rgba(255,255,255,.14)}
+[data-theme="dark"] .bb-tools .bb-ftem{color:#f28578;border-color:rgba(240,126,114,.5)}
+[data-theme="dark"] .bb-tools .bb-ftem:hover{background:#241b22}
 /* diskreter Theme-Umschalter */
 .themebtn{background:none;border:1px solid var(--line);border-radius:9px;width:33px;height:33px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mut);transition:color .15s,border-color .15s,background .15s}
 .themebtn:hover{color:var(--ink);border-color:var(--acc-line)}
@@ -2627,8 +2661,10 @@ function initSport(sec){
 sections.forEach(initSport);
 
 // ---- Stufendossier: erst Stufe waehlen, dann kompakt nur diese Stufe drucken ----
-const DOSSIER_CSS = '@page{size:A4 portrait;margin:0}'
- +'body.ddoc{background:#fff!important;margin:0;padding:12mm 12mm 14mm;color:#1d2630;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}'
+// Seitenraender oben/unten ueber @page, damit auch Folgeseiten Luft haben
+// (Feedback Bjoern: Inhalt klebte ab Seite 2 am oberen Rand).
+const DOSSIER_CSS = '@page{size:A4 portrait;margin:10mm 0 12mm}'
+ +'body.ddoc{background:#fff!important;margin:0;padding:2mm 12mm 2mm;color:#1d2630;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}'
  +'.ds-head{border-left:5px solid #b6c0cc;padding:1px 0 9px 12px;margin:0 0 13px}'
  +'.ds-head.ph-foundation{border-color:#1f8fa6}.ds-head.ph-talent{border-color:#e2a900}.ds-head.ph-elite{border-color:#e8772e}.ds-head.ph-mastery{border-color:#d52b1e}'
  +'.ds-title{font-size:15px;font-weight:800;line-height:1.2}.ds-stage{font-size:12px;font-weight:700;color:#5a6472;margin-top:2px}'
