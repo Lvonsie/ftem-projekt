@@ -3557,6 +3557,13 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
 </div>
 <script>
 const ORIGS=__ADMIN_ORIG__, GLOSS=__GLOSSARY__, PW="__ADMIN_PW__", SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
+// Schreibzugriffe laufen ueber die geschuetzte Netlify-Funktion save.js (Passwort-
+// Pruefung + service-role-Schluessel auf dem Server). Der oeffentliche Schluessel
+// wird nur noch zum LESEN verwendet.
+function admWrite(rows,del){
+  return fetch('/.netlify/functions/save',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({key:window.__admkey||'',rows:rows||[],del:del||[]})});
+}
 const ALANGS=['de','fr','it','en'], ALABEL={de:'DE',fr:'FR',it:'IT',en:'EN'};
 let LNG='de';
 const gate=document.getElementById('gate'),app=document.getElementById('app');
@@ -3602,9 +3609,7 @@ function addGloss(){
   // bestehende Uebersetzungen des Begriffs nicht verlieren (Felder ergaenzen sich)
   var old=null;GLOSS.forEach(function(g){if(g.de===de)old=g;});
   const tr={fr:fr||(old&&old.fr)||'',it:it||(old&&old.it)||'',en:en||(old&&old.en)||''};
-  fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
-    headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-    body:JSON.stringify([{cid:'gloss|'+de,txt:JSON.stringify(tr)}])})
+  admWrite([{cid:'gloss|'+de,txt:JSON.stringify(tr)}])
    .then(function(r){
      if(!r.ok)throw new Error('HTTP '+r.status);
      _glossMerge(de,tr.fr,tr.it,tr.en);
@@ -3949,9 +3954,7 @@ function markReviewed(cid){
   reviewed[LNG]=reviewed[LNG]||{}; reviewed[LNG][cid]=t;
   revTipHide(); updateReview();
   if(SUPA_URL&&SUPA_KEY){
-    fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
-      headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-      body:JSON.stringify([{cid:'rev|'+cid+'|'+LNG,txt:t}])}).catch(function(){});
+    admWrite([{cid:'rev|'+cid+'|'+LNG,txt:t}]).catch(function(){});
   }
 }
 // Wort-Diff (LCS) -> markiert Ergaenzungen/Aenderungen im neuen Text
@@ -4195,9 +4198,7 @@ function save(){
     const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ftem-aenderungen.json';a.click();return;
   }
   saveBtn.disabled=true;statusEl.textContent='Speichere …';
-  fetch(SUPA_URL+'/rest/v1/ftem_overrides',{method:'POST',
-    headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates,return=minimal'},
-    body:JSON.stringify(payload)})
+  admWrite(payload)
    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);
      ch.forEach(function(x){
        const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);

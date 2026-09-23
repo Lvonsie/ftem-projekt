@@ -8,7 +8,9 @@
 // nur ein Kurz-Hash der IP (keine Klartext-IPs). Die Seiten laden diese Zeilen
 // nicht (cid=not.like.chatq|*). Faellt die Pruefung aus, laeuft der Chat weiter.
 const QUOTA_URL = 'https://xphbwnzyebbejsdeqled.supabase.co/rest/v1/ftem_overrides';
-const QUOTA_KEY = 'sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_';
+// Nach der RLS-Umstellung darf nur noch der Server schreiben: service-role-
+// Schluessel verwenden, sobald er als Netlify-Variable gesetzt ist.
+const QUOTA_KEY = process.env.SUPABASE_SERVICE_KEY || 'sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_';
 const CHAT_LIMIT = parseInt(process.env.CHAT_DAILY_LIMIT || '10', 10);       // Fragen/Tag/IP
 // Der Admin-Bereich (Modus "translate", KI-Uebersetzungsvorschlaege) hat KEINE Limite.
 const LIMIT_MSG = {
