@@ -29,9 +29,46 @@
 # ---- Weiterleitungen (Livegang unter my.ftem.swiss-ski.ch) -------------------
 # Alte App-Links (my.ftem war frueher das FTEM-Tool) und alle unbekannten Pfade
 # landen auf der Landingpage statt "Page not found".
+# Bekannte alte Sportarten-Links: Landingpage mit vorgewaehlter Sportart
+[[redirects]]
+  from = "/dashboard/alpine-ski"
+  to = "/?sport=ski-alpin"
+  status = 301
+
+[[redirects]]
+  from = "/dashboard/cross-country-skiing"
+  to = "/?sport=langlauf"
+  status = 301
+
+[[redirects]]
+  from = "/dashboard/skispringen"
+  to = "/?sport=skispringen"
+  status = 301
+
+[[redirects]]
+  from = "/dashboard/biathlon"
+  to = "/?sport=biathlon"
+  status = 301
+
+[[redirects]]
+  from = "/dashboard/snowboard-papi"
+  to = "/?sport=snowboard-park-pipe"
+  status = 301
+
+[[redirects]]
+  from = "/dashboard/skicross"
+  to = "/?sport=skicross"
+  status = 301
+
+[[redirects]]
+  from = "/dashboard/freeski-papi"
+  to = "/?sport=freeski-park-pipe"
+  status = 301
+
+# Alle uebrigen alten Dashboard-Links: Landingpage mit Ski Alpin vorgewaehlt
 [[redirects]]
   from = "/dashboard/*"
-  to = "/"
+  to = "/?sport=ski-alpin"
   status = 301
 
 # Auffangnetz: unbekannte Pfade -> Startseite (bestehende Dateien wie fr.html,

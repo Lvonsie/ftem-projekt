@@ -1637,6 +1637,17 @@ function updMissionLbl(){
 }
 if(homeSport)homeSport.addEventListener('change',updMissionLbl);
 updMissionLbl();
+// Vorwahl per Link: /?sport=<id> stellt die Sportart im Wahlmenue der Landing-
+// page ein (fuer Weiterleitungen alter my.ftem-Links, siehe netlify.toml).
+(function(){
+  try{
+    var q=new URLSearchParams(location.search).get('sport');
+    if(!q||SPORT_IDS.indexOf(q)<0)return;
+    var li=document.querySelector('.sportpick .sp-opt[data-val="'+q+'"]');
+    if(li){li.click();}else if(homeSport){homeSport.value=q;homeSport.dispatchEvent(new Event('change'));}
+    history.replaceState(null,'',location.pathname+location.hash);
+  }catch(_){}
+})();
 function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
 // AW-Knopf exakt ueber der Bergspitze; Hover blendet die Piste ein
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero'), heroSvg=document.querySelector('.heromt');
