@@ -182,7 +182,10 @@ ${context || '(kein Kontext übermittelt)'}`;
       return json(502, { error: 'upstream',
         message: (data && data.error && data.error.message) || 'Fehler beim Sprachmodell.' });
     }
-    const answer = (data.content || []).map(c => c.text || '').join('').trim();
+    // Markdown-Fettdruck entfernen: Das Chatfenster zeigt reinen Text, sonst
+    // erscheinen die Sternchen woertlich (das Modell haelt sich nicht immer an
+    // die Anweisung "kein **").
+    const answer = (data.content || []).map(c => c.text || '').join('').trim().replace(/\*\*/g, '');
     // Statistik: 1 Zeile pro beantworteter Frage (serverseitig -> nicht verfaelschbar).
     // Fehlt die Tabelle ftem_stats, passiert still nichts.
     try {
