@@ -27,13 +27,8 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 # ---- Weiterleitungen (Livegang unter my.ftem.swiss-ski.ch) -------------------
-# Alte App-Links (my.ftem war frueher das FTEM-Tool): bekannte Pfade direkt zur
-# passenden Sportart, alles andere zur Startseite statt "Page not found".
-[[redirects]]
-  from = "/dashboard/alpine-ski"
-  to = "/#ski-alpin"
-  status = 301
-
+# Alte App-Links (my.ftem war frueher das FTEM-Tool) und alle unbekannten Pfade
+# landen auf der Landingpage statt "Page not found".
 [[redirects]]
   from = "/dashboard/*"
   to = "/"
