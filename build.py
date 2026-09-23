@@ -52,7 +52,7 @@ SUPABASE_ANON_KEY = "sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_"
 # Live-Adresse der Seite (Netlify), z. B. "https://ftem-projekt.netlify.app".
 # Wird fuer das Teilen-Vorschaubild (Open Graph) als absolute Bild-URL genutzt.
 # Leer lassen = relative URL (funktioniert bei vielen, aber nicht allen Diensten).
-SITE_URL = "https://ftemschneesport.netlify.app"
+SITE_URL = "https://my.ftem.swiss-ski.ch"
 
 # Englische UI-Texte fuer tr()-Aufrufe (Inhalte aus den Excels bleiben vorerst deutsch)
 TR_EN_UI = {
@@ -1229,7 +1229,7 @@ def home_html(datamap, lang):
         _wf += ('<button type="button" class="fwd fwd-'+["f","t","e","m"][n % 4]+' pdw" data-act="'+_acts[i]+'" data-t="'+esc(ft)+'">'
                 '<span class="fwd-h"><b>'+esc(ft)+'</b></span><p>'+esc(fd)+'</p></button>')
     pres_web = ('<template id="tpl-pres-web"><div class="pd-web"><h2>'+esc(web_head[0])+'</h2>'
-                '<p class="lead">'+esc(web_head[1])+' <b>ftemschneesport.netlify.app</b></p>'
+                '<p class="lead">'+esc(web_head[1])+' <b>my.ftem.swiss-ski.ch</b></p>'
                 '<div class="pd-feats">'+_wf+'</div></div></template>')
     # Schwarze Fusszeile: sportartuebergreifende Grundlagen (oeffnen als iframe-Overlay)
     foot_links = [

@@ -25,3 +25,24 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# ---- Weiterleitungen (Livegang unter my.ftem.swiss-ski.ch) -------------------
+# Alte App-Links (my.ftem war frueher das FTEM-Tool): bekannte Pfade direkt zur
+# passenden Sportart, alles andere zur Startseite statt "Page not found".
+[[redirects]]
+  from = "/dashboard/alpine-ski"
+  to = "/#ski-alpin"
+  status = 301
+
+[[redirects]]
+  from = "/dashboard/*"
+  to = "/"
+  status = 301
+
+# Auffangnetz: unbekannte Pfade -> Startseite (bestehende Dateien wie fr.html,
+# admin.html oder /assets/* sind davon nicht betroffen - Netlify leitet nur um,
+# wenn keine Datei unter dem Pfad existiert).
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 301
