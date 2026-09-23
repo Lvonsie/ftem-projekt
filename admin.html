@@ -940,40 +940,15 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .glostab td{border-top-color:rgba(255,255,255,.08)}
 [data-theme="dark"] .glostab tr:hover td{background:#1c2740}
 [data-theme="dark"] .glosadd{background:#172231;border-color:rgba(255,255,255,.10)}
-/* Landingpage im Dunkelmodus (Feedback Bjoern: Schrift war zu hell auf hellen
-   Boxen - die Startseite hatte nie eigene Dunkel-Regeln) */
-[data-theme="dark"] .heromt{filter:brightness(.8) saturate(.92)}
-[data-theme="dark"] .fb3d{background:rgba(20,29,44,.92);box-shadow:0 12px 34px -6px color-mix(in srgb,currentColor 45%,transparent),0 2px 8px rgba(0,0,0,.35)}
-[data-theme="dark"] .fbl{color:#e7edf4}
-[data-theme="dark"] .fbl small{color:#aab4c0}
-[data-theme="dark"] .fb-card{background:rgba(23,34,49,.94);border-color:rgba(255,255,255,.14)}
-[data-theme="dark"] .fb-panel{background:rgba(23,34,49,.97);border-color:rgba(255,255,255,.12)}
-[data-theme="dark"] .fb-text{background:#141d2c;border-color:rgba(255,255,255,.16);color:#e7edf4}
-[data-theme="dark"] .news-box{background:rgba(23,34,49,.94);border-color:rgba(255,255,255,.12)}
-[data-theme="dark"] .news-box .nb-teaser{color:#aab4c0}
-[data-theme="dark"] .news-box .nb-list{color:#c2ccd8}
-[data-theme="dark"] .news-box .nb-list li+li{border-top-color:rgba(255,255,255,.09)}
-[data-theme="dark"] .news-box .nb-more{background:#1c2740;border-color:rgba(255,255,255,.16)}
-[data-theme="dark"] .news-box:hover .nb-more{background:#2a1e1c}
-[data-theme="dark"] .sp-btn{background:rgba(23,34,49,.92);color:#e7edf4;border-color:rgba(255,255,255,.18)}
-[data-theme="dark"] .sp-list{background:#172231;border-color:rgba(255,255,255,.12)}
-[data-theme="dark"] .sp-cur-ic .sp-ic{filter:invert(1) brightness(1.4)}
-[data-theme="dark"] .menu-btn,[data-theme="dark"] .lang-ic-btn{background:rgba(23,34,49,.92);color:#e7edf4;border-color:rgba(255,255,255,.2)}
-[data-theme="dark"] .menu-btn:hover,[data-theme="dark"] .lang-ic-btn:hover{background:#1c2740;border-color:rgba(255,255,255,.35)}
-[data-theme="dark"] .lang-ic-menu{background:rgba(23,34,49,.97);border-color:rgba(255,255,255,.12)}
-[data-theme="dark"] .menu-panel{background:rgba(23,34,49,.97);border-color:rgba(255,255,255,.1)}
-[data-theme="dark"] .mp-item{background:#1c2740;border-color:rgba(255,255,255,.14);color:#e7edf4}
-[data-theme="dark"] .mp-item:hover{border-color:var(--red);color:#f28578;background:#241b22}
-[data-theme="dark"] .menu-panel .fb-btn{background:#1c2740;border-color:rgba(255,255,255,.14);color:#e7edf4}
-[data-theme="dark"] .bottombar{background:rgba(13,19,30,.9);border-top-color:rgba(255,255,255,.10)}
-[data-theme="dark"] .bb-item,[data-theme="dark"] .bb-mission{background:#1c2740;border-color:rgba(255,255,255,.16)}
-[data-theme="dark"] .bb-item:hover{color:#f28578;border-color:rgba(240,126,114,.6)}
-[data-theme="dark"] .bb-mission:hover{border-color:rgba(240,126,114,.6)}
-[data-theme="dark"] .bb-mission:hover b{color:#f28578}
-[data-theme="dark"] .bb-intro{color:#aab4c0}
-[data-theme="dark"] .bb-div{background:rgba(255,255,255,.14)}
-[data-theme="dark"] .bb-tools .bb-ftem{color:#f28578;border-color:rgba(240,126,114,.5)}
-[data-theme="dark"] .bb-tools .bb-ftem:hover{background:#241b22}
+/* Landingpage bleibt IMMER im hellen Look (Entscheid Michael/Bjoern): Im
+   Dunkelmodus werden hier nur die Farbvariablen zurueckgepinnt, damit die
+   Schrift auf den weissen Boxen dunkel und lesbar bleibt. Sportarten-Seiten
+   und Popups behalten ihren Dunkelmodus. */
+[data-theme="dark"] #home{--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--card:#fff;--acc-bg:#eef2f6;--acc-line:rgba(29,38,48,.18)}
+[data-theme="dark"] #home .sp-list{background:#fff;border-color:rgba(0,0,0,.1)}
+[data-theme="dark"] #home .sp-opt{color:#1d2630}
+[data-theme="dark"] #home .sp-opt .sp-ic{filter:none}
+[data-theme="dark"] #home .sp-opt:hover,[data-theme="dark"] #home .sp-opt[aria-selected="true"]{background:#eef2f6;color:var(--red)}
 /* diskreter Theme-Umschalter */
 .themebtn{background:none;border:1px solid var(--line);border-radius:9px;width:33px;height:33px;padding:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--mut);transition:color .15s,border-color .15s,background .15s}
 .themebtn:hover{color:var(--ink);border-color:var(--acc-line)}
