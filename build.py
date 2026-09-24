@@ -884,19 +884,23 @@ INSTALL_HINT = {
  "de": {"title": "Als App aufs Handy legen",
         "body": "Diese Seite lässt sich wie eine App speichern – ohne Download.<br>"
                 "<b>iPhone (Safari):</b> «Teilen» <span class=\"ai-i\">&#8593;</span> → «Zum Home-Bildschirm».<br>"
-                "<b>Android (Chrome):</b> Menü ⋮ → «App installieren»."},
+                "<b>Android (Chrome):</b> Menü ⋮ → «App installieren».<br>"
+                "<span class=\"ai-note\">Hinweis Samsung-Browser: Beim Installieren kann eine Play-Protect-Warnung erscheinen – sie stammt vom Samsung-Browser selbst. Einfach in Chrome installieren oder mit «OK / Trotzdem installieren» bestätigen.</span>"},
  "fr": {"title": "Ajouter comme app",
         "body": "Cette page s'enregistre comme une app – sans téléchargement.<br>"
                 "<b>iPhone (Safari) :</b> « Partager » <span class=\"ai-i\">&#8593;</span> → « Sur l'écran d'accueil ».<br>"
-                "<b>Android (Chrome) :</b> menu ⋮ → « Installer l'application »."},
+                "<b>Android (Chrome) :</b> menu ⋮ → « Installer l'application ».<br>"
+                "<span class=\"ai-note\">Navigateur Samsung : un avertissement Play Protect peut apparaître – il vient du navigateur Samsung lui-même. Installez via Chrome ou confirmez avec « OK / Installer quand même ».</span>"},
  "en": {"title": "Add as an app",
         "body": "This page can be saved like an app – no download needed.<br>"
                 "<b>iPhone (Safari):</b> \u201cShare\u201d <span class=\"ai-i\">&#8593;</span> \u2192 \u201cAdd to Home Screen\u201d.<br>"
-                "<b>Android (Chrome):</b> menu \u22ee \u2192 \u201cInstall app\u201d."},
+                "<b>Android (Chrome):</b> menu \u22ee \u2192 \u201cInstall app\u201d.<br>"
+                "<span class=\"ai-note\">Samsung browser: a Play Protect warning may appear – it comes from the Samsung browser itself. Install via Chrome or confirm with \u201cOK / Install anyway\u201d.</span>"},
  "it": {"title": "Aggiungi come app",
         "body": "Questa pagina si salva come un'app – senza download.<br>"
                 "<b>iPhone (Safari):</b> « Condividi » <span class=\"ai-i\">&#8593;</span> → « Aggiungi a Home ».<br>"
-                "<b>Android (Chrome):</b> menu ⋮ → « Installa app »."},
+                "<b>Android (Chrome):</b> menu ⋮ → « Installa app ».<br>"
+                "<span class=\"ai-note\">Browser Samsung: può apparire un avviso Play Protect – proviene dal browser Samsung stesso. Installa tramite Chrome o conferma con « OK / Installa comunque ».</span>"},
 }
 
 def install_hint(lang):
@@ -1371,7 +1375,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .langsw a.active{background:#3f4650;color:#fff}
 .langsw a:hover:not(.active){background:#fff;color:var(--ink)}
 /* Startseite - Neon-Konstellation */
-#home .home-hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;
+#home .home-hero{position:relative;padding-top:env(safe-area-inset-top,0px);min-height:100vh;min-height:100svh;overflow:hidden;color:var(--ink);display:flex;flex-direction:column;
   background:linear-gradient(180deg,rgba(255,255,255,.40),rgba(255,255,255,.08) 34%,rgba(255,255,255,0) 55%,rgba(255,255,255,.55) 88%,rgba(255,255,255,.72)),url("assets/hero.jpg") center 32%/cover no-repeat}
 #home .hero-top{position:absolute;top:16px;left:18px;z-index:7;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 #home .hero-top .lsrow{display:flex;align-items:stretch;gap:8px}
@@ -1391,7 +1395,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .fbc-ar{flex:none;color:var(--red);font-weight:800;font-size:15px;margin-left:4px}
 .fb-wrap .fb-panel{position:absolute;top:calc(100% + 8px);left:0;z-index:20}
 @media(max-width:760px){
-  .fb-wrap{left:14px;top:66px}
+  .fb-wrap{left:14px;top:calc(66px + env(safe-area-inset-top,0px))}
   .fb-card{padding:6px 12px 6px 8px;border-radius:999px;gap:6px}
   .fbc-ic{width:22px;height:22px;background:none}
   .fbc-ic svg{width:15px;height:15px}
@@ -1465,7 +1469,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 /* Mission-Iframe-Overlay */
 .mmodal{position:fixed;inset:0;z-index:300;background:rgba(8,12,20,.78);display:flex;align-items:center;justify-content:center;padding:18px}
 .mm-box{width:min(1240px,96vw);height:min(880px,92vh);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 70px rgba(0,0,0,.45)}
-.mm-bar{display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
+.mm-bar{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top,0px)) 12px 8px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
 .mm-bar .mm-ext{color:var(--ink);border-color:rgba(29,38,48,.25)}
 .mm-bar .mm-ext:hover{background:#f2f4f6}
 .mm-bar .mm-x{color:#98a1ad}
@@ -1577,7 +1581,10 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);width:100%;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
 .homesport{color-scheme:dark}
 .homesport option{color:#1d2630;background:#fff}
-.hero-top-r{position:absolute;top:16px;right:18px;z-index:7}
+.hero-top-r{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:18px;z-index:7}
+@media(display-mode:standalone){
+  #home .home-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:calc(env(safe-area-inset-top,0px) + 10px);background:linear-gradient(rgba(20,26,34,.5),rgba(20,26,34,0));z-index:6;pointer-events:none}
+}
 .news-btn{background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 15px;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer}
 .news-btn:hover{filter:brightness(1.12)}
 .hero-top-r{display:flex;flex-direction:column;align-items:stretch;gap:8px;width:265px}
@@ -1600,7 +1607,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 [data-theme="dark"] .imodal.wide .ps-theme{background:rgba(23,34,49,.72)}
 /* Stufen-Popup: standardmaessig nur so hoch wie noetig; waechst beim Ausklappen */
 .imodal.wide .im-box.grown{height:92vh;height:92svh}
-.im-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
+.im-bar{display:flex;align-items:center;gap:10px;padding:calc(9px + env(safe-area-inset-top,0px)) 14px 9px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#98a1ad;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
 .im-x:hover{color:var(--red)}
@@ -1807,7 +1814,7 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
   .fltbtn{padding:7px 10px}
   .fthemes{grid-template-columns:1fr}
 }
-@media(max-width:760px){.aw-cta{top:118px;left:50%;transform:translateX(-50%)}.aw-btn{font-size:13px;padding:9px 18px}}
+@media(max-width:760px){.aw-cta{top:calc(118px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%)}.aw-btn{font-size:13px;padding:9px 18px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;gap:14px;padding:8px 18px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);border-top:1px solid rgba(29,38,48,.08)}
 /* Mission Sportart links in der Fusszeile (Bjoern-Mock, Farben wie gehabt) */
@@ -1937,6 +1944,7 @@ body.pres section.sport .c.hd .stf{font-size:11px}
 body.pres section.sport h2.grp{font-size:15px}
 /* App-Installations-Hinweis */
 .appinstall{max-width:600px;margin:26px auto 0;display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
+.ai-note{display:block;margin-top:7px;font-size:10.5px;color:var(--mut);line-height:1.45}
 .appinstall .ai-icon{width:60px;height:60px;border-radius:14px;flex:none;box-shadow:0 5px 14px rgba(0,0,0,.16)}
 .appinstall .ai-h{font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:4px}
 .appinstall .ai-txt p{margin:0;font-size:12.5px;line-height:1.6;color:var(--mut)}
@@ -2229,7 +2237,7 @@ footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
 footer a{color:var(--red)}
 /* ---------- Responsive: Tablet ---------- */
 @media(max-width:1180px){
-header.top{flex-wrap:wrap;height:auto;padding:8px 14px;gap:8px 10px}
+header.top{flex-wrap:wrap;height:auto;padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;gap:8px 10px}
 .ht-l{flex:1 1 100%}
 .ht-c{flex:1 1 auto;order:3}
 .ht-c .qbox{width:100%;min-width:160px}
@@ -2739,7 +2747,8 @@ function applyFilter(sec){
   // Spalten ein-/ausblenden: Raster pro Zeile neu aufspannen, Zellen-Spannen
   // auf die Schnittmenge mit den gewaehlten Stufen kuerzen.
   sec.querySelectorAll('details.theme .grid .r').forEach(r=>{
-    r.style.gridTemplateColumns=sel?('var(--lblw) repeat('+sel.length+',var(--colw))'):'';
+    // Bei aktivem Stufen-Filter duerfen die Spalten wachsen und die Breite fuellen
+    r.style.gridTemplateColumns=sel?('var(--lblw) repeat('+sel.length+',minmax(var(--colw),1fr))'):'';
     let any=false;
     [...r.children].forEach(c=>{
       if(c.classList.contains('hd')&&c.dataset.idx!==undefined){
@@ -3551,6 +3560,26 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .pend-meta{font-size:11px;font-weight:800;color:#1f8fa6;grid-column:1;letter-spacing:.01em}
 .pend-tx{font-size:12px;color:#39424e;grid-column:1;line-height:1.45}
 .pend-go{grid-column:2;grid-row:1/3;font:inherit;font-size:12px;font-weight:700;border:1px solid rgba(213,43,30,.4);color:#d52b1e;background:#fff;border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+/* Dunkelmodus fuer Statistik & Pendenzen (Feedback Bjoern: Karten blieben weiss,
+   Schrift dadurch fast unlesbar hell) */
+[data-theme="dark"] .stat-card{background:#172231;border-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .stat-kpi{background:#1c2740;border-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .stat-kpi span,[data-theme="dark"] .stat-sub{color:#98a4b3}
+[data-theme="dark"] .stat-cht{border-bottom-color:rgba(255,255,255,.12)}
+[data-theme="dark"] .stat-cht-t,[data-theme="dark"] .stat-leg{color:#aeb8c6}
+[data-theme="dark"] .stat-top th{border-bottom-color:rgba(255,255,255,.14)}
+[data-theme="dark"] .stat-top td{border-bottom-color:rgba(255,255,255,.07)}
+[data-theme="dark"] .stat-err{background:rgba(213,43,30,.14);color:#f29d94;border-color:rgba(240,126,114,.4)}
+[data-theme="dark"] .stat-err code{background:#141d2c;color:#e7edf4}
+[data-theme="dark"] .stat-qa{border-color:rgba(255,255,255,.12)}
+[data-theme="dark"] .stat-qa details+details{border-top-color:rgba(255,255,255,.08)}
+[data-theme="dark"] .stat-qa summary:hover{background:#1c2740}
+[data-theme="dark"] .stat-qa .qa-q{color:#e7edf4}
+[data-theme="dark"] .stat-qa .qa-a{background:#141d2c;color:#c2ccd8}
+[data-theme="dark"] .pend-l{color:#e7edf4}
+[data-theme="dark"] .pend-it{background:#172231;border-color:rgba(255,255,255,.10)}
+[data-theme="dark"] .pend-tx{color:#c2ccd8}
+[data-theme="dark"] .pend-go{background:#1c2740}
 .pend-go:hover{background:#fdf5f4}
 #fbpanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
 .fbbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:6px;border-radius:9px;background:#d52b1e;color:#fff;font-size:10.5px;font-weight:800;vertical-align:1px}
@@ -4637,7 +4666,11 @@ for lang in LANGS:
         '<meta name="twitter:description" content="'+esc(og_desc)+'">'
         '<meta name="twitter:image" content="'+esc(og_img)+'">')
     page = ('<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8">'
-        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+        # Installierte App (iPhone): Inhalt darf hinter die Statusleiste reichen,
+        # damit der Bildschirm voll genutzt wird (Wunsch Michael).
+        '<meta name="apple-mobile-web-app-capable" content="yes">'
+        '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">'
         '<link rel="preconnect" href="https://fonts.googleapis.com">'
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">'
