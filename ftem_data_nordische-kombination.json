@@ -121,13 +121,13 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "ca.550-650 Sprünge/Jahr\n(Mittel 600 Sprünge)",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "ca.550-650 Sprünge/Jahr\n(Mittel 600 Sprünge)",
        "from": 9,
        "to": 9,
        "l": []
@@ -168,13 +168,13 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Sommerschanze:\ndurchschnittlich 18 Sprünge/Woche",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Sommerschanze:\ndurchschnittlich 18 Sprünge/Woche",
        "from": 9,
        "to": 9,
        "l": []
@@ -209,13 +209,13 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
        "from": 9,
        "to": 9,
        "l": []
@@ -250,13 +250,13 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Winterschanze:\nduchschnittlich 10 Sprünge/Woche",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Winterschanze:\nduchschnittlich 10 Sprünge/Woche",
        "from": 9,
        "to": 9,
        "l": []
@@ -291,13 +291,13 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Geführte (Athletik-)Trainings:\n10h/Woche\n\nAllgemein sportliche Aktivität:\n0-3h/Woche: Individuell nach Zeit- und Energiereserven",
        "from": 9,
        "to": 9,
        "l": []
@@ -310,6 +310,59 @@
    "title": "Makroplanung",
    "group": "Sport & Athlet:in",
    "rows": [
+    {
+     "label": "Regeneration\nApril bis mitte Mai",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und die Freude an polysportiver Bewegung wiederbeleben.\n\nInhalt:\nUnstrukturierte, spielerische Bewegung im Alltag (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Trainingsumfang und ohne langlaufspezifische Inhalte.",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nErholung von der Wettkampfsaison sichern und mit polysportiver Bewegung die Freude am Sport erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) mit deutlich reduziertem Umfang.",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Wettkampfsaison sichern und mit polysportiver Bewegung die Trainingsfreude erhalten.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang.",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und mit polysportiver Bewegung Belastungsmonotonie vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der intensiven Wettkampfsaison sichern und Belastungsmonotonie sowie Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der internationalen Wettkampfsaison sichern und Übertraining vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKörperliche und mentale Erholung nach der Weltcup-Saison sichern und Übertraining auf höchstem Belastungsniveau vorbeugen.\n\nInhalt:\nUnstrukturierte, vielseitige Aktivitäten ohne langlaufspezifische Inhalte (Velo, Schwimmen, Spielsportarten) bei deutlich reduziertem Umfang und tiefer Intensität.",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
     {
      "label": "Vorbereitungsphase 1 (VP1): Mitte Mai-Juli",
      "segs": [
@@ -338,13 +391,19 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf hohem Umfangsniveau (18–22 h/Woche) aufbauen.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5) sowie Athletiktraining (~11.7 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.\n\nSprung:\nKoordinatives Techniktraining mit hoher Sprungfrequenz auf der Sommerschanze; Schanzengrösse eher kleiner.",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nKonditionelle Grundlagen breit und nachhaltig auf höchstem Umfangsniveau (18–22 h/Woche) aufbauen.\n\nInhalt:\nAusdauertraining zu Fuss und auf Rollski, ergänzt mit Velo, Rudern und Schwimmen, kombiniert mit zwei intensiven Einheiten pro Woche (I4/I5) sowie Athletiktraining (~13.4 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.\n\nSprung:\nKoordinatives Techniktraining mit hoher Sprungfrequenz auf der Sommerschanze; Schanzengrösse eher kleiner.",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nKonditionelle Grundlagen auf Weltklasseniveau ausbauen und individuelle Bedürfnisse gezielt entwickeln.\n\nInhalt:\nHochvolumiges Ausdauertraining zu Fuss und auf Rollski mit spezifischen Trainingsgeräten, ergänzt durch Velo, Rudern und Schwimmen sowie Athletiktraining (~14.2 h/Woche) mit Fokus auf Langhanteltechnik, Plyometrie und Rumpfkraft.\n\nSprung:\nKoordinatives Techniktraining mit hoher Sprungfrequenz auf der Sommerschanze; Schanzengrösse eher kleiner.",
        "from": 9,
        "to": 9,
        "l": []
@@ -373,13 +432,19 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln sowie Muskelhypertrophie und Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch Sommerwettkämpfe (1–2 Rollski-Rennen, Trainingsrennen Langlauf) sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.\n\nSprung:\nVariables Techniktraining und Übergang auf Wettkampfschanzen; Qualität vor Quantität; erste Wettkampfsimulationen.",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nVO₂max und Grundlagenausdauer gezielt entwickeln sowie Muskelhypertrophie und Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch 2–4 nationale/internationale Rollski-Rennen und Trainingsrennen Langlauf sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.\n\nSprung:\nVariables Techniktraining und Übergang auf Wettkampfschanzen; Qualität vor Quantität; erste Wettkampfsimulationen.",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nVO₂max, Laktattoleranz und Schwellen-Geschwindigkeit auf Weltklasseniveau entwickeln und Muskelhypertrophie sowie Maximalkraft weiter ausbauen.\n\nInhalt:\nAusdauer- und Intervalltraining auf der Rollskibahn, ergänzt durch 2–4 nationale/internationale Rollski-Rennen und Trainingsrennen Langlauf sowie intramuskuläres Koordinationstraining und Explosivkrafttraining mit Zusatzgewichten.\n\nSprung:\nVariables Techniktraining und Übergang auf Wettkampfschanzen; Qualität vor Quantität; erste Wettkampfsimulationen.",
        "from": 9,
        "to": 9,
        "l": []
@@ -408,13 +473,19 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nRennintensität und VO₂max auf Wettkampfniveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.\n\nSprung:\nUmstellung auf die Winterschanze; Feinabstimmung von Anfahrtsposition, Absprung-Timing und Flugsystem.",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nRennintensität und VO₂max auf Weltcup-Niveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.\n\nSprung:\nUmstellung auf die Winterschanze; Feinabstimmung von Anfahrtsposition, Absprung-Timing und Flugsystem.",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nTempohärte und Hochgeschwindigkeitstechnik auf Weltcup-Niveau bringen und auf Schnee adaptieren.\n\nInhalt:\nTraining auf Schnee und Ski mit Renntempo-Intervallen, ergänzt durch Schnell- und Explosivkrafttraining sowie Rumpfkraft.\n\nSprung:\nUmstellung auf die Winterschanze; Feinabstimmung von Anfahrtsposition, Absprung-Timing und Flugsystem.",
        "from": 9,
        "to": 9,
        "l": []
@@ -443,13 +514,19 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nWettkampfleistung im internationalen Kalender  abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~3.8 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.\n\nSprung:\nWettkämpfe steuern das Sprungtraining; Technikerhalt zwischen den Wettkampfblöcken.",
        "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender  abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit individueller Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.3 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.\n\nSprung:\nWettkämpfe steuern das Sprungtraining; Technikerhalt zwischen den Wettkampfblöcken.",
+       "from": 8,
        "to": 8,
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Ziele:\nWettkampfleistung im internationalen Spitzenkalender konstant abrufen und Form über gezieltes Tapering steuern.\n\nInhalt:\nWettkampforientiertes Skitraining mit hochgradig individualisierter Belastungssteuerung, kombiniert mit erhaltendem Athletik-, Explosiv- und Maximalkrafttraining (~4.6 h/Woche) bei gleichbleibender Intensität und an die Wettkämpfe angepasstem Volumen.\n\nSprung:\nWettkämpfe steuern das Sprungtraining; Technikerhalt zwischen den Wettkampfblöcken.",
        "from": 9,
        "to": 9,
        "l": []
@@ -573,7 +650,7 @@
    ]
   },
   {
-   "title": "Technik",
+   "title": "Technik Sprung",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -657,13 +734,89 @@
        "l": []
       },
       {
-       "v": "Coming Soon…",
+       "v": "Individuelles Techniktraining nach Videoanalyse\n• Feinabstimmung von Anfahrtsposition, Absprung und Flugsystem\n• Neuroathletik als Ergänzung\n• Qualität vor Quantität – Sprungumfang mit dem Langlauftraining abstimmen",
        "from": 7,
        "to": 8,
        "l": []
       },
       {
        "v": "Vorbereitungsphase 1\n• Grundlagenausdauer (aerobe Basis)\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen (VO2max, Laktatverträglichkeit)\n\nVorwettkampfphase\n• Intervallformen (Laktatverträglichkeit, VO2max)\n• Grundlagenausdauer (als Regenerati",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Technik Langlauf",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Technik Klassisch",
+     "segs": [
+      {
+       "v": "Element Schnee entdecken\n• Gleiten\n• Schieben\n• Rutschen\n• Drehen\n• Springen\n• Balancieren\n• Bremsen auf Rutschgeräten (Langlaufski, Snowboard oder Ski)",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Spielerisch den Schnee entdecken und sich variantenreich auf LL-Ski bewegen.\nSpielformen und abwechslungsreiche Übungen, die vielseitige Bewegungsarten fördern. Elefantenwaschen, Skills Park, Namen-Memory, Der Fuchs geht um, Spitalfangis etc.\n\nSicher und selbständig langlaufen und bremsen\n\nKL-Schritt (Beinarbeit)\nStreckung des Abstossbeines, stabiles Gleiten auf Gleitski\n\nDiagonal\nWechsel von Bein- und Armarbeit in diagonaler Bewegung für Vortrieb.\n\nGräten\nScherenschritte bergauf: Ski in V-Form setzen, Kick aus den Beinen (kein Gleiten)\n\nDoppelstock\nBeide Stöcke gleichzeitig einsetzen, Körper nach vorne bringen und Arme aktiv strecken.\n\nBogentreten\nSeitliches Treten in einer Bogenspurlinie, Gewicht auf den Aussenski\n\nSpurwechsel\nSki parallel anheben, Gewicht verlagern und sanft in die neue Spur setzen.\n\nÜbungen\nÜber Wurzeln steigen, Himbeeren pflücken, La-Ola-Welle, Schaukelschuhe etc.",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Technik Skating",
+     "segs": [
+      {
+       "v": "Element Schnee entdecken\n• Gleiten\n• Schieben\n• Rutschen\n• Drehen\n• Springen\n• Balancieren\n• Bremsen auf Rutschgeräten (Langlaufski, Snowboard oder Ski)",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Spielerisch den Schnee entdecken und sich variantenreich auf LL-Ski bewegen.\nSpielformen und abwechslungsreiche Übungen, die vielseitige Bewegungsarten fördern. Elefantenwaschen, Skills Park, Namen-Memory, Der Fuchs geht um, Spitalfangis etc.\n\nSicher und selbständig langlaufen und bremsen\n\nSchlittschuschritt (Beinarbeit) Streckung des Abstossbeines (seitlich), stabiles Gleiten auf Gleitski\n\n1:2\nSchlittschuhschritt mit Doppelstockstoss auf jeden zweiten Beinabstoss.\n\n1:1\nSchlittschuhschritt mit Doppelstockstoss auf jeden Beinabstoss.\n\nAsymm. SS\nAsymmetrische Armarbeit (Führungsarm)  und gleichzeitiges aufsetzen von Stock und Ski (sonst gleich wie 1:2)\n\nDiagonal SS\nBeinschritt (seitlich) mit diagonalem Stockeinsatz.\n\nSchlittschuschritt ohne Stockeinsatz\nTiefer Schwerpunkt mit dynamischer Gewichtsverlagerung für längeres Gleiten.\n\nÜbungen\nKnöchel berühren, Zäunen, Glöckner, Hip-Hopper etc.",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
        "from": 9,
        "to": 9,
        "l": []
@@ -1141,39 +1294,39 @@
       "l": []
      },
      "F2": {
-      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\nLoading...\n\nOff Snow:\nLoading…",
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\n- Sicher auf Langlaufski unterwegs: gleiten, bremsen, Richtung ändern.\n- Viele Sprünge auf kleinen Schanzen: Anfahrt, Absprung und Landung spielerisch festigen.\n- Verschiedene Schnee-Sportarten kennenlernen.\n\nOff Snow:\n- Vielseitig und spielerisch in Bewegung bleiben: Kraft, Beweglichkeit und Schnelligkeit entwickeln.\n- Aktiven Alltag pflegen.",
       "l": []
      },
      "F3": {
-      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\nComing Soon…\n\nOff Snow:\nComing Soon…",
+      "v": "Verschiedene (Schnee)-Sportarten praktizieren\nUmfang - & erlebnisorientiertes Bewegen\nBewegungs- & Spielgrundformen verbessern\n\nKreativität & Selbständigkeit fördern\n\nOn Snow:\n- Vielseitige Bewegung auf Langlaufski, erste Rennen.\n- Viele Sprünge: Körperwahrnehmung schulen, erste Wettkampferfahrung auf der Schanze sammeln.\n- Koordination und Technik in beiden Disziplinen entwickeln.\n\nOff Snow:\n- Belastungsverträglichkeit und Ausdauer gezielt aufbauen.\n- 1–2x Spielsport/Hallentraining, polysportives Training.",
       "l": []
      },
      "T1": {
-      "v": "Psychologische Grundtechniken erlernen\nRegenerations-& Präventionsmassn. ausprobieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon...",
+      "v": "Psychologische Grundtechniken erlernen\nRegenerations-& Präventionsmassn. ausprobieren\n\nOn Snow:\n- Sprung: Koordinatives Techniktraining, Schanzengrösse eher kleiner, hohe Sprungfrequenz.\n- Langlauf: 1x lang + 1x kurz/intensiv mit Stocklauf/Rollski (Sommer); vielseitige Bewegung auf Ski + Rennen (Winter).\n\nOff Snow:\n- Kraft: Technik und Haltung festigen, Geschicklichkeit und Sprungkraft.\n- Ausdauer: Belastbarkeit, Erholung und VO₂max gezielt aufbauen.",
       "l": []
      },
      "T2": {
-      "v": "Psychologische Grundtechniken erlernen\nRegenerations-& Präventionsmassn. ausprobieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon...",
+      "v": "Psychologische Grundtechniken erlernen\nRegenerations-& Präventionsmassn. ausprobieren\n\nOn Snow:\n- Sprung: Koordinatives Techniktraining, mehr Sprünge, erste Wettkämpfe.\n- Langlauf: 2x lang + 1x kurz/intensiv mit Stocklauf/Rollski (Sommer); vielseitige Bewegung auf Ski (Winter).\n\nOff Snow:\n- Kraft: Window of Opportunity nutzen, Geschicklichkeit und Sprungkraft.\n- Ausdauer: Belastbarkeit, Erholung und VO₂max gezielt aufbauen.",
       "l": []
      },
      "T3": {
-      "v": "Optimaler Leistungszustand OLZ identifizieren\nRegenerations-& Präventionsmassn. implementieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "v": "Optimaler Leistungszustand OLZ identifizieren\nRegenerations-& Präventionsmassn. implementieren\n\nOn Snow:\n- Sprung: Variables Techniktraining, Übergang auf grössere Schanzen, Qualität vor Quantität.\n- Langlauf: 2x lang + 1–2x kurz/intensiv mit Stocklauf/Rollski; Formsteuerung über Intervalle (Winter).\n\nOff Snow:\n- Kraft/Explosivkraft disziplinspezifisch aufbauen; Interferenz zwischen Kraft- und Ausdauertraining durch Planung minimieren.\n- Ausdauer: aerobe und anaerobe Ausdauer gezielt entwickeln.",
       "l": []
      },
      "T4": {
-      "v": "Optimaler Leistungszustand OLZ identifizieren\nRegenerations-& Präventionsmassn. implementieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "v": "Optimaler Leistungszustand OLZ identifizieren\nRegenerations-& Präventionsmassn. implementieren\n\nOn Snow:\n- Sprung: Variables Techniktraining, Wettkampfschanzen, Wettkampfsimulationen.\n- Langlauf: 3x lang + 2–3x kurz/intensiv mit Stocklauf/Rollski; Formsteuerung über Intervalle (Winter).\n\nOff Snow:\n- Kraft/Explosivkraft disziplinspezifisch weiterentwickeln; Balance Sprung/Langlauf bewusst steuern.\n- Ausdauer: aerobe und anaerobe Ausdauer gezielt entwickeln.",
       "l": []
      },
      "E1": {
-      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\n- Sprung: Wettkampfsimulationen auf Sommer- und Winterschanze; Feinabstimmung von Anfahrt und Absprung.\n- Langlauf: Rollskibahn-Intervalle & Sommerwettkämpfe; Renntempo-Intervalle auf Schnee; Wettkampfleistung & Tapering (COC, WC, WM).\n\nOff Snow:\n- Hoher Ausdauerumfang – bewusst unter den Langlauf-Spezialisten (Doppelbelastung Sprung).\n- Langhanteltechnik, Explosivkraft & Plyometrie; Balance Kraft/Ausdauer steuern.",
       "l": []
      },
      "E2": {
-      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\n- Sprung: Wettkampfsimulationen auf Sommer- und Winterschanze; individuelle Feinabstimmung.\n- Langlauf: Rollskibahn-Intervalle auf internationalem Niveau; Renntempo-Intervalle auf Schnee; Wettkampfleistung & Tapering (WC, WSC, Olympia).\n\nOff Snow:\n- Hoher Ausdauerumfang, individuell gesteuert (Doppelbelastung Sprung).\n- Langhanteltechnik, Explosivkraft & Plyometrie; Balance Kraft/Ausdauer steuern.",
       "l": []
      },
      "M": {
-      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\nComing Soon...\n\nOff Snow:\nComing Soon…",
+      "v": "Psychologische Techniken optimieren\nOLZ in unterschiedlichen Situationen erreichen\nRegenerations-& Präventionsmassn. optimieren\n\nOn Snow:\n- Sprung: Individuell gesteuertes Techniktraining auf Weltcup-Niveau; Technikerhalt zwischen den Wettkampfblöcken.\n- Langlauf: Tempohärte & Hochgeschwindigkeitstechnik; Wettkampfleistung & Tapering (WC, WSC, Olympia).\n\nOff Snow:\n- Hochindividualisierte Balance zwischen Sprung-Explosivität und Langlauf-Ausdauer.\n- Regeneration & Prävention auf höchstem Niveau.",
       "l": []
      }
     }
@@ -1210,15 +1363,15 @@
       "l": []
      },
      "E1": {
-      "v": "Pro Jahr: Coming Soon...",
+      "v": "Pro Jahr: ca. 550 bis 650 Sprünge\nund mindestens xy Stunden",
       "l": []
      },
      "E2": {
-      "v": "Pro Jahr:  Coming Soon...",
+      "v": "Pro Jahr: ca. 550 bis 650 Sprünge\nund mindestens xy Stunden",
       "l": []
      },
      "M": {
-      "v": "Pro Jahr:  Coming Soon...",
+      "v": "Pro Jahr: ca. 550 bis 650 Sprünge\nund mindestens xy Stunden",
       "l": []
      }
     }
