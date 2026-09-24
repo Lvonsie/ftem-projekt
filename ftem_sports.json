@@ -55,13 +55,15 @@
    "id": "snowboard-alpin",
    "name": "Snowboard Alpin",
    "short": "SBA",
-   "mission": "https://snowsports.flink.host/s/1nwko22K/"
+   "mission": "https://snowsports.flink.host/s/1nwko22K/",
+   "icon": "icons/snowboard-alpin.jpg"
   },
   {
    "id": "snowboard-cross",
    "name": "Snowboard Cross",
    "short": "SBX",
-   "mission": "https://snowsports.flink.host/s/0q2Deqp2/"
+   "mission": "https://snowsports.flink.host/s/0q2Deqp2/",
+   "icon": "icons/snowboard-cross.jpg"
   },
   {
    "id": "snowboard-park-pipe",

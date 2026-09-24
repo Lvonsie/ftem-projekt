@@ -523,7 +523,7 @@
    ]
   },
   {
-   "title": "Cross Start",
+   "title": "Snowboardcross Start",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -617,7 +617,7 @@
    ]
   },
   {
-   "title": "Cross Schwung",
+   "title": "Snowboardcross Schwung",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -717,7 +717,7 @@
    ]
   },
   {
-   "title": "Cross Elemente, Gelände, Aerodynamik",
+   "title": "Snowboardcross Elemente, Gelände, Aerodynamik",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -817,11 +817,11 @@
    ]
   },
   {
-   "title": "Cross Strategie & Taktik",
+   "title": "Snowboardcross Strategie & Taktik",
    "group": "Sport & Athlet:in",
    "rows": [
     {
-     "label": "Cross Strategie & Taktik",
+     "label": "Snowboardcross Strategie & Taktik",
      "segs": [
       {
        "v": "",
