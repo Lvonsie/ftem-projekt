@@ -3373,6 +3373,18 @@ __MAINCSS__
 #glosspanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
 #pendpanel{max-width:900px;margin:0 auto;padding:8px 18px 60px}
 #statspanel{max-width:980px;margin:0 auto;padding:8px 18px 60px}
+/* Fragen & Antworten des FTEM-Coach in der Statistik */
+.stat-qa{margin-top:6px;border:1px solid #e3e7ec;border-radius:10px;overflow:hidden}
+.stat-qa details+details{border-top:1px solid #eef0f3}
+.stat-qa summary{display:flex;gap:9px;align-items:baseline;padding:8px 12px;cursor:pointer;font-size:12px;list-style:none}
+.stat-qa summary::-webkit-details-marker{display:none}
+.stat-qa summary:hover{background:#f7f8fa}
+.stat-qa .qa-t{flex:none;color:#8a93a0;font-size:10.5px}
+.stat-qa .qa-l{flex:none;font-size:9.5px;font-weight:800;color:#1f8fa6;border:1px solid rgba(31,143,166,.4);border-radius:5px;padding:0 5px}
+.stat-qa .qa-s{flex:none;font-size:10px;font-weight:700;color:#8a93a0}
+.stat-qa .qa-q{font-weight:700;color:#1d2630;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stat-qa details[open] .qa-q{white-space:normal}
+.stat-qa .qa-a{padding:2px 12px 11px 12px;font-size:12px;line-height:1.55;color:#39424e;background:#fafbfc}
 .stat-card{background:#fff;border:1px solid #e3e7ec;border-radius:14px;padding:16px 18px;margin:14px 0}
 .stat-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .stat-h b{font-size:15px}
@@ -3757,10 +3769,12 @@ function _statKpi(v,lbl){return '<div class="stat-kpi"><b>'+v+'</b><span>'+lbl+'
 function renderStats(rows){
   var body=document.getElementById('statsbody');
   var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5;
-  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={};
+  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[];
   rows.forEach(function(x){
     var t=new Date(x.created_at).getTime();
-    if(x.kind==='ki_frage'){ki.push({ts:x.created_at,key:'KI-Fragen'});if(t>=t0)kiToday++;if(t>=t7)ki7++;}
+    if(x.kind==='ki_frage'){ki.push({ts:x.created_at,key:'KI-Fragen'});if(t>=t0)kiToday++;if(t>=t7)ki7++;
+      var qa=null;try{qa=JSON.parse(x.meta);}catch(_){}
+      if(qa&&qa.q){qa.ts=x.created_at;qaList.push(qa);}}
     else if(x.kind==='zugriff'){var l=String(x.meta||'de').toUpperCase().slice(0,2);
       zu.push({ts:x.created_at,key:l});zuLang[l]=(zuLang[l]||0)+1;if(t>=t0)zuToday++;if(t>=t7)zu7++;}
     else if(x.kind==='sport'&&x.meta){var s=sports[x.meta]||{n:0,last:x.created_at};
@@ -3790,7 +3804,17 @@ function renderStats(rows){
     +'<div class="stat-sub">Eine Frage = eine beantwortete Frage an den FTEM-Coach (serverseitig gezählt, Limite 10/Tag pro IP).</div>'
     +'<div class="stat-kpis">'+_statKpi(kiToday,'Heute')+_statKpi(ki7,'7 Tage')+_statKpi(ki.length,'30 Tage')+_statKpi((ki.length/30).toFixed(1).replace('.',','),'Ø pro Tag · 30 T')+'</div>'
     +'<div class="stat-cht-t">Fragen pro Tag (14 Tage)</div>'
-    +tagesChart(ki,14,{'KI-Fragen':'#d52b1e'},'Fragen')+'</div>';
+    +tagesChart(ki,14,{'KI-Fragen':'#d52b1e'},'Fragen')
+    +(qaList.length?('<div class="stat-cht-t">Letzte Fragen &amp; Antworten ('+Math.min(qaList.length,100)+')</div>'
+      +'<div class="stat-qa">'+qaList.slice(0,100).map(function(x){
+        var sportN=x.s?fbEsc(x.s):'';
+        return '<details><summary><span class="qa-t">'+fdate(x.ts)+'</span>'
+          +'<span class="qa-l">'+fbEsc(String(x.l||'de').toUpperCase())+'</span>'
+          +(sportN?('<span class="qa-s">'+sportN+'</span>'):'')
+          +'<span class="qa-q">'+fbEsc(x.q)+'</span></summary>'
+          +'<div class="qa-a">'+fbEsc(x.a||'').replace(/\n/g,'<br>')+'</div></details>';
+      }).join('')+'</div>'):'<p class="glosnote">Frage-Texte erscheinen hier ab dem nächsten Deploy (ältere Fragen wurden nur gezählt, ohne Text).</p>')
+    +'</div>';
   var intro=rows.length?'':'<p class="glosnote" style="margin-top:14px">Noch keine Daten – die Zählung beginnt, sobald der neue Stand veröffentlicht ist und die ersten Besuche eintreffen.</p>';
   body.innerHTML=intro+hZu+hKi;
   document.getElementById('statinfo').textContent='letzte 30 Tage · aktualisiert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});

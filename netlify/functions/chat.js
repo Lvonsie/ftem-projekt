@@ -192,7 +192,10 @@ ${context || '(kein Kontext übermittelt)'}`;
       await fetch(QUOTA_URL.replace('ftem_overrides', 'ftem_stats'), { method: 'POST',
         headers: { apikey: QUOTA_KEY, Authorization: 'Bearer ' + QUOTA_KEY,
           'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        body: JSON.stringify({ kind: 'ki_frage', meta: lang }) });
+        body: JSON.stringify({ kind: 'ki_frage',
+          // Frage + Antwort (gekuerzt) fuer die Admin-Statistik - anonym,
+          // ohne IP oder sonstige Nutzerdaten.
+          meta: JSON.stringify({ l: lang, s: sport, q: question.slice(0, 500), a: answer.slice(0, 1200) }) }) });
     } catch (_) {}
     return json(200, { answer: answer || 'Dazu habe ich leider keine Antwort gefunden.' });
   } catch (e) {
