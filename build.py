@@ -1178,13 +1178,9 @@ def home_html(datamap, lang):
             '<defs><linearGradient id="adminlk" x1="0" y1="0" x2="1" y2="1">'
             '<stop offset="0" stop-color="#1f8fa6"/><stop offset=".4" stop-color="#e2a900"/><stop offset=".7" stop-color="#e8772e"/><stop offset="1" stop-color="#d52b1e"/></linearGradient></defs>'
             '<rect x="4.6" y="10.4" width="14.8" height="10.2" rx="2.4"/><path d="M8 10.4V7.4a4 4 0 0 1 8 0v3"/>'
-            '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a>'
-            '<button class="presopen" type="button" title="'+esc(PRES_TITLE[lang])+'" aria-label="'+esc(PRES_TITLE[lang])+'">'
-            '<svg viewBox="0 0 24 24" fill="none" stroke="url(#adminlk)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-            '<path d="M4 9V5.5A1.5 1.5 0 0 1 5.5 4H9"/><path d="M15 4h3.5A1.5 1.5 0 0 1 20 5.5V9"/>'
-            '<path d="M20 15v3.5a1.5 1.5 0 0 1-1.5 1.5H15"/><path d="M9 20H5.5A1.5 1.5 0 0 1 4 18.5V15"/></svg></button>'
-            '<span class="presask" hidden><input class="prespw" type="password" placeholder="'+esc(PRES_PWPH[lang])+'" autocomplete="off">'
-            '<button class="presgo" type="button">OK</button></span></div>')
+            '<circle cx="12" cy="15" r="1.5" fill="url(#adminlk)" stroke="none"/></svg></a></div>')
+    # Praesentationsmodus: Knopf ist in den Admin-Bereich gezuegelt (index.html?pres=1,
+    # ohne eigenes Passwort - Entscheid Michael); das Schloss bleibt, aber unsichtbar.
     # Folie "Die Website" fuer den Praesentationsmodus
     web_head = {"de": ("Die Website", "Alles zur Athlet:innen-Entwicklung im Schneesport – auf einer Seite:"),
                 "fr": ("Le site web", "Tout sur le développement des athlètes dans les sports de neige – sur une seule page :"),
@@ -1567,6 +1563,11 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .adminlink{text-align:center;margin-top:26px}
 .adminlink a{display:inline-flex;opacity:.42;text-decoration:none;transition:opacity .16s,transform .16s}
 .adminlink a:hover{opacity:1;transform:translateY(-1px)}
+/* Fusszeile Startseite: Schloss unsichtbar, aber klickbar (Admins kennen die
+   Stelle); per Tastatur-Fokus sichtbar (Zugaenglichkeit). */
+.bb-tools .adminlink a{opacity:0}
+.bb-tools .adminlink a:hover{opacity:0;transform:none}
+.bb-tools .adminlink a:focus-visible{opacity:1}
 .adminlink svg{width:22px;height:22px}
 /* Meeting-Paket: Hero-Buttons, Overlays, Titel-Dropdown, Steady, Mobile-Header */
 .homesport{font:inherit;font-size:13.5px;font-weight:700;color:#fff;background:rgba(15,21,32,.55);border:1px solid rgba(255,255,255,.42);border-radius:9px;padding:9px 14px;backdrop-filter:blur(6px);width:100%;cursor:pointer;text-shadow:0 1px 4px rgba(0,0,0,.4)}
@@ -3197,20 +3198,12 @@ document.addEventListener('keydown',e=>{
 });
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&!deck.hidden)closeDeck(false);});
 
-document.querySelectorAll('.preslink').forEach(pl=>{
-  const btn=pl.querySelector('.presopen'), ask=pl.querySelector('.presask'), pw=pl.querySelector('.prespw');
-  btn.addEventListener('click',()=>{ask.hidden=!ask.hidden;if(!ask.hidden){pw.value='';pw.focus();}});
-  function tryGo(){
-    if(pw.value===PRES_PW){
-      ask.hidden=true;
-      if(typeof menuPanel!=='undefined'&&menuPanel){menuPanel.hidden=true;}
-      openDeck();
-    }
-    else{pw.classList.add('bad');setTimeout(()=>pw.classList.remove('bad'),500);pw.select();}
-  }
-  pl.querySelector('.presgo').addEventListener('click',tryGo);
-  pw.addEventListener('keydown',e=>{if(e.key==='Enter')tryGo();});
-});
+// Praesentationsmodus wird aus dem Admin-Bereich gestartet (index.html?pres=1).
+// Das fruehere Passwortfeld auf der Seite ist entfernt (Entscheid Michael).
+if(new URLSearchParams(location.search).get('pres')==='1'){
+  try{history.replaceState(null,'',location.pathname+location.hash);}catch(_){}
+  setTimeout(openDeck,250);
+}
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)document.body.classList.remove('pres');});
 document.addEventListener('keydown',e=>{
   if(!document.body.classList.contains('pres'))return;
@@ -3545,6 +3538,7 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     <button id="pendbtn" class="agloss" type="button">Pendenzen<span id="pendbadge" class="fbbadge" hidden>0</span></button>
     <button id="statbtn" class="agloss" type="button">Statistik</button>
     <button id="fbbtn" class="agloss" type="button">Feedback<span id="fbbadge" class="fbbadge" hidden>0</span></button>
+    <button id="presbtn" class="agloss" type="button" title="Präsentationsmodus auf der Webseite starten" onclick="window.open('index.html?pres=1','_blank')">Präsentation</button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
   <div id="note" class="note"></div>
