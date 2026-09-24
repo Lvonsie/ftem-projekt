@@ -743,6 +743,8 @@ def stage_bar(stages, lang):
                    'title="'+esc(FULL.get(s,s))+'">'+esc(s)+'</button>' for i, s in enumerate(stages))
     return ('<div class="stagebar" role="group" aria-label="'+esc(tr("Stufe hervorheben", lang))+'">'+btns+'</div>')
 
+FILTER_LBL = {"de": "Filter", "fr": "Filtre", "it": "Filtro", "en": "Filter"}
+
 def sport_section(sport, d, lang, edit=False):
     sid = sport["id"]; name = tr(sport["name"], lang)
     if edit and d is not None:
@@ -777,7 +779,9 @@ def sport_section(sport, d, lang, edit=False):
         '<span class="hits"></span>'
         '<button class="qx" type="button" hidden title="'+esc(CLEAR_LBL[lang])+'" aria-label="'+esc(CLEAR_LBL[lang])+'">&times;</button>'
         '</div></div>'
-        '<div class="ht-r"><select class="jump"><option>'+esc(tr("Zu Thema springen…", lang))+'</option>'+jump_opts+'</select>'
+        '<div class="ht-r"><button class="fltbtn" type="button" title="'+esc(FILTER_LBL[lang])+'">'
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>'
+        '<span class="flt-word">'+esc(FILTER_LBL[lang])+'</span><span class="fltn" hidden>0</span></button>'
         '<button class="toggleall" type="button" title="'+esc(EXPAND_ALL[lang])+'" aria-label="'+esc(EXPAND_ALL[lang])+'" data-open="'+esc(EXPAND_ALL[lang])+'" data-close="'+esc(COLLAPSE_ALL[lang])+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 13l5 5 5-5"/><path d="M7 6l5 5 5-5"/></svg></button>'
         '<button class="pdf" title="'+esc(tr("Drucken / als PDF speichern", lang))+'" aria-label="'+esc(tr("Drucken / als PDF speichern", lang))+'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/><circle cx="17.5" cy="12" r="1" fill="currentColor" stroke="none"/></svg></button>'
         '<span class="hdiv" aria-hidden="true"></span>'
@@ -1756,6 +1760,53 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235b6672' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:13px;padding-right:34px}
 [data-theme="dark"] header.top select,[data-theme="dark"] .sportsel2,[data-theme="dark"] select.jump,[data-theme="dark"] .pd-sportsel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2ccd8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
 .mr-row{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:none}
+/* ---- Filter (ersetzt "Zu Thema springen...") ---- */
+.fltbtn{font:inherit;position:relative;display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:7px 14px;cursor:pointer;transition:border-color .15s,color .15s}
+.fltbtn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.fltbtn:hover{border-color:var(--red);color:var(--red)}
+.fltbtn .fltn{position:absolute;top:-7px;right:-7px;background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:99px;min-width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;padding:0 4px}
+.fmodal{position:fixed;inset:0;background:rgba(20,26,34,.55);display:none;align-items:flex-start;justify-content:center;padding:56px 14px;z-index:70;overflow:auto}
+.fmodal.on{display:flex}
+.fbox{width:min(560px,96vw);background:var(--card);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.35);overflow:hidden}
+.fbar{display:flex;align-items:center;gap:9px;padding:12px 18px;border-bottom:1px solid var(--line)}
+.fbar b{font-size:14px}
+.fbar svg{width:15px;height:15px;fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round}
+.fbar .fx{margin-left:auto;border:none;background:none;font-size:20px;color:#98a1ad;cursor:pointer;padding:2px 8px}
+.fbar .fx:hover{color:var(--ink)}
+.fsec{padding:13px 18px 4px}
+.fsec .ft{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:800;color:#8a93a0;margin-bottom:8px}
+.fchips{display:flex;flex-wrap:wrap;gap:7px}
+.fchip{font:inherit;font-size:12px;font-weight:800;border:1.5px solid var(--line);background:var(--card);border-radius:9px;padding:6px 0;width:44px;text-align:center;cursor:pointer;color:var(--mut)}
+.fchip.pf{border-color:rgba(31,143,166,.45);color:var(--found-t,#1f8fa6)}
+.fchip.pt{border-color:rgba(226,169,0,.5);color:#8a6d00}
+.fchip.pe{border-color:rgba(232,119,46,.5);color:var(--elite-t,#e8772e)}
+.fchip.pm{border-color:rgba(213,43,30,.45);color:var(--mast-t,#d52b1e)}
+[data-theme="dark"] .fchip.pt{color:#f0c657}
+.fchip.sel.pf{background:var(--found);color:#fff;border-color:var(--found)}
+.fchip.sel.pt{background:var(--talent);color:#3b2e00;border-color:var(--talent)}
+.fchip.sel.pe{background:var(--elite);color:#fff;border-color:var(--elite)}
+.fchip.sel.pm{background:var(--mast);color:#fff;border-color:var(--mast)}
+.fthemes{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:min(44vh,330px);overflow:auto;padding-right:4px}
+.fthx{display:flex;align-items:center;gap:8px;font-size:12.5px;border:1px solid var(--line);border-radius:9px;padding:7px 10px;cursor:pointer;min-width:0}
+.fthx:hover{border-color:#c3ccd6}
+.fthx input{accent-color:var(--red);flex:none}
+.fthx span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ffoot{display:flex;gap:10px;align-items:center;padding:13px 18px;border-top:1px solid var(--line);background:var(--bg)}
+.freset{font:inherit;font-size:12.5px;font-weight:700;border:none;background:none;color:#8a93a0;cursor:pointer}
+.freset:hover{color:var(--ink)}
+.fapply{font:inherit;margin-left:auto;font-size:13px;font-weight:800;background:var(--red);color:#fff;border:none;border-radius:9px;padding:9px 22px;cursor:pointer}
+.fapply:hover{filter:brightness(1.08)}
+.fltinfo{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fdf5f4;border:1px solid rgba(213,43,30,.35);border-radius:10px;padding:8px 13px;font-size:12.5px;margin:10px 0 2px}
+.fltinfo b{flex:none}
+.flt-tag{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-weight:700;font-size:11.5px}
+.flt-clear{margin-left:auto;font:inherit;border:none;background:none;color:var(--red);font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap}
+[data-theme="dark"] .fltinfo{background:rgba(213,43,30,.14);border-color:rgba(240,126,114,.4)}
+[data-theme="dark"] .fthx:hover{border-color:rgba(255,255,255,.3)}
+@media(max-width:760px){
+  .fltbtn .flt-word{display:none}
+  .fltbtn{padding:7px 10px}
+  .fthemes{grid-template-columns:1fr}
+}
 @media(max-width:760px){.aw-cta{top:118px;left:50%;transform:translateX(-50%)}.aw-btn{font-size:13px;padding:9px 18px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;gap:14px;padding:8px 18px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);border-top:1px solid rgba(29,38,48,.08)}
@@ -2203,7 +2254,7 @@ header.top .sicon+.sportsel2{flex:none;width:44px;height:34px;min-width:0;max-wi
 .ht-c{flex:1 1 44%;order:3;min-width:0}
 .ht-c .qbox{width:100%}
 .ht-c input.q{font-size:16px;padding:0 56px 0 30px}
-.ht-r select.jump{order:4;flex:1 1 44%;width:auto;min-width:172px;font-size:12px}
+.ht-r .fltbtn{order:4;font-size:12px}
 .ht-r .chatbtn{order:5;flex:none}
 .ht-r .toggleall,.ht-r .pdf,.ht-r .hdiv{display:none}
 .wrap{padding:10px 10px 60px}
@@ -2559,19 +2610,8 @@ function initSport(sec){
   if(pdfBtn)pdfBtn.onclick=()=>openPrintPicker(sec);
   const chatBtn=sec.querySelector('.chatbtn');
   if(chatBtn)chatBtn.onclick=()=>openChat(sec);
-  sec.querySelector('.jump').onchange=e=>{
-    const el=document.getElementById(e.target.value);
-    if(el){
-      el.open=true;
-      const go=()=>{
-        const hh=(sec.querySelector('header.top')||{offsetHeight:54}).offsetHeight;
-        const y=el.getBoundingClientRect().top+window.scrollY-hh-12;
-        window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
-      };
-      setTimeout(go,80);setTimeout(go,550);  // zweiter Sprung nach dem Clamp-Layout
-    }
-    e.target.selectedIndex=0;
-  };
+  const fbtn=sec.querySelector('.fltbtn');
+  if(fbtn)fbtn.onclick=()=>openFilter(sec);
   themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
   window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
   // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart.
@@ -2653,6 +2693,102 @@ const DOSSIER_CSS = '@page{size:A4 portrait;margin:10mm 0 12mm}'
  +'.ds-c{font-size:10px;line-height:1.42}.ds-c .cwrap{padding:0!important;max-height:none!important;overflow:visible!important;font-size:10px!important;line-height:1.42!important;color:#1d2630!important}'
  +'.ds-c .cwrap .zlab{background:#eef1f4!important;color:#4a5462!important}'
  +'.ds-empty{font-size:11px;color:#8a929c;padding:14px 2px}';
+
+// ---- Filter: Stufe und/oder Thema (ersetzt "Zu Thema springen...") ----------
+const fmodal=document.createElement('div');
+fmodal.className='fmodal';
+fmodal.innerHTML='<div class="fbox"><div class="fbar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><b></b>'
+ +'<button class="fx" type="button" aria-label="'+_esc(I18N.printClose)+'">&times;</button></div>'
+ +'<div class="fsec"><div class="ft">'+_esc(I18N.fltStage)+'</div><div class="fchips"></div></div>'
+ +'<div class="fsec"><div class="ft">'+_esc(I18N.fltTheme)+'</div><div class="fthemes"></div></div>'
+ +'<div class="ffoot"><button class="freset" type="button">'+_esc(I18N.fltReset)+'</button>'
+ +'<button class="fapply" type="button">'+_esc(I18N.fltApply)+'</button></div></div>';
+document.body.appendChild(fmodal);
+const fchips=fmodal.querySelector('.fchips'),fthemes=fmodal.querySelector('.fthemes'),fttl=fmodal.querySelector('.fbar b');
+let fltSec=null;
+fmodal.addEventListener('click',e=>{if(e.target===fmodal)fmodal.classList.remove('on');});
+fmodal.querySelector('.fx').onclick=()=>fmodal.classList.remove('on');
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&fmodal.classList.contains('on')){e._ovl=true;fmodal.classList.remove('on');}});
+function _phc(i){return i<3?'pf':i<7?'pt':i<9?'pe':'pm';}
+function openFilter(sec){
+  fltSec=sec;
+  const st=(sec.__flt&&sec.__flt.st)||[],th=(sec.__flt&&sec.__flt.th)||[];
+  fttl.textContent=I18N.fltTitle+' · '+(SPORT_NAMES[sec.dataset.sport]||'');
+  const sbs=[...sec.querySelectorAll('.stagebar .sb')];
+  fchips.innerHTML=sbs.map((b,i)=>'<button type="button" class="fchip '+_phc(i)+(st.indexOf(i)>=0?' sel':'')+'" data-i="'+i+'">'+_esc(b.textContent.trim())+'</button>').join('');
+  fchips.querySelectorAll('.fchip').forEach(c=>c.onclick=()=>c.classList.toggle('sel'));
+  fthemes.innerHTML=[...sec.querySelectorAll('details.theme')].map(t=>{
+    const ttl=(t.querySelector('summary .tt')||{textContent:t.id}).textContent.trim();
+    return '<label class="fthx"><input type="checkbox" value="'+_esc(t.id)+'"'+(th.indexOf(t.id)>=0?' checked':'')+'><span>'+_esc(ttl)+'</span></label>';
+  }).join('');
+  fmodal.classList.add('on');
+}
+fmodal.querySelector('.fapply').onclick=()=>{
+  if(!fltSec)return;
+  fltSec.__flt={st:[...fchips.querySelectorAll('.fchip.sel')].map(c=>+c.dataset.i).sort((a,b)=>a-b),
+                th:[...fthemes.querySelectorAll('input:checked')].map(i=>i.value)};
+  applyFilter(fltSec);fmodal.classList.remove('on');
+};
+fmodal.querySelector('.freset').onclick=()=>{
+  if(!fltSec)return;
+  fltSec.__flt={st:[],th:[]};applyFilter(fltSec);fmodal.classList.remove('on');
+};
+function applyFilter(sec){
+  const st=(sec.__flt&&sec.__flt.st)||[],th=(sec.__flt&&sec.__flt.th)||[];
+  const sel=st.length?st:null;
+  // Spalten ein-/ausblenden: Raster pro Zeile neu aufspannen, Zellen-Spannen
+  // auf die Schnittmenge mit den gewaehlten Stufen kuerzen.
+  sec.querySelectorAll('details.theme .grid .r').forEach(r=>{
+    r.style.gridTemplateColumns=sel?('var(--lblw) repeat('+sel.length+',var(--colw))'):'';
+    let any=false;
+    [...r.children].forEach(c=>{
+      if(c.classList.contains('hd')&&c.dataset.idx!==undefined){
+        c.style.display=(!sel||sel.indexOf(+c.dataset.idx)>=0)?'':'none';
+      }else if(c.classList.contains('cell')){
+        const f=+c.dataset.from,t=+c.dataset.to;
+        if(!sel){c.style.display='';c.style.gridColumn='span '+(t-f+1);any=true;}
+        else{const n=sel.filter(i=>i>=f&&i<=t).length;
+          if(!n){c.style.display='none';}
+          else{c.style.display='';c.style.gridColumn='span '+n;any=true;}}
+      }
+    });
+    if(!r.classList.contains('head'))r.style.display=(sel&&!any)?'none':'';
+  });
+  // Themen ein-/ausblenden
+  sec.querySelectorAll('details.theme').forEach(t=>{
+    const show=!th.length||th.indexOf(t.id)>=0;
+    t.style.display=show?'':'none';
+    if(show&&th.length)t.open=true;
+  });
+  // Bereichstitel ohne sichtbares Thema ausblenden
+  sec.querySelectorAll('h2.grp').forEach(h=>{
+    let el=h.nextElementSibling,vis=false;
+    while(el&&!(el.tagName==='H2'&&el.classList.contains('grp'))){
+      if(el.matches('details.theme')&&el.style.display!=='none'){vis=true;break;}
+      el=el.nextElementSibling;
+    }
+    h.style.display=vis?'':'none';
+  });
+  // Hinweisbalken + Zaehler auf dem Knopf
+  const n=st.length+th.length;
+  const btn=sec.querySelector('.fltbtn'),bad=btn?btn.querySelector('.fltn'):null;
+  if(bad){bad.hidden=!n;bad.textContent=n;}
+  let info=sec.querySelector('.fltinfo');
+  if(!n){if(info)info.remove();}
+  else{
+    if(!info){info=document.createElement('div');info.className='fltinfo';
+      const w=sec.querySelector('.wrap');w.insertBefore(info,w.firstChild);}
+    const sbs=[...sec.querySelectorAll('.stagebar .sb')].map(b=>b.textContent.trim());
+    const tn=th.map(id=>{const t=document.getElementById(id);
+      return t?(t.querySelector('summary .tt')||{textContent:id}).textContent.trim():id;});
+    info.innerHTML='<b>'+_esc(I18N.fltActive)+'</b>'
+      +'<span class="flt-tag">'+_esc(st.length?st.map(i=>sbs[i]).join(', '):I18N.fltAllS)+'</span>'
+      +'<span class="flt-tag">'+_esc(th.length?tn.join(' · '):I18N.fltAllT)+'</span>'
+      +'<button class="flt-clear" type="button">✕ '+_esc(I18N.fltClear)+'</button>';
+    info.querySelector('.flt-clear').onclick=()=>{sec.__flt={st:[],th:[]};applyFilter(sec);};
+  }
+  if(sec.__clamp)setTimeout(sec.__clamp,60);
+}
 
 let ppSec=null;
 const pick=document.createElement('div');
@@ -4414,6 +4550,15 @@ for lang in LANGS:
     steady_btn = '<button class="steady" type="button" hidden>💬 '+esc(assist_lbl)+'</button>'
     body = home_html(datamap, lang) + "".join(sport_section(s, datamap[s["id"]], lang) for s in SPORTS) + mmodal + imodal + steady_btn
     i18n = {"more": tr("mehr ▾", lang), "less": tr("weniger ▴", lang),
+            "fltTitle": FILTER_LBL[lang],
+            "fltStage": {"de": "Stufe (eine oder mehrere)", "fr": "Niveau (un ou plusieurs)", "it": "Livello (uno o più)", "en": "Stage (one or more)"}[lang],
+            "fltTheme": {"de": "Thema (eines oder mehrere)", "fr": "Thème (un ou plusieurs)", "it": "Tema (uno o più)", "en": "Topic (one or more)"}[lang],
+            "fltApply": {"de": "Anwenden", "fr": "Appliquer", "it": "Applica", "en": "Apply"}[lang],
+            "fltReset": {"de": "Zurücksetzen", "fr": "Réinitialiser", "it": "Reimposta", "en": "Reset"}[lang],
+            "fltActive": {"de": "Filter aktiv:", "fr": "Filtre actif :", "it": "Filtro attivo:", "en": "Filter active:"}[lang],
+            "fltClear": {"de": "Filter aufheben", "fr": "Supprimer le filtre", "it": "Rimuovi il filtro", "en": "Clear filter"}[lang],
+            "fltAllS": {"de": "alle Stufen", "fr": "tous les niveaux", "it": "tutti i livelli", "en": "all stages"}[lang],
+            "fltAllT": {"de": "alle Themen", "fr": "tous les thèmes", "it": "tutti i temi", "en": "all topics"}[lang],
             "themes": tr("Themen · F1–M", lang), "hits": tr("Themen mit Treffern", lang),
             "hitsWord": {"de": "Treffer", "fr": "résultats", "it": "risultati", "en": "hits"}[lang],
             "noHits": {"de": "keine Treffer", "fr": "aucun résultat", "it": "nessun risultato", "en": "no hits"}[lang],
