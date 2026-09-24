@@ -589,6 +589,12 @@ body.pres section.sport h2.grp{font-size:15px}
 /* App-Installations-Hinweis */
 .appinstall{max-width:600px;margin:26px auto 0;display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
 .ai-note{display:block;margin-top:7px;font-size:10.5px;color:var(--mut);line-height:1.45}
+/* App-Update-Hinweis (nur installierte App): fixe Leiste am unteren Rand */
+.updbar{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:340;display:flex;align-items:flex-start;gap:10px;background:#0f1622;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:11px 13px;box-shadow:0 10px 30px rgba(0,0,0,.38);font-size:12.5px;line-height:1.45}
+.updbar .updtxt b{display:block;font-size:13px;margin-bottom:2px}
+.updbar .updtxt span{color:rgba(255,255,255,.82)}
+.updbar .updx{flex:none;background:none;border:none;color:#fff;opacity:.75;font-size:15px;cursor:pointer;padding:2px 6px;margin:-2px -6px 0 0}
+.updbar .updx:hover{opacity:1}
 .appinstall .ai-icon{width:60px;height:60px;border-radius:14px;flex:none;box-shadow:0 5px 14px rgba(0,0,0,.16)}
 .appinstall .ai-h{font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:4px}
 .appinstall .ai-txt p{margin:0;font-size:12.5px;line-height:1.6;color:var(--mut)}
@@ -1018,7 +1024,7 @@ function toggleTheme(){var r=document.documentElement;var d=r.getAttribute('data
 const SPORT_IDS = ["ski-alpin", "langlauf", "biathlon", "skispringen", "nordische-kombination", "skicross", "freeski-park-pipe", "snowboard-alpin", "snowboard-cross", "snowboard-park-pipe"];
 const SPORT_MISSIONS = {"ski-alpin": "https://snowsports.flink.host/s/iFt05YOw/", "langlauf": "https://snowsports.flink.host/s/0QOLfudd/", "biathlon": "https://snowsports.flink.host/s/DUs2W0eD/", "skispringen": "https://snowsports.flink.host/s/FBDQQ9AP/", "nordische-kombination": "", "skicross": "https://snowsports.flink.host/s/8RhLL4D6/", "freeski-park-pipe": "https://snowsports.flink.host/s/R7EVNr6x/", "snowboard-alpin": "https://snowsports.flink.host/s/1nwko22K/", "snowboard-cross": "https://snowsports.flink.host/s/0q2Deqp2/", "snowboard-park-pipe": "https://snowsports.flink.host/s/R7EVNr6x/"};
 const SPORT_NAMES = {"ski-alpin": "Alpine Skiing", "langlauf": "Cross-Country Skiing", "biathlon": "Biathlon", "skispringen": "Ski Jumping", "nordische-kombination": "Nordic Combined", "skicross": "Ski Cross", "freeski-park-pipe": "Freeski Park & Pipe", "snowboard-alpin": "Alpine Snowboard", "snowboard-cross": "Snowboard Cross", "snowboard-park-pipe": "Snowboard Park & Pipe"};
-const I18N = {"more": "more ▾", "less": "less ▴", "fltTitle": "Filter", "fltStage": "Stage (one or more)", "fltTheme": "Topic (one or more)", "fltApply": "Apply", "fltReset": "Reset", "fltActive": "Filter active:", "fltClear": "Clear filter", "fltAllS": "all stages", "fltAllT": "all topics", "themes": "Topics · F1–M", "hits": "Topics with hits", "hitsWord": "hits", "noHits": "no hits", "printPick": "Choose the stage for the dossier", "printAll": "Entire sport (landscape)", "printClose": "Close", "dossier": "Stage dossier", "popupBlocked": "Please allow pop-ups for this page to print the dossier.", "send": "Send", "navPrev": "back", "navNext": "next", "chatTitle": "FTEM Coach", "chatPh": "Question about the pathway…", "chatWelcome": "Hi! Ask me anything about this sport's athlete pathway – for example:", "chatExamples": ["What gear do I need in F3?", "Strength goals in T2?", "Which squads exist?", "Overview of training phases"], "chatErr": "Something went wrong. Please try again later.", "chatLimit": "Daily limit reached: the FTEM coach answers up to 10 questions per day. See you tomorrow – all content remains available right on this page.", "chatNote": "Answers are based on this sport's FTEM content and the linked documents. Max. 10 questions per day."};
+const I18N = {"more": "more ▾", "less": "less ▴", "fltTitle": "Filter", "fltStage": "Stage (one or more)", "fltTheme": "Topic (one or more)", "fltApply": "Apply", "fltReset": "Reset", "fltActive": "Filter active:", "fltClear": "Clear filter", "fltAllS": "all stages", "fltAllT": "all topics", "themes": "Topics · F1–M", "hits": "Topics with hits", "hitsWord": "hits", "noHits": "no hits", "printPick": "Choose the stage for the dossier", "printAll": "Entire sport (landscape)", "printClose": "Close", "dossier": "Stage dossier", "popupBlocked": "Please allow pop-ups for this page to print the dossier.", "send": "Send", "navPrev": "back", "navNext": "next", "chatTitle": "FTEM Coach", "chatPh": "Question about the pathway…", "chatWelcome": "Hi! Ask me anything about this sport's athlete pathway – for example:", "chatExamples": ["What gear do I need in F3?", "Strength goals in T2?", "Which squads exist?", "Overview of training phases"], "chatErr": "Something went wrong. Please try again later.", "chatLimit": "Daily limit reached: the FTEM coach answers up to 10 questions per day. See you tomorrow – all content remains available right on this page.", "chatNote": "Answers are based on this sport's FTEM content and the linked documents. Max. 10 questions per day.", "updTitle": "New app version available", "updBody": "Please remove the app from your home screen once and re-add the page from Safari via “Share → Add to Home Screen”. Nothing is lost."};
 const PAGELANG="en";
 const sections = [...document.querySelectorAll('section.sport')];
 const home = document.getElementById('home');
@@ -1813,8 +1819,11 @@ function posAW(){
     awCta.style.left='';awCta.style.top='';awCta.style.bottom='';
     if(heroNews&&heroEl.clientHeight){
       const bb=heroEl.querySelector('.bottombar');
-      const t=heroEl.clientHeight-(bb?bb.offsetHeight:120)-12-heroNews.offsetHeight-16; // 16 = top der .hero-top-r
-      heroNews.style.top=Math.max(150,Math.round(t))+'px';
+      // Versatz der .hero-top-r wirklich messen (in der installierten App kommt
+      // die Safe-Area der Statusleiste dazu - fixe 16px waren dort zu wenig).
+      const htr=heroNews.offsetParent;
+      const t=heroEl.clientHeight-(bb?bb.offsetHeight:120)-12-heroNews.offsetHeight-((htr&&htr.offsetTop)||16);
+      heroNews.style.top=Math.max(120,Math.round(t))+'px';
     }
     return;
   }
@@ -2082,6 +2091,38 @@ function route(){
   if(standalone||flag)hideApp();
   window.addEventListener('appinstalled',function(){try{localStorage.setItem('ftem-installed','1');}catch(_){}hideApp();});
 })();
+// App-Update-Hinweis: erscheint nur in der INSTALLIERTEN App auf iPhone/iPad,
+// wenn ein neues Huellen-Paket (Icon/Splash/Vollbild) eine Neuinstallation
+// braucht (NEED_SHELL im Generator setzen). Android aktualisiert die Huelle
+// automatisch - dort ist kein Banner noetig. Die App merkt sich ihre
+// Huellen-Generation im localStorage; beim Loeschen der App loescht iOS
+// diesen Speicher mit -> nach der Neuinstallation ist die neue Generation
+// vermerkt und das Banner verschwindet von selbst.
+var SHELL_V=2;
+window.__shellBanner=function(need){
+  var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
+  var ios=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(!standalone||!ios)return false;
+  var inst=0;
+  try{
+    inst=parseInt(localStorage.getItem('ftem-shellv')||'0',10)||0;
+    if(!inst){inst=SHELL_V;localStorage.setItem('ftem-shellv',String(SHELL_V));}
+    if(need&&parseInt(localStorage.getItem('ftem-shellv-x')||'0',10)>=need)return false;
+  }catch(_){return false;}
+  if(!need||inst>=need)return false;
+  var old=document.querySelector('.updbar');if(old)old.remove();
+  var d=document.createElement('div');d.className='updbar';d.setAttribute('role','status');
+  d.innerHTML='<div class="updtxt"><b></b><span></span></div><button class="updx" aria-label="OK">✕</button>';
+  d.querySelector('b').textContent=I18N.updTitle;
+  d.querySelector('span').textContent=I18N.updBody;
+  d.querySelector('.updx').addEventListener('click',function(){
+    try{localStorage.setItem('ftem-shellv-x',String(need));}catch(_){}
+    d.remove();
+  });
+  document.body.appendChild(d);
+  return true;
+};
+__shellBanner(0);
 window.addEventListener('hashchange',route);
 route();
 loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});

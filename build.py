@@ -903,6 +903,37 @@ INSTALL_HINT = {
                 "<span class=\"ai-note\">Browser Samsung: può apparire un avviso Play Protect – proviene dal browser Samsung stesso. Installa tramite Chrome o conferma con « OK / Installa comunque ».</span>"},
 }
 
+# --- App-Update-Hinweis (Banner in der installierten iPhone/iPad-App) --------
+# Hintergrund: Inhalte aktualisieren sich in der App automatisch bei jedem
+# Oeffnen. Nur die "Huelle" (Icon, Name, Splash, Vollbild-Verhalten) wird bei
+# der Installation eingefroren. Android erneuert die Huelle von selbst,
+# iOS nicht - dort hilft nur Loeschen + neu Hinzufuegen.
+#
+# SHELL_V   = aktuelle Huellen-Generation. Bei jeder Aenderung an
+#             manifest.webmanifest / Icons / Apple-Metas, die eine
+#             Neuinstallation braucht, um 1 erhoehen.
+# NEED_SHELL = 0  -> Banner AUS (Normalzustand).
+#            = SHELL_V setzen (im selben Deploy wie das grosse Paket), damit
+#              bestehende Installationen mit aelterer Huelle den Hinweis sehen.
+#
+# Funktionsweise: Beim ersten Oeffnen merkt sich die App ihre Huellen-
+# Generation (localStorage 'ftem-shellv'). Loescht man die App auf iOS,
+# loescht iOS diesen Speicher mit -> nach der Neuinstallation wird die neue
+# Generation vermerkt und das Banner verschwindet von selbst.
+SHELL_V = 2
+NEED_SHELL = 0
+
+APP_UPDATE = {
+ "de": {"t": "Neue App-Version verfügbar",
+        "b": "Bitte die App einmal vom Home-Bildschirm löschen und die Seite in Safari über «Teilen → Zum Home-Bildschirm» neu hinzufügen. Es geht nichts verloren."},
+ "fr": {"t": "Nouvelle version de l'app disponible",
+        "b": "Supprime l'app de l'écran d'accueil, puis rajoute la page depuis Safari via « Partager → Sur l'écran d'accueil ». Rien ne se perd."},
+ "it": {"t": "Nuova versione dell'app disponibile",
+        "b": "Elimina l'app dalla schermata Home e aggiungi di nuovo la pagina da Safari tramite « Condividi → Aggiungi a Home ». Non si perde nulla."},
+ "en": {"t": "New app version available",
+        "b": "Please remove the app from your home screen once and re-add the page from Safari via “Share → Add to Home Screen”. Nothing is lost."},
+}
+
 def install_hint(lang):
     t = INSTALL_HINT.get(lang, INSTALL_HINT["de"])
     return ('<div class="appinstall">'
@@ -1945,6 +1976,12 @@ body.pres section.sport h2.grp{font-size:15px}
 /* App-Installations-Hinweis */
 .appinstall{max-width:600px;margin:26px auto 0;display:flex;gap:15px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
 .ai-note{display:block;margin-top:7px;font-size:10.5px;color:var(--mut);line-height:1.45}
+/* App-Update-Hinweis (nur installierte App): fixe Leiste am unteren Rand */
+.updbar{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:340;display:flex;align-items:flex-start;gap:10px;background:#0f1622;color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:11px 13px;box-shadow:0 10px 30px rgba(0,0,0,.38);font-size:12.5px;line-height:1.45}
+.updbar .updtxt b{display:block;font-size:13px;margin-bottom:2px}
+.updbar .updtxt span{color:rgba(255,255,255,.82)}
+.updbar .updx{flex:none;background:none;border:none;color:#fff;opacity:.75;font-size:15px;cursor:pointer;padding:2px 6px;margin:-2px -6px 0 0}
+.updbar .updx:hover{opacity:1}
 .appinstall .ai-icon{width:60px;height:60px;border-radius:14px;flex:none;box-shadow:0 5px 14px rgba(0,0,0,.16)}
 .appinstall .ai-h{font-weight:800;font-size:14.5px;color:var(--ink);margin-bottom:4px}
 .appinstall .ai-txt p{margin:0;font-size:12.5px;line-height:1.6;color:var(--mut)}
@@ -3165,8 +3202,11 @@ function posAW(){
     awCta.style.left='';awCta.style.top='';awCta.style.bottom='';
     if(heroNews&&heroEl.clientHeight){
       const bb=heroEl.querySelector('.bottombar');
-      const t=heroEl.clientHeight-(bb?bb.offsetHeight:120)-12-heroNews.offsetHeight-16; // 16 = top der .hero-top-r
-      heroNews.style.top=Math.max(150,Math.round(t))+'px';
+      // Versatz der .hero-top-r wirklich messen (in der installierten App kommt
+      // die Safe-Area der Statusleiste dazu - fixe 16px waren dort zu wenig).
+      const htr=heroNews.offsetParent;
+      const t=heroEl.clientHeight-(bb?bb.offsetHeight:120)-12-heroNews.offsetHeight-((htr&&htr.offsetTop)||16);
+      heroNews.style.top=Math.max(120,Math.round(t))+'px';
     }
     return;
   }
@@ -3434,6 +3474,38 @@ function route(){
   if(standalone||flag)hideApp();
   window.addEventListener('appinstalled',function(){try{localStorage.setItem('ftem-installed','1');}catch(_){}hideApp();});
 })();
+// App-Update-Hinweis: erscheint nur in der INSTALLIERTEN App auf iPhone/iPad,
+// wenn ein neues Huellen-Paket (Icon/Splash/Vollbild) eine Neuinstallation
+// braucht (NEED_SHELL im Generator setzen). Android aktualisiert die Huelle
+// automatisch - dort ist kein Banner noetig. Die App merkt sich ihre
+// Huellen-Generation im localStorage; beim Loeschen der App loescht iOS
+// diesen Speicher mit -> nach der Neuinstallation ist die neue Generation
+// vermerkt und das Banner verschwindet von selbst.
+var SHELL_V=__SHELL_V__;
+window.__shellBanner=function(need){
+  var standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
+  var ios=/iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(!standalone||!ios)return false;
+  var inst=0;
+  try{
+    inst=parseInt(localStorage.getItem('ftem-shellv')||'0',10)||0;
+    if(!inst){inst=SHELL_V;localStorage.setItem('ftem-shellv',String(SHELL_V));}
+    if(need&&parseInt(localStorage.getItem('ftem-shellv-x')||'0',10)>=need)return false;
+  }catch(_){return false;}
+  if(!need||inst>=need)return false;
+  var old=document.querySelector('.updbar');if(old)old.remove();
+  var d=document.createElement('div');d.className='updbar';d.setAttribute('role','status');
+  d.innerHTML='<div class="updtxt"><b></b><span></span></div><button class="updx" aria-label="OK">✕</button>';
+  d.querySelector('b').textContent=I18N.updTitle;
+  d.querySelector('span').textContent=I18N.updBody;
+  d.querySelector('.updx').addEventListener('click',function(){
+    try{localStorage.setItem('ftem-shellv-x',String(need));}catch(_){}
+    d.remove();
+  });
+  document.body.appendChild(d);
+  return true;
+};
+__shellBanner(__NEED_SHELL__);
 window.addEventListener('hashchange',route);
 route();
 loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});
@@ -4605,7 +4677,9 @@ for lang in LANGS:
             "chatExamples": {"de": ["Welches Material brauche ich in F3?", "Kraft-Ziele in Stufe T2?", "Welche Kader gibt es?", "Trainingsphasen im Überblick"], "fr": ["Quel matériel en F3 ?", "Objectifs de force en T2 ?", "Quels cadres existe-t-il ?", "Aperçu des phases d'entraînement"], "it": ["Quale materiale in F3?", "Obiettivi di forza in T2?", "Quali quadri esistono?", "Panoramica delle fasi"], "en": ["What gear do I need in F3?", "Strength goals in T2?", "Which squads exist?", "Overview of training phases"]}[lang],
             "chatErr": {"de": "Es gab ein Problem beim Beantworten. Bitte später erneut versuchen.", "fr": "Un problème est survenu. Veuillez réessayer plus tard.", "it": "Si è verificato un problema. Riprova più tardi.", "en": "Something went wrong. Please try again later."}[lang],
             "chatLimit": {"de": "Tageslimite erreicht: Der FTEM-Coach beantwortet pro Tag maximal 10 Fragen. Morgen geht es weiter – die Inhalte findest du jederzeit direkt auf dieser Seite.", "fr": "Limite quotidienne atteinte : le coach FTEM répond à 10 questions par jour au maximum. À demain – les contenus restent disponibles directement sur cette page.", "it": "Limite giornaliero raggiunto: il coach FTEM risponde al massimo a 10 domande al giorno. A domani – i contenuti restano disponibili direttamente su questa pagina.", "en": "Daily limit reached: the FTEM coach answers up to 10 questions per day. See you tomorrow – all content remains available right on this page."}[lang],
-            "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Max. 10 Fragen pro Tag.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés. Max. 10 questions par jour.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati. Max. 10 domande al giorno.", "en": "Answers are based on this sport's FTEM content and the linked documents. Max. 10 questions per day."}[lang]}
+            "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Max. 10 Fragen pro Tag.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés. Max. 10 questions par jour.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati. Max. 10 domande al giorno.", "en": "Answers are based on this sport's FTEM content and the linked documents. Max. 10 questions per day."}[lang],
+            "updTitle": APP_UPDATE.get(lang, APP_UPDATE["de"])["t"],
+            "updBody": APP_UPDATE.get(lang, APP_UPDATE["de"])["b"]}
     js = (JS.replace("__GSD_ICON__", asset_v("assets/gsd-icon.png"))
             .replace("__GSD_CAP__", GSD_CAP.get(lang, GSD_CAP["de"]))
             .replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
@@ -4628,6 +4702,7 @@ for lang in LANGS:
             .replace("__I18N__", json.dumps(i18n, ensure_ascii=False))
             .replace("__PAGELANG__", lang)
             .replace("__SUPA_URL__", SUPABASE_URL).replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
+            .replace("__SHELL_V__", str(SHELL_V)).replace("__NEED_SHELL__", str(NEED_SHELL))
             .replace("__PRES_PW__", PRES_PW))
     og_title = "FTEM – "+tr("Athlet:innen-Weg", lang)+" · Swiss-Ski"
     og_desc = {"de":"Der Athlet:innen-Weg von Swiss-Ski: alle Schneesportarten über die zehn FTEM-Entwicklungsstufen F1–M.",
