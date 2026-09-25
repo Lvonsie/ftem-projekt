@@ -1674,7 +1674,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 /* News-Box (Vorschlag 5B): breiter, groessere Schrift, CTA-Balken im FTEM-Verlauf */
 .news-box{width:100%;align-self:flex-end;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border:1px solid rgba(29,38,48,.10);border-radius:14px;overflow:hidden;cursor:pointer;text-align:left;transition:border-color .15s;box-shadow:0 14px 40px rgba(29,38,48,.16)}
 .news-box:hover{border-color:rgba(213,43,30,.45)}
-.news-box .nb-head{color:var(--ink);font-weight:800;font-size:13.5px;letter-spacing:.03em;padding:11px 14px 3px}
+/* Ueberschrift «News» rot, damit klar ist, dass die Box klickbar ist (Feedback) */
+.news-box .nb-head{color:var(--red);font-weight:800;font-size:13.5px;letter-spacing:.03em;padding:11px 14px 3px}
 /* News-Eintraege als helle Pill-Knoepfe (Feedback Bjoern) */
 /* News-Eintraege mit Teaser + "Mehr lesen" (Bjoern-Mock) */
 .news-box .nb-list{list-style:none;margin:2px 0 4px;padding:0 14px;color:#39424e}
@@ -1682,8 +1683,7 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-list li+li{border-top:1px solid #eef0f3}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:14px;width:5px;height:5px;border-radius:50%;background:var(--red)}
 .news-box .nb-item{display:flex;flex-direction:column;gap:2px}
-/* Titel rot wie ein Link, damit klar ist, dass die News klickbar sind (Feedback) */
-.news-box .nb-t{font-weight:800;color:var(--red);line-height:1.3}
+.news-box .nb-t{font-weight:800;color:var(--ink);line-height:1.3}
 .news-box .nb-teaser{font-size:11px;font-weight:500;color:#5b6472;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .news-box .nb-lnk{align-self:flex-end;font-size:11px;font-weight:800;color:var(--red);text-decoration:none;letter-spacing:.01em;margin-top:2px}
 .news-box .nb-lnk:hover{text-decoration:underline}
