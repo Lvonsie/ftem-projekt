@@ -30,6 +30,18 @@ try:
     TR = json.load(open(os.path.join(BASE, "translations.json"), encoding="utf-8"))
 except FileNotFoundError:
     TR = {}
+# Link-Uebersetzungen: URL der FR/IT/EN-Version eines verlinkten Dokuments
+# (gepflegt ueber links-sprachen-inventar.xlsx). Fehlt eine Sprache,
+# bleibt automatisch der deutsche Link.
+try:
+    LINK_TR = json.load(open(os.path.join(BASE, "link_translations.json"), encoding="utf-8"))
+except FileNotFoundError:
+    LINK_TR = {}
+
+def lhref(href, lang):
+    if lang == "de" or not href:
+        return href
+    return LINK_TR.get(href, {}).get(lang) or href
 LANGS = ["de", "fr", "it", "en"]
 FILES = {"de": "index.html", "fr": "fr.html", "it": "it.html", "en": "en.html"}
 
@@ -495,7 +507,7 @@ def render_cell(seg, lang, cid=None, edit=False):
             key=l.get("href")
             if key in seen: continue
             seen.add(key)
-            btns += '<a href="'+esc(l["href"] or "#")+'" target="_blank" rel="noopener">'+esc(tr(l.get("text"), lang) or "Dokument")+'</a>'
+            btns += '<a href="'+esc(lhref(l["href"], lang) or "#")+'" target="_blank" rel="noopener">'+esc(tr(l.get("text"), lang) or "Dokument")+'</a>'
         if btns: out += '<div class="lks">'+btns+'</div>'
     return out
 
