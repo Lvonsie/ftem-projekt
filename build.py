@@ -1682,7 +1682,8 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-list li+li{border-top:1px solid #eef0f3}
 .news-box .nb-list li::before{content:'';position:absolute;left:2px;top:14px;width:5px;height:5px;border-radius:50%;background:var(--red)}
 .news-box .nb-item{display:flex;flex-direction:column;gap:2px}
-.news-box .nb-t{font-weight:800;color:var(--ink);line-height:1.3}
+/* Titel rot wie ein Link, damit klar ist, dass die News klickbar sind (Feedback) */
+.news-box .nb-t{font-weight:800;color:var(--red);line-height:1.3}
 .news-box .nb-teaser{font-size:11px;font-weight:500;color:#5b6472;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .news-box .nb-lnk{align-self:flex-end;font-size:11px;font-weight:800;color:var(--red);text-decoration:none;letter-spacing:.01em;margin-top:2px}
 .news-box .nb-lnk:hover{text-decoration:underline}
@@ -2301,7 +2302,8 @@ header.top .sicon+.sportsel2{flex:none;width:44px;height:34px;min-width:0;max-wi
 .ht-c input.q{font-size:16px;padding:0 56px 0 30px}
 .ht-r .fltbtn{order:4;font-size:12px}
 .ht-r .chatbtn{order:5;flex:none}
-.ht-r .toggleall,.ht-r .pdf,.ht-r .hdiv{display:none}
+.ht-r .pdf,.ht-r .hdiv{display:none}
+.ht-r .toggleall{order:4;width:31px;height:31px}
 .wrap{padding:10px 10px 60px}
 .scroller{padding:0 8px 10px;will-change:scroll-position}
 .grid{transform:translateZ(0)}
@@ -2592,7 +2594,25 @@ function initSport(sec){
       };
     });
   }
-  sec.__clamp = setupClamp;
+  // "mehr"-Knopf bei breiten (verbundenen) Zellen im sichtbaren Bereich halten:
+  // statt fix rechts unten in der Zelle rueckt er beim Seitwaertsscrollen mit,
+  // damit er auf jeder Stufe klickbar ist (Feedback Handy).
+  function fixMore(){
+    sec.querySelectorAll('details.theme[open]').forEach(dd=>{
+      const scEl=dd.querySelector('.scroller'); if(!scEl)return;
+      const vr=scEl.getBoundingClientRect().right;
+      dd.querySelectorAll('.cell .more').forEach(b=>{
+        if(b.hidden)return;
+        const c=b.closest('.cell').getBoundingClientRect();
+        let r=8+Math.max(0,c.right-(vr-6));
+        r=Math.min(r,Math.max(8,c.width-74)); // nie aus der Zelle hinausschieben
+        b.style.right=Math.round(r)+'px';
+      });
+    });
+  }
+  let _mt=false;
+  function queueMore(){if(_mt)return;_mt=true;requestAnimationFrame(()=>{_mt=false;fixMore();});}
+  sec.__clamp = function(){setupClamp();fixMore();};
   if(!q) return; // Platzhalter-Seite ohne Werkzeuge
   const cnt = sec.querySelector('.cnt');
   const hitEl = sec.querySelector('.hits');
@@ -2650,15 +2670,15 @@ function initSport(sec){
   const qx=sec.querySelector('.qx');
   if(qx){function qtog(){qx.hidden=!q.value;}q.addEventListener('input',qtog);qx.onclick=()=>{q.value='';qtog();run();q.focus();};}
   const toggleAll=sec.querySelector('.toggleall');
-  if(toggleAll){toggleAll.onclick=()=>{const open=!toggleAll.classList.contains('allopen');themes.forEach(t=>t.open=open);toggleAll.classList.toggle('allopen',open);var lbl=toggleAll.getAttribute(open?'data-close':'data-open');toggleAll.title=lbl;toggleAll.setAttribute('aria-label',lbl);if(open)setTimeout(setupClamp,50);};}
+  if(toggleAll){toggleAll.onclick=()=>{const open=!toggleAll.classList.contains('allopen');themes.forEach(t=>t.open=open);toggleAll.classList.toggle('allopen',open);var lbl=toggleAll.getAttribute(open?'data-close':'data-open');toggleAll.title=lbl;toggleAll.setAttribute('aria-label',lbl);if(open)setTimeout(sec.__clamp,50);};}
   const pdfBtn=sec.querySelector('.pdf');
   if(pdfBtn)pdfBtn.onclick=()=>openPrintPicker(sec);
   const chatBtn=sec.querySelector('.chatbtn');
   if(chatBtn)chatBtn.onclick=()=>openChat(sec);
   const fbtn=sec.querySelector('.fltbtn');
   if(fbtn)fbtn.onclick=()=>openFilter(sec);
-  themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(setupClamp,50);}}));
-  window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(setupClamp,150);});
+  themes.forEach(t=>t.addEventListener('toggle',()=>{if(t.open){const sc=t.querySelector('.scroller');if(sc)sc.scrollLeft=sec.__sx||0;setTimeout(sec.__clamp,50);}}));
+  window.addEventListener('resize',()=>{if(!sec.hidden)setTimeout(sec.__clamp,150);});
   // synchronisiertes Seitwaerts-Scrollen innerhalb der Sportart.
   // WICHTIG fuers Handy: programmatisch gesetzte Positionen loesen selbst
   // scroll-Events aus ("Echos"). Wuerden die zurueck in den gerade gewischten
@@ -2667,6 +2687,7 @@ function initSport(sec){
   const scrollers=[...sec.querySelectorAll('.scroller')];
   sec.__sx=0;
   scrollers.forEach(s=>s.addEventListener('scroll',()=>{
+    queueMore();
     if(s.__prog!==undefined){delete s.__prog;return;}
     sec.__sx=s.scrollLeft;
     scrollers.forEach(o=>{
