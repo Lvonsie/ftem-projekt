@@ -1701,9 +1701,10 @@ a.news-btn{text-decoration:none;display:inline-block;text-align:center}
 .news-box .nb-lnk:hover{text-decoration:underline}
 .news-box .nb-more{display:block;text-align:center;font-weight:800;font-size:12px;color:var(--red);margin:6px 14px 13px;padding:8px 14px;border:1px solid rgba(29,38,48,.14);border-radius:999px;background:#fff;box-shadow:0 2px 8px rgba(29,38,48,.06);letter-spacing:.02em;transition:background .15s,border-color .15s}
 .news-box:hover .nb-more{background:#fdf3f2;border-color:rgba(213,43,30,.5)}
-@media(max-width:760px){
-  /* Mobil: News-Box im freien Bereich rechts unten im Panorama (JS setzt die exakte
-     Hoehe knapp ueber der Fusszeile; die svh-Angabe ist nur der Startwert). */
+@media(max-width:760px),(max-width:1100px) and (orientation:portrait){
+  /* Mobil + Tablet hochkant: News-Box im freien Bereich rechts unten im Panorama
+     (JS setzt die exakte Hoehe knapp ueber der Fusszeile; svh ist der Startwert).
+     Hochkant-Tablets brauchen das auch - sonst ueberdeckt die Box die M-Kachel. */
   .news-box{width:100%;align-self:stretch;position:absolute;right:0;top:52vh;top:52svh}
   .news-box .nb-list li:nth-child(n+3){display:none}
   .news-box .nb-more{display:none}
@@ -1858,7 +1859,7 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
   .fltbtn{padding:7px 10px}
   .fthemes{grid-template-columns:1fr}
 }
-@media(max-width:760px){.aw-cta{top:calc(118px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%)}.aw-btn{font-size:13px;padding:9px 18px}}
+@media(max-width:760px),(max-width:1100px) and (orientation:portrait){.aw-cta{top:calc(118px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%)}.aw-btn{font-size:13px;padding:9px 18px}}
 /* schlanke Fusszeile mit Mission Swiss-Ski */
 .bottombar{position:absolute;left:0;right:0;bottom:0;z-index:8;display:flex;align-items:center;gap:14px;padding:8px 18px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);border-top:1px solid rgba(29,38,48,.08)}
 /* Mission Sportart links in der Fusszeile (Bjoern-Mock, Farben wie gehabt) */
@@ -3229,7 +3230,9 @@ const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.h
 const heroNews=document.querySelector('.hero-top-r .news-box');
 function posAW(){
   if(!awCta||!heroEl)return;
-  if(window.innerWidth<=760){
+  // "Mobil-Layout" gilt auch fuer Tablets im Hochformat (dort ueberdeckte die
+  // News-Box sonst die M-Kachel und den Athlet:innen-Weg-Knopf).
+  if(window.innerWidth<=760||(window.innerWidth<=1100&&window.innerHeight>window.innerWidth)){
     // Mobil: Knopf oben zentriert (CSS); News-Box rechts unten im Panorama,
     // knapp ueber der Fusszeile (deren Hoehe je nach Sprache/Umbruch variiert).
     awCta.style.left='';awCta.style.top='';awCta.style.bottom='';
@@ -3251,7 +3254,15 @@ function posAW(){
   const VBW=window.innerWidth<=760?1896:1600;
   if(heroSvg)heroSvg.setAttribute('viewBox','0 110 '+VBW+' 876');
   const s=Math.max(w/VBW,h/876),ox=(w-VBW*s)/2;
-  awCta.style.left=Math.round(1018*s+ox)+'px';
+  let lx=Math.round(1018*s+ox);
+  // Nie in die rechte Spalte (Sportwahl/News) hineinragen - bei schmalen
+  // Querformat-Fenstern rueckt der Knopf sonst unter die News-Box.
+  const htrEl=heroEl.querySelector('.hero-top-r');
+  if(htrEl){
+    const lim=Math.round(htrEl.getBoundingClientRect().left-heroEl.getBoundingClientRect().left-awCta.offsetWidth-14);
+    if(lx>lim)lx=Math.max(10,lim);
+  }
+  awCta.style.left=lx+'px';
   awCta.style.top=Math.max(10,Math.round((227-110)*s-awCta.offsetHeight-12))+'px';
 }
 window.addEventListener('resize',posAW);posAW();
