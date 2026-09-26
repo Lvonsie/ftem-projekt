@@ -480,9 +480,9 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .bb-item{font:inherit;flex:none;white-space:nowrap;background:#fff;border:1px solid rgba(29,38,48,.14);border-radius:999px;color:var(--ink);font-weight:700;font-size:12.5px;padding:7px 16px;cursor:pointer;text-decoration:none;letter-spacing:.03em;box-shadow:0 2px 8px rgba(29,38,48,.06);transition:background .15s,border-color .15s,color .15s,transform .15s}
 .bb-item b{color:var(--red);font-weight:800;margin-left:4px}
 .bb-item:hover{border-color:var(--red);color:var(--red);transform:translateY(-1px)}
-/* Fusszeile mobil: sauberes 2-Spalten-Raster (NACH den Grundregeln, damit es gewinnt).
-   Zeile 1: Titel · Zeile 2/3: die 4 Grundlagen · Zeile 4: Mission + FTEM kurz erklaert */
-@media(max-width:760px){
+/* Fusszeile mobil + Tablet hochkant: sauberes 2-Spalten-Raster (NACH den Grundregeln,
+   damit es gewinnt). Zeile 1: Titel · Zeile 2/3: die 4 Grundlagen · Zeile 4: Mission + FTEM */
+@media(max-width:760px),(max-width:1100px) and (orientation:portrait){
   .bottombar{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
   .bb-div{display:none}
   .bb-intro{order:0;grid-column:1/-1;text-align:center;font-size:9.5px;line-height:1.25}
