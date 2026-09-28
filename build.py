@@ -198,14 +198,32 @@ def _bodyhtml(txt):
 def render_block(block, link_texts):
     b = block.strip()
     if not b: return ""
+    # Explizite Admin-Schreibweise: "---" allein = Trennstrich
+    if re.fullmatch(r'-{3,}', b):
+        return '<hr class="chr">'
     if b in link_texts:  # pure link-label token, shown as button instead
         return ""
     # "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip wie im Athlet:innen-Weg
     _l0 = b.split("\n", 1)
     if _SNOW_RE.match(_l0[0].strip()):
         return _snow_zone_html(_l0[0].strip(), _l0[1] if len(_l0) > 1 else "")
+    # Explizite Admin-Schreibweise: "((Label))" als erste Zeile = Zonen-Chip
+    _mz = re.match(r'^\(\((.{1,28})\)\)\s*$', _l0[0].strip())
+    if _mz:
+        zbody, _zl = _zone_body(_l0[1] if len(_l0) > 1 else "")
+        return '<div class="zone"><span class="zlab">'+esc(_mz.group(1).strip())+'</span>'+zbody+'</div>'
     lines = [l for l in b.split("\n")]
     nonempty = [l.strip() for l in lines if l.strip()]
+    # Explizite Admin-Schreibweise: "[[Etikett]] Text"-Zeilen = Badge-Liste
+    _bg = [re.match(r'^\[\[(.{1,28})\]\]\s*(.*)$', l) for l in nonempty]
+    if nonempty and sum(1 for m in _bg if m) >= max(1, len(nonempty)-1):
+        out = '<ul class="sc">'
+        for l, m in zip(nonempty, _bg):
+            if m:
+                out += '<li><span class="badge">'+esc(m.group(1).strip())+'</span> '+esc(m.group(2).strip())+'</li>'
+            else:
+                out += '<li>'+esc(l)+'</li>'
+        return out + '</ul>'
     # bullet list
     if any(l.strip().startswith("•") for l in lines):
         intro, items = [], []
@@ -2239,6 +2257,9 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap .bh,.cwrap .sh,.cwrap .bi{font-weight:700;color:var(--acc);font-size:9px;text-transform:uppercase;letter-spacing:.055em;margin:12px 0 4px;line-height:1.3}
 .cwrap .bh:first-child,.cwrap .sh:first-child,.cwrap .bi:first-child{margin-top:0}
 .cwrap .bh:not(:first-child),.cwrap .sh:not(:first-child),.cwrap .bi:not(:first-child){border-top:1px solid #e3e8ee;padding-top:10px}
+/* Expliziter Trennstrich ("---" im Admin) */
+.cwrap .chr{border:none;border-top:1px solid #e3e8ee;height:0;margin:9px 0 8px}
+[data-theme="dark"] .cwrap .chr{border-top-color:rgba(255,255,255,.10)}
 /* Off-Snow / On-Snow Zonen */
 .cwrap .zone{margin-top:11px}.cwrap .zone:first-child{margin-top:0}
 .cwrap .zone+.zone{border-top:1px solid #e3e8ee;padding-top:10px}
@@ -2443,18 +2464,8 @@ footer{padding:16px;font-size:11px}
 #home .hero-top .themebtn:hover{color:#fff;border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.1)}
 """
 
-JS = r"""
-function toggleTheme(){var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',d);try{localStorage.setItem('ftem-theme',d);}catch(e){}}
-const SPORT_IDS = __SPORT_IDS__;
-const SPORT_MISSIONS = __SPORT_MISSIONS__;
-const SPORT_NAMES = __SPORT_NAMES__;
-const I18N = __I18N__;
-const PAGELANG="__PAGELANG__";
-const sections = [...document.querySelectorAll('section.sport')];
-const home = document.getElementById('home');
-
-// ---- Live-Overrides aus dem Admin-Bereich (Supabase) ----
-const SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
+RENDER_JS = r"""
+// ---- Gemeinsamer Zellen-Renderer (Live-Seiten, Overrides UND Admin-Vorschau) ----
 function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*([\s\S]*)$/;
 const SNOW_RE=/^(on|off)[\s-]?snow:?$/i;
@@ -2473,8 +2484,31 @@ function structBlock(b){
   // Stern-Absaetze ("* Window of Opportunity ...") wie im Seiten-Build als
   // schlichten <p> ausgeben - gsdWrap macht daraus ggf. den markierten Kasten.
   if(/^\*/.test(b.trim())){return '<p>'+_esc(b.trim()).replace(/\n/g,'<br>')+'</p>';}
+  // Explizite Admin-Schreibweise: "---" allein = Trennstrich
+  if(/^-{3,}$/.test(b.trim()))return '<hr class="chr">';
   const lines=b.split('\n');
   const nonempty=lines.map(l=>l.trim()).filter(Boolean);
+  // Explizite Admin-Schreibweise: "((Label))" als erste Zeile = Zonen-Chip
+  const mz=lines[0].trim().match(/^\(\((.{1,28})\)\)$/);
+  if(mz){
+    const items=[],other=[];
+    lines.slice(1).forEach(l=>{const ls=l.trim();if(!ls)return;
+      if('-–•·'.indexOf(ls[0])>=0)items.push(ls.replace(/^[-–•·]+\s*/,'').trim());
+      else if(items.length)items[items.length-1]+=' '+ls;
+      else other.push(ls);});
+    let body='';
+    if(other.length)body+='<p>'+_esc(other.join(' '))+'</p>';
+    if(items.length)body+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';
+    return '<div class="zone"><span class="zlab">'+_esc(mz[1].trim())+'</span>'+body+'</div>';
+  }
+  // Explizite Admin-Schreibweise: "[[Etikett]] Text"-Zeilen = Badge-Liste
+  const bg=nonempty.map(l=>l.match(/^\[\[(.{1,28})\]\]\s*([\s\S]*)$/));
+  if(nonempty.length&&bg.filter(Boolean).length>=Math.max(1,nonempty.length-1)){
+    let out='<ul class="sc">';
+    nonempty.forEach((l,i)=>{const m=bg[i];
+      out+=m?'<li><span class="badge">'+_esc(m[1].trim())+'</span> '+_esc(m[2].trim())+'</li>':'<li>'+_esc(l)+'</li>';});
+    return out+'</ul>';
+  }
   // "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip (gleich wie beim Seiten-Build)
   if(SNOW_RE.test(lines[0].trim())){
     const lab=/^on/i.test(lines[0].trim())?'On-Snow':'Off-Snow';
@@ -2558,6 +2592,33 @@ function gsdWrap(h){
   });
   return h.replace(/\x02(\d+)\x02/g,function(_,i){return hold[+i];});
 }
+
+// Eigenstaendige "[Text](URL)"-Zeilen im Override sind Link-Buttons (gleiche
+// Schreibweise wie im Admin-Editor angezeigt). Sie ersetzen die bestehenden
+// Buttons der Zelle; ohne solche Zeilen bleiben die bisherigen Buttons stehen
+// (aeltere Overrides kennen die Schreibweise noch nicht).
+function splitCellLinks(v){
+  const keep=[],links=[];
+  String(v).split('\n').forEach(l=>{
+    const m=l.trim().match(/^\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)$/);
+    if(m)links.push({t:m[1],u:m[2]});else keep.push(l);
+  });
+  return {txt:keep.join('\n').replace(/\n{3,}/g,'\n\n').trim(),links:links};
+}
+"""
+
+JS = r"""
+function toggleTheme(){var r=document.documentElement;var d=r.getAttribute('data-theme')==='dark'?'light':'dark';r.setAttribute('data-theme',d);try{localStorage.setItem('ftem-theme',d);}catch(e){}}
+const SPORT_IDS = __SPORT_IDS__;
+const SPORT_MISSIONS = __SPORT_MISSIONS__;
+const SPORT_NAMES = __SPORT_NAMES__;
+const I18N = __I18N__;
+const PAGELANG="__PAGELANG__";
+const sections = [...document.querySelectorAll('section.sport')];
+const home = document.getElementById('home');
+
+// ---- Live-Overrides aus dem Admin-Bereich (Supabase) ----
+const SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
 function loadOverrides(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
   // Lastarm & ausfallsicher: nur die fuer die Seite relevanten Zeilen laden
@@ -2599,23 +2660,11 @@ function applyOverrides(map){
     if(bh&&_fnv36(v)===bh)return null;
     return v;
   }
-  // Eigenstaendige "[Text](URL)"-Zeilen im Override sind Link-Buttons (gleiche
-  // Schreibweise wie im Admin-Editor angezeigt). Sie ersetzen die bestehenden
-  // Buttons der Zelle; ohne solche Zeilen bleiben die bisherigen Buttons stehen
-  // (aeltere Overrides kennen die Schreibweise noch nicht).
-  function splitLinks(v){
-    const keep=[],links=[];
-    String(v).split('\n').forEach(l=>{
-      const m=l.trim().match(/^\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)$/);
-      if(m)links.push({t:m[1],u:m[2]});else keep.push(l);
-    });
-    return {txt:keep.join('\n').replace(/\n{3,}/g,'\n\n').trim(),links:links};
-  }
   function patch(root){
     root.querySelectorAll('.ctext[data-cid]').forEach(el=>{
       const v=pick(el);
       if(v!=null){
-        const sp=splitLinks(v);
+        const sp=splitCellLinks(v);
         el.innerHTML=structCell(sp.txt);
         if(sp.links.length){
           const wrap=el.closest('.cwrap')||el.parentElement;
@@ -3798,6 +3847,23 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .cedit.curchg{box-shadow:0 0 0 3px rgba(213,43,30,.35);border-color:#d52b1e}
 /* Uebersetzung-pruefen-Markierung: Deutsch wurde geaendert */
 .cedit-wrap{position:relative}
+/* Live-Vorschau der fokussierten Zelle */
+.cprev{margin-top:6px;border:1px dashed #c6cdd6;border-radius:8px;background:var(--card);padding:8px 10px 9px}
+.cprev-h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#98a1ad;margin-bottom:5px}
+.cprev-cell{font-size:11.5px;line-height:1.45}
+.cprev-cell .lks{margin-top:8px}
+/* Formatierungs-Spickzettel */
+.fmtpanel{position:fixed;inset:0;z-index:400;background:rgba(8,12,20,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+.fmtpanel[hidden]{display:none}
+.fmt-box{width:min(880px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:14px;padding:16px 18px 18px;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+.fmt-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.fmt-bar b{font-size:15px}
+.fmt-x{background:none;border:none;font-size:17px;color:#98a1ad;cursor:pointer;padding:4px 8px}
+.fmt-x:hover{color:var(--ink)}
+.fmt-t{width:100%;border-collapse:collapse;font-size:12px}
+.fmt-t td{border:1px solid var(--line);padding:7px 9px;vertical-align:top}
+.fmt-t td:first-child{font-family:ui-monospace,Consolas,monospace;font-size:11px;white-space:pre-wrap;background:rgba(127,140,160,.08);width:38%}
+.fmt-t th{background:#1d2630;color:#fff;text-align:left;padding:6px 9px;font-size:11px}
 .cedit.needs-review{border-color:#e0932c;background:#fffaf1}
 .revflag{position:absolute;top:5px;right:5px;z-index:5;border:0;background:none;padding:0;margin:0;cursor:help;font:inherit;line-height:0}
 .revflag.aisugg{right:28px;cursor:pointer}
@@ -3887,6 +3953,7 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     <button id="statbtn" class="agloss" type="button">Statistik</button>
     <button id="fbbtn" class="agloss" type="button">Feedback<span id="fbbadge" class="fbbadge" hidden>0</span></button>
     <button id="presbtn" class="agloss" type="button" title="Präsentationsmodus auf der Webseite starten" onclick="window.open('index.html?pres=1','_blank')">Präsentation</button>
+    <button id="fmtbtn" class="agloss" type="button" title="Spickzettel: Schreibweisen für Struktur, Links, Badges …">Formatierung&nbsp;?</button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
   <div id="note" class="note"></div>
@@ -3894,6 +3961,33 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     <div class="glosbar"><b style="font-size:14px">Feedback-Eingänge</b><span id="fbcount" class="astatus"></span>
       <label class="fbfilter"><input id="fbopen" type="checkbox"> nur offene</label></div>
     <div id="fbtable"></div>
+  </div>
+  <div id="fmtpanel" class="fmtpanel" hidden>
+    <div class="fmt-box">
+      <div class="fmt-bar"><b>Formatierung – so gestaltest du eine Zelle</b><button id="fmtx" class="fmt-x" type="button" aria-label="Schliessen">✕</button></div>
+      <p class="glosnote">Links: was du ins Textfeld tippst · Rechts: was daraus wird. Abschnitte immer mit einer <b>Leerzeile</b> trennen – die Live-Vorschau unter der Zelle zeigt das Ergebnis sofort.</p>
+      <table class="fmt-t">
+        <tr><th>Du tippst …</th><th>… und das wird daraus</th></tr>
+        <tr><td>(Leerzeile)</td><td>Neuer Abschnitt.</td></tr>
+        <tr><td>Freies Fahren
+jede Gelegenheit nutzen</td><td>Kurze erste Zeile (bis ca. 50 Zeichen, ohne Punkt/Komma am Ende) = <b>Kopfzeile</b> in Grossbuchstaben – ab dem zweiten Abschnitt automatisch mit Trennstrich darüber.</td></tr>
+        <tr><td>Racing Essential 2:
+Schwung</td><td>Zeile mit <b>Doppelpunkt am Ende</b> = Kopfzeile (funktioniert auch mit «…»-Anführungszeichen). Inhalt auf den Folgezeilen.</td></tr>
+        <tr><td>Ziele: Grundlagenausdauer entwickeln</td><td><b>Label und Wert auf einer Zeile:</b> «Ziele:» wird fett, der Text steht dahinter. Bei langem/mehrzeiligem Text wird das Label zur Kopfzeile.</td></tr>
+        <tr><td>• Gleiten
+• Bremsen
+- Richtung ändern</td><td><b>Aufzählung</b> mit Punkten (• oder - am Zeilenanfang). Eine kurze Zeile direkt davor wird zur Überschrift der Liste.</td></tr>
+        <tr><td>---</td><td><b>Trennstrich</b> – drei Bindestriche allein auf einer Zeile (mit Leerzeile davor und danach).</td></tr>
+        <tr><td>[[SC 1]] Anfahrtsposition
+[[SC 2]] Absprung</td><td><b>Badge-Etikett</b> + Text, ein Eintrag pro Zeile. (Zeilen, die mit «SC 1:» oder «ST:» beginnen, werden weiterhin automatisch zu Badges.)</td></tr>
+        <tr><td>((Sommer))
+- Viele Sprünge
+- Rollski</td><td><b>Zonen-Chip-Block</b> mit frei wählbarem Etikett. «On Snow:» / «Off Snow:» als erste Zeile erzeugen den Chip weiterhin automatisch.</td></tr>
+        <tr><td>[Taktik T1-4](https://…)</td><td>Auf einer <b>eigenen Zeile</b>: Link-Knopf unter der Zelle. Die bestehenden Knöpfe stehen bereits so am Zellenende – umbenennen, löschen oder ergänzen.</td></tr>
+        <tr><td>… siehe [Konzept](https://…) im Detail.</td><td>Mitten im Satz: anklickbarer <b>Link im Fliesstext</b>.</td></tr>
+        <tr><td>*Mädchen sind in der Adoleszenz …</td><td>Abschnitt mit <b>Stern</b> + Stichwort (Mädchen/Jungen/Adoleszenz …) = Kasten «Geschlechtsspezifische Unterschiede» mit Icon. «Window of Opportunity» erhält die Icon-Pille automatisch.</td></tr>
+      </table>
+    </div>
   </div>
   <div id="glosspanel" hidden>
     <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (DE, FR, IT oder EN) …"><span id="gloscount" class="astatus"></span></div>
@@ -3920,6 +4014,7 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
   <div id="editwrap">__ADMIN_SECTIONS__</div>
 </div>
 <script>
+__RENDER_JS__
 const ORIGS=__ADMIN_ORIG__, GLOSS=__GLOSSARY__, PW="__ADMIN_PW__", SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
 // Schreibzugriffe laufen ueber die geschuetzte Netlify-Funktion save.js (Passwort-
 // Pruefung + service-role-Schluessel auf dem Server). Der oeffentliche Schluessel
@@ -4557,6 +4652,41 @@ function init(){
   showSport(sel.value||(sel.options[0]&&sel.options[0].value));
   updateCount();
 }
+// ---- Live-Vorschau der fokussierten Zelle + Formatierungs-Spickzettel ----
+var _prevBox=null,_prevTa=null;
+function renderPrev(ta){
+  if(!_prevBox){
+    _prevBox=document.createElement('div');_prevBox.className='cprev';
+    _prevBox.innerHTML='<div class="cprev-h">Vorschau – so erscheint die Zelle auf der Webseite</div>'
+      +'<div class="cprev-cell"><div class="cwrap"><div class="ctext"></div></div></div>';
+  }
+  var w=ta.closest('.cedit-wrap')||ta.parentElement;
+  if(_prevBox.parentElement!==w)w.appendChild(_prevBox);
+  var sp=splitCellLinks(ta.value);
+  _prevBox.querySelector('.ctext').innerHTML=structCell(sp.txt);
+  var cw=_prevBox.querySelector('.cwrap');
+  var old=cw.querySelector('.lks');if(old)old.remove();
+  if(sp.links.length){
+    var seen={},btns='';
+    sp.links.forEach(function(l){if(seen[l.u])return;seen[l.u]=1;
+      btns+='<a href="'+_esc(l.u)+'" target="_blank" rel="noopener">'+_esc(l.t)+'</a>';});
+    var d=document.createElement('div');d.className='lks';d.innerHTML=btns;cw.appendChild(d);
+  }
+  _prevTa=ta;
+}
+app.addEventListener('focusin',function(e){
+  var t=e.target;
+  if(t&&t.classList&&t.classList.contains('cedit'))renderPrev(t);
+});
+app.addEventListener('input',function(e){if(_prevTa&&e.target===_prevTa)renderPrev(_prevTa);});
+(function(){
+  var fb=document.getElementById('fmtbtn'),fp=document.getElementById('fmtpanel');
+  if(!fb||!fp)return;
+  fb.addEventListener('click',function(){fp.hidden=!fp.hidden;});
+  document.getElementById('fmtx').addEventListener('click',function(){fp.hidden=true;});
+  fp.addEventListener('click',function(e){if(e.target===fp)fp.hidden=true;});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!fp.hidden)fp.hidden=true;});
+})();
 function save(){
   const ch=changed();if(!ch.length)return;
   // Review-Zeilen bestimmen: geänderte Übersetzungen = geprüft ggü. aktuellem Deutsch;
@@ -4734,7 +4864,10 @@ def admin_html(datamap):
     if os.path.exists(gpath):
         gloss = json.load(open(gpath, encoding="utf-8"))
     gloss_js = json.dumps(gloss, ensure_ascii=False).replace("</", "<\\/")
+    render_js = (RENDER_JS.replace("__GSD_ICON__", asset_v("assets/gsd-icon.png"))
+                          .replace("__GSD_CAP__", GSD_CAP["de"]))
     return (ADMIN_TMPL.replace("__MAINCSS__", CSS)
+                      .replace("__RENDER_JS__", render_js)
                       .replace("__ADMIN_SECTIONS__", secs)
                       .replace("__SPORT_OPTIONS__", opts)
                       .replace("__ADMIN_ORIG__", orig_js)
@@ -4791,7 +4924,7 @@ for lang in LANGS:
             "chatNote": {"de": "Antworten basieren auf den FTEM-Inhalten dieser Sportart und den verlinkten Dokumenten. Max. 10 Fragen pro Tag.", "fr": "Les réponses se basent sur les contenus FTEM de ce sport et les documents liés. Max. 10 questions par jour.", "it": "Le risposte si basano sui contenuti FTEM di questo sport e sui documenti collegati. Max. 10 domande al giorno.", "en": "Answers are based on this sport's FTEM content and the linked documents. Max. 10 questions per day."}[lang],
             "updTitle": APP_UPDATE.get(lang, APP_UPDATE["de"])["t"],
             "updBody": APP_UPDATE.get(lang, APP_UPDATE["de"])["b"]}
-    js = (JS.replace("__GSD_ICON__", asset_v("assets/gsd-icon.png"))
+    js = ((RENDER_JS + JS).replace("__GSD_ICON__", asset_v("assets/gsd-icon.png"))
             .replace("__GSD_CAP__", GSD_CAP.get(lang, GSD_CAP["de"]))
             .replace("__SPORT_IDS__", json.dumps([s["id"] for s in SPORTS]))
             .replace("__SPORT_MISSIONS__", json.dumps({s["id"]: (mission_url(s, lang) or "") for s in SPORTS}))
