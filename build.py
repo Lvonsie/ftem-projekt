@@ -250,7 +250,9 @@ def render_block(block, link_texts):
         rest = "\n".join([mf.group(2).strip()] + list(lines[1:])).strip()
         return '<p class="bh">'+esc(head)+'</p>'+_bodyhtml(rest)
     # Fall C: erste Zeile endet mit ":" -> reine Titelzeile + Rest
-    if first.endswith(":") and 2 <= len(first) <= 60 and first[:1].isupper():
+    # (fuehrende Anfuehrungszeichen zaehlen nicht, z.B. '"Sich konzentrieren":')
+    _fc = first.lstrip('"«»\'„“”')
+    if first.endswith(":") and 2 <= len(first) <= 60 and _fc[:1].isupper():
         head = first[:-1].strip()
         if head:
             return '<p class="bh">'+esc(head)+'</p>'+_bodyhtml("\n".join(lines[1:]))
@@ -482,9 +484,33 @@ def gsd_wrap(html, lang):
     return re.sub('\x02(\\d+)\x02', lambda m: hold[int(m.group(1))], html)
 
 
+def _mdlinks(lks, lang="de"):
+    """Bestehende Link-Buttons als "[Text](URL)"-Zeilen (Admin-Schreibweise)."""
+    seen = set(); out = []
+    for l in (lks or []):
+        h = l.get("href")
+        if not h or h in seen: continue
+        seen.add(h)
+        t = l.get("text") or "Dokument"
+        if lang != "de":
+            t = tr(t, lang); h = lhref(h, lang)
+        out.append("["+t+"]("+h+")")
+    return out
+
+def edit_text_with_links(v, lks, lang="de"):
+    """Zellentext fuer den Admin-Editor: vorhandene Links werden am Ende als
+    eigene "[Text](URL)"-Zeilen angezeigt - im selben Format, in dem Admins
+    Links auch neu erfassen. Beim Speichern uebernimmt die Seite diese Zeilen
+    wieder als Link-Buttons (siehe applyOverrides im Frontend)."""
+    v = (v or "").rstrip()
+    md = _mdlinks(lks, lang)
+    if not md:
+        return v
+    return (v+"\n\n" if v else "")+"\n".join(md)
+
 def render_cell(seg, lang, cid=None, edit=False):
     if edit:
-        raw = seg.get("v") or ""
+        raw = edit_text_with_links(seg.get("v"), seg.get("l"))
         return '<textarea class="cedit" data-cid="'+esc(cid or "")+'">'+esc(raw)+'</textarea>'
     txt = clean_ws((tr(seg["v"], lang) or "").strip())
     link_texts = set(tr(l["text"], lang) for l in seg["l"] if l.get("text"))
@@ -2462,10 +2488,15 @@ function structBlock(b){
     if(items.length)body+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';
     return '<div class="zone"><span class="zlab">'+lab+'</span>'+body+'</div>';
   }
-  if(lines.some(l=>l.trim().startsWith('•'))){
+  if(lines.some(l=>/^([•·‣]|[-–]\s)/.test(l.trim()))){
     const intro=[],items=[];
-    lines.forEach(l=>{const ls=l.trim();if(ls.startsWith('•'))items.push(ls.replace(/^•+/,'').trim());else if(ls){items.length?items.push(ls):intro.push(ls);}});
-    let out='';if(intro.length)out+='<p class="bh">'+_esc(intro[0])+'</p>';
+    lines.forEach(l=>{const ls=l.trim();if(/^([•·‣]|[-–]\s)/.test(ls))items.push(ls.replace(/^[•·‣\-–]+\s*/,'').trim());else if(ls){items.length?items.push(ls):intro.push(ls);}});
+    let out='';
+    if(intro.length){
+      // Titelzeile: Doppelpunkt am Ende weglassen ("Sich konzentrieren:" -> Kopfzeile)
+      out+='<p class="bh">'+_esc(intro[0].replace(/:$/,''))+'</p>';
+      if(intro.length>1)out+='<p>'+_esc(intro.slice(1).join(' '))+'</p>';
+    }
     out+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';return out;
   }
   const scHits=nonempty.filter(l=>SC_RE.test(l));
@@ -2568,10 +2599,34 @@ function applyOverrides(map){
     if(bh&&_fnv36(v)===bh)return null;
     return v;
   }
+  // Eigenstaendige "[Text](URL)"-Zeilen im Override sind Link-Buttons (gleiche
+  // Schreibweise wie im Admin-Editor angezeigt). Sie ersetzen die bestehenden
+  // Buttons der Zelle; ohne solche Zeilen bleiben die bisherigen Buttons stehen
+  // (aeltere Overrides kennen die Schreibweise noch nicht).
+  function splitLinks(v){
+    const keep=[],links=[];
+    String(v).split('\n').forEach(l=>{
+      const m=l.trim().match(/^\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)$/);
+      if(m)links.push({t:m[1],u:m[2]});else keep.push(l);
+    });
+    return {txt:keep.join('\n').replace(/\n{3,}/g,'\n\n').trim(),links:links};
+  }
   function patch(root){
     root.querySelectorAll('.ctext[data-cid]').forEach(el=>{
       const v=pick(el);
-      if(v!=null){el.innerHTML=structCell(v);}
+      if(v!=null){
+        const sp=splitLinks(v);
+        el.innerHTML=structCell(sp.txt);
+        if(sp.links.length){
+          const wrap=el.closest('.cwrap')||el.parentElement;
+          const old=wrap.querySelector('.lks');if(old)old.remove();
+          const seen={};let btns='';
+          sp.links.forEach(l=>{if(seen[l.u])return;seen[l.u]=1;
+            btns+='<a href="'+_esc(l.u)+'" target="_blank" rel="noopener">'+_esc(l.t)+'</a>';});
+          const d=document.createElement('div');d.className='lks';d.innerHTML=btns;
+          wrap.appendChild(d);
+        }
+      }
     });
     root.querySelectorAll('.ovr-txt[data-cid]').forEach(el=>{
       const v=pick(el);
@@ -4218,10 +4273,17 @@ const edits={de:{},fr:{},it:{},en:{}};
 const reviewed={fr:{},it:{},en:{}};
 function curDe(cid){return edits.de[cid]!==undefined?edits.de[cid]:(base.de[cid]||'');}
 function reviewedDe(l,cid){return (reviewed[l]&&reviewed[l][cid]!==undefined)?reviewed[l][cid]:(base.de[cid]||'');}
+function _nolnk(s){
+  // Link-Zeilen "[Text](URL)" fuer Vergleiche ausblenden - aeltere Pruef-Staende
+  // in der Datenbank kennen die angehaengten Link-Zeilen noch nicht.
+  return String(s||'').split('\n').filter(function(l){
+    return !/^\[[^\]]+\]\(https?:\/\/[^\s)]+\)$/.test(l.trim());
+  }).join('\n').replace(/\n{3,}/g,'\n\n').trim();
+}
 function isStale(l,cid){
   if(l==='de')return false;
   var de=curDe(cid); if(!de)return false;
-  return reviewedDe(l,cid)!==de;
+  return _nolnk(reviewedDe(l,cid))!==_nolnk(de);
 }
 function updateReview(){
   var show=(LNG!=='de');
@@ -4592,14 +4654,14 @@ def _shared_admin_section(datamap):
             if t.get("_sh") and t["_sh"] not in used:
                 used.append(t["_sh"])
     if not used:
-        return "", {}
+        return "", {}, {}
     stages = ["F1","F2","F3","T1","T2","T3","T4","E1","E2","M"]
     ages = {k: v for k, v in AGE.items() if v}
     sportname = {s["id"]: s["name"] for s in SPORTS}
     html = ('<section class="sport" data-sport="__shared" hidden><div class="wrap">'
             '<h2 class="grp" style="--gc:#1f8fa6">Sportartübergreifende Inhalte '
             '<span class="adm-tag">eine Änderung wirkt in allen aufgeführten Sportarten (alle Sprachen wie gewohnt)</span></h2>')
-    orig = {}
+    orig = {}; origl = {}
     # Gleiche Themen zusammen gruppieren (alphabetisch, Varianten direkt untereinander)
     used.sort(key=lambda bid: (SHARED_BLOCKS[bid]["title"].lower(), SHARED_BLOCKS[bid].get("label", "")))
     _last_title = None
@@ -4621,15 +4683,16 @@ def _shared_admin_section(datamap):
         for ri, r in enumerate(b["rows"]):
             for si, seg in enumerate(merge_same_segs(r["segs"])):
                 orig["shared|"+bid+"|"+str(ri)+"|"+str(si)] = seg.get("v") or ""
-    return html + "</div></section>", orig
+                if seg.get("l"): origl["shared|"+bid+"|"+str(ri)+"|"+str(si)] = seg["l"]
+    return html + "</div></section>", orig, origl
 
 def admin_html(datamap):
-    secs = ""; opts = ""; orig = {}
-    sh_html, sh_orig = _shared_admin_section(datamap)
+    secs = ""; opts = ""; orig = {}; origl = {}
+    sh_html, sh_orig, sh_origl = _shared_admin_section(datamap)
     if sh_html:
         secs += sh_html
         opts += '<option value="__shared">★ Sportartübergreifend</option>'
-        orig.update(sh_orig)
+        orig.update(sh_orig); origl.update(sh_origl)
     for s in SPORTS:
         d = datamap[s["id"]]
         if not d: continue
@@ -4645,6 +4708,7 @@ def admin_html(datamap):
                 # "ungespeichert" an (Index-Verschiebung).
                 for si, seg in enumerate(merge_same_segs(r["segs"])):
                     orig[s["id"]+"|"+str(ti)+"|"+str(ri)+"|"+str(si)] = seg.get("v") or ""
+                    if seg.get("l"): origl[s["id"]+"|"+str(ti)+"|"+str(ri)+"|"+str(si)] = seg["l"]
         # Startseiten-Popup-Inhalte dieser Sportart (Stufen-Überblick)
         hm = d.get("home")
         if hm:
@@ -4656,11 +4720,14 @@ def admin_html(datamap):
                 for st, cell in (sec.get("cells") or {}).items():
                     if cell and (cell.get("v") or cell.get("l")):
                         orig["home|"+s["id"]+"|"+str(si)+"|"+st] = cell.get("v") or ""
+                        if cell.get("l"): origl["home|"+s["id"]+"|"+str(si)+"|"+st] = cell["l"]
     # Basiswerte pro Sprache: DE = Quelltext, FR/IT/EN = dessen Uebersetzung
-    # (gleiche Logik wie auf den Live-Seiten: tr() ganzer Zellen)
-    origs = {"de": orig}
+    # (gleiche Logik wie auf den Live-Seiten: tr() ganzer Zellen).
+    # Bestehende Links haengen als "[Text](URL)"-Zeilen an - im gleichen Format,
+    # in dem Admins Links neu erfassen (siehe edit_text_with_links).
+    origs = {"de": {c: edit_text_with_links(v, origl.get(c)) for c, v in orig.items()}}
     for _L in ("fr", "it", "en"):
-        origs[_L] = {c: tr(v, _L) for c, v in orig.items()}
+        origs[_L] = {c: edit_text_with_links(tr(v, _L), origl.get(c), _L) for c, v in orig.items()}
     orig_js = json.dumps(origs, ensure_ascii=False).replace("</", "<\\/")
     gloss = []
     gpath = os.path.join(BASE, "glossary.json")
