@@ -3852,18 +3852,16 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .cprev-h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#98a1ad;margin-bottom:5px}
 .cprev-cell{font-size:11.5px;line-height:1.45}
 .cprev-cell .lks{margin-top:8px}
-/* Formatierungs-Spickzettel */
-.fmtpanel{position:fixed;inset:0;z-index:400;background:rgba(8,12,20,.55);display:flex;align-items:center;justify-content:center;padding:20px}
-.fmtpanel[hidden]{display:none}
-.fmt-box{width:min(880px,94vw);max-height:90vh;overflow:auto;background:var(--bg);border-radius:14px;padding:16px 18px 18px;box-shadow:0 24px 70px rgba(0,0,0,.4)}
-.fmt-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.fmt-bar b{font-size:15px}
-.fmt-x{background:none;border:none;font-size:17px;color:#98a1ad;cursor:pointer;padding:4px 8px}
-.fmt-x:hover{color:var(--ink)}
-.fmt-t{width:100%;border-collapse:collapse;font-size:12px}
-.fmt-t td{border:1px solid var(--line);padding:7px 9px;vertical-align:top}
-.fmt-t td:first-child{font-family:ui-monospace,Consolas,monospace;font-size:11px;white-space:pre-wrap;background:rgba(127,140,160,.08);width:38%}
-.fmt-t th{background:#1d2630;color:#fff;text-align:left;padding:6px 9px;font-size:11px}
+/* Formatierungshilfe: ausklappbarer Spickzettel direkt neben der Zelle */
+.cfmt{margin-top:6px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:11px}
+.cfmt summary{cursor:pointer;padding:5px 10px;font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#98a1ad;list-style:none;display:flex;align-items:center;gap:6px}
+.cfmt summary::before{content:"▸";font-size:9px;transition:transform .15s}
+.cfmt[open] summary::before{transform:rotate(90deg)}
+.cfmt summary::-webkit-details-marker{display:none}
+.cfmt summary:hover{color:var(--ink)}
+.cfmt-t{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:2px 12px 10px;align-items:baseline}
+.cfmt-t .k{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;background:rgba(127,140,160,.12);border-radius:4px;padding:1px 6px;white-space:pre}
+[data-theme="dark"] .cfmt-t .k{background:rgba(255,255,255,.10)}
 .cedit.needs-review{border-color:#e0932c;background:#fffaf1}
 .revflag{position:absolute;top:5px;right:5px;z-index:5;border:0;background:none;padding:0;margin:0;cursor:help;font:inherit;line-height:0}
 .revflag.aisugg{right:28px;cursor:pointer}
@@ -3953,7 +3951,6 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     <button id="statbtn" class="agloss" type="button">Statistik</button>
     <button id="fbbtn" class="agloss" type="button">Feedback<span id="fbbadge" class="fbbadge" hidden>0</span></button>
     <button id="presbtn" class="agloss" type="button" title="Präsentationsmodus auf der Webseite starten" onclick="window.open('index.html?pres=1','_blank')">Präsentation</button>
-    <button id="fmtbtn" class="agloss" type="button" title="Spickzettel: Schreibweisen für Struktur, Links, Badges …">Formatierung&nbsp;?</button>
     <a href="index.html" class="asite">&#8617; Zur Seite</a>
   </header>
   <div id="note" class="note"></div>
@@ -3961,33 +3958,6 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
     <div class="glosbar"><b style="font-size:14px">Feedback-Eingänge</b><span id="fbcount" class="astatus"></span>
       <label class="fbfilter"><input id="fbopen" type="checkbox"> nur offene</label></div>
     <div id="fbtable"></div>
-  </div>
-  <div id="fmtpanel" class="fmtpanel" hidden>
-    <div class="fmt-box">
-      <div class="fmt-bar"><b>Formatierung – so gestaltest du eine Zelle</b><button id="fmtx" class="fmt-x" type="button" aria-label="Schliessen">✕</button></div>
-      <p class="glosnote">Links: was du ins Textfeld tippst · Rechts: was daraus wird. Abschnitte immer mit einer <b>Leerzeile</b> trennen – die Live-Vorschau unter der Zelle zeigt das Ergebnis sofort.</p>
-      <table class="fmt-t">
-        <tr><th>Du tippst …</th><th>… und das wird daraus</th></tr>
-        <tr><td>(Leerzeile)</td><td>Neuer Abschnitt.</td></tr>
-        <tr><td>Freies Fahren
-jede Gelegenheit nutzen</td><td>Kurze erste Zeile (bis ca. 50 Zeichen, ohne Punkt/Komma am Ende) = <b>Kopfzeile</b> in Grossbuchstaben – ab dem zweiten Abschnitt automatisch mit Trennstrich darüber.</td></tr>
-        <tr><td>Racing Essential 2:
-Schwung</td><td>Zeile mit <b>Doppelpunkt am Ende</b> = Kopfzeile (funktioniert auch mit «…»-Anführungszeichen). Inhalt auf den Folgezeilen.</td></tr>
-        <tr><td>Ziele: Grundlagenausdauer entwickeln</td><td><b>Label und Wert auf einer Zeile:</b> «Ziele:» wird fett, der Text steht dahinter. Bei langem/mehrzeiligem Text wird das Label zur Kopfzeile.</td></tr>
-        <tr><td>• Gleiten
-• Bremsen
-- Richtung ändern</td><td><b>Aufzählung</b> mit Punkten (• oder - am Zeilenanfang). Eine kurze Zeile direkt davor wird zur Überschrift der Liste.</td></tr>
-        <tr><td>---</td><td><b>Trennstrich</b> – drei Bindestriche allein auf einer Zeile (mit Leerzeile davor und danach).</td></tr>
-        <tr><td>[[SC 1]] Anfahrtsposition
-[[SC 2]] Absprung</td><td><b>Badge-Etikett</b> + Text, ein Eintrag pro Zeile. (Zeilen, die mit «SC 1:» oder «ST:» beginnen, werden weiterhin automatisch zu Badges.)</td></tr>
-        <tr><td>((Sommer))
-- Viele Sprünge
-- Rollski</td><td><b>Zonen-Chip-Block</b> mit frei wählbarem Etikett. «On Snow:» / «Off Snow:» als erste Zeile erzeugen den Chip weiterhin automatisch.</td></tr>
-        <tr><td>[Taktik T1-4](https://…)</td><td>Auf einer <b>eigenen Zeile</b>: Link-Knopf unter der Zelle. Die bestehenden Knöpfe stehen bereits so am Zellenende – umbenennen, löschen oder ergänzen.</td></tr>
-        <tr><td>… siehe [Konzept](https://…) im Detail.</td><td>Mitten im Satz: anklickbarer <b>Link im Fliesstext</b>.</td></tr>
-        <tr><td>*Mädchen sind in der Adoleszenz …</td><td>Abschnitt mit <b>Stern</b> + Stichwort (Mädchen/Jungen/Adoleszenz …) = Kasten «Geschlechtsspezifische Unterschiede» mit Icon. «Window of Opportunity» erhält die Icon-Pille automatisch.</td></tr>
-      </table>
-    </div>
   </div>
   <div id="glosspanel" hidden>
     <div class="glosbar"><input id="glosq" type="search" placeholder="Begriff suchen (DE, FR, IT oder EN) …"><span id="gloscount" class="astatus"></span></div>
@@ -4652,8 +4622,25 @@ function init(){
   showSport(sel.value||(sel.options[0]&&sel.options[0].value));
   updateCount();
 }
-// ---- Live-Vorschau der fokussierten Zelle + Formatierungs-Spickzettel ----
-var _prevBox=null,_prevTa=null;
+// ---- Live-Vorschau + ausklappbare Formatierungshilfe an der fokussierten Zelle ----
+var _prevBox=null,_prevTa=null,_fmtBox=null;
+function fmtBox(){
+  if(_fmtBox)return _fmtBox;
+  function row(k,v){return '<span class="k">'+k+'</span><span>'+v+'</span>';}
+  _fmtBox=document.createElement('details');_fmtBox.className='cfmt';
+  _fmtBox.innerHTML='<summary>Formatierungshilfe</summary><div class="cfmt-t">'
+    +row('Leerzeile','neuer Abschnitt')
+    +row('Kurze Zeile / Titel:','Überschrift (Trennstrich kommt ab dem 2. Abschnitt automatisch)')
+    +row('Ziele: Wert','fettes Label, Text dahinter')
+    +row('• oder -','Aufzählung')
+    +row('---','Trennstrich (eigene Zeile)')
+    +row('[[SC 1]] Text','Badge-Etikett')
+    +row('((Sommer))','Zonen-Chip, Inhalt auf den Zeilen darunter')
+    +row('[Text](https://…)','eigene Zeile = Link-Knopf · im Satz = Link im Text')
+    +row('*Text …','Geschlechter-Kasten (mit Stichwort Mädchen/Jungen/Adoleszenz)')
+    +'</div>';
+  return _fmtBox;
+}
 function renderPrev(ta){
   if(!_prevBox){
     _prevBox=document.createElement('div');_prevBox.className='cprev';
@@ -4661,7 +4648,7 @@ function renderPrev(ta){
       +'<div class="cprev-cell"><div class="cwrap"><div class="ctext"></div></div></div>';
   }
   var w=ta.closest('.cedit-wrap')||ta.parentElement;
-  if(_prevBox.parentElement!==w)w.appendChild(_prevBox);
+  if(_prevBox.parentElement!==w){w.appendChild(fmtBox());w.appendChild(_prevBox);}
   var sp=splitCellLinks(ta.value);
   _prevBox.querySelector('.ctext').innerHTML=structCell(sp.txt);
   var cw=_prevBox.querySelector('.cwrap');
@@ -4679,14 +4666,6 @@ app.addEventListener('focusin',function(e){
   if(t&&t.classList&&t.classList.contains('cedit'))renderPrev(t);
 });
 app.addEventListener('input',function(e){if(_prevTa&&e.target===_prevTa)renderPrev(_prevTa);});
-(function(){
-  var fb=document.getElementById('fmtbtn'),fp=document.getElementById('fmtpanel');
-  if(!fb||!fp)return;
-  fb.addEventListener('click',function(){fp.hidden=!fp.hidden;});
-  document.getElementById('fmtx').addEventListener('click',function(){fp.hidden=true;});
-  fp.addEventListener('click',function(e){if(e.target===fp)fp.hidden=true;});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!fp.hidden)fp.hidden=true;});
-})();
 function save(){
   const ch=changed();if(!ch.length)return;
   // Review-Zeilen bestimmen: geänderte Übersetzungen = geprüft ggü. aktuellem Deutsch;
