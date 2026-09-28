@@ -3859,7 +3859,13 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .cfmt[open] summary::before{transform:rotate(90deg)}
 .cfmt summary::-webkit-details-marker{display:none}
 .cfmt summary:hover{color:var(--ink)}
-.cfmt-t{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:2px 12px 10px;align-items:baseline}
+/* Aufgeklappt schwebt der Spickzettel NEBEN der Zelle (fixe Position via JS),
+   damit er in schmalen Zellen nicht eingequetscht wird. */
+.cfmt-t{position:fixed;z-index:410;width:330px;max-height:72vh;overflow:auto;box-sizing:border-box;
+  display:none;grid-template-columns:auto 1fr;gap:5px 12px;align-items:baseline;
+  background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 13px;
+  box-shadow:0 14px 40px rgba(0,0,0,.28);font-size:11px}
+.cfmt-t.on{display:grid}
 .cfmt-t .k{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;background:rgba(127,140,160,.12);border-radius:4px;padding:1px 6px;white-space:pre}
 [data-theme="dark"] .cfmt-t .k{background:rgba(255,255,255,.10)}
 .cedit.needs-review{border-color:#e0932c;background:#fffaf1}
@@ -4623,13 +4629,16 @@ function init(){
   updateCount();
 }
 // ---- Live-Vorschau + ausklappbare Formatierungshilfe an der fokussierten Zelle ----
-var _prevBox=null,_prevTa=null,_fmtBox=null;
+var _prevBox=null,_prevTa=null,_fmtBox=null,_fmtT=null;
 function fmtBox(){
   if(_fmtBox)return _fmtBox;
   function row(k,v){return '<span class="k">'+k+'</span><span>'+v+'</span>';}
   _fmtBox=document.createElement('details');_fmtBox.className='cfmt';
-  _fmtBox.innerHTML='<summary>Formatierungshilfe</summary><div class="cfmt-t">'
-    +row('Leerzeile','neuer Abschnitt')
+  _fmtBox.innerHTML='<summary>Formatierungshilfe</summary>';
+  // Das aufgeklappte Panel haengt am <body> (position:fixed funktioniert nicht
+  // zuverlaessig innerhalb transformierter Container) und schwebt NEBEN der Zelle.
+  _fmtT=document.createElement('div');_fmtT.className='cfmt-t';
+  _fmtT.innerHTML=row('Leerzeile','neuer Abschnitt')
     +row('Kurze Zeile / Titel:','Überschrift (Trennstrich kommt ab dem 2. Abschnitt automatisch)')
     +row('Ziele: Wert','fettes Label, Text dahinter')
     +row('• oder -','Aufzählung')
@@ -4637,9 +4646,28 @@ function fmtBox(){
     +row('[[SC 1]] Text','Badge-Etikett')
     +row('((Sommer))','Zonen-Chip, Inhalt auf den Zeilen darunter')
     +row('[Text](https://…)','eigene Zeile = Link-Knopf · im Satz = Link im Text')
-    +row('*Text …','Geschlechter-Kasten (mit Stichwort Mädchen/Jungen/Adoleszenz)')
-    +'</div>';
+    +row('*Text …','Geschlechter-Kasten (mit Stichwort Mädchen/Jungen/Adoleszenz)');
+  document.body.appendChild(_fmtT);
+  _fmtBox.addEventListener('toggle',function(){
+    _fmtT.classList.toggle('on',_fmtBox.open);
+    placeFmt();
+  });
+  window.addEventListener('scroll',function(){if(_fmtBox.open)placeFmt();},true);
+  window.addEventListener('resize',function(){if(_fmtBox.open)placeFmt();});
   return _fmtBox;
+}
+function placeFmt(){
+  // Panel neben der Zelle platzieren: rechts, wenn Platz - sonst links,
+  // bei Feldern ueber die volle Breite rechtsbuendig im Fenster
+  if(!_fmtBox||!_fmtBox.open||!_fmtT)return;
+  var w=_fmtBox.parentElement;if(!w)return;
+  var r=w.getBoundingClientRect(),PW=330;
+  var x=r.right+10;
+  if(x+PW>window.innerWidth-8)x=r.left-PW-10;
+  if(x<8||x+PW>window.innerWidth-8)x=window.innerWidth-PW-8;
+  if(x<8)x=8;
+  _fmtT.style.left=Math.round(x)+'px';
+  _fmtT.style.top=Math.round(Math.max(8,Math.min(r.top,window.innerHeight-Math.min(_fmtT.offsetHeight||300,window.innerHeight*0.72)-12)))+'px';
 }
 function renderPrev(ta){
   if(!_prevBox){
@@ -4648,7 +4676,7 @@ function renderPrev(ta){
       +'<div class="cprev-cell"><div class="cwrap"><div class="ctext"></div></div></div>';
   }
   var w=ta.closest('.cedit-wrap')||ta.parentElement;
-  if(_prevBox.parentElement!==w){w.appendChild(fmtBox());w.appendChild(_prevBox);}
+  if(_prevBox.parentElement!==w){w.appendChild(fmtBox());w.appendChild(_prevBox);placeFmt();}
   var sp=splitCellLinks(ta.value);
   _prevBox.querySelector('.ctext').innerHTML=structCell(sp.txt);
   var cw=_prevBox.querySelector('.cwrap');
