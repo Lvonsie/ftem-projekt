@@ -526,6 +526,20 @@ def edit_text_with_links(v, lks, lang="de"):
         return v
     return (v+"\n\n" if v else "")+"\n".join(md)
 
+# Eigenstaendige "[Text](URL)"-Zeile -> Link-Knopf an Ort und Stelle
+_LNKLINE_RE = re.compile(r'^\[([^\]]{1,140})\]\((https?://[^\s)]+)\)$')
+
+def _lks_html(lines, lang):
+    seen = set(); btns = ""
+    for l in lines:
+        m = _LNKLINE_RE.match(l.strip())
+        if not m: continue
+        href = lhref(m.group(2), lang)
+        if href in seen: continue
+        seen.add(href)
+        btns += '<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(m.group(1).strip())+'</a>'
+    return '<div class="lks">'+btns+'</div>' if btns else ""
+
 def render_cell(seg, lang, cid=None, edit=False):
     if edit:
         raw = edit_text_with_links(seg.get("v"), seg.get("l"))
@@ -539,8 +553,29 @@ def render_cell(seg, lang, cid=None, edit=False):
         if zoned is not None:
             inner = zoned
         else:
-            parts = [render_block(bl, link_texts) for bl in blocks]
-            inner = "".join(p for p in parts if p)
+            # "[Text](URL)"-Zeilen werden GENAU dort zum Link-Knopf, wo sie im
+            # Zellentext stehen (auch mitten in der Zelle) - gleiche Logik wie
+            # structCell im Frontend.
+            parts = []
+            for bl in blocks:
+                tbuf, lbuf = [], []
+                def _flush_t():
+                    if tbuf:
+                        p = render_block("\n".join(tbuf), link_texts)
+                        if p: parts.append(p)
+                        del tbuf[:]
+                def _flush_l():
+                    if lbuf:
+                        p = _lks_html(lbuf, lang)
+                        if p: parts.append(p)
+                        del lbuf[:]
+                for ln in bl.split("\n"):
+                    if _LNKLINE_RE.match(ln.strip()):
+                        _flush_t(); lbuf.append(ln)
+                    else:
+                        _flush_l(); tbuf.append(ln)
+                _flush_t(); _flush_l()
+            inner = "".join(parts)
         inner = gsd_wrap(linkify_html(inner), lang)
     text_html = inner or '<div class="empty">–</div>'
     cidattr = (' data-cid="'+esc(cid)+'" data-bh="'+fnv36(seg.get("v") or "")+'"') if cid else ''
@@ -2276,6 +2311,8 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap ul.sc .badge{display:inline-block;background:var(--ink);color:#fff;font-size:9.5px;font-weight:700;border-radius:4px;padding:1px 5px;margin-right:4px}
 .cwrap .empty{color:#c2c8d0;text-align:center;font-size:14px}
 .lks{margin-top:7px;display:flex;flex-direction:column;gap:4px}
+/* Link-Knoepfe mitten in der Zelle (aus "[Text](URL)"-Zeilen) */
+.ctext .lks{margin:7px 0}
 /* Links im Fliesstext (Admin-Syntax "[Text](https://…)" oder nackte URL) */
 a.txtlnk{color:var(--red);font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;overflow-wrap:anywhere}
 a.txtlnk:hover{text-decoration-thickness:2px}
@@ -2568,10 +2605,31 @@ function linkifyHtml(h){
   });
   return h.replace(/(\d+)/g,function(_,i){return keep[+i];});
 }
+// Eigenstaendige "[Text](URL)"-Zeile -> Link-Knopf GENAU an dieser Stelle
+const LNKLINE=/^\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)$/;
+function hasLinkLines(v){return String(v||'').split('\n').some(l=>LNKLINE.test(l.trim()));}
+function lksHtml(lines){
+  const seen={};let b='';
+  lines.forEach(l=>{const m=l.trim().match(LNKLINE);
+    if(!m||seen[m[2]])return;seen[m[2]]=1;
+    b+='<a href="'+_esc(m[2])+'" target="_blank" rel="noopener">'+_esc(m[1].trim())+'</a>';});
+  return b?'<div class="lks">'+b+'</div>':'';
+}
 function structCell(txt){
   txt=(txt||'').trim();
   if(!txt)return '<div class="empty">–</div>';
-  return gsdWrap(linkifyHtml(txt.split(/\n\s*\n/).map(structBlock).filter(Boolean).join('')))||'<div class="empty">–</div>';
+  const parts=[];
+  txt.split(/\n\s*\n/).forEach(bl=>{
+    const tbuf=[],lbuf=[];
+    const flushT=()=>{if(tbuf.length){const p=structBlock(tbuf.join('\n'));if(p)parts.push(p);tbuf.length=0;}};
+    const flushL=()=>{if(lbuf.length){const p=lksHtml(lbuf);if(p)parts.push(p);lbuf.length=0;}};
+    bl.split('\n').forEach(ln=>{
+      if(LNKLINE.test(ln.trim())){flushT();lbuf.push(ln);}
+      else{flushL();tbuf.push(ln);}
+    });
+    flushT();flushL();
+  });
+  return gsdWrap(linkifyHtml(parts.join('')))||'<div class="empty">–</div>';
 }
 // Geschlechtsspezifische Hinweise markieren - Gegenstueck zu gsd_wrap() im
 // Generator, damit im Admin gespeicherte Korrekturen dieselbe Optik behalten.
@@ -2593,18 +2651,6 @@ function gsdWrap(h){
   return h.replace(/\x02(\d+)\x02/g,function(_,i){return hold[+i];});
 }
 
-// Eigenstaendige "[Text](URL)"-Zeilen im Override sind Link-Buttons (gleiche
-// Schreibweise wie im Admin-Editor angezeigt). Sie ersetzen die bestehenden
-// Buttons der Zelle; ohne solche Zeilen bleiben die bisherigen Buttons stehen
-// (aeltere Overrides kennen die Schreibweise noch nicht).
-function splitCellLinks(v){
-  const keep=[],links=[];
-  String(v).split('\n').forEach(l=>{
-    const m=l.trim().match(/^\[([^\]]{1,140})\]\((https?:\/\/[^\s)]+)\)$/);
-    if(m)links.push({t:m[1],u:m[2]});else keep.push(l);
-  });
-  return {txt:keep.join('\n').replace(/\n{3,}/g,'\n\n').trim(),links:links};
-}
 """
 
 JS = r"""
@@ -2664,16 +2710,17 @@ function applyOverrides(map){
     root.querySelectorAll('.ctext[data-cid]').forEach(el=>{
       const v=pick(el);
       if(v!=null){
-        const sp=splitCellLinks(v);
-        el.innerHTML=structCell(sp.txt);
-        if(sp.links.length){
+        // Link-Zeilen "[Text](URL)" werden von structCell an Ort und Stelle zu
+        // Knoepfen. Enthaelt das Override solche Zeilen, definieren SIE die
+        // Links der Zelle - die alten Knoepfe unter der Zelle verschwinden.
+        // Ohne Link-Zeilen bleiben die bisherigen Knoepfe stehen (aeltere
+        // Overrides kennen die Schreibweise noch nicht).
+        el.innerHTML=structCell(v);
+        if(hasLinkLines(v)){
           const wrap=el.closest('.cwrap')||el.parentElement;
-          const old=wrap.querySelector('.lks');if(old)old.remove();
-          const seen={};let btns='';
-          sp.links.forEach(l=>{if(seen[l.u])return;seen[l.u]=1;
-            btns+='<a href="'+_esc(l.u)+'" target="_blank" rel="noopener">'+_esc(l.t)+'</a>';});
-          const d=document.createElement('div');d.className='lks';d.innerHTML=btns;
-          wrap.appendChild(d);
+          [...wrap.children].forEach(ch=>{
+            if(ch!==el&&ch.classList&&ch.classList.contains('lks'))ch.remove();
+          });
         }
       }
     });
@@ -4645,7 +4692,7 @@ function fmtBox(){
     +row('---','Trennstrich (eigene Zeile)')
     +row('[[SC 1]] Text','Badge-Etikett')
     +row('((Sommer))','Zonen-Chip, Inhalt auf den Zeilen darunter')
-    +row('[Text](https://…)','eigene Zeile = Link-Knopf · im Satz = Link im Text')
+    +row('[Text](https://…)','eigene Zeile = Link-Knopf genau an dieser Stelle · im Satz = Link im Text')
     +row('*Text …','Geschlechter-Kasten (mit Stichwort Mädchen/Jungen/Adoleszenz)');
   document.body.appendChild(_fmtT);
   _fmtBox.addEventListener('toggle',function(){
@@ -4677,16 +4724,7 @@ function renderPrev(ta){
   }
   var w=ta.closest('.cedit-wrap')||ta.parentElement;
   if(_prevBox.parentElement!==w){w.appendChild(fmtBox());w.appendChild(_prevBox);placeFmt();}
-  var sp=splitCellLinks(ta.value);
-  _prevBox.querySelector('.ctext').innerHTML=structCell(sp.txt);
-  var cw=_prevBox.querySelector('.cwrap');
-  var old=cw.querySelector('.lks');if(old)old.remove();
-  if(sp.links.length){
-    var seen={},btns='';
-    sp.links.forEach(function(l){if(seen[l.u])return;seen[l.u]=1;
-      btns+='<a href="'+_esc(l.u)+'" target="_blank" rel="noopener">'+_esc(l.t)+'</a>';});
-    var d=document.createElement('div');d.className='lks';d.innerHTML=btns;cw.appendChild(d);
-  }
+  _prevBox.querySelector('.ctext').innerHTML=structCell(ta.value);
   _prevTa=ta;
 }
 app.addEventListener('focusin',function(e){
