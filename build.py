@@ -1994,6 +1994,13 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 /* Stufenleiste im Stufen-Popup: dezente Karten (Variante 1) - neutraler Rand,
    Stufe im abgedunkelten Phasenton, aktive Kachel mit feinem Farbring */
 .ps-stb{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+/* Beim Scrollen im aufgeklappten Popup bleibt die Leiste oben sichtbar */
+.imodal.wide .im-body{padding-top:0}
+.imodal.wide .ph-sum .ps-head{padding-top:14px}
+.imodal.wide .ps-stb{position:sticky;top:0;z-index:6;margin:0 -16px 14px;padding:10px 16px 9px;
+  background:rgba(240,244,248,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(29,38,48,.08)}
+[data-theme="dark"] .imodal.wide .ps-stb{background:rgba(20,30,44,.9);border-bottom-color:rgba(255,255,255,.08)}
 .ps-sb{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:50px;
   color:var(--psx,#4a5563);background:var(--card);border:1.5px solid var(--line);border-radius:11px;
   padding:6px 12px 5px;cursor:pointer;line-height:1.15;box-shadow:0 1px 3px rgba(29,38,48,.06);
