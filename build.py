@@ -1292,9 +1292,10 @@ def home_html(datamap, lang):
             if secs and len(PH_STAGES[k]) > 1:
                 all_lbl = {"de": "Alle "+letter+"-Stufen", "fr": "Tous les niveaux "+letter,
                            "it": "Tutti i livelli "+letter, "en": "All "+letter+" stages"}[lang]
-                stbar = ('<div class="ps-stb"><button class="ps-sb on" type="button" data-st="alle">'+esc(all_lbl)+'</button>'
-                         + "".join('<button class="ps-sb" type="button" data-st="'+st+'">'+st+'</button>'
-                                   for st in PH_STAGES[k])
+                stbar = ('<div class="ps-stb"><button class="ps-sb on" type="button" data-st="alle"><b>'+esc(all_lbl)+'</b></button>'
+                         + "".join('<button class="ps-sb" type="button" data-st="'+st+'"><b>'+st+'</b>'
+                                   + ('<small>'+esc(ages2.get(st, ""))+'</small>' if ages2.get(st) else '')
+                                   + '</button>' for st in PH_STAGES[k])
                          + '</div>')
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
@@ -1990,11 +1991,20 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .ph-sum .ps-head{display:flex;align-items:center;gap:13px;margin-bottom:11px}
 .ph-sum .ps-badge{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:var(--psc,#4a5563)}
 .ps-f{--psc:var(--found)}.ps-t{--psc:var(--talent)}.ps-e{--psc:var(--elite)}.ps-m{--psc:var(--mast)}
-/* Stufenleiste im Stufen-Popup: «Alle X-Stufen» + Stufen der Phase als Filter */
-.ps-stb{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
-.ps-sb{font:inherit;font-weight:800;font-size:12px;color:var(--ink);padding:6px 14px;background:var(--card);border:1px solid var(--line);border-bottom:3px solid var(--psc,#4a5563);border-radius:9px;cursor:pointer;transition:transform .12s,box-shadow .12s}
-.ps-sb:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(29,38,48,.12)}
-.ps-sb.on{box-shadow:inset 0 0 0 1.5px var(--psc,#4a5563);background:var(--acc-bg)}
+/* Stufenleiste im Stufen-Popup: Mini-Kacheln im Stil der Landingpage
+   (weisse Karte, farbiger Rand + Schimmer in der Phasenfarbe) */
+.ps-stb{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.ps-sb{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:52px;
+  color:var(--psc,#4a5563);background:rgba(255,255,255,.93);border:1.5px solid currentColor;border-radius:12px;
+  padding:7px 13px 6px;cursor:pointer;line-height:1.15;
+  box-shadow:0 6px 18px -4px color-mix(in srgb,currentColor 40%,transparent),0 1px 4px rgba(29,38,48,.08),inset 0 1px 0 rgba(255,255,255,.85);
+  transition:transform .2s cubic-bezier(.2,.8,.3,1.15),box-shadow .2s}
+.ps-sb b{font-weight:800;font-size:14px;letter-spacing:.4px}
+.ps-sb small{font-size:9.5px;font-weight:700;color:var(--mut)}
+.ps-sb:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 10px 24px -5px color-mix(in srgb,currentColor 55%,transparent),0 2px 6px rgba(29,38,48,.10)}
+.ps-sb.on{transform:scale(1.04);box-shadow:0 0 0 3px color-mix(in srgb,currentColor 28%,transparent),0 10px 26px -6px color-mix(in srgb,currentColor 60%,transparent),inset 0 1px 0 rgba(255,255,255,.85)}
+[data-theme="dark"] .ps-sb{background:rgba(23,34,49,.92);box-shadow:0 6px 18px -4px rgba(0,0,0,.5)}
+[data-theme="dark"] .ps-sb.on{box-shadow:0 0 0 3px color-mix(in srgb,currentColor 35%,transparent),0 10px 26px -6px rgba(0,0,0,.55)}
 .ps-t .ps-badge{color:#3b2e00}
 .ph-sum .ps-name{font-size:17px;font-weight:800}
 .ph-sum .ps-rng{font-size:12px;font-weight:700;color:var(--mut)}
