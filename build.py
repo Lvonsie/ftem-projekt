@@ -1297,11 +1297,14 @@ def home_html(datamap, lang):
                                    + ('<small>'+esc(ages2.get(st, ""))+'</small>' if ages2.get(st) else '')
                                    + '</button>' for st in PH_STAGES[k])
                          + '</div>')
+            # Die ganze Kopfzeile (Titel + Beschreibung + Stufenleiste) in einen
+            # Wrapper, damit sie beim Scrollen gemeinsam oben fixiert bleibt.
+            fixcls = ' has-stb' if stbar else ''
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
-                        '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
+                        '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-fix'+fixcls+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                         '<div><div class="ps-name ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|ptitle" data-bh="'+fnv36(pname)+'">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
                         '<p class="ps-desc ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|intro" data-bh="'+fnv36(intro2)+'">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
-                        + stbar + secs +
+                        + stbar + '</div>' + secs +
                         '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
     fi_links = [
@@ -1994,13 +1997,16 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 /* Stufenleiste im Stufen-Popup: dezente Karten (Variante 1) - neutraler Rand,
    Stufe im abgedunkelten Phasenton, aktive Kachel mit feinem Farbring */
 .ps-stb{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
-/* Beim Scrollen im aufgeklappten Popup bleibt die Leiste oben sichtbar */
+/* Beim Scrollen im aufgeklappten Popup bleibt die ganze Kopfzeile
+   (Titel, Beschreibung und Stufenleiste zusammen) oben fixiert */
 .imodal.wide .im-body{padding-top:0}
 .imodal.wide .ph-sum .ps-head{padding-top:14px}
-.imodal.wide .ps-stb{position:sticky;top:0;z-index:6;margin:0 -16px 14px;padding:10px 16px 9px;
-  background:rgba(240,244,248,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+.imodal.wide .ps-fix.has-stb{position:sticky;top:0;z-index:6;margin:0 -16px 14px;padding:0 16px 10px;
+  background:rgba(240,244,248,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(29,38,48,.08)}
-[data-theme="dark"] .imodal.wide .ps-stb{background:rgba(20,30,44,.9);border-bottom-color:rgba(255,255,255,.08)}
+.imodal.wide .ps-fix.has-stb .ps-stb{margin:0}
+.imodal.wide .ps-fix.has-stb .ps-desc{margin-bottom:12px}
+[data-theme="dark"] .imodal.wide .ps-fix.has-stb{background:rgba(20,30,44,.93);border-bottom-color:rgba(255,255,255,.08)}
 .ps-sb{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:50px;
   color:var(--psx,#4a5563);background:var(--card);border:1.5px solid var(--line);border-radius:11px;
   padding:6px 12px 5px;cursor:pointer;line-height:1.15;box-shadow:0 1px 3px rgba(29,38,48,.06);
