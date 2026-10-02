@@ -1276,7 +1276,7 @@ def home_html(datamap, lang):
                                         cid="home|"+s2["id"]+"|"+str(si2)+"|"+st)
                     age2 = ages2.get(st, "")
                     ncols += 1
-                    cols += ('<div class="ps-col"><div class="ps-st">'+st
+                    cols += ('<div class="ps-col" data-st="'+st+'"><div class="ps-st">'+st
                              + ('<i>'+esc(age2)+'</i>' if age2 else '') + '</div>'
                              + '<div class="cwrap">'+body2+'</div></div>')
                 if cols:
@@ -1286,11 +1286,21 @@ def home_html(datamap, lang):
                              + theme_icon(sec["title"]) + '</span>'
                              '<span class="tt ovr-txt" data-cid="home|'+s2["id"]+'|'+str(si2)+'|title" data-bh="'+fnv36(sec["title"] or "")+'">'+esc(tr(sec["title"], lang))+'</span><span class="tchev"></span></summary>'
                              '<div class="ps-secbody"><div class="ps-cols" style="--nc:'+str(ncols)+'">'+cols+'</div></div></details>')
+            # Stufenleiste (Variante B): «Alle X-Stufen» + die Stufen der Phase
+            # als Filter fuer die drei Abschnitte. Bei Mastery (nur M) unnoetig.
+            stbar = ""
+            if secs and len(PH_STAGES[k]) > 1:
+                all_lbl = {"de": "Alle "+letter+"-Stufen", "fr": "Tous les niveaux "+letter,
+                           "it": "Tutti i livelli "+letter, "en": "All "+letter+" stages"}[lang]
+                stbar = ('<div class="ps-stb"><button class="ps-sb on" type="button" data-st="alle">'+esc(all_lbl)+'</button>'
+                         + "".join('<button class="ps-sb" type="button" data-st="'+st+'">'+st+'</button>'
+                                   for st in PH_STAGES[k])
+                         + '</div>')
             ph_tpls += ('<template id="tpl-ph-'+k+'-'+s2["id"]+'" data-t="'+esc(pname)+' · '+esc(prng)+' – '+esc(tr(s2["name"], lang))+'">'
                         '<div class="ph-sum ph-wide ps-'+k+'"><div class="ps-head"><span class="ps-badge">'+esc(letter)+'</span>'
                         '<div><div class="ps-name ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|ptitle" data-bh="'+fnv36(pname)+'">'+esc(pname)+'</div><div class="ps-rng">'+esc(prng)+' · '+esc(tr(s2["name"], lang))+'</div></div></div>'
                         '<p class="ps-desc ovr-txt" data-cid="home|'+s2["id"]+'|'+k+'|intro" data-bh="'+fnv36(intro2)+'">'+esc(tr(intro2, lang)).replace("\n", "<br>")+'</p>'
-                        + secs +
+                        + stbar + secs +
                         '<button class="aw-go" type="button">'+esc(go_lbl)+' →</button></div></template>')
     # Drei Grundlagen-Links im "Was ist FTEM?"-Overlay
     fi_links = [
@@ -1980,6 +1990,11 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .ph-sum .ps-head{display:flex;align-items:center;gap:13px;margin-bottom:11px}
 .ph-sum .ps-badge{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:var(--psc,#4a5563)}
 .ps-f{--psc:var(--found)}.ps-t{--psc:var(--talent)}.ps-e{--psc:var(--elite)}.ps-m{--psc:var(--mast)}
+/* Stufenleiste im Stufen-Popup: «Alle X-Stufen» + Stufen der Phase als Filter */
+.ps-stb{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.ps-sb{font:inherit;font-weight:800;font-size:12px;color:var(--ink);padding:6px 14px;background:var(--card);border:1px solid var(--line);border-bottom:3px solid var(--psc,#4a5563);border-radius:9px;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.ps-sb:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(29,38,48,.12)}
+.ps-sb.on{box-shadow:inset 0 0 0 1.5px var(--psc,#4a5563);background:var(--acc-bg)}
 .ps-t .ps-badge{color:#3b2e00}
 .ph-sum .ps-name{font-size:17px;font-weight:800}
 .ph-sum .ps-rng{font-size:12px;font-weight:700;color:var(--mut)}
@@ -3701,6 +3716,26 @@ window.__shellBanner=function(need){
   return true;
 };
 __shellBanner(__NEED_SHELL__);
+// Stufenleiste im Stufen-Popup: filtert die Spalten der drei Abschnitte auf
+// eine Stufe («Alle X-Stufen» = zurueck zur Gesamtansicht). Das Popup wird bei
+// jedem Oeffnen frisch aus dem Template geklont -> Leiste startet auf «Alle».
+document.addEventListener('click',function(e){
+  const b=e.target&&e.target.closest?e.target.closest('.ps-sb'):null;
+  if(!b)return;
+  const root=b.closest('.ph-sum');if(!root)return;
+  root.querySelectorAll('.ps-sb').forEach(x=>x.classList.toggle('on',x===b));
+  const st=b.dataset.st;
+  root.querySelectorAll('.ps-theme').forEach(d=>{
+    d.querySelectorAll('.ps-col').forEach(c=>{c.style.display=(st==='alle'||c.dataset.st===st)?'':'none';});
+    const pc=d.querySelector('.ps-cols');
+    if(pc)pc.style.gridTemplateColumns=(st==='alle')?'':'minmax(220px,540px)';
+  });
+  // Die Abschnitte sind ein Akkordeon (immer nur einer offen): beim Filtern
+  // mindestens den ersten oeffnen, damit die Auswahl sofort sichtbar ist.
+  if(st!=='alle'&&!root.querySelector('.ps-theme[open]')){
+    const f=root.querySelector('.ps-theme');if(f)f.open=true;
+  }
+});
 window.addEventListener('hashchange',route);
 route();
 loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});
