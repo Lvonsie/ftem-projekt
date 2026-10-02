@@ -1991,20 +1991,27 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .ph-sum .ps-head{display:flex;align-items:center;gap:13px;margin-bottom:11px}
 .ph-sum .ps-badge{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:var(--psc,#4a5563)}
 .ps-f{--psc:var(--found)}.ps-t{--psc:var(--talent)}.ps-e{--psc:var(--elite)}.ps-m{--psc:var(--mast)}
-/* Stufenleiste im Stufen-Popup: Mini-Kacheln im Stil der Landingpage
-   (weisse Karte, farbiger Rand + Schimmer in der Phasenfarbe) */
-.ps-stb{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
-.ps-sb{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:52px;
-  color:var(--psc,#4a5563);background:rgba(255,255,255,.93);border:1.5px solid currentColor;border-radius:12px;
-  padding:7px 13px 6px;cursor:pointer;line-height:1.15;
-  box-shadow:0 6px 18px -4px color-mix(in srgb,currentColor 40%,transparent),0 1px 4px rgba(29,38,48,.08),inset 0 1px 0 rgba(255,255,255,.85);
-  transition:transform .2s cubic-bezier(.2,.8,.3,1.15),box-shadow .2s}
-.ps-sb b{font-weight:800;font-size:14px;letter-spacing:.4px}
-.ps-sb small{font-size:9.5px;font-weight:700;color:var(--mut)}
-.ps-sb:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 10px 24px -5px color-mix(in srgb,currentColor 55%,transparent),0 2px 6px rgba(29,38,48,.10)}
-.ps-sb.on{transform:scale(1.04);box-shadow:0 0 0 3px color-mix(in srgb,currentColor 28%,transparent),0 10px 26px -6px color-mix(in srgb,currentColor 60%,transparent),inset 0 1px 0 rgba(255,255,255,.85)}
-[data-theme="dark"] .ps-sb{background:rgba(23,34,49,.92);box-shadow:0 6px 18px -4px rgba(0,0,0,.5)}
-[data-theme="dark"] .ps-sb.on{box-shadow:0 0 0 3px color-mix(in srgb,currentColor 35%,transparent),0 10px 26px -6px rgba(0,0,0,.55)}
+/* Stufenleiste im Stufen-Popup: dezente Karten (Variante 1) - neutraler Rand,
+   Stufe im abgedunkelten Phasenton, aktive Kachel mit feinem Farbring */
+.ps-stb{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+.ps-sb{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:50px;
+  color:var(--psx,#4a5563);background:var(--card);border:1.5px solid var(--line);border-radius:11px;
+  padding:6px 12px 5px;cursor:pointer;line-height:1.15;box-shadow:0 1px 3px rgba(29,38,48,.06);
+  transition:border-color .15s,background .15s,box-shadow .15s}
+.ps-sb b{font-weight:600;font-size:12.5px;letter-spacing:.2px}
+.ps-sb small{font-size:9px;font-weight:500;color:var(--mut)}
+.ps-sb:hover{border-color:#cdd5dd}
+.ps-sb.on{border-color:var(--psc,#4a5563);background:var(--psbg,#f4f6f8);box-shadow:0 2px 8px color-mix(in srgb,var(--psc,#4a5563) 18%,transparent)}
+.ps-f .ps-sb{--psx:#15707f;--psbg:#eff7f9}
+.ps-t .ps-sb{--psx:#a37c00;--psbg:#fdfaf0}
+.ps-e .ps-sb{--psx:#b05015;--psbg:#fdf4ee}
+.ps-m .ps-sb{--psx:#b3160b;--psbg:#fdf1f0}
+[data-theme="dark"] .ps-sb{background:#172231;border-color:rgba(255,255,255,.14);box-shadow:none}
+[data-theme="dark"] .ps-sb:hover{border-color:rgba(255,255,255,.3)}
+[data-theme="dark"] .ps-f .ps-sb{--psx:#7fd6e8;--psbg:#152731}
+[data-theme="dark"] .ps-t .ps-sb{--psx:#f0cf72;--psbg:#25220f}
+[data-theme="dark"] .ps-e .ps-sb{--psx:#f0a877;--psbg:#271c12}
+[data-theme="dark"] .ps-m .ps-sb{--psx:#f09287;--psbg:#271413}
 .ps-t .ps-badge{color:#3b2e00}
 .ph-sum .ps-name{font-size:17px;font-weight:800}
 .ph-sum .ps-rng{font-size:12px;font-weight:700;color:var(--mut)}

@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup: Stufenleiste – dezente Varianten</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1d2630;--mut:#697080;--line:#e4e8ec;--talent:#e2a900;--talent-tx:#a37c00}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,-apple-system,'Segoe UI',Roboto,sans-serif;background:linear-gradient(180deg,#5d6b7a,#8795a4);padding:26px 14px 60px;color:var(--ink)}
+h1{color:#fff;font-size:18px;margin:0 0 4px}
+p.lead{color:#e8edf2;font-size:13px;margin:0 0 20px;max-width:860px}
+.v{max-width:860px;margin:0 auto 22px}
+.vt{color:#fff;font-weight:800;font-size:13.5px;margin-bottom:7px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.card{background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.ctx{font-size:12.5px;color:#39424e;margin:0 0 11px}
+.stb{display:flex;gap:7px;flex-wrap:wrap}
+.stb .c{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:50px;
+  background:#fff;border-radius:11px;padding:6px 12px 5px;cursor:pointer;line-height:1.15;transition:all .15s}
+.stb .c b{font-weight:600;font-size:12.5px;letter-spacing:.2px}
+.stb .c small{font-size:9px;font-weight:500;color:var(--mut)}
+
+/* V1 dezente Karte: neutraler Rand, aktive Kachel feiner Farbring + Hauch Tönung */
+.v1 .c{border:1px solid var(--line);color:var(--talent-tx);box-shadow:0 1px 3px rgba(29,38,48,.06)}
+.v1 .c:hover{border-color:#cdd5dd}
+.v1 .c.on{border:1.5px solid var(--talent);background:#fdfaf0;box-shadow:0 2px 8px rgba(226,169,0,.18)}
+
+/* V2 feine Linie unten (wie Stufenleiste im Athlet:innen-Weg) */
+.v2 .c{border:1px solid var(--line);border-bottom:2px solid var(--talent);border-radius:9px;color:var(--ink);box-shadow:none}
+.v2 .c b{font-weight:600}
+.v2 .c.on{background:#faf6e9;border-color:var(--talent);color:var(--talent-tx)}
+
+/* V3 Ton-in-Ton: sanft getoente Flaeche, kein Rand */
+.v3 .c{border:none;background:rgba(226,169,0,.09);color:#5c564a}
+.v3 .c b{font-weight:600;color:#8a6c00}
+.v3 .c.on{background:rgba(226,169,0,.2);box-shadow:inset 0 0 0 1px rgba(226,169,0,.55);color:var(--ink)}
+
+/* V4 neutral, nur aktiv farbig */
+.v4 .c{border:1px solid var(--line);color:var(--mut);box-shadow:0 1px 3px rgba(29,38,48,.05)}
+.v4 .c b{font-weight:600;color:#4a5563}
+.v4 .c.on{border-color:var(--talent);background:#fff;color:var(--talent-tx)}
+.v4 .c.on b{color:var(--talent-tx)}
+</style></head><body>
+<h1>Stufenleiste – dezente Varianten (Beispiel Talent)</h1>
+<p class="lead">Alle mit feinerer Schrift (kein Fettdruck mehr, kleinere Alterskategorie) und ohne Farbschimmer. Antippen zum Ausprobieren des aktiven Zustands. Die Gelbtöne sind fürs Beispiel – jede Phase bekäme analog ihre eigene, abgedunkelte Farbe.</p>
+<div class="v"><div class="vt">Variante 1 – Dezente Karte: neutraler Rand, Stufe in abgedunkeltem Phasenton, aktive Kachel mit feinem Farbring</div><div class="card"><div class="stb v1"><button class="c on" type="button"><b>Alle T-Stufen</b></button><button class="c" type="button"><b>T1</b><small>U12-U14</small></button><button class="c" type="button"><b>T2</b><small>U14-U16</small></button><button class="c" type="button"><b>T3</b><small>U16-U21</small></button><button class="c" type="button"><b>T4</b><small>U21</small></button></div></div></div><div class="v"><div class="vt">Variante 2 – Feine farbige Linie unten (wie die F1–M-Leiste im Athlet:innen-Weg), aktiv leicht getönt</div><div class="card"><div class="stb v2"><button class="c on" type="button"><b>Alle T-Stufen</b></button><button class="c" type="button"><b>T1</b><small>U12-U14</small></button><button class="c" type="button"><b>T2</b><small>U14-U16</small></button><button class="c" type="button"><b>T3</b><small>U16-U21</small></button><button class="c" type="button"><b>T4</b><small>U21</small></button></div></div></div><div class="v"><div class="vt">Variante 3 – Ton-in-Ton: sanft eingefärbte Flächen ohne Rand, aktiv etwas kräftiger</div><div class="card"><div class="stb v3"><button class="c on" type="button"><b>Alle T-Stufen</b></button><button class="c" type="button"><b>T1</b><small>U12-U14</small></button><button class="c" type="button"><b>T2</b><small>U14-U16</small></button><button class="c" type="button"><b>T3</b><small>U16-U21</small></button><button class="c" type="button"><b>T4</b><small>U21</small></button></div></div></div><div class="v"><div class="vt">Variante 4 – Neutral in Grau, nur die gewählte Stufe zeigt die Phasenfarbe</div><div class="card"><div class="stb v4"><button class="c on" type="button"><b>Alle T-Stufen</b></button><button class="c" type="button"><b>T1</b><small>U12-U14</small></button><button class="c" type="button"><b>T2</b><small>U14-U16</small></button><button class="c" type="button"><b>T3</b><small>U16-U21</small></button><button class="c" type="button"><b>T4</b><small>U21</small></button></div></div></div><script>
+document.querySelectorAll('.stb').forEach(s=>s.querySelectorAll('.c').forEach(b=>b.addEventListener('click',()=>{
+  s.querySelectorAll('.c').forEach(x=>x.classList.remove('on'));b.classList.add('on');})));
+</script></body></html>
