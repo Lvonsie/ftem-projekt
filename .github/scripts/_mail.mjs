@@ -6,12 +6,15 @@
 
 export async function warnmail(subject, lines) {
   const key = process.env.RESEND_API_KEY;
-  const to = process.env.ALERT_TO;
+  // Mehrere Empfaenger moeglich: Adressen in ALERT_TO mit Komma trennen.
+  // Achtung: ohne verifizierte Domain stellt Resend nur an die Adresse des
+  // eigenen Resend-Kontos zu - weitere Adressen erst nach Domain-Verifizierung.
+  const to = (process.env.ALERT_TO || '').split(',').map(s => s.trim()).filter(Boolean);
   const run = process.env.GITHUB_SERVER_URL && process.env.GITHUB_RUN_ID
     ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
     : '';
   const when = new Date().toLocaleString('de-CH', { timeZone: 'Europe/Zurich' });
-  if (!key || !to) {
+  if (!key || !to.length) {
     console.error('Keine Mail verschickt: RESEND_API_KEY oder ALERT_TO fehlt.');
     return false;
   }
@@ -27,7 +30,7 @@ export async function warnmail(subject, lines) {
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from: 'FTEM Ueberwachung <onboarding@resend.dev>',
-      to: [to],
+      to,
       subject,
       html,
     }),
@@ -36,6 +39,6 @@ export async function warnmail(subject, lines) {
     console.error('Mailversand fehlgeschlagen:', r.status, await r.text().catch(() => ''));
     return false;
   }
-  console.log('Warn-Mail verschickt an', to);
+  console.log('Warn-Mail verschickt an', to.join(', '));
   return true;
 }

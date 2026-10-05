@@ -9,6 +9,11 @@ on:
   schedule:
     - cron: '41 4,10,16,22 * * *'   # alle 6 h (UTC); bewusst nicht zur vollen Stunde
   workflow_dispatch:
+    inputs:
+      testalarm:
+        description: 'Nur Testalarm-Mail verschicken (Seite wird nicht geprueft)'
+        type: boolean
+        default: false
 
 concurrency:
   group: seiten-check
@@ -18,10 +23,17 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      ALERT_TO: michael.pleus@swiss-ski.ch
     steps:
       - uses: actions/checkout@v4
+      - name: Testalarm-Mail verschicken (nur auf Wunsch)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.testalarm }}
+        run: >-
+          node .github/scripts/mailfail.mjs
+          "✅ FTEM-Überwachung: Testalarm"
+          "Dies ist ein absichtlich ausgelöster Testalarm - der Mailversand funktioniert. Die Seite wurde bei diesem Lauf nicht geprüft."
       - name: Live-Seite pruefen
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.testalarm) }}
         run: node .github/scripts/check.mjs
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          ALERT_TO: michael.pleus@swiss-ski.ch
