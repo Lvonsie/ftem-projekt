@@ -1,0 +1,48 @@
+# Taegliches Backup der Datenbank-Inhalte (Admin-Texte, Feedback, Statistik)
+# in den Ordner backup/ dieses Repos. Commit nur bei Aenderungen; die ganze
+# Historie liegt danach in der Git-Versionsgeschichte. Bei Fehlern geht eine
+# Warn-Mail an ALERT_TO (Versand via Resend, Secret RESEND_API_KEY).
+# Manuell ausloesbar unter GitHub -> Actions -> "Daten-Backup" -> Run workflow.
+name: Daten-Backup
+
+on:
+  schedule:
+    - cron: '23 2 * * *'   # taeglich 02:23 UTC = 03:23/04:23 Schweizer Zeit
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daten-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      ALERT_TO: michael.pleus@swiss-ski.ch
+    steps:
+      - uses: actions/checkout@v4
+      - name: Datenbank sichern
+        run: node .github/scripts/backup.mjs
+      - name: Backup committen (nur bei Aenderungen)
+        run: |
+          git config user.name "ftem-backup"
+          git config user.email "actions@github.com"
+          git add backup/
+          if git diff --cached --quiet; then
+            echo "Keine Aenderungen - nichts zu committen."
+          else
+            git commit -m "Automatisches Daten-Backup $(TZ=Europe/Zurich date +%d.%m.%Y)"
+            git pull --rebase origin ${GITHUB_REF_NAME}
+            git push
+          fi
+      - name: Warn-Mail bei Fehler im Lauf
+        if: failure()
+        run: >-
+          node .github/scripts/mailfail.mjs
+          "⚠️ FTEM-Seite: tägliches Backup fehlgeschlagen"
+          "Der Backup-Lauf auf GitHub ist fehlgeschlagen (z.B. beim Speichern ins Repo) - Details im verlinkten Protokoll."

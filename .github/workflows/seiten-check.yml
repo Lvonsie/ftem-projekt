@@ -1,0 +1,27 @@
+# Automatischer Funktions-Check der Live-Seite, alle 6 Stunden.
+# Prueft alle 4 Sprachseiten, Admin-Seite, Service-Worker, Manifest,
+# Datenbank und die beiden Netlify-Funktionen. Bei bleibenden Problemen
+# geht eine Warn-Mail an ALERT_TO (Versand via Resend, Secret RESEND_API_KEY).
+# Manuell ausloesbar unter GitHub -> Actions -> "Seiten-Check" -> Run workflow.
+name: Seiten-Check
+
+on:
+  schedule:
+    - cron: '41 4,10,16,22 * * *'   # alle 6 h (UTC); bewusst nicht zur vollen Stunde
+  workflow_dispatch:
+
+concurrency:
+  group: seiten-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Live-Seite pruefen
+        run: node .github/scripts/check.mjs
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ALERT_TO: michael.pleus@swiss-ski.ch
