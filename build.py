@@ -3295,11 +3295,16 @@ function fitSec(d){
   if(!cols||!body)return;
   cols.style.transform='';cols.style.width='';body.style.height='';body.style.overflow='';
   const imb=im.querySelector('.im-body');
+  // Fixierte Kopfzeile (Titel+Stufenleiste) ueberdeckt den oberen Rand des
+  // Scrollbereichs: beim Anscrollen ihre Hoehe abziehen, sonst verschwindet
+  // die Abschnitt-Zeile darunter
+  const fx=imb.querySelector('.ps-fix.has-stb');
+  const fxh=fx?fx.offsetHeight:0;
   if(window.matchMedia('(max-width:760px)').matches){
     // Handy: nicht verkleinern (wuerde die Spalten abschneiden), sondern
     // seitlich wischbar machen
     body.style.overflowX='auto';
-    setTimeout(()=>{imb.scrollTo({top:Math.max(0,d.offsetTop-10),behavior:'smooth'});},40);
+    setTimeout(()=>{imb.scrollTo({top:Math.max(0,d.offsetTop-fxh-10),behavior:'smooth'});},40);
     return;
   }
   const avail=imb.clientHeight - d.querySelector('summary').getBoundingClientRect().height - 64;
@@ -3312,7 +3317,7 @@ function fitSec(d){
     body.style.height=Math.ceil(need*r+8)+'px';
     body.style.overflow='hidden';
   }
-  setTimeout(()=>{imb.scrollTo({top:Math.max(0,d.offsetTop-10),behavior:'smooth'});},40);
+  setTimeout(()=>{imb.scrollTo({top:Math.max(0,d.offsetTop-fxh-10),behavior:'smooth'});},40);
 }
 im&&im.addEventListener('toggle',e=>{
   const d=e.target;
