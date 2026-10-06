@@ -911,6 +911,20 @@ CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9)]
 #   "url"     : Link -> wird als "Link"-Button gezeigt (leer lassen = kein Button)
 NEWS = [
     {
+        "title": "News Schneesport 26/27",
+        "date": "Oktober 2026",
+        "body": ["Die Schneesportnews 26/27 von Jugend+Sport sind online! Alle Neuigkeiten in folgenden Bereichen:"],
+        "bullets": ["Swiss Snowsports: Kurse, SnowHow & neue Swiss Snow League",
+                    "Swiss-Ski: J+S- & esa-News, neue Ausbildungsstruktur ab 2027",
+                    "Disziplinen-News: Ski | Snowboard | Langlauf | Telemark | Disabled"],
+        "url": "https://tool.jugendundsport.ch/modules/6a96ec7cb6267c1c550aa6f3?preview=&lang=de",
+        # J+S-Modul gibt es auf DE/FR/IT (EN faellt auf DE zurueck)
+        "url_lang": {
+            "fr": "https://tool.jugendundsport.ch/modules/6a96ec7cb6267c1c550aa6f3?preview=&lang=fr",
+            "it": "https://tool.jugendundsport.ch/modules/6a96ec7cb6267c1c550aa6f3?preview=&lang=it",
+        },
+    },
+    {
         "title": "Neue Ausbildungsstruktur",
         "date": "Juli 2026",
         "body": ["Die Übersichtsseite zur neuen Ausbildungsstruktur ist live!",
@@ -961,7 +975,9 @@ def news_html(lang):
         if it.get("foot"):
             body += '<p>'+esc(tr(it["foot"], lang))+'</p>'
         _urls = (' data-urls=\''+json.dumps(it["urls"], ensure_ascii=False)+'\'') if it.get("urls") else ''
-        link = ('<a class="news-link" href="'+esc(it["url"])+'"'+_urls+' target="_blank" rel="noopener">Link ↗</a>') if it.get("url") else ''
+        # Sprachversion des Links, falls vorhanden (url_lang: {fr/it/en: ...})
+        _u = it.get("url_lang", {}).get(lang) or it.get("url")
+        link = ('<a class="news-link" href="'+esc(_u)+'"'+_urls+' target="_blank" rel="noopener">Link ↗</a>') if _u else ''
         date = ('<span class="news-date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
         new_badge = '<span class="news-new">NEU</span>' if i == 0 else ''
         cards += ('<article class="news-card"><div class="news-meta">'+date+new_badge+'</div>'
