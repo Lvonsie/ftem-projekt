@@ -886,6 +886,45 @@
   },
   {
    "shared": "umfeld"
+  },
+  {
+   "title": "Ausbildungsweg",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Vom Trainer:in Nachwuchs über Trainer:in Leistungssport bis Trainer:in Spitzensport – der Ausbildungsweg für Trainer:innen.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Neue Ausbildungsstruktur ab 2027",
+         "href": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Coachpoints",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ],
  "home": {

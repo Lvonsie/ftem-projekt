@@ -124,7 +124,8 @@
   "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/": {
    "text": "Riding Konzept",
    "bemerkung": "Links fürt zu richtiger Seite jedoch ohne Inhalt"
-  }
+  },
+  "assets/docs/skills-check-auswertungsvorlage.pdf": "PDF nur auf Deutsch vorhanden (Skills-Check-Auswertungsvorlage)"
  },
  "https://snowsports.flink.host/s/A4kzIlD4/VRqnCEMS": {
   "fr": "https://snowsports.flink.host/s/UVySo09n/taCwQdZi"
@@ -384,5 +385,20 @@
  },
  "https://snowsports.flink.host/s/W4qUh9WA": {
   "fr": "https://snowsports.flink.host/s/DZ8U3cBv"
+ },
+ "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027": {
+  "fr": "https://www.swiss-ski.ch/fr/a-propos/formation/entraineur/ski-alpin-a-2027/"
+ },
+ "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/langlauf-ab-2027/": {
+  "fr": "https://www.swiss-ski.ch/fr/a-propos/formation/entraineur/ski-de-fond-a-2027"
+ },
+ "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/biathlon-ab-2027/": {
+  "fr": "https://www.swiss-ski.ch/fr/a-propos/formation/entraineur/biathlon-a-2027/"
+ },
+ "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen-ab-2027/": {
+  "fr": "https://www.swiss-ski.ch/fr/a-propos/formation/entraineur/saut-a-ski-a-2027/"
+ },
+ "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/": {
+  "fr": "https://www.swiss-ski.ch/fr/a-propos/formation/entraineur/freestyle-a-2027/"
  }
 }

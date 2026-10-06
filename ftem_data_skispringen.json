@@ -532,19 +532,34 @@
        "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Inline-Sprünge\n\nLT: PISTE",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "SC 1: Imitation fahrend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
        "from": 4,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "",
@@ -664,6 +679,10 @@
         {
          "text": "Skills Check F3",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/MhhJ8rgF"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -675,6 +694,10 @@
         {
          "text": "Skills Check T1",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/qUZLkAub"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -686,6 +709,10 @@
         {
          "text": "Skills Check T2",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/5EsfSqCX"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -697,6 +724,10 @@
         {
          "text": "Skills Check T3-4",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/09S42akB"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -704,13 +735,23 @@
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       }
      ]
     },
@@ -1273,6 +1314,45 @@
   },
   {
    "shared": "umfeld"
+  },
+  {
+   "title": "Ausbildungsweg",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Vom Trainer:in Nachwuchs über Trainer:in Leistungssport bis Trainer:in Spitzensport – der Ausbildungsweg für Trainer:innen.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Neue Ausbildungsstruktur ab 2027",
+         "href": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen-ab-2027/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Coachpoints",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ],
  "home": {

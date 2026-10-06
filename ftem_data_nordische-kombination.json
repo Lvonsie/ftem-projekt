@@ -573,19 +573,34 @@
        "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Inline-Sprünge\n\nLT: PISTE Test",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE Test",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "SC 1: Imitation fahrend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE Test",
        "from": 4,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "",
@@ -666,25 +681,45 @@
        "v": "SC 1: Anfahrtsposition (Symmetrie)\nSC 2: Absprung (Beinstreckung)\nSC 3: Flug (Beinstreckung)\nSC 4: Landung (Telemark)\nSC 5: Schanzengrösse (bis HS70)",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "SC 1: Anfahrtsposition (Symmetrie)\nSC 2: Absprung (Armführung)\nSC 3: Flug (Beinstreckung und Armführung)\nSC 4: Landung (Telemark)\nSC 5: Schanzengrösse (bis Normalschanze)",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "SC 1: Anfahrtsposition (Symmetrie und Schliessen)\nSC 2: Absprung (Rücken und Arm-Kopf-Linie)\nSC 3: Flug (Skiaufnahme und Skiführung)\nSC 4: Landung (Telemark)\nSC 5: Schanzengrösse (bis Normalschanze)",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "SC 1: Anfahrtsposition (Schwerpunkt und Geschwindigkeit)\nSC 2: Absprung (Schwerpunkt)\nSC 3: Flug (Position und Ausfliegen)\nSC 4: Landung (Telemark)\nSC 5: Schanzengrösse (bis Grossschanze)",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "",
@@ -696,7 +731,12 @@
        "v": "• Neuroathletik",
        "from": 8,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "",
@@ -1276,6 +1316,45 @@
   },
   {
    "shared": "umfeld"
+  },
+  {
+   "title": "Ausbildungsweg",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Vom Trainer:in Nachwuchs über Trainer:in Leistungssport bis Trainer:in Spitzensport – der Ausbildungsweg für Trainer:innen.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Neue Ausbildungsstruktur ab 2027",
+         "href": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen-ab-2027/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Coachpoints",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ],
  "home": {

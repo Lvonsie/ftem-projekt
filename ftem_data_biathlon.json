@@ -705,13 +705,23 @@
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       }
      ]
     },
@@ -886,6 +896,10 @@
         {
          "text": "Skills Check F1",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/JejSc6Wn"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -897,6 +911,10 @@
         {
          "text": "Skills Check F2",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/V2yGwL27"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -908,6 +926,10 @@
         {
          "text": "Skills Check F3",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/2maBKGeJ"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -919,6 +941,10 @@
         {
          "text": "Skills Check T1",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/Az3cmPbP"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -930,6 +956,10 @@
         {
          "text": "Skills Check T2",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/g2f4V8sA"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -945,6 +975,10 @@
         {
          "text": "Skills Check T4",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/ptd5MNkj"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -956,6 +990,10 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/y1AhORyr"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -967,6 +1005,10 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/FgjXULkZ/y1AhORyr"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       }
@@ -1575,6 +1617,45 @@
   },
   {
    "shared": "umfeld"
+  },
+  {
+   "title": "Ausbildungsweg",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Vom Trainer:in Nachwuchs über Trainer:in Leistungssport bis Trainer:in Spitzensport – der Ausbildungsweg für Trainer:innen.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Neue Ausbildungsstruktur ab 2027",
+         "href": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/biathlon-ab-2027/"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Coachpoints",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ],
  "home": {

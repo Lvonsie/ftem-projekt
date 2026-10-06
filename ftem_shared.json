@@ -14,14 +14,8 @@
      "label": "Skills-Checks (SC) Mental",
      "segs": [
       {
-       "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.",
+       "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.\n\nSC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
        "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "SC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
-       "from": 1,
        "to": 1,
        "l": []
       },

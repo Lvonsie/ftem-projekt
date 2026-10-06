@@ -82,6 +82,7 @@ TR_EN_UI = {
     "Sport & Athlet:in": "Sport & athlete",
     "Material": "Equipment",
     "Strukturen & Umfeld": "Structures & environment",
+    "Für Trainer:innen": "For coaches",
 }
 
 def tr(s, lang):
@@ -158,7 +159,7 @@ CHAT_BTN = {"de": "FTEM-Coach (KI)", "fr": "Coach FTEM (IA)", "it": "Coach FTEM 
 FULL = {"F1":"Foundation 1","F2":"Foundation 2","F3":"Foundation 3","T1":"Talent 1","T2":"Talent 2","T3":"Talent 3","T4":"Talent 4","E1":"Elite 1","E2":"Elite 2","M":"Mastery"}
 # Fallback, falls eine Datendatei keine "ages" enthaelt (Alterskategorien pro Sportart)
 AGE = {"F1":"U8","F2":"U8–U10","F3":"U10–U12","T1":"U12–U14","T2":"U14–U16","T3":"U16+","T4":"U18+","E1":"","E2":"","M":""}
-GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld"]
+GROUP_ORDER = ["Sport & Athlet:in","Material","Strukturen & Umfeld","Für Trainer:innen"]
 
 def ph(st): return "foundation" if st[0]=="F" else "talent" if st[0]=="T" else "elite" if st[0]=="E" else "mastery"
 def esc(s): return html.escape(s, quote=True)
@@ -596,6 +597,8 @@ GROUP_COLORS = {
     "Sport & Athlet:in":    ("#4a5563", "rgba(74,85,99,.13)"),
     "Material":             ("#4a5563", "rgba(74,85,99,.13)"),
     "Strukturen & Umfeld":  ("#4a5563", "rgba(74,85,99,.13)"),
+    # Richtet sich an Trainer:innen statt Athlet:innen -> bewusst in Swiss-Ski-Rot
+    "Für Trainer:innen":    ("#d52b1e", "rgba(213,43,30,.12)"),
 }
 def group_accent(g):
     return GROUP_COLORS.get(g, ("#7a828c", "rgba(122,130,140,.15)"))
@@ -606,6 +609,8 @@ def mission_url(s, lang):
     return ((s.get("missions") or {}).get(lang)) or s.get("mission")
 
 _ICONS = {
+ "steps": '<path d="M3 20.5h4.5V16H12v-4.5h4.5V7"/><path d="M16.5 7l4-4"/><path d="M16 3h4.5v4.5"/>',
+ "coachpt": '<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3.8v2.4M12 17.8v2.4M3.8 12h2.4M17.8 12h2.4"/>',
  "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
  "calendar": '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/>',
  "apple": '<path d="M12 8c1.4-2.2 5-1.8 5 1.6 0 3.6-2.4 8.4-5 8.4S7 13.2 7 9.6C7 6.2 10.6 5.8 12 8z"/><path d="M12 8c0-2 .9-3 2.2-3.4"/>',
@@ -661,6 +666,8 @@ _KEYMAP = [
  (("selekt",),"funnel"),
  (("förderstruktur","foerderstruktur","wettkampf","wettkämpf","wettkaempf","rennen"),"podium"),
  (("umfeld","eltern","schule","beruf","management","betreu"),"users"),
+ (("ausbildungsweg",),"steps"),
+ (("coachpoint",),"coachpt"),
 ]
 def theme_icon(title):
     t = (title or "").lower()
@@ -934,14 +941,15 @@ NEWS = [
         "url": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
         "urls": {
             "default": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
-            "langlauf": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/langlauf-ab-2027-1-1/",
-            "biathlon": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/biathlon-ab-2027-1-1/",
-            "skispringen": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen/",
-            "skicross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
-            "freeski-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
-            "snowboard-alpin": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
-            "snowboard-cross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
-            "snowboard-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle/",
+            "langlauf": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/langlauf-ab-2027/",
+            "biathlon": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/biathlon-ab-2027/",
+            "skispringen": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen-ab-2027/",
+            "nordische-kombination": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen-ab-2027/",
+            "skicross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
+            "freeski-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/",
+            "snowboard-alpin": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/",
+            "snowboard-cross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
+            "snowboard-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/",
         },
     },
     {

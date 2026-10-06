@@ -399,6 +399,10 @@
         {
          "text": "F1 Skills-Check",
          "href": "https://snowsports.flink.host/s/82AcAbDz/L2n7lxLD/JWPs1tqA"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -410,6 +414,10 @@
         {
          "text": "F2 Skills-Check",
          "href": "https://snowsports.flink.host/s/82AcAbDz/4d5A7wtz/gknIMhqZ"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -421,6 +429,10 @@
         {
          "text": "F3 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/E7AJYlUd"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -432,6 +444,10 @@
         {
          "text": "T1 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/bOhH5PnS"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -447,6 +463,10 @@
         {
          "text": "T2 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/4GQ5GMSy"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -458,6 +478,10 @@
         {
          "text": "T3-4 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/qAUcPPUv"
+        },
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -465,13 +489,23 @@
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Analoges Erfassungstool für Skills Checks",
+         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
+        }
+       ]
       }
      ]
     },
@@ -2062,6 +2096,45 @@
   },
   {
    "shared": "umfeld"
+  },
+  {
+   "title": "Ausbildungsweg",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Vom Trainer:in Nachwuchs über Trainer:in Leistungssport bis Trainer:in Spitzensport – der Ausbildungsweg für Trainer:innen.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Neue Ausbildungsstruktur ab 2027",
+         "href": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Coachpoints",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ],
  "home": {
