@@ -1317,6 +1317,24 @@
     }
    ],
    "nohead": true
+  },
+  {
+   "title": "Downloads",
+   "group": "Für Trainer:innen",
+   "nohead": true,
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ],
  "home": {

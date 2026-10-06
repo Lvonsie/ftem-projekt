@@ -610,6 +610,7 @@ def mission_url(s, lang):
 _ICONS = {
  "steps": '<path d="M3 20.5h4.5V16H12v-4.5h4.5V7"/><path d="M16.5 7l4-4"/><path d="M16 3h4.5v4.5"/>',
  "coachpt": '<circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3.8v2.4M12 17.8v2.4M3.8 12h2.4M17.8 12h2.4"/>',
+ "dl": '<path d="M12 4v10.5M12 14.5l-4.5-4.5M12 14.5l4.5-4.5"/><path d="M4.5 16.5v2.5a1.5 1.5 0 0 0 1.5 1.5h12a1.5 1.5 0 0 0 1.5-1.5v-2.5"/>',
  "clock": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
  "calendar": '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/>',
  "apple": '<path d="M12 8c1.4-2.2 5-1.8 5 1.6 0 3.6-2.4 8.4-5 8.4S7 13.2 7 9.6C7 6.2 10.6 5.8 12 8z"/><path d="M12 8c0-2 .9-3 2.2-3.4"/>',
@@ -667,6 +668,7 @@ _KEYMAP = [
  (("umfeld","eltern","schule","beruf","management","betreu"),"users"),
  (("ausbildungsweg",),"steps"),
  (("coachpoint",),"coachpt"),
+ (("download",),"dl"),
 ]
 def theme_icon(title):
     t = (title or "").lower()
