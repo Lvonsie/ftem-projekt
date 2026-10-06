@@ -597,8 +597,7 @@ GROUP_COLORS = {
     "Sport & Athlet:in":    ("#4a5563", "rgba(74,85,99,.13)"),
     "Material":             ("#4a5563", "rgba(74,85,99,.13)"),
     "Strukturen & Umfeld":  ("#4a5563", "rgba(74,85,99,.13)"),
-    # Richtet sich an Trainer:innen statt Athlet:innen -> bewusst in Swiss-Ski-Rot
-    "Für Trainer:innen":    ("#d52b1e", "rgba(213,43,30,.12)"),
+    "Für Trainer:innen":    ("#4a5563", "rgba(74,85,99,.13)"),
 }
 def group_accent(g):
     return GROUP_COLORS.get(g, ("#7a828c", "rgba(122,130,140,.15)"))
@@ -691,12 +690,15 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
                 '<span class="tchev"></span></summary>'
                 '<div class="adm-home"><p class="adm-shnote">Dieser Abschnitt gilt für mehrere Sportarten und wird zentral bearbeitet: '
                 'oben bei der Sportart «Sportartübergreifend» auswählen. Änderungen dort wirken hier automatisch.</p></div></details>')
-    # header row
+    # header row ("nohead": true im Thema -> keine F1-M-Kacheln, z.B. Trainer-Themen
+    # mit einer durchgehenden Zelle ohne Stufenbezug)
     th = '<div class="r head"><div class="rl corner"></div>'
     for si,s in enumerate(stages):
         age = ages.get(s,"")
         th += '<div class="c hd ph-'+ph(s)+'" data-idx="'+str(si)+'" title="'+esc(tr("Spalte hervorheben", lang))+'"><span class="st">'+FULL[s]+'</span>'+('<span class="stf">'+age+'</span>' if age else '')+'</div>'
     th += '</div>'
+    if t.get("nohead"):
+        th = ''
     body = ""
     for ri, r in enumerate(t["rows"]):
         lbl = tr(r["label"], lang) or ""
@@ -737,7 +739,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
     else:
         tt_span = ('<span class="tt ovr-txt" data-cid="'+cidb+'|title" data-bh="'+fnv36(t["title"] or "")+'">'+esc(title)+'</span>')
         tfield = ''
-    return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
+    return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+(' nohd' if t.get("nohead") else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(t["title"])+'</span>'
             + tt_span + '<span class="tchev"></span></summary>'
             + tfield +
@@ -2078,6 +2080,12 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .fi-links{margin-top:16px}
 /* Zebra im Darkmode: leicht aufhellen statt abdunkeln */
 [data-theme="dark"] .grid .r:nth-child(odd):not(.head) .cell,[data-theme="dark"] .grid .r:nth-child(odd):not(.head) .rl{background-image:linear-gradient(rgba(255,255,255,.045),rgba(255,255,255,.045)),var(--mg)}
+/* Themen ohne Stufen-Kacheln (nohead): leeres Beschriftungsfeld ausblenden */
+.theme.nohd .rl.nolbl{display:none}
+/* nohd: eine Spalte in Containerbreite statt 10-Spalten-Raster */
+.theme.nohd .grid{min-width:0}
+.theme.nohd .r{display:block}
+.theme.nohd .c.cell{width:auto;background:var(--card)!important;background-image:none!important}
 @media(max-width:760px){
   .aw-btn{font-size:12px;padding:8px 16px}
 }

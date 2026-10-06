@@ -1379,7 +1379,8 @@
       }
      ]
     }
-   ]
+   ],
+   "nohead": true
   },
   {
    "title": "Coachpoints",
@@ -1396,7 +1397,8 @@
       }
      ]
     }
-   ]
+   ],
+   "nohead": true
   }
  ],
  "home": {
