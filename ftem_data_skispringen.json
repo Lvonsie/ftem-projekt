@@ -532,34 +532,19 @@
        "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Inline-Sprünge\n\nLT: PISTE",
        "from": 2,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Imitation stehend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Imitation fahrend\nSC 2: Wagensprünge stehend\nSC 3: Wagensprünge fahrend\n\nLT: PISTE",
        "from": 4,
        "to": 6,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "",
@@ -679,10 +664,6 @@
         {
          "text": "Skills Check F3",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/MhhJ8rgF"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -694,10 +675,6 @@
         {
          "text": "Skills Check T1",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/qUZLkAub"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -709,10 +686,6 @@
         {
          "text": "Skills Check T2",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/5EsfSqCX"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -724,10 +697,6 @@
         {
          "text": "Skills Check T3-4",
          "href": "https://snowsports.flink.host/s/ZYYuoX2L/09S42akB"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -735,23 +704,13 @@
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },

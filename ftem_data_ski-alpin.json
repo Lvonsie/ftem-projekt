@@ -399,10 +399,6 @@
         {
          "text": "F1 Skills-Check",
          "href": "https://snowsports.flink.host/s/82AcAbDz/L2n7lxLD/JWPs1tqA"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -414,10 +410,6 @@
         {
          "text": "F2 Skills-Check",
          "href": "https://snowsports.flink.host/s/82AcAbDz/4d5A7wtz/gknIMhqZ"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -429,10 +421,6 @@
         {
          "text": "F3 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/E7AJYlUd"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -444,10 +432,6 @@
         {
          "text": "T1 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/bOhH5PnS"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -463,10 +447,6 @@
         {
          "text": "T2 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/4GQ5GMSy"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -478,10 +458,6 @@
         {
          "text": "T3-4 Skills-Check",
          "href": "https://snowsports.flink.host/s/3Og6aRH3/qAUcPPUv"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -489,23 +465,13 @@
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },

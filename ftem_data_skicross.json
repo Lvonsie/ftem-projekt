@@ -377,67 +377,37 @@
        "v": "SC: On Snow Skills für Kinder F1 Gold",
        "from": 0,
        "to": 0,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: On Snow Skills für Kinder F2 Gold",
        "from": 1,
        "to": 1,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: On Snow Skills für Kinder F3 Race Gold",
        "from": 2,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "LT: Regionale Techniktests U12-U16\nSC: Vorbereitung Techniktest",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "LT: Swiss Ski Nationaler Techniktest U 16\nSC: Vorbereitung Techniktest",
        "from": 4,
        "to": 4,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "LT: 3 Techniknoten (SL, RS, Freifahren)",
        "from": 5,
        "to": 5,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "",

@@ -17,89 +17,49 @@
        "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.\n\nSC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
        "from": 0,
        "to": 1,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen machen eine Aufgabe (z.B. Technikübung) mit Ablenkungen (z.B. Lärm): Fähigkeit testen, Konzentration zu halten.",
        "from": 2,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Athleten:innen formulieren ein kleines Ziel für das Training und erklären, warum es ihnen wichtig ist.\nSC 2: Simulierte Stresssituation (z.B Wettkampfsimulation). Kinder sollen bewusst Techniken (z.B. Atmung) einsetzen, um „grün“ zu erreichen.",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen beschreiben eine Bestleistung: „Wie hast du dich gefühlt?“: Merkmale des persönlichen optimalen Leistungszustand identifizieren und  anwenden.",
        "from": 4,
        "to": 4,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Während z.B. Intervalltraining bewusst Atemtechniken nutzen, um Ruhe zu bewahren.\nSC 3: Vor einer Technikaufgabe den Ablauf mental durchspielen.",
        "from": 5,
        "to": 5,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Bei einer schwierigen Aufgabe (z.B. Zeitdruck) positive Selbstgespräche anwenden.\nSC 3: Technikübung mit eingebauten Ablenkungen durchführen.",
        "from": 6,
        "to": 6,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -203,100 +163,55 @@
        "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.",
        "from": 0,
        "to": 0,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
        "from": 1,
        "to": 1,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen machen eine Aufgabe (z.B. Technikübung) mit Ablenkungen (z.B. Lärm): Fähigkeit testen, Konzentration zu halten.",
        "from": 2,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Athleten:innen formulieren ein kleines Ziel für das Training und erklären, warum es ihnen wichtig ist.\nSC 2: Simulierte Stresssituation (z.B Wettkampfsimulation). Kinder sollen bewusst Techniken (z.B. Atmung) einsetzen, um „grün“ zu erreichen.",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen beschreiben eine Bestleistung: „Wie hast du dich gefühlt?“: Merkmale des persönlichen optimalen Leistungszustand identifizieren und  anwenden.",
        "from": 4,
        "to": 4,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Während z.B. Intervalltraining bewusst Atemtechniken nutzen, um Ruhe zu bewahren.\nSC 3: Vor einer Technikaufgabe den Ablauf mental durchspielen.",
        "from": 5,
        "to": 5,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Bei einer schwierigen Aufgabe (z.B. Zeitdruck) positive Selbstgespräche anwenden.\nSC 3: Technikübung mit eingebauten Ablenkungen durchführen.",
        "from": 6,
        "to": 6,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -401,100 +316,55 @@
        "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.",
        "from": 0,
        "to": 0,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
        "from": 1,
        "to": 1,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen machen eine Aufgabe (z.B. Technikübung) mit Ablenkungen (z.B. Lärm): Fähigkeit testen, Konzentration zu halten.",
        "from": 2,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Athleten:innen formulieren ein kleines Ziel für das Training und erklären, warum es ihnen wichtig ist.\nSC 2: Simulierte Stresssituation (z.B Wettkampfsimulation). Kinder sollen bewusst Techniken (z.B. Atmung) einsetzen, um „grün“ zu erreichen.",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Athleten:innen beschreiben eine Bestleistung: „Wie hast du dich gefühlt?“: Merkmale des persönlichen optimalen Leistungszustand identifizieren und  anwenden.",
        "from": 4,
        "to": 4,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Während z.B. Intervalltraining bewusst Atemtechniken nutzen, um Ruhe zu bewahren.\nSC 3: Vor einer Technikaufgabe den Ablauf mental durchspielen.",
        "from": 5,
        "to": 5,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Bei einer schwierigen Aufgabe (z.B. Zeitdruck) positive Selbstgespräche anwenden.\nSC 3: Technikübung mit eingebauten Ablenkungen durchführen.",
        "from": 6,
        "to": 6,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -605,78 +475,43 @@
        "v": "SC: Fragen an die Kinder: Wie viele Stunden Schlaf brauchen wir? Was hilft uns besser zu schlafen?",
        "from": 0,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Eine Woche lang Schlafdauer und wie sie sich am nächsten Tag fühlen dokumentieren.",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Vor dem Schlafen Atemtechniken oder progressive Muskelrelaxation (PMR) ausprobieren.",
        "from": 4,
        "to": 4,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Schlafdauer und Qualität eine Woche lang dokumentieren, zusammen mit der Trainingsleistung.\nSC 2: Abendroutinen reflektieren und Anpassungen vornehmen.",
        "from": 5,
        "to": 5,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Plan für Schlaf- und Essenszeiten vor einem Wettkampf erstellen und umsetzen.\nSC 2: Gedanken vor dem Schlaf „parken“, z.B. durch Aufschreiben oder Atemübungen (Grübelstopp)",
        "from": 6,
        "to": 6,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Etablierte Schlafroutine für Training und Wettkampf.",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -1032,10 +867,6 @@
         {
          "text": "Skills Check F1-2",
          "href": "https://snowsports.flink.host/s/QEH4xaub/YyaeOBN1"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1047,10 +878,6 @@
         {
          "text": "Skills Check F3",
          "href": "https://snowsports.flink.host/s/QEH4xaub/skbTiIFF"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1062,10 +889,6 @@
         {
          "text": "Skills Check T1",
          "href": "https://snowsports.flink.host/s/QEH4xaub/KBG9w0kx"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1077,10 +900,6 @@
         {
          "text": "Skills Check T2",
          "href": "https://snowsports.flink.host/s/QEH4xaub/UlfUtKpv"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1092,10 +911,6 @@
         {
          "text": "Skills Check T3",
          "href": "https://snowsports.flink.host/s/QEH4xaub/8xNUKODE"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1107,10 +922,6 @@
         {
          "text": "Skills Check T4",
          "href": "https://snowsports.flink.host/s/QEH4xaub/dUmzwHTv"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1122,10 +933,6 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/QEH4xaub/vyqcs6RA"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1137,10 +944,6 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/QEH4xaub/vyqcs6RA"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       }
@@ -1260,10 +1063,6 @@
         {
          "text": "Skills Checks F1-2",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/VRqnCEMS"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1275,10 +1074,6 @@
         {
          "text": "Skills Checks F3",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/e8eVqFKW"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1290,10 +1085,6 @@
         {
          "text": "Skills Checks T1",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/uLnnCCKA"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1305,10 +1096,6 @@
         {
          "text": "Skills Checks T2",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/ZUyORDHY"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1320,10 +1107,6 @@
         {
          "text": "Skills Checks T3",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/U6NB2ByU"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1335,10 +1118,6 @@
         {
          "text": "Skills Checks T4",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/GB3iYwbg"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1350,10 +1129,6 @@
         {
          "text": "Skills Checks E-M",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/eLtXFUia"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -1365,10 +1140,6 @@
         {
          "text": "Skills Checks E-M",
          "href": "https://snowsports.flink.host/s/A4kzIlD4/eLtXFUia"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       }
@@ -1488,78 +1259,43 @@
        "v": "SC 1: Kinder schätzen, wie viel sie pro Training trinken sollten und überprüfen es (z.B. durch Markierungen an der Trinkflasche).\n\nSC 2: Kinder prüfen selbstständig, ob alle wichtigen Items dabei sind (Taschencheck).",
        "from": 0,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Einen Tag bezüglich Ernährung dokumentieren und diskutieren: Essen, Trinken und Snacks.",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Selbständig eine Mahlzeit/Snack für vor, während und nach dem Training/Wettkampf zusammenstellen und diskutieren.",
        "from": 4,
        "to": 4,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Mit verschiedenen Snacks, Trinkstrategien oder Mahlzeiten vor/während/nach dem Training/Wettkampf experimentieren und individuell anpassen.",
        "from": 5,
        "to": 5,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Ernährung und Hydration unter Wettkampfbedingungen testen (z.B. Gels, isotonische Getränke während Belastung).\n\nSC 2: Flüssigkeitsverlust, Energiebedarf und Regeneration dokumentieren und auswerten.",
        "from": 6,
        "to": 6,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -1706,78 +1442,43 @@
        "v": "SC 1: Kinder schätzen, wie viel sie pro Training trinken sollten und überprüfen es (z.B. durch Markierungen an der Trinkflasche).\nSC 2: Kinder prüfen selbstständig, ob alle wichtigen Items dabei sind (Taschencheck).",
        "from": 0,
        "to": 2,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Einen Tag bezüglich Ernährung dokumentieren und diskutieren: Essen, Trinken und Snacks.",
        "from": 3,
        "to": 3,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Selbständig eine Mahlzeit/Snack für vor, während und nach dem Training/Wettkampf zusammenstellen und diskutieren.",
        "from": 4,
        "to": 4,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Mit verschiedenen Snacks, Trinkstrategien oder Mahlzeiten vor/während/nach dem Training/Wettkampf experimentieren und individuell anpassen.",
        "from": 5,
        "to": 5,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC 1: Ernährung und Hydration unter Wettkampfbedingungen testen (z.B. Gels, isotonische Getränke während Belastung).\nSC 2: Flüssigkeitsverlust, Energiebedarf und Regeneration dokumentieren und auswerten.",
        "from": 6,
        "to": 6,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "SC: Etablierte Ernährungs- und Hydrationsstrategie für Training und Wettkampf.",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -2175,10 +1876,6 @@
         {
          "text": "Skills Check F1-2",
          "href": "https://snowsports.flink.host/s/82AcAbDz/"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2190,10 +1887,6 @@
         {
          "text": "Skills Check F3",
          "href": "https://snowsports.flink.host/s/V8RPoTvV/3DswFJec"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2205,10 +1898,6 @@
         {
          "text": "Skills Check T1-2",
          "href": "https://snowsports.flink.host/s/V8RPoTvV/zDp2jWdg"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2220,10 +1909,6 @@
         {
          "text": "Skills Check T3-4",
          "href": "https://snowsports.flink.host/s/V8RPoTvV/lKUuSGpU"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2231,23 +1916,13 @@
        "v": "LT: Physio Check Elite",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "LT: Physio Check Elite",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -2389,10 +2064,6 @@
         {
          "text": "Skills Checks F1-2",
          "href": "https://snowsports.flink.host/s/82AcAbDz/"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2404,10 +2075,6 @@
         {
          "text": "Skills Checks F3",
          "href": "https://snowsports.flink.host/s/V8RPoTvV/3DswFJec"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2419,10 +2086,6 @@
         {
          "text": "Skills Checks T1-2",
          "href": "https://snowsports.flink.host/s/V8RPoTvV/zDp2jWdg"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2434,10 +2097,6 @@
         {
          "text": "Skills Checks T3-4",
          "href": "https://snowsports.flink.host/s/V8RPoTvV/lKUuSGpU"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2445,23 +2104,13 @@
        "v": "ST: Physio Check Elite",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "ST: Physio Check Elite",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
@@ -2571,10 +2220,6 @@
         {
          "text": "Skills Check F1-2",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/caW1jsv7"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2586,10 +2231,6 @@
         {
          "text": "Skills Check F3",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/UdvThSLV"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2601,10 +2242,6 @@
         {
          "text": "Skills Check T1",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/eye1J25O"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2616,10 +2253,6 @@
         {
          "text": "Skills Check T2",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/dd0Ww3sg"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2631,10 +2264,6 @@
         {
          "text": "Skills Check T3",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/P9lqnOKT"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2646,10 +2275,6 @@
         {
          "text": "Skills Check T4",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/VQWOd1MB"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2661,10 +2286,6 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2676,10 +2297,6 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       }
@@ -2795,10 +2412,6 @@
         {
          "text": "F1-2 Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/caW1jsv7"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2810,10 +2423,6 @@
         {
          "text": "F3 Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/UdvThSLV"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2825,10 +2434,6 @@
         {
          "text": "T1 Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/eye1J25O"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2840,10 +2445,6 @@
         {
          "text": "T2 Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/dd0Ww3sg"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2855,10 +2456,6 @@
         {
          "text": "T3 Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/P9lqnOKT"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2870,10 +2467,6 @@
         {
          "text": "T4 Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/VQWOd1MB"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2885,10 +2478,6 @@
         {
          "text": "E Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -2900,10 +2489,6 @@
         {
          "text": "M Skills-Check",
          "href": "https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       }
@@ -3015,10 +2600,6 @@
         {
          "text": "Skills Check F1-2",
          "href": "https://snowsports.flink.host/s/0j6vgp47/y649CbPO"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3030,10 +2611,6 @@
         {
          "text": "Skills Check F3",
          "href": "https://snowsports.flink.host/s/0j6vgp47/kvC7i1uL"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3045,10 +2622,6 @@
         {
          "text": "Skills Check T1-2",
          "href": "https://snowsports.flink.host/s/0j6vgp47/UgLkS6DV"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3060,10 +2633,6 @@
         {
          "text": "Skills Check T3-4",
          "href": "https://snowsports.flink.host/s/0j6vgp47/zxViygWv"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3075,10 +2644,6 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/0j6vgp47/wXSmixxp"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3090,10 +2655,6 @@
         {
          "text": "Skills Check E-M",
          "href": "https://snowsports.flink.host/s/0j6vgp47/wXSmixxp"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       }
@@ -3221,10 +2782,6 @@
         {
          "text": "Skills-Check Kraft F2",
          "href": "https://snowsports.flink.host/s/82AcAbDz/4d5A7wtz"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3236,10 +2793,6 @@
         {
          "text": "Skills-Check Kraft F3",
          "href": "https://snowsports.flink.host/s/LELW9uhe/mSoSEMei"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3255,10 +2808,6 @@
         {
          "text": "Swiss-Ski Power Test (SSPT)",
          "href": "https://snowsports.flink.host/s/UmOtlQP3/"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3270,10 +2819,6 @@
         {
          "text": "Skills-Check Kraft T3-4",
          "href": "https://snowsports.flink.host/s/LELW9uhe/afjNYpUu"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3285,10 +2830,6 @@
         {
          "text": "Skills-Check Kraft E-M",
          "href": "https://snowsports.flink.host/s/LELW9uhe/LpkGPfry"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       },
@@ -3300,10 +2841,6 @@
         {
          "text": "Skills-Check Kraft E-M",
          "href": "https://snowsports.flink.host/s/LELW9uhe/LpkGPfry"
-        },
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
         }
        ]
       }

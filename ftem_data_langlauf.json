@@ -705,23 +705,13 @@
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
        "from": 9,
        "to": 9,
-       "l": [
-        {
-         "text": "Analoges Erfassungstool für Skills Checks",
-         "href": "assets/docs/skills-check-auswertungsvorlage.pdf"
-        }
-       ]
+       "l": []
       }
      ]
     },
