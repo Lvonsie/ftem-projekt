@@ -4211,7 +4211,12 @@ function pendLoc(cid){
   var tt='';
   var th=ta.closest('details.theme');
   if(th){var t2=th.querySelector('summary .tt');
-    if(t2){var c=t2.cloneNode(true);c.querySelectorAll('.adm-tag').forEach(function(x){x.parentNode.removeChild(x);});tt=c.textContent.trim();}}
+    if(t2){var c=t2.cloneNode(true);
+      // Cluster-Etikett (z.B. «Ski (3)» bei den drei Mental-Bloecken) behalten,
+      // damit in der Pendenzenliste klar ist, WELCHER Block gemeint ist
+      var sh=c.querySelector('.adm-shtag'),shl=sh?sh.textContent.trim():'';
+      c.querySelectorAll('.adm-tag').forEach(function(x){x.parentNode.removeChild(x);});
+      tt=c.textContent.trim();if(shl)tt+=' ('+shl.split(' · ').join(', ')+')';}}
   var row=ta.closest('.r'),rl=row?((row.querySelector('.rl')||{}).textContent||''):'';
   var fld=ta.closest('.adm-field'),fl=fld?((fld.querySelector('label')||{}).textContent||''):'';
   return {ta:ta,sec:sec,sname:sname,theme:tt,row:(rl||fl||'').trim()};

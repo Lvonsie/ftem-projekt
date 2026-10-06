@@ -509,6 +509,37 @@ header.top select,.sportsel2,select.jump,.pd-sportsel,.abar select{-webkit-appea
 .ph-sum .ps-head{display:flex;align-items:center;gap:13px;margin-bottom:11px}
 .ph-sum .ps-badge{flex:none;width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:var(--psc,#4a5563)}
 .ps-f{--psc:var(--found)}.ps-t{--psc:var(--talent)}.ps-e{--psc:var(--elite)}.ps-m{--psc:var(--mast)}
+/* Stufenleiste im Stufen-Popup: dezente Karten (Variante 1) - neutraler Rand,
+   Stufe im abgedunkelten Phasenton, aktive Kachel mit feinem Farbring */
+.ps-stb{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}
+/* Beim Scrollen im aufgeklappten Popup bleibt die ganze Kopfzeile
+   (Titel, Beschreibung und Stufenleiste zusammen) oben fixiert */
+.imodal.wide .im-body{padding-top:0}
+.imodal.wide .ph-sum .ps-head{padding-top:14px}
+.imodal.wide .ps-fix.has-stb{position:sticky;top:0;z-index:6;margin:0 -16px 14px;padding:0 16px 10px;
+  background:rgba(240,244,248,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(29,38,48,.08)}
+.imodal.wide .ps-fix.has-stb .ps-stb{margin:0}
+.imodal.wide .ps-fix.has-stb .ps-desc{margin-bottom:12px}
+[data-theme="dark"] .imodal.wide .ps-fix.has-stb{background:rgba(20,30,44,.93);border-bottom-color:rgba(255,255,255,.08)}
+.ps-sb{font:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:50px;
+  color:var(--psx,#4a5563);background:var(--card);border:1.5px solid var(--line);border-radius:11px;
+  padding:6px 12px 5px;cursor:pointer;line-height:1.15;box-shadow:0 1px 3px rgba(29,38,48,.06);
+  transition:border-color .15s,background .15s,box-shadow .15s}
+.ps-sb b{font-weight:600;font-size:12.5px;letter-spacing:.2px}
+.ps-sb small{font-size:9px;font-weight:500;color:var(--mut)}
+.ps-sb:hover{border-color:#cdd5dd}
+.ps-sb.on{border-color:var(--psc,#4a5563);background:var(--psbg,#f4f6f8);box-shadow:0 2px 8px color-mix(in srgb,var(--psc,#4a5563) 18%,transparent)}
+.ps-f .ps-sb{--psx:#15707f;--psbg:#eff7f9}
+.ps-t .ps-sb{--psx:#a37c00;--psbg:#fdfaf0}
+.ps-e .ps-sb{--psx:#b05015;--psbg:#fdf4ee}
+.ps-m .ps-sb{--psx:#b3160b;--psbg:#fdf1f0}
+[data-theme="dark"] .ps-sb{background:#172231;border-color:rgba(255,255,255,.14);box-shadow:none}
+[data-theme="dark"] .ps-sb:hover{border-color:rgba(255,255,255,.3)}
+[data-theme="dark"] .ps-f .ps-sb{--psx:#7fd6e8;--psbg:#152731}
+[data-theme="dark"] .ps-t .ps-sb{--psx:#f0cf72;--psbg:#25220f}
+[data-theme="dark"] .ps-e .ps-sb{--psx:#f0a877;--psbg:#271c12}
+[data-theme="dark"] .ps-m .ps-sb{--psx:#f09287;--psbg:#271413}
 .ps-t .ps-badge{color:#3b2e00}
 .ph-sum .ps-name{font-size:17px;font-weight:800}
 .ph-sum .ps-rng{font-size:12px;font-weight:700;color:var(--mut)}
@@ -9080,7 +9111,12 @@ function pendLoc(cid){
   var tt='';
   var th=ta.closest('details.theme');
   if(th){var t2=th.querySelector('summary .tt');
-    if(t2){var c=t2.cloneNode(true);c.querySelectorAll('.adm-tag').forEach(function(x){x.parentNode.removeChild(x);});tt=c.textContent.trim();}}
+    if(t2){var c=t2.cloneNode(true);
+      // Cluster-Etikett (z.B. «Ski (3)» bei den drei Mental-Bloecken) behalten,
+      // damit in der Pendenzenliste klar ist, WELCHER Block gemeint ist
+      var sh=c.querySelector('.adm-shtag'),shl=sh?sh.textContent.trim():'';
+      c.querySelectorAll('.adm-tag').forEach(function(x){x.parentNode.removeChild(x);});
+      tt=c.textContent.trim();if(shl)tt+=' ('+shl.split(' · ').join(', ')+')';}}
   var row=ta.closest('.r'),rl=row?((row.querySelector('.rl')||{}).textContent||''):'';
   var fld=ta.closest('.adm-field'),fl=fld?((fld.querySelector('label')||{}).textContent||''):'';
   return {ta:ta,sec:sec,sname:sname,theme:tt,row:(rl||fl||'').trim()};
