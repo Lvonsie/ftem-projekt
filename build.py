@@ -589,6 +589,33 @@ def render_cell(seg, lang, cid=None, edit=False):
             seen.add(key)
             btns += '<a href="'+esc(lhref(l["href"], lang) or "#")+'" target="_blank" rel="noopener">'+esc(tr(l.get("text"), lang) or "Dokument")+'</a>'
         if btns: out += '<div class="lks">'+btns+'</div>'
+    # Download-Karten ("dl" im Segment): ein-/ausklappbare Karte mit Titel,
+    # Stufen-Chips, Beschreibung und PDF-Knoepfen (z.B. Trainer-Downloads).
+    # Standard: eingeklappt, damit der Bereich kompakt bleibt.
+    for d in seg.get("dl") or []:
+        chips = ""
+        for c in d.get("chips") or []:
+            k = (c or " ")[0].lower()
+            k = k if k in "ftem" else "f"
+            chips += '<span class="dch-'+k+'">'+esc(c)+'</span>'
+        files = ""
+        for f in d.get("files") or []:
+            href = f.get("href") or "#"
+            if not href.startswith("http"):
+                href = asset_v(href)
+            files += ('<a class="dlbtn" href="'+esc(href)+'" download target="_blank" rel="noopener">'
+                      '<span class="dic">PDF</span><span><b>'+esc(tr(f.get("label"), lang) or "")+'</b>'
+                      '<small>'+esc(tr(f.get("hint"), lang) or "")+'</small></span></a>')
+        note = esc(tr(d.get("note"), lang) or "")
+        out += ('<details class="dlc"><summary><span class="dlpdf">PDF</span>'
+                '<span class="dlt">'+esc(tr(d.get("title"), lang) or "")+'</span>'
+                + ('<span class="dlchips">'+chips+'</span>' if chips else '')
+                + '<span class="dlchev"></span></summary>'
+                '<div class="dlbody">'
+                + ('<p class="dldesc">'+esc(tr(d.get("desc"), lang) or "")+'</p>' if d.get("desc") else '')
+                + ('<div class="dlrow">'+files+'</div>' if files else '')
+                + ('<div class="dlnote">'+note+'</div>' if note else '')
+                + '</div></details>')
     return out
 
 # --- Themen-Icons (Inline-SVG, offline) + dezente Bereichsfarben ---
@@ -2265,7 +2292,7 @@ header.top button:hover{background:var(--bg)}
   @page{size:A4 landscape;margin:0}
   :root{--colw:84px;--lblw:80px}
   html,body{background:#fff}
-  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar,.printpick,.lks{display:none!important}
+  #home,header.top,footer,.scrolldown,.adminlink,.news,.more,.hits,.fb-btn,.fb-panel,.stagebar,.printpick,.lks,.dlc{display:none!important}
   section.sport{display:block!important}
   section.sport[hidden]{display:none!important}
   .wrap{padding:8mm;max-width:none}
@@ -2398,6 +2425,44 @@ a.txtlnk:hover{text-decoration-thickness:2px}
 .lks a{font-size:11px;color:#39424e;text-decoration:none;font-weight:700;background:var(--acc-bg);padding:5px 8px;border-radius:6px;display:flex;align-items:center;gap:5px}
 .lks a::before{content:'📄'}
 .lks a:hover{background:var(--acc-bg2)}
+/* Download-Karten (seg.dl): ein-/ausklappbar, Standard eingeklappt */
+.dlc{border:1px solid var(--line);border-radius:11px;background:var(--card);margin-top:10px;max-width:760px;overflow:hidden}
+.dlc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:10px 13px;user-select:none}
+.dlc summary::-webkit-details-marker{display:none}
+.dlc summary:hover{background:var(--acc-bg)}
+.dlc[open] summary{border-bottom:1px solid var(--line)}
+.dlpdf{flex:0 0 auto;width:27px;height:27px;border-radius:7px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:800;letter-spacing:.3px}
+.dlt{font-size:12.5px;font-weight:800;color:var(--ink)}
+.dlchips{display:flex;gap:4px}
+.dlchips span{font-size:9.5px;font-weight:700;line-height:1;padding:3px 7px;border-radius:999px}
+.dlchips .dch-f{background:#ecf6f8;color:#0d5e6e}
+.dlchips .dch-t{background:#fdf7e4;color:#8a6a00}
+.dlchips .dch-e{background:#fdeef0;color:#8f1d2c}
+.dlchips .dch-m{background:#f1edfa;color:#4c3a86}
+.dlchev{margin-left:auto;flex:0 0 auto;width:8px;height:8px;border-right:2px solid #8a94a3;border-bottom:2px solid #8a94a3;transform:rotate(45deg);transition:transform .2s}
+.dlc[open] .dlchev{transform:rotate(225deg);margin-top:5px}
+.dlbody{padding:10px 13px 13px}
+.dldesc{margin:0 0 11px;font-size:11.5px;line-height:1.55;color:#55606d}
+.dlrow{display:flex;gap:9px;flex-wrap:wrap}
+.dlbtn{flex:1 1 240px;display:flex;gap:9px;align-items:flex-start;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:var(--acc-bg);transition:background .15s}
+.dlbtn:hover{background:var(--acc-bg2)}
+.dlbtn .dic{flex:0 0 auto;width:32px;height:32px;border-radius:8px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:800}
+.dlbtn b{display:block;font-size:12px;margin-bottom:2px;color:var(--ink)}
+.dlbtn small{display:block;font-size:10.5px;line-height:1.45;color:#55606d;font-weight:400}
+.dlnote{margin-top:9px;font-size:11px;line-height:1.5;color:#55606d;background:var(--acc-bg);border-radius:8px;padding:7px 10px}
+/* nohd-Zellen (Trainer-Bereich): keine Hoehenbegrenzung, damit aufgeklappte
+   Download-Karten nicht abgeschnitten werden */
+.theme.nohd .cell .cwrap{max-height:none}
+[data-theme="dark"] .dlc{background:#141c2b;border-color:#2a3650}
+[data-theme="dark"] .dlc summary:hover{background:#1c2740}
+[data-theme="dark"] .dlc[open] summary{border-color:#2a3650}
+[data-theme="dark"] .dlt{color:var(--ink)}
+[data-theme="dark"] .dldesc,[data-theme="dark"] .dlbtn small,[data-theme="dark"] .dlnote{color:#c2ccd8}
+[data-theme="dark"] .dlbtn{background:#1c2740;border-color:#2a3650}
+[data-theme="dark"] .dlbtn:hover{background:#2a3a55}
+[data-theme="dark"] .dlnote{background:#1c2740}
+[data-theme="dark"] .dlchips .dch-f{background:#12303a;color:#8fd4e2}
+[data-theme="dark"] .dlchips .dch-t{background:#3b2f10;color:#ecd38a}
 .more{position:absolute;bottom:6px;right:8px;z-index:3;font:inherit;font-size:10.5px;font-weight:700;color:var(--acc);background:#fff;border:1px solid var(--line);border-radius:20px;padding:2px 9px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .more:hover{background:var(--acc-bg)}
 /* Stufen-Druck-Dialog */

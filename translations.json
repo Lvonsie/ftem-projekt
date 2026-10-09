@@ -1662,7 +1662,15 @@
   "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.": "Les Coachpoints pour entraîneur·es sont en cours d'élaboration et seront complétés ici au fur et à mesure.",
   "Downloads": "Téléchargements",
   "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.": "Les téléchargements pour entraîneur·es sont en cours de préparation et seront ajoutés ici.",
-  "Swiss-Ski Ausbildungsnews Oktober 26": "Swiss-Ski Ausbildungsnews octobre 26"
+  "Swiss-Ski Ausbildungsnews Oktober 26": "Swiss-Ski Ausbildungsnews octobre 26",
+  "Die Downloads für Trainer:innen werden hier laufend ergänzt.": "Les téléchargements pour entraîneur·es seront ajoutés ici au fur et à mesure.",
+  "Skills-Check F1–T2 · Auswertungsbüchlein": "Skills-Check F1–T2 · carnet d’évaluation",
+  "Ein Büchlein pro Athlet:in: alle Skills-Checks von Foundation 1 bis Talent 2 – geordnet nach Off-Snow, On-Snow und Mental, mit Ampelbewertung für 4 Folgechecks pro Stufe und QR-Codes zu Videos und Kriterien auf LernFlink.": "Un carnet par athlète: tous les Skills-Checks de Foundation 1 à Talent 2 – classés en Off-Snow, On-Snow et Mental, avec évaluation par feux pour 4 checks de suivi par niveau et codes QR vers les vidéos et critères sur LernFlink.",
+  "Büchlein-Druckvorlage": "Carnet – modèle d’impression",
+  "A4 quer, beidseitig drucken (Wenden an der kurzen Kante), in der Mitte falten → A5-Heft · PDF, 2.3 MB": "A4 paysage, recto verso (retourner sur le bord court), plier au milieu → carnet A5 · PDF, 2.3 Mo",
+  "Vorlage zum digitalen Ausfüllen": "Modèle à remplir en numérique",
+  "20 Seiten A5 in normaler Reihenfolge – am Bildschirm ausfüllen oder einzeln drucken · PDF, 2.3 MB": "20 pages A5 dans l’ordre normal – à remplir à l’écran ou à imprimer · PDF, 2.3 Mo",
+  "Auf My Swiss-Ski und in der Club App gibt es zusätzlich ein digitales Auswertungstool für die Skills-Checks.": "Sur My Swiss-Ski et dans la Club App, un outil numérique d’évaluation des Skills-Checks est également disponible."
  },
  "it": {
   "Athlet:innen-Weg": "Percorso dell'atleta",
@@ -3327,7 +3335,15 @@
   "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.": "I Coachpoints per allenatori e allenatrici sono in fase di elaborazione e saranno integrati qui progressivamente.",
   "Downloads": "Download",
   "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.": "I download per allenatori e allenatrici sono in preparazione e saranno aggiunti qui.",
-  "Swiss-Ski Ausbildungsnews Oktober 26": "Swiss-Ski Ausbildungsnews ottobre 26"
+  "Swiss-Ski Ausbildungsnews Oktober 26": "Swiss-Ski Ausbildungsnews ottobre 26",
+  "Die Downloads für Trainer:innen werden hier laufend ergänzt.": "I download per gli allenatori e le allenatrici saranno aggiunti qui man mano.",
+  "Skills-Check F1–T2 · Auswertungsbüchlein": "Skills-Check F1–T2 · libretto di valutazione",
+  "Ein Büchlein pro Athlet:in: alle Skills-Checks von Foundation 1 bis Talent 2 – geordnet nach Off-Snow, On-Snow und Mental, mit Ampelbewertung für 4 Folgechecks pro Stufe und QR-Codes zu Videos und Kriterien auf LernFlink.": "Un libretto per atleta: tutti gli Skills-Check da Foundation 1 a Talent 2 – ordinati in Off-Snow, On-Snow e Mental, con valutazione a semaforo per 4 check successivi per livello e codici QR verso video e criteri su LernFlink.",
+  "Büchlein-Druckvorlage": "Libretto – modello di stampa",
+  "A4 quer, beidseitig drucken (Wenden an der kurzen Kante), in der Mitte falten → A5-Heft · PDF, 2.3 MB": "A4 orizzontale, fronte-retro (voltare sul lato corto), piegare a metà → libretto A5 · PDF, 2.3 MB",
+  "Vorlage zum digitalen Ausfüllen": "Modello da compilare in digitale",
+  "20 Seiten A5 in normaler Reihenfolge – am Bildschirm ausfüllen oder einzeln drucken · PDF, 2.3 MB": "20 pagine A5 in ordine normale – da compilare sullo schermo o stampare · PDF, 2.3 MB",
+  "Auf My Swiss-Ski und in der Club App gibt es zusätzlich ein digitales Auswertungstool für die Skills-Checks.": "Su My Swiss-Ski e nella Club App è inoltre disponibile uno strumento digitale di valutazione degli Skills-Check."
  },
  "en": {
   "Trainingsstunden und Entwicklungsfokus": "Training hours and development focus",
@@ -4956,6 +4972,14 @@
   "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.": "The Coachpoints for coaches are currently being developed and will be added here step by step.",
   "Downloads": "Downloads",
   "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.": "Downloads for coaches are being compiled and will be added here.",
-  "Swiss-Ski Ausbildungsnews Oktober 26": "Swiss-Ski Ausbildungsnews October 26"
+  "Swiss-Ski Ausbildungsnews Oktober 26": "Swiss-Ski Ausbildungsnews October 26",
+  "Die Downloads für Trainer:innen werden hier laufend ergänzt.": "Downloads for coaches will be added here on an ongoing basis.",
+  "Skills-Check F1–T2 · Auswertungsbüchlein": "Skills Check F1–T2 · assessment booklet",
+  "Ein Büchlein pro Athlet:in: alle Skills-Checks von Foundation 1 bis Talent 2 – geordnet nach Off-Snow, On-Snow und Mental, mit Ampelbewertung für 4 Folgechecks pro Stufe und QR-Codes zu Videos und Kriterien auf LernFlink.": "One booklet per athlete: all skills checks from Foundation 1 to Talent 2 – grouped into off-snow, on-snow and mental, with a traffic-light rating for 4 follow-up checks per stage and QR codes linking to videos and criteria on LernFlink.",
+  "Büchlein-Druckvorlage": "Booklet print template",
+  "A4 quer, beidseitig drucken (Wenden an der kurzen Kante), in der Mitte falten → A5-Heft · PDF, 2.3 MB": "A4 landscape, print double-sided (flip on short edge), fold in the middle → A5 booklet · PDF, 2.3 MB",
+  "Vorlage zum digitalen Ausfüllen": "Fillable PDF template",
+  "20 Seiten A5 in normaler Reihenfolge – am Bildschirm ausfüllen oder einzeln drucken · PDF, 2.3 MB": "20 A5 pages in normal order – fill in on screen or print individually · PDF, 2.3 MB",
+  "Auf My Swiss-Ski und in der Club App gibt es zusätzlich ein digitales Auswertungstool für die Skills-Checks.": "A digital evaluation tool for the skills checks is also available on My Swiss-Ski and in the Club App."
  }
 }

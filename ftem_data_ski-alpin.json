@@ -2113,10 +2113,36 @@
      "label": "",
      "segs": [
       {
-       "v": "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.",
+       "v": "Die Downloads für Trainer:innen werden hier laufend ergänzt.",
        "from": 0,
        "to": 9,
-       "l": []
+       "l": [],
+       "dl": [
+        {
+         "title": "Skills-Check F1–T2 · Auswertungsbüchlein",
+         "chips": [
+          "F1",
+          "F2",
+          "F3",
+          "T1",
+          "T2"
+         ],
+         "desc": "Ein Büchlein pro Athlet:in: alle Skills-Checks von Foundation 1 bis Talent 2 – geordnet nach Off-Snow, On-Snow und Mental, mit Ampelbewertung für 4 Folgechecks pro Stufe und QR-Codes zu Videos und Kriterien auf LernFlink.",
+         "files": [
+          {
+           "label": "Büchlein-Druckvorlage",
+           "hint": "A4 quer, beidseitig drucken (Wenden an der kurzen Kante), in der Mitte falten → A5-Heft · PDF, 2.3 MB",
+           "href": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Buechlein-Druckvorlage.pdf"
+          },
+          {
+           "label": "Vorlage zum digitalen Ausfüllen",
+           "hint": "20 Seiten A5 in normaler Reihenfolge – am Bildschirm ausfüllen oder einzeln drucken · PDF, 2.3 MB",
+           "href": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Auswertungsvorlage.pdf"
+          }
+         ],
+         "note": "Auf My Swiss-Ski und in der Club App gibt es zusätzlich ein digitales Auswertungstool für die Skills-Checks."
+        }
+       ]
       }
      ]
     }
