@@ -957,8 +957,8 @@ NEWS = [
         },
     },
     {
-        "title": "Swiss-Ski Ausbildungsnews Juli 26",
-        "date": "Juli 2026",
+        "title": "Swiss-Ski Ausbildungsnews Oktober 26",
+        "date": "Oktober 2026",
         "body": ["Verschiedene News in folgenden Bereichen:"],
         "bullets": ["Gut zu wissen",
                     "Kurse: Ski Alpin | Langlauf | Biathlon | Ski Freestyle / Snowboard | Skispringen | Tourenwesen"],
