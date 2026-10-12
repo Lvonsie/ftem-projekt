@@ -1,8 +1,8 @@
 // Warn-Mail via Resend (https://resend.com).
 // Braucht das GitHub-Secret RESEND_API_KEY. Empfaenger kommt aus ALERT_TO.
-// Ohne eigene verifizierte Domain erlaubt Resend nur den Versand an die
-// Adresse des eigenen Resend-Kontos - das Konto also mit der Empfaenger-
-// Adresse (michael.pleus@swiss-ski.ch) anlegen.
+// Absender: alarm@ftem.swiss-ski.ch - die Domain ftem.swiss-ski.ch ist in
+// Resend verifiziert (DNS-Eintraege durch die IT, Okt. 2026). Damit sind
+// auch mehrere Empfaenger moeglich (ALERT_TO mit Komma trennen).
 
 export async function warnmail(subject, lines) {
   const key = process.env.RESEND_API_KEY;
@@ -29,7 +29,7 @@ export async function warnmail(subject, lines) {
     method: 'POST',
     headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: 'FTEM Ueberwachung <onboarding@resend.dev>',
+      from: 'FTEM Ueberwachung <alarm@ftem.swiss-ski.ch>',
       to,
       subject,
       html,
