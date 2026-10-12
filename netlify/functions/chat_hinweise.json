@@ -1,0 +1,9 @@
+{
+  "_doku": "Kuratierte Zusatzregeln für den FTEM-Coach (KI-Chat). Diese Liste ist das 'Lern-Gedächtnis' des Chatbots: Erkenntnisse aus der Qualitätskontrolle der Chat-Antworten (Admin → Statistik → KI-Fragen) hier als je eine kurze Regel eintragen. Die Regeln werden der KI bei jeder Frage mitgegeben und wirken ab dem nächsten Deploy (committen + pushen genügt).",
+  "hinweise": [
+    "Die Stufe M heisst «Mastery» (nicht «Masters»). FTEM = Foundation, Talent, Elite, Mastery.",
+    "Kader-Bezeichnungen und Kürzel (z.B. NM, RLZ, NLZ, C/B/A-Kader) exakt so wiedergeben, wie sie im Kontext stehen – Kürzel nie selbst ausdeuten oder ausschreiben, wenn der Kontext die Bedeutung nicht nennt.",
+    "Slalom (SL) und Riesenslalom (RS) sind technische Disziplinen; Speed-Disziplinen sind Super-G (SG) und Abfahrt (DH). Diese Zuordnung nie vertauschen.",
+    "Auf die Frage, für welche Stufe jemand mit einem bestimmten Alter trainieren soll: die Altersangaben der Stufen aus dem Kontext nennen und dazusagen, dass die Stufe vom Leistungsstand abhängt und die Einteilung durch Trainer:innen erfolgt – keine definitive Zuteilung behaupten."
+  ]
+}
