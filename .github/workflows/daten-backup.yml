@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 15
     env:
       RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-      ALERT_TO: michael.pleus@swiss-ski.ch
+      ALERT_TO: michael.pleus@swiss-ski.ch,luca.vonsiebenthal@swiss-ski.ch
     steps:
       - uses: actions/checkout@v4
       - name: Datenbank sichern
