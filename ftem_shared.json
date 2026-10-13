@@ -7,7 +7,8 @@
    "sports": [
     "ski-alpin",
     "skicross",
-    "freeski-park-pipe"
+    "snowboard-cross",
+    "snowboard-alpin"
    ],
    "rows": [
     {
@@ -144,16 +145,15 @@
      ]
     }
    ],
-   "label": "Ski (3)"
+   "label": "Alpin & Cross (4)"
   },
   {
    "id": "mental-snowboard",
    "title": "Mental",
    "group": "Sport & Athlet:in",
    "sports": [
-    "snowboard-park-pipe",
-    "snowboard-cross",
-    "snowboard-alpin"
+    "freeski-park-pipe",
+    "snowboard-park-pipe"
    ],
    "rows": [
     {
@@ -296,7 +296,7 @@
      ]
     }
    ],
-   "label": "Snowboard (3)"
+   "label": "Park & Pipe (2)"
   },
   {
    "id": "mental-nordisch",
