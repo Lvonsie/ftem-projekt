@@ -1,0 +1,37 @@
+# Woechentlicher Link-Check: prueft alle externen Links der 4 Sprachseiten
+# und der Admin-Texte (z.B. Selektionsrichtlinien-PDFs, Flink, Verbaende).
+# Bei defekten Links geht eine Warn-Mail mit Fundstelle an ALERT_TO
+# (Versand via Resend, Secret RESEND_API_KEY). Laeuft zusaetzlich bei jedem
+# Push, der Seiteninhalte aendert, damit neue Tippfehler sofort auffallen.
+# Manuell ausloesbar unter GitHub -> Actions -> "Link-Check" -> Run workflow.
+name: Link-Check
+
+on:
+  schedule:
+    - cron: '37 4 * * 1'   # jeden Montag 04:37 UTC = 05:37/06:37 Schweizer Zeit
+  push:
+    branches: [main]
+    paths: ['index.html', 'fr.html', 'it.html', 'en.html']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: link-check
+  cancel-in-progress: true
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      ALERT_TO: michael.pleus@swiss-ski.ch,luca.vonsiebenthal@swiss-ski.ch
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Alle Links pruefen
+        run: node .github/scripts/linkcheck.mjs
