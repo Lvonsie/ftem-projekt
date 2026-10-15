@@ -4,10 +4,10 @@
 // Quellen:  - die 4 gebauten Sprachseiten im Repo (index/fr/it/en.html)
 //           - die Admin-Texte aus der Datenbank (Supabase, nur Lesen;
 //             Rueckfall: backup/ftem_overrides.json aus dem taeglichen Backup)
-// Pruefung: GET mit Weiterleitungen, 25 s Timeout, Browser-Kennung.
+// Pruefung: GET mit Weiterleitungen, 20 s Timeout, Browser-Kennung.
 //           Defekte Links werden nach 60 s ein zweites Mal geprueft.
-//           Pro Server wird nacheinander geprueft (sonst drosseln z.B. Flink
-//           oder J+S die vielen Abrufe und es gibt Fehlalarme).
+//           Links ohne Antwort (Drosselung, z.B. Flink/J+S) werden nach 2 min
+//           einzeln nachgeprueft.
 // Defekt:   404/410, Serverfehler (5xx), Domain existiert nicht / Verbindung
 //           abgelehnt / Zertifikat ungueltig.
 // Nicht pruefbar (kein Alarm, nur im Protokoll): 401/403/429 sowie Zeitueber-
@@ -108,23 +108,24 @@ const ZEIT = /TIMEOUT|Timeout|Abort|ECONNRESET|UND_ERR_SOCKET|EPIPE/;
 const art = x => x.code === 0 ? (ZEIT.test(x.fehler) ? 'gesperrt' : 'defekt')
   : [401, 403, 429].includes(x.code) ? 'gesperrt' : x.code >= 400 ? 'defekt' : 'ok';
 const warte = ms => new Promise(r => setTimeout(r, ms));
-// Pro Server nacheinander (mit Pause), bis zu 8 Server gleichzeitig.
-async function alle(liste, pause = 300) {
-  const proServer = new Map();
-  for (const u of liste) { let h; try { h = new URL(u).host; } catch { h = u; }
-    if (!proServer.has(h)) proServer.set(h, []); proServer.get(h).push(u); }
-  const gruppen = [...proServer.values()], erg = new Map(); let i = 0;
-  await Promise.all(Array.from({ length: 8 }, async () => {
-    while (i < gruppen.length) {
-      let ausfall = 0;                                       // Notbremse: Server antwortet gar nicht
-      for (const u of gruppen[i++]) {
-        if (ausfall >= 5) { erg.set(u, { code: 0, fehler: 'Timeout (Server antwortet nicht)' }); continue; }
-        const x = await pruefe(u); erg.set(u, x);
-        ausfall = x.code === 0 && ZEIT.test(x.fehler) ? ausfall + 1 : 0;
-        await warte(pause);
-      }
-    }
+// Bis zu 6 Abrufe gleichzeitig (so drosselt Flink am wenigsten, siehe Lauf #1/#2).
+async function alle(liste, n = 6) {
+  const erg = new Map(); let i = 0;
+  await Promise.all(Array.from({ length: n }, async () => {
+    while (i < liste.length) { const u = liste[i++]; erg.set(u, await pruefe(u)); }
   }));
+  return erg;
+}
+// Einzeln und langsam nachpruefen; bricht ab, wenn 3x in Folge keine Antwort kommt
+// (Server drosselt weiterhin -> Rest bleibt "nicht pruefbar", kein Fehlalarm).
+async function langsam(liste, pause) {
+  const erg = new Map(); let still = 0;
+  for (const u of liste) {
+    if (still >= 3) break;
+    const x = await pruefe(u); erg.set(u, x);
+    still = x.code === 0 && ZEIT.test(x.fehler) ? still + 1 : 0;
+    await warte(pause);
+  }
   return erg;
 }
 const erg = await alle([...links.keys()]);
@@ -132,13 +133,16 @@ let defekt = [...erg].filter(([, x]) => art(x) === 'defekt').map(([u]) => u);
 if (defekt.length) {
   console.log(`${defekt.length} Links fehlerhaft - zweiter Versuch in 60 s ...`);
   await warte(60000);
-  for (const [u, x] of await alle(defekt, 2000)) erg.set(u, x);
+  for (const [u, x] of await langsam(defekt, 1000)) erg.set(u, x);
   defekt = defekt.filter(u => art(erg.get(u)) === 'defekt');
 }
-// Auch Zeitueberschreitungen nochmals einzeln und langsam pruefen
 const zeit = [...erg].filter(([, x]) => x.code === 0 && ZEIT.test(x.fehler)).map(([u]) => u);
-if (zeit.length) { await warte(30000); for (const [u, x] of await alle(zeit, 3000)) erg.set(u, x); }
-defekt = [...new Set([...defekt, ...zeit])].filter(u => art(erg.get(u)) === 'defekt');
+if (zeit.length) {
+  console.log(`${zeit.length} Links ohne Antwort - in 2 min einzeln nachpruefen ...`);
+  await warte(120000);
+  for (const [u, x] of await langsam(zeit, 4000)) erg.set(u, x);
+  defekt = [...new Set([...defekt, ...zeit])].filter(u => art(erg.get(u)) === 'defekt');
+}
 const gesperrt = [...erg].filter(([, x]) => art(x) === 'gesperrt').map(([u]) => u);
 const grund = x => x.code ? `HTTP ${x.code}${x.code === 404 ? ' (nicht gefunden)' : ''}` : `nicht erreichbar (${x.fehler})`;
 const zeile = u => {
