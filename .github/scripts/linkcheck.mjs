@@ -6,9 +6,13 @@
 //             Rueckfall: backup/ftem_overrides.json aus dem taeglichen Backup)
 // Pruefung: GET mit Weiterleitungen, 25 s Timeout, Browser-Kennung.
 //           Defekte Links werden nach 60 s ein zweites Mal geprueft.
-// Defekt:   404/410, Serverfehler (5xx), Domain/Verbindung nicht erreichbar.
-// Nicht pruefbar (kein Alarm, nur im Protokoll): 401/403/429 - viele Seiten
-//           sperren automatische Abrufe, obwohl der Link fuer Menschen geht.
+//           Pro Server wird nacheinander geprueft (sonst drosseln z.B. Flink
+//           oder J+S die vielen Abrufe und es gibt Fehlalarme).
+// Defekt:   404/410, Serverfehler (5xx), Domain existiert nicht / Verbindung
+//           abgelehnt / Zertifikat ungueltig.
+// Nicht pruefbar (kein Alarm, nur im Protokoll): 401/403/429 sowie Zeitueber-
+//           schreitungen - viele Seiten sperren oder drosseln automatische
+//           Abrufe, obwohl der Link fuer Menschen geht.
 // Ergebnis: Bei defekten Links Warn-Mail (Resend) mit Fundstelle + roter Lauf.
 
 import fs from 'node:fs';
@@ -91,7 +95,7 @@ console.log(`${links.size} externe Links gefunden.`);
 // ---------- 3. Pruefen ----------
 async function pruefe(u) {
   try {
-    const r = await fetch(u, { redirect: 'follow', signal: AbortSignal.timeout(25000),
+    const r = await fetch(u, { redirect: 'follow', signal: AbortSignal.timeout(20000),
       headers: { 'user-agent': UA, accept: 'text/html,application/pdf,*/*;q=0.8', 'accept-language': 'de-CH,de;q=0.9' } });
     r.body?.cancel?.().catch(() => {});
     return { code: r.status };
@@ -99,12 +103,27 @@ async function pruefe(u) {
     return { code: 0, fehler: (e.cause?.code || e.name || 'Fehler').toString() };
   }
 }
-const art = x => x.code === 0 ? 'defekt' : [401, 403, 429].includes(x.code) ? 'gesperrt'
-  : (x.code === 404 || x.code === 410 || x.code >= 500) ? 'defekt' : x.code >= 400 ? 'defekt' : 'ok';
-async function alle(liste, n = 8) {
-  const erg = new Map(); let i = 0;
-  await Promise.all(Array.from({ length: n }, async () => {
-    while (i < liste.length) { const u = liste[i++]; erg.set(u, await pruefe(u)); }
+// Zeitueberschreitung/abgebrochene Verbindung = meist Drosselung -> nicht pruefbar
+const ZEIT = /TIMEOUT|Timeout|Abort|ECONNRESET|UND_ERR_SOCKET|EPIPE/;
+const art = x => x.code === 0 ? (ZEIT.test(x.fehler) ? 'gesperrt' : 'defekt')
+  : [401, 403, 429].includes(x.code) ? 'gesperrt' : x.code >= 400 ? 'defekt' : 'ok';
+const warte = ms => new Promise(r => setTimeout(r, ms));
+// Pro Server nacheinander (mit Pause), bis zu 8 Server gleichzeitig.
+async function alle(liste, pause = 300) {
+  const proServer = new Map();
+  for (const u of liste) { let h; try { h = new URL(u).host; } catch { h = u; }
+    if (!proServer.has(h)) proServer.set(h, []); proServer.get(h).push(u); }
+  const gruppen = [...proServer.values()], erg = new Map(); let i = 0;
+  await Promise.all(Array.from({ length: 8 }, async () => {
+    while (i < gruppen.length) {
+      let ausfall = 0;                                       // Notbremse: Server antwortet gar nicht
+      for (const u of gruppen[i++]) {
+        if (ausfall >= 5) { erg.set(u, { code: 0, fehler: 'Timeout (Server antwortet nicht)' }); continue; }
+        const x = await pruefe(u); erg.set(u, x);
+        ausfall = x.code === 0 && ZEIT.test(x.fehler) ? ausfall + 1 : 0;
+        await warte(pause);
+      }
+    }
   }));
   return erg;
 }
@@ -112,10 +131,14 @@ const erg = await alle([...links.keys()]);
 let defekt = [...erg].filter(([, x]) => art(x) === 'defekt').map(([u]) => u);
 if (defekt.length) {
   console.log(`${defekt.length} Links fehlerhaft - zweiter Versuch in 60 s ...`);
-  await new Promise(r => setTimeout(r, 60000));
-  for (const [u, x] of await alle(defekt, 4)) erg.set(u, x);
+  await warte(60000);
+  for (const [u, x] of await alle(defekt, 2000)) erg.set(u, x);
   defekt = defekt.filter(u => art(erg.get(u)) === 'defekt');
 }
+// Auch Zeitueberschreitungen nochmals einzeln und langsam pruefen
+const zeit = [...erg].filter(([, x]) => x.code === 0 && ZEIT.test(x.fehler)).map(([u]) => u);
+if (zeit.length) { await warte(30000); for (const [u, x] of await alle(zeit, 3000)) erg.set(u, x); }
+defekt = [...new Set([...defekt, ...zeit])].filter(u => art(erg.get(u)) === 'defekt');
 const gesperrt = [...erg].filter(([, x]) => art(x) === 'gesperrt').map(([u]) => u);
 const grund = x => x.code ? `HTTP ${x.code}${x.code === 404 ? ' (nicht gefunden)' : ''}` : `nicht erreichbar (${x.fehler})`;
 const zeile = u => {
@@ -125,9 +148,9 @@ const zeile = u => {
 
 // ---------- 4. Bericht ----------
 const bericht = [
-  `# Link-Check`, ``, `Geprüft: ${erg.size} · defekt: ${defekt.length} · nicht prüfbar (Zugriffsschutz): ${gesperrt.length}`, ``,
+  `# Link-Check`, ``, `Geprüft: ${erg.size} · defekt: ${defekt.length} · nicht prüfbar (Zugriffsschutz/Drosselung): ${gesperrt.length}`, ``,
   ...(defekt.length ? ['## Defekte Links', '', ...defekt.map(u => `- ${zeile(u)}`), ''] : ['Alle Links funktionieren.', '']),
-  ...(gesperrt.length ? ['## Nicht prüfbar (Seite sperrt automatische Abrufe – von Hand kontrollieren)', '',
+  ...(gesperrt.length ? ['## Nicht prüfbar (Seite sperrt/drosselt automatische Abrufe – bei Bedarf von Hand kontrollieren)', '',
     ...gesperrt.map(u => `- ${zeile(u)}`)] : []),
 ].join('\n');
 console.log(bericht);
