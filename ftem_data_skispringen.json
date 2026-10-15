@@ -504,16 +504,555 @@
    "shared": "mental-nordisch"
   },
   {
-   "shared": "ausdauer"
+   "title": "Ausdauer",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Ausdauer",
+     "segs": [
+      {
+       "v": "Off Snow Skills F1-2\n\nLeichtathletik\nGeländetraining\nRollen und Gleiten\nRadsport\nSpielen",
+       "from": 0,
+       "to": 1,
+       "l": [
+        {
+         "text": "Skills Checks F1-2",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/VRqnCEMS"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: 30 Minuten intermittierende Bewegungszeit (intensiv)\n\n• Spielerisches\n• Small Side Games\n• Parkour",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "Skills Checks F3",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/e8eVqFKW"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: 45 Minuten Bewegung ohne Pause\nSC 2: 1000 Meter Lauf\nSC 3: 12 Minuten Lauf",
+       "from": 3,
+       "to": 3,
+       "l": [
+        {
+         "text": "Skills Checks T1",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/uLnnCCKA"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: 60 Minuten Dauerlauf oder 75 Minuten Fahrradfahren ohne Pause\nSC 2: 1000 Meter Lauf\nSC 3: 12 Minuten Lauf\n\nST: Swiss-Ski Powertest (SSPT)",
+       "from": 4,
+       "to": 4,
+       "l": [
+        {
+         "text": "Skills Checks T2",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/ZUyORDHY"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: 75 Minuten Dauerlauf oder 90 Minuten Fahrradfahren ohne Pause\nSC 2: 1000 Meter Lauf\nSC 3: 12 Minuten Lauf\n\nST Nachwuchs: Wattbike 30 Sekunden und 3 Minuten Test\n\nST Elite: Spiroergometrie (Magglingen)",
+       "from": 5,
+       "to": 5,
+       "l": [
+        {
+         "text": "Skills Checks T3",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/U6NB2ByU"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: mind. 90 Minuten Dauerlauf oder Fahrradfahren ohne Pause\nSC 2: 1000 Meter Lauf\nSC 3: 12 Minuten Lauf\n\nST Nachwuchs: Wattbike 30 Sekunden und 3 Minuten Test\n\nST Elite: Spiroergometrie (Magglingen)",
+       "from": 6,
+       "to": 6,
+       "l": [
+        {
+         "text": "Skills Checks T4",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/GB3iYwbg"
+        }
+       ]
+      },
+      {
+       "v": "SC: Wattbike 30 Sekunden und 3 Minuten Test\n\nST Nachwuchs: Wattbike 30 Sekunden und 3 Minuten Test\n\nST Elite: Spiroergometrie (Magglingen)",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills Checks E-M",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/eLtXFUia"
+        }
+       ]
+      },
+      {
+       "v": "SC: Wattbike 30 Sekunden und 3 Minuten Test\n\nST Elite: Spiroergometrie (Magglingen)",
+       "from": 9,
+       "to": 9,
+       "l": [
+        {
+         "text": "Skills Checks E-M",
+         "href": "https://snowsports.flink.host/s/A4kzIlD4/eLtXFUia"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Ausdauer",
+     "segs": [
+      {
+       "v": "Aktiven Alltag pflegen\n\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungsgrundformen",
+       "from": 0,
+       "to": 0,
+       "l": [
+        {
+         "text": "Ausdauer F1-2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/XQjBEeez"
+        }
+       ]
+      },
+      {
+       "v": "Aktiven Alltag pflegen\n\n• Belastbar werden\n• Anwenden und Variieren von Bewegungsgrundformen",
+       "from": 1,
+       "to": 1,
+       "l": [
+        {
+         "text": "Ausdauer F1-2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/XQjBEeez"
+        }
+       ]
+      },
+      {
+       "v": "Aktiven Alltag pflegen\n\nDie Belastungsverträglichkeit soll umfangreich, vielseitig und zugleich herausfordernd aufgebaut werden. Durch die Ausrichtung auf Polysportivität bleibt die Wahl der Sportarten individuell und ermöglicht eine abwechslungsreiche Gestaltung der körperlichen Aktivität.",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "Ausdauer F3",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/hPTdbSXz"
+        }
+       ]
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Spielerische Intervallformen\n\nVorwettkampfphase\n• Spielerische Intervallformen\n• Grundlagenausdauer zur Regeneration\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
+       "from": 3,
+       "to": 3,
+       "l": [
+        {
+         "text": "Ausdauer T1",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/HwOdB8Ra"
+        }
+       ]
+      },
+      {
+       "v": "Vorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer zur Regeneration\n\nWettkampfphase:\n• Grundlagenausdauer zur Regeneration",
+       "from": 4,
+       "to": 4,
+       "l": [
+        {
+         "text": "Ausdauer T2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/vVlrXqGT"
+        }
+       ]
+      },
+      {
+       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
+       "from": 5,
+       "to": 6,
+       "l": [
+        {
+         "text": "Ausdauer T3-4",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/y5n8mYX6"
+        }
+       ]
+      },
+      {
+       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Ausdauer E1-2",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/IjcexbkV"
+        }
+       ]
+      },
+      {
+       "v": "Trainingsfokus in Abhängigkeit von Testergebnis der Leistungsdiagnostik wählen\n\nVorbereitungsphase 1\n• Grundlagenausdauer\n\nVorbereitungsphase 2\n• Grundlagenausdauer\n• Intervallformen\n\nVorwettkampfphase\n• Intervallformen\n• Grundlagenausdauer (zur Regeneration und abhängig von Testergebnis)\n\nWettkampfphase\n• Grundlagenausdauer zur Regeneration",
+       "from": 9,
+       "to": 9,
+       "l": [
+        {
+         "text": "Ausdauer M",
+         "href": "https://snowsports.flink.host/s/3rBylHzO/0QdfkKdO"
+        }
+       ]
+      }
+     ]
+    }
+   ]
   },
   {
    "shared": "mobilitaet"
   },
   {
-   "shared": "kraft"
+   "title": "Kraft & Explosivität",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Kraft",
+     "segs": [
+      {
+       "v": "Swiss-Ski Off Snow Skills Kraft und Stabilität F1-2",
+       "from": 0,
+       "to": 1,
+       "l": [
+        {
+         "text": "Skills-Check Kraft F1",
+         "href": "https://snowsports.flink.host/s/82AcAbDz/L2n7lxLD"
+        },
+        {
+         "text": "Skills-Check Kraft F2",
+         "href": "https://snowsports.flink.host/s/82AcAbDz/4d5A7wtz"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: Kniebeuge einbeinig auf Box\nSC 2: Kniebeuge mit Miniband ohne Zusatzgewicht\nSC 3: Reisskniebeuge mit Stab\nSC 4: Bridging beidbeinig statisch\nSC 5: Standwaage\nSC 6 : Sprung von kniehohem Element  mit beidbeiniger Landung\nSC 7: Liegestütz\nSC 8: Klimmzug (exzentrische Phase)",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "Skills-Check Kraft F3",
+         "href": "https://snowsports.flink.host/s/LELW9uhe/mSoSEMei"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Zusatzgewicht vorne\nSC 3: Reisskniebeuge mit Reckstange / Langhantel\nSC 4: Umsetzen mit Reckstange / Langhantel\nSC 5: Leg Curls exzentrisch und konzentrisch bb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Standwaage\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\n\nST: Swiss Ski Powertest (SSPT)",
+       "from": 3,
+       "to": 4,
+       "l": [
+        {
+         "text": "Skills-Check Kraft T1-2",
+         "href": "https://snowsports.flink.host/s/LELW9uhe/jhbfUEpW"
+        },
+        {
+         "text": "Swiss-Ski Power Test (SSPT)",
+         "href": "https://snowsports.flink.host/s/UmOtlQP3/"
+        }
+       ]
+      },
+      {
+       "v": "SC 1: Kniebeuge einbeinig\nSC 2: Kniebeuge mit Langhantel vorne\nSC 3: Reisskniebeuge mit Langhantel\nSC 4: Umsetzen mit Langhantel\nSC 5: Leg Curls einbeinig exzentrisch und konzentrisch eb mit Teppich\nSC 6: Nordic Hamstring - Variation\nSC 7: Good Morning mit Langhantel\nSC 8: Sprung von Box mit einbeiniger Landung\nSC 9: Seitsprünge mit Stabilisieren\nSC 10: Box Jump to High Jump\nSC 11: Liegestütz\nSC 12: Klimmzug\n\nST Nachwuchs: Sprungtests und Nordbord\n\nST Elite: MLD und Nordbord",
+       "from": 5,
+       "to": 6,
+       "l": [
+        {
+         "text": "Skills-Check Kraft T3-4",
+         "href": "https://snowsports.flink.host/s/LELW9uhe/afjNYpUu"
+        }
+       ]
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nST Nachwuchs: Sprungtests und Nordbord\n\nST Elite: MLD und Nordbord",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Skills-Check Kraft E-M",
+         "href": "https://snowsports.flink.host/s/LELW9uhe/LpkGPfry"
+        }
+       ]
+      },
+      {
+       "v": "Individuelle Übungsstruktur nach Testing (MLD)\n\nST Elite: MLD und Nordbord",
+       "from": 9,
+       "to": 9,
+       "l": [
+        {
+         "text": "Skills-Check Kraft E-M",
+         "href": "https://snowsports.flink.host/s/LELW9uhe/LpkGPfry"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Kraft",
+     "segs": [
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen: Kraft, Stabilität & Schnellkraft\n• Erwerben und Festigen von spielerischen Krafteinheiten",
+       "from": 0,
+       "to": 0,
+       "l": [
+        {
+         "text": "F1-2 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm"
+        }
+       ]
+      },
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastbar werden: Kraft, Stabilität & Schnellkraft\n• Anwenden und Variieren von spielerischen Krafteinheiten",
+       "from": 1,
+       "to": 1,
+       "l": [
+        {
+         "text": "F1-2 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/Ih0bN8zm"
+        }
+       ]
+      },
+      {
+       "v": "Sommer\n• Techniktraining (Körperhaltung und Langhantel)\n• Koordination im vollen Bewegungsumfang\n• Übungen mit eigenem Körpergewicht\n• Vielseitige Sprünge\n\nWinter\n• Vielseitige Sprünge\n• Erhaltung der Kraft",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "F3 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/61f5x5Fo"
+        }
+       ]
+      },
+      {
+       "v": "Das Training wird an das Leistungsniveau der Athlet:innen angepasst\n\nVorbereitungsphase 1\n• Langhanteltechnik mit Körpergewicht und leichten Zusatzgewichten\n• Erste Sprungformen (Fokus auf korrekte Landungstechnik)\n• Training der Rumpfstabilität\n\nVorbereitungsphase 2\n• Muskelaufbau\n• Aufbau des Explosivkrafttraining\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Explosivkrafttraining\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosivkrafttraining & Plyometrie mit reduziertem Volumen\n• Rumpfkrafttraining erhaltend\n\n* Window of Opportunity bei Mädchen T1\n* Window of Opportunity bei Jungen T2",
+       "from": 3,
+       "to": 4,
+       "l": [
+        {
+         "text": "T1 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/0lz9f3v1"
+        },
+        {
+         "text": "T2 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/ZPtYjqVS"
+        }
+       ]
+      },
+      {
+       "v": "Das Training wird an das Leistungsniveau der Athlet:innen angepasst und in Oberkörper und Unterkörper aufgeteilt\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Förderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen",
+       "from": 5,
+       "to": 6,
+       "l": [
+        {
+         "text": "T3 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/GyGRkrgf"
+        },
+        {
+         "text": "T4 Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/XaTXxDfC"
+        }
+       ]
+      },
+      {
+       "v": "Training wird individuell an Leistungstest (MLD) angepasst und vermehrt exzentrisch zur Maximierung der Kraftentwicklungsrate und Verletzungsprävention durchgeführt\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Förderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "E Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/Xm1bVW2K"
+        }
+       ]
+      },
+      {
+       "v": "Training wird individuell an Leistungstest (MLD) angepasst und vermehrt exzentrisch zur Maximierung der Kraftentwicklungsrate und Verletzungsprävention durchgeführt\n\nVorbereitungsphase 1\n• Funktionelle Effizienz entwicklen (Langhanteltechnik)\n• Plyometrische Übungen Förderung der Explosivität\n• Rumpfkrafttraining\n\nVorbereitungsphase 2\n• Muskelpotential Aufbauen (Muskelhypertrophie)\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Explosivkrafttraining  mit Zusatzgewichten\n• Rumpfkrafttraining\n\nVorwettkampfphase\n• Steigerung der Maximalkraft durch intramuskuläres Koordinationstraining (Muskelpotential ausprägen)\n• Training der Schnell & Explosivkraft mit und ohne Zusatzgewicht\n• Rumpfkrafttraining\n\nWettkampfphase\n• Explosiv- und  Maximalkraft erhalten\n• Anpassung des Volumens an Wettkämpfe\n• Intensität bleibt bestehen",
+       "from": 9,
+       "to": 9,
+       "l": [
+        {
+         "text": "M Inhalt",
+         "href": "https://snowsports.flink.host/s/HOx8PqfA/AAuP9QsT"
+        }
+       ]
+      }
+     ]
+    }
+   ]
   },
   {
-   "shared": "schnelligkeit"
+   "title": "Schnelligkeit & Agilität",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Schnelligkeit",
+     "segs": [
+      {
+       "v": "Off Snow Skills F1-2\n\nTurnen\nLeichatheltik\nGeländetraining\nSpielen",
+       "from": 0,
+       "to": 1,
+       "l": [
+        {
+         "text": "F1-2 Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/caW1jsv7"
+        }
+       ]
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m)\nSC 2: 30x Seilspringen einfachdurchzüge",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "F3 Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/UdvThSLV"
+        }
+       ]
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (25m & 50m)\nSC 2: 50x Seilspringen einfachdurchzüge, 10x Doppeldurchzüge am Stück\n\nST: Swiss Ski Power Test (SSPT)",
+       "from": 3,
+       "to": 3,
+       "l": [
+        {
+         "text": "T1 Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/eye1J25O"
+        }
+       ]
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 60m)\nSC 2: 50x Seilspringen einfachdurchzüge, 20x Doppeldurchzüge am Stück\n\nST: Swiss Ski Power Test (SSPT)",
+       "from": 4,
+       "to": 4,
+       "l": [
+        {
+         "text": "T2 Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/dd0Ww3sg"
+        }
+       ]
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 80m)\nSC 2: 100x Seilspringen einfachdurchzüge, 30x Doppeldurchzüge am Stück\n\nST: individuell nach Absprache mit dem/der Athletiktrainer:in",
+       "from": 5,
+       "to": 5,
+       "l": [
+        {
+         "text": "T3 Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/P9lqnOKT"
+        }
+       ]
+      },
+      {
+       "v": "SC \"Lauf-ABC\": Punktevergabe (1-4) in den Kriterien Rhythmus, Körperhaltung, Dynamik & Koordination.\nSC 1: Sprint (30m & 100m)\nSC 2: 100x Seilspringen einfachdurchzüge, 40x Doppeldurchzüge am Stück\n\nST: individuell nach Absprache mit dem/der Athletiktrainer:in",
+       "from": 6,
+       "to": 6,
+       "l": [
+        {
+         "text": "T4 Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/VQWOd1MB"
+        }
+       ]
+      },
+      {
+       "v": "ST: LD Magglingen und individuel nach Absprache mit dem/der Athletiktrainer:in",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "E Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55"
+        }
+       ]
+      },
+      {
+       "v": "ST: LD Magglingen und individuel nach Absprache mit dem/der Athletiktrainer:in",
+       "from": 9,
+       "to": 9,
+       "l": [
+        {
+         "text": "M Skills-Check",
+         "href": "https://snowsports.flink.host/s/HF9mgLsD/EHGOqS55"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Schnelligkeit",
+     "segs": [
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastungsverträglichkeit aufbauen\n• Erwerben und Festigen von Bewegungs- & Spielgrundformen",
+       "from": 0,
+       "to": 0,
+       "l": [
+        {
+         "text": "Inhalt F1",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/kY1BOb3c"
+        }
+       ]
+      },
+      {
+       "v": "Aktiver Alltag pflegen\n• Belastbar werden\n• Anwenden und Variieren von Bewegungs- & Spielgrundformen",
+       "from": 1,
+       "to": 1,
+       "l": [
+        {
+         "text": "Inhalt F2",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/kY1BOb3c"
+        }
+       ]
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel machen (stop & go)\n• Immer frisch & maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Windows of Opportunity im Alter von 8 bis 13 Jahren",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "Inhalt F3",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/r8idtvTH"
+        }
+       ]
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen (in kurzer Zeit max. Geschwindigkeit erreichen)\n• Maximal schnell sein (hohe Schrittfrequenz & Schrittlänge)\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (statisch & dynamisch)\n\n*Aufpassen: Wachstumsschub in der Adoleszenz",
+       "from": 3,
+       "to": 4,
+       "l": [
+        {
+         "text": "Inhalt T1-2",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/UBlddCun"
+        }
+       ]
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n•  Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)",
+       "from": 5,
+       "to": 6,
+       "l": [
+        {
+         "text": "Inhalt T3-4",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/0gahlWER"
+        }
+       ]
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)",
+       "from": 7,
+       "to": 8,
+       "l": [
+        {
+         "text": "Inhalt E",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh"
+        }
+       ]
+      },
+      {
+       "v": "Schnelligkeit\n• Beschleunigen: schnell max. Geschwindigkeit erreichen\n• Maximal schnell sein: hohe Schrittfrequenz & Schrittlänge\n• Schneller & geschickter die Richtungswechsel ohne Tempoverlust (stop & go)\n• Erholt & mit maximaler Intensität trainieren\n\nAgilität\n• Koordinationsleiter\n• Hindernisparcours\n• Gleichgewichtstraining (dynamisch & statisch)",
+       "from": 9,
+       "to": 9,
+       "l": [
+        {
+         "text": "Inhalt M",
+         "href": "https://snowsports.flink.host/s/PPsFiXFu/MjgEN4Nh"
+        }
+       ]
+      }
+     ]
+    }
+   ]
   },
   {
    "title": "Koordination und Imitation",

@@ -1044,7 +1044,6 @@
    "group": "Sport & Athlet:in",
    "sports": [
     "ski-alpin",
-    "skispringen",
     "skicross",
     "freeski-park-pipe",
     "snowboard-alpin",
@@ -1239,7 +1238,7 @@
      ]
     }
    ],
-   "label": "übrige Sportarten (7)"
+   "label": "übrige Sportarten (6)"
   },
   {
    "id": "ernaehrung-nordisch",
@@ -2393,7 +2392,6 @@
    "group": "Sport & Athlet:in",
    "sports": [
     "ski-alpin",
-    "skispringen",
     "skicross",
     "freeski-park-pipe",
     "snowboard-alpin",
@@ -2577,7 +2575,7 @@
      ]
     }
    ],
-   "label": "übrige Sportarten (7)"
+   "label": "übrige Sportarten (6)"
   },
   {
    "id": "kraft-nordisch",
@@ -2759,7 +2757,6 @@
    "group": "Sport & Athlet:in",
    "sports": [
     "ski-alpin",
-    "skispringen",
     "skicross",
     "snowboard-alpin",
     "snowboard-cross",
@@ -2937,7 +2934,7 @@
      ]
     }
    ],
-   "label": "übrige Sportarten (7)"
+   "label": "übrige Sportarten (6)"
   }
  ]
 }
