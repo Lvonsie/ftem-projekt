@@ -253,7 +253,7 @@
    "label": "Park & Pipe (2)"
   },
   {
-   "id": "mental-nordisch",
+   "id": "mental-nord",
    "title": "Mental",
    "group": "Sport & Athlet:in",
    "sports": [
@@ -267,43 +267,37 @@
      "label": "Skills-Checks (SC) Mental",
      "segs": [
       {
-       "v": "SC: Athleten:innen erzählen von einem Moment, auf den sie stolz sind.",
+       "v": "Sich konzentrieren:\n[[SC1]] Farben zählen\n[[SC2]] Eichhörnchen - Nuss\n[[SC3]] Spaghetti - Ski\n[[SC4]] Frosch Fuss",
        "from": 0,
-       "to": 0,
-       "l": []
-      },
-      {
-       "v": "SC: Athleten:innen beschreiben ihre Emotionen in schwierigen Situationen (z.B. bei Fehler) anhand einer Ampel.\n\nRot: Ich bin wütend.\nGelb: Ich bin unsicher.\nGrün: Ich bin ruhig/fokussiert.",
-       "from": 1,
        "to": 1,
        "l": []
       },
       {
-       "v": "SC: Athleten:innen machen eine Aufgabe (z.B. Technikübung) mit Ablenkungen (z.B. Lärm): Fähigkeit testen, Konzentration zu halten.",
+       "v": "Sich konzentrieren:\n[[SC1]] Strecken-Überblick\n[[SC2]] Schnee-Lesen\n[[SC3]] Lauf/Sprung-Replay\n[[SC4]] Ein Wort pro Lauf/Sprung",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "SC 1: Athleten:innen formulieren ein kleines Ziel für das Training und erklären, warum es ihnen wichtig ist.\nSC 2: Simulierte Stresssituation (z.B Wettkampfsimulation). Kinder sollen bewusst Techniken (z.B. Atmung) einsetzen, um „grün“ zu erreichen.",
+       "v": "Sich konzentrieren T1:\n[[SC1]] Strecken-/Schiessstand-/Schanzenbesichtigung 360°\n[[SC2]] Abstoss/Stellung/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "SC: Athleten:innen beschreiben eine Bestleistung: „Wie hast du dich gefühlt?“: Merkmale des persönlichen optimalen Leistungszustand identifizieren und  anwenden.",
+       "v": "Sich konzentrieren T2:\n[[SC1]] Besichtigung im Renntempo\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Während z.B. Intervalltraining bewusst Atemtechniken nutzen, um Ruhe zu bewahren.\nSC 3: Vor einer Technikaufgabe den Ablauf mental durchspielen.",
+       "v": "Sich konzentrieren T3:\n[[SC1]] Wettkampf-Scan\n[[SC2]] Markierung bei Renntempo\n[[SC3]] Debriefing\n[[SC4]] Start-Fokus",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "SC 1: Für jede Kategorie Prozessziele und Rangziele (später bewerten und anpassen).\nSC 2: Bei einer schwierigen Aufgabe (z.B. Zeitdruck) positive Selbstgespräche anwenden.\nSC 3: Technikübung mit eingebauten Ablenkungen durchführen.",
+       "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Schiessablauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start",
        "from": 6,
        "to": 6,
        "l": []
@@ -326,68 +320,28 @@
      "label": "Inhalt Mental",
      "segs": [
       {
-       "v": "Mental / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative ermöglichen",
+       "v": "Sich konzentrieren:\n• Die vier Aufmerksamkeitsformen mit Bildern erleben (Adler = aussen weit, Eichhörnchen = aussen eng, Bär = innen weit, Frosch = innen eng)\n• Gegensatzerfahrungen: weit vs. eng schauen, ganz steif vs. ganz locker bewegen\n• Eine Sache pro Lauf/Schussauslösung/Sprung: eine Spur, ein Körperteil\n• Kurze Fokusphasen, klare Pausen\n• Fokus auf Äusseres (Spur, Markierung, Zielbogen, Zielscheibe) statt genaue Körperanweisungen\n• Rituale beim Sammeln, Starten, Anhalten einführen\n\n[Sich konzentrieren](https://snowsports.flink.host/s/2hc74Tk1/)",
        "from": 0,
        "to": 1,
-       "l": [
-        {
-         "text": "F1 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/yGxQ89v5"
-        },
-        {
-         "text": "F2 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/JptDIQmL"
-        }
-       ]
+       "l": []
       },
       {
-       "v": "Mental / Persönlichkeit\n• Freude am Tun\n• Selbstwahrnehmung fördern\n• Aktivierungsregulation aufbauen\n• Spielerische Bewegungssteuerung ermöglichen\n• Positives Lernumfeld schaffen\n• Analytische Fähigkeiten aufbauen\n• Eigeninitiative fördern",
+       "v": "Sich konzentrieren:\n• Die vier Felder benennen können («Wo war dein Fokus?»)\n• Aufmerksamkeit bewusst nach aussen richten (Spur, Gelände, Schnee) und nach innen (Druck, Atem)\n• Lauf/Sprung innerlich «abspielen» und eine Sache auswählen (innen weit → innen eng)\n• Ein Schlüsselwort pro Lauf/Schussauslösung/Sprung\n• Einfache Vorstartroutine aufbauen: ein Atemzug, ein Blick, ein Wort\n• Fokus halten trotz kleiner Ablenkungen (Lärm, Zurufe) im Training\n\n[Sich konzentrieren](https://snowsports.flink.host/s/2hc74Tk1/)",
        "from": 2,
        "to": 2,
-       "l": [
-        {
-         "text": "F3 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/Adh6YvTP"
-        }
-       ]
+       "l": []
       },
       {
-       "v": "Mental / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "v": "Sich konzentrieren:\n• Kennenlernen der Fokusarten internal/external und eng/weit (Fachbegriffe)\n• Bewusste Fokuslenkung innerhalb und ausserhalb des Sports\n• Feldwechsel im Wettkampfablauf trainieren: Streckenbesichtigung → Vorstart → Lauf/Schussauslösung/Sprung → Analyse\n• Achtsamkeit aufbauen (Body-Scan, Atemfokus, Wahrnehmen ohne Bewerten)\n• Aufmerksamkeitslenkungs-Routine: positive Körpersprache, Atemzug, Schlüsselwort, Ritual\n• Fokus unter Ablenkung üben (Musik, Zuschauer, Zeitdruck)\n• Gedanken «parken»: Schule und Privates bewusst vor dem Training ablegen\n• Biathlon: Fokuswechsel Laufen ↔ Schiessen trainieren (Einfahrt Schiessstand → koordinierte Schussauslösung → zurück auf die Strecke)\n• Skispringen/Biathlon: Fokus bei wechselnden Windverhältnissen halten, Wartezeiten bewusst nutzen\n\n[Sich konzentrieren](https://snowsports.flink.host/s/2hc74Tk1/)",
        "from": 3,
        "to": 6,
-       "l": [
-        {
-         "text": "T1 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/IIPCz6q9"
-        },
-        {
-         "text": "T2 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/6bNaH29j"
-        },
-        {
-         "text": "T3 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/cS1Wo4jZ"
-        },
-        {
-         "text": "T4 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/AlYf6UYv"
-        }
-       ]
+       "l": []
       },
       {
-       "v": "Mental / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
+       "v": "Sich konzentrieren:\n• Fokusplan pro Streckenabschnitt, Schussauslösung bzw. Sprungphase als Teil der Wettkampfstrategie\n• Konzentration und Ablenkungskontrolle aufbauen: Reset-Routine nach Fehlern\n• Individuelle Vorstartroutine festigen und unter Wettkampfbedingungen anwenden\n• Fokus im Wettkampf laufend anpassen (Spur-/Schneeveränderung, Wind, Wetter, Sicht)\n• Achtsamkeit festigen: regelmässige formelle und informelle Übungen\n• Eigenes Fokusverhalten protokollieren, Muster erkennen, Strategien optimieren\n• Biathlon: Schiessroutine unter hoher Belastung und Druck festigen (Puls, Zuschauer, Strafrunden ausblenden)\n\n[Sich konzentrieren](https://snowsports.flink.host/s/2hc74Tk1/)",
        "from": 7,
        "to": 8,
-       "l": [
-        {
-         "text": "E1 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/S1Yapfvj"
-        },
-        {
-         "text": "E2 Inhalt",
-         "href": "https://snowsports.flink.host/s/C8XpRskG/3I6pSQ5L"
-        }
-       ]
+       "l": []
       },
       {
        "v": "Mental / Persönlichkeit\n• Zielsetzung ausbauen\n• Umgang mit Emotionen und Gedanken ausbauen\n• Optimaler Leistungszustand\n• Bewegungsvorstellung aufbauen\n• Fokus aufbauen\n• Positives Lernumfeld schaffen und Teamfähigkeit fördern\n• Analytische Fähigkeiten festigen\n• Eigeninitiative fördern\n• Karriereplanung",
