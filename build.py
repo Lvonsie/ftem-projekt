@@ -731,7 +731,8 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
     body = ""
     for ri, r in enumerate(t["rows"]):
         lbl = tr(r["label"], lang) or ""
-        body += '<div class="r">'
+        # data-rid: Zeilen-Kennung fuer Spalten-Layouts aus dem Admin ("lay|<rid>")
+        body += '<div class="r" data-rid="'+esc(cidb+"|"+str(ri))+'">'
         body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
         # render segs with spans; we lay out as 10 cells using grid-column span
         # Gleiche benachbarte Zellen werden ueber Phasen hinweg zu einem Block verbunden
@@ -754,7 +755,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
                 grad = "--mg:linear-gradient(90deg,"+",".join(stops)+");"
             cid = cidb+"|"+str(ri)+"|"+str(si)
             more = '' if edit else '<button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button>'
-            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
+            body += '<div class="c cell '+cls+'" data-k="'+str(si)+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
     opn = ''  # auch im Bearbeitungsmodus eingeklappt starten (schnelleres Navigieren)
     if edit:
@@ -2646,6 +2647,59 @@ footer{padding:16px;font-size:11px}
 """
 
 RENDER_JS = r"""
+// ---- Spalten-Layout (Admin: Zellen trennen/verbinden) ----
+// Override "lay|<rid>" = JSON [[von,bis,schluessel,quelle],...] fuer eine Zeile
+// (rid = data-rid der Zeile). Schluessel = data-k der Zelle; bestehende Zellen
+// behalten ihren Schluessel (Index der Zelle im Generator), so bleiben alle
+// Text-Overrides gueltig. Neue Teile ("s5-ab12") werden aus der Quellzelle
+// geklont; ihr Text kommt als normales Override "<rid>|<schluessel>".
+const LAY_PHR=[['foundation',0,2,'--phf'],['talent',3,6,'--pht'],['elite',7,8,'--phe'],['mastery',9,9,'--phm']];
+function layPhase(i){for(var k=0;k<LAY_PHR.length;k++){if(i>=LAY_PHR[k][1]&&i<=LAY_PHR[k][2])return LAY_PHR[k][0];}return 'mastery';}
+function layStyle(cell,a,b){
+  var phs={},n=0;for(var i=a;i<=b;i++){var p=layPhase(i);if(!phs[p]){phs[p]=1;n++;}}
+  Array.prototype.slice.call(cell.classList).forEach(function(c){if(c.indexOf('ph-')===0)cell.classList.remove(c);});
+  var grad='';
+  if(n>1){
+    cell.classList.add('ph-multi');var w=b-a+1,st=[];
+    LAY_PHR.forEach(function(p){if(p[2]<a||p[1]>b)return;
+      var cen=((Math.max(p[1],a)+Math.min(p[2],b))/2-a+0.5)/w*100;st.push('var('+p[3]+') '+Math.round(cen)+'%');});
+    grad='--mg:linear-gradient(90deg,'+st.join(',')+');';
+  }else cell.classList.add('ph-'+layPhase(a));
+  cell.setAttribute('style',grad+'grid-column: span '+(b-a+1));
+  cell.dataset.from=a;cell.dataset.to=b;
+}
+function layCells(row){return Array.prototype.filter.call(row.children,function(c){return c.classList.contains('cell')&&c.dataset.k!=null;});}
+function layOf(row){return layCells(row).map(function(c){var e=[+c.dataset.from,+c.dataset.to,c.dataset.k];if(c.dataset.src)e.push(c.dataset.src);return e;});}
+function layParse(t){try{var a=JSON.parse(t);return Array.isArray(a)&&a.length?a:null;}catch(_){return null;}}
+// Wendet ein Layout auf eine Zeile an. mk(quellzelle,schluessel) liefert die neue
+// Zelle fuer Teile ohne bestehende Zelle. Passt das Layout nicht zur Zeile
+// (Luecken, Ueberlappung, anderer Stufenbereich), bleibt die Zeile unveraendert.
+function layApply(row,lay,mk){
+  var cells=layCells(row);
+  if(!cells.length||!lay)return false;
+  var lo=Math.min.apply(null,cells.map(function(c){return +c.dataset.from;}));
+  var hi=Math.max.apply(null,cells.map(function(c){return +c.dataset.to;}));
+  var by={},seen={},exp=lo;
+  cells.forEach(function(c){by[c.dataset.k]=c;});
+  for(var i=0;i<lay.length;i++){
+    var e=lay[i];
+    if(!Array.isArray(e)||e.length<3||+e[0]!==exp||+e[1]<+e[0]||typeof e[2]!=='string'||!e[2]||seen[e[2]])return false;
+    seen[e[2]]=1;exp=+e[1]+1;
+  }
+  if(exp!==hi+1)return false;
+  var out=lay.map(function(e){
+    var a=+e[0],b=+e[1],c=by[e[2]];
+    if(!c){
+      var src=by[e[3]]||cells.filter(function(x){return a>=+x.dataset.from&&a<=+x.dataset.to;})[0]||cells[0];
+      c=mk(src,e[2]);c.dataset.k=e[2];
+    }
+    if(e[3])c.dataset.src=e[3];else delete c.dataset.src;
+    layStyle(c,a,b);return c;
+  });
+  cells.forEach(function(c){if(out.indexOf(c)<0)c.remove();});
+  out.forEach(function(c){row.appendChild(c);});
+  return true;
+}
 // ---- Gemeinsamer Zellen-Renderer (Live-Seiten, Overrides UND Admin-Vorschau) ----
 function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*([\s\S]*)$/;
@@ -2873,6 +2927,19 @@ function applyOverrides(map){
       if(v!=null){el.innerHTML=plain(v);}
     });
   }
+  // Spalten-Layouts zuerst anwenden (neue Teil-Zellen bekommen danach ihre Texte)
+  Object.keys(gm).forEach(k=>{
+    if(k.indexOf('lay|')!==0)return;
+    const rid=k.slice(4),lay=layParse(gm[k]);if(!lay)return;
+    document.querySelectorAll('.r[data-rid]').forEach(row=>{
+      if(row.dataset.rid!==rid)return;
+      layApply(row,lay,(src,key)=>{
+        const c=src.cloneNode(true);c.classList.remove('clamped','expanded');
+        const t=c.querySelector('.ctext[data-cid]');if(t)t.dataset.cid=rid+'|'+key;
+        return c;
+      });
+    });
+  });
   patch(document);
   // Inhalte in <template> (Stufen-Popups, News-Overlay, "Was ist FTEM?") ebenfalls patchen
   document.querySelectorAll('template').forEach(t=>patch(t.content));
@@ -4114,6 +4181,19 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .adm-field label{display:block;font-size:10.5px;font-weight:800;color:#546a8c;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
 .adm-field label .adm-hint{display:block;font-style:normal;text-transform:none;letter-spacing:0;font-weight:600;color:#98a1ad;font-size:10.5px;margin-top:1px}
 .adm-field .cedit{font-size:12.5px}
+.adm-cbar{display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap;padding:5px 6px 0;opacity:.5;transition:opacity .15s}
+.cell:hover>.adm-cbar,.cell:focus-within>.adm-cbar{opacity:1}
+.adm-cb{font:inherit;font-size:10.5px;line-height:1;padding:3px 8px;border:1px solid #d4dae1;border-radius:999px;background:#fff;color:#4a5866;cursor:pointer;white-space:nowrap}
+.adm-cb:hover{border-color:#d52b1e;color:#d52b1e}
+.adm-cmenu{position:fixed;z-index:200;background:#fff;border:1px solid #d4dae1;border-radius:9px;box-shadow:0 10px 28px rgba(0,0,0,.16);padding:6px;display:flex;flex-direction:column;gap:4px;min-width:170px}
+.adm-cmh{font-size:11px;color:#6b7785;padding:2px 4px 3px}
+.adm-cmo,.adm-cmx{font:inherit;font-size:12px;text-align:left;padding:6px 9px;border:1px solid #e3e7ec;border-radius:6px;background:#f7f8fa;color:#1d2630;cursor:pointer}
+.adm-cmo span{color:#d52b1e;font-weight:700;padding:0 4px}
+.adm-cmo:hover{border-color:#d52b1e;background:#fff8f7}
+.adm-cmx{background:none;border-color:transparent;color:#6b7785;text-align:center}
+[data-theme="dark"] .adm-cb{background:#141d2c;color:#c9d3df;border-color:rgba(255,255,255,.16)}
+[data-theme="dark"] .adm-cmenu{background:#1b2536;border-color:rgba(255,255,255,.16)}
+[data-theme="dark"] .adm-cmo{background:#141d2c;color:#e7edf4;border-color:rgba(255,255,255,.12)}
 .adm-sec{border:1px solid #e4e8ec;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:10px;background:#fafbfc}
 .adm-sect{font-size:12.5px;font-weight:800;color:#1d2630}
 .adm-tag{font-size:10.5px;font-weight:700;color:#697080;background:#eef1f4;border-radius:20px;padding:2px 9px;margin-left:8px;letter-spacing:.02em;vertical-align:2px}
@@ -4286,9 +4366,12 @@ function toggleGloss(){
 // Grundlage ist der Review-Zustand (isStale): Deutsch wurde inhaltlich geaendert,
 // und die Sprache wurde seither weder korrigiert noch als geprueft markiert.
 function pendList(){
-  var out=[];
+  // Grundlage sind die Felder im Admin (auch neu getrennte Zellen); Texte von
+  // weggefallenen Zellen (z.B. nach "Verbinden") zaehlen nicht mehr.
+  var out=[],cids={};
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(t){cids[t.dataset.cid]=1;});
   ['fr','it','en'].forEach(function(l){
-    Object.keys(ORIGS.de).forEach(function(cid){
+    Object.keys(cids).forEach(function(cid){
       if(isStale(l,cid))out.push({l:l,cid:cid});
     });
   });
@@ -4789,7 +4872,43 @@ function init(){
     const d=e.target;
     if(d&&d.matches&&d.matches('details.theme')&&d.open)d.querySelectorAll('.cedit').forEach(autosize);
   },true);
-  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+  app.querySelectorAll('.cedit[data-cid]').forEach(setupTa);
+  layInit();
+  langSel.addEventListener('change',function(){
+    LNG=langSel.value;chgIdx=-1;
+    refreshValues();updateCount();
+  });
+  saveBtn.addEventListener('click',save);
+  document.getElementById('chgprev').addEventListener('click',function(){gotoChg(-1);});
+  document.getElementById('chgnext').addEventListener('click',function(){gotoChg(1);});
+  document.getElementById('chgundo').addEventListener('click',undoCur);
+  document.getElementById('glossbtn').addEventListener('click',toggleGloss);
+  document.getElementById('pendbtn').addEventListener('click',togglePend);
+  document.getElementById('statbtn').addEventListener('click',toggleStats);
+  fbInit();
+  if(SUPA_URL&&SUPA_KEY){
+    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+      .then(function(r){return r.ok?r.json():[];}).then(function(rows){
+        (rows||[]).forEach(function(x){
+          if(x.cid.indexOf('gloss|')===0)return;
+          if(x.cid.indexOf('lay|')===0){LAYS[x.cid.slice(4)]=x.txt;return;}
+          var mr=x.cid.match(/^rev\|(.*)\|(fr|it|en)$/);
+          if(mr){reviewed[mr[2]][mr[1]]=x.txt;return;}
+          const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
+          if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
+        });
+        layApplyAll();
+        refreshValues();
+        showSport(sel.value);updateCount();
+      }).catch(function(){});
+  }else{
+    document.getElementById('note').textContent='Hinweis: Cloud-Speicher (Supabase) ist noch nicht eingerichtet – Änderungen können bearbeitet und als Datei heruntergeladen, aber noch nicht direkt live gespeichert werden. Siehe SETUP-ADMIN.md.';
+    saveBtn.textContent='Herunterladen';
+  }
+  showSport(sel.value||(sel.options[0]&&sel.options[0].value));
+  updateCount();
+}
+function setupTa(ta){
     // Wrapper + Prüf-Markierung (Info bei geänderter deutscher Quelle)
     var w=document.createElement('div'); w.className='cedit-wrap';
     ta.parentNode.insertBefore(w,ta); w.appendChild(ta);
@@ -4816,38 +4935,150 @@ function init(){
       if(ta.value===(base[LNG][cid]||''))delete edits[LNG][cid];else edits[LNG][cid]=ta.value;
       updateCount();
     });
+}
+// ---- Spalten trennen / verbinden (Layout-Override "lay|<rid>", siehe layApply) ----
+// Wirkt sofort live (eigener Speichervorgang, kein Push noetig). Neue Teil-Zellen
+// starten mit dem Text der bisherigen Zelle in allen 4 Sprachen (inkl. Pruefstand),
+// beim Verbinden gilt der Text der linken Zelle.
+const LAYS={}, LAY0={};
+const LAY_STN=['F1','F2','F3','T1','T2','T3','T4','E1','E2','M'];
+var _layMenu=null;
+function layRows(){return app.querySelectorAll('.r[data-rid]');}
+function layName(i){return LAY_STN[i]||String(i);}
+function layRange(a,b){return a===b?layName(a):layName(a)+'–'+layName(b);}
+function layInit(){
+  layRows().forEach(function(row){
+    if(!(row.dataset.rid in LAY0))LAY0[row.dataset.rid]=JSON.stringify(layOf(row));
+    layBars(row);
   });
-  langSel.addEventListener('change',function(){
-    LNG=langSel.value;chgIdx=-1;
+  document.addEventListener('click',function(e){
+    if(_layMenu&&!_layMenu.contains(e.target)&&!(e.target.classList&&e.target.classList.contains('adm-cb')))layMenuClose();
+  });
+  // Beim Scrollen schliessen - aber nur, wenn sich der Knopf wirklich verschoben hat
+  window.addEventListener('scroll',function(){
+    if(_layMenu&&_layMenu.__btn&&Math.abs(_layMenu.__btn.getBoundingClientRect().top-_layMenu.__top)>30)layMenuClose();
+  },true);
+}
+function layMk(src,key){
+  var row=src.closest('.r'),rid=row.dataset.rid;
+  var c=document.createElement('div');c.className='c cell';
+  var w=document.createElement('div');w.className='cwrap';
+  var ta=document.createElement('textarea');ta.className='cedit';ta.dataset.cid=rid+'|'+key;
+  w.appendChild(ta);c.appendChild(w);setupTa(ta);
+  return c;
+}
+function layApplyAll(){
+  Object.keys(LAYS).forEach(function(rid){
+    var lay=layParse(LAYS[rid]);if(!lay)return;
+    layRows().forEach(function(row){if(row.dataset.rid===rid&&layApply(row,lay,layMk))layBars(row);});
+  });
+}
+function layBars(row){
+  var cells=layCells(row);
+  cells.forEach(function(c,i){
+    var old=c.querySelector(':scope > .adm-cbar');if(old)old.remove();
+    var a=+c.dataset.from,b=+c.dataset.to;
+    var bar=document.createElement('div');bar.className='adm-cbar';
+    if(b>a){
+      var bt=document.createElement('button');bt.type='button';bt.className='adm-cb';
+      bt.textContent='Trennen';bt.title='Zelle '+layRange(a,b)+' in zwei Spalten trennen';
+      bt.addEventListener('click',function(e){e.preventDefault();layMenu(c,bt);});
+      bar.appendChild(bt);
+    }
+    if(i<cells.length-1){
+      var n=cells[i+1],bj=document.createElement('button');bj.type='button';bj.className='adm-cb';
+      bj.textContent='Verbinden →';bj.title='Mit der Zelle rechts ('+layRange(+n.dataset.from,+n.dataset.to)+') zu einer Zelle '+layRange(a,+n.dataset.to)+' verbinden';
+      bj.addEventListener('click',function(e){e.preventDefault();layMenuClose();layJoin(c,n);});
+      bar.appendChild(bj);
+    }
+    if(bar.children.length)c.insertBefore(bar,c.firstChild);
+  });
+}
+function layMenuClose(){if(_layMenu){_layMenu.remove();_layMenu=null;}}
+function layMenu(c,btn){
+  layMenuClose();
+  var a=+c.dataset.from,b=+c.dataset.to;
+  var m=document.createElement('div');m.className='adm-cmenu';
+  m.innerHTML='<div class="adm-cmh">Wo trennen?</div>';
+  for(var at=a+1;at<=b;at++){(function(at){
+    var o=document.createElement('button');o.type='button';o.className='adm-cmo';
+    o.innerHTML='<b>'+layRange(a,at-1)+'</b> <span>|</span> <b>'+layRange(at,b)+'</b>';
+    o.addEventListener('click',function(e){e.preventDefault();layMenuClose();laySplit(c,at);});
+    m.appendChild(o);})(at);}
+  var x=document.createElement('button');x.type='button';x.className='adm-cmx';x.textContent='Abbrechen';
+  x.addEventListener('click',function(e){e.preventDefault();layMenuClose();});
+  m.appendChild(x);
+  document.body.appendChild(m);_layMenu=m;
+  var r=btn.getBoundingClientRect();m.__btn=btn;m.__top=r.top;
+  var mw=m.offsetWidth,mh=m.offsetHeight;
+  var left=Math.min(Math.max(8,r.right-mw),window.innerWidth-mw-8),top=r.bottom+5;
+  if(top+mh>window.innerHeight-8)top=Math.max(8,r.top-mh-5);
+  m.style.left=left+'px';m.style.top=top+'px';
+}
+function layBlocked(){
+  if(!SUPA_URL||!SUPA_KEY){statusEl.textContent='Spalten trennen/verbinden braucht den Cloud-Speicher (Supabase).';return true;}
+  if(changed().length){statusEl.textContent='Bitte zuerst die offenen Änderungen speichern (oder rückgängig machen) – danach Spalten trennen/verbinden.';return true;}
+  return false;
+}
+function layKey(at){return 's'+at+'-'+Date.now().toString(36).slice(-5);}
+function laySplit(c,at){
+  if(layBlocked())return;
+  var row=c.closest('.r'),rid=row.dataset.rid,k=c.dataset.k,src=c.dataset.src||k;
+  var a=+c.dataset.from,b=+c.dataset.to;
+  var nk=layKey(at),scid=rid+'|'+k,ncid=rid+'|'+nk;
+  var lay=[];
+  layOf(row).forEach(function(e){
+    if(e[2]!==k){lay.push(e);return;}
+    var l=[e[0],at-1,k];if(e[3])l.push(e[3]);lay.push(l);
+    lay.push([at,e[1],nk,src]);
+  });
+  var rows=[{cid:'lay|'+rid,txt:JSON.stringify(lay)}];
+  ALANGS.forEach(function(l){var v=base[l][scid];if(v!=null&&v!=='')rows.push({cid:l==='de'?ncid:ncid+'|'+l,txt:v});});
+  ['fr','it','en'].forEach(function(l){if(reviewed[l]&&reviewed[l][scid]!==undefined)rows.push({cid:'rev|'+ncid+'|'+l,txt:reviewed[l][scid]});});
+  layCommit(row,lay,rows,[],'Zelle getrennt: '+layRange(a,at-1)+' | '+layRange(at,b)+' – beide Teile haben den bisherigen Text und sind jetzt live.');
+}
+function layJoin(c,n){
+  if(layBlocked())return;
+  var row=c.closest('.r'),rid=row.dataset.rid,k=c.dataset.k,nk=n.dataset.k;
+  var a=+c.dataset.from,b=+n.dataset.to;
+  var lt=(base.de[rid+'|'+k]||'').trim(),rt=(base.de[rid+'|'+nk]||'').trim();
+  if(rt&&rt!==lt&&!window.confirm('Zellen '+layRange(a,+c.dataset.to)+' und '+layRange(+n.dataset.from,b)+' verbinden?\n\n'
+      +'Die verbundene Zelle '+layRange(a,b)+' übernimmt den Text der LINKEN Zelle. Der Text der rechten Zelle wird gelöscht:\n\n«'
+      +(rt.length>220?rt.slice(0,220)+'…':rt)+'»'))return;
+  var lay=[];
+  layOf(row).forEach(function(e){
+    if(e[2]===nk)return;
+    if(e[2]===k){var l=[e[0],b,k];if(e[3])l.push(e[3]);lay.push(l);}else lay.push(e);
+  });
+  var rc=rid+'|'+nk,del=[rc];
+  ['fr','it','en'].forEach(function(l){del.push(rc+'|'+l);del.push('rev|'+rc+'|'+l);});
+  var rows=[];
+  if(JSON.stringify(lay)===LAY0[rid])del.push('lay|'+rid);   // wieder wie im Original
+  else rows.push({cid:'lay|'+rid,txt:JSON.stringify(lay)});
+  layCommit(row,lay,rows,del,'Zellen verbunden: '+layRange(a,b)+' – jetzt live.');
+}
+function layCommit(row,lay,rows,del,msg){
+  statusEl.textContent='Speichere Spalten …';
+  admWrite(rows,del).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    del.forEach(function(cid){
+      if(cid.indexOf('lay|')===0){delete LAYS[cid.slice(4)];return;}
+      var m=cid.match(/^rev\|(.*)\|(fr|it|en)$/);
+      if(m){if(reviewed[m[2]])delete reviewed[m[2]][m[1]];return;}
+      var m2=cid.match(/^(.*)\|(fr|it|en)$/),l=m2?m2[2]:'de',c=m2?m2[1]:cid;
+      if(ORIGS[l][c]!==undefined)base[l][c]=ORIGS[l][c];else delete base[l][c];
+    });
+    rows.forEach(function(x){
+      if(x.cid.indexOf('lay|')===0){LAYS[x.cid.slice(4)]=x.txt;return;}
+      var m=x.cid.match(/^rev\|(.*)\|(fr|it|en)$/);
+      if(m){reviewed[m[2]][m[1]]=x.txt;return;}
+      var m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
+      if(m2)base[m2[2]][m2[1]]=x.txt;else base.de[x.cid]=x.txt;
+    });
+    layApply(row,lay,layMk);layBars(row);
     refreshValues();updateCount();
-  });
-  saveBtn.addEventListener('click',save);
-  document.getElementById('chgprev').addEventListener('click',function(){gotoChg(-1);});
-  document.getElementById('chgnext').addEventListener('click',function(){gotoChg(1);});
-  document.getElementById('chgundo').addEventListener('click',undoCur);
-  document.getElementById('glossbtn').addEventListener('click',toggleGloss);
-  document.getElementById('pendbtn').addEventListener('click',togglePend);
-  document.getElementById('statbtn').addEventListener('click',toggleStats);
-  fbInit();
-  if(SUPA_URL&&SUPA_KEY){
-    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-      .then(function(r){return r.ok?r.json():[];}).then(function(rows){
-        (rows||[]).forEach(function(x){
-          if(x.cid.indexOf('gloss|')===0)return;
-          var mr=x.cid.match(/^rev\|(.*)\|(fr|it|en)$/);
-          if(mr){reviewed[mr[2]][mr[1]]=x.txt;return;}
-          const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
-          if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
-        });
-        refreshValues();
-        showSport(sel.value);updateCount();
-      }).catch(function(){});
-  }else{
-    document.getElementById('note').textContent='Hinweis: Cloud-Speicher (Supabase) ist noch nicht eingerichtet – Änderungen können bearbeitet und als Datei heruntergeladen, aber noch nicht direkt live gespeichert werden. Siehe SETUP-ADMIN.md.';
-    saveBtn.textContent='Herunterladen';
-  }
-  showSport(sel.value||(sel.options[0]&&sel.options[0].value));
-  updateCount();
+    statusEl.textContent=msg;
+  }).catch(function(e){statusEl.textContent='Fehler beim Speichern der Spalten: '+e.message;});
 }
 // ---- Live-Vorschau + ausklappbare Formatierungshilfe an der fokussierten Zelle ----
 var _prevBox=null,_prevTa=null,_fmtBox=null,_fmtT=null;

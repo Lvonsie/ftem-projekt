@@ -1863,10 +1863,27 @@
      "label": "",
      "segs": [
       {
-       "v": "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.",
+       "v": "Die Downloads für Trainer:innen werden hier laufend ergänzt.",
        "from": 0,
        "to": 9,
-       "l": []
+       "l": [],
+       "dl": [
+        {
+         "title": "Athletikbaukasten F3–T1 · Baukasten für Clubtrainer:innen",
+         "chips": [
+          "F3",
+          "T1"
+         ],
+         "desc": "Athletiktraining in 3 Bausteinen: Warm-up, Schnelligkeit & Schnellkraft sowie Kraft & Core. Mit Vorlagen für den Trainingsaufbau (ca. 45–65 Minuten), Übungsauswahl mit Satz- und Wiederholungsangaben und QR-Codes zu den Übungsvideos.",
+         "files": [
+          {
+           "label": "Athletikbaukasten F3–T1",
+           "hint": "3 Seiten A4 quer – zum Ausdrucken oder am Bildschirm · PDF, 3.2 MB",
+           "href": "assets/docs/Swiss-Ski_Athletikbaukasten_F3-T1.pdf"
+          }
+         ]
+        }
+       ]
       }
      ]
     }
