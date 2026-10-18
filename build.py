@@ -4130,11 +4130,23 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .cedit.curchg{box-shadow:0 0 0 3px rgba(213,43,30,.35);border-color:#d52b1e}
 /* Uebersetzung-pruefen-Markierung: Deutsch wurde geaendert */
 .cedit-wrap{position:relative}
-/* Live-Vorschau der fokussierten Zelle */
-.cprev{margin-top:6px;border:1px dashed #c6cdd6;border-radius:8px;background:var(--card);padding:8px 10px 9px}
-.cprev-h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#98a1ad;margin-bottom:5px}
+/* Live-Vorschau der fokussierten Zelle - bewusst klar vom (weissen) Eingabefeld
+   abgehoben (blaeulich getoent, gestrichelt): Admins tippten versehentlich in die
+   Vorschau statt ins Feld (Feedback Matheo 10/2026). Klick auf die Vorschau
+   springt ins zugehoerige Eingabefeld. */
+.cprev{margin-top:6px;border:1.5px dashed #8fb3d4;border-radius:8px;background:#edf4fb;padding:8px 10px 9px;cursor:pointer}
+.cprev:hover{border-color:#5f93c4}
+.cprev-h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#4a7194;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.cprev-h::before{content:"";width:12px;height:12px;flex:none;background:currentColor;
+  -webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>') center/contain no-repeat;
+  mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>') center/contain no-repeat}
+.cprev-h small{font-weight:600;letter-spacing:.02em;text-transform:none;color:#7d99b3;margin-left:auto}
 .cprev-cell{font-size:11.5px;line-height:1.45}
 .cprev-cell .lks{margin-top:8px}
+[data-theme="dark"] .cprev{background:#152233;border-color:#3b5a7a}
+[data-theme="dark"] .cprev:hover{border-color:#5f93c4}
+[data-theme="dark"] .cprev-h{color:#8fb3d4}
+[data-theme="dark"] .cprev-h small{color:#6d88a3}
 /* Formatierungshilfe: ausklappbarer Spickzettel direkt neben der Zelle */
 .cfmt{margin-top:6px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:11px}
 .cfmt summary{cursor:pointer;padding:5px 10px;font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#98a1ad;list-style:none;display:flex;align-items:center;gap:6px}
@@ -5124,8 +5136,13 @@ function placeFmt(){
 function renderPrev(ta){
   if(!_prevBox){
     _prevBox=document.createElement('div');_prevBox.className='cprev';
-    _prevBox.innerHTML='<div class="cprev-h">Vorschau – so erscheint die Zelle auf der Webseite</div>'
+    _prevBox.innerHTML='<div class="cprev-h">Vorschau<small>nicht bearbeitbar – Klick springt ins Eingabefeld</small></div>'
       +'<div class="cprev-cell"><div class="cwrap"><div class="ctext"></div></div></div>';
+    _prevBox.title='Das ist nur die Vorschau – bearbeitet wird im weissen Feld. Klick springt dorthin.';
+    // Versehentlicher Klick in die Vorschau: zurueck ins Eingabefeld springen
+    _prevBox.addEventListener('mousedown',function(e){
+      if(_prevTa){e.preventDefault();_prevTa.focus();}
+    });
   }
   var w=ta.closest('.cedit-wrap')||ta.parentElement;
   if(_prevBox.parentElement!==w){w.appendChild(fmtBox());w.appendChild(_prevBox);placeFmt();}
