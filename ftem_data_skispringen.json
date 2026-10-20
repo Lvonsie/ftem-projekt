@@ -1150,37 +1150,9 @@
   {
    "title": "Technik Übergeordnet",
    "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Taktik",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
+   "removed": true,
+   "_hinweis": "10/2026 entfernt (Wunsch Matheo); Platzhalter haelt die Positionen der folgenden Themen fest.",
+   "rows": []
   },
   {
    "title": "Technik",

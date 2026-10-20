@@ -167,7 +167,8 @@ def esc(s): return html.escape(s, quote=True)
 # "FTEM" in den vier Phasenfarben (Anpassung von Luca, Commit "Farben FTEM")
 FTEM = '<span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span>'
 
-SC_RE = re.compile(r'^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST|LT\s?\d+[a-z]?|LT)\s*[:.\)]\s*(.*)$', re.S)
+# SC/ST/LT + optionale Nummer + optionaler Zusatz ("ST Nachwuchs:", "ST Elite:", "ST relève :")
+SC_RE = re.compile(r'^((?:SC|ST|LT)(?:\s?\d+[a-z]?)?(?:\s+[A-Za-zÀ-ÿ]{2,14})?)\s*[:.\)]\s*(.*)$', re.S)
 def _badge(lbl):
     # LT = Leistungstest: eigene Farbe, damit SC und LT auf einen Blick unterscheidbar sind
     lbl = lbl.strip()
@@ -2711,7 +2712,7 @@ function layApply(row,lay,mk){
 }
 // ---- Gemeinsamer Zellen-Renderer (Live-Seiten, Overrides UND Admin-Vorschau) ----
 function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
-const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST|LT\s?\d+[a-z]?|LT)\s*[:.\)]\s*([\s\S]*)$/;
+const SC_RE=/^((?:SC|ST|LT)(?:\s?\d+[a-z]?)?(?:\s+[A-Za-zÀ-ÿ]{2,14})?)\s*[:.\)]\s*([\s\S]*)$/;
 function _badge(l){l=l.trim();return '<span class="badge'+(/^LT(\b|\s?\d)/.test(l)?' lt':'')+'">'+_esc(l)+'</span>';}
 const SNOW_RE=/^(on|off)[\s-]?snow:?$/i;
 // Gleiche Logik wie _is_head_line im Generator: sieht die Zeile wie ein Titel aus?
