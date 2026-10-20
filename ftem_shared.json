@@ -279,13 +279,13 @@
        "l": []
       },
       {
-       "v": "Sich konzentrieren T1:\n[[SC1]] Strecken-/Schiessstand-/Schanzenbesichtigung 360°\n[[SC2]] Abstoss/Stellung/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort",
+       "v": "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Sich konzentrieren T2:\n[[SC1]] Besichtigung im Renntempo\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
+       "v": "Sich konzentrieren T2:\n[[SC1]] Besichtigung Rennstrecke / Schanze\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
        "from": 4,
        "to": 4,
        "l": []
@@ -297,7 +297,7 @@
        "l": []
       },
       {
-       "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Schiessablauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start",
+       "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start",
        "from": 6,
        "to": 6,
        "l": []
