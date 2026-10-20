@@ -167,7 +167,11 @@ def esc(s): return html.escape(s, quote=True)
 # "FTEM" in den vier Phasenfarben (Anpassung von Luca, Commit "Farben FTEM")
 FTEM = '<span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span>'
 
-SC_RE = re.compile(r'^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*(.*)$', re.S)
+SC_RE = re.compile(r'^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST|LT\s?\d+[a-z]?|LT)\s*[:.\)]\s*(.*)$', re.S)
+def _badge(lbl):
+    # LT = Leistungstest: eigene Farbe, damit SC und LT auf einen Blick unterscheidbar sind
+    lbl = lbl.strip()
+    return '<span class="badge'+(' lt' if re.match(r'LT\b|LT\s?\d', lbl) else '')+'">'+esc(lbl)+'</span>'
 
 # Einheitliche Titel-Erkennung (ueber alle Themen/Sportarten/Stufen gleich)
 # "Label: Wert" nur mit Leerzeichen nach dem Doppelpunkt -> schuetzt Gender-Doppelpunkt
@@ -216,12 +220,12 @@ def render_block(block, link_texts):
     lines = [l for l in b.split("\n")]
     nonempty = [l.strip() for l in lines if l.strip()]
     # Explizite Admin-Schreibweise: "[[Etikett]] Text"-Zeilen = Badge-Liste
-    _bg = [re.match(r'^\[\[(.{1,28})\]\]\s*(.*)$', l) for l in nonempty]
+    _bg = [re.match(r'^\[\[(.{1,28})\]\]\s*(.*)$', l) or SC_RE.match(l) for l in nonempty]
     if nonempty and sum(1 for m in _bg if m) >= max(1, len(nonempty)-1):
         out = '<ul class="sc">'
         for l, m in zip(nonempty, _bg):
             if m:
-                out += '<li><span class="badge">'+esc(m.group(1).strip())+'</span> '+esc(m.group(2).strip())+'</li>'
+                out += '<li>'+_badge(m.group(1))+' '+esc(m.group(2).strip())+'</li>'
             else:
                 out += '<li>'+esc(l)+'</li>'
         return out + '</ul>'
@@ -246,7 +250,7 @@ def render_block(block, link_texts):
         for ls in nonempty:
             m = SC_RE.match(ls)
             if m:
-                out += '<li><span class="badge">'+esc(m.group(1).strip())+'</span> '+esc(m.group(2).strip())+'</li>'
+                out += '<li>'+_badge(m.group(1))+' '+esc(m.group(2).strip())+'</li>'
             else:
                 out += '<li>'+esc(ls)+'</li>'
         out += '</ul>'
@@ -792,21 +796,24 @@ def merge_same_segs(segs):
     return out
 
 def build_sections(d, prefix, lang, edit=False):
-    themes = d["themes"]
+    # "removed": true = Thema entfernt, bleibt aber als Platzhalter in der Liste,
+    # damit die Positionen (cids "<sport>|<index>|...") der folgenden Themen und
+    # damit alle Admin-Texte gueltig bleiben.
+    themes = [t if not t.get("removed") else None for t in d["themes"]]
     stages = d["stages"]
     ages = {k: v for k, v in (d.get("ages") or AGE).items() if v}
-    seen = list(dict.fromkeys(t["group"] for t in themes))
+    seen = list(dict.fromkeys(t["group"] for t in themes if t))
     order = [g for g in GROUP_ORDER if g in seen] + [g for g in seen if g not in GROUP_ORDER]
     sections=""
     for g in order:
-        items=[(i,t) for i,t in enumerate(themes) if t["group"]==g]
+        items=[(i,t) for i,t in enumerate(themes) if t and t["group"]==g]
         if not items: continue
         gbar, gchip = group_accent(g)
         sections += '<h2 class="grp" style="--gc:'+gbar+'">'+esc(tr(g, lang))+'</h2>'
         for k2,(i,t) in enumerate(items):
             # Zebra startet pro Bereich neu; einzelne Themen bleiben weiss (Kontrast)
             sections += theme_html(t,i,stages,prefix,lang,ages,edit,g, alt=(len(items)>1 and k2%2==1))
-    jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
+    jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes) if t)
     return sections, jump
 
 # --- Sportartuebergreifende Themenbloecke -----------------------------------
@@ -900,7 +907,7 @@ def sport_section(sport, d, lang, edit=False):
             +PLACE[lang].format(name=esc(name), file='ftem_data_'+esc(sid)+'.json')+
             '</div></div></section>')
     sections, jump_opts = build_sections(d, sid, lang)
-    n_themes = len(d["themes"])
+    n_themes = len([t for t in d["themes"] if not t.get("removed")])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
         '<header class="top"><div class="ht-l">'+back+title_sel+'</div>'
         '<div class="ht-c"><div class="qbox">'
@@ -2416,6 +2423,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap ul.sc{list-style:none;padding-left:0}
 .cwrap ul.sc li{margin-bottom:5px;padding-left:0;line-height:1.45}
 .cwrap ul.sc .badge{display:inline-block;background:var(--ink);color:#fff;font-size:9.5px;font-weight:700;border-radius:4px;padding:1px 5px;margin-right:4px}
+.cwrap ul.sc .badge.lt{background:#2f6690}
 .cwrap .empty{color:#c2c8d0;text-align:center;font-size:14px}
 .lks{margin-top:7px;display:flex;flex-direction:column;gap:4px}
 /* Link-Knoepfe mitten in der Zelle (aus "[Text](URL)"-Zeilen) */
@@ -2595,6 +2603,7 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .cwrap .zone+.zone{border-top-color:rgba(255,255,255,.10)}
 [data-theme="dark"] .cwrap .zk::after{color:#5a6472}
 [data-theme="dark"] .cwrap ul.sc .badge{background:#33425c;color:#e7edf4}
+[data-theme="dark"] .cwrap ul.sc .badge.lt{background:#2b5d86}
 [data-theme="dark"] .cwrap .empty{color:#4a5568}
 [data-theme="dark"] .more{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
 [data-theme="dark"] .lks a{background:#1c2740;color:#d6dee8}
@@ -2702,7 +2711,8 @@ function layApply(row,lay,mk){
 }
 // ---- Gemeinsamer Zellen-Renderer (Live-Seiten, Overrides UND Admin-Vorschau) ----
 function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
-const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*([\s\S]*)$/;
+const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST|LT\s?\d+[a-z]?|LT)\s*[:.\)]\s*([\s\S]*)$/;
+function _badge(l){l=l.trim();return '<span class="badge'+(/^LT(\b|\s?\d)/.test(l)?' lt':'')+'">'+_esc(l)+'</span>';}
 const SNOW_RE=/^(on|off)[\s-]?snow:?$/i;
 // Gleiche Logik wie _is_head_line im Generator: sieht die Zeile wie ein Titel aus?
 function _headln(s){
@@ -2737,11 +2747,11 @@ function structBlock(b){
     return '<div class="zone"><span class="zlab">'+_esc(mz[1].trim())+'</span>'+body+'</div>';
   }
   // Explizite Admin-Schreibweise: "[[Etikett]] Text"-Zeilen = Badge-Liste
-  const bg=nonempty.map(l=>l.match(/^\[\[(.{1,28})\]\]\s*([\s\S]*)$/));
+  const bg=nonempty.map(l=>l.match(/^\[\[(.{1,28})\]\]\s*([\s\S]*)$/)||l.match(SC_RE));
   if(nonempty.length&&bg.filter(Boolean).length>=Math.max(1,nonempty.length-1)){
     let out='<ul class="sc">';
     nonempty.forEach((l,i)=>{const m=bg[i];
-      out+=m?'<li><span class="badge">'+_esc(m[1].trim())+'</span> '+_esc(m[2].trim())+'</li>':'<li>'+_esc(l)+'</li>';});
+      out+=m?'<li>'+_badge(m[1])+' '+_esc(m[2].trim())+'</li>':'<li>'+_esc(l)+'</li>';});
     return out+'</ul>';
   }
   // "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip (gleich wie beim Seiten-Build)
@@ -2771,7 +2781,7 @@ function structBlock(b){
   const scHits=nonempty.filter(l=>SC_RE.test(l));
   if(nonempty.length>=1&&scHits.length>=1&&scHits.length>=Math.max(1,nonempty.length-1)){
     let out='<ul class="sc">';
-    nonempty.forEach(ls=>{const m=ls.match(SC_RE);if(m)out+='<li><span class="badge">'+_esc(m[1].trim())+'</span> '+_esc(m[2].trim())+'</li>';else out+='<li>'+_esc(ls)+'</li>';});
+    nonempty.forEach(ls=>{const m=ls.match(SC_RE);if(m)out+='<li>'+_badge(m[1])+' '+_esc(m[2].trim())+'</li>';else out+='<li>'+_esc(ls)+'</li>';});
     return out+'</ul>';
   }
   if(lines.length>=2&&lines[0].trim()&&lines[0].trim().length<=46&&!/[.:,;]$/.test(lines[0].trim())&&!_headln(lines[1])){
@@ -5108,6 +5118,7 @@ function fmtBox(){
     +row('• oder -','Aufzählung')
     +row('---','Trennstrich (eigene Zeile)')
     +row('[[SC 1]] Text','Badge-Etikett')
+    +row('SC 1: … / LT: … / LT 2: …','Skills-Check- bzw. Leistungstest-Badge (LT blau)')
     +row('((Sommer))','Zonen-Chip, Inhalt auf den Zeilen darunter')
     +row('[Text](https://…)','eigene Zeile = Link-Knopf genau an dieser Stelle · im Satz = Link im Text')
     +row('*Text …','Geschlechter-Kasten (mit Stichwort Mädchen/Jungen/Adoleszenz)');
@@ -5296,7 +5307,7 @@ def admin_html(datamap):
         secs += sport_section(s, d, "de", edit=True)
         opts += '<option value="'+esc(s["id"])+'">'+esc(tr(s["name"], "de"))+'</option>'
         for ti, t in enumerate(d["themes"]):
-            if t.get("_sh"):
+            if t.get("_sh") or t.get("removed"):
                 continue  # zentral erfasst (siehe _shared_admin_section)
             orig[s["id"]+"|"+str(ti)+"|title"] = t["title"] or ""
             for ri, r in enumerate(t["rows"]):
