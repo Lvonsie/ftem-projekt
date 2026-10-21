@@ -2903,6 +2903,79 @@
     }
    ],
    "label": "übrige Sportarten (6)"
+  },
+  {
+   "id": "medizin-alpin",
+   "title": "Medizin & Gesundheit",
+   "label": "Alpin & Cross (4)",
+   "group": "Sport & Athlet:in",
+   "sports": [
+    "ski-alpin",
+    "skicross",
+    "snowboard-cross",
+    "snowboard-alpin"
+   ],
+   "rows": [
+    {
+     "label": "Inhalt",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "medizin-nord",
+   "title": "Medizin & Gesundheit",
+   "label": "Nordisch inkl. Skispringen (4)",
+   "group": "Sport & Athlet:in",
+   "sports": [
+    "langlauf",
+    "biathlon",
+    "skispringen",
+    "nordische-kombination"
+   ],
+   "rows": [
+    {
+     "label": "Inhalt",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "medizin-pp",
+   "title": "Medizin & Gesundheit",
+   "label": "Park & Pipe (2)",
+   "group": "Sport & Athlet:in",
+   "sports": [
+    "freeski-park-pipe",
+    "snowboard-park-pipe"
+   ],
+   "rows": [
+    {
+     "label": "Inhalt",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ]
 }

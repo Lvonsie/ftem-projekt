@@ -1703,7 +1703,8 @@
   "Technik & Taktik Langlauf": "Technique & tactique ski de fond",
   "Sich konzentrieren T2:\n[[SC1]] Besichtigung Rennstrecke / Schanze\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine": "Se concentrer T2 :\n[[SC1]] Reconnaissance du parcours / du tremplin\n[[SC2]] Points du parcours\n[[SC3]] Mettre ses pensées de côté\n[[SC4]] Routine des 16 secondes",
   "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start": "Se concentrer T4 :\n[[SC1]] Analyse de la situation le jour de course\n[[SC2]] Simulation de visibilité\n[[SC3]] Protocole de focus\n[[SC4]] Course/saut mental avec tous les sens\n[[SC5]] Une pensée, une course/un tir/un saut\n[[SC6]] Rythme respiratoire au départ",
-  "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort": "Se concentrer T1 :\n[[SC1]] Reconnaissance à 360° du parcours, du stand de tir ou du tremplin\n[[SC2]] Poussée/impulsion\n[[SC3]] Body-scan pendant l'échauffement\n[[SC4]] Mot-clé"
+  "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort": "Se concentrer T1 :\n[[SC1]] Reconnaissance à 360° du parcours, du stand de tir ou du tremplin\n[[SC2]] Poussée/impulsion\n[[SC3]] Body-scan pendant l'échauffement\n[[SC4]] Mot-clé",
+  "Medizin & Gesundheit": "Médecine & santé"
  },
  "it": {
   "Athlet:innen-Weg": "Percorso dell'atleta",
@@ -3409,7 +3410,8 @@
   "Technik & Taktik Langlauf": "Tecnica & tattica sci di fondo",
   "Sich konzentrieren T2:\n[[SC1]] Besichtigung Rennstrecke / Schanze\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine": "Concentrarsi T2:\n[[SC1]] Ricognizione del tracciato / del trampolino\n[[SC2]] Punti del tracciato\n[[SC3]] Parcheggiare i pensieri\n[[SC4]] Routine dei 16 secondi",
   "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start": "Concentrarsi T4:\n[[SC1]] Analisi della situazione il giorno di gara\n[[SC2]] Simulazione di visibilità\n[[SC3]] Protocollo del focus\n[[SC4]] Gara/salto mentale con tutti i sensi\n[[SC5]] Un pensiero, una gara/un tiro/un salto\n[[SC6]] Ritmo respiratorio alla partenza",
-  "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort": "Concentrarsi T1:\n[[SC1]] Ricognizione a 360° di tracciato, poligono di tiro o trampolino\n[[SC2]] Spinta/stacco\n[[SC3]] Body scan durante il riscaldamento\n[[SC4]] Parola chiave"
+  "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort": "Concentrarsi T1:\n[[SC1]] Ricognizione a 360° di tracciato, poligono di tiro o trampolino\n[[SC2]] Spinta/stacco\n[[SC3]] Body scan durante il riscaldamento\n[[SC4]] Parola chiave",
+  "Medizin & Gesundheit": "Medicina & salute"
  },
  "en": {
   "Trainingsstunden und Entwicklungsfokus": "Training hours and development focus",
@@ -5079,6 +5081,7 @@
   "Technik & Taktik Langlauf": "Cross-country technique & tactics",
   "Sich konzentrieren T2:\n[[SC1]] Besichtigung Rennstrecke / Schanze\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine": "Focusing T2:\n[[SC1]] Inspection of course / hill\n[[SC2]] Course points\n[[SC3]] Parking thoughts\n[[SC4]] 16-second routine",
   "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start": "Focusing T4:\n[[SC1]] Situation analysis on race day\n[[SC2]] Visibility simulation\n[[SC3]] Focus log\n[[SC4]] Mental race/jump with all senses\n[[SC5]] One thought, one race/shot/jump\n[[SC6]] Breathing rhythm at the start",
-  "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort": "Focusing T1:\n[[SC1]] 360° inspection of course, shooting range or hill\n[[SC2]] Push-off/take-off\n[[SC3]] Body scan during warm-up\n[[SC4]] Key word"
+  "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort": "Focusing T1:\n[[SC1]] 360° inspection of course, shooting range or hill\n[[SC2]] Push-off/take-off\n[[SC3]] Body scan during warm-up\n[[SC4]] Key word",
+  "Medizin & Gesundheit": "Medicine & health"
  }
 }
