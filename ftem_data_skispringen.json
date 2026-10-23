@@ -1148,42 +1148,14 @@
    ]
   },
   {
-   "title": "Technik & Taktik Übergeordnet",
+   "title": "Technik Übergeordnet",
    "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Taktik",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
+   "removed": true,
+   "_hinweis": "10/2026 entfernt (Wunsch Matheo); Platzhalter haelt die Positionen der folgenden Themen fest.",
+   "rows": []
   },
   {
-   "title": "Technik & Taktik",
+   "title": "Technik",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -1863,14 +1835,35 @@
      "label": "",
      "segs": [
       {
-       "v": "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.",
+       "v": "Die Downloads für Trainer:innen werden hier laufend ergänzt.",
        "from": 0,
        "to": 9,
-       "l": []
+       "l": [],
+       "dl": [
+        {
+         "title": "Athletikbaukasten F3–T1 · Baukasten für Clubtrainer:innen",
+         "chips": [
+          "F3",
+          "T1"
+         ],
+         "desc": "Athletiktraining in 3 Bausteinen: Warm-up, Schnelligkeit & Schnellkraft sowie Kraft & Core. Mit Vorlagen für den Trainingsaufbau (ca. 45–65 Minuten), Übungsauswahl mit Satz- und Wiederholungsangaben und QR-Codes zu den Übungsvideos.",
+         "files": [
+          {
+           "label": "Athletikbaukasten F3–T1",
+           "hint": "3 Seiten A4 quer – zum Ausdrucken oder am Bildschirm · PDF, 3.2 MB",
+           "href": "assets/docs/Swiss-Ski_Athletikbaukasten_F3-T1.pdf"
+          }
+         ]
+        }
+       ]
       }
      ]
     }
    ]
+  },
+  {
+   "shared": "medizin-nord",
+   "sort": 3.5
   }
  ],
  "home": {

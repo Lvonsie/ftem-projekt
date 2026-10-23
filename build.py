@@ -167,7 +167,12 @@ def esc(s): return html.escape(s, quote=True)
 # "FTEM" in den vier Phasenfarben (Anpassung von Luca, Commit "Farben FTEM")
 FTEM = '<span class="fF">F</span><span class="fT">T</span><span class="fE">E</span><span class="fM">M</span>'
 
-SC_RE = re.compile(r'^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*(.*)$', re.S)
+# SC/ST/LT + optionale Nummer + optionaler Zusatz ("ST Nachwuchs:", "ST Elite:", "ST relève :")
+SC_RE = re.compile(r'^((?:SC|ST|LT)(?:\s?\d+[a-z]?)?(?:\s+[A-Za-zÀ-ÿ]{2,14})?)\s*[:.\)]\s*(.*)$', re.S)
+def _badge(lbl):
+    # LT = Leistungstest: eigene Farbe, damit SC und LT auf einen Blick unterscheidbar sind
+    lbl = lbl.strip()
+    return '<span class="badge'+(' lt' if re.match(r'LT\b|LT\s?\d', lbl) else '')+'">'+esc(lbl)+'</span>'
 
 # Einheitliche Titel-Erkennung (ueber alle Themen/Sportarten/Stufen gleich)
 # "Label: Wert" nur mit Leerzeichen nach dem Doppelpunkt -> schuetzt Gender-Doppelpunkt
@@ -216,12 +221,12 @@ def render_block(block, link_texts):
     lines = [l for l in b.split("\n")]
     nonempty = [l.strip() for l in lines if l.strip()]
     # Explizite Admin-Schreibweise: "[[Etikett]] Text"-Zeilen = Badge-Liste
-    _bg = [re.match(r'^\[\[(.{1,28})\]\]\s*(.*)$', l) for l in nonempty]
+    _bg = [re.match(r'^\[\[(.{1,28})\]\]\s*(.*)$', l) or SC_RE.match(l) for l in nonempty]
     if nonempty and sum(1 for m in _bg if m) >= max(1, len(nonempty)-1):
         out = '<ul class="sc">'
         for l, m in zip(nonempty, _bg):
             if m:
-                out += '<li><span class="badge">'+esc(m.group(1).strip())+'</span> '+esc(m.group(2).strip())+'</li>'
+                out += '<li>'+_badge(m.group(1))+' '+esc(m.group(2).strip())+'</li>'
             else:
                 out += '<li>'+esc(l)+'</li>'
         return out + '</ul>'
@@ -246,7 +251,7 @@ def render_block(block, link_texts):
         for ls in nonempty:
             m = SC_RE.match(ls)
             if m:
-                out += '<li><span class="badge">'+esc(m.group(1).strip())+'</span> '+esc(m.group(2).strip())+'</li>'
+                out += '<li>'+_badge(m.group(1))+' '+esc(m.group(2).strip())+'</li>'
             else:
                 out += '<li>'+esc(ls)+'</li>'
         out += '</ul>'
@@ -664,9 +669,11 @@ _ICONS = {
  "funnel": '<path d="M4 5h16l-6.2 7v5.6l-3.6 2.4v-8L4 5z"/>',
  "podium": '<rect x="9" y="9" width="6" height="11"/><rect x="3" y="13" width="6" height="7"/><rect x="15" y="15" width="6" height="5"/><path d="M12 3v3M10.6 4.5h2.8"/>',
  "users": '<circle cx="9" cy="8" r="3"/><path d="M4 20c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M15 5.5a3 3 0 0 1 0 5M20 20c0-2-1.1-3.7-2.7-4.5"/>',
+ "medical": '<path d="M9.5 3.5h5v6h6v5h-6v6h-5v-6h-6v-5h6z"/>',
  "list": '<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4" cy="18" r="1" fill="currentColor" stroke="none"/>',
 }
 _KEYMAP = [
+ (("medizin","gesundheit"),"medical"),
  (("trainingsstund","entwicklungsfokus","trainings","stunden","umfang"),"clock"),
  (("makroplan","periodis","jahresplan","planung"),"calendar"),
  (("ernähr","ernaehr","nutrition"),"apple"),
@@ -731,7 +738,8 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
     body = ""
     for ri, r in enumerate(t["rows"]):
         lbl = tr(r["label"], lang) or ""
-        body += '<div class="r">'
+        # data-rid: Zeilen-Kennung fuer Spalten-Layouts aus dem Admin ("lay|<rid>")
+        body += '<div class="r" data-rid="'+esc(cidb+"|"+str(ri))+'">'
         body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
         # render segs with spans; we lay out as 10 cells using grid-column span
         # Gleiche benachbarte Zellen werden ueber Phasen hinweg zu einem Block verbunden
@@ -754,7 +762,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
                 grad = "--mg:linear-gradient(90deg,"+",".join(stops)+");"
             cid = cidb+"|"+str(ri)+"|"+str(si)
             more = '' if edit else '<button class="more" hidden>'+esc(tr("mehr ▾", lang))+'</button>'
-            body += '<div class="c cell '+cls+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
+            body += '<div class="c cell '+cls+'" data-k="'+str(si)+'" data-from="'+str(seg["from"])+'" data-to="'+str(seg["to"])+'" style="'+grad+'grid-column: span '+str(span)+'"><div class="cwrap">'+render_cell(seg, lang, cid, edit)+'</div>'+more+'</div>'
         body += '</div>'
     opn = ''  # auch im Bearbeitungsmodus eingeklappt starten (schnelleres Navigieren)
     if edit:
@@ -791,21 +799,27 @@ def merge_same_segs(segs):
     return out
 
 def build_sections(d, prefix, lang, edit=False):
-    themes = d["themes"]
+    # "removed": true = Thema entfernt, bleibt aber als Platzhalter in der Liste,
+    # damit die Positionen (cids "<sport>|<index>|...") der folgenden Themen und
+    # damit alle Admin-Texte gueltig bleiben.
+    themes = [t if not t.get("removed") else None for t in d["themes"]]
     stages = d["stages"]
     ages = {k: v for k, v in (d.get("ages") or AGE).items() if v}
-    seen = list(dict.fromkeys(t["group"] for t in themes))
+    seen = list(dict.fromkeys(t["group"] for t in themes if t))
     order = [g for g in GROUP_ORDER if g in seen] + [g for g in seen if g not in GROUP_ORDER]
     sections=""
     for g in order:
-        items=[(i,t) for i,t in enumerate(themes) if t["group"]==g]
+        # "sort" (optional): Anzeigeposition, ohne den Index (cid) zu aendern -
+        # so koennen neue Themen hinten angehaengt und trotzdem z.B. nach
+        # "Schlaf" angezeigt werden (bestehende Admin-Texte bleiben gueltig).
+        items=sorted([(i,t) for i,t in enumerate(themes) if t and t["group"]==g], key=lambda x: x[1].get("sort", x[0]))
         if not items: continue
         gbar, gchip = group_accent(g)
         sections += '<h2 class="grp" style="--gc:'+gbar+'">'+esc(tr(g, lang))+'</h2>'
         for k2,(i,t) in enumerate(items):
             # Zebra startet pro Bereich neu; einzelne Themen bleiben weiss (Kontrast)
             sections += theme_html(t,i,stages,prefix,lang,ages,edit,g, alt=(len(items)>1 and k2%2==1))
-    jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in enumerate(themes))
+    jump = "".join('<option value="'+prefix+'-t'+str(i)+'">'+esc(tr(t["title"], lang))+'</option>' for i,t in sorted([(i,t) for i,t in enumerate(themes) if t], key=lambda x: x[1].get("sort", x[0])))
     return sections, jump
 
 # --- Sportartuebergreifende Themenbloecke -----------------------------------
@@ -827,8 +841,10 @@ def _resolve_shared(d):
         if "shared" in t:
             b = SHARED_BLOCKS.get(t["shared"])
             if b:
-                out.append({"title": b["title"], "group": b["group"],
-                            "rows": b["rows"], "_sh": b["id"]})
+                nt = {"title": b["title"], "group": b["group"],
+                      "rows": b["rows"], "_sh": b["id"]}
+                if "sort" in t: nt["sort"] = t["sort"]
+                out.append(nt)
             # unbekannte Referenz: Thema still weglassen (statt Absturz)
         else:
             out.append(t)
@@ -899,7 +915,7 @@ def sport_section(sport, d, lang, edit=False):
             +PLACE[lang].format(name=esc(name), file='ftem_data_'+esc(sid)+'.json')+
             '</div></div></section>')
     sections, jump_opts = build_sections(d, sid, lang)
-    n_themes = len(d["themes"])
+    n_themes = len([t for t in d["themes"] if not t.get("removed")])
     return ('<section class="sport" data-sport="'+sid+'" hidden>'
         '<header class="top"><div class="ht-l">'+back+title_sel+'</div>'
         '<div class="ht-c"><div class="qbox">'
@@ -2415,6 +2431,7 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .cwrap ul.sc{list-style:none;padding-left:0}
 .cwrap ul.sc li{margin-bottom:5px;padding-left:0;line-height:1.45}
 .cwrap ul.sc .badge{display:inline-block;background:var(--ink);color:#fff;font-size:9.5px;font-weight:700;border-radius:4px;padding:1px 5px;margin-right:4px}
+.cwrap ul.sc .badge.lt{background:#2f6690}
 .cwrap .empty{color:#c2c8d0;text-align:center;font-size:14px}
 .lks{margin-top:7px;display:flex;flex-direction:column;gap:4px}
 /* Link-Knoepfe mitten in der Zelle (aus "[Text](URL)"-Zeilen) */
@@ -2594,6 +2611,7 @@ footer{padding:16px;font-size:11px}
 [data-theme="dark"] .cwrap .zone+.zone{border-top-color:rgba(255,255,255,.10)}
 [data-theme="dark"] .cwrap .zk::after{color:#5a6472}
 [data-theme="dark"] .cwrap ul.sc .badge{background:#33425c;color:#e7edf4}
+[data-theme="dark"] .cwrap ul.sc .badge.lt{background:#2b5d86}
 [data-theme="dark"] .cwrap .empty{color:#4a5568}
 [data-theme="dark"] .more{background:#1c2740;color:var(--ink);border-color:rgba(255,255,255,.14)}
 [data-theme="dark"] .lks a{background:#1c2740;color:#d6dee8}
@@ -2646,9 +2664,63 @@ footer{padding:16px;font-size:11px}
 """
 
 RENDER_JS = r"""
+// ---- Spalten-Layout (Admin: Zellen trennen/verbinden) ----
+// Override "lay|<rid>" = JSON [[von,bis,schluessel,quelle],...] fuer eine Zeile
+// (rid = data-rid der Zeile). Schluessel = data-k der Zelle; bestehende Zellen
+// behalten ihren Schluessel (Index der Zelle im Generator), so bleiben alle
+// Text-Overrides gueltig. Neue Teile ("s5-ab12") werden aus der Quellzelle
+// geklont; ihr Text kommt als normales Override "<rid>|<schluessel>".
+const LAY_PHR=[['foundation',0,2,'--phf'],['talent',3,6,'--pht'],['elite',7,8,'--phe'],['mastery',9,9,'--phm']];
+function layPhase(i){for(var k=0;k<LAY_PHR.length;k++){if(i>=LAY_PHR[k][1]&&i<=LAY_PHR[k][2])return LAY_PHR[k][0];}return 'mastery';}
+function layStyle(cell,a,b){
+  var phs={},n=0;for(var i=a;i<=b;i++){var p=layPhase(i);if(!phs[p]){phs[p]=1;n++;}}
+  Array.prototype.slice.call(cell.classList).forEach(function(c){if(c.indexOf('ph-')===0)cell.classList.remove(c);});
+  var grad='';
+  if(n>1){
+    cell.classList.add('ph-multi');var w=b-a+1,st=[];
+    LAY_PHR.forEach(function(p){if(p[2]<a||p[1]>b)return;
+      var cen=((Math.max(p[1],a)+Math.min(p[2],b))/2-a+0.5)/w*100;st.push('var('+p[3]+') '+Math.round(cen)+'%');});
+    grad='--mg:linear-gradient(90deg,'+st.join(',')+');';
+  }else cell.classList.add('ph-'+layPhase(a));
+  cell.setAttribute('style',grad+'grid-column: span '+(b-a+1));
+  cell.dataset.from=a;cell.dataset.to=b;
+}
+function layCells(row){return Array.prototype.filter.call(row.children,function(c){return c.classList.contains('cell')&&c.dataset.k!=null;});}
+function layOf(row){return layCells(row).map(function(c){var e=[+c.dataset.from,+c.dataset.to,c.dataset.k];if(c.dataset.src)e.push(c.dataset.src);return e;});}
+function layParse(t){try{var a=JSON.parse(t);return Array.isArray(a)&&a.length?a:null;}catch(_){return null;}}
+// Wendet ein Layout auf eine Zeile an. mk(quellzelle,schluessel) liefert die neue
+// Zelle fuer Teile ohne bestehende Zelle. Passt das Layout nicht zur Zeile
+// (Luecken, Ueberlappung, anderer Stufenbereich), bleibt die Zeile unveraendert.
+function layApply(row,lay,mk){
+  var cells=layCells(row);
+  if(!cells.length||!lay)return false;
+  var lo=Math.min.apply(null,cells.map(function(c){return +c.dataset.from;}));
+  var hi=Math.max.apply(null,cells.map(function(c){return +c.dataset.to;}));
+  var by={},seen={},exp=lo;
+  cells.forEach(function(c){by[c.dataset.k]=c;});
+  for(var i=0;i<lay.length;i++){
+    var e=lay[i];
+    if(!Array.isArray(e)||e.length<3||+e[0]!==exp||+e[1]<+e[0]||typeof e[2]!=='string'||!e[2]||seen[e[2]])return false;
+    seen[e[2]]=1;exp=+e[1]+1;
+  }
+  if(exp!==hi+1)return false;
+  var out=lay.map(function(e){
+    var a=+e[0],b=+e[1],c=by[e[2]];
+    if(!c){
+      var src=by[e[3]]||cells.filter(function(x){return a>=+x.dataset.from&&a<=+x.dataset.to;})[0]||cells[0];
+      c=mk(src,e[2]);c.dataset.k=e[2];
+    }
+    if(e[3])c.dataset.src=e[3];else delete c.dataset.src;
+    layStyle(c,a,b);return c;
+  });
+  cells.forEach(function(c){if(out.indexOf(c)<0)c.remove();});
+  out.forEach(function(c){row.appendChild(c);});
+  return true;
+}
 // ---- Gemeinsamer Zellen-Renderer (Live-Seiten, Overrides UND Admin-Vorschau) ----
 function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
-const SC_RE=/^(SC\s?\d+[a-z]?|SC|ST\s?\d*|ST)\s*[:.\)]\s*([\s\S]*)$/;
+const SC_RE=/^((?:SC|ST|LT)(?:\s?\d+[a-z]?)?(?:\s+[A-Za-zÀ-ÿ]{2,14})?)\s*[:.\)]\s*([\s\S]*)$/;
+function _badge(l){l=l.trim();return '<span class="badge'+(/^LT(\b|\s?\d)/.test(l)?' lt':'')+'">'+_esc(l)+'</span>';}
 const SNOW_RE=/^(on|off)[\s-]?snow:?$/i;
 // Gleiche Logik wie _is_head_line im Generator: sieht die Zeile wie ein Titel aus?
 function _headln(s){
@@ -2683,11 +2755,11 @@ function structBlock(b){
     return '<div class="zone"><span class="zlab">'+_esc(mz[1].trim())+'</span>'+body+'</div>';
   }
   // Explizite Admin-Schreibweise: "[[Etikett]] Text"-Zeilen = Badge-Liste
-  const bg=nonempty.map(l=>l.match(/^\[\[(.{1,28})\]\]\s*([\s\S]*)$/));
+  const bg=nonempty.map(l=>l.match(/^\[\[(.{1,28})\]\]\s*([\s\S]*)$/)||l.match(SC_RE));
   if(nonempty.length&&bg.filter(Boolean).length>=Math.max(1,nonempty.length-1)){
     let out='<ul class="sc">';
     nonempty.forEach((l,i)=>{const m=bg[i];
-      out+=m?'<li><span class="badge">'+_esc(m[1].trim())+'</span> '+_esc(m[2].trim())+'</li>':'<li>'+_esc(l)+'</li>';});
+      out+=m?'<li>'+_badge(m[1])+' '+_esc(m[2].trim())+'</li>':'<li>'+_esc(l)+'</li>';});
     return out+'</ul>';
   }
   // "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip (gleich wie beim Seiten-Build)
@@ -2717,7 +2789,7 @@ function structBlock(b){
   const scHits=nonempty.filter(l=>SC_RE.test(l));
   if(nonempty.length>=1&&scHits.length>=1&&scHits.length>=Math.max(1,nonempty.length-1)){
     let out='<ul class="sc">';
-    nonempty.forEach(ls=>{const m=ls.match(SC_RE);if(m)out+='<li><span class="badge">'+_esc(m[1].trim())+'</span> '+_esc(m[2].trim())+'</li>';else out+='<li>'+_esc(ls)+'</li>';});
+    nonempty.forEach(ls=>{const m=ls.match(SC_RE);if(m)out+='<li>'+_badge(m[1])+' '+_esc(m[2].trim())+'</li>';else out+='<li>'+_esc(ls)+'</li>';});
     return out+'</ul>';
   }
   if(lines.length>=2&&lines[0].trim()&&lines[0].trim().length<=46&&!/[.:,;]$/.test(lines[0].trim())&&!_headln(lines[1])){
@@ -2873,6 +2945,19 @@ function applyOverrides(map){
       if(v!=null){el.innerHTML=plain(v);}
     });
   }
+  // Spalten-Layouts zuerst anwenden (neue Teil-Zellen bekommen danach ihre Texte)
+  Object.keys(gm).forEach(k=>{
+    if(k.indexOf('lay|')!==0)return;
+    const rid=k.slice(4),lay=layParse(gm[k]);if(!lay)return;
+    document.querySelectorAll('.r[data-rid]').forEach(row=>{
+      if(row.dataset.rid!==rid)return;
+      layApply(row,lay,(src,key)=>{
+        const c=src.cloneNode(true);c.classList.remove('clamped','expanded');
+        const t=c.querySelector('.ctext[data-cid]');if(t)t.dataset.cid=rid+'|'+key;
+        return c;
+      });
+    });
+  });
   patch(document);
   // Inhalte in <template> (Stufen-Popups, News-Overlay, "Was ist FTEM?") ebenfalls patchen
   document.querySelectorAll('template').forEach(t=>patch(t.content));
@@ -4063,11 +4148,23 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .cedit.curchg{box-shadow:0 0 0 3px rgba(213,43,30,.35);border-color:#d52b1e}
 /* Uebersetzung-pruefen-Markierung: Deutsch wurde geaendert */
 .cedit-wrap{position:relative}
-/* Live-Vorschau der fokussierten Zelle */
-.cprev{margin-top:6px;border:1px dashed #c6cdd6;border-radius:8px;background:var(--card);padding:8px 10px 9px}
-.cprev-h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#98a1ad;margin-bottom:5px}
+/* Live-Vorschau der fokussierten Zelle - bewusst klar vom (weissen) Eingabefeld
+   abgehoben (blaeulich getoent, gestrichelt): Admins tippten versehentlich in die
+   Vorschau statt ins Feld (Feedback Matheo 10/2026). Klick auf die Vorschau
+   springt ins zugehoerige Eingabefeld. */
+.cprev{margin-top:6px;border:1.5px dashed #8fb3d4;border-radius:8px;background:#edf4fb;padding:8px 10px 9px;cursor:pointer}
+.cprev:hover{border-color:#5f93c4}
+.cprev-h{font-size:9.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#4a7194;margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.cprev-h::before{content:"";width:12px;height:12px;flex:none;background:currentColor;
+  -webkit-mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>') center/contain no-repeat;
+  mask:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4"><path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>') center/contain no-repeat}
+.cprev-h small{font-weight:600;letter-spacing:.02em;text-transform:none;color:#7d99b3;margin-left:auto}
 .cprev-cell{font-size:11.5px;line-height:1.45}
 .cprev-cell .lks{margin-top:8px}
+[data-theme="dark"] .cprev{background:#152233;border-color:#3b5a7a}
+[data-theme="dark"] .cprev:hover{border-color:#5f93c4}
+[data-theme="dark"] .cprev-h{color:#8fb3d4}
+[data-theme="dark"] .cprev-h small{color:#6d88a3}
 /* Formatierungshilfe: ausklappbarer Spickzettel direkt neben der Zelle */
 .cfmt{margin-top:6px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:11px}
 .cfmt summary{cursor:pointer;padding:5px 10px;font-weight:800;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#98a1ad;list-style:none;display:flex;align-items:center;gap:6px}
@@ -4114,6 +4211,19 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .adm-field label{display:block;font-size:10.5px;font-weight:800;color:#546a8c;letter-spacing:.06em;text-transform:uppercase;margin:0 0 4px}
 .adm-field label .adm-hint{display:block;font-style:normal;text-transform:none;letter-spacing:0;font-weight:600;color:#98a1ad;font-size:10.5px;margin-top:1px}
 .adm-field .cedit{font-size:12.5px}
+.adm-cbar{display:flex;gap:4px;justify-content:flex-end;flex-wrap:wrap;padding:5px 6px 0;opacity:.5;transition:opacity .15s}
+.cell:hover>.adm-cbar,.cell:focus-within>.adm-cbar{opacity:1}
+.adm-cb{font:inherit;font-size:10.5px;line-height:1;padding:3px 8px;border:1px solid #d4dae1;border-radius:999px;background:#fff;color:#4a5866;cursor:pointer;white-space:nowrap}
+.adm-cb:hover{border-color:#d52b1e;color:#d52b1e}
+.adm-cmenu{position:fixed;z-index:200;background:#fff;border:1px solid #d4dae1;border-radius:9px;box-shadow:0 10px 28px rgba(0,0,0,.16);padding:6px;display:flex;flex-direction:column;gap:4px;min-width:170px}
+.adm-cmh{font-size:11px;color:#6b7785;padding:2px 4px 3px}
+.adm-cmo,.adm-cmx{font:inherit;font-size:12px;text-align:left;padding:6px 9px;border:1px solid #e3e7ec;border-radius:6px;background:#f7f8fa;color:#1d2630;cursor:pointer}
+.adm-cmo span{color:#d52b1e;font-weight:700;padding:0 4px}
+.adm-cmo:hover{border-color:#d52b1e;background:#fff8f7}
+.adm-cmx{background:none;border-color:transparent;color:#6b7785;text-align:center}
+[data-theme="dark"] .adm-cb{background:#141d2c;color:#c9d3df;border-color:rgba(255,255,255,.16)}
+[data-theme="dark"] .adm-cmenu{background:#1b2536;border-color:rgba(255,255,255,.16)}
+[data-theme="dark"] .adm-cmo{background:#141d2c;color:#e7edf4;border-color:rgba(255,255,255,.12)}
 .adm-sec{border:1px solid #e4e8ec;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:10px;background:#fafbfc}
 .adm-sect{font-size:12.5px;font-weight:800;color:#1d2630}
 .adm-tag{font-size:10.5px;font-weight:700;color:#697080;background:#eef1f4;border-radius:20px;padding:2px 9px;margin-left:8px;letter-spacing:.02em;vertical-align:2px}
@@ -4286,9 +4396,12 @@ function toggleGloss(){
 // Grundlage ist der Review-Zustand (isStale): Deutsch wurde inhaltlich geaendert,
 // und die Sprache wurde seither weder korrigiert noch als geprueft markiert.
 function pendList(){
-  var out=[];
+  // Grundlage sind die Felder im Admin (auch neu getrennte Zellen); Texte von
+  // weggefallenen Zellen (z.B. nach "Verbinden") zaehlen nicht mehr.
+  var out=[],cids={};
+  app.querySelectorAll('.cedit[data-cid]').forEach(function(t){cids[t.dataset.cid]=1;});
   ['fr','it','en'].forEach(function(l){
-    Object.keys(ORIGS.de).forEach(function(cid){
+    Object.keys(cids).forEach(function(cid){
       if(isStale(l,cid))out.push({l:l,cid:cid});
     });
   });
@@ -4789,7 +4902,43 @@ function init(){
     const d=e.target;
     if(d&&d.matches&&d.matches('details.theme')&&d.open)d.querySelectorAll('.cedit').forEach(autosize);
   },true);
-  app.querySelectorAll('.cedit[data-cid]').forEach(function(ta){
+  app.querySelectorAll('.cedit[data-cid]').forEach(setupTa);
+  layInit();
+  langSel.addEventListener('change',function(){
+    LNG=langSel.value;chgIdx=-1;
+    refreshValues();updateCount();
+  });
+  saveBtn.addEventListener('click',save);
+  document.getElementById('chgprev').addEventListener('click',function(){gotoChg(-1);});
+  document.getElementById('chgnext').addEventListener('click',function(){gotoChg(1);});
+  document.getElementById('chgundo').addEventListener('click',undoCur);
+  document.getElementById('glossbtn').addEventListener('click',toggleGloss);
+  document.getElementById('pendbtn').addEventListener('click',togglePend);
+  document.getElementById('statbtn').addEventListener('click',toggleStats);
+  fbInit();
+  if(SUPA_URL&&SUPA_KEY){
+    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
+      .then(function(r){return r.ok?r.json():[];}).then(function(rows){
+        (rows||[]).forEach(function(x){
+          if(x.cid.indexOf('gloss|')===0)return;
+          if(x.cid.indexOf('lay|')===0){LAYS[x.cid.slice(4)]=x.txt;return;}
+          var mr=x.cid.match(/^rev\|(.*)\|(fr|it|en)$/);
+          if(mr){reviewed[mr[2]][mr[1]]=x.txt;return;}
+          const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
+          if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
+        });
+        layApplyAll();
+        refreshValues();
+        showSport(sel.value);updateCount();
+      }).catch(function(){});
+  }else{
+    document.getElementById('note').textContent='Hinweis: Cloud-Speicher (Supabase) ist noch nicht eingerichtet – Änderungen können bearbeitet und als Datei heruntergeladen, aber noch nicht direkt live gespeichert werden. Siehe SETUP-ADMIN.md.';
+    saveBtn.textContent='Herunterladen';
+  }
+  showSport(sel.value||(sel.options[0]&&sel.options[0].value));
+  updateCount();
+}
+function setupTa(ta){
     // Wrapper + Prüf-Markierung (Info bei geänderter deutscher Quelle)
     var w=document.createElement('div'); w.className='cedit-wrap';
     ta.parentNode.insertBefore(w,ta); w.appendChild(ta);
@@ -4816,38 +4965,150 @@ function init(){
       if(ta.value===(base[LNG][cid]||''))delete edits[LNG][cid];else edits[LNG][cid]=ta.value;
       updateCount();
     });
+}
+// ---- Spalten trennen / verbinden (Layout-Override "lay|<rid>", siehe layApply) ----
+// Wirkt sofort live (eigener Speichervorgang, kein Push noetig). Neue Teil-Zellen
+// starten mit dem Text der bisherigen Zelle in allen 4 Sprachen (inkl. Pruefstand),
+// beim Verbinden gilt der Text der linken Zelle.
+const LAYS={}, LAY0={};
+const LAY_STN=['F1','F2','F3','T1','T2','T3','T4','E1','E2','M'];
+var _layMenu=null;
+function layRows(){return app.querySelectorAll('.r[data-rid]');}
+function layName(i){return LAY_STN[i]||String(i);}
+function layRange(a,b){return a===b?layName(a):layName(a)+'–'+layName(b);}
+function layInit(){
+  layRows().forEach(function(row){
+    if(!(row.dataset.rid in LAY0))LAY0[row.dataset.rid]=JSON.stringify(layOf(row));
+    layBars(row);
   });
-  langSel.addEventListener('change',function(){
-    LNG=langSel.value;chgIdx=-1;
+  document.addEventListener('click',function(e){
+    if(_layMenu&&!_layMenu.contains(e.target)&&!(e.target.classList&&e.target.classList.contains('adm-cb')))layMenuClose();
+  });
+  // Beim Scrollen schliessen - aber nur, wenn sich der Knopf wirklich verschoben hat
+  window.addEventListener('scroll',function(){
+    if(_layMenu&&_layMenu.__btn&&Math.abs(_layMenu.__btn.getBoundingClientRect().top-_layMenu.__top)>30)layMenuClose();
+  },true);
+}
+function layMk(src,key){
+  var row=src.closest('.r'),rid=row.dataset.rid;
+  var c=document.createElement('div');c.className='c cell';
+  var w=document.createElement('div');w.className='cwrap';
+  var ta=document.createElement('textarea');ta.className='cedit';ta.dataset.cid=rid+'|'+key;
+  w.appendChild(ta);c.appendChild(w);setupTa(ta);
+  return c;
+}
+function layApplyAll(){
+  Object.keys(LAYS).forEach(function(rid){
+    var lay=layParse(LAYS[rid]);if(!lay)return;
+    layRows().forEach(function(row){if(row.dataset.rid===rid&&layApply(row,lay,layMk))layBars(row);});
+  });
+}
+function layBars(row){
+  var cells=layCells(row);
+  cells.forEach(function(c,i){
+    var old=c.querySelector(':scope > .adm-cbar');if(old)old.remove();
+    var a=+c.dataset.from,b=+c.dataset.to;
+    var bar=document.createElement('div');bar.className='adm-cbar';
+    if(b>a){
+      var bt=document.createElement('button');bt.type='button';bt.className='adm-cb';
+      bt.textContent='Trennen';bt.title='Zelle '+layRange(a,b)+' in zwei Spalten trennen';
+      bt.addEventListener('click',function(e){e.preventDefault();layMenu(c,bt);});
+      bar.appendChild(bt);
+    }
+    if(i<cells.length-1){
+      var n=cells[i+1],bj=document.createElement('button');bj.type='button';bj.className='adm-cb';
+      bj.textContent='Verbinden →';bj.title='Mit der Zelle rechts ('+layRange(+n.dataset.from,+n.dataset.to)+') zu einer Zelle '+layRange(a,+n.dataset.to)+' verbinden';
+      bj.addEventListener('click',function(e){e.preventDefault();layMenuClose();layJoin(c,n);});
+      bar.appendChild(bj);
+    }
+    if(bar.children.length)c.insertBefore(bar,c.firstChild);
+  });
+}
+function layMenuClose(){if(_layMenu){_layMenu.remove();_layMenu=null;}}
+function layMenu(c,btn){
+  layMenuClose();
+  var a=+c.dataset.from,b=+c.dataset.to;
+  var m=document.createElement('div');m.className='adm-cmenu';
+  m.innerHTML='<div class="adm-cmh">Wo trennen?</div>';
+  for(var at=a+1;at<=b;at++){(function(at){
+    var o=document.createElement('button');o.type='button';o.className='adm-cmo';
+    o.innerHTML='<b>'+layRange(a,at-1)+'</b> <span>|</span> <b>'+layRange(at,b)+'</b>';
+    o.addEventListener('click',function(e){e.preventDefault();layMenuClose();laySplit(c,at);});
+    m.appendChild(o);})(at);}
+  var x=document.createElement('button');x.type='button';x.className='adm-cmx';x.textContent='Abbrechen';
+  x.addEventListener('click',function(e){e.preventDefault();layMenuClose();});
+  m.appendChild(x);
+  document.body.appendChild(m);_layMenu=m;
+  var r=btn.getBoundingClientRect();m.__btn=btn;m.__top=r.top;
+  var mw=m.offsetWidth,mh=m.offsetHeight;
+  var left=Math.min(Math.max(8,r.right-mw),window.innerWidth-mw-8),top=r.bottom+5;
+  if(top+mh>window.innerHeight-8)top=Math.max(8,r.top-mh-5);
+  m.style.left=left+'px';m.style.top=top+'px';
+}
+function layBlocked(){
+  if(!SUPA_URL||!SUPA_KEY){statusEl.textContent='Spalten trennen/verbinden braucht den Cloud-Speicher (Supabase).';return true;}
+  if(changed().length){statusEl.textContent='Bitte zuerst die offenen Änderungen speichern (oder rückgängig machen) – danach Spalten trennen/verbinden.';return true;}
+  return false;
+}
+function layKey(at){return 's'+at+'-'+Date.now().toString(36).slice(-5);}
+function laySplit(c,at){
+  if(layBlocked())return;
+  var row=c.closest('.r'),rid=row.dataset.rid,k=c.dataset.k,src=c.dataset.src||k;
+  var a=+c.dataset.from,b=+c.dataset.to;
+  var nk=layKey(at),scid=rid+'|'+k,ncid=rid+'|'+nk;
+  var lay=[];
+  layOf(row).forEach(function(e){
+    if(e[2]!==k){lay.push(e);return;}
+    var l=[e[0],at-1,k];if(e[3])l.push(e[3]);lay.push(l);
+    lay.push([at,e[1],nk,src]);
+  });
+  var rows=[{cid:'lay|'+rid,txt:JSON.stringify(lay)}];
+  ALANGS.forEach(function(l){var v=base[l][scid];if(v!=null&&v!=='')rows.push({cid:l==='de'?ncid:ncid+'|'+l,txt:v});});
+  ['fr','it','en'].forEach(function(l){if(reviewed[l]&&reviewed[l][scid]!==undefined)rows.push({cid:'rev|'+ncid+'|'+l,txt:reviewed[l][scid]});});
+  layCommit(row,lay,rows,[],'Zelle getrennt: '+layRange(a,at-1)+' | '+layRange(at,b)+' – beide Teile haben den bisherigen Text und sind jetzt live.');
+}
+function layJoin(c,n){
+  if(layBlocked())return;
+  var row=c.closest('.r'),rid=row.dataset.rid,k=c.dataset.k,nk=n.dataset.k;
+  var a=+c.dataset.from,b=+n.dataset.to;
+  var lt=(base.de[rid+'|'+k]||'').trim(),rt=(base.de[rid+'|'+nk]||'').trim();
+  if(rt&&rt!==lt&&!window.confirm('Zellen '+layRange(a,+c.dataset.to)+' und '+layRange(+n.dataset.from,b)+' verbinden?\n\n'
+      +'Die verbundene Zelle '+layRange(a,b)+' übernimmt den Text der LINKEN Zelle. Der Text der rechten Zelle wird gelöscht:\n\n«'
+      +(rt.length>220?rt.slice(0,220)+'…':rt)+'»'))return;
+  var lay=[];
+  layOf(row).forEach(function(e){
+    if(e[2]===nk)return;
+    if(e[2]===k){var l=[e[0],b,k];if(e[3])l.push(e[3]);lay.push(l);}else lay.push(e);
+  });
+  var rc=rid+'|'+nk,del=[rc];
+  ['fr','it','en'].forEach(function(l){del.push(rc+'|'+l);del.push('rev|'+rc+'|'+l);});
+  var rows=[];
+  if(JSON.stringify(lay)===LAY0[rid])del.push('lay|'+rid);   // wieder wie im Original
+  else rows.push({cid:'lay|'+rid,txt:JSON.stringify(lay)});
+  layCommit(row,lay,rows,del,'Zellen verbunden: '+layRange(a,b)+' – jetzt live.');
+}
+function layCommit(row,lay,rows,del,msg){
+  statusEl.textContent='Speichere Spalten …';
+  admWrite(rows,del).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    del.forEach(function(cid){
+      if(cid.indexOf('lay|')===0){delete LAYS[cid.slice(4)];return;}
+      var m=cid.match(/^rev\|(.*)\|(fr|it|en)$/);
+      if(m){if(reviewed[m[2]])delete reviewed[m[2]][m[1]];return;}
+      var m2=cid.match(/^(.*)\|(fr|it|en)$/),l=m2?m2[2]:'de',c=m2?m2[1]:cid;
+      if(ORIGS[l][c]!==undefined)base[l][c]=ORIGS[l][c];else delete base[l][c];
+    });
+    rows.forEach(function(x){
+      if(x.cid.indexOf('lay|')===0){LAYS[x.cid.slice(4)]=x.txt;return;}
+      var m=x.cid.match(/^rev\|(.*)\|(fr|it|en)$/);
+      if(m){reviewed[m[2]][m[1]]=x.txt;return;}
+      var m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
+      if(m2)base[m2[2]][m2[1]]=x.txt;else base.de[x.cid]=x.txt;
+    });
+    layApply(row,lay,layMk);layBars(row);
     refreshValues();updateCount();
-  });
-  saveBtn.addEventListener('click',save);
-  document.getElementById('chgprev').addEventListener('click',function(){gotoChg(-1);});
-  document.getElementById('chgnext').addEventListener('click',function(){gotoChg(1);});
-  document.getElementById('chgundo').addEventListener('click',undoCur);
-  document.getElementById('glossbtn').addEventListener('click',toggleGloss);
-  document.getElementById('pendbtn').addEventListener('click',togglePend);
-  document.getElementById('statbtn').addEventListener('click',toggleStats);
-  fbInit();
-  if(SUPA_URL&&SUPA_KEY){
-    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-      .then(function(r){return r.ok?r.json():[];}).then(function(rows){
-        (rows||[]).forEach(function(x){
-          if(x.cid.indexOf('gloss|')===0)return;
-          var mr=x.cid.match(/^rev\|(.*)\|(fr|it|en)$/);
-          if(mr){reviewed[mr[2]][mr[1]]=x.txt;return;}
-          const m2=x.cid.match(/^(.*)\|(fr|it|en)$/);
-          if(m2){base[m2[2]][m2[1]]=x.txt;}else{base.de[x.cid]=x.txt;}
-        });
-        refreshValues();
-        showSport(sel.value);updateCount();
-      }).catch(function(){});
-  }else{
-    document.getElementById('note').textContent='Hinweis: Cloud-Speicher (Supabase) ist noch nicht eingerichtet – Änderungen können bearbeitet und als Datei heruntergeladen, aber noch nicht direkt live gespeichert werden. Siehe SETUP-ADMIN.md.';
-    saveBtn.textContent='Herunterladen';
-  }
-  showSport(sel.value||(sel.options[0]&&sel.options[0].value));
-  updateCount();
+    statusEl.textContent=msg;
+  }).catch(function(e){statusEl.textContent='Fehler beim Speichern der Spalten: '+e.message;});
 }
 // ---- Live-Vorschau + ausklappbare Formatierungshilfe an der fokussierten Zelle ----
 var _prevBox=null,_prevTa=null,_fmtBox=null,_fmtT=null;
@@ -4865,6 +5126,7 @@ function fmtBox(){
     +row('• oder -','Aufzählung')
     +row('---','Trennstrich (eigene Zeile)')
     +row('[[SC 1]] Text','Badge-Etikett')
+    +row('SC 1: … / LT: … / LT 2: …','Skills-Check- bzw. Leistungstest-Badge (LT blau)')
     +row('((Sommer))','Zonen-Chip, Inhalt auf den Zeilen darunter')
     +row('[Text](https://…)','eigene Zeile = Link-Knopf genau an dieser Stelle · im Satz = Link im Text')
     +row('*Text …','Geschlechter-Kasten (mit Stichwort Mädchen/Jungen/Adoleszenz)');
@@ -4893,8 +5155,13 @@ function placeFmt(){
 function renderPrev(ta){
   if(!_prevBox){
     _prevBox=document.createElement('div');_prevBox.className='cprev';
-    _prevBox.innerHTML='<div class="cprev-h">Vorschau – so erscheint die Zelle auf der Webseite</div>'
+    _prevBox.innerHTML='<div class="cprev-h">Vorschau<small>nicht bearbeitbar – Klick springt ins Eingabefeld</small></div>'
       +'<div class="cprev-cell"><div class="cwrap"><div class="ctext"></div></div></div>';
+    _prevBox.title='Das ist nur die Vorschau – bearbeitet wird im weissen Feld. Klick springt dorthin.';
+    // Versehentlicher Klick in die Vorschau: zurueck ins Eingabefeld springen
+    _prevBox.addEventListener('mousedown',function(e){
+      if(_prevTa){e.preventDefault();_prevTa.focus();}
+    });
   }
   var w=ta.closest('.cedit-wrap')||ta.parentElement;
   if(_prevBox.parentElement!==w){w.appendChild(fmtBox());w.appendChild(_prevBox);placeFmt();}
@@ -5048,7 +5315,7 @@ def admin_html(datamap):
         secs += sport_section(s, d, "de", edit=True)
         opts += '<option value="'+esc(s["id"])+'">'+esc(tr(s["name"], "de"))+'</option>'
         for ti, t in enumerate(d["themes"]):
-            if t.get("_sh"):
+            if t.get("_sh") or t.get("removed"):
                 continue  # zentral erfasst (siehe _shared_admin_section)
             orig[s["id"]+"|"+str(ti)+"|title"] = t["title"] or ""
             for ri, r in enumerate(t["rows"]):

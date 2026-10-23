@@ -49,9 +49,9 @@
    "text": "Selektionsguideline",
    "bemerkung": "Gibt es nur auf Deutsch"
   },
-  "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/Selektionsrichtlinien_Langlauf_Kader_2026-27_DE.pdf": {
+  "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/2027_Selektionskonzept_EYOF_2027_Brasov_Langlauf_def_signed.pdf": {
    "text": "Swiss-Ski 2026/27",
-   "bemerkung": "Link geht nicht mehr"
+   "bemerkung": "Gibt es nur auf Deutsch"
   },
   "https://bsv.ch/alpin/dokumente/": {
    "text": "BSV",
@@ -124,6 +124,10 @@
   "https://www.thatsnowsports.ch/riding-konzept-snowboard-alpin/": {
    "text": "Riding Konzept",
    "bemerkung": "Links fürt zu richtiger Seite jedoch ohne Inhalt"
+  },
+  "https://snowsports.flink.host/s/Y8SMd0CM": {
+   "text": "Gehirnerschütterungen im Schneesport",
+   "bemerkung": "Noch keine französische Version (Stand 10/2026)"
   }
  },
  "https://snowsports.flink.host/s/A4kzIlD4/VRqnCEMS": {
@@ -399,5 +403,11 @@
  },
  "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/": {
   "fr": "https://www.swiss-ski.ch/fr/a-propos/formation/entraineur/freestyle-a-2027/"
+ },
+ "https://snowsports.flink.host/s/RIZo7s9C": {
+  "fr": "https://snowsports.flink.host/s/LSPB3DxF"
+ },
+ "https://snowsports.flink.host/s/GGpwULa3": {
+  "fr": "https://snowsports.flink.host/s/qKYIo1Us"
  }
 }

@@ -683,7 +683,7 @@
    "shared": "schnelligkeit-nordisch"
   },
   {
-   "title": "Technik & Taktik Übergeordnet",
+   "title": "Technik & Taktik",
    "group": "Sport & Athlet:in",
    "rows": [
     {
@@ -709,115 +709,6 @@
       },
       {
        "v": "Individuelle Übungsstruktur nach Stärken/Schwächen-Analyse",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Technik Übergeordnet",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    },
-    {
-     "label": "Taktik Übergeordnet",
-     "segs": [
-      {
-       "v": "",
-       "from": 0,
-       "to": 2,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 9,
-       "to": 9,
-       "l": []
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "title": "Technik",
-   "group": "Sport & Athlet:in",
-   "rows": [
-    {
-     "label": "Technik Klassisch",
-     "segs": [
-      {
-       "v": "Element Schnee entdecken\n• Gleiten\n• Schieben\n• Rutschen\n• Drehen\n• Springen\n• Balancieren\n• Bremsen auf Rutschgeräten (Langlaufski, Snowboard oder Ski)",
-       "from": 0,
-       "to": 0,
-       "l": [
-        {
-         "text": "Klassisch",
-         "href": "https://snowsports.flink.host/s/UxZyybZ4/4x8Ml5xU"
-        }
-       ]
-      },
-      {
-       "v": "Spielerisch den Schnee entdecken und sich variantenreich auf LL-Ski bewegen.\nSpielformen und abwechslungsreiche Übungen, die vielseitige Bewegungsarten fördern. Elefantenwaschen, Skills Park, Namen-Memory, Der Fuchs geht um, Spitalfangis etc.\n\nSicher und selbständig langlaufen und bremsen\n\nKL-Schritt (Beinarbeit)\nStreckung des Abstossbeines, stabiles Gleiten auf Gleitski\n\nDiagonal\nWechsel von Bein- und Armarbeit in diagonaler Bewegung für Vortrieb.\n\nGräten\nScherenschritte bergauf: Ski in V-Form setzen, Kick aus den Beinen (kein Gleiten)\n\nDoppelstock\nBeide Stöcke gleichzeitig einsetzen, Körper nach vorne bringen und Arme aktiv strecken.\n\nBogentreten\nSeitliches Treten in einer Bogenspurlinie, Gewicht auf den Aussenski\n\nSpurwechsel\nSki parallel anheben, Gewicht verlagern und sanft in die neue Spur setzen.\n\nÜbungen\nÜber Wurzeln steigen, Himbeeren pflücken, La-Ola-Welle, Schaukelschuhe etc.",
-       "from": 1,
-       "to": 2,
-       "l": [
-        {
-         "text": "Klassisch",
-         "href": "https://snowsports.flink.host/s/UxZyybZ4/4x8Ml5xU"
-        }
-       ]
-      },
-      {
-       "v": "",
-       "from": 3,
-       "to": 6,
-       "l": []
-      },
-      {
-       "v": "",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "",
        "from": 9,
        "to": 9,
        "l": []
@@ -868,8 +759,89 @@
        "l": []
       }
      ]
+    },
+    {
+     "label": "Technik Klassisch",
+     "segs": [
+      {
+       "v": "Element Schnee entdecken\n• Gleiten\n• Schieben\n• Rutschen\n• Drehen\n• Springen\n• Balancieren\n• Bremsen auf Rutschgeräten (Langlaufski, Snowboard oder Ski)",
+       "from": 0,
+       "to": 0,
+       "l": [
+        {
+         "text": "Klassisch",
+         "href": "https://snowsports.flink.host/s/UxZyybZ4/4x8Ml5xU"
+        }
+       ]
+      },
+      {
+       "v": "Spielerisch den Schnee entdecken und sich variantenreich auf LL-Ski bewegen.\nSpielformen und abwechslungsreiche Übungen, die vielseitige Bewegungsarten fördern. Elefantenwaschen, Skills Park, Namen-Memory, Der Fuchs geht um, Spitalfangis etc.\n\nSicher und selbständig langlaufen und bremsen\n\nKL-Schritt (Beinarbeit)\nStreckung des Abstossbeines, stabiles Gleiten auf Gleitski\n\nDiagonal\nWechsel von Bein- und Armarbeit in diagonaler Bewegung für Vortrieb.\n\nGräten\nScherenschritte bergauf: Ski in V-Form setzen, Kick aus den Beinen (kein Gleiten)\n\nDoppelstock\nBeide Stöcke gleichzeitig einsetzen, Körper nach vorne bringen und Arme aktiv strecken.\n\nBogentreten\nSeitliches Treten in einer Bogenspurlinie, Gewicht auf den Aussenski\n\nSpurwechsel\nSki parallel anheben, Gewicht verlagern und sanft in die neue Spur setzen.\n\nÜbungen\nÜber Wurzeln steigen, Himbeeren pflücken, La-Ola-Welle, Schaukelschuhe etc.",
+       "from": 1,
+       "to": 2,
+       "l": [
+        {
+         "text": "Klassisch",
+         "href": "https://snowsports.flink.host/s/UxZyybZ4/4x8Ml5xU"
+        }
+       ]
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Taktik",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
     }
    ]
+  },
+  {
+   "title": "Technik",
+   "group": "Sport & Athlet:in",
+   "removed": true,
+   "_hinweis": "10/2026 in 'Technik & Taktik' (Thema 9) zusammengefuehrt; Platzhalter haelt die Positionen der folgenden Themen fest.",
+   "rows": []
   },
   {
    "title": "Schiessen",
@@ -1626,14 +1598,42 @@
      "label": "",
      "segs": [
       {
-       "v": "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.",
+       "v": "Die Downloads für Trainer:innen werden hier laufend ergänzt.",
        "from": 0,
        "to": 9,
-       "l": []
+       "l": [],
+       "dl": [
+        {
+         "title": "Unser Ziel: Belastungstoleranz und VO₂max entwickeln",
+         "desc": "Merkblatt: was VO₂max ist, wie sich Muskeln und Herz anpassen, warum die Pubertät das grösste Zeitfenster für den Ausbau des «Motors» ist – und wie viel lockerer Umfang (80–90 %) und regelmässig schnelle Reize (10–20 %) es dafür braucht.",
+         "files": [
+          {
+           "label": "Merkblatt VO₂max",
+           "hint": "1 Seite A4 hoch – zum Aufhängen oder Verteilen · PDF, 2.2 MB",
+           "href": "assets/docs/Swiss-Ski_Nordisch_Merkblatt_VO2max.pdf"
+          }
+         ]
+        },
+        {
+         "title": "Intensitätssteuerung im Nachwuchs",
+         "desc": "Merkblatt: Intensität steuern mit Belastungsempfinden (RPE), Herzfrequenz und Leistungstest – 3 bzw. 5 Intensitätszonen, polarisiertes Training auf allen Stufen (viel I1–I2, wenig I4–I5) und Orientierungswerte in % der HF-max.",
+         "files": [
+          {
+           "label": "Merkblatt Intensitätssteuerung",
+           "hint": "1 Seite A4 hoch – zum Aufhängen oder Verteilen · PDF, 1.8 MB",
+           "href": "assets/docs/Swiss-Ski_Nordisch_Merkblatt_Intensitaetssteuerung.pdf"
+          }
+         ]
+        }
+       ]
       }
      ]
     }
    ]
+  },
+  {
+   "shared": "medizin-nord",
+   "sort": 3.5
   }
  ],
  "home": {

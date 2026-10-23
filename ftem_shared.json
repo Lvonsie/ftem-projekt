@@ -163,37 +163,67 @@
        "v": "Sich konzentrieren:\n[[SC1]] Farben zählen\n[[SC2]] Eichhörnchen - Nuss\n[[SC3]] Spaghetti - Ski/Board\n[[SC4]] Frosch Fuss",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "SC F1&F2",
+         "href": "https://snowsports.flink.host/s/rBFJJf6W/Mcbte9Vl"
+        }
+       ]
       },
       {
        "v": "Sich konzentrieren:\n[[SC1]] Run-Überblick\n[[SC2]] Schnee-Lesen\n[[SC3]] Run-Replay\n[[SC4]] Ein Wort pro Run",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "SC F3",
+         "href": "https://snowsports.flink.host/s/rBFJJf6W/acAFFSoI"
+        }
+       ]
       },
       {
        "v": "Sich konzentrieren T1:\n[[SC1]] Kursbesichtigung 360°\n[[SC2]] Absprung\n[[SC3]] Body-Scan auf dem Sessellift\n[[SC4]] Trick ansagen",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "SC T1",
+         "href": "https://snowsports.flink.host/s/rBFJJf6W/oRt2Odh4"
+        }
+       ]
       },
       {
        "v": "Sich konzentrieren T2:\n[[SC1]] Speed-Check\n[[SC2]] Linienpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "SC T2",
+         "href": "https://snowsports.flink.host/s/rBFJJf6W/Iz3S8IK8"
+        }
+       ]
       },
       {
        "v": "Sich konzentrieren T3:\n[[SC1]] Wettkampf-Scan\n[[SC2]] Trick für Trick\n[[SC3]] Debriefing\n[[SC4]] Drop-in-Fokus",
        "from": 5,
        "to": 5,
-       "l": []
+       "l": [
+        {
+         "text": "SC T3",
+         "href": "https://snowsports.flink.host/s/rBFJJf6W/1u4LBqBP"
+        }
+       ]
       },
       {
        "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Wettkampftag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Run mit allen Sinnen\n[[SC5]] Ein Gedanke ein Run\n[[SC6]] Atemrhythmus am Drop-in",
        "from": 6,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "SC T4",
+         "href": "https://snowsports.flink.host/s/rBFJJf6W/5kNPO2Wf"
+        }
+       ]
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
@@ -270,37 +300,67 @@
        "v": "Sich konzentrieren:\n[[SC1]] Farben zählen\n[[SC2]] Eichhörnchen - Nuss\n[[SC3]] Spaghetti - Ski\n[[SC4]] Frosch Fuss",
        "from": 0,
        "to": 1,
-       "l": []
+       "l": [
+        {
+         "text": "SC F1&F2",
+         "href": "https://snowsports.flink.host/s/Y5QfFMxu/cPQYisCO"
+        }
+       ]
       },
       {
        "v": "Sich konzentrieren:\n[[SC1]] Strecken-Überblick\n[[SC2]] Schnee-Lesen\n[[SC3]] Lauf/Sprung-Replay\n[[SC4]] Ein Wort pro Lauf/Sprung",
        "from": 2,
        "to": 2,
-       "l": []
+       "l": [
+        {
+         "text": "SC F3",
+         "href": "https://snowsports.flink.host/s/Y5QfFMxu/RkU8G7OX"
+        }
+       ]
       },
       {
-       "v": "Sich konzentrieren T1:\n[[SC1]] Strecken-/Schiessstand-/Schanzenbesichtigung 360°\n[[SC2]] Abstoss/Stellung/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort",
+       "v": "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort",
        "from": 3,
        "to": 3,
-       "l": []
+       "l": [
+        {
+         "text": "SC T1",
+         "href": "https://snowsports.flink.host/s/Y5QfFMxu/VFoPmx7U"
+        }
+       ]
       },
       {
-       "v": "Sich konzentrieren T2:\n[[SC1]] Besichtigung im Renntempo\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
+       "v": "Sich konzentrieren T2:\n[[SC1]] Besichtigung Rennstrecke / Schanze\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
        "from": 4,
        "to": 4,
-       "l": []
+       "l": [
+        {
+         "text": "SC T2",
+         "href": "https://snowsports.flink.host/s/Y5QfFMxu/M4JmmbOo"
+        }
+       ]
       },
       {
        "v": "Sich konzentrieren T3:\n[[SC1]] Wettkampf-Scan\n[[SC2]] Markierung bei Renntempo\n[[SC3]] Debriefing\n[[SC4]] Start-Fokus",
        "from": 5,
        "to": 5,
-       "l": []
+       "l": [
+        {
+         "text": "SC T3",
+         "href": "https://snowsports.flink.host/s/Y5QfFMxu/5fLQU09X"
+        }
+       ]
       },
       {
-       "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Schiessablauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start",
+       "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start",
        "from": 6,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "SC T4",
+         "href": "https://snowsports.flink.host/s/Y5QfFMxu/AYdrZeo1"
+        }
+       ]
       },
       {
        "v": "SC1: Vor dem Wettkampf eine etablierte mentale Aktivierungsroutine anwenden.\nSC2: Bei Drucksituationen gezielte Atemtechniken oder Selbstgespräche einsetzen.\nSC3: Nach einem Rückschlag den Fokus bewusst auf die nächste Aufgabe lenken.\nSC4: Eine bevorstehende Wettkampfsituation gezielt visualisieren.",
@@ -2843,6 +2903,98 @@
     }
    ],
    "label": "übrige Sportarten (6)"
+  },
+  {
+   "id": "medizin-alpin",
+   "title": "Medizin & Gesundheit",
+   "label": "Alpin & Cross (4)",
+   "group": "Sport & Athlet:in",
+   "sports": [
+    "ski-alpin",
+    "skicross",
+    "snowboard-cross",
+    "snowboard-alpin"
+   ],
+   "rows": [
+    {
+     "label": "Inhalt",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 9,
+       "l": [
+        {
+         "text": "Gehirnerschütterungen im Schneesport",
+         "href": "https://snowsports.flink.host/s/Y8SMd0CM"
+        },
+        {
+         "text": "Return to Snow nach Gehirnerschütterung",
+         "href": "https://snowsports.flink.host/s/RIZo7s9C"
+        },
+        {
+         "text": "Gehirnerschütterung erkennen",
+         "href": "https://snowsports.flink.host/s/GGpwULa3"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "medizin-nord",
+   "title": "Medizin & Gesundheit",
+   "label": "Nordisch inkl. Skispringen (4)",
+   "group": "Sport & Athlet:in",
+   "sports": [
+    "langlauf",
+    "biathlon",
+    "skispringen",
+    "nordische-kombination"
+   ],
+   "rows": [
+    {
+     "label": "Inhalt",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "medizin-pp",
+   "title": "Medizin & Gesundheit",
+   "label": "Park & Pipe (2)",
+   "group": "Sport & Athlet:in",
+   "sports": [
+    "freeski-park-pipe",
+    "snowboard-park-pipe"
+   ],
+   "rows": [
+    {
+     "label": "Inhalt",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
   }
  ]
 }
