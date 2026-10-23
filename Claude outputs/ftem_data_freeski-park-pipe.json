@@ -1,0 +1,1099 @@
+{
+ "stages": [
+  "F1",
+  "F2",
+  "F3",
+  "T1",
+  "T2",
+  "T3",
+  "T4",
+  "E1",
+  "E2",
+  "M"
+ ],
+ "ages": {
+  "F1": "U7",
+  "F2": "U9",
+  "F3": "U11",
+  "T1": "U13",
+  "T2": "U14",
+  "T3": "U16",
+  "T4": "U18",
+  "E1": "U23",
+  "E2": ">24",
+  "M": ">24"
+ },
+ "themes": [
+  {
+   "title": "Trainingsstunden und Entwicklungsfokus",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Entwicklungsfokus",
+     "segs": [
+      {
+       "v": "Bewegungs- und Spielgrundformen entwickeln: Umfangreich, vielseitig und herausfordernd",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "Belastungsverträglichkeit aufbauen: Umfangreich, vielseitig und herausfordernd",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Aufbautraining: \"LEARN TO TRAIN\"",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Aufbautraining: \"LEARN TO TRAIN MORE\"",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Leistungstraining: \"LEARN TO TRAIN AND COMPETE\"",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Leistungstraining: \"LEARN TO TRAIN AND COMPETE SMART\"",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Hochleistungstraining: \"TRAIN TO WIN\"",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Hochleistungstraining: \"TRAIN TO BE A WINNER\"",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Sportart dominieren: \"BE A WINNER\"",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Stunden / Jahr",
+     "segs": [
+      {
+       "v": "Coming soon…",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "300",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "450",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "530",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "720",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "~1000",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": ">1000",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": ">1000",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sommer (Mai - November) On-Snow",
+     "segs": [
+      {
+       "v": "Coming soon…",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sommer Off-Snow",
+     "segs": [
+      {
+       "v": "Coming soon…",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Winter (Dezember - April) On-Snow Trainings",
+     "segs": [
+      {
+       "v": "Coming soon…",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Winter Off-Snow",
+     "segs": [
+      {
+       "v": "Coming soon…",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Coming soon…",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "shared": "makro-pp"
+  },
+  {
+   "shared": "ernaehrung"
+  },
+  {
+   "shared": "schlaf"
+  },
+  {
+   "shared": "mental-pp"
+  },
+  {
+   "shared": "ausdauer-pp"
+  },
+  {
+   "shared": "mobilitaet-pp"
+  },
+  {
+   "shared": "kraft-pp"
+  },
+  {
+   "shared": "schnelligkeit-pp"
+  },
+  {
+   "title": "Technik & Taktik Übergeordnet",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Technik",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Technik Übergeordnet",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Taktik Übergeordnet",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Akrobatik",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Akrobatik Technical Check Up (TCU)",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Akrobatik Inhalt",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Material",
+   "group": "Material",
+   "rows": [
+    {
+     "label": "Off Snow",
+     "segs": [
+      {
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Schoner\n• Skateboard (plus Skateschuhe) plus Helm und Schoner / Inlines plus Helm und Protektoren",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Schoner\n• Skateboard (plus Skateschuhe) plus Helm und Schoner / Inlines plus Helm und Protektoren",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Skischuhe\n• Ski plus Bindung plus Stöcke\n• Helm",
+       "from": 4,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Skischuhe\n• Ski plus Bindung plus Stöcke\n• Helm",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• Turnschuhe Outdoor\n• Hallenschuhe / Turnschuhe Indoor\n• Velo/MTB plus Helm und Protektoren\n• Skateboard (plus Skateschuhe) plus Helm und Protektoren / Inlines plus Helm und Protektoren\n\nBag-Training\n• Neopren\n• Skischuhe\n• Ski plus Bindung plus Stöcke\n• Helm",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "On Snow Allgemein",
+     "segs": [
+      {
+       "v": "• Ski plus Bindung\n• Skischuhe\n• Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)\n\n--> Material kann/soll gemietet oder übernommen werden (ausser Helm und Mouthguard)",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "• Ski plus Bindung\n• Skischuhe\n• Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "• mind. 2 Trainings Ski plus Bindung\n• mind. 2 Wettkampf Ski plus Bindung\n• 2x Skiboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "from": 5,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "• mind. 2 Trainings Ski plus Bindung\n• mind. 2 Wettkampf Ski plus Bindung\n• 2x Skiboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "• mind. 2 Trainings Ski plus Bindung\n• mind. 2 Wettkampf Ski plus Bindung\n• 2x Skiboots\n• 2x Helm und Goggles\n• Rückenpanzer\n• Mouthguard (empfohlen)",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Fördergefässe",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Trägerschaft",
+     "segs": [
+      {
+       "v": "Familie, Schule, Skiclub, Sportclubs",
+       "from": 0,
+       "to": 1,
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
+      },
+      {
+       "v": "Familie, Schule, Skiclub, RLZ, Sportclubs",
+       "from": 2,
+       "to": 2,
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
+      },
+      {
+       "v": "RLZ,  Skiclub, Sportclubs, Familie, Schule",
+       "from": 3,
+       "to": 4,
+       "l": [
+        {
+         "text": "Unsere Schneesportclubs",
+         "href": "https://www.swiss-ski.ch/skiclubs/?tx_kochclubs_list%5Baction%5D=search&tx_kochclubs_list%5Bcontroller%5D=Club&cHash=e24ce532def903bc6b45a39cb315654c"
+        }
+       ]
+      },
+      {
+       "v": "RV, NLZ, C-Kader, Sportschule",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "NLZ, Swiss-Ski Kader, RV, Sportschule",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Swiss-Ski Kader",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Swiss Ski Kader NM",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Förderstrukturen & Wettkämpfe",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Kader",
+     "segs": [
+      {
+       "v": "Skiclub,Sportclub",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "RLZ,Skiclub,Sportclub",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "RLZ,Skiclub,Sportclub",
+       "from": 3,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "RV, NLZ",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "NLZ, Swiss-Ski Kader",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Swiss-Ski Kader",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Swiss Ski Kader NM",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Swiss Olympic Card",
+     "segs": [
+      {
+       "v": "keine",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Talent Card Lokal",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Talent Card Lokal oder Regional",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Talent Card Regional oder National",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Talent Card National",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Elite, Bronze, Silber",
+       "from": 7,
+       "to": 7,
+       "l": []
+      },
+      {
+       "v": "Elite, Silber oder Gold",
+       "from": 8,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Silber oder Gold",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Wettkampfart",
+     "segs": [
+      {
+       "v": "keine",
+       "from": 0,
+       "to": 0,
+       "l": []
+      },
+      {
+       "v": "Wettbewerbe in der Interregion (Ost, Mitte, West)",
+       "from": 1,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Wettbewerbe in der Interregion (Ost, Mitte, West) oder Stufe National-C",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Wettbewerbe in der Interregion (Ost, Mitte, West) und Stufe National-C",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "NC/FIS Junior, NB/FIS, NA/Europa Cup, JWM, EYOF, YOG",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "NB/FIS, NA und Europa Cup, JWM, EYOF, YOG",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "World Cup, WM, OG",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "World Cup, WM, OG",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Anzahl Wettkämpfe",
+     "segs": [
+      {
+       "v": "Keine",
+       "from": 0,
+       "to": 1,
+       "l": []
+      },
+      {
+       "v": "2 bis 4",
+       "from": 2,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "4 bis 6",
+       "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Style 4 bis 6",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Style 8 bis 10",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "~10",
+       "from": 6,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "~12",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "~12",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Selektionen",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Testing & Leistungsdiagnostik",
+     "segs": [
+      {
+       "v": "Coming soon…",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "Heimtrainereinschätzung\n• Wird von der Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• Empfehlung: AWK mit geforderten Wochenumfängen (+/-)\n\nTesting\nMeldung ohne Powertest, Wettkampfresultate und TCU-Resultate möglich\n\nWettkampfresultate\n• Die Regionale Gesamtrangliste U11/U13 der jeweiligen interregionalen Tour wird beigezogen\n• Wir empfehlen, an den interregionalen Touren in deiner Region teilzunehmen. (BUZZ Tour, Eastside Tour, Tour Freestyle Romand)",
+       "from": 3,
+       "to": 3,
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
+      },
+      {
+       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest\n• TCU\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die Regionale Gesamtrangliste U11/U13 der jeweiligen interregionalen Tour wird beigezogen..\n• bzw. die Nationale Gesamtrangliste U15/U18 wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Für eine Regionale Karte müssen Wettkampfresultate vorliegen\n• Keine Wettkampfresultate = Note 1\n• Notengebung gemäss PISTE Guidelines",
+       "from": 4,
+       "to": 4,
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
+      },
+      {
+       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest\n• TCU On- und Off-Snow mit Werten von mindestens 55% Performer oder 75% Contender\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n• Für eine Nationale Karte muss ein nationaler Powertest mit mind. Mittelwert 51 Punkte absolviert werden (ab 26/27 mit 55 P.)\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die FIS/WSPL Liste wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Notengebung gemäss PISTE Guidelines (www.Thatsnowsports.ch)\n• Verletztenstatus muss mit Arztzeugnis bei Assessment begründet werden",
+       "from": 5,
+       "to": 5,
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
+      },
+      {
+       "v": "Heimtrainereinschätzung\n• Wird von den Trägerschaft erstellt\n• Muss über das Assessment termingerecht eingereicht werden\n• AWK mit geforderten Wochenumfängen (+/-)\n\nEs müssen folgende Test-Resultate vorliegen:\n• Powertest mit mind. 55 Punkten (ab 26/27 mit 60 P.)\n• TCU On- und Off-Snow Resultate mit mindestens 80%-Score\n• NLZ Test muss absolviert werden\n• Liegen keine Resultate vor = Note 1\n• Notengebung gemäss Prozentangaben in PISTE Guidelines\n\nWettkampfresultate\n• Die FIS/WSPL Liste wird beigezogen\n• Dies höchste Punktzahl aus den möglichen Disziplinen wird berücksichtigt\n• Notengebung gemäss PISTE Guidelines\n• Verletztenstatus muss mit Arztzeugnis bei Assessment begründet werden",
+       "from": 6,
+       "to": 6,
+       "l": [
+        {
+         "text": "Selektionskonzept",
+         "href": "https://www.thatsnowsports.ch/konzept-piste-selektion-und-einstufung/"
+        },
+        {
+         "text": "Selektionsguideline",
+         "href": "https://www.thatsnowsports.ch/tcu-google-links/"
+        }
+       ]
+      },
+      {
+       "v": "Siehe die jeweiligen Selektionsrichtlinien auf der Swiss-Ski-Homepage",
+       "from": 7,
+       "to": 8,
+       "l": []
+      },
+      {
+       "v": "Siehe die jeweiligen Selektionsrichtlinien auf der Swiss-Ski-Homepage",
+       "from": 9,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "shared": "umfeld"
+  },
+  {
+   "title": "Ausbildungsweg",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Vom Trainer:in Nachwuchs über Trainer:in Leistungssport bis Trainer:in Spitzensport – der Ausbildungsweg für Trainer:innen.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Neue Ausbildungsstruktur ab 2027",
+         "href": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "nohead": true
+  },
+  {
+   "title": "Coachpoints",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ],
+   "nohead": true
+  },
+  {
+   "title": "Downloads",
+   "group": "Für Trainer:innen",
+   "nohead": true,
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Die Downloads für Trainer:innen werden zurzeit zusammengestellt und hier ergänzt.",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "shared": "medizin-pp",
+   "sort": 3.5
+  }
+ ],
+ "home": {
+  "intro": {
+   "f": "Vom Entwickeln von Bewegungs- und Spielgrundformen bis zum Aufbau der Belastungsverträglichkeit: Umfangreich, vielseitig und herausfordernd.",
+   "t": "Vom Aufbautraining bis zum Leistungstraining: Potential entfalten, den Durchbruch schaffen und Belohnung ernten.",
+   "e": "Hochleistungstraining: Vom Erfolg bei Schweizer Wettkämpfen zum internationalen Gewinner.",
+   "m": "Sportart dominieren: dauerhaft an der Spitze bleiben."
+  },
+  "sections": [
+   {
+    "title": "Was trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Coming soon…",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Wie viel trainieren?",
+    "cells": {
+     "F1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Coming soon…",
+      "l": []
+     }
+    }
+   },
+   {
+    "title": "Struktur & Umfeld",
+    "cells": {
+     "F1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "F3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T3": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "T4": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E1": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "E2": {
+      "v": "Coming soon…",
+      "l": []
+     },
+     "M": {
+      "v": "Coming soon…",
+      "l": []
+     }
+    }
+   }
+  ]
+ }
+}
