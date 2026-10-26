@@ -49,10 +49,6 @@
    "text": "Selektionsguideline",
    "bemerkung": "Gibt es nur auf Deutsch"
   },
-  "https://www.swiss-ski.ch/fileadmin/user_upload/www.swiss-ski.ch/sportarten/cross-country/pdf/downloads/selektionsrichtlinien_de/2027_Selektionskonzept_EYOF_2027_Brasov_Langlauf_def_signed.pdf": {
-   "text": "Swiss-Ski 2026/27",
-   "bemerkung": "Gibt es nur auf Deutsch"
-  },
   "https://bsv.ch/alpin/dokumente/": {
    "text": "BSV",
    "bemerkung": "Gibt es nur auf Deutsch"
@@ -409,5 +405,11 @@
  },
  "https://snowsports.flink.host/s/GGpwULa3": {
   "fr": "https://snowsports.flink.host/s/qKYIo1Us"
+ },
+ "https://www.swiss-ski.ch/biathlon/downloads/": {
+  "fr": "https://www.swiss-ski.ch/fr/biathlon/telechargements/"
+ },
+ "https://www.swiss-ski.ch/langlauf/downloads/": {
+  "fr": "https://www.swiss-ski.ch/fr/ski-de-fond/telechargements/"
  }
 }
