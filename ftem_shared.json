@@ -160,7 +160,7 @@
      "label": "Skills-Checks (SC) Mental",
      "segs": [
       {
-       "v": "Sich konzentrieren:\n[[SC1]] Farben zählen\n[[SC2]] Eichhörnchen - Nuss\n[[SC3]] Spaghetti - Ski/Board\n[[SC4]] Frosch Fuss",
+       "v": "Sich konzentrieren:\n[[SC1]] Adler-Parkkarte\n[[SC2]] Eichhörnchen-Blick\n[[SC3]] Bär wacht auf\n[[SC4]] Adler – Frosch – los!",
        "from": 0,
        "to": 1,
        "l": [
@@ -171,7 +171,7 @@
        ]
       },
       {
-       "v": "Sich konzentrieren:\n[[SC1]] Run-Überblick\n[[SC2]] Schnee-Lesen\n[[SC3]] Run-Replay\n[[SC4]] Ein Wort pro Run",
+       "v": "Sich konzentrieren:\n[[SC1]] Park lesen, Run ansagen\n[[SC2]] Absprungkante und Landung\n[[SC3]] Commitment-Check vor dem Feature\n[[SC4]] Drop-in-Call",
        "from": 2,
        "to": 2,
        "l": [
@@ -182,19 +182,8 @@
        ]
       },
       {
-       "v": "Sich konzentrieren T1:\n[[SC1]] Kursbesichtigung 360°\n[[SC2]] Absprung\n[[SC3]] Body-Scan auf dem Sessellift\n[[SC4]] Trick ansagen",
+       "v": "Sich konzentrieren:\n[[SC1]] Speed-Check-Run\n[[SC2]] Spotten bei Rotationen\n[[SC3]] Erst fühlen, dann Video\n[[SC4]] Drop-in-Routine unter Ablenkung",
        "from": 3,
-       "to": 3,
-       "l": [
-        {
-         "text": "SC T1&T2",
-         "href": "https://snowsports.flink.host/s/dOYvLuVK/jb2E54op"
-        }
-       ]
-      },
-      {
-       "v": "Sich konzentrieren T2:\n[[SC1]] Speed-Check\n[[SC2]] Linienpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
-       "from": 4,
        "to": 4,
        "l": [
         {
@@ -204,19 +193,8 @@
        ]
       },
       {
-       "v": "Sich konzentrieren T3:\n[[SC1]] Wettkampf-Scan\n[[SC2]] Trick für Trick\n[[SC3]] Debriefing\n[[SC4]] Drop-in-Fokus",
+       "v": "Sich konzentrieren:\n[[SC1]] Bedingungen lesen in der Contest-Simulation\n[[SC2]] Zielpunkte Feature für Feature\n[[SC3]] Neuer Trick: bereit für den ersten Versuch?\n[[SC4]] Reset und Neustart",
        "from": 5,
-       "to": 5,
-       "l": [
-        {
-         "text": "SC T3&T4",
-         "href": "https://snowsports.flink.host/s/dOYvLuVK/WOnGC5aF"
-        }
-       ]
-      },
-      {
-       "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Wettkampftag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Run mit allen Sinnen\n[[SC5]] Ein Gedanke ein Run\n[[SC6]] Atemrhythmus am Drop-in",
-       "from": 6,
        "to": 6,
        "l": [
         {
@@ -319,7 +297,7 @@
        ]
       },
       {
-       "v": "Sich konzentrieren T1:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort",
+       "v": "Sich konzentrieren:\n[[SC1]] Strecken-/​Schiessstand-/​Schanzen­besichtigung 360°\n[[SC2]] Abstoss/Absprung\n[[SC3]] Body-Scan beim Einlaufen\n[[SC4]] Schlüsselwort",
        "from": 3,
        "to": 3,
        "l": [
@@ -330,7 +308,7 @@
        ]
       },
       {
-       "v": "Sich konzentrieren T2:\n[[SC1]] Besichtigung Rennstrecke / Schanze\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken Parkieren\n[[SC4]] 16-Sekunden Routine",
+       "v": "Sich konzentrieren:\n[[SC1]] Besichtigung Rennstrecke / Schanze\n[[SC2]] Streckenpunkte\n[[SC3]] Gedanken parkieren\n[[SC4]] 16-Sekunden Routine",
        "from": 4,
        "to": 4,
        "l": [
@@ -341,7 +319,7 @@
        ]
       },
       {
-       "v": "Sich konzentrieren T3:\n[[SC1]] Wettkampf-Scan\n[[SC2]] Markierung bei Renntempo\n[[SC3]] Debriefing\n[[SC4]] Start-Fokus",
+       "v": "Sich konzentrieren:\n[[SC1]] Wettkampf-Scan\n[[SC2]] Markierungen bei Renntempo\n[[SC3]] Debriefing\n[[SC4]] Start-Fokus",
        "from": 5,
        "to": 5,
        "l": [
@@ -352,7 +330,7 @@
        ]
       },
       {
-       "v": "Sich konzentrieren T4:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus am Start",
+       "v": "Sich konzentrieren:\n[[SC1]] Situationsanalyse am Renntag\n[[SC2]] Sicht Simulation\n[[SC3]] Fokus Protokoll\n[[SC4]] Mentaler Lauf/Sprung mit allen Sinnen\n[[SC5]] Ein Gedanke ein Lauf/Schuss/Sprung\n[[SC6]] Atemrhythmus im Start",
        "from": 6,
        "to": 6,
        "l": [
