@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup · F3 Breitensport & Spitzensport</title>
+<style>
+:root{--red:#d52b1e;--found:#1f8fa6;--talent:#e2a900;--elite:#e8772e;--mast:#d52b1e;
+ --card:#fff;--line:#e4e8ec;--mut:#697080;--ink:#1d2630;
+ --phf:#f4faf8;--pht:#fcf8ee;--phe:#fdf5ef;--phm:#fcefef}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+ background:#eef2f6;color:var(--ink);padding:26px 18px 60px}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:21px;margin:0 0 4px}
+.sub{color:var(--mut);font-size:13.5px;margin-bottom:26px}
+.var{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px 20px;margin-bottom:30px;
+ box-shadow:0 2px 10px rgba(29,38,48,.05)}
+.vh{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.vh b{font-size:16px}
+.tag{font-size:10px;font-weight:800;letter-spacing:.05em;color:#fff;background:var(--red);border-radius:12px;padding:2px 9px}
+.tag.g{background:#4a5563}
+.note{font-size:13px;color:var(--mut);line-height:1.55;margin:4px 0 18px}
+.pro{font-size:12.5px;line-height:1.6;margin-top:16px;color:#33404d;background:#f6f8fa;border-radius:10px;padding:10px 14px}
+.pro b{color:var(--ink)}
+
+/* ---------- gemeinsame Bausteine ---------- */
+.st{color:#fff;border-radius:9px;text-align:center;font-weight:800;font-size:12.5px;
+ padding:8px 4px 6px;line-height:1.15}
+.st small{display:block;font-weight:600;font-size:9px;opacity:.85}
+.f{background:var(--found)} .t{background:var(--talent);color:#3b2e00} .e{background:var(--elite)} .m{background:var(--mast)}
+
+/* ---------- Variante 1: Weiche ---------- */
+.v1{display:grid;grid-template-columns:repeat(2,76px) 26px 1fr;gap:7px;align-items:stretch}
+.v1 .spalte{display:flex;flex-direction:column;gap:7px}
+.v1 .pfeil{display:flex;align-items:center;justify-content:center;color:#9aa6b2;font-size:20px}
+.aeste{display:flex;flex-direction:column;gap:10px}
+.ast{border-radius:12px;padding:10px 14px}
+.ast .lbl{font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--mut);margin-bottom:7px}
+.ast.oben{background:linear-gradient(90deg,var(--pht),var(--phe) 55%,var(--phm));border:1px solid var(--line)}
+.ast .reihe{display:flex;gap:6px}
+.ast .reihe .st{flex:1}
+.ast.unten{background:var(--phf);border:1.5px dashed var(--found);cursor:pointer;display:flex;align-items:center;gap:14px}
+.ast.unten .f3chip{background:var(--found);color:#fff;border-radius:9px;font-weight:800;font-size:12.5px;padding:8px 12px 6px;text-align:center;flex:none}
+.ast.unten .f3chip small{display:block;font-weight:600;font-size:9px;opacity:.85}
+.ast.unten .txt{font-size:12.5px;line-height:1.45;color:#14525f}
+.ast.unten .txt b{font-size:13px}
+.ast.unten .inf{margin-left:auto;font-size:22px;color:var(--found);font-weight:800;display:flex;align-items:center;gap:6px}
+.ast.unten .inf svg{width:30px;height:18px}
+
+/* ---------- Variante 2: Band in der Tabelle ---------- */
+.tbl{overflow-x:auto}
+.grid2{display:grid;grid-template-columns:120px repeat(10,86px);gap:5px;min-width:max-content}
+.grid2 .rl{background:#f2f5f8;border-radius:8px;font-size:11px;font-weight:700;color:#4a5563;padding:8px;display:flex;align-items:center}
+.cell{background:#fff;border:1px solid var(--line);border-radius:8px;font-size:10.5px;color:#4a5563;padding:7px 8px;min-height:52px}
+.cell.pf{background:var(--phf)} .cell.pt{background:var(--pht)} .cell.pe{background:var(--phe)} .cell.pm{background:var(--phm)}
+.band{grid-column:4 / 14;background:var(--phf);border:1.5px dashed var(--found);border-radius:9px;
+ display:flex;align-items:center;gap:10px;padding:7px 12px;font-size:11.5px;color:#14525f;cursor:pointer}
+.band b{font-size:12px}
+.band .bchip{background:var(--found);color:#fff;border-radius:7px;font-size:10px;font-weight:800;padding:3px 8px;flex:none}
+.band .arr{margin-left:auto;color:var(--found);font-weight:800;font-size:16px}
+.split{position:relative}
+.split:after{content:"teilt sich";position:absolute;right:-4px;top:-9px;background:#fff;border:1px solid var(--found);
+ color:var(--found);font-size:8px;font-weight:800;border-radius:10px;padding:1px 6px}
+
+/* ---------- Variante 3: Umschalter ---------- */
+.toggle{display:inline-flex;background:#eef1f4;border-radius:12px;padding:4px;gap:4px;margin-bottom:14px}
+.toggle span{font-size:12.5px;font-weight:700;border-radius:9px;padding:7px 16px;color:var(--mut);cursor:pointer}
+.toggle .on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(29,38,48,.12)}
+.grid3{display:grid;grid-template-columns:120px repeat(2,110px) 260px;gap:5px}
+.grid3 .st.breit{background:var(--found);position:relative;overflow:hidden}
+.grid3 .st.breit:after{content:"";position:absolute;right:-7px;top:50%;transform:translateY(-50%);
+ border:9px solid transparent;border-left-color:var(--found)}
+.lebenslang{font-size:9px!important;opacity:.95}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>F3: Breitensport & Spitzensport – drei Darstellungs-Varianten</h1>
+<div class="sub">Grundidee FTEM: Schon nach F2 verzweigt sich der Weg – F3 gibt es auf beiden Ästen: im Spitzensport als Durchgangsstufe (U10–U12), im Breitensport ein Leben lang. Inhalte Breitensport folgen von Oli Genzoni (hier als Platzhalter).</div>
+
+<!-- ================= VARIANTE 1 ================= -->
+<div class="var">
+  <div class="vh"><b>Variante 1 · Die Weiche</b> <span class="tag">Empfehlung</span></div>
+  <div class="note">Einmalige, klickbare Grafik <b>zuoberst im Athlet:innen-Weg</b> (vor den Themen): zeigt die Verzweigung nach F2 – F3 erscheint auf beiden Ästen. Der untere Ast öffnet einen eigenen <b>Breitensport-Popup</b> mit Olis Inhalten. Die Themen-Tabelle darunter bleibt unverändert = Spitzensport.</div>
+  <div class="v1">
+    <div class="spalte"><div class="st f">F1<small>U8</small></div></div>
+    <div class="spalte"><div class="st f split">F2<small>U8–U10</small></div></div>
+    <div class="pfeil">→</div>
+    <div class="aeste">
+      <div class="ast oben">
+        <div class="lbl">SPITZENSPORT – DER ATHLET:INNEN-WEG (INHALTE UNTEN)</div>
+        <div class="reihe">
+          <div class="st f">F3<small>U10–U12</small></div>
+          <div class="st t">T1</div><div class="st t">T2</div><div class="st t">T3</div><div class="st t">T4</div>
+          <div class="st e">E1</div><div class="st e">E2</div><div class="st m">M</div>
+        </div>
+      </div>
+      <div class="ast unten">
+        <div class="f3chip">F3<small>ein Leben lang</small></div>
+        <div class="txt"><b>Breitensport</b><br>Schneesport als lebenslange Aktivität – über alle Altersstufen. Zum Breitensport-Bereich →</div>
+        <div class="inf">
+          <svg viewBox="0 0 34 18" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M9 9c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6zm12 0c0-3.3 2.7-6 6-6"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pro"><b>Pro:</b> erklärt das FTEM-Modell auf einen Blick · kein Eingriff in die bestehende Tabelle · Breitensport-Inhalte können als eigener Bereich wachsen (eigene Themen, ohne Altersspalten).<br><b>Contra:</b> Breitensport ist «einen Klick entfernt», nicht direkt in den Themen sichtbar.</div>
+</div>
+
+<!-- ================= VARIANTE 2 ================= -->
+<div class="var">
+  <div class="vh"><b>Variante 2 · Breitensport-Band in der Tabelle</b> <span class="tag g">Alternative</span></div>
+  <div class="note">In jedem Thema läuft unter der Stufen-Kopfzeile ein schmales <b>Band ab der F3-Spalte bis M</b>: «Breitensport = F3 ein Leben lang» (parallel zum Spitzensport-F3). Klick aufs Band öffnet den Breitensport-Inhalt des Themas.</div>
+  <div class="tbl"><div class="grid2">
+    <div class="rl"></div>
+    <div class="st f">F1</div><div class="st f split">F2</div><div class="st f">F3</div>
+    <div class="st t">T1</div><div class="st t">T2</div><div class="st t">T3</div><div class="st t">T4</div>
+    <div class="st e">E1</div><div class="st e">E2</div><div class="st m">M</div>
+    <div class="rl" style="background:none"></div>
+    <div class="band"><span class="bchip">F3 ∞</span><span><b>Breitensport:</b> bleibt ein Leben lang F3 – Inhalte ansehen</span><span class="arr">→</span></div>
+    <div class="rl">Skills-Checks</div>
+    <div class="cell pf">…</div><div class="cell pf">…</div><div class="cell pf">…</div>
+    <div class="cell pt">…</div><div class="cell pt">…</div><div class="cell pt">…</div><div class="cell pt">…</div>
+    <div class="cell pe">…</div><div class="cell pe">…</div><div class="cell pm">…</div>
+  </div></div>
+  <div class="pro"><b>Pro:</b> Verzweigung ist in jedem Thema präsent, direkt neben den Inhalten.<br><b>Contra:</b> wiederholt sich 15× pro Sportart (visuelles Rauschen) · kostet Höhe in jeder Tabelle · Breitensport hat pro Thema evtl. gar keinen eigenen Inhalt.</div>
+</div>
+
+<!-- ================= VARIANTE 3 ================= -->
+<div class="var">
+  <div class="vh"><b>Variante 3 · Umschalter Spitzensport / Breitensport</b> <span class="tag g">Alternative</span></div>
+  <div class="note">Oben im Athlet:innen-Weg ein Umschalter (wie der Sprachwechsler). <b>Breitensport-Ansicht:</b> gemeinsame Stufen F1–F2, danach eine breite Spalte «F3 Breitensport · alle Altersstufen» mit Olis Inhalten pro Thema. Spitzensport-Ansicht = heutige Seite.</div>
+  <div class="toggle"><span>Spitzensport</span><span class="on">Breitensport</span></div>
+  <div class="grid3">
+    <div class="rl" style="background:none"></div>
+    <div class="st f">F1<small>U8</small></div><div class="st f">F2<small>U8–U10</small></div>
+    <div class="st breit">F3 Breitensport<small class="lebenslang">ab U10 · alle Altersstufen · ein Leben lang</small></div>
+    <div class="rl">Skills-Checks</div>
+    <div class="cell pf">…</div><div class="cell pf">…</div>
+    <div class="cell pf">Inhalt Breitensport (Oli Genzoni)</div>
+  </div>
+  <div class="pro"><b>Pro:</b> Breitensport wird vollwertiger Bereich mit eigener Tabelle pro Thema · skaliert, wenn Oli viel Inhalt liefert.<br><b>Contra:</b> grösster Umbau (zweite Inhaltsebene pro Sportart und Thema, Admin, Übersetzungen) · Besucher:innen müssen den Umschalter entdecken.</div>
+</div>
+
+<div class="sub" style="margin-top:-6px">Kombinierbar: Variante 1 als Einstieg + später Variante 3, wenn die Breitensport-Inhalte da sind. Das Etikett «teilt sich» sitzt neu an der F2-Kachel und passt zu allen Varianten.</div>
+</div>
+</body>
+</html>
