@@ -287,7 +287,7 @@
    "group": "Sport & Athlet:in",
    "rows": [
     {
-     "label": "Skills-Checks (SC) & Leistungstests (LT) Technik",
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Jumps",
      "segs": [
       {
        "v": "",
@@ -302,14 +302,54 @@
        "l": []
       },
       {
-       "v": "",
+       "v": "Anforderungsprofil aus den Podestresultaten Weltcup, WM und Olympia 2024/25 und 2025/26\n\n((Männer))\nKicker XL\n• Big Air (60 Sprünge): meist 1800 (43 %), 1980 (35 %), 1620 (8 %); häufigste Tricks Backside 1980 (22 %), Frontside 1800 (12 %), Switch Backside 1980 (12 %)\n• Slopestyle (68 Sprünge): meist 1440 (24 %), 1620 (24 %), 1260 (19 %); häufigste Tricks Switch Backside 1620 (12 %), Switch Backside 1260 und Frontside Double 1080 (je 6 %)\n• Drehrichtung Big Air: Backside 35 %, Frontside 28 %, Switch Backside 23 %, Cab 12 %; Slopestyle: Switch Backside 28 %, Backside 26 %, Frontside 19 %, Cab 16 %\n• 67 % der Podestplätze mit Cab oder Switch BS; Grabs v. a. Indy, Melon, Weddle\n\n((Frauen))\nKicker XL\n• Big Air (60 Sprünge): meist 1080 (52 %), 1260 (28 %), 1440 (15 %); häufigste Tricks Backside Double 1080 (18 %), Frontside 1080 (15 %), Backside 1260 (8 %)\n• Slopestyle (74 Sprünge): meist 900 (32 %), 1080 (26 %), 720 (16 %); häufigste Tricks Cab 900 (9 %), Backside 900 und Frontside 720 (je 8 %)\n• Drehrichtung Big Air: Backside 43 %, Frontside 27 %, Cab 17 %, Switch Backside 13 %; Slopestyle: Backside 35 %, Frontside 28 %, Cab 22 %, Switch Backside 11 %\n• 60 % der Podestplätze mit Cab oder Switch BS; Grabs v. a. Melon, Mute, Weddle, Indy",
        "from": 7,
-       "to": 8,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Rails",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
        "l": []
       },
       {
        "v": "",
-       "from": 9,
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Anforderungsprofil aus den Podestresultaten Weltcup, WM und Olympia 2024/25 und 2025/26\n\n((Männer))\n• On (72 Rails): gerade 50 %, 270 29 %, 450 10 %, 180 7 %, 360 4 %\n• Out: 270 39 %, gerade 38 %, 630 14 %; Pretzel 8 %, übrige Spin outs 54 %\n• Rail-Tricks: Boardslide 40 %, 50-50 13 %, Bluntslide 10 %, Lipslide 6 %; Switch/Cab angefahren 43 %, Underflip out 4 %\n\n((Frauen))\n• On (72 Rails): gerade 82 %, 270 11 %, 180 4 %, 360 3 %\n• Out: 270 51 %, gerade 26 %, 450 10 %, 360 6 %; Pretzel 13 %, übrige Spin outs 61 %\n• Rail-Tricks: Boardslide 42 %, Bluntslide 19 %, Lipslide 17 %, 50-50 14 %; Switch/Cab angefahren 36 %, Underflip out 6 %",
+       "from": 7,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Skills-Checks (SC) & Leistungstests (LT) Halfpipe",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 2,
+       "l": []
+      },
+      {
+       "v": "",
+       "from": 3,
+       "to": 6,
+       "l": []
+      },
+      {
+       "v": "Anforderungsprofil aus den Podestresultaten Weltcup, WM und Olympia 2024/25 und 2025/26\n\n((Männer))\n• 4.9 Hits pro Run (163 Hits); meist 1260 (31 %), 1440 (26 %), 1080 (23 %); 69 % Doubles, 6 % Triples\n• Rotation pro Hit: Hit 1 1080–1260, Hit 2 1080–1440, Hit 3 1260, Hit 4 1080–1440, Hit 5 900–1260\n• Drehrichtung: Frontside 30 %, Backside 25 %, Cab 21 %, Switch Backside 20 %\n• Häufigste Tricks Frontside Double 1260 (11 %), Backside Double 1260 (9 %), Cab Double 1080 (8 %); Alley-oop 8 %, Inverts 9 %; Grabs v. a. Mute, Indy, Weddle\n\n((Frauen))\n• 5.2 Hits pro Run (171 Hits); meist 720 (29 %), 540 (26 %), 900 (25 %); 97 % Singles\n• Rotation pro Hit 540–900; grösste Rotation meist im ersten Hit (45 %)\n• Drehrichtung: Frontside 39 %, Backside 27 %, Cab 16 %, Switch Backside 9 %\n• Häufigste Tricks Backside 540 (14 %), Frontside 900 und Frontside 720 (je 13 %); Alley-oop 8 %, Inverts 9 %; Grabs v. a. Mute, Indy, Melon",
+       "from": 7,
        "to": 9,
        "l": []
       }
