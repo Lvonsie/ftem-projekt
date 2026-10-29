@@ -1293,19 +1293,34 @@
        "v": "gemäss RV und Swiss-Ski",
        "from": 5,
        "to": 6,
-       "l": []
+       "l": [
+        {
+         "text": "Swiss-Ski 2027/28",
+         "href": "assets/docs/Selektionsrichtlinien_Snowboard_Alpin_Kader_2027-28_DE.pdf"
+        }
+       ]
       },
       {
        "v": "gemäss Swiss-Ski",
        "from": 7,
        "to": 8,
-       "l": []
+       "l": [
+        {
+         "text": "Swiss-Ski 2027/28",
+         "href": "assets/docs/Selektionsrichtlinien_Snowboard_Alpin_Kader_2027-28_DE.pdf"
+        }
+       ]
       },
       {
        "v": "gemäss Swiss-Ski",
        "from": 9,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Swiss-Ski 2027/28",
+         "href": "assets/docs/Selektionsrichtlinien_Snowboard_Alpin_Kader_2027-28_DE.pdf"
+        }
+       ]
       }
      ]
     }

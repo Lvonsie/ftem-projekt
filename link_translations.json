@@ -411,5 +411,14 @@
  },
  "https://www.swiss-ski.ch/langlauf/downloads/": {
   "fr": "https://www.swiss-ski.ch/fr/ski-de-fond/telechargements/"
+ },
+ "assets/docs/Selektionsrichtlinien_Skicross_Kader_2027-28_DE.pdf": {
+  "fr": "assets/docs/Selektionsrichtlinien_Skicross_Kader_2027-28_FR.pdf"
+ },
+ "assets/docs/Selektionsrichtlinien_Snowboard_Alpin_Kader_2027-28_DE.pdf": {
+  "fr": "assets/docs/Selektionsrichtlinien_Snowboard_Alpin_Kader_2027-28_FR.pdf"
+ },
+ "assets/docs/Selektionsrichtlinien_Snowboardcross_Kader_2027-28_DE.pdf": {
+  "fr": "assets/docs/Selektionsrichtlinien_Snowboardcross_Kader_2027-28_FR.pdf"
  }
 }
