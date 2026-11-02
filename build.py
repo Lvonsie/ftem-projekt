@@ -4055,6 +4055,14 @@ __MAINCSS__
 .stat-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .stat-h b{font-size:15px}
 .stat-pill{font-size:11px;font-weight:800;color:#fff;background:#d52b1e;border-radius:999px;padding:3px 10px}
+.stat-range{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 4px}
+.stat-range span{font-size:12px;font-weight:700;color:#4a5563;margin-right:2px}
+.stat-range button{font:inherit;font-size:12px;font-weight:700;border:1px solid #d9dee4;background:#fff;color:#2c3440;border-radius:999px;padding:5px 12px;cursor:pointer}
+.stat-range button:hover{border-color:#d52b1e}
+.stat-range button.on{background:#d52b1e;border-color:#d52b1e;color:#fff}
+[data-theme="dark"] .stat-range span{color:#aeb8c6}
+[data-theme="dark"] .stat-range button{background:transparent;border-color:rgba(255,255,255,.2);color:#e6ebf1}
+[data-theme="dark"] .stat-range button.on{background:#d52b1e;border-color:#d52b1e;color:#fff}
 .stat-sub{font-size:11.5px;color:#697080;margin:4px 0 12px}
 .stat-kpis{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
 .stat-kpi{flex:1 1 118px;min-width:118px;background:#f7f8fa;border:1px solid #e9edf1;border-radius:10px;padding:10px 12px}
@@ -4311,6 +4319,7 @@ details.theme.shref:hover,details.theme.shref[open]{opacity:1}
   </div>
   <div id="statspanel" hidden>
     <div class="glosbar"><b style="font-size:14px">Statistik &ndash; Nutzung der Webseite</b><span id="statinfo" class="astatus"></span></div>
+    <div id="statrange" class="stat-range" role="group" aria-label="Zeitraum"><span>Zeitraum:</span><button type="button" data-d="7" onclick="setStatDays(7)">7 Tage</button><button type="button" data-d="30" onclick="setStatDays(30)">30 Tage</button><button type="button" data-d="90" onclick="setStatDays(90)">90 Tage</button><button type="button" data-d="365" onclick="setStatDays(365)">365 Tage</button><button type="button" data-d="3650" onclick="setStatDays(3650)">Seit Start</button></div>
     <div id="statsbody"></div>
   </div>
   <div id="editwrap">__ADMIN_SECTIONS__</div>
@@ -4485,30 +4494,54 @@ function togglePend(){
 }
 // --- Statistik: Nutzungszahlen der Webseite (Tabelle ftem_stats) -------------
 // Bausteine nach der Club-App-Vorlage: KPI-Kacheln, CSS-Saeulenchart (gestapelt),
-// Top-5-Tabelle. Aggregiert wird im Browser (rohe Zeilen der letzten 30 Tage).
+// Top-Tabelle. Aggregiert wird im Browser. Zeitraum waehlbar (7/30/90/365 Tage
+// oder seit Start). Supabase liefert pro Anfrage hoechstens 1000 Zeilen, darum
+// wird seitenweise geladen (Range-Header, parallel).
+var STAT_DAYS=30;
 function _dkey(d){function p(n){return (n<10?'0':'')+n;}return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
-function tagesChart(reihen,tage,farben,einheit){
-  var days=[],m={};
-  for(var i=tage-1;i>=0;i--){var d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-i);var k=_dkey(d);days.push({k:k,d:d});m[k]={};}
-  reihen.forEach(function(r){var k=_dkey(new Date(r.ts));if(m[k])m[k][r.key]=(m[k][r.key]||0)+1;});
-  var keys=Object.keys(farben),max=0;
+var _MON=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+// Raster: bis 31 Tage pro Tag, bis 120 Tage pro Woche (ab Montag), sonst pro Monat
+function _statGran(tage){return tage<=31?'tag':(tage<=120?'woche':'monat');}
+function _bucketStart(d,gran){var x=new Date(d);x.setHours(0,0,0,0);
+  if(gran==='woche'){x.setDate(x.getDate()-((x.getDay()+6)%7));}
+  else if(gran==='monat'){x.setDate(1);}
+  return x;}
+function _bucketNext(x,gran){var y=new Date(x);
+  if(gran==='tag')y.setDate(y.getDate()+1);else if(gran==='woche')y.setDate(y.getDate()+7);else y.setMonth(y.getMonth()+1);
+  return y;}
+function zeitChart(reihen,tage,farben,einheit){
+  var gran=_statGran(tage),start=new Date();start.setHours(0,0,0,0);start.setDate(start.getDate()-(tage-1));
+  var b=_bucketStart(start,gran),end=new Date(),days=[],m={};
+  while(b<=end){var k=_dkey(b);days.push({k:k,d:new Date(b)});m[k]={};b=_bucketNext(b,gran);}
+  reihen.forEach(function(r){var k=_dkey(_bucketStart(new Date(r.ts),gran));if(m[k])m[k][r.key]=(m[k][r.key]||0)+1;});
+  var keys=Object.keys(farben),max=0,n=days.length;
   days.forEach(function(dy){var s=0;keys.forEach(function(kk){s+=m[dy.k][kk]||0;});dy.sum=s;if(s>max)max=s;});
   var mx=max||1,cols='',xs='';
-  days.forEach(function(dy){
+  days.forEach(function(dy,i){
     var segs='',tip=[];
-    keys.forEach(function(kk){var n=m[dy.k][kk]||0;
-      if(n>0){segs+='<span class="stat-seg" style="height:'+(n/mx*100)+'%;background:'+farben[kk]+'"></span>';
-        if(keys.length>1)tip.push(kk+': '+n);}});
-    var dd=dy.d.getDate(),mm=dy.d.getMonth()+1;
-    var title=dd+'.'+mm+'. · '+dy.sum+' '+einheit+(tip.length?' ('+tip.join(', ')+')':'');
+    keys.forEach(function(kk){var c=m[dy.k][kk]||0;
+      if(c>0){segs+='<span class="stat-seg" style="height:'+(c/mx*100)+'%;background:'+farben[kk]+'"></span>';
+        if(keys.length>1)tip.push(kk+': '+c);}});
+    var dd=dy.d.getDate(),mm=dy.d.getMonth()+1,lbl,title;
+    if(gran==='tag'){title=dd+'.'+mm+'.';lbl=(n<=14)?String(dd):([1,5,10,15,20,25].indexOf(dd)>=0?dd+'.':'');}
+    else if(gran==='woche'){title='Woche ab '+dd+'.'+mm+'.';lbl=(n<=10||i%2===0)?dd+'.'+mm+'.':'';}
+    else{title=_MON[mm-1]+' '+dy.d.getFullYear();lbl=_MON[mm-1]+(mm===1||i===0?' '+String(dy.d.getFullYear()).slice(2):'');}
+    title+=' · '+dy.sum+' '+einheit+(tip.length?' ('+tip.join(', ')+')':'');
     cols+='<span class="stat-col" title="'+fbEsc(title)+'">'+segs+'</span>';
-    xs+='<i>'+((tage<=14)?String(dd):([1,5,10,15,20,25].indexOf(dd)>=0?dd+'.':''))+'</i>';
+    xs+='<i>'+lbl+'</i>';
   });
   return '<div class="stat-cht">'+cols+'<span class="stat-max">'+max+'</span></div><div class="stat-x">'+xs+'</div>';
 }
 function _statKpi(v,lbl){return '<div class="stat-kpi"><b>'+v+'</b><span>'+lbl+'</span></div>';}
-function renderStats(rows){
+function _statRange(tage){return tage>=3650?'seit Start':(tage===365?'365 Tagen':tage+' Tagen');}
+function renderStats(rows,tage){
   var body=document.getElementById('statsbody');
+  // "Seit Start": effektive Laenge ab dem aeltesten Eintrag
+  if(tage>=3650){var old=rows.length?new Date(rows[rows.length-1].created_at):new Date();
+    var eff=Math.max(1,Math.ceil((Date.now()-new Date(old).setHours(0,0,0,0))/864e5));}
+  else var eff=tage;
+  var PER=tage>=3650?'seit Start':(tage+' T'), ZR=tage>=3650?'seit Start':('in '+_statRange(tage)), gran=_statGran(eff);
+  var granTxt={tag:'pro Tag',woche:'pro Woche',monat:'pro Monat'}[gran];
   var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5;
   var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[];
   rows.forEach(function(x){
@@ -4522,31 +4555,32 @@ function renderStats(rows){
       s.n++;if(x.created_at>s.last)s.last=x.created_at;sports[x.meta]=s;}
   });
   var LFARBEN={'DE':'#d52b1e','FR':'#1f8fa6','IT':'#e2a900','EN':'#e8772e'};
-  // Karte B: Zugriffe
-  var leg='';Object.keys(LFARBEN).forEach(function(l){if(zuLang[l])leg+='<i><span class="dot" style="background:'+LFARBEN[l]+'"></span>'+l+' · '+zuLang[l]+'</i>';});
+  var leg='';Object.keys(LFARBEN).forEach(function(l){if(zuLang[l])leg+='<i><span class="dot" style="background:'+LFARBEN[l]+'"></span>'+l+' · '+zuLang[l]+' ('+Math.round(zuLang[l]/zu.length*100)+' %)</i>';});
   var spName={};for(var oi=0;oi<sel.options.length;oi++){var o=sel.options[oi];if(o.value!=='__shared')spName[o.value]=o.textContent;}
+  var spSum=0;Object.keys(sports).forEach(function(k){spSum+=sports[k].n;});
   var top=Object.keys(sports).map(function(k){return {id:k,n:sports[k].n,last:sports[k].last};})
-    .sort(function(a,b){return b.n-a.n;}).slice(0,5);
+    .sort(function(a,b){return b.n-a.n;});
   function fdate(iso){var d=new Date(iso);function p(n){return (n<10?'0':'')+n;}
     return p(d.getDate())+'.'+p(d.getMonth()+1)+'.'+d.getFullYear()+' '+p(d.getHours())+':'+p(d.getMinutes());}
-  var topHtml=top.length?('<div class="stat-cht-t">Meistbesuchte Sportarten (30 Tage)</div>'
-    +'<table class="stat-top"><thead><tr><th>Sportart</th><th>Aufrufe</th><th>zuletzt</th></tr></thead><tbody>'
-    +top.map(function(x){return '<tr><td>'+fbEsc(spName[x.id]||x.id)+'</td><td>'+x.n+'</td><td>'+fdate(x.last)+'</td></tr>';}).join('')
+  var topHtml=top.length?('<div class="stat-cht-t">Besuchte Sportarten ('+PER+')</div>'
+    +'<table class="stat-top"><thead><tr><th>Sportart</th><th>Aufrufe</th><th>Anteil</th><th>zuletzt</th></tr></thead><tbody>'
+    +top.map(function(x){return '<tr><td>'+fbEsc(spName[x.id]||x.id)+'</td><td>'+x.n+'</td><td>'+Math.round(x.n/spSum*100)+' %</td><td>'+fdate(x.last)+'</td></tr>';}).join('')
     +'</tbody></table>'):'';
-  var hZu='<div class="stat-card"><div class="stat-h"><b>Zugriffe</b><span class="stat-pill">'+zu.length+' in 30 Tagen</span></div>'
+  function avg(n){return (n/eff).toFixed(1).replace('.',',');}
+  var kpiZr=tage>=3650?'Seit Start':(tage+' Tage');
+  var hZu='<div class="stat-card"><div class="stat-h"><b>Zugriffe</b><span class="stat-pill">'+zu.length+' '+ZR+'</span></div>'
     +'<div class="stat-sub">Ein Zugriff = eine Browser-Sitzung (einmal pro Besuch gezählt, ohne Cookies, IDs oder IP-Adressen).</div>'
-    +'<div class="stat-kpis">'+_statKpi(zuToday,'Heute')+_statKpi(zu7,'7 Tage')+_statKpi(zu.length,'30 Tage')+_statKpi((zu.length/30).toFixed(1).replace('.',','),'Ø pro Tag · 30 T')+'</div>'
-    +'<div class="stat-cht-t">Zugriffe pro Tag (30 Tage) · gestapelt nach Sprache</div>'
-    +tagesChart(zu,30,LFARBEN,'Zugriffe')
+    +'<div class="stat-kpis">'+_statKpi(zuToday,'Heute')+_statKpi(zu7,'7 Tage')+(tage!==7?_statKpi(zu.length,kpiZr):'')+_statKpi(avg(zu.length),'Ø pro Tag · '+PER)+'</div>'
+    +'<div class="stat-cht-t">Zugriffe '+granTxt+' ('+PER+') · gestapelt nach Sprache</div>'
+    +zeitChart(zu,eff,LFARBEN,'Zugriffe')
     +(leg?'<div class="stat-leg">'+leg+'</div>':'')
     +topHtml+'</div>';
-  // Karte A: KI-Fragen
-  var hKi='<div class="stat-card"><div class="stat-h"><b>KI-Fragen (FTEM-Coach)</b><span class="stat-pill">'+ki.length+' in 30 Tagen</span></div>'
+  var hKi='<div class="stat-card"><div class="stat-h"><b>KI-Fragen (FTEM-Coach)</b><span class="stat-pill">'+ki.length+' '+ZR+'</span></div>'
     +'<div class="stat-sub">Eine Frage = eine beantwortete Frage an den FTEM-Coach (serverseitig gezählt, Limite 10/Tag pro IP).</div>'
-    +'<div class="stat-kpis">'+_statKpi(kiToday,'Heute')+_statKpi(ki7,'7 Tage')+_statKpi(ki.length,'30 Tage')+_statKpi((ki.length/30).toFixed(1).replace('.',','),'Ø pro Tag · 30 T')+'</div>'
-    +'<div class="stat-cht-t">Fragen pro Tag (14 Tage)</div>'
-    +tagesChart(ki,14,{'KI-Fragen':'#d52b1e'},'Fragen')
-    +(qaList.length?('<div class="stat-cht-t">Letzte Fragen &amp; Antworten ('+Math.min(qaList.length,100)+')</div>'
+    +'<div class="stat-kpis">'+_statKpi(kiToday,'Heute')+_statKpi(ki7,'7 Tage')+(tage!==7?_statKpi(ki.length,kpiZr):'')+_statKpi(avg(ki.length),'Ø pro Tag · '+PER)+'</div>'
+    +'<div class="stat-cht-t">Fragen '+granTxt+' ('+PER+')</div>'
+    +zeitChart(ki,eff,{'KI-Fragen':'#d52b1e'},'Fragen')
+    +(qaList.length?('<div class="stat-cht-t">Letzte Fragen &amp; Antworten ('+Math.min(qaList.length,100)+(qaList.length>100?' von '+qaList.length:'')+')</div>'
       +'<div class="stat-qa">'+qaList.slice(0,100).map(function(x){
         var sportN=x.s?fbEsc(x.s):'';
         return '<details><summary><span class="qa-t">'+fdate(x.ts)+'</span>'
@@ -4556,21 +4590,39 @@ function renderStats(rows){
           +'<div class="qa-a">'+fbEsc(x.a||'').replace(/\n/g,'<br>')+'</div></details>';
       }).join('')+'</div>'):'<p class="glosnote">Frage-Texte erscheinen hier ab dem nächsten Deploy (ältere Fragen wurden nur gezählt, ohne Text).</p>')
     +'</div>';
-  var intro=rows.length?'':'<p class="glosnote" style="margin-top:14px">Noch keine Daten – die Zählung beginnt, sobald der neue Stand veröffentlicht ist und die ersten Besuche eintreffen.</p>';
+  var intro=rows.length?'':'<p class="glosnote" style="margin-top:14px">Keine Daten in diesem Zeitraum.</p>';
   body.innerHTML=intro+hZu+hKi;
-  document.getElementById('statinfo').textContent='letzte 30 Tage · aktualisiert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('statinfo').textContent=(tage>=3650?'seit Start':('letzte '+tage+' Tage'))+' · '+rows.length+' Einträge · aktualisiert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});
 }
+function _statRangeBtns(){
+  var w=document.getElementById('statrange');if(!w)return;
+  w.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',+b.dataset.d===STAT_DAYS);});
+}
+function setStatDays(d){STAT_DAYS=d;_statRangeBtns();loadStats();}
 function loadStats(){
-  var body=document.getElementById('statsbody');
+  var body=document.getElementById('statsbody'),tage=STAT_DAYS;
+  _statRangeBtns();
   body.innerHTML='<p class="glosnote" style="margin-top:14px">Lade Statistik …</p>';
-  var since=new Date(Date.now()-30*864e5).toISOString();
-  fetch(SUPA_URL+'/rest/v1/ftem_stats?select=created_at,kind,meta&created_at=gte.'+encodeURIComponent(since)+'&order=created_at.desc&limit=5000',
-    {headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-   .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-   .then(function(rows){renderStats(rows||[]);})
+  var q=SUPA_URL+'/rest/v1/ftem_stats?select=created_at,kind,meta&order=created_at.desc,id.desc';
+  if(tage<3650)q+='&created_at=gte.'+encodeURIComponent(new Date(Date.now()-tage*864e5).toISOString());
+  var H={apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY};
+  var PAGE=1000;
+  function page(i){return fetch(q,{headers:Object.assign({'Range-Unit':'items',Range:(i*PAGE)+'-'+(i*PAGE+PAGE-1)},H)})
+    .then(function(r){if(!r.ok&&r.status!==206)throw new Error('HTTP '+r.status);return r.json();});}
+  // erste Seite mit Gesamtzahl holen, Rest parallel
+  fetch(q,{headers:Object.assign({'Range-Unit':'items',Range:'0-'+(PAGE-1),Prefer:'count=exact'},H)})
+   .then(function(r){if(!r.ok&&r.status!==206)throw new Error('HTTP '+r.status);
+     var cr=r.headers.get('content-range')||'',tot=parseInt(cr.split('/')[1],10);
+     return r.json().then(function(first){
+       var n=isNaN(tot)?1:Math.ceil(tot/PAGE),ps=[];
+       if(n>1)body.innerHTML='<p class="glosnote" style="margin-top:14px">Lade Statistik … ('+tot+' Einträge)</p>';
+       for(var i=1;i<n;i++)ps.push(page(i));
+       return Promise.all(ps).then(function(rest){return rest.reduce(function(a,b){return a.concat(b);},first);});
+     });})
+   .then(function(rows){if(tage===STAT_DAYS)renderStats(rows||[],tage);})
    .catch(function(e){
-     body.innerHTML='<div class="stat-err"><b>Statistik-Tabelle noch nicht eingerichtet</b> ('+fbEsc(e.message)+').<br>'
-      +'Luca kann sie in Supabase (SQL-Editor) einmalig anlegen:<br>'
+     body.innerHTML='<div class="stat-err"><b>Statistik konnte nicht geladen werden</b> ('+fbEsc(e.message)+').<br>'
+      +'Falls die Tabelle fehlt, kann Luca sie in Supabase (SQL-Editor) einmalig anlegen:<br>'
       +'<code>create table if not exists public.ftem_stats (id bigint generated always as identity primary key, created_at timestamptz not null default now(), kind text not null, meta text);</code><br>'
       +'<code>alter table public.ftem_stats enable row level security;</code><br>'
       +'<code>create policy "stats einfuegen" on public.ftem_stats for insert with check (true);</code><br>'
