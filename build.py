@@ -776,7 +776,7 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
     else:
         tt_span = ('<span class="tt ovr-txt" data-cid="'+cidb+'|title" data-bh="'+fnv36(t["title"] or "")+'">'+esc(title)+'</span>')
         tfield = ''
-    return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+(' nohd' if t.get("nohead") else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" style="border-left-color:'+bar+'">'
+    return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+(' nohd' if t.get("nohead") else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" data-k="'+esc(t["title"] or "")+'" style="border-left-color:'+bar+'">'
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(t["title"])+'</span>'
             + tt_span + '<span class="tchev"></span></summary>'
             + tfield +
@@ -3878,6 +3878,40 @@ function route(){
   }
   ev('zugriff',PAGELANG);
   window.__statSport=function(sid){ev('sport',sid);};
+  // Link-Klicks: jeder Link, der die Seite verlaesst (Lernflink, swiss-ski.ch,
+  // PDFs unter assets/ ...), einmal pro Sitzung und Link+Fundort. Gespeichert
+  // werden nur Link, Linktext und Fundort (Sportart, Thema, Zeile, Stufe, Sprache).
+  var STG=['F1','F2','F3','T1','T2','T3','T4','E1','E2','M'];
+  function txt(e,n){return e?String(e.innerText||e.textContent||'').replace(/\s+/g,' ').trim().slice(0,n||80):'';}
+  function linkCtx(a){
+    var o={u:a.href,t:txt(a,80)||a.getAttribute('aria-label')||'',l:PAGELANG};
+    var sec=a.closest('section.sport');if(sec)o.s=sec.getAttribute('data-sport')||'';
+    var th=a.closest('details.theme');
+    if(th){o.k=th.getAttribute('data-k')||th.getAttribute('data-title')||'';var tt=th.querySelector(':scope > summary .tt');o.th=txt(tt,60);}
+    var im=a.closest('.imodal');if(im){o.a='Übersicht: '+txt(im.querySelector('.im-t'),50);}
+    else if(!sec){var hs=a.closest('section,header,footer,nav,.bottombar,.mlist');
+      o.a=hs?(hs.id||hs.className.split(' ')[0]||hs.tagName.toLowerCase()):'seite';}
+    var r=a.closest('.r');if(r){var rl=r.querySelector(':scope > .rl');o.r=txt(rl,60);}
+    var c=a.closest('.cell');
+    if(c&&c.hasAttribute('data-from')){var f=+c.getAttribute('data-from'),t=+c.getAttribute('data-to');
+      o.st=STG[f]+(t>f?'–'+STG[t]:'');}
+    return o;
+  }
+  function onLink(e){
+    var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;if(!a)return;
+    if(e.type==='auxclick'&&e.button!==1)return;
+    var h=a.getAttribute('href')||'';
+    if(!h||h.charAt(0)==='#'||/^javascript:/i.test(h)||a.closest('.langsw'))return;
+    var u;try{u=new URL(a.href,location.href);}catch(_){return;}
+    var intern=u.origin===location.origin&&!/\/assets\//.test(u.pathname);
+    if(intern&&!/^(mailto|tel):/.test(u.protocol))return; // Seitenwechsel innerhalb FTEM nicht zaehlen
+    try{var o=linkCtx(a);
+      // eigene Dokumente ohne Versions-Anhang (?v=…) und ohne Domain speichern
+      if(u.origin===location.origin){o.u=u.pathname.replace(/^.*\/assets\//,'assets/');}
+      ev('link',JSON.stringify(o).slice(0,900));}catch(_){}
+  }
+  document.addEventListener('click',onLink,true);
+  document.addEventListener('auxclick',onLink,true);
 })();
 // F1-M-Leiste waehrend des Scrollens ausblenden (nur Handy) - sie erscheint
 // automatisch wieder, sobald das Scrollen stoppt.
@@ -4055,6 +4089,15 @@ __MAINCSS__
 .stat-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .stat-h b{font-size:15px}
 .stat-pill{font-size:11px;font-weight:800;color:#fff;background:#d52b1e;border-radius:999px;padding:3px 10px}
+.stat-lsel{margin-left:auto;font:inherit;font-size:12px;padding:4px 8px;border:1px solid #d9dee4;border-radius:8px;background:#fff;color:#2c3440;max-width:100%}
+.stat-lu{font-size:10.5px;color:#98a1ad;word-break:break-all}
+.stat-ltab td{vertical-align:top}
+.stat-ltab td:first-child{max-width:320px}
+.stat-ltab a{color:inherit;font-weight:700;text-decoration:none}
+.stat-ltab a:hover{text-decoration:underline}
+.stat-more{margin-top:6px}
+.stat-more summary{cursor:pointer;font-size:12px;font-weight:700;color:#d52b1e}
+[data-theme="dark"] .stat-lsel{background:transparent;border-color:rgba(255,255,255,.2);color:#e6ebf1}
 .stat-range{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 4px}
 .stat-range span{font-size:12px;font-weight:700;color:#4a5563;margin-right:2px}
 .stat-range button{font:inherit;font-size:12px;font-weight:700;border:1px solid #d9dee4;background:#fff;color:#2c3440;border-radius:999px;padding:5px 12px;cursor:pointer}
@@ -4543,7 +4586,7 @@ function renderStats(rows,tage){
   var PER=tage>=3650?'seit Start':(tage+' T'), ZR=tage>=3650?'seit Start':('in '+_statRange(tage)), gran=_statGran(eff);
   var granTxt={tag:'pro Tag',woche:'pro Woche',monat:'pro Monat'}[gran];
   var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5;
-  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[];
+  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[],links=[];
   rows.forEach(function(x){
     var t=new Date(x.created_at).getTime();
     if(x.kind==='ki_frage'){ki.push({ts:x.created_at,key:'KI-Fragen'});if(t>=t0)kiToday++;if(t>=t7)ki7++;
@@ -4553,6 +4596,8 @@ function renderStats(rows,tage){
       zu.push({ts:x.created_at,key:l});zuLang[l]=(zuLang[l]||0)+1;if(t>=t0)zuToday++;if(t>=t7)zu7++;}
     else if(x.kind==='sport'&&x.meta){var s=sports[x.meta]||{n:0,last:x.created_at};
       s.n++;if(x.created_at>s.last)s.last=x.created_at;sports[x.meta]=s;}
+    else if(x.kind==='link'&&x.meta){var o=null;try{o=JSON.parse(x.meta);}catch(_){}
+      if(o&&o.u){o.ts=x.created_at;links.push(o);}}
   });
   var LFARBEN={'DE':'#d52b1e','FR':'#1f8fa6','IT':'#e2a900','EN':'#e8772e'};
   var leg='';Object.keys(LFARBEN).forEach(function(l){if(zuLang[l])leg+='<i><span class="dot" style="background:'+LFARBEN[l]+'"></span>'+l+' · '+zuLang[l]+' ('+Math.round(zuLang[l]/zu.length*100)+' %)</i>';});
@@ -4591,8 +4636,64 @@ function renderStats(rows,tage){
       }).join('')+'</div>'):'<p class="glosnote">Frage-Texte erscheinen hier ab dem nächsten Deploy (ältere Fragen wurden nur gezählt, ohne Text).</p>')
     +'</div>';
   var intro=rows.length?'':'<p class="glosnote" style="margin-top:14px">Keine Daten in diesem Zeitraum.</p>';
-  body.innerHTML=intro+hZu+hKi;
+  STAT_LINKS={links:links,eff:eff,tage:tage,PER:PER,ZR:ZR,kpiZr:kpiZr,granTxt:granTxt,spName:spName,fdate:fdate};
+  body.innerHTML=intro+hZu+'<div id="statlinks"></div>'+hKi;
+  renderLinkCard();
   document.getElementById('statinfo').textContent=(tage>=3650?'seit Start':('letzte '+tage+' Tage'))+' · '+rows.length+' Einträge · aktualisiert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});
+}
+// Karte C: Link-Klicks (kind 'link', meta = JSON mit Link + Fundort)
+var STAT_LINKS=null,STAT_LSPORT='';
+// Sprachversionen eines Links (FR/IT-Lernflink …) auf den deutschen Link zurueckfuehren,
+// damit derselbe Inhalt in allen Sprachen als eine Zeile erscheint.
+var LINK_REV=__LINK_REV__;
+var _AREA={home:'Startseite',seite:'Startseite',bottombar:'Menüleiste',mlist:'Mission'};
+function _linkHost(u){try{var x=new URL(u);var p=x.pathname.length>1?x.pathname:'';return x.host.replace(/^www\./,'')+p+(x.hash||'');}catch(_){return u;}}
+function _top(obj){var b='',n=-1;Object.keys(obj).forEach(function(k){if(obj[k]>n){n=obj[k];b=k;}});return b;}
+function renderLinkCard(){
+  var box=document.getElementById('statlinks');if(!box||!STAT_LINKS)return;
+  var D=STAT_LINKS,all=D.links,spName=D.spName;
+  var sps={};all.forEach(function(o){var k=o.s||'';sps[k]=(sps[k]||0)+1;});
+  var L=STAT_LSPORT?all.filter(function(o){return (o.s||'')===(STAT_LSPORT==='_none'?'':STAT_LSPORT);}):all;
+  var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5,nT=0,n7=0;
+  var byU={},byTh={};
+  L.forEach(function(o){var t=new Date(o.ts).getTime();if(t>=t0)nT++;if(t>=t7)n7++;
+    var cu=LINK_REV[o.u]||o.u,lg=String(o.l||'de').toUpperCase();
+    var u=byU[cu]||(byU[cu]={n:0,txt:{},ctx:{},lang:{},last:o.ts});u.n++;if(o.ts>u.last)u.last=o.ts;
+    u.lang[lg]=(u.lang[lg]||0)+1;
+    if(o.t)u.txt[o.t]=(u.txt[o.t]||0)+(lg==='DE'?1000:1);
+    var area=_AREA[o.a]||o.a||'Startseite';
+    var where=o.s?((spName[o.s]||o.s)+(o.k?' · '+o.k:'')+(o.r&&lg==='DE'?' · '+o.r:'')+(o.st?' · '+o.st:'')):area;
+    u.ctx[where]=(u.ctx[where]||0)+1;
+    var tk=o.k||(o.s?'(ohne Thema)':area);
+    var th=byTh[tk]||(byTh[tk]={n:0,u:{}});th.n++;th.u[cu]=1;});
+  var opts='<option value="">Alle Sportarten ('+all.length+')</option>'
+    +Object.keys(sps).filter(function(k){return k;}).sort(function(a,b){return sps[b]-sps[a];})
+      .map(function(k){return '<option value="'+fbEsc(k)+'"'+(STAT_LSPORT===k?' selected':'')+'>'+fbEsc(spName[k]||k)+' ('+sps[k]+')</option>';}).join('')
+    +(sps['']?'<option value="_none"'+(STAT_LSPORT==='_none'?' selected':'')+'>Startseite &amp; Übersichten ('+sps['']+')</option>':'');
+  var uList=Object.keys(byU).map(function(k){return {u:k,n:byU[k].n,t:_top(byU[k].txt),w:_top(byU[k].ctx),wn:Object.keys(byU[k].ctx).length,last:byU[k].last,
+      lg:Object.keys(byU[k].lang).sort(function(a,b){return byU[k].lang[b]-byU[k].lang[a];}).map(function(l){return l+' '+byU[k].lang[l];}).join(' · ')};})
+    .sort(function(a,b){return b.n-a.n||(a.t<b.t?-1:1);});
+  var thList=Object.keys(byTh).map(function(k){return {k:k,n:byTh[k].n,nu:Object.keys(byTh[k].u).length};}).sort(function(a,b){return b.n-a.n;});
+  function urow(x){return '<tr><td><a href="'+fbEsc(/^assets\//.test(x.u)?'/'+x.u:x.u)+'\" target="_blank" rel="noopener">'+fbEsc(x.t||_linkHost(x.u))+'</a>'
+    +'<div class="stat-lu">'+fbEsc(_linkHost(x.u))+'</div><div class="stat-lu">'+fbEsc(x.lg)+'</div></td>'
+    +'<td>'+fbEsc(x.w)+(x.wn>1?' <span class="stat-lu">(+'+(x.wn-1)+' weitere)</span>':'')+'</td>'
+    +'<td>'+x.n+'</td><td>'+Math.round(x.n/L.length*100)+' %</td><td>'+D.fdate(x.last)+'</td></tr>';}
+  var TH='<thead><tr><th>Link</th><th>Wo (häufigster Fundort)</th><th>Klicks</th><th>Anteil</th><th>zuletzt</th></tr></thead>';
+  var uHtml=uList.length?('<div class="stat-cht-t">Meistgeklickte Links ('+D.PER+')</div>'
+    +'<table class="stat-top stat-ltab">'+TH+'<tbody>'+uList.slice(0,25).map(urow).join('')+'</tbody></table>'
+    +(uList.length>25?'<details class="stat-more"><summary>Alle '+uList.length+' Links anzeigen</summary><table class="stat-top stat-ltab">'+TH+'<tbody>'+uList.slice(25).map(urow).join('')+'</tbody></table></details>':'')):'';
+  var thHtml=thList.length?('<div class="stat-cht-t">Klicks nach Thema ('+D.PER+')</div>'
+    +'<table class="stat-top"><thead><tr><th>Thema</th><th>Klicks</th><th>Anteil</th><th>versch. Links</th></tr></thead><tbody>'
+    +thList.slice(0,20).map(function(x){return '<tr><td>'+fbEsc(x.k)+'</td><td>'+x.n+'</td><td>'+Math.round(x.n/L.length*100)+' %</td><td>'+x.nu+'</td></tr>';}).join('')
+    +'</tbody></table>'):'';
+  box.innerHTML='<div class="stat-card"><div class="stat-h"><b>Link-Klicks</b><span class="stat-pill">'+L.length+' '+D.ZR+'</span>'
+    +'<select class="stat-lsel" onchange="STAT_LSPORT=this.value;renderLinkCard()">'+opts+'</select></div>'
+    +'<div class="stat-sub">Ein Klick = ein angeklickter Link, der die FTEM-Seite verlässt (Lernflink, swiss-ski.ch, Dokumente …), einmal pro Besuch und Fundort gezählt. Sprachversionen desselben Links werden zusammengefasst (Aufteilung DE/FR/IT/EN unter dem Link). Gezählt wird ab der Veröffentlichung dieser Funktion.</div>'
+    +'<div class="stat-kpis">'+_statKpi(nT,'Heute')+_statKpi(n7,'7 Tage')+(D.tage!==7?_statKpi(L.length,D.kpiZr):'')+_statKpi(Object.keys(byU).length,'versch. Links')+'</div>'
+    +'<div class="stat-cht-t">Klicks '+D.granTxt+' ('+D.PER+')</div>'
+    +zeitChart(L.map(function(o){return {ts:o.ts,key:'Klicks'};}),D.eff,{'Klicks':'#1f8fa6'},'Klicks')
+    +thHtml+uHtml
+    +(L.length?'':'<p class="glosnote">Noch keine Link-Klicks in diesem Zeitraum.</p>')+'</div>';
 }
 function _statRangeBtns(){
   var w=document.getElementById('statrange');if(!w)return;
@@ -5412,7 +5513,8 @@ def admin_html(datamap):
                       .replace("__GLOSSARY__", gloss_js)
                       .replace("__ADMIN_PW__", ADMIN_PW)
                       .replace("__SUPA_URL__", SUPABASE_URL)
-                      .replace("__SUPA_KEY__", SUPABASE_ANON_KEY))
+                      .replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
+                      .replace("__LINK_REV__", json.dumps({v: k for k, d in LINK_TR.items() if isinstance(d, dict) for v in d.values() if isinstance(v, str) and v != k}, ensure_ascii=False).replace("</", "<\\/")))
 
 datamap = {s["id"]: sport_data(s) for s in SPORTS}
 ids_with_data = [s["id"] for s in SPORTS if datamap[s["id"]] is not None]
