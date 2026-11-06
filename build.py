@@ -605,7 +605,7 @@ def render_cell(seg, lang, cid=None, edit=False):
             chips += '<span class="dch-'+k+'">'+esc(c)+'</span>'
         files = ""
         for f in d.get("files") or []:
-            href = f.get("href") or "#"
+            href = lhref(f.get("href") or "#", lang)   # Sprachversion des Dokuments, falls vorhanden
             if not href.startswith("http"):
                 href = asset_v(href)
             files += ('<a class="dlbtn" href="'+esc(href)+'" download target="_blank" rel="noopener">'
@@ -2498,28 +2498,28 @@ a.txtlnk:hover{text-decoration-thickness:2px}
 /* KI-Assistent Chat-Panel */
 .chatpanel{position:fixed;inset:0;z-index:310;background:rgba(15,22,34,.42);display:flex;justify-content:flex-end}
 .chatpanel[hidden]{display:none}
-.cp-card{width:min(430px,100%);height:100%;background:var(--card);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.28);animation:cpIn .25s ease}
+.cp-card{width:min(430px,100%);height:100%;max-height:100%;background:var(--card);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.28);animation:cpIn .25s ease}
 @keyframes cpIn{from{transform:translateX(34px);opacity:.5}to{transform:none;opacity:1}}
-.cp-head{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.cp-head{flex:none;display:flex;align-items:center;gap:10px;padding:13px 16px;padding-top:calc(13px + env(safe-area-inset-top,0px));border-bottom:1px solid var(--line)}
 .cp-head .cp-ic{width:28px;height:28px;flex:none;border-radius:8px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center}
 .cp-head .cp-ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .cp-head .cp-ic svg path:last-child{fill:currentColor;stroke:none}
 .cp-t{font-weight:800;font-size:14.5px;color:var(--ink);flex:1}
-.cp-x{background:none;border:none;font-size:23px;line-height:1;color:var(--mut);cursor:pointer;padding:0 6px}
+.cp-x{flex:none;background:none;border:none;font-size:26px;line-height:1;color:var(--mut);cursor:pointer;padding:6px 10px;margin:-6px -8px -6px 0;min-width:44px;min-height:44px}
 .cp-x:hover{color:var(--ink)}
-.cp-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.cp-msgs{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
 .cp-msg{max-width:90%;font-size:13px;line-height:1.5;padding:9px 12px;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere}
 .cp-msg.u{align-self:flex-end;background:#3f4650;color:#fff;border-bottom-right-radius:4px}
 .cp-msg.a{align-self:flex-start;background:var(--bg);color:var(--ink);border-bottom-left-radius:4px}
 .cp-msg.a a{color:var(--red);font-weight:600}
 .cp-msg.think{color:var(--mut);font-style:italic}
-.cp-form{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
-.cp-in{flex:1;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:13px;background:var(--card);color:var(--ink)}
+.cp-form{flex:none;display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--line)}
+.cp-in{flex:1;min-width:0;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:9px;font:inherit;font-size:16px;background:var(--card);color:var(--ink)}
 .cp-in:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 2px rgba(213,43,30,.14)}
 .cp-send{width:40px;height:40px;flex:none;background:var(--red);color:#fff;border:none;border-radius:9px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
 .cp-send:hover{filter:brightness(1.08)}
 .cp-send:disabled{opacity:.5;cursor:default}
-.cp-note{font-size:10px;color:var(--mut);padding:2px 16px 10px;text-align:center;line-height:1.4}
+.cp-note{flex:none;font-size:10px;color:var(--mut);padding:2px 16px calc(10px + env(safe-area-inset-bottom,0px));text-align:center;line-height:1.4}
 .cp-chips{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 2px;align-self:flex-start;max-width:96%}
 .cp-chip{font:inherit;font-size:12px;font-weight:600;color:var(--red);background:var(--acc-bg);border:1px solid var(--line);border-radius:16px;padding:6px 12px;cursor:pointer;text-align:left;line-height:1.3;transition:background .12s,color .12s,border-color .12s}
 .cp-chip:hover{background:var(--red);color:#fff;border-color:var(--red)}
@@ -3337,17 +3337,31 @@ chatPanel.innerHTML='<div class="cp-card" role="dialog" aria-modal="true" aria-l
 document.body.appendChild(chatPanel);
 const cpMsgs=chatPanel.querySelector('.cp-msgs'),cpForm=chatPanel.querySelector('.cp-form'),cpIn=chatPanel.querySelector('.cp-in'),cpSend=chatPanel.querySelector('.cp-send');
 let chatSec=null,chatBusy=false;const chatHist=[];const chatWelcomed=new Set();
+// Handy: Panel immer an den sichtbaren Bereich anpassen (Tastatur, Safari-Leisten),
+// damit Kopfzeile mit X nie aus dem Bild rutscht. Zurueck-Taste schliesst den Coach.
+const cpTouch=window.matchMedia&&window.matchMedia('(pointer:coarse)').matches;
+function cpFit(){if(chatPanel.hidden)return;const vv=window.visualViewport;
+  if(vv){chatPanel.style.top=vv.offsetTop+'px';chatPanel.style.height=vv.height+'px';chatPanel.style.bottom='auto';}}
+if(window.visualViewport){visualViewport.addEventListener('resize',cpFit);visualViewport.addEventListener('scroll',cpFit);}
 function openChat(sec){chatSec=sec;chatPanel.hidden=false;document.documentElement.style.overflow='hidden';
   const id=sec.dataset.sport;
   if(!chatWelcomed.has(id)){cpMsgs.innerHTML='';chatHist.length=0;addMsg('a',I18N.chatWelcome);addExamples();chatWelcomed.add(id);}
-  setTimeout(()=>cpIn.focus(),60);}
+  cpFit();
+  try{if(!(history.state&&history.state.ftemChat))history.pushState({ftemChat:1},'',location.href);}catch(_){}
+  // auf dem Handy nicht automatisch die Tastatur oeffnen (verschiebt sonst die Ansicht)
+  if(!cpTouch)setTimeout(()=>cpIn.focus(),60);}
 function addExamples(){var ex=I18N.chatExamples||[];if(!ex.length)return;
   var wrap=document.createElement('div');wrap.className='cp-chips';
   ex.forEach(function(q){var b=document.createElement('button');b.type='button';b.className='cp-chip';b.textContent=q;
     b.onclick=function(){cpIn.value=q;if(cpForm.requestSubmit)cpForm.requestSubmit();else cpForm.dispatchEvent(new Event('submit',{cancelable:true}));};
     wrap.appendChild(b);});
   cpMsgs.appendChild(wrap);cpMsgs.scrollTop=cpMsgs.scrollHeight;}
-function closeChat(){chatPanel.hidden=true;document.documentElement.style.overflow='';}
+function closeChat(fromPop){if(chatPanel.hidden)return;
+  try{cpIn.blur();}catch(_){}
+  chatPanel.hidden=true;document.documentElement.style.overflow='';
+  chatPanel.style.top='';chatPanel.style.height='';chatPanel.style.bottom='';
+  if(!fromPop){try{if(history.state&&history.state.ftemChat)history.back();}catch(_){}}}
+window.addEventListener('popstate',function(){if(!chatPanel.hidden)closeChat(true);});
 chatPanel.addEventListener('click',e=>{if(e.target===chatPanel||e.target.closest('.cp-x'))closeChat();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatPanel.hidden){closeChat();e._ovl=true;}});
 function linkify(t){var d=document.createElement('div');d.textContent=t;var h=d.innerHTML;
@@ -3864,19 +3878,31 @@ function route(){
 // keine IP-Adressen. Fehlt die Tabelle, passiert still nichts (try/catch).
 (function(){
   if(!SUPA_URL||!SUPA_KEY)return;
-  function ev(kind,meta){
+  function once(kind,meta){
     try{
       var k='ftem-st-'+kind+(meta?'-'+meta:'');
-      if(sessionStorage.getItem(k))return;
-      sessionStorage.setItem(k,'1');
-    }catch(_){return;} // ohne sessionStorage lieber gar nicht zaehlen (sonst Doppelzaehlung)
+      if(sessionStorage.getItem(k))return false;
+      sessionStorage.setItem(k,'1');return true;
+    }catch(_){return false;} // ohne sessionStorage lieber gar nicht zaehlen (sonst Doppelzaehlung)
+  }
+  function ev(kind,meta,force){
+    if(!force&&!once(kind,meta))return;
     try{
       fetch(SUPA_URL+'/rest/v1/ftem_stats',{method:'POST',
         headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,'Content-Type':'application/json',Prefer:'return=minimal'},
         body:JSON.stringify({kind:kind,meta:meta||null})}).catch(function(){});
     }catch(_){}
   }
-  ev('zugriff',PAGELANG);
+  // Zugriff ueber die Netlify-Funktion "hit": sie ergaenzt die grobe Herkunft
+  // (Land, Kanton, Ort - aus der IP abgeleitet, die IP wird nicht gespeichert).
+  // Klappt das nicht (z.B. lokal geoeffnet), wird wie bisher direkt gezaehlt.
+  if(once('zugriff',PAGELANG)){
+    var direct=function(){ev('zugriff',PAGELANG,true);};
+    try{
+      fetch('/.netlify/functions/hit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({l:PAGELANG})})
+        .then(function(r){if(!r.ok)direct();}).catch(direct);
+    }catch(_){direct();}
+  }
   window.__statSport=function(sid){ev('sport',sid);};
   // Link-Klicks: jeder Link, der die Seite verlaesst (Lernflink, swiss-ski.ch,
   // PDFs unter assets/ ...), einmal pro Sitzung und Link+Fundort. Gespeichert
@@ -4098,6 +4124,18 @@ __MAINCSS__
 .stat-more{margin-top:6px}
 .stat-more summary{cursor:pointer;font-size:12px;font-weight:700;color:#d52b1e}
 [data-theme="dark"] .stat-lsel{background:transparent;border-color:rgba(255,255,255,.2);color:#e6ebf1}
+.geo-map{display:block;width:100%;height:auto;margin:4px 0 2px}
+.geo-map path{stroke:#fff;stroke-width:.6;stroke-linejoin:round}
+.geo-map path:hover{stroke:#2c3440;stroke-width:1.2}
+.geo-map .geo-lake{fill:#cfe3f1;stroke:none;pointer-events:none}
+.geo-map .geo-dot{fill:#1f3a5f;fill-opacity:.7;stroke:#fff;stroke-width:1.2}
+.geo-map .geo-dot:hover{fill-opacity:.95}
+.geo-leg{display:flex;align-items:center;gap:4px;font-size:10.5px;color:#98a1ad;margin-bottom:6px}
+.geo-leg i{display:inline-block;width:22px;height:9px;border-radius:2px}
+.geo-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 20px}
+[data-theme="dark"] .geo-map{--geo0:#2a3448}
+[data-theme="dark"] .geo-map path{stroke:#1c2740}
+[data-theme="dark"] .geo-map .geo-lake{fill:#24405a}
 .stat-range{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 4px}
 .stat-range span{font-size:12px;font-weight:700;color:#4a5563;margin-right:2px}
 .stat-range button{font:inherit;font-size:12px;font-weight:700;border:1px solid #d9dee4;background:#fff;color:#2c3440;border-radius:999px;padding:5px 12px;cursor:pointer}
@@ -4586,13 +4624,16 @@ function renderStats(rows,tage){
   var PER=tage>=3650?'seit Start':(tage+' T'), ZR=tage>=3650?'seit Start':('in '+_statRange(tage)), gran=_statGran(eff);
   var granTxt={tag:'pro Tag',woche:'pro Woche',monat:'pro Monat'}[gran];
   var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5;
-  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[],links=[];
+  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[],links=[],geo=[];
   rows.forEach(function(x){
     var t=new Date(x.created_at).getTime();
     if(x.kind==='ki_frage'){ki.push({ts:x.created_at,key:'KI-Fragen'});if(t>=t0)kiToday++;if(t>=t7)ki7++;
       var qa=null;try{qa=JSON.parse(x.meta);}catch(_){}
       if(qa&&qa.q){qa.ts=x.created_at;qaList.push(qa);}}
-    else if(x.kind==='zugriff'){var l=String(x.meta||'de').toUpperCase().slice(0,2);
+    else if(x.kind==='zugriff'){var zm=String(x.meta||'de'),l;
+      if(zm.charAt(0)==='{'){var g=null;try{g=JSON.parse(zm);}catch(_){}
+        l=String((g&&g.l)||'de').toUpperCase().slice(0,2);if(g){g.ts=x.created_at;geo.push(g);}}
+      else l=zm.toUpperCase().slice(0,2);
       zu.push({ts:x.created_at,key:l});zuLang[l]=(zuLang[l]||0)+1;if(t>=t0)zuToday++;if(t>=t7)zu7++;}
     else if(x.kind==='sport'&&x.meta){var s=sports[x.meta]||{n:0,last:x.created_at};
       s.n++;if(x.created_at>s.last)s.last=x.created_at;sports[x.meta]=s;}
@@ -4637,8 +4678,9 @@ function renderStats(rows,tage){
     +'</div>';
   var intro=rows.length?'':'<p class="glosnote" style="margin-top:14px">Keine Daten in diesem Zeitraum.</p>';
   STAT_LINKS={links:links,eff:eff,tage:tage,PER:PER,ZR:ZR,kpiZr:kpiZr,granTxt:granTxt,spName:spName,fdate:fdate};
-  body.innerHTML=intro+hZu+'<div id="statlinks"></div>'+hKi;
-  renderLinkCard();
+  STAT_GEO={geo:geo,zu:zu.length,PER:PER,ZR:ZR};
+  body.innerHTML=intro+hZu+'<div id="statgeo"></div><div id="statlinks"></div>'+hKi;
+  renderLinkCard();renderGeoCard();
   document.getElementById('statinfo').textContent=(tage>=3650?'seit Start':('letzte '+tage+' Tage'))+' · '+rows.length+' Einträge · aktualisiert '+new Date().toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'});
 }
 // Karte C: Link-Klicks (kind 'link', meta = JSON mit Link + Fundort)
@@ -4694,6 +4736,69 @@ function renderLinkCard(){
     +zeitChart(L.map(function(o){return {ts:o.ts,key:'Klicks'};}),D.eff,{'Klicks':'#1f8fa6'},'Klicks')
     +thHtml+uHtml
     +(L.length?'':'<p class="glosnote">Noch keine Link-Klicks in diesem Zeitraum.</p>')+'</div>';
+}
+// Karte D: Herkunft der Zugriffe (Welt- und Schweizkarte). Die Herkunft
+// (Land, Kanton, Ort, Koordinaten auf ca. 10 km gerundet) setzt die Netlify-
+// Funktion "hit" aus der IP - die IP selbst wird nicht gespeichert.
+// Kartenformen: assets/geo/ftem_geo.json (Natural-Earth-Projektion fuer die Welt,
+// einfache Lat/Lon-Projektion fuer die Schweiz), wird erst hier geladen.
+var STAT_GEO=null,GEO_SHAPES=null,GEO_URL='__GEO_URL__';
+function _geoColor(n,max){if(!n)return 'var(--geo0,#e9edf1)';
+  var t=Math.log(1+n)/Math.log(1+max);t=0.18+0.82*t;
+  function mix(a,b){return Math.round(a+(b-a)*t);}
+  return 'rgb('+mix(253,180)+','+mix(224,20)+','+mix(220,12)+')';}
+function _neXY(W,lo,la){var l=lo*Math.PI/180,p=la*Math.PI/180,p2=p*p,p4=p2*p2;
+  var x=l*(0.8707-0.131979*p2+p4*(-0.013791+p4*(0.003971*p2-0.001529*p4)));
+  var y=p*(1.007226+p2*(0.015085+p4*(-0.044475+0.028874*p2-0.005916*p4)));
+  return [W.tx+W.k*x,W.ty-W.k*y];}
+function _chXY(C,lo,la){return [C.pad+(lo*C.cos-C.x0)*C.k,C.pad+(-la-C.y0)*C.k];}
+function _geoTable(title,list,tot,cols){
+  if(!list.length)return '';
+  return '<div class="stat-cht-t">'+title+'</div><table class="stat-top"><thead><tr><th>'+cols+'</th><th>Zugriffe</th><th>Anteil</th></tr></thead><tbody>'
+    +list.map(function(x){return '<tr><td>'+fbEsc(x.n)+'</td><td>'+x.v+'</td><td>'+Math.round(x.v/tot*100)+' %</td></tr>';}).join('')+'</tbody></table>';}
+function renderGeoCard(){
+  var box=document.getElementById('statgeo');if(!box||!STAT_GEO)return;
+  if(!GEO_SHAPES){box.innerHTML='<div class="stat-card"><div class="stat-h"><b>Herkunft der Zugriffe</b></div><p class="glosnote">Karten werden geladen …</p></div>';
+    fetch(GEO_URL).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+      .then(function(j){GEO_SHAPES=j;renderGeoCard();})
+      .catch(function(e){box.innerHTML='<div class="stat-card"><div class="stat-h"><b>Herkunft der Zugriffe</b></div><p class="glosnote">Karten konnten nicht geladen werden ('+fbEsc(e.message)+').</p></div>';});
+    return;}
+  var D=STAT_GEO,G=D.geo,W=GEO_SHAPES.world,C=GEO_SHAPES.ch;
+  var byC={},byK={},byCity={},chN=0;
+  G.forEach(function(g){if(g.c)byC[g.c]=(byC[g.c]||0)+1;
+    if(g.c==='CH'){chN++;var r=String(g.r||'').replace(/^CH-/,'').toUpperCase();if(r)byK[r]=(byK[r]||0)+1;
+      if(g.ci&&isFinite(g.la)&&isFinite(g.lo)){var ck=g.ci;var o=byCity[ck]||(byCity[ck]={n:0,la:g.la,lo:g.lo});o.n++;}}});
+  var maxC=0;Object.keys(byC).forEach(function(k){if(byC[k]>maxC)maxC=byC[k];});
+  var maxK=0;Object.keys(byK).forEach(function(k){if(byK[k]>maxK)maxK=byK[k];});
+  // Weltkarte
+  var wp='';Object.keys(W.c).forEach(function(k){var n=byC[k]||0;
+    wp+='<path d="'+W.c[k].d+'" style="fill:'+_geoColor(n,maxC)+'"><title>'+fbEsc(W.c[k].n)+': '+n+' Zugriffe</title></path>';});
+  var wsvg='<svg class="geo-map" viewBox="0 0 '+W.w+' '+W.h+'" role="img" aria-label="Weltkarte der Zugriffe">'+wp+'</svg>';
+  // Schweizkarte: Kantone eingefaerbt, Orte als Punkte
+  var cp='';Object.keys(C.c).forEach(function(k){var n=byK[k]||0;
+    cp+='<path d="'+C.c[k].d+'" style="fill:'+_geoColor(n,maxK)+'"><title>'+fbEsc(C.c[k].n)+': '+n+' Zugriffe</title></path>';});
+  cp+='<path d="'+C.lakes+'" class="geo-lake"/>';
+  var cities=Object.keys(byCity).map(function(k){return {n:k,v:byCity[k].n,la:byCity[k].la,lo:byCity[k].lo};}).sort(function(a,b){return b.v-a.v;});
+  var maxCi=cities.length?cities[0].v:1;
+  cities.slice().reverse().forEach(function(x){var p=_chXY(C,x.lo,x.la);if(p[0]<0||p[1]<0||p[0]>C.w||p[1]>C.h)return;
+    var r=3+11*Math.sqrt(x.v/maxCi);
+    cp+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+r.toFixed(1)+'" class="geo-dot"><title>'+fbEsc(x.n)+': '+x.v+' Zugriffe</title></circle>';});
+  var csvg='<svg class="geo-map" viewBox="0 0 '+C.w+' '+C.h+'" role="img" aria-label="Schweizkarte der Zugriffe">'+cp+'</svg>';
+  var cList=Object.keys(byC).map(function(k){return {n:(W.c[k]&&W.c[k].n)||k,v:byC[k]};}).sort(function(a,b){return b.v-a.v;});
+  var kList=Object.keys(byK).map(function(k){return {n:(C.c[k]&&C.c[k].n)||k,v:byK[k]};}).sort(function(a,b){return b.v-a.v;});
+  var noGeo=D.zu-G.length;
+  var sub='Herkunft aus der IP-Adresse abgeleitet (Land, Kanton, Ort – auf ca. 10 km gerundet), die IP-Adresse selbst wird nicht gespeichert. '
+    +'Erfasst ab der Veröffentlichung dieser Funktion'+(noGeo>0?' – '+noGeo+' ältere Zugriffe im Zeitraum sind ohne Herkunft':'')+'. Der Ort ist eine Schätzung des Internetanbieters und kann abweichen.';
+  var legend='<div class="geo-leg"><span>wenig</span><i style="background:'+_geoColor(1,10)+'"></i><i style="background:'+_geoColor(3,10)+'"></i><i style="background:'+_geoColor(10,10)+'"></i><span>viel</span></div>';
+  box.innerHTML='<div class="stat-card"><div class="stat-h"><b>Herkunft der Zugriffe</b><span class="stat-pill">'+G.length+' mit Herkunft '+D.ZR+'</span></div>'
+    +'<div class="stat-sub">'+sub+'</div>'
+    +(G.length?'':'<p class="glosnote">Noch keine Zugriffe mit Herkunft in diesem Zeitraum.</p>')
+    +'<div class="stat-kpis">'+_statKpi(cList.length,'Länder')+_statKpi(G.length?Math.round(chN/G.length*100)+' %':'–','aus der Schweiz')+_statKpi(kList.length,'Kantone')+_statKpi(cities.length,'Orte in der Schweiz')+'</div>'
+    +'<div class="stat-cht-t">Welt · Zugriffe pro Land ('+D.PER+')</div>'+wsvg+legend
+    +'<div class="geo-cols"><div>'+_geoTable('Länder ('+D.PER+')',cList.slice(0,15),G.length,'Land')+'</div></div>'
+    +'<div class="stat-cht-t">Schweiz · Zugriffe pro Kanton, Punkte = Orte ('+D.PER+')</div>'+csvg+legend
+    +'<div class="geo-cols"><div>'+_geoTable('Kantone',kList,chN,'Kanton')+'</div><div>'
+    +_geoTable('Orte (Top 20)',cities.slice(0,20),chN,'Ort')+'</div></div></div>';
 }
 function _statRangeBtns(){
   var w=document.getElementById('statrange');if(!w)return;
@@ -5514,6 +5619,7 @@ def admin_html(datamap):
                       .replace("__ADMIN_PW__", ADMIN_PW)
                       .replace("__SUPA_URL__", SUPABASE_URL)
                       .replace("__SUPA_KEY__", SUPABASE_ANON_KEY)
+                      .replace("__GEO_URL__", asset_v("assets/geo/ftem_geo.json"))
                       .replace("__LINK_REV__", json.dumps({v: k for k, d in LINK_TR.items() if isinstance(d, dict) for v in d.values() if isinstance(v, str) and v != k}, ensure_ascii=False).replace("</", "<\\/")))
 
 datamap = {s["id"]: sport_data(s) for s in SPORTS}

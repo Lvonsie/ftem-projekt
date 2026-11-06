@@ -464,5 +464,15 @@
  "https://snowsports.flink.host/s/Y5QfFMxu/AYdrZeo1": {
   "it": "https://snowsports.flink.host/s/kkusx5r7/4Ax65YNN",
   "fr": "https://snowsports.flink.host/s/f9Qk8Zkq/ikmiwOCj"
+ },
+ "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Buechlein-Druckvorlage.pdf": {
+  "fr": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Carnet-Modele-impression_FR.pdf",
+  "it": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Libretto-Modello-stampa_IT.pdf",
+  "en": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Booklet-Print-template_EN.pdf"
+ },
+ "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Auswertungsvorlage.pdf": {
+  "fr": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Modele-evaluation_FR.pdf",
+  "it": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Modello-valutazione_IT.pdf",
+  "en": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Evaluation-template_EN.pdf"
  }
 }
