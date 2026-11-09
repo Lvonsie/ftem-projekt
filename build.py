@@ -598,6 +598,8 @@ def render_cell(seg, lang, cid=None, edit=False):
     # Stufen-Chips, Beschreibung und PDF-Knoepfen (z.B. Trainer-Downloads).
     # Standard: eingeklappt, damit der Bereich kompakt bleibt.
     for d in seg.get("dl") or []:
+        if d.get("langs") and lang not in d["langs"]:
+            continue   # Karte nur in bestimmten Sprachen zeigen (z.B. Dokument nur DE)
         chips = ""
         for c in d.get("chips") or []:
             k = (c or " ")[0].lower()

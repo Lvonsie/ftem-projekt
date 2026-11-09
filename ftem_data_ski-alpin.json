@@ -2102,6 +2102,23 @@
          "text": "Coachpoints 2026-28",
          "href": "https://snowsports.flink.host/s/yBlIjD79"
         }
+       ],
+       "dl": [
+        {
+         "title": "Lerninhalte im Leiteralltag nachhaltig verankern (Transferwirksamkeit)",
+         "desc": "Präsentation von J+S / BASPO: wie Gelerntes aus Kursen im Trainingsalltag hängen bleibt – Motivation und Volition, kleine Schritte (Micro-Ziele), Habit Stacking, Erfolge sichtbar machen und Take-Aways für Leiter:innen.",
+         "files": [
+          {
+           "label": "Slides Transferwirksamkeit",
+           "hint": "Präsentation J+S / BASPO, 38 Folien · PDF, 2.4 MB (auf Deutsch)",
+           "href": "assets/docs/JS_Slides_Transferwirksamkeit_Lerninhalte-verankern_DE.pdf"
+          }
+         ],
+         "langs": [
+          "de",
+          "en"
+         ]
+        }
        ]
       }
      ]
