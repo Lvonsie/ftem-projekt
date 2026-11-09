@@ -660,6 +660,12 @@ _ICONS = {
  "flag": '<path d="M6 21V4M6 4h12l-2.5 4L18 12H6"/>',
  "carve": '<path d="M8.5 3c7.5 2.5-7.5 6.5 0 9s-7.5 6.5 0 9"/><path d="M17 4.5v6.5"/><path d="M17 4.5l4 1.5-4 1.6"/>',
  "slzigzag": '<path d="M6 4l12 4L6 12l12 4-12 4"/>',
+ # Park & Pipe: Kicker mit Flugkurve, Rail, Halfpipe
+ "ppjump": '<path d="M2 19h7l5-5"/><path d="M14 14c2-5.5 5-8 8-8" stroke-dasharray="2.5 2.2"/>',
+ "pprail": '<path d="M3 12h18"/><path d="M6 12v7M18 12v7"/><path d="M4 8c4-3 12-3 16 0"/>',
+ "pphalfpipe": '<path d="M3 5v5a9 9 0 0 0 18 0V5"/><path d="M1.5 5h3M19.5 5h3"/>',
+ "skateboard": '<path d="M3 11c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/><path d="M7 13v2.4M17 13v2.4"/>',
+ "inlineskate": '<path d="M7 3h4v8l6 2.5V16H5V3z"/><circle cx="6.5" cy="19.5" r="1.5"/><circle cx="11" cy="19.5" r="1.5"/><circle cx="15.5" cy="19.5" r="1.5"/>',
  "gscurve": '<path d="M5 4c13 2 13 6.5 7 8s-6 6.5 7 8"/>',
  # Skicross/Boardercross: Startmaschine (45 Grad), Schwung um SX-Flaggen,
  # Wellen+Sprungelement, Linienwahl ums Tor (mehrere Linien)
@@ -686,6 +692,11 @@ _KEYMAP = [
  (("kraft","explosiv","power"),"barbell"),
  # Disziplin-spezifische Technik-&-Taktik-Themen VOR dem generischen carve-Icon
  # ("riesenslalom" vor "slalom" pruefen – der String enthaelt "slalom"!)
+ (("jumps",),"ppjump"),
+ (("rails",),"pprail"),
+ (("halfpipe",),"pphalfpipe"),
+ (("skate",),"skateboard"),
+ (("inline",),"inlineskate"),
  (("riesenslalom",),"gscurve"),
  (("slalom",),"slzigzag"),
  # Skicross & Snowboard Cross ("cross start" trifft auch "Skicross Start" usw.);
