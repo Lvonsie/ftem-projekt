@@ -474,5 +474,13 @@
   "fr": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Modele-evaluation_FR.pdf",
   "it": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Modello-valutazione_IT.pdf",
   "en": "assets/docs/Swiss-Ski_Skills-Check_F1-T2_Evaluation-template_EN.pdf"
+ },
+ "assets/docs/MFL_Ski_Kursleitungsdossier_Konzentration_2026-27_DE.pdf": {
+  "fr": "assets/docs/MPM_Ski_Dossier-du-cours_Concentration_2026-27_FR.pdf",
+  "it": "assets/docs/MPM_Sci_Dossier-del-corso_Concentrazione_2026-27_IT.pdf"
+ },
+ "assets/docs/FK_Ski_Kursleitungsdossier_Konzentration_2026-27_DE.pdf": {
+  "fr": "assets/docs/CP_Ski_Dossier-du-cours_Concentration_2026-27_FR.pdf",
+  "it": "assets/docs/CP_Sci_Dossier-del-corso_Concentrazione_2026-27_IT.pdf"
  }
 }

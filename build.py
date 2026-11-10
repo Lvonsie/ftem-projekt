@@ -976,7 +976,16 @@ CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9)]
 #   "body"    : Liste von Absaetzen (Text)
 #   "bullets" : optionale Liste von Aufzaehlungspunkten
 #   "url"     : Link -> wird als "Link"-Button gezeigt (leer lassen = kein Button)
+#   "sports"  : optional - nur bei diesen Sportarten zeigen (Auswahl auf der Startseite)
 NEWS = [
+    {
+        "title": "Schneesportforum: Mit dem Lasergewehr am Fusse des Matterhorns",
+        "date": "November 2026",
+        "body": ["Rund 30 Langlauf-Expertinnen und -Experten von J+S und Swiss Snowsports trafen sich in Zermatt zum Fokusthema «Konzentration»."],
+        "bullets": ["Aufmerksamkeitsformen und gezielte Lenkung der Konzentration",
+                    "Workshop «Biathlon mit dem Lasergewehr» mit Selina Gasparin und Aurel Dittli: Übungen für Verein und Schule, die Konzentration, Koordination und Motivation fördern"],
+        "url": "https://www.swiss-ski.ch/newsroom/news/schneesportforum-mit-dem-lasergewehr-am-fusse-des-matterhorns-1",
+    },
     {
         "title": "News Schneesport 26/27",
         "date": "Oktober 2026",
@@ -989,27 +998,6 @@ NEWS = [
         "url_lang": {
             "fr": "https://tool.jugendundsport.ch/modules/6a96ec7cb6267c1c550aa6f3?preview=&lang=fr",
             "it": "https://tool.jugendundsport.ch/modules/6a96ec7cb6267c1c550aa6f3?preview=&lang=it",
-        },
-    },
-    {
-        "title": "Neue Ausbildungsstruktur",
-        "date": "Juli 2026",
-        "body": ["Die Übersichtsseite zur neuen Ausbildungsstruktur ist live!",
-                 "Entdecke den Ausbildungsweg bis hin zum «Swiss-Ski Trainer:in Spitzensport»."],
-        "bullets": [],
-        # Link je nach gewaehlter Sportart ("default" = Ski Alpin, gilt auch fuer NoKo & Co.)
-        "url": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
-        "urls": {
-            "default": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
-            "langlauf": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/langlauf-ab-2027/",
-            "biathlon": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/biathlon-ab-2027/",
-            "skispringen": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen-ab-2027/",
-            "nordische-kombination": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/skispringen-ab-2027/",
-            "skicross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
-            "freeski-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/",
-            "snowboard-alpin": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/",
-            "snowboard-cross": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/ski-alpin-ab-2027",
-            "snowboard-park-pipe": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/",
         },
     },
     {
@@ -1048,7 +1036,8 @@ def news_html(lang):
         link = ('<a class="news-link" href="'+esc(_u)+'"'+_urls+' target="_blank" rel="noopener">Link ↗</a>') if _u else ''
         date = ('<span class="news-date">'+esc(tr(it["date"], lang))+'</span>') if it.get("date") else ''
         new_badge = '<span class="news-new">NEU</span>' if i == 0 else ''
-        cards += ('<article class="news-card"><div class="news-meta">'+date+new_badge+'</div>'
+        _sp = (' data-sports="'+" ".join(it["sports"])+'"') if it.get("sports") else ''
+        cards += ('<article class="news-card"'+_sp+'><div class="news-meta">'+date+new_badge+'</div>'
                   '<h3>'+esc(tr(it["title"], lang))+'</h3>'
                   '<div class="news-body">'+body+'</div>'+link+'</article>')
     return ('<section class="news"><h2 class="news-h">'+esc(heading)+'</h2>'
@@ -1544,7 +1533,7 @@ def home_html(datamap, lang):
               '<div class="nb-head">'+esc(news_label)+nbadge+'</div>'
               '<ul class="nb-list">'
               + "".join(
-                  '<li><div class="nb-item"><span class="nb-t">'+esc(tr(it["title"], lang))+'</span>'
+                  '<li'+((' data-sports="'+" ".join(it["sports"])+'"') if it.get("sports") else '')+'><div class="nb-item"><span class="nb-t">'+esc(tr(it["title"], lang))+'</span>'
                   # Teaser: erster Satz des News-Texts
                   + (('<span class="nb-teaser">'+esc(tr((it.get("body") or [""])[0], lang))+'</span>') if (it.get("body") or [""])[0] else '')
                   # Direktlink (oeffnet extern, ohne News-Overlay-Umweg)
@@ -1553,7 +1542,7 @@ def home_html(datamap, lang):
                       + ' target="_blank" rel="noopener">'
                       + esc({"de":"Mehr lesen","fr":"En savoir plus","it":"Leggi di più","en":"Read more"}.get(lang,"Mehr lesen"))+' →</a>') if it.get("url") else '')
                   + '</div></li>'
-                  for it in NEWS[:3])
+                  for it in NEWS)
               + '</ul>'
               '<span class="nb-more">'+esc({"de":"Alle News ansehen","fr":"Voir toutes les actualités","it":"Vedi tutte le notizie","en":"See all news"}[lang])+' →</span>'
               '</div>') if NEWS else
@@ -3494,6 +3483,7 @@ function openInfo(tplId,title){
     const nm=im.querySelector('.im-body .ps-name'),rg=im.querySelector('.im-body .ps-rng');
     if(nm&&rg)title=nm.textContent.trim()+' · '+rg.textContent.trim();
   }
+  if(tplId==='tpl-news'&&typeof newsFilter==='function')newsFilter(im);
   im.querySelector('.im-t').textContent=title;
   im.classList.toggle('wide', tplId.indexOf('tpl-ph-')===0);
   im.querySelector('.im-box').classList.remove('grown'); // frisch geoeffnet = kompakt
@@ -3636,6 +3626,21 @@ updMissionLbl();
     history.replaceState(null,'',location.pathname+location.hash);
   }catch(_){}
 })();
+// News nur fuer bestimmte Sportarten (data-sports): je nach gewaehlter Sportart
+// ein-/ausblenden; in der News-Box max. 3 Meldungen; "NEU" an der ersten sichtbaren.
+function newsFilter(root){
+  root=root||document;
+  const sid=(homeSport&&homeSport.value)?homeSport.value:SPORT_IDS[0];
+  root.querySelectorAll('[data-sports]').forEach(el=>{el.hidden=el.dataset.sports.split(' ').indexOf(sid)<0;});
+  root.querySelectorAll('.news-box .nb-list').forEach(ul=>{let n=0;
+    ul.querySelectorAll(':scope > li').forEach(li=>{if(li.dataset.sports&&li.hidden)return;n++;li.hidden=n>3;});});
+  const cards=[...root.querySelectorAll('.news-card')];
+  if(cards.length){root.querySelectorAll('.news-card .news-new').forEach(b=>b.remove());
+    const first=cards.find(c=>!c.hidden);
+    if(first){const m=first.querySelector('.news-meta');if(m){const b=document.createElement('span');b.className='news-new';b.textContent='NEU';m.appendChild(b);}}}
+}
+newsFilter(document);
+if(homeSport)homeSport.addEventListener('change',()=>{newsFilter(document);if(im&&!im.hidden&&im.__tpl==='tpl-news')newsFilter(im);});
 function goAW(){location.hash='#'+(homeSport&&homeSport.value?homeSport.value:SPORT_IDS[0]);}
 // AW-Knopf exakt ueber der Bergspitze; Hover blendet die Piste ein
 const awCta=document.querySelector('.aw-cta'), heroEl=document.querySelector('.home-hero'), heroSvg=document.querySelector('.heromt');
@@ -3891,6 +3896,10 @@ function route(){
 // keine IP-Adressen. Fehlt die Tabelle, passiert still nichts (try/catch).
 (function(){
   if(!SUPA_URL||!SUPA_KEY)return;
+  // Automatische Besucher (Suchmaschinen, Ueberwachungsdienste, Testbrowser) nicht zaehlen
+  try{var _ua=navigator.userAgent||'';
+    if(navigator.webdriver||/bot|crawl|spider|slurp|headless|lighthouse|pagespeed|pingdom|uptime|monitor|statuscake|site24x7|checkly|preview|facebookexternalhit|whatsapp|python|curl|wget|phantom|selenium|puppeteer|playwright/i.test(_ua))return;
+  }catch(_){}
   function once(kind,meta){
     try{
       var k='ftem-st-'+kind+(meta?'-'+meta:'');
@@ -4149,6 +4158,13 @@ __MAINCSS__
 [data-theme="dark"] .geo-map{--geo0:#2a3448}
 [data-theme="dark"] .geo-map path{stroke:#1c2740}
 [data-theme="dark"] .geo-map .geo-lake{fill:#24405a}
+.stat-botbar{margin:10px 0 14px;padding:10px 12px;border:1px solid #e3e7ec;border-radius:10px;background:#f7f9fb;font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.stat-botbar label{font-weight:700;display:flex;gap:6px;align-items:center;cursor:pointer}
+.stat-botbar details{flex-basis:100%;font-size:12px}
+.stat-botbar summary{cursor:pointer;color:#d52b1e;font-weight:700}
+.stat-botbar details div{margin-top:4px;color:#4a5563;line-height:1.5}
+.stat-botnote{flex-basis:100%;font-size:11px;color:#98a1ad}
+[data-theme="dark"] .stat-botbar{background:transparent;border-color:rgba(255,255,255,.14)}
 .stat-range{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 4px}
 .stat-range span{font-size:12px;font-weight:700;color:#4a5563;margin-right:2px}
 .stat-range button{font:inherit;font-size:12px;font-weight:700;border:1px solid #d9dee4;background:#fff;color:#2c3440;border-radius:999px;padding:5px 12px;cursor:pointer}
@@ -4591,7 +4607,7 @@ function togglePend(){
 // Top-Tabelle. Aggregiert wird im Browser. Zeitraum waehlbar (7/30/90/365 Tage
 // oder seit Start). Supabase liefert pro Anfrage hoechstens 1000 Zeilen, darum
 // wird seitenweise geladen (Range-Header, parallel).
-var STAT_DAYS=30;
+var STAT_DAYS=30,STAT_LAST=null,STAT_BOTINFO=null;
 function _dkey(d){function p(n){return (n<10?'0':'')+n;}return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());}
 var _MON=['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
 // Raster: bis 31 Tage pro Tag, bis 120 Tage pro Woche (ab Montag), sonst pro Monat
@@ -4628,8 +4644,37 @@ function zeitChart(reihen,tage,farben,einheit){
 }
 function _statKpi(v,lbl){return '<div class="stat-kpi"><b>'+v+'</b><span>'+lbl+'</span></div>';}
 function _statRange(tage){return tage>=3650?'seit Start':(tage===365?'365 Tagen':tage+' Tagen');}
+// Automatische Zugriffe erkennen (nur Eintraege mit Herkunft, ab 06.11.2026):
+// a) Rechenzentrums-Standorte grosser Anbieter in den USA (Suchmaschinen,
+//    Link-Vorschauen von WhatsApp/Teams/Facebook), b) Orte, von denen Zugriffe in
+//    sehr regelmaessigem Takt kommen (z. B. alle 10 Minuten = Ueberwachungsdienst).
+var STAT_HIDEBOT=true;
+var DC_CITIES=['Ashburn','Boydton','Sandston','Henrico','Des Moines','West Des Moines','Council Bluffs','Prineville','The Dalles','Boardman','Hillsboro','Quincy','Forest City','Lenoir','Moncks Corner','Gallatin','DeKalb','Huntsville','Fort Worth','Altoona','Los Lunas','New Albany','Papillion','Eagle Mountain','Pryor','Hilliard','San Antonio','Clifton','Santa Clara','Mountain View'];
+function _botKeys(rows){
+  var by={};rows.forEach(function(x){if(x.kind!=='zugriff'||String(x.meta||'').charAt(0)!=='{')return;
+    var g=null;try{g=JSON.parse(x.meta);}catch(_){}if(!g)return;
+    var k=(g.c||'')+'|'+(g.r||'')+'|'+(g.ci||'');(by[k]=by[k]||[]).push(new Date(x.created_at).getTime());});
+  var out={};
+  Object.keys(by).forEach(function(k){var t=by[k].sort(function(a,b){return a-b;});
+    var p=k.split('|');
+    if(p[0]==='US'&&DC_CITIES.indexOf(p[2])>=0){out[k]='Rechenzentrum';return;}
+    if(t.length<30)return;
+    var d=[];for(var i=1;i<t.length;i++)d.push(t[i]-t[i-1]);
+    var s=d.slice().sort(function(a,b){return a-b;}),med=s[Math.floor(s.length/2)];
+    if(med>3*3600e3)return;
+    var near=d.filter(function(v){return Math.abs(v-med)<=med*0.15;}).length;
+    if(near/d.length>=0.6)out[k]='regelmässiger Takt (ca. alle '+Math.round(med/60000)+' Min.)';});
+  return out;
+}
+function _isBot(x,bk){if(x.kind!=='zugriff'||String(x.meta||'').charAt(0)!=='{')return false;
+  var g=null;try{g=JSON.parse(x.meta);}catch(_){}if(!g)return false;
+  return !!bk[(g.c||'')+'|'+(g.r||'')+'|'+(g.ci||'')];}
 function renderStats(rows,tage){
   var body=document.getElementById('statsbody');
+  var allRows=rows,bk=_botKeys(rows),nBot=0;
+  if(STAT_HIDEBOT){rows=rows.filter(function(x){var b=_isBot(x,bk);if(b)nBot++;return !b;});}
+  else rows.forEach(function(x){if(_isBot(x,bk))nBot++;});
+  STAT_BOTINFO={n:nBot,keys:bk};
   // "Seit Start": effektive Laenge ab dem aeltesten Eintrag
   if(tage>=3650){var old=rows.length?new Date(rows[rows.length-1].created_at):new Date();
     var eff=Math.max(1,Math.ceil((Date.now()-new Date(old).setHours(0,0,0,0))/864e5));}
@@ -4690,6 +4735,11 @@ function renderStats(rows,tage){
       }).join('')+'</div>'):'<p class="glosnote">Frage-Texte erscheinen hier ab dem nächsten Deploy (ältere Fragen wurden nur gezählt, ohne Text).</p>')
     +'</div>';
   var intro=rows.length?'':'<p class="glosnote" style="margin-top:14px">Keine Daten in diesem Zeitraum.</p>';
+  var bl=Object.keys(bk).map(function(k){var p=k.split('|');return fbEsc((p[2]||'?')+(p[1]?' ('+p[1]+')':'')+', '+p[0])+': '+fbEsc(bk[k]);});
+  intro+='<div class="stat-botbar"><label><input type="checkbox" '+(STAT_HIDEBOT?'checked ':'')+'onchange="STAT_HIDEBOT=this.checked;if(STAT_LAST)renderStats(STAT_LAST.rows,STAT_LAST.tage)"> Automatische Zugriffe ausblenden</label>'
+    +'<span>'+nBot+' Zugriffe '+(STAT_HIDEBOT?'ausgeblendet':'als automatisch erkannt')+' (Überwachungsdienste, Suchmaschinen, Link-Vorschauen)</span>'
+    +(bl.length?'<details><summary>Erkannte Quellen ('+bl.length+')</summary><div>'+bl.join('<br>')+'</div></details>':'')
+    +'<div class="stat-botnote">Erkennung ab Erfassung der Herkunft (06.11.2026); ältere Zugriffe lassen sich nicht zuordnen. Seit dem 10.11.2026 werden sich selbst als Bot meldende Besucher gar nicht mehr gezählt.</div></div>';
   STAT_LINKS={links:links,eff:eff,tage:tage,PER:PER,ZR:ZR,kpiZr:kpiZr,granTxt:granTxt,spName:spName,fdate:fdate};
   STAT_GEO={geo:geo,zu:zu.length,PER:PER,ZR:ZR};
   body.innerHTML=intro+hZu+'<div id="statgeo"></div><div id="statlinks"></div>'+hKi;
@@ -4838,7 +4888,7 @@ function loadStats(){
        for(var i=1;i<n;i++)ps.push(page(i));
        return Promise.all(ps).then(function(rest){return rest.reduce(function(a,b){return a.concat(b);},first);});
      });})
-   .then(function(rows){if(tage===STAT_DAYS)renderStats(rows||[],tage);})
+   .then(function(rows){if(tage===STAT_DAYS){STAT_LAST={rows:rows||[],tage:tage};renderStats(rows||[],tage);}})
    .catch(function(e){
      body.innerHTML='<div class="stat-err"><b>Statistik konnte nicht geladen werden</b> ('+fbEsc(e.message)+').<br>'
       +'Falls die Tabelle fehlt, kann Luca sie in Supabase (SQL-Editor) einmalig anlegen:<br>'

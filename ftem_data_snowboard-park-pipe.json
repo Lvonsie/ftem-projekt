@@ -347,31 +347,31 @@
        "l": []
       },
       {
-       "v": "Stufe Starter\n\n((Trampolin))\n• Männer: 6x Strecksprung in Serie · 6x Monkey in Serie · 6x 180° mit Sprung dazwischen · Line-Jumps (6 Linien) · Bücksprung · Sitzsprung · 3x Bank in Serie · Side-Roll (bounced) · 90° to Back to Sideroll\n• Frauen: 6x Strecksprung in Serie · 6x Monkey in Serie · 6x 180° mit Sprung dazwischen · Line-Jumps (6 Linien) · Bücksprung · Sitzsprung · 3x Bank in Serie · Side-Roll (bounced) · 90° to Sideroll\n\n((Airtrack))\n• 6x Strecksprung, Arme am Körper · 180 L · 180 R · Rolle vorwärts · Rolle rückwärts · Seitrolle L · Seitrolle R · Kerze 10\" · Kopfstand 10\"",
+       "v": "Stufe Starter\n\n((Trampolin · Männer))\n• 6x Strecksprung in Serie\n• 6x Monkey in Serie\n• 6x 180° mit Sprung dazwischen\n• Line-Jumps (6 Linien)\n• Bücksprung\n• Sitzsprung\n• 3x Bank in Serie\n• Side-Roll (bounced)\n• 90° to Back to Sideroll\n\n((Trampolin · Frauen))\n• 6x Strecksprung in Serie\n• 6x Monkey in Serie\n• 6x 180° mit Sprung dazwischen\n• Line-Jumps (6 Linien)\n• Bücksprung\n• Sitzsprung\n• 3x Bank in Serie\n• Side-Roll (bounced)\n• 90° to Sideroll\n\n((Airtrack))\n• 6x Strecksprung, Arme am Körper\n• 180 L\n• 180 R\n• Rolle vorwärts\n• Rolle rückwärts\n• Seitrolle L\n• Seitrolle R\n• Kerze 10\"\n• Kopfstand 10\"",
        "from": 2,
        "to": 2,
        "l": []
       },
       {
-       "v": "Stufe Sportster\n\n((Trampolin))\n• Männer: 6x Back-Jump · 540 L · 540 R · Back Pullover · Frontflip · 6x Side-Roll bounce (3× L, 3× R) · Misty Roll (bounced) · 360 Back-Jump to Back to Pullover (Vorübung Cork 7) · Underflip Roll: 90° to Back Pullover to stand\n• Frauen: 6x Back-Jump · 360 L · 360 R · Back Pullover · Frontflip · 6x Side-Roll bounce (3× L, 3× R) · Misty Roll (bounced) · Front Pullover · Underflip Roll: 90° to Back Pullover to stand\n\n((Airtrack))\n• 6x Strecksprung hoch-weit-hoch · 360 L · 360 R · 3x Rolle vorwärts am Stück · 3x Rolle rückwärts am Stück · Mistyrolle L · Mistyrolle R · Rolle vorwärts über Kerze · Wand-Handstand 30\"",
+       "v": "Stufe Sportster\n\n((Trampolin · Männer))\n• 6x Back-Jump\n• 540 L\n• 540 R\n• Back Pullover\n• Frontflip\n• 6x Side-Roll bounce (3× L, 3× R)\n• Misty Roll (bounced)\n• 360 Back-Jump to Back to Pullover (Vorübung Cork 7)\n• Underflip Roll: 90° to Back Pullover to stand\n\n((Trampolin · Frauen))\n• 6x Back-Jump\n• 360 L\n• 360 R\n• Back Pullover\n• Frontflip\n• 6x Side-Roll bounce (3× L, 3× R)\n• Misty Roll (bounced)\n• Front Pullover\n• Underflip Roll: 90° to Back Pullover to stand\n\n((Airtrack))\n• 6x Strecksprung hoch-weit-hoch\n• 360 L\n• 360 R\n• 3x Rolle vorwärts am Stück\n• 3x Rolle rückwärts am Stück\n• Mistyrolle L\n• Mistyrolle R\n• Rolle vorwärts über Kerze\n• Wand-Handstand 30\"",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Stufe Contender\n\n((Trampolin))\n• Männer: Catturn 360 · 720 L · 720 R · 3x Backflip in Serie · Sideflip · Misty 540 L · Misty 540 R · Cork 720 · Underflip (one side)\n• Frauen: Catturn 360 · 540 L · 540 R · Backflip · Sideflip · Misty 540 L · Misty 540 R · 360 Back-Jump to Back to Pullover (Vorübung Cork 7) · Underflip (one side)\n\n((Airtrack))\n• Männer: Frontflip · 540 L · 540 R · 3x Handstand abrollen · Streuli – Rolle rückwärts durch den Handstand · Sideflip (one side) · Misty 5 (one side) · Sprungrolle · 3x Handstand hüpfen\n• Frauen: Frontflip · Back to Back 360 · 540 natural · 3x Handstand abrollen · Streuli – Rolle rückwärts durch den Handstand · Mistyrolle bounced · Sideflip (one side) · Sprungrolle · 3x Handstand hüpfen",
+       "v": "Stufe Contender\n\n((Trampolin · Männer))\n• Catturn 360\n• 720 L\n• 720 R\n• 3x Backflip in Serie\n• Sideflip\n• Misty 540 L\n• Misty 540 R\n• Cork 720\n• Underflip (one side)\n\n((Trampolin · Frauen))\n• Catturn 360\n• 540 L\n• 540 R\n• Backflip\n• Sideflip\n• Misty 540 L\n• Misty 540 R\n• 360 Back-Jump to Back to Pullover (Vorübung Cork 7)\n• Underflip (one side)\n\n((Airtrack · Männer))\n• Frontflip\n• 540 L\n• 540 R\n• 3x Handstand abrollen\n• Streuli – Rolle rückwärts durch den Handstand\n• Sideflip (one side)\n• Misty 5 (one side)\n• Sprungrolle\n• 3x Handstand hüpfen\n\n((Airtrack · Frauen))\n• Frontflip\n• Back to Back 360\n• 540 natural\n• 3x Handstand abrollen\n• Streuli – Rolle rückwärts durch den Handstand\n• Mistyrolle bounced\n• Sideflip (one side)\n• Sprungrolle\n• 3x Handstand hüpfen",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Stufe Performer\n\n((Trampolin))\n• Männer: 4x Back 180 L to Back to 180 R · 900 L · 900 R · Double Backflip · Double Sideflip L · Double Sideflip R · Misty 900 · Cork 900 · Underflip (other side)\n• Frauen: 4x Back 180 L to Back to 180 R · 720 L · 720 R · 3x Backflip in Serie · 6x Sideflip (L und R) · 90 Sideflip – Back – Back Sideflip 90 (Vorübung Double Misty 900) · Misty 7 · Cork 7 · Underflip (other side)\n\n((Airtrack))\n• Männer: Frontflip Sprungrolle · Kick the Moon L · Kick the Moon R · Backflip · Rondat Backflip · Misty 5 (other side) · Sideflip (other side) · Rolle vorwärts in den Handstand, 180° zur Rolle rückwärts · Überschlag vorwärts\n• Frauen: Frontflip to straight jump · Kick the Moon · 540 unnatural · Rad – 180°-Sprung – Rad andere Seite · Rondat to Jump · Misty 5 (one side) · Sideflip (other side) · Rolle vorwärts in den Handstand, 180° zur Rolle rückwärts · Überschlag vorwärts",
+       "v": "Stufe Performer\n\n((Trampolin · Männer))\n• 4x Back 180 L to Back to 180 R\n• 900 L\n• 900 R\n• Double Backflip\n• Double Sideflip L\n• Double Sideflip R\n• Misty 900\n• Cork 900\n• Underflip (other side)\n\n((Trampolin · Frauen))\n• 4x Back 180 L to Back to 180 R\n• 720 L\n• 720 R\n• 3x Backflip in Serie\n• 6x Sideflip (L und R)\n• 90 Sideflip – Back – Back Sideflip 90 (Vorübung Double Misty 900)\n• Misty 7\n• Cork 7\n• Underflip (other side)\n\n((Airtrack · Männer))\n• Frontflip Sprungrolle\n• Kick the Moon L\n• Kick the Moon R\n• Backflip\n• Rondat Backflip\n• Misty 5 (other side)\n• Sideflip (other side)\n• Rolle vorwärts in den Handstand, 180° zur Rolle rückwärts\n• Überschlag vorwärts\n\n((Airtrack · Frauen))\n• Frontflip to straight jump\n• Kick the Moon\n• 540 unnatural\n• Rad – 180°-Sprung – Rad andere Seite\n• Rondat to Jump\n• Misty 5 (one side)\n• Sideflip (other side)\n• Rolle vorwärts in den Handstand, 180° zur Rolle rückwärts\n• Überschlag vorwärts",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Stufe Rookie\n\n((Trampolin))\n• Männer: Catturn 720 · 1080 L · 1080 R · Double Misty 900 L · Double Misty 900 R · Double Cork 1080 L · Double Cork 1080 R · Double Underflip 900 · Double Underflip 900 (other side)\n• Frauen: Catturn 720 · 900 L · 900 R · Double Backflip · Double Misty 900 · Misty 900 · 3/4 Frontflip to Back to 1 1/4 Frontflip to stand · Cork 900 · Cork 7 (other side)\n\n((Airtrack))\n• Männer: Frontflip Frontflip · Cheat Gainer · Back to Back 540 · Rolle rückwärts to Backflip · Misty 7 L · Misty 7 R · Rad Sideflip L · Rad Sideflip R · Handstand frei stehen 5\"\n• Frauen: Frontflip Sprungrolle · Cheat Gainer · Back to Back 540 · Backflip · Rondat Backflip · Misty 5 (other side) · Misty 5 to Jump 180 · Rad-Hüpfer Sideflip · Handstand frei stehen 5\"",
+       "v": "Stufe Rookie\n\n((Trampolin · Männer))\n• Catturn 720\n• 1080 L\n• 1080 R\n• Double Misty 900 L\n• Double Misty 900 R\n• Double Cork 1080 L\n• Double Cork 1080 R\n• Double Underflip 900\n• Double Underflip 900 (other side)\n\n((Trampolin · Frauen))\n• Catturn 720\n• 900 L\n• 900 R\n• Double Backflip\n• Double Misty 900\n• Misty 900\n• 3/4 Frontflip to Back to 1 1/4 Frontflip to stand\n• Cork 900\n• Cork 7 (other side)\n\n((Airtrack · Männer))\n• Frontflip Frontflip\n• Cheat Gainer\n• Back to Back 540\n• Rolle rückwärts to Backflip\n• Misty 7 L\n• Misty 7 R\n• Rad Sideflip L\n• Rad Sideflip R\n• Handstand frei stehen 5\"\n\n((Airtrack · Frauen))\n• Frontflip Sprungrolle\n• Cheat Gainer\n• Back to Back 540\n• Backflip\n• Rondat Backflip\n• Misty 5 (other side)\n• Misty 5 to Jump 180\n• Rad-Hüpfer Sideflip\n• Handstand frei stehen 5\"",
        "from": 6,
        "to": 6,
        "l": []
@@ -1130,25 +1130,25 @@
        "l": []
       },
       {
-       "v": "Stufe Sportster\n\n• 7c-tac aus dem Stand (10 m) · Slalom: 5 Pylonen im Abstand von 2 m · Bomb drop · fs 180° und cab 180° mit Skate gedreht · Pushen: vorwärts und rückwärts traveln (Ramp) · Pushen und vorne/hinten Coping berühren (Ramp) · 8x bs Kickturn (Ramp) · 8x wheel lift · 4x jump down and up",
+       "v": "Stufe Sportster\n\n• 7c-tac aus dem Stand (10 m)\n• Slalom: 5 Pylonen im Abstand von 2 m\n• Bomb drop\n• fs 180° und cab 180° mit Skate gedreht\n• Pushen: vorwärts und rückwärts traveln (Ramp)\n• Pushen und vorne/hinten Coping berühren (Ramp)\n• 8x bs Kickturn (Ramp)\n• 8x wheel lift\n• 4x jump down and up",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "Stufe Contender\n\n• switch 7c-tac aus dem Stand (10 m) · 180° body varial · Ollie über ein Deck · bs 180° und sbs 180° mit Skate gedreht · Drop in (Ramp) · 3x Rock to Fakie und Tail Stall (Ramp) · 8x fs kickturn · 4x bs axle stall · 4x bs rock n' roll",
+       "v": "Stufe Contender\n\n• switch 7c-tac aus dem Stand (10 m)\n• 180° body varial\n• Ollie über ein Deck\n• bs 180° und sbs 180° mit Skate gedreht\n• Drop in (Ramp)\n• 3x Rock to Fakie und Tail Stall (Ramp)\n• 8x fs kickturn\n• 4x bs axle stall\n• 4x bs rock n' roll",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "Stufe Performer\n\n• Hippie Jump · fs 180° · Ollie über zwei Decks · bs 360° gerutscht am Boden · bs Boardslide to normal auf einem Rail · switch Drop in (Ramp) · 8x fs und bs Kickturn (Ramp) · 4x bs 50-50 gegrindet (Ramp) · Tail Stall fs und Nose Stall cab revert",
+       "v": "Stufe Performer\n\n• Hippie Jump\n• fs 180°\n• Ollie über zwei Decks\n• bs 360° gerutscht am Boden\n• bs Boardslide to normal auf einem Rail\n• switch Drop in (Ramp)\n• 8x fs und bs Kickturn (Ramp)\n• 4x bs 50-50 gegrindet (Ramp)\n• Tail Stall fs und Nose Stall cab revert",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "Stufe Rookie\n\n• switch Hippie Jump (dafür fs 180°) · bs 180° · sbs 360° gerutscht am Boden · fs boardslide to normal · 4x fs rock n' roll · switch fs und bs Kickturn (Ramp) · fs und cab 360° (Ramp) · 4x fs 50-50 gegrindet (Ramp) · Tail Stall bs und Nose Stall sbs revert",
+       "v": "Stufe Rookie\n\n• switch Hippie Jump (dafür fs 180°)\n• bs 180°\n• sbs 360° gerutscht am Boden\n• fs boardslide to normal\n• 4x fs rock n' roll\n• switch fs und bs Kickturn (Ramp)\n• fs und cab 360° (Ramp)\n• 4x fs 50-50 gegrindet (Ramp)\n• Tail Stall bs und Nose Stall sbs revert",
        "from": 6,
        "to": 6,
        "l": []

@@ -3,10 +3,20 @@
 // IP-Adresse selbst wird NICHT gespeichert. Koordinaten werden auf 0,1 Grad
 // gerundet (ca. 10 km), damit kein genauer Standort entsteht.
 // Gespeichert wird in ftem_stats: kind = "zugriff", meta = JSON
-// {l: Sprache, c: Land (ISO-2), r: Kanton/Region-Code, ci: Ort, la, lo}.
+// {l: Sprache, c: Land (ISO-2), r: Kanton/Region-Code, ci: Ort, la, lo, b: Browser/System grob}.
 const URL_STATS = 'https://xphbwnzyebbejsdeqled.supabase.co/rest/v1/ftem_stats';
 const KEY = process.env.SUPABASE_SERVICE_KEY || 'sb_publishable_UQLqY8OqccllVy9t1FRlFQ_HZr_--D_';
 const LANGS = ['de', 'fr', 'it', 'en'];
+// Automatische Besucher (Suchmaschinen, Ueberwachungsdienste, Testbrowser, Skripte) nicht zaehlen
+const BOT_RE = /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|pingdom|uptime|monitor|statuscake|site24x7|checkly|preview|facebookexternalhit|whatsapp|python|curl|wget|phantom|selenium|puppeteer|playwright|go-http|node-fetch|axios|java\//i;
+// Grober Browser-Typ (ohne Version), nur zur Erkennung automatischer Zugriffe
+function uaFamily(ua) {
+  const b = /Edg\//.test(ua) ? 'Edge' : /OPR\//.test(ua) ? 'Opera' : /Firefox\//.test(ua) ? 'Firefox'
+    : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : 'andere';
+  const o = /iPhone|iPad|iPod/.test(ua) ? 'iOS' : /Android/.test(ua) ? 'Android' : /Windows/.test(ua) ? 'Windows'
+    : /Mac OS X/.test(ua) ? 'macOS' : /Linux/.test(ua) ? 'Linux' : 'andere';
+  return b + '/' + o;
+}
 
 function geoFrom(event) {
   try {
@@ -28,7 +38,9 @@ exports.handler = async (event) => {
   let body = {};
   try { body = JSON.parse(event.body || '{}'); } catch (_) {}
   const lang = LANGS.indexOf(body.l) >= 0 ? body.l : 'de';
-  const meta = Object.assign({ l: lang }, geoFrom(event));
+  const ua = String(event.headers['user-agent'] || '');
+  if (!ua || BOT_RE.test(ua)) return { statusCode: 204, body: '' };   // Bot: nicht zaehlen
+  const meta = Object.assign({ l: lang }, geoFrom(event), { b: uaFamily(ua) });
   try {
     const r = await fetch(URL_STATS, {
       method: 'POST',
