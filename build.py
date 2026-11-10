@@ -753,7 +753,12 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
         lbl = tr(r["label"], lang) or ""
         # data-rid: Zeilen-Kennung fuer Spalten-Layouts aus dem Admin ("lay|<rid>")
         body += '<div class="r" data-rid="'+esc(cidb+"|"+str(ri))+'">'
-        body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
+        # Mehrzeilige Beschriftung: 1. Zeile = Name, weitere Zeilen klein darunter (z.B. Phasen)
+        if lbl and "\n" in lbl:
+            _l = [x.strip() for x in lbl.split("\n") if x.strip()]
+            body += '<div class="rl rlm"><span>'+esc(_l[0])+'</span> <span class="rlsub">'+'<br>'.join(esc(x) for x in _l[1:])+'</span></div>'
+        else:
+            body += '<div class="rl">'+esc(lbl)+'</div>' if lbl else '<div class="rl nolbl"></div>'
         # render segs with spans; we lay out as 10 cells using grid-column span
         # Gleiche benachbarte Zellen werden ueber Phasen hinweg zu einem Block verbunden
         # (nicht nur innerhalb F/T/E/M) – so entsteht bei identischem Inhalt eine Spalte.
@@ -2356,6 +2361,8 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:stretch}
 .rl{position:sticky;left:0;z-index:5;align-self:stretch;background:var(--card);font-weight:700;font-size:11.5px;color:var(--ink);display:flex;align-items:flex-start;padding:9px 10px;border-radius:8px;border:1px solid var(--line);box-shadow:0 0 0 7px var(--card),-14px 0 0 7px var(--card),9px 0 9px -6px rgba(0,0,0,.2);min-width:0;overflow:hidden;overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
+.rl.rlm{flex-direction:column;gap:4px}
+.rlsub{font-weight:500;font-size:10px;line-height:1.35;color:var(--mut)}
 .rl.nolbl{background:var(--card);border:1px dashed #e9ecef}
 /* Geschlechtsspezifische Hinweise: Kasten mit Icon (dezenter Rahmen im Seiten-Gelb) */
 .gsdbox{display:flex;gap:9px;align-items:flex-start;margin:8px 0 4px;background:#fffdf4;border:1.5px solid #e2a900;border-radius:10px;padding:7px 10px 7px 8px;box-shadow:0 1px 5px rgba(29,38,48,.07)}

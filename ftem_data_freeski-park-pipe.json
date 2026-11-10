@@ -91,166 +91,160 @@
      "label": "Stunden / Jahr",
      "segs": [
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\n150-500h",
        "from": 0,
        "to": 2,
        "l": []
       },
       {
-       "v": "300",
+       "v": "Soll-Werte\n400-600h",
        "from": 3,
        "to": 3,
        "l": []
       },
       {
-       "v": "450",
+       "v": "Soll-Werte\n600-800h",
        "from": 4,
        "to": 4,
        "l": []
       },
       {
-       "v": "530",
+       "v": "Soll-Werte\n700-900h",
        "from": 5,
        "to": 5,
        "l": []
       },
       {
-       "v": "720",
+       "v": "Soll-Werte\n800-1000h",
        "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "~1000",
+       "v": "Soll-Werte\n>1000h",
        "from": 7,
-       "to": 7,
-       "l": []
-      },
-      {
-       "v": ">1000",
-       "from": 8,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": ">1000",
-       "from": 9,
        "to": 9,
        "l": []
       }
      ]
     },
     {
-     "label": "Sommer (Mai - November) On-Snow",
+     "label": "Sommer (Mai - September) On-Snow\nVorbereitungsphase 1: Mai - Juni\nVorbereitungsphase 2: Juli - September",
      "segs": [
       {
-       "v": "Coming soon…",
+       "v": "-",
        "from": 0,
        "to": 2,
        "l": []
       },
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\n5 Tage",
        "from": 3,
-       "to": 6,
+       "to": 4,
        "l": []
       },
       {
-       "v": "Coming soon…",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "Coming soon…",
-       "from": 9,
+       "v": "Soll-Werte\n10-20 Tage",
+       "from": 5,
        "to": 9,
        "l": []
       }
      ]
     },
     {
-     "label": "Sommer Off-Snow",
+     "label": "Sommer (Mai - September) Off-Snow\nVorbereitungsphase 1: Mai - Juni\nVorbereitungsphase 2: Juli - September",
      "segs": [
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\nBag Sessions: 1-10\nDry Slope: 2h pro Woche\nTrampolin: 2h pro Woche\nAthletik: 4h pro Woche",
        "from": 0,
        "to": 2,
        "l": []
       },
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\nBag Sessions: 10-20\nDry Slope: 2h pro Woche\nTrampolin: 2h pro Woche\nAthletik: 5h pro Woche\nMentaltraining: 0.5h pro Woche",
        "from": 3,
+       "to": 3,
+       "l": []
+      },
+      {
+       "v": "Soll-Werte\nBag Sessions: 20-30\nDry Slope: 2h pro Woche\nTrampolin: 2h pro Woche\nAthletik: 6.5h pro Woche\nMentaltraining: 0.5h pro Woche",
+       "from": 4,
+       "to": 4,
+       "l": []
+      },
+      {
+       "v": "Soll-Werte\nBag Sessions: 30-50\nDry Slope: 2h pro Woche\nTrampolin: 1h pro Woche\nAthletik: 8h pro Woche\nMentaltraining: 1h pro Woche",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Soll-Werte\nBag Sessions: 40-60\nDry Slope: 2h pro Woche\nTrampolin: 1h pro Woche\nAthletik: 8h pro Woche\nMentaltraining: 1h pro Woche",
+       "from": 6,
        "to": 6,
        "l": []
       },
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\nBag Sessions: 50-60\nAthletik: 8h pro Woche\nMentaltraining: 1h pro Woche",
        "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "Coming soon…",
-       "from": 9,
        "to": 9,
        "l": []
       }
      ]
     },
     {
-     "label": "Winter (Dezember - April) On-Snow Trainings",
+     "label": "Winter (Oktober - April) On-Snow Trainings\nVorwettkampfphase: Oktober - November\nWettkampfphase: Dezember - April",
      "segs": [
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\nSchneetage Total: 30-45\nSchneetage Ø: 1.5-2 Tage pro Woche",
        "from": 0,
        "to": 2,
        "l": []
       },
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\nSchneetage Total: 45-65\nSchneetage Ø: 1.5-2 Tage pro Woche",
        "from": 3,
-       "to": 6,
+       "to": 3,
        "l": []
       },
       {
-       "v": "Coming soon…",
-       "from": 7,
-       "to": 8,
+       "v": "Soll-Werte\nSchneetage Total: 65-80\nSchneetage Ø: 2-3 Tage pro Woche",
+       "from": 4,
+       "to": 4,
        "l": []
       },
       {
-       "v": "Coming soon…",
-       "from": 9,
+       "v": "Soll-Werte\nSchneetage Total: 80-100\nSchneetage Ø: 3-4 Tage pro Woche",
+       "from": 5,
+       "to": 5,
+       "l": []
+      },
+      {
+       "v": "Soll-Werte\nSchneetage Total: 100-120\nSchneetage Ø: 3-4.5 Tage pro Woche",
+       "from": 6,
        "to": 9,
        "l": []
       }
      ]
     },
     {
-     "label": "Winter Off-Snow",
+     "label": "Winter (Oktober - April) Off-Snow\nVorwettkampfphase: Oktober - November\nWettkampfphase: Dezember - April",
      "segs": [
       {
-       "v": "Coming soon…",
+       "v": "Soll-Werte\nAthletik: 2h pro Woche\nMentaltraining: 0.5h pro Woche",
        "from": 0,
-       "to": 2,
+       "to": 3,
        "l": []
       },
       {
-       "v": "Coming soon…",
-       "from": 3,
-       "to": 6,
+       "v": "Soll-Werte\nAthletik: 2.5h pro Woche\nMentaltraining: 0.5h pro Woche",
+       "from": 4,
+       "to": 4,
        "l": []
       },
       {
-       "v": "Coming soon…",
-       "from": 7,
-       "to": 8,
-       "l": []
-      },
-      {
-       "v": "Coming soon…",
-       "from": 9,
+       "v": "Soll-Werte\nAthletik: 3h pro Woche\nMentaltraining: 1h pro Woche",
+       "from": 5,
        "to": 9,
        "l": []
       }
@@ -785,7 +779,7 @@
      "label": "Testing & Leistungsdiagnostik",
      "segs": [
       {
-       "v": "Coming soon…",
+       "v": "",
        "from": 0,
        "to": 2,
        "l": []
