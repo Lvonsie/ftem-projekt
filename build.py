@@ -204,6 +204,10 @@ def _bodyhtml(txt):
 def render_block(block, link_texts):
     b = block.strip()
     if not b: return ""
+    # Stern-Absatz ("*Mädchen: …", "* Window of Opportunity …") = schlichter
+    # Absatz; gsd_wrap macht daraus ggf. den markierten Geschlechter-Kasten
+    if b.startswith("*"):
+        return '<p>'+esc(b).replace("\n", "<br>")+'</p>'
     # Explizite Admin-Schreibweise: "---" allein = Trennstrich
     if re.fullmatch(r'-{3,}', b):
         return '<hr class="chr">'
@@ -211,7 +215,7 @@ def render_block(block, link_texts):
         return ""
     # "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip wie im Athlet:innen-Weg
     _l0 = b.split("\n", 1)
-    if _SNOW_RE.match(_l0[0].strip()):
+    if _SNOW_RE.match(_l0[0].strip()) and _l0[0].strip() != _l0[0].strip().upper():   # GROSS = normale Kopfzeile
         return _snow_zone_html(_l0[0].strip(), _l0[1] if len(_l0) > 1 else "")
     # Explizite Admin-Schreibweise: "((Label))" als erste Zeile = Zonen-Chip
     _mz = re.match(r'^\(\((.{1,28})\)\)\s*$', _l0[0].strip())
@@ -230,18 +234,19 @@ def render_block(block, link_texts):
             else:
                 out += '<li>'+esc(l)+'</li>'
         return out + '</ul>'
-    # bullet list
-    if any(l.strip().startswith("•") for l in lines):
+    # bullet list ("•", "·", "- " oder "– " am Zeilenanfang)
+    if any(_is_bul(l) for l in lines):
         intro, items = [], []
         for l in lines:
             ls = l.strip()
-            if ls.startswith("•"):
-                items.append(ls.lstrip("•").strip())
+            if _is_bul(ls):
+                items.append(_unbul(ls))
             elif ls:
                 if not items: intro.append(ls)
                 else: items.append(ls)
         out = ""
         if intro: out += '<p class="bi">'+esc(intro[0])+'</p>'
+        if len(intro) > 1: out += '<p>'+esc(" ".join(intro[1:]))+'</p>'
         out += '<ul class="bl">'+"".join('<li>'+esc(i)+'</li>' for i in items if i)+'</ul>'
         return out
     # SC/ST list
@@ -390,11 +395,15 @@ def bullets_from_text(text):
         return '<ul class="bl">'+"".join('<li>'+esc(s)+'</li>' for s in items)+'</ul>'
     return None
 
+_BUL_RE = re.compile(r'^([•·‣]|[-–]\s)')
+def _is_bul(l): return bool(_BUL_RE.match((l or "").strip()))
+def _unbul(l): return re.sub(r'^[•·‣\-–]+\s*', '', (l or "").strip()).strip()
+
 def _zone_body(text):
     lines = text.split("\n")
-    if any(l.strip().startswith("•") for l in lines):
-        items = [l.strip().lstrip("•").strip() for l in lines if l.strip().startswith("•")]
-        intro = " ".join(l.strip() for l in lines if l.strip() and not l.strip().startswith("•"))
+    if any(_is_bul(l) for l in lines):
+        items = [_unbul(l) for l in lines if _is_bul(l)]
+        intro = " ".join(l.strip() for l in lines if l.strip() and not _is_bul(l))
         html = (esc(intro)+" ") if intro else ""
         html += '<ul class="bl">'+"".join('<li>'+esc(i)+'</li>' for i in items if i)+'</ul>'
         return html, True
@@ -799,6 +808,21 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
             + tt_span + '<span class="tchev"></span></summary>'
             + tfield +
             '<div class="scroller"><div class="grid">'+th+body+'</div></div></details>')
+
+# Startseiten-Popups: optional zusammengefasste Stufen pro Sportart
+# (data["home"]["groups"] = [["F1","F2","F3"],["T1","T2"],...]). Eine Gruppe
+# = EINE Box mit Titel "F1–F3"; Inhalt + Admin-Feld laufen ueber die erste Stufe.
+def home_units(hm, stages):
+    groups = [g for g in ((hm or {}).get("groups") or []) if g and all(s in stages for s in g)]
+    out, done = [], set()
+    for st in stages:
+        if st in done: continue
+        g = next((g for g in groups if st in g), None)
+        if g:
+            out.append((g[0]+"–"+g[-1], list(g))); done.update(g)
+        else:
+            out.append((st, [st])); done.add(st)
+    return out
 
 def merge_same_segs(segs):
     """Benachbarte Segmente mit identischem Inhalt (Text + Links) zu einem Block
@@ -1341,10 +1365,12 @@ def home_html(datamap, lang):
         for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
             intro2 = (hm.get("intro") or {}).get(k) or pdesc
             secs = ""
+            units2 = home_units(hm, PH_STAGES[k])
             for si2, sec in enumerate(hm.get("sections", [])):
                 cols = ""
                 ncols = 0
-                for st in PH_STAGES[k]:
+                for ulbl, ust in units2:
+                    st = ust[0]
                     cell = (sec.get("cells") or {}).get(st)
                     if not cell or not (cell.get("v") or cell.get("l")):
                         continue
@@ -1352,9 +1378,9 @@ def home_html(datamap, lang):
                     # (data-cid -> im Admin-Bereich als Startseiten-Inhalt editierbar)
                     body2 = render_cell({"v": cell.get("v") or "", "l": cell.get("l") or []}, lang,
                                         cid="home|"+s2["id"]+"|"+str(si2)+"|"+st)
-                    age2 = ages2.get(st, "")
+                    age2 = ages2.get(st, "") if len(ust) == 1 else ""
                     ncols += 1
-                    cols += ('<div class="ps-col" data-st="'+st+'"><div class="ps-st">'+st
+                    cols += ('<div class="ps-col" data-st="'+" ".join(ust)+'"><div class="ps-st">'+ulbl
                              + ('<i>'+esc(age2)+'</i>' if age2 else '') + '</div>'
                              + '<div class="cwrap">'+body2+'</div></div>')
                 if cols:
@@ -1367,13 +1393,13 @@ def home_html(datamap, lang):
             # Stufenleiste (Variante B): «Alle X-Stufen» + die Stufen der Phase
             # als Filter fuer die drei Abschnitte. Bei Mastery (nur M) unnoetig.
             stbar = ""
-            if secs and len(PH_STAGES[k]) > 1:
+            if secs and len(units2) > 1:
                 all_lbl = {"de": "Alle "+letter+"-Stufen", "fr": "Tous les niveaux "+letter,
                            "it": "Tutti i livelli "+letter, "en": "All "+letter+" stages"}[lang]
                 stbar = ('<div class="ps-stb"><button class="ps-sb on" type="button" data-st="alle"><b>'+esc(all_lbl)+'</b></button>'
-                         + "".join('<button class="ps-sb" type="button" data-st="'+st+'"><b>'+st+'</b>'
-                                   + ('<small>'+esc(ages2.get(st, ""))+'</small>' if ages2.get(st) else '')
-                                   + '</button>' for st in PH_STAGES[k])
+                         + "".join('<button class="ps-sb" type="button" data-st="'+ust[0]+'"><b>'+ulbl+'</b>'
+                                   + ('<small>'+esc(ages2.get(ust[0], ""))+'</small>' if len(ust) == 1 and ages2.get(ust[0]) else '')
+                                   + '</button>' for ulbl, ust in units2)
                          + '</div>')
             # Die ganze Kopfzeile (Titel + Beschreibung + Stufenleiste) in einen
             # Wrapper, damit sie beim Scrollen gemeinsam oben fixiert bleibt.
@@ -2731,86 +2757,169 @@ function _esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;
 const SC_RE=/^((?:SC|ST|LT)(?:\s?\d+[a-z]?)?(?:\s+[A-Za-zÀ-ÿ]{2,14})?)\s*[:.\)]\s*([\s\S]*)$/;
 function _badge(l){l=l.trim();return '<span class="badge'+(/^LT(\b|\s?\d)/.test(l)?' lt':'')+'">'+_esc(l)+'</span>';}
 const SNOW_RE=/^(on|off)[\s-]?snow:?$/i;
-// Gleiche Logik wie _is_head_line im Generator: sieht die Zeile wie ein Titel aus?
+// ---- 1:1-Port von render_block / render_cell aus build.py ----
+// WICHTIG: Aenderungen an der Zellen-Formatierung immer in BEIDEN Versionen
+// machen (Python = Seiten-Build, JS = Admin-Vorschau + Admin-Korrekturen),
+// sonst sieht derselbe Text je nach Herkunft verschieden aus.
+const _UP=/^\p{Lu}/u, _AL=/\p{L}/u;
+const LABELVAL_RE=/^([^:\n]{2,44}):[ \t ]+(\S[\s\S]*)$/;
+function _titleLabel(lab){
+  lab=(lab||'').trim();
+  if(lab.length<2||lab.length>44)return false;
+  if(!_UP.test(lab))return false;
+  if(/[.!?]$/.test(lab)||lab.indexOf('. ')>=0)return false;
+  return true;
+}
 function _headln(s){
   s=(s||'').trim();
   if(s.length<2||s.length>50)return false;
-  if(/[.,;:!?]$/.test(s))return false;
+  if(/[.,;!?:]$/.test(s))return false;
   if(s.indexOf(',')>=0||s.indexOf(':')>=0)return false;
-  if(!/^[A-ZÄÖÜ]/.test(s))return false;
+  if(!_UP.test(s))return false;
   return s.split(/\s+/).length<=6;
 }
-function structBlock(b){
-  b=b.replace(/\s+$/,'');
-  if(!b.trim())return '';
-  // Stern-Absaetze ("* Window of Opportunity ...") wie im Seiten-Build als
-  // schlichten <p> ausgeben - gsdWrap macht daraus ggf. den markierten Kasten.
-  if(/^\*/.test(b.trim())){return '<p>'+_esc(b.trim()).replace(/\n/g,'<br>')+'</p>';}
-  // Explizite Admin-Schreibweise: "---" allein = Trennstrich
-  if(/^-{3,}$/.test(b.trim()))return '<hr class="chr">';
+const _BUL=/^([•·‣]|[-–]\s)/;
+function _isBul(l){return _BUL.test((l||'').trim());}
+function _unbul(l){return (l||'').trim().replace(/^[•·‣\-–]+\s*/,'').trim();}
+const _ABBR=["z.B.","z. B.","u.a.","u. a.","d.h.","d. h.","u.v.m.","o.ä.","u.ä.","ca.","bzw.",
+  "inkl.","exkl.","max.","min.","Nr.","sek.","Sek.","Min.","Std.","etc.","usw.",
+  "evtl.","ggf.","vs.","engl.","env.","p.ex.","p. ex.","c.-à-d.","ecc.","Bsp."];
+function _splitSent(text){
+  let t=text;
+  _ABBR.forEach(a=>{t=t.split(a).join(a.replace(/\./g,'\u0000'));});
+  t=t.replace(/(\d)\.(\d)/g,'$1\u0000$2');
+  t=t.replace(/\b(\d{1,2})\.(?=\s[A-ZÄÖÜ])/g,'$1\u0000');
+  const parts=t.split(/(?<=[.!?])\s+(?=[«"„(\[A-ZÄÖÜ0-9])/).map(p=>p.trim()).filter(Boolean);
+  return parts.map(p=>{p=p.replace(/\u0000/g,'.').trim();if(p.endsWith('.')&&!p.endsWith('..'))p=p.slice(0,-1);return p;});
+}
+const _CONN=new Set(["um","damit","sodass","wobei","weil","da","wenn","falls","aber","sondern",
+  "denn","dabei","während","bis","obwohl","indem","ohne","statt","anstatt","jedoch",
+  "allerdings","sowie","respektive","resp","bzw","evtl","ggf","wodurch","womit",
+  "welche","welcher","welches","was","also","dann","je","und","oder",
+  "für","mit","im","in","auf","bei","von","zur","zum","nach","über","unter",
+  "durch","gegen","an","am","aus","vor","als"]);
+function _splitCommas(s){
+  const parts=[];let depth=0,cur='';const n=s.length;
+  for(let i=0;i<n;i++){const ch=s[i];
+    if('([{'.indexOf(ch)>=0)depth++;else if(')]}'.indexOf(ch)>=0)depth=Math.max(0,depth-1);
+    if(ch===','&&depth===0){
+      const prevc=i>0?s[i-1]:'';
+      if(/\d/.test(prevc)&&i+1<n&&/\d/.test(s[i+1])){cur+=ch;continue;}
+      let j=i+1;while(j<n&&s[j]===' ')j++;
+      let w='';while(j<n&&_AL.test(s[j])){w+=s[j];j++;}
+      if(_CONN.has(w.toLowerCase())){cur+=ch;continue;}
+      parts.push(cur);cur='';
+    }else cur+=ch;
+  }
+  parts.push(cur);
+  return parts.map(p=>p.trim()).filter(Boolean);
+}
+function _sentBullets(text){
+  if(text.indexOf('\n')>=0||text.indexOf('•')>=0)return null;
+  const items=[];
+  _splitSent(text).forEach(s=>{const p=_splitCommas(s);if(p.length>=2)items.push(...p);else items.push(s);});
+  return items.length>=2?items:null;
+}
+function _bulletsHtml(text){const it=_sentBullets(text);return it?'<ul class="bl">'+it.map(s=>'<li>'+_esc(s)+'</li>').join('')+'</ul>':null;}
+function _bodyHtml(txt){
+  txt=(txt||'').trim();if(!txt)return '';
+  return _bulletsHtml(txt)||('<p>'+_esc(txt).replace(/\n/g,'<br>')+'</p>');
+}
+function _zoneBody(text){
+  const lines=text.split('\n');
+  if(lines.some(_isBul)){
+    const items=lines.filter(_isBul).map(_unbul);
+    const intro=lines.filter(l=>l.trim()&&!_isBul(l)).map(l=>l.trim()).join(' ');
+    return [(intro?_esc(intro)+' ':'')+'<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>',true];
+  }
+  const bl=_bulletsHtml(text);if(bl)return [bl,true];
+  return [_esc(text).replace(/\n/g,'<br>'),false];
+}
+const ZONE_RE=/^(.{1,20}?)\s+(Off-Snow|On-Snow)\s*[:.]\s*([\s\S]*)$/;
+function _zoneGroups(blocks){
+  const parsed=[];
+  for(const b0 of blocks){const b=b0.trim();if(!b)continue;
+    const nl=b.indexOf('\n');const h0=nl<0?b:b.slice(0,nl),tail=nl<0?'':b.slice(nl+1);
+    const m=h0.trim().match(ZONE_RE);if(!m)return null;
+    const rest=m[3].trim();
+    parsed.push([m[2],m[1].trim(),[rest,tail.trim()?tail:''].filter(Boolean).join('\n').trim()]);
+  }
+  if(parsed.length<2)return null;
+  const order=[],buckets={};
+  parsed.forEach(([z,l,t])=>{if(!buckets[z]){buckets[z]=[];order.push(z);}buckets[z].push([l,t]);});
+  let out='';
+  order.forEach(z=>{out+='<div class="zone"><span class="zlab">'+_esc(z)+'</span>';
+    buckets[z].forEach(([l,t])=>{const [body,isList]=_zoneBody(t);
+      out+=isList?'<div class="zsub zsub-l"><span class="zk">'+_esc(l)+'</span>'+body+'</div>'
+                 :'<div class="zsub"><span class="zk">'+_esc(l)+'</span> '+body+'</div>';});
+    out+='</div>';});
+  return out;
+}
+function _snowZone(first,rest){
+  const lab=/^on/i.test(first.trim())?'On-Snow':'Off-Snow';
+  const items=[],other=[];
+  (rest||'').split('\n').forEach(l=>{const ls=l.trim();if(!ls)return;
+    if('-–•'.indexOf(ls[0])>=0)items.push(ls.replace(/^[-–•]+/,'').trim());
+    else if(items.length)items[items.length-1]+=' '+ls;
+    else other.push(ls);});
+  let body='';
+  if(other.length)body+='<p>'+_esc(other.join(' '))+'</p>';
+  if(items.length)body+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';
+  if(!body&&(rest||'').trim())body=_bodyHtml(rest);
+  return '<div class="zone"><span class="zlab">'+lab+'</span>'+body+'</div>';
+}
+function structBlock(block){
+  const b=(block||'').trim();
+  if(!b)return '';
+  if(b[0]==='*')return '<p>'+_esc(b).replace(/\n/g,'<br>')+'</p>';
+  if(/^-{3,}$/.test(b))return '<hr class="chr">';
+  const nl=b.indexOf('\n');const l0=(nl<0?b:b.slice(0,nl)).trim(),l1=nl<0?'':b.slice(nl+1);
+  if(SNOW_RE.test(l0)&&l0!==l0.toUpperCase())return _snowZone(l0,l1);
+  const mz=l0.match(/^\(\((.{1,28})\)\)$/);
+  if(mz){const zb=_zoneBody(l1);return '<div class="zone"><span class="zlab">'+_esc(mz[1].trim())+'</span>'+zb[0]+'</div>';}
   const lines=b.split('\n');
   const nonempty=lines.map(l=>l.trim()).filter(Boolean);
-  // Explizite Admin-Schreibweise: "((Label))" als erste Zeile = Zonen-Chip
-  const mz=lines[0].trim().match(/^\(\((.{1,28})\)\)$/);
-  if(mz){
-    const items=[],other=[];
-    lines.slice(1).forEach(l=>{const ls=l.trim();if(!ls)return;
-      if('-–•·'.indexOf(ls[0])>=0)items.push(ls.replace(/^[-–•·]+\s*/,'').trim());
-      else if(items.length)items[items.length-1]+=' '+ls;
-      else other.push(ls);});
-    let body='';
-    if(other.length)body+='<p>'+_esc(other.join(' '))+'</p>';
-    if(items.length)body+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';
-    return '<div class="zone"><span class="zlab">'+_esc(mz[1].trim())+'</span>'+body+'</div>';
-  }
-  // Explizite Admin-Schreibweise: "[[Etikett]] Text"-Zeilen = Badge-Liste
   const bg=nonempty.map(l=>l.match(/^\[\[(.{1,28})\]\]\s*([\s\S]*)$/)||l.match(SC_RE));
   if(nonempty.length&&bg.filter(Boolean).length>=Math.max(1,nonempty.length-1)){
-    let out='<ul class="sc">';
-    nonempty.forEach((l,i)=>{const m=bg[i];
-      out+=m?'<li>'+_badge(m[1])+' '+_esc(m[2].trim())+'</li>':'<li>'+_esc(l)+'</li>';});
-    return out+'</ul>';
+    return '<ul class="sc">'+nonempty.map((l,i)=>{const m=bg[i];return m?'<li>'+_badge(m[1])+' '+_esc(m[2].trim())+'</li>':'<li>'+_esc(l)+'</li>';}).join('')+'</ul>';
   }
-  // "ON SNOW" / "OFF SNOW" als Kopfzeile -> Zonen-Chip (gleich wie beim Seiten-Build)
-  if(SNOW_RE.test(lines[0].trim())){
-    const lab=/^on/i.test(lines[0].trim())?'On-Snow':'Off-Snow';
-    const items=[],other=[];
-    lines.slice(1).forEach(l=>{const ls=l.trim();if(!ls)return;
-      if('-–•'.indexOf(ls[0])>=0)items.push(ls.replace(/^[-–•]+/,'').trim());
-      else if(items.length)items[items.length-1]+=' '+ls;
-      else other.push(ls);});
-    let body='';
-    if(other.length)body+='<p>'+_esc(other.join(' '))+'</p>';
-    if(items.length)body+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';
-    return '<div class="zone"><span class="zlab">'+lab+'</span>'+body+'</div>';
-  }
-  if(lines.some(l=>/^([•·‣]|[-–]\s)/.test(l.trim()))){
+  if(lines.some(_isBul)){
     const intro=[],items=[];
-    lines.forEach(l=>{const ls=l.trim();if(/^([•·‣]|[-–]\s)/.test(ls))items.push(ls.replace(/^[•·‣\-–]+\s*/,'').trim());else if(ls){items.length?items.push(ls):intro.push(ls);}});
+    lines.forEach(l=>{const ls=l.trim();if(_isBul(ls))items.push(_unbul(ls));else if(ls){if(!items.length)intro.push(ls);else items.push(ls);}});
     let out='';
-    if(intro.length){
-      // Titelzeile: Doppelpunkt am Ende weglassen ("Sich konzentrieren:" -> Kopfzeile)
-      out+='<p class="bh">'+_esc(intro[0].replace(/:$/,''))+'</p>';
-      if(intro.length>1)out+='<p>'+_esc(intro.slice(1).join(' '))+'</p>';
-    }
-    out+='<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';return out;
+    if(intro.length)out+='<p class="bi">'+_esc(intro[0])+'</p>';
+    if(intro.length>1)out+='<p>'+_esc(intro.slice(1).join(' '))+'</p>';
+    return out+'<ul class="bl">'+items.filter(Boolean).map(i=>'<li>'+_esc(i)+'</li>').join('')+'</ul>';
   }
-  const scHits=nonempty.filter(l=>SC_RE.test(l));
-  if(nonempty.length>=1&&scHits.length>=1&&scHits.length>=Math.max(1,nonempty.length-1)){
-    let out='<ul class="sc">';
-    nonempty.forEach(ls=>{const m=ls.match(SC_RE);if(m)out+='<li>'+_badge(m[1])+' '+_esc(m[2].trim())+'</li>';else out+='<li>'+_esc(ls)+'</li>';});
-    return out+'</ul>';
+  const ne=nonempty;
+  // Fall A: mehrere "Label: Wert"-Zeilen -> je Titel + Wert
+  const ms=ne.map(l=>l.match(LABELVAL_RE));
+  if(ne.length>=2&&ms.every(Boolean)&&ms.every(m=>_titleLabel(m[1]))){
+    return ms.map(m=>'<p class="bh">'+_esc(m[1].trim())+'</p>'+(m[2].trim()?'<p>'+_esc(m[2].trim())+'</p>':'')).join('');
   }
-  if(lines.length>=2&&lines[0].trim()&&lines[0].trim().length<=46&&!/[.:,;]$/.test(lines[0].trim())&&!_headln(lines[1])){
-    return '<p class="bh">'+_esc(lines[0].trim())+'</p><p>'+_esc(lines.slice(1).join('\n').trim()).replace(/\n/g,'<br>')+'</p>';
+  const first=lines[0].trim();
+  // Fall B: erste Zeile "Label: Wert" -> Titel + Rest
+  const mf=first.match(LABELVAL_RE);
+  if(mf&&_titleLabel(mf[1])){
+    return '<p class="bh">'+_esc(mf[1].trim())+'</p>'+_bodyHtml([mf[2].trim()].concat(lines.slice(1)).join('\n').trim());
   }
-  const m=b.match(/^([^:\n]{2,46}):\s*([\s\S]+)$/);
-  if(m&&m[1].indexOf('\n')<0){
-    const lab=m[1].trim(),val=m[2].trim();
-    if(val.length>55||val.indexOf('\n')>=0)return '<p class="sh">'+_esc(lab)+'</p><p>'+_esc(val).replace(/\n/g,'<br>')+'</p>';
-    return '<p><span class="lbl">'+_esc(lab)+':</span> '+_esc(val).replace(/\n/g,'<br>')+'</p>';
+  // Fall C: erste Zeile endet mit ":" -> Titelzeile + Rest
+  const fc=first.replace(/^["«»'„“”]+/,'');
+  if(first.endsWith(':')&&first.length>=2&&first.length<=60&&_UP.test(fc)){
+    const head=first.slice(0,-1).trim();
+    if(head)return '<p class="bh">'+_esc(head)+'</p>'+_bodyHtml(lines.slice(1).join('\n'));
   }
-  return '<p>'+_esc(b).replace(/\n/g,'<br>')+'</p>';
+  // Fall D: kurze Titelzeile + Rest (ausser die Folgezeile sieht selbst wie ein Titel aus)
+  if(lines.length>=2&&_headln(first)&&!_headln(lines[1].trim())){
+    return '<p class="bh">'+_esc(first)+'</p>'+_bodyHtml(lines.slice(1).join('\n'));
+  }
+  // Fall E: einzelne kurze Titel-Phrase
+  if(ne.length===1&&_headln(ne[0]))return '<p class="bh">'+_esc(ne[0])+'</p>';
+  return _bodyHtml(b);
+}
+function _cleanWs(s){
+  s=s.replace(/\t/g,' ');
+  return s.split('\n').map(l=>l.replace(/ {2,}/g,' ').replace(/\s+$/,'')).join('\n').replace(/\n{3,}/g,'\n\n').trim();
 }
 function linkifyHtml(h){
   // Links im Fliesstext: "[Text](https://…)" und nackte http(s)-Adressen werden
@@ -2841,20 +2950,25 @@ function lksHtml(lines){
   return b?'<div class="lks">'+b+'</div>':'';
 }
 function structCell(txt){
-  txt=(txt||'').trim();
+  txt=_cleanWs(txt||'');
   if(!txt)return '<div class="empty">–</div>';
-  const parts=[];
-  txt.split(/\n\s*\n/).forEach(bl=>{
-    const tbuf=[],lbuf=[];
-    const flushT=()=>{if(tbuf.length){const p=structBlock(tbuf.join('\n'));if(p)parts.push(p);tbuf.length=0;}};
-    const flushL=()=>{if(lbuf.length){const p=lksHtml(lbuf);if(p)parts.push(p);lbuf.length=0;}};
-    bl.split('\n').forEach(ln=>{
-      if(LNKLINE.test(ln.trim())){flushT();lbuf.push(ln);}
-      else{flushL();tbuf.push(ln);}
+  const blocks=txt.split(/\n\s*\n/);
+  let inner=_zoneGroups(blocks);
+  if(inner===null){
+    const parts=[];
+    blocks.forEach(bl=>{
+      const tbuf=[],lbuf=[];
+      const flushT=()=>{if(tbuf.length){const p=structBlock(tbuf.join('\n'));if(p)parts.push(p);tbuf.length=0;}};
+      const flushL=()=>{if(lbuf.length){const p=lksHtml(lbuf);if(p)parts.push(p);lbuf.length=0;}};
+      bl.split('\n').forEach(ln=>{
+        if(LNKLINE.test(ln.trim())){flushT();lbuf.push(ln);}
+        else{flushL();tbuf.push(ln);}
+      });
+      flushT();flushL();
     });
-    flushT();flushL();
-  });
-  return gsdWrap(linkifyHtml(parts.join('')))||'<div class="empty">–</div>';
+    inner=parts.join('');
+  }
+  return gsdWrap(linkifyHtml(inner))||'<div class="empty">–</div>';
 }
 // Geschlechtsspezifische Hinweise markieren - Gegenstueck zu gsd_wrap() im
 // Generator, damit im Admin gespeicherte Korrekturen dieselbe Optik behalten.
@@ -2890,6 +3004,18 @@ const home = document.getElementById('home');
 
 // ---- Live-Overrides aus dem Admin-Bereich (Supabase) ----
 const SUPA_URL="__SUPA_URL__", SUPA_KEY="__SUPA_KEY__";
+// Alle Zeilen holen: Supabase liefert pro Abruf hoechstens 1000 Zeilen,
+// darum seitenweise (Range) und stabil sortiert nachladen.
+function ovAll(q){
+  var out=[];
+  function page(o){
+    return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt'+q+'&order=cid',
+        {headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,Range:o+'-'+(o+999)}})
+      .then(function(r){if(!r.ok)throw 0;return r.json();})
+      .then(function(rows){rows=rows||[];out=out.concat(rows);return rows.length<1000?out:page(o+1000);});
+  }
+  return page(0);
+}
 function loadOverrides(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
   // Lastarm & ausfallsicher: nur die fuer die Seite relevanten Zeilen laden
@@ -2901,8 +3027,7 @@ function loadOverrides(){
   let cached=null;
   try{cached=JSON.parse(sessionStorage.getItem(CK)||'null');}catch(_){}
   if(cached&&cached.t&&(Date.now()-cached.t)<TTL&&cached.m)return Promise.resolve(cached.m);
-  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*&cid=not.like.rev%7C*&cid=not.like.gloss%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-    .then(r=>{if(!r.ok)throw 0;return r.json();})
+  return ovAll('&cid=not.like.chatq%7C*&cid=not.like.rev%7C*&cid=not.like.gloss%7C*')
     .then(rows=>{const m={};(rows||[]).forEach(x=>m[x.cid]=x.txt);
       try{sessionStorage.setItem(CK,JSON.stringify({t:Date.now(),m:m}));}catch(_){}
       return m;})
@@ -4034,7 +4159,7 @@ document.addEventListener('click',function(e){
   root.querySelectorAll('.ps-sb').forEach(x=>x.classList.toggle('on',x===b));
   const st=b.dataset.st;
   root.querySelectorAll('.ps-theme').forEach(d=>{
-    d.querySelectorAll('.ps-col').forEach(c=>{c.style.display=(st==='alle'||c.dataset.st===st)?'':'none';});
+    d.querySelectorAll('.ps-col').forEach(c=>{c.style.display=(st==='alle'||(c.dataset.st||'').split(' ').indexOf(st)>=0)?'':'none';});
     const pc=d.querySelector('.ps-cols');
     if(pc)pc.style.gridTemplateColumns=(st==='alle')?'':'minmax(220px,540px)';
   });
@@ -4299,12 +4424,12 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 .cfmt summary:hover{color:var(--ink)}
 /* Aufgeklappt schwebt der Spickzettel NEBEN der Zelle (fixe Position via JS),
    damit er in schmalen Zellen nicht eingequetscht wird. */
-.cfmt-t{position:fixed;z-index:410;width:330px;max-height:72vh;overflow:auto;box-sizing:border-box;
-  display:none;grid-template-columns:auto 1fr;gap:5px 12px;align-items:baseline;
+.cfmt-t{position:fixed;z-index:410;width:340px;max-width:calc(100vw - 16px);max-height:72vh;overflow:auto;box-sizing:border-box;
+  display:none;grid-template-columns:minmax(0,128px) minmax(0,1fr);gap:5px 12px;align-items:baseline;
   background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 13px;
   box-shadow:0 14px 40px rgba(0,0,0,.28);font-size:11px}
 .cfmt-t.on{display:grid}
-.cfmt-t .k{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;background:rgba(127,140,160,.12);border-radius:4px;padding:1px 6px;white-space:pre}
+.cfmt-t .k{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;background:rgba(127,140,160,.12);border-radius:4px;padding:1px 6px;white-space:pre-wrap;overflow-wrap:anywhere}
 [data-theme="dark"] .cfmt-t .k{background:rgba(255,255,255,.10)}
 .cedit.needs-review{border-color:#e0932c;background:#fffaf1}
 .revflag{position:absolute;top:5px;right:5px;z-index:5;border:0;background:none;padding:0;margin:0;cursor:help;font:inherit;line-height:0}
@@ -4473,11 +4598,21 @@ function _glossMerge(de,fr,it,en){
   if(glosDe.has(de)){GLOSS.forEach(function(g){if(g.de===de){if(fr)g.fr=fr;if(it)g.it=it;if(en)g.en=en;}});}
   else{glosDe.add(de);GLOSS.unshift({de:de,fr:fr||'',it:it||'',en:en||''});}
 }
+// Alle Zeilen holen: Supabase liefert pro Abruf hoechstens 1000 Zeilen,
+// darum seitenweise (Range) und stabil sortiert nachladen.
+function ovAll(q){
+  var out=[];
+  function page(o){
+    return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt'+q+'&order=cid',
+        {headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY,Range:o+'-'+(o+999)}})
+      .then(function(r){if(!r.ok)throw 0;return r.json();})
+      .then(function(rows){rows=rows||[];out=out.concat(rows);return rows.length<1000?out:page(o+1000);});
+  }
+  return page(0);
+}
 function loadGlossAdditions(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve();
-  return fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=like.gloss%7C*',
-      {headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-    .then(function(r){return r.ok?r.json():[];})
+  return ovAll('&cid=like.gloss%7C*').catch(function(){return [];})
     .then(function(rows){
       (rows||[]).forEach(function(x){
         var de=x.cid.slice(6),tr={};
@@ -5245,8 +5380,8 @@ function init(){
   document.getElementById('statbtn').addEventListener('click',toggleStats);
   fbInit();
   if(SUPA_URL&&SUPA_KEY){
-    fetch(SUPA_URL+'/rest/v1/ftem_overrides?select=cid,txt&cid=not.like.chatq%7C*',{headers:{apikey:SUPA_KEY,Authorization:'Bearer '+SUPA_KEY}})
-      .then(function(r){return r.ok?r.json():[];}).then(function(rows){
+    ovAll('&cid=not.like.chatq%7C*')
+      .then(function(rows){
         (rows||[]).forEach(function(x){
           if(x.cid.indexOf('gloss|')===0)return;
           if(x.cid.indexOf('lay|')===0){LAYS[x.cid.slice(4)]=x.txt;return;}
@@ -5449,13 +5584,16 @@ function fmtBox(){
   // zuverlaessig innerhalb transformierter Container) und schwebt NEBEN der Zelle.
   _fmtT=document.createElement('div');_fmtT.className='cfmt-t';
   _fmtT.innerHTML=row('Leerzeile','neuer Abschnitt')
-    +row('Kurze Zeile / Titel:','Überschrift (Trennstrich kommt ab dem 2. Abschnitt automatisch)')
-    +row('Ziele: Wert','fettes Label, Text dahinter')
-    +row('• oder -','Aufzählung')
+    +row('Titel:','Überschrift, Text auf den Zeilen darunter (Trennstrich ab dem 2. Abschnitt automatisch)')
+    +row('Kurze Zeile','ohne Satzzeichen, max. 6 Wörter, gross beginnend = Überschrift für die Zeilen darunter')
+    +row('Ziele: Wert','Überschrift «Ziele», Wert darunter (mehrere solche Zeilen = je Titel + Wert)')
+    +row('• Text oder - Text','Aufzählung (Bindestrich mit Leerzeichen)')
+    +row('Satz. Satz.','mehrere Sätze oder Komma-Aufzählung in einer Zeile = automatisch Stichpunkte')
     +row('---','Trennstrich (eigene Zeile)')
     +row('[[SC 1]] Text','Badge-Etikett')
     +row('SC 1: … / LT: … / LT 2: …','Skills-Check- bzw. Leistungstest-Badge (LT blau)')
     +row('((Sommer))','Zonen-Chip, Inhalt auf den Zeilen darunter')
+    +row('On Snow: / Off Snow:','Zonen-Chip (in GROSSBUCHSTABEN = normale Überschrift)')
     +row('[Text](https://…)','eigene Zeile = Link-Knopf genau an dieser Stelle · im Satz = Link im Text')
     +row('*Text …','Geschlechter-Kasten (mit Stichwort Mädchen/Jungen/Adoleszenz)');
   document.body.appendChild(_fmtT);
@@ -5472,10 +5610,11 @@ function placeFmt(){
   // bei Feldern ueber die volle Breite rechtsbuendig im Fenster
   if(!_fmtBox||!_fmtBox.open||!_fmtT)return;
   var w=_fmtBox.parentElement;if(!w)return;
-  var r=w.getBoundingClientRect(),PW=330;
+  // Breite ohne Scrollleiste (clientWidth), sonst ragt das Panel rechts hinaus
+  var r=w.getBoundingClientRect(),VW=document.documentElement.clientWidth||window.innerWidth,PW=Math.min(340,VW-16);
   var x=r.right+10;
-  if(x+PW>window.innerWidth-8)x=r.left-PW-10;
-  if(x<8||x+PW>window.innerWidth-8)x=window.innerWidth-PW-8;
+  if(x+PW>VW-8)x=r.left-PW-10;
+  if(x<8||x+PW>VW-8)x=VW-PW-8;
   if(x<8)x=8;
   _fmtT.style.left=Math.round(x)+'px';
   _fmtT.style.top=Math.round(Math.max(8,Math.min(r.top,window.innerHeight-Math.min(_fmtT.offsetHeight||300,window.innerHeight*0.72)-12)))+'px';
@@ -5576,11 +5715,12 @@ def home_edit_html(sport, d):
         blocks += _adm_field("Einleitung", "home|"+sport["id"]+"|"+k+"|intro", intro)
         for si, sec in enumerate(hm.get("sections", [])):
             cols = ""
-            for st in PH_STAGES_ADM[k]:
+            for ulbl, ust in home_units(hm, PH_STAGES_ADM[k]):
+                st = ust[0]
                 cell = (sec.get("cells") or {}).get(st)
                 if not cell or not (cell.get("v") or cell.get("l")):
                     continue
-                cols += _adm_field(st, "home|"+sport["id"]+"|"+str(si)+"|"+st, cell.get("v") or "")
+                cols += _adm_field(ulbl, "home|"+sport["id"]+"|"+str(si)+"|"+st, cell.get("v") or "")
             if cols:
                 blocks += '<div class="adm-sec"><div class="adm-sect">'+esc(sec["title"])+'</div>'+cols+'</div>'
         out += ('<details class="theme"><summary>'
