@@ -813,7 +813,9 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
 # (data["home"]["groups"] = [["F1","F2","F3"],["T1","T2"],...]). Eine Gruppe
 # = EINE Box mit Titel "F1–F3"; Inhalt + Admin-Feld laufen ueber die erste Stufe.
 def home_units(hm, stages):
-    groups = [g for g in ((hm or {}).get("groups") or []) if g and all(s in stages for s in g)]
+    # Gruppen duerfen ueber eine Phase hinausgehen (z.B. E1–M): sie erscheinen
+    # dann in jedem betroffenen Popup mit demselben Inhalt (erste Stufe).
+    groups = [g for g in ((hm or {}).get("groups") or []) if g and any(s in stages for s in g)]
     out, done = [], set()
     for st in stages:
         if st in done: continue
@@ -2789,7 +2791,8 @@ function _splitSent(text){
   _ABBR.forEach(a=>{t=t.split(a).join(a.replace(/\./g,'\u0000'));});
   t=t.replace(/(\d)\.(\d)/g,'$1\u0000$2');
   t=t.replace(/\b(\d{1,2})\.(?=\s[A-ZÄÖÜ])/g,'$1\u0000');
-  const parts=t.split(/(?<=[.!?])\s+(?=[«"„(\[A-ZÄÖÜ0-9])/).map(p=>p.trim()).filter(Boolean);
+  // ohne Lookbehind (aeltere Safari-Versionen kennen ihn nicht -> ganzes Skript waere kaputt)
+  const parts=t.replace(/([.!?])\s+(?=[«"„(\[A-ZÄÖÜ0-9])/g,'$1\u0001').split('\u0001').map(p=>p.trim()).filter(Boolean);
   return parts.map(p=>{p=p.replace(/\u0000/g,'.').trim();if(p.endsWith('.')&&!p.endsWith('..'))p=p.slice(0,-1);return p;});
 }
 const _CONN=new Set(["um","damit","sodass","wobei","weil","da","wenn","falls","aber","sondern",
@@ -3020,10 +3023,10 @@ function loadOverrides(){
   if(!SUPA_URL||!SUPA_KEY)return Promise.resolve({});
   // Lastarm & ausfallsicher: nur die fuer die Seite relevanten Zeilen laden
   // (ohne Zaehler chatq|, Pruef-Referenzen rev| und Glossar gloss| - die braucht
-  // nur der Admin-Bereich). Ergebnis 5 Min. im sessionStorage zwischenspeichern;
+  // nur der Admin-Bereich). Ergebnis 1 Min. im sessionStorage zwischenspeichern;
   // ist Supabase langsam oder nicht erreichbar, wird der letzte bekannte Stand
   // verwendet (egal wie alt) - die Seite selbst laeuft auch ganz ohne Korrekturen.
-  const CK='ftem-ovr', TTL=5*60*1000;
+  const CK='ftem-ovr', TTL=60*1000;   // 1 Min.: Admin-Aenderungen erscheinen rasch
   let cached=null;
   try{cached=JSON.parse(sessionStorage.getItem(CK)||'null');}catch(_){}
   if(cached&&cached.t&&(Date.now()-cached.t)<TTL&&cached.m)return Promise.resolve(cached.m);
@@ -5674,7 +5677,8 @@ function save(){
      ALANGS.forEach(function(l){edits[l]={};});
      app.querySelectorAll('.cedit.changed').forEach(function(t){t.classList.remove('changed');});
      updateReview();
-     statusEl.textContent='Gespeichert ✓ – Änderungen sind jetzt live.';saveBtn.disabled=true;
+     try{sessionStorage.removeItem('ftem-ovr');}catch(_){}   // "Zur Seite" zeigt sofort den neuen Stand
+     statusEl.textContent='Gespeichert ✓ – Änderungen sind jetzt live (offene Seiten: nach max. 1 Min. neu laden).';saveBtn.disabled=true;
    }).catch(function(err){statusEl.textContent='Fehler beim Speichern: '+err.message;saveBtn.disabled=false;});
 }
 </script></body></html>'''
@@ -5717,6 +5721,8 @@ def home_edit_html(sport, d):
             cols = ""
             for ulbl, ust in home_units(hm, PH_STAGES_ADM[k]):
                 st = ust[0]
+                if st not in PH_STAGES_ADM[k]:
+                    continue   # phasenuebergreifende Gruppe: nur einmal (bei ihrer ersten Stufe) editierbar
                 cell = (sec.get("cells") or {}).get(st)
                 if not cell or not (cell.get("v") or cell.get("l")):
                     continue

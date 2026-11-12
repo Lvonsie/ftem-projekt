@@ -894,10 +894,28 @@
      "label": "",
      "segs": [
       {
-       "v": "Die Coachpoints für Trainer:innen werden zurzeit erarbeitet und hier laufend ergänzt.",
+       "v": "Programmvorschlag und Material für die Coachpoints Park & Pipe 2026–28: Kurstag mit Trickaufbau nach FTEM und Skills-Check Technik (Jump, Rail, Halfpipe) am Vormittag und «Sich konzentrieren» mit dem Skills-Check Mental Park & Pipe am Nachmittag.",
        "from": 0,
        "to": 9,
-       "l": []
+       "l": [
+        {
+         "text": "Coachpoints Park & Pipe 2026-28",
+         "href": "https://snowsports.flink.host/s/FbMZabAv"
+        }
+       ],
+       "dl": [
+        {
+         "title": "Kursprogramm Coachpoint Park & Pipe 2026",
+         "desc": "Programm für einen Kurstag mit Zeitplan, Vorbereitungsauftrag, Lernzielen und Praxisinhalten: Trickaufbau nach FTEM mit dem Skills-Check Technik, Keypoints pro Phase, sich konzentrieren mit dem Skills-Check Mental Park & Pipe und Gruppen nach Trainingsstufe – als Vorlage für die Kursleitung.",
+         "files": [
+          {
+           "label": "Kursprogramm Coachpoint Park & Pipe",
+           "hint": "J+S-Kurstag Freeski & Snowboard 2026 · PDF, 9 Seiten, 0.2 MB (auf Deutsch)",
+           "href": "assets/docs/Programm_Coachpoint_Park-Pipe_2026_DE.pdf"
+          }
+         ]
+        }
+       ]
       }
      ]
     }
@@ -1348,14 +1366,6 @@
      "E1": {
       "v": "No Content yet",
       "l": []
-     },
-     "E2": {
-      "v": "No Content yet",
-      "l": []
-     },
-     "M": {
-      "v": "No Content yet",
-      "l": []
      }
     }
    },
@@ -1375,14 +1385,6 @@
       "l": []
      },
      "E1": {
-      "v": "No Content yet",
-      "l": []
-     },
-     "E2": {
-      "v": "No Content yet",
-      "l": []
-     },
-     "M": {
       "v": "No Content yet",
       "l": []
      }
@@ -1406,14 +1408,6 @@
      "E1": {
       "v": "No Content yet",
       "l": []
-     },
-     "E2": {
-      "v": "No Content yet",
-      "l": []
-     },
-     "M": {
-      "v": "No Content yet",
-      "l": []
      }
     }
    }
@@ -1431,6 +1425,11 @@
    [
     "T3",
     "T4"
+   ],
+   [
+    "E1",
+    "E2",
+    "M"
    ]
   ]
  }
