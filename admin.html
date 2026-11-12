@@ -1226,11 +1226,14 @@ footer{padding:16px;font-size:11px}
 .stat-kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums;line-height:1.15}
 .stat-kpi span{font-size:10.5px;color:#697080;font-weight:700}
 .stat-cht-t{font-size:11px;font-weight:800;color:#4a5563;margin:12px 0 4px;letter-spacing:.02em;text-transform:uppercase}
-.stat-cht{position:relative;display:flex;align-items:flex-end;gap:2px;height:120px;padding-right:36px;border-bottom:1px solid #e9edf1}
-.stat-col{flex:1 1 0;display:flex;flex-direction:column-reverse;min-width:3px;height:100%;border-radius:2px 2px 0 0;overflow:hidden}
+.stat-cht{position:relative;display:flex;align-items:flex-end;gap:2px;height:120px;padding-top:14px;padding-right:4px;border-bottom:1px solid #e9edf1}
+.stat-col{flex:1 1 0;display:flex;flex-direction:column-reverse;min-width:3px;height:100%;overflow:visible}
+.stat-col .stat-seg:last-of-type{border-radius:2px 2px 0 0}
+.stat-n{display:block;flex:none;font-style:normal;font-weight:700;font-size:9px;line-height:12px;color:#697080;text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums;margin:0 -6px}
+@media (max-width:700px){.stat-cht.viele .stat-n{display:none}}
 .stat-seg{width:100%;flex:none}
 .stat-max{position:absolute;right:0;top:0;font-size:10px;color:#98a1ad;font-variant-numeric:tabular-nums}
-.stat-x{display:flex;gap:2px;padding-right:36px;margin-top:3px}
+.stat-x{display:flex;gap:2px;padding-right:4px;margin-top:3px}
 .stat-x i{flex:1 1 0;font-style:normal;font-size:9px;color:#98a1ad;text-align:center;min-width:3px;overflow:visible;white-space:nowrap}
 .stat-leg{display:flex;gap:14px;font-size:11px;color:#4a5563;margin-top:9px;flex-wrap:wrap;font-weight:600}
 .stat-leg i{font-style:normal;display:inline-flex;align-items:center;gap:5px}
@@ -1253,6 +1256,7 @@ table.stat-top{width:100%;border-collapse:collapse;margin-top:6px}
 [data-theme="dark"] .stat-kpi span,[data-theme="dark"] .stat-sub{color:#98a4b3}
 [data-theme="dark"] .stat-cht{border-bottom-color:rgba(255,255,255,.12)}
 [data-theme="dark"] .stat-cht-t,[data-theme="dark"] .stat-leg{color:#aeb8c6}
+[data-theme="dark"] .stat-n{color:#aeb8c6}
 [data-theme="dark"] .stat-top th{border-bottom-color:rgba(255,255,255,.14)}
 [data-theme="dark"] .stat-top td{border-bottom-color:rgba(255,255,255,.07)}
 [data-theme="dark"] .stat-err{background:rgba(213,43,30,.14);color:#f29d94;border-color:rgba(240,126,114,.4)}
@@ -11357,10 +11361,10 @@ function zeitChart(reihen,tage,farben,einheit){
     else if(gran==='woche'){title='Woche ab '+dd+'.'+mm+'.';lbl=(n<=10||i%2===0)?dd+'.'+mm+'.':'';}
     else{title=_MON[mm-1]+' '+dy.d.getFullYear();lbl=_MON[mm-1]+(mm===1||i===0?' '+String(dy.d.getFullYear()).slice(2):'');}
     title+=' · '+dy.sum+' '+einheit+(tip.length?' ('+tip.join(', ')+')':'');
-    cols+='<span class="stat-col" title="'+fbEsc(title)+'">'+segs+'</span>';
+    cols+='<span class="stat-col" title="'+fbEsc(title)+'">'+segs+(dy.sum>0?'<b class="stat-n">'+dy.sum+'</b>':'')+'</span>';
     xs+='<i>'+lbl+'</i>';
   });
-  return '<div class="stat-cht">'+cols+'<span class="stat-max">'+max+'</span></div><div class="stat-x">'+xs+'</div>';
+  return '<div class="stat-cht'+(n>16?' viele':'')+'">'+cols+'</div><div class="stat-x">'+xs+'</div>';
 }
 function _statKpi(v,lbl){return '<div class="stat-kpi"><b>'+v+'</b><span>'+lbl+'</span></div>';}
 function _statRange(tage){return tage>=3650?'seit Start':(tage===365?'365 Tagen':tage+' Tagen');}
