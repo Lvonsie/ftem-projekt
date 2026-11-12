@@ -1,0 +1,467 @@
+{
+ "stages": [
+  "F1",
+  "F2",
+  "F3",
+  "T1",
+  "T2",
+  "T3",
+  "T4",
+  "E1",
+  "E2",
+  "M"
+ ],
+ "ages": {
+  "F1": "",
+  "F2": "",
+  "F3": "",
+  "T1": "",
+  "T2": "",
+  "T3": "",
+  "T4": "",
+  "E1": "",
+  "E2": "",
+  "M": ""
+ },
+ "themes": [
+  {
+   "title": "Trainingsstunden und Entwicklungsfokus",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Entwicklungsfokus",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Stunden / Jahr",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sommer On-Snow",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sommer Off-Snow",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Winter On-Snow Trainings",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Winter Off-Snow",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Makroplanung",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Vorbereitungsphase 1 (VP1)",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Vorbereitungsphase 2 (VP2)",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Vorwettkampfphase (VWP)",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Wettkampfphase (WP)",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "shared": "ernaehrung"
+  },
+  {
+   "shared": "schlaf"
+  },
+  {
+   "title": "Mental",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Skills-Checks (SC) Mental",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Inhalt Mental",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "shared": "ausdauer-pp"
+  },
+  {
+   "shared": "mobilitaet-pp"
+  },
+  {
+   "shared": "kraft-pp"
+  },
+  {
+   "shared": "schnelligkeit-pp"
+  },
+  {
+   "title": "Technik & Taktik Übergeordnet",
+   "group": "Sport & Athlet:in",
+   "rows": [
+    {
+     "label": "Technik Übergeordnet",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Taktik Übergeordnet",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Material",
+   "group": "Material",
+   "rows": [
+    {
+     "label": "Off Snow",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "On Snow Allgemein",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Fördergefässe",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Trägerschaft",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Förderstrukturen & Wettkämpfe",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Kader",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Swiss Olympic Card",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Wettkampfart",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Anzahl Wettkämpfe",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Selektionen",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Testing & Leistungsdiagnostik",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Umfeldmanagement",
+   "group": "Strukturen & Umfeld",
+   "rows": [
+    {
+     "label": "Ansprechpersonen",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Sozial",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Finanziell",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    },
+    {
+     "label": "Beruflich/Schulisch",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Ausbildungsweg",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Vom Trainer:in Nachwuchs über Trainer:in Leistungssport bis Trainer:in Spitzensport – der Ausbildungsweg für Trainer:innen.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Neue Ausbildungsstruktur ab 2027",
+         "href": "https://www.swiss-ski.ch/ueber-swiss-ski/ausbildung/trainerin/freestyle-ab-2027/"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "nohead": true
+  },
+  {
+   "title": "Coachpoints",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "Programmvorschlag und Material für die Coachpoints Park & Pipe 2026–28: Kurstag mit Trickaufbau nach FTEM und Skills-Check Technik (Jump, Rail, Halfpipe) am Vormittag und «Sich konzentrieren» mit dem Skills-Check Mental Park & Pipe am Nachmittag.",
+       "from": 0,
+       "to": 9,
+       "l": [
+        {
+         "text": "Coachpoints Park & Pipe 2026-28",
+         "href": "https://snowsports.flink.host/s/FbMZabAv"
+        }
+       ],
+       "dl": [
+        {
+         "title": "Kursprogramm Coachpoint Park & Pipe 2026",
+         "desc": "Programm für einen Kurstag mit Zeitplan, Vorbereitungsauftrag, Lernzielen und Praxisinhalten: Trickaufbau nach FTEM mit dem Skills-Check Technik, Keypoints pro Phase, sich konzentrieren mit dem Skills-Check Mental Park & Pipe und Gruppen nach Trainingsstufe – als Vorlage für die Kursleitung.",
+         "files": [
+          {
+           "label": "Kursprogramm Coachpoint Park & Pipe",
+           "hint": "J+S-Kurstag Freeski & Snowboard 2026 · PDF, 9 Seiten, 0.2 MB (auf Deutsch)",
+           "href": "assets/docs/Programm_Coachpoint_Park-Pipe_2026_DE.pdf"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "nohead": true
+  },
+  {
+   "title": "Downloads",
+   "group": "Für Trainer:innen",
+   "rows": [
+    {
+     "label": "",
+     "segs": [
+      {
+       "v": "",
+       "from": 0,
+       "to": 9,
+       "l": []
+      }
+     ]
+    }
+   ],
+   "nohead": true
+  },
+  {
+   "shared": "medizin-pp",
+   "sort": 3.5
+  }
+ ]
+}

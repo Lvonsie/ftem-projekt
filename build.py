@@ -799,10 +799,20 @@ def theme_html(t, idx, stages, prefix, lang, ages, edit=False, group=None, alt=F
         _who = ('<div class="adm-shwho">gilt für: '+esc(t["_shwho"])+'</div>') if t.get("_shwho") else ''
         tfield = ('<div class="adm-home adm-title">'+_who
                   + _adm_field("Titel des Abschnitts", cidb+"|title", t["title"])
+                  + _adm_field("Bemerkung zum Abschnitt", cidb+"|note", t.get("note") or "",
+                               "optional – erscheint auf der Seite nur, wenn etwas eingetragen ist")
                   + '</div>')
     else:
         tt_span = ('<span class="tt ovr-txt" data-cid="'+cidb+'|title" data-bh="'+fnv36(t["title"] or "")+'">'+esc(title)+'</span>')
-        tfield = ''
+        # Bemerkung zum Abschnitt (optional): Kasten unter dem Titel, nur sichtbar
+        # wenn Text vorhanden (aus den Daten oder per Admin). Standard: am Computer
+        # offen, am Handy zu (siehe tnoteInit im Frontend).
+        _nt = t.get("note") or ""
+        tt_span += '<span class="tni" title="'+esc(tr("Bemerkung", lang))+'"'+('' if _nt.strip() else ' hidden')+'>ⓘ</span>'
+        tfield = ('<details class="tnote"'+('' if _nt.strip() else ' hidden')+'><summary><span class="tn-i">ⓘ</span>'
+                  '<span class="tn-l">'+esc(tr("Bemerkung", lang))+'</span><span class="tn-c"></span></summary>'
+                  '<div class="tn-tx ovr-txt" data-cid="'+cidb+'|note" data-bh="'+fnv36(_nt)+'">'
+                  + esc(tr(_nt, lang)).replace("\n", "<br>") + '</div></details>')
     return ('<details class="theme'+(' edit' if edit else '')+(' alt' if alt else '')+(' nohd' if t.get("nohead") else '')+'"'+opn+' id="'+prefix+'-t'+str(idx)+'" data-title="'+esc(title.lower())+'" data-k="'+esc(t["title"] or "")+'" style="border-left-color:'+bar+'">'
             '<summary><span class="ticon" style="color:'+bar+';background:'+chip+'">'+theme_icon(t["title"])+'</span>'
             + tt_span + '<span class="tchev"></span></summary>'
@@ -887,6 +897,7 @@ def _resolve_shared(d):
             if b:
                 nt = {"title": b["title"], "group": b["group"],
                       "rows": b["rows"], "_sh": b["id"]}
+                if b.get("note"): nt["note"] = b["note"]
                 if "sort" in t: nt["sort"] = t["sort"]
                 out.append(nt)
             # unbekannte Referenz: Thema still weglassen (statt Absturz)
@@ -994,11 +1005,11 @@ RIDGE_PATH = "M0,986 L0,563.6 L0,563.6 L8,564.9 L21,569.6 L28,569.9 L39,567.0 L6
 # Dient als ClipPath fuer die Blau-Toenung des Himmels (freundlicherer Look).
 SKY_PATH = "M0,0 " + RIDGE_PATH[len("M0,986 "):].rsplit("L1896,986", 1)[0] + "L1896,0 Z"
 
-CONS_POS = [(7,74),(14,49),(22,71),(29,35),(37,64),(44,48),(55,72),(66,40),(77,67),(89,43)]
+CONS_POS = [(6,74),(12.5,50),(19,71),(25.5,36),(32,64),(39,48),(47,72),(55,41),(63,67),(71,44),(80,70),(90,46)]
 # durchgehende Linien (Sport-Indizes): Nordisch-Gruppe, Cross-Gruppe, Park&Pipe-Gruppe
 # 0 ski-alpin,1 langlauf,2 biathlon,3 skispringen,4 nord.komb,5 skicross,
-# 6 freeski-pp,7 sb-alpin,8 sb-cross,9 sb-pp
-CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9)]
+# 6 freeski-pp,7 sb-alpin,8 sb-cross,9 sb-pp,10 aerials,11 moguls
+CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9),(10,11)]
 
 # --- Newsbox -----------------------------------------------------------------
 # Neue Meldung? Einfach oben in diese Liste einen Block einfuegen (neueste zuerst).
@@ -1528,6 +1539,8 @@ def home_html(datamap, lang):
         "snowboard-alpin": '<rect x="9.5" y="3" width="5" height="18" rx="2.5" transform="rotate(32 12 12)"/>',
         "snowboard-cross": '<rect x="8.5" y="4" width="4.6" height="15" rx="2.2" transform="rotate(32 11 12)"/><path d="M18 4v6"/><path d="M18 4l3 1-3 1"/>',
         "snowboard-park-pipe": '<rect x="7" y="4" width="4.6" height="15" rx="2.2" transform="rotate(32 9.5 12)"/><path d="M15 6v4a3 2.4 0 0 0 6 0V6"/>',
+        "aerials": '<path d="M4 19c2-9 14-9 16 0"/><circle cx="12" cy="6.5" r="2.3"/><path d="M17.5 13.5l2.5 5.5-5-1"/>',
+        "moguls": '<path d="M2 18c2-3.2 4-3.2 6 0s4 3.2 6 0 4-3.2 6 0"/><path d="M9 4l3 8"/><path d="M15 4l-3 8"/>',
     }
     def sport_icon(sid):
         # Piktogramm-Figuren aus dem Athletenweg (schwarz, transparenter Hintergrund);
@@ -2385,6 +2398,17 @@ summary .ticon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-w
 summary .tt{font-size:12.5px;font-weight:700;flex:1;min-width:0}
 summary .tchev{flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .18s;margin-right:3px}
 details[open]>summary .tchev{transform:rotate(45deg)}
+summary .tni{flex:none;color:#1f8fa6;font-size:13px;font-weight:700;line-height:1}
+details.theme[open]>summary .tni{display:none}
+.tnote{margin:2px 12px 10px;background:#f4f8fa;border:1px solid #d7e7ec;border-left:4px solid #1f8fa6;border-radius:8px;font-size:12.5px;line-height:1.5;color:#33404d}
+.tnote>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:7px;padding:6px 11px;font-weight:700;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#1f8fa6}
+.tnote>summary::-webkit-details-marker{display:none}
+.tnote .tn-i{font-size:13px;letter-spacing:0}
+.tnote .tn-c{width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .18s;margin-left:2px}
+.tnote[open] .tn-c{transform:rotate(45deg)}
+.tnote .tn-tx{padding:0 12px 9px 31px}
+[data-theme="dark"] .tnote{background:#152731;border-color:rgba(127,214,232,.25);color:#c2ccd8}
+[data-theme="dark"] .tnote>summary,[data-theme="dark"] summary .tni{color:#7fd6e8}
 .scroller{overflow-x:auto;overflow-y:hidden;padding:0 12px 13px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .grid{min-width:max-content;display:flex;flex-direction:column;gap:6px}
 .r{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px;align-items:stretch}
@@ -2409,6 +2433,12 @@ details[open]>summary .tchev{transform:rotate(45deg)}
 }
 
 .r.head{position:relative;z-index:2}
+.fhead{position:fixed;z-index:55;overflow:hidden;background:var(--card);padding:6px 0;box-shadow:0 6px 10px -6px rgba(0,0,0,.25)}
+.fhead[hidden]{display:none}
+.fhead .fh-in{will-change:transform}
+.fhead .r.head{display:grid;grid-template-columns:var(--lblw) repeat(10,var(--colw));gap:6px}
+.fhead .rl.corner{background:var(--card);z-index:2}
+body.pres .fhead{display:none}
 .r.head .rl.corner{position:sticky;left:0;z-index:6;background:var(--card);border:none}
 .c.hd{border-radius:8px;padding:6px 6px;text-align:center;display:flex;flex-direction:column;gap:0;justify-content:center}
 .c.hd .st{font-size:13.5px;font-weight:800}
@@ -3098,7 +3128,74 @@ function applyOverrides(map){
   patch(document);
   // Inhalte in <template> (Stufen-Popups, News-Overlay, "Was ist FTEM?") ebenfalls patchen
   document.querySelectorAll('template').forEach(t=>patch(t.content));
+  tnoteInit();
 }
+// Bemerkungen zu Abschnitten: nur zeigen, wenn Text vorhanden; am Computer
+// standardmaessig offen, am Handy zu (Platz sparen)
+function tnoteInit(){
+  const wide=window.matchMedia('(min-width:760px)').matches;
+  document.querySelectorAll('details.tnote').forEach(d=>{
+    const tx=d.querySelector('.tn-tx');const has=!!(tx&&tx.textContent.trim());
+    d.hidden=!has;
+    const th=d.closest('details.theme');const ic=th&&th.querySelector(':scope>summary .tni');if(ic)ic.hidden=!has;
+    if(!d.dataset.init){d.open=wide;d.dataset.init='1';}
+  });
+}
+tnoteInit();
+// Stufen-Balken (F1–M) bleibt beim Scrollen sichtbar: Die Kopfzeile eines
+// offenen Themas liegt im horizontal scrollenden .scroller, wo position:sticky
+// nach oben nicht greift. Darum schwebt eine Kopie fix unter der Seitenleiste,
+// solange man sich im Thema befindet, und rollt seitlich mit.
+(function(){
+  const fh=document.createElement('div');fh.className='fhead';fh.hidden=true;
+  const inner=document.createElement('div');inner.className='fh-in';fh.appendChild(inner);
+  document.body.appendChild(fh);
+  let cur=null,clone=null,corner=null,raf=0;
+  function topEdge(){const h=document.querySelector('header.top');return h?Math.max(0,h.getBoundingClientRect().bottom):0;}
+  function pick(){
+    const t0=topEdge();
+    const ths=document.querySelectorAll('details.theme[open]:not(.nohd)');
+    for(const th of ths){
+      const head=th.querySelector('.grid>.r.head');if(!head||!head.offsetParent)continue;
+      const hr=head.getBoundingClientRect(),tr=th.getBoundingClientRect();
+      if(hr.top<t0&&tr.bottom>t0+hr.height+30)return th;
+    }
+    return null;
+  }
+  function sync(){
+    if(!cur)return;
+    const sc=cur.querySelector('.scroller'),head=cur.querySelector('.grid>.r.head');
+    const r=sc.getBoundingClientRect(),hr=head.getBoundingClientRect();
+    fh.style.top=topEdge()+'px';fh.style.left=r.left+'px';fh.style.width=sc.clientWidth+'px';
+    inner.style.transform='translateX('+(hr.left-r.left)+'px)';
+    if(corner)corner.style.transform='translateX('+(r.left-hr.left)+'px)';
+  }
+  function onSc(){sync();}
+  function upd(){
+    raf=0;const th=pick();
+    if(th!==cur){
+      if(cur){const s=cur.querySelector('.scroller');if(s)s.removeEventListener('scroll',onSc);}
+      cur=th;inner.innerHTML='';clone=corner=null;
+      if(cur){
+        const head=cur.querySelector('.grid>.r.head');
+        clone=head.cloneNode(true);clone.style.width=head.getBoundingClientRect().width+'px';clone.style.gridTemplateColumns=getComputedStyle(head).gridTemplateColumns;clone.style.columnGap=getComputedStyle(head).columnGap;
+        corner=clone.querySelector('.rl.corner');if(corner)corner.style.position='relative';
+        inner.appendChild(clone);
+        cur.querySelector('.scroller').addEventListener('scroll',onSc,{passive:true});
+        // Klick auf eine Stufe im schwebenden Balken = Klick im Original (Spalte hervorheben)
+        clone.addEventListener('click',e=>{const c=e.target.closest('.c.hd[data-idx]');if(!c)return;
+          const o=head.querySelector('.c.hd[data-idx="'+c.dataset.idx+'"]');if(o)o.click();
+          setTimeout(()=>{clone.querySelectorAll('.c.hd[data-idx]').forEach(x=>{const y=head.querySelector('.c.hd[data-idx="'+x.dataset.idx+'"]');x.classList.toggle('active',!!(y&&y.classList.contains('active')));});},0);});
+      }
+      fh.hidden=!cur;
+    }
+    sync();
+  }
+  function req(){if(!raf)raf=requestAnimationFrame(upd);}
+  window.addEventListener('scroll',req,{passive:true});
+  window.addEventListener('resize',req);
+  document.addEventListener('toggle',req,true);
+})();
 
 // Sprachwechsel behaelt die aktuelle Sportart (#hash) bei
 document.querySelectorAll('.langsw a').forEach(a=>a.addEventListener('click',()=>{a.href=a.dataset.f+location.hash;}));
@@ -5767,9 +5864,10 @@ def _shared_admin_section(datamap):
         lbl = "alle Sportarten" if len(b.get("sports", [])) >= len(SPORTS) else " · ".join(
             sportname.get(x, x) for x in b.get("sports", []))
         t = {"title": b["title"], "group": b["group"], "rows": b["rows"], "_sh": bid,
-             "_shlbl": lbl, "_shwho": who}
+             "_shlbl": lbl, "_shwho": who, "note": b.get("note") or ""}
         html += theme_html(t, i, stages, "shared-adm", "de", ages, edit=True, group=b["group"])
         orig["shared|"+bid+"|title"] = b["title"] or ""
+        orig["shared|"+bid+"|note"] = b.get("note") or ""
         for ri, r in enumerate(b["rows"]):
             for si, seg in enumerate(merge_same_segs(r["segs"])):
                 orig["shared|"+bid+"|"+str(ri)+"|"+str(si)] = seg.get("v") or ""
@@ -5792,6 +5890,7 @@ def admin_html(datamap):
             if t.get("_sh") or t.get("removed"):
                 continue  # zentral erfasst (siehe _shared_admin_section)
             orig[s["id"]+"|"+str(ti)+"|title"] = t["title"] or ""
+            orig[s["id"]+"|"+str(ti)+"|note"] = t.get("note") or ""
             for ri, r in enumerate(t["rows"]):
                 # WICHTIG: gleiche Nummerierung wie theme_html (zusammengefuehrte
                 # Segmente) – sonst zeigen Zellen nach Verschmelzungen faelschlich

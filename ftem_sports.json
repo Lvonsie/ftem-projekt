@@ -71,6 +71,18 @@
    "short": "SBP",
    "icon": "icons/snowboard-park-pipe.jpg",
    "mission": "https://snowsports.flink.host/s/R7EVNr6x/"
+  },
+  {
+   "id": "aerials",
+   "name": "Aerials",
+   "short": "AE",
+   "icon": "icons/reserve-aerials.jpg"
+  },
+  {
+   "id": "moguls",
+   "name": "Moguls",
+   "short": "MO",
+   "icon": "icons/reserve-moguls.jpg"
   }
  ]
 }
