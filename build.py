@@ -3151,7 +3151,8 @@ tnoteInit();
   const inner=document.createElement('div');inner.className='fh-in';fh.appendChild(inner);
   document.body.appendChild(fh);
   let cur=null,clone=null,corner=null,raf=0;
-  function topEdge(){const h=document.querySelector('header.top');return h?Math.max(0,h.getBoundingClientRect().bottom):0;}
+  // jede Sportart hat ihre eigene Kopfleiste: die sichtbare nehmen (nicht einfach die erste)
+  function topEdge(){let m=0;document.querySelectorAll('header.top').forEach(h=>{if(h.offsetParent||getComputedStyle(h).position==='fixed'){const r=h.getBoundingClientRect();if(r.height>0)m=Math.max(m,r.bottom);}});return Math.max(0,m);}
   function pick(){
     const t0=topEdge();
     const ths=document.querySelectorAll('details.theme[open]:not(.nohd)');
