@@ -1560,6 +1560,54 @@ def home_html(datamap, lang):
                            + sport_icon(x["id"]) + '<span>' + esc(tr(x["name"], lang)) + '</span></li>'
                            for x in SPORTS)
                  + '</ul></div>')
+    # Interaktive Kurzanleitung (Tour): beim ersten Besuch der Startseite Schritt fuer
+    # Schritt, jeweils als Sprechblase beim beschriebenen Element. Der Coach-Schritt
+    # erscheint separat beim ersten Oeffnen des Athlet:innen-Wegs. "?" startet neu.
+    TOUR = {
+     "de": {"t": "Kurzanleitung", "next": "Weiter", "back": "Zurück", "skip": "Überspringen", "done": "Los geht’s", "ok": "Verstanden",
+      "steps": [
+       ("Sprache wählen", "Hier wechselst du zwischen Deutsch, Französisch, Italienisch und Englisch."),
+       ("Sportart wählen", "Wähle deine Sportart. Alle Inhalte passen sich daran an."),
+       ("Stufen & Athlet:innen-Weg", "Tippe auf F, T, E oder M für einen Überblick: was und wie viel auf dieser Stufe trainiert wird und welches Umfeld es braucht. Der rote Knopf «Athlet:innen-Weg» führt zu allen Themen, Stufe für Stufe von F1 bis M, mit Suche und Filter."),
+       ("Grundlagen, News & Feedback", "Unten findest du die Mission deiner Sportart, sportartübergreifende Grundlagen und «FTEM kurz erklärt». Dazu die aktuellen News und die Möglichkeit, uns Feedback zu geben."),
+      ],
+      "coach": ("FTEM-Coach", "Hast du eine Frage zu den Inhalten? Der FTEM-Coach beantwortet sie dir direkt.")},
+     "fr": {"t": "Guide rapide", "next": "Suivant", "back": "Retour", "skip": "Passer", "done": "C’est parti", "ok": "Compris",
+      "steps": [
+       ("Choisir la langue", "Ici, tu passes de l’allemand au français, à l’italien ou à l’anglais."),
+       ("Choisir un sport", "Choisis ton sport. Tous les contenus s’y adaptent."),
+       ("Niveaux & chemin des athlètes", "Clique sur F, T, E ou M pour un aperçu : quoi et combien entraîner à ce niveau, et quel environnement est nécessaire. Le bouton rouge « Chemin des athlètes » mène à tous les thèmes, niveau par niveau de F1 à M, avec recherche et filtre."),
+       ("Bases, actualités & feedback", "En bas, tu trouves la mission de ton sport, les bases communes à tous les sports et « FTEM en bref ». S’y ajoutent les actualités et la possibilité de nous donner ton feedback."),
+      ],
+      "coach": ("Coach FTEM", "Une question sur les contenus ? Le coach FTEM y répond directement.")},
+     "it": {"t": "Guida rapida", "next": "Avanti", "back": "Indietro", "skip": "Salta", "done": "Iniziamo", "ok": "Capito",
+      "steps": [
+       ("Scegliere la lingua", "Qui passi dal tedesco al francese, all’italiano o all’inglese."),
+       ("Scegliere lo sport", "Scegli il tuo sport. Tutti i contenuti si adattano."),
+       ("Livelli & percorso dell’atleta", "Tocca F, T, E o M per una panoramica: cosa e quanto allenare a questo livello e di quale contesto c’è bisogno. Il pulsante rosso «Percorso dell’atleta» porta a tutti i temi, livello per livello da F1 a M, con ricerca e filtro."),
+       ("Basi, notizie & feedback", "In basso trovi la missione del tuo sport, le basi comuni a tutti gli sport e «FTEM in breve». Inoltre le notizie attuali e la possibilità di darci un feedback."),
+      ],
+      "coach": ("Coach FTEM", "Hai una domanda sui contenuti? Il coach FTEM ti risponde direttamente.")},
+     "en": {"t": "Quick guide", "next": "Next", "back": "Back", "skip": "Skip", "done": "Let’s go", "ok": "Got it",
+      "steps": [
+       ("Choose a language", "Switch between German, French, Italian and English here."),
+       ("Choose a sport", "Choose your sport. All content adapts to it."),
+       ("Stages & athlete pathway", "Tap F, T, E or M for an overview: what and how much to train at that stage and what environment it needs. The red “Athlete pathway” button leads to all topics, stage by stage from F1 to M, with search and filter."),
+       ("Basics, news & feedback", "At the bottom you’ll find your sport’s mission, cross-sport basics and “FTEM in a nutshell”, plus the latest news and a way to give us feedback."),
+      ],
+      "coach": ("FTEM coach", "Got a question about the content? The FTEM coach answers it right away.")},
+    }[lang]
+    # Ziele je Schritt: erstes Element = Anker der Sprechblase, weitere werden mit hervorgehoben
+    _tsel = [["#home .lang-ic .lang-ic-btn"], ["#home .sp-btn"], ["#home .aw-btn", "#home .fbtnw"],
+             ["#home .bottombar", "#home .news-box", "#home .news-btn", "#home .fb-wrap"]]
+    _tour = {k: TOUR[k] for k in ("t", "next", "back", "skip", "done", "ok")}
+    _tour["steps"] = [{"h": h, "p": d, "sel": sel} for (h, d), sel in zip(TOUR["steps"], _tsel)]
+    _tour["coach"] = {"h": TOUR["coach"][0], "p": TOUR["coach"][1], "sel": [".steady"]}
+    guide_tpl = ('<script type="application/json" id="tour-data">'
+                 + json.dumps(_tour, ensure_ascii=False).replace("</", "<\\/") + '</script>')
+    guide_btn = ('<button class="lang-ic-btn gd-btn" type="button" '
+                 'aria-label="'+esc(TOUR["t"])+'" title="'+esc(TOUR["t"])+'">'
+                 '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.6 2.3c-.8.4-1.2 1-1.2 1.9v.5"/><path d="M12 17h.01"/></svg></button>')
     return ('<section id="home">'
             '<div class="home-hero">'
             +aw_cta
@@ -1570,7 +1618,7 @@ def home_html(datamap, lang):
             '<select class="homesport sr-only" tabindex="-1" aria-hidden="true">'
             + "".join('<option value="'+x["id"]+'">'+esc(tr(x["name"], lang))+'</option>' for x in SPORTS)
             + '</select>'
-            '<div class="mr-row">'
+            '<div class="mr-row">'+guide_btn+
             '<div class="lang-ic"><button class="lang-ic-btn" type="button" aria-expanded="false" aria-label="'+esc({"de":"Sprache","fr":"Langue","it":"Lingua","en":"Language"}[lang])+'">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/></svg></button>'
             '<div class="lang-ic-menu" hidden>'+lang_switch(lang)+'</div></div></div>'
@@ -1604,6 +1652,7 @@ def home_html(datamap, lang):
             '<template id="tpl-news">'+news_html(lang)+'</template>'
             '<template id="tpl-app">'+install_hint(lang)+'</template>'
             '<template id="tpl-info">'+ftem_info+fi_html+'</template>'
+            +guide_tpl+
             '<template id="tpl-missions"><div class="mlist">'+mission_items+'</div></template>'
             +ph_tpls+
             '</section>')
@@ -1865,6 +1914,29 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .im-bar{display:flex;align-items:center;gap:10px;padding:calc(9px + env(safe-area-inset-top,0px)) 14px 9px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#98a1ad;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
+.tour-dim{position:fixed;inset:0;z-index:2147483000;width:100vw;height:100vh;pointer-events:auto}
+.tour-ring{position:fixed;z-index:2147483001;border:2px solid #fff;border-radius:14px;box-shadow:0 0 0 4px rgba(213,43,30,.85);pointer-events:none;transition:all .25s ease}
+.tour-ring.sub{box-shadow:0 0 0 3px rgba(213,43,30,.55);border-style:dashed}
+.tour-tip{position:fixed;z-index:2147483002;width:min(340px,calc(100vw - 24px));background:#fff;color:#1d2630;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.28);padding:14px 16px 12px;font-size:13.5px;line-height:1.5;transition:top .25s ease,left .25s ease}
+.tour-tip:before{content:"";position:absolute;width:14px;height:14px;background:inherit;transform:rotate(45deg);left:var(--ax,30px);margin-left:-7px}
+.tour-tip.below:before{top:-7px}.tour-tip.above:before{bottom:-7px}.tour-tip.noarrow:before{display:none}
+.tour-tip .tt-step{font-size:11px;font-weight:800;letter-spacing:.04em;color:#d52b1e;text-transform:uppercase}
+.tour-tip h3{margin:2px 0 4px;font-size:15.5px}
+.tour-tip p{margin:0}
+.tour-tip .tt-act{display:flex;align-items:center;gap:8px;margin-top:12px}
+.tour-tip .tt-dots{display:flex;gap:5px;margin-right:auto}
+.tour-tip .tt-dots i{width:7px;height:7px;border-radius:9px;background:#d5dbe2}
+.tour-tip .tt-dots i.on{background:#d52b1e}
+.tour-tip button{font:inherit;font-size:13px;font-weight:700;border-radius:999px;padding:7px 14px;cursor:pointer;border:1px solid #d5dbe2;background:#fff;color:#1d2630}
+.tour-tip button.tt-go{background:#d52b1e;border-color:#d52b1e;color:#fff}
+.tour-tip button.tt-skip{border:0;background:none;color:#697080;font-weight:600;padding:7px 6px}
+@media (max-width:480px){.tour-tip{font-size:12.5px;line-height:1.42;padding:11px 13px 10px}.tour-tip h3{font-size:14.5px}.tour-tip .tt-act{margin-top:9px}.tour-tip button{padding:6px 12px;font-size:12.5px}}
+[data-theme="dark"] .tour-tip{background:#1d2633;color:#e6ebf1}
+[data-theme="dark"] .tour-tip button{background:#1d2633;color:#e6ebf1;border-color:#3a4554}
+[data-theme="dark"] .tour-tip button.tt-go{background:#d52b1e;border-color:#d52b1e;color:#fff}
+[data-theme="dark"] .tour-tip .tt-dots i{background:#3a4554}
+[data-theme="dark"] .tour-tip .tt-dots i.on{background:#d52b1e}
+.gd-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .im-x:hover{color:var(--red)}
 [data-theme="dark"] .im-bar{background:#1d2630;color:#fff;border-bottom-color:transparent}
 [data-theme="dark"] .im-x{color:rgba(255,255,255,.75)}
@@ -4117,6 +4189,98 @@ function show(id){
     if(sec&&sec.__clamp)setTimeout(sec.__clamp,60);
   }
 }
+// ---- Interaktive Kurzanleitung (Tour) ----
+// Startseite: Schritte mit Sprechblase am jeweiligen Element (einmal pro Browser,
+// localStorage 'ftem-guide'); Athlet:innen-Weg: einmaliger Hinweis auf den
+// FTEM-Coach ('ftem-guide-aw'). Der "?"-Knopf neben dem Globus startet die Tour neu.
+var TOUR=null;try{TOUR=JSON.parse(document.getElementById('tour-data').textContent);}catch(_){}
+var tourEl=null;
+function tourVis(el){if(!el)return false;var r=el.getBoundingClientRect();if(!r.width||!r.height)return false;var cs=getComputedStyle(el);return cs.visibility!=='hidden'&&cs.display!=='none';}
+function tourEnd(){if(!tourEl)return;tourEl.forEach(function(e){e.remove();});tourEl=null;window.removeEventListener('resize',tourPos);window.removeEventListener('scroll',tourPos,true);document.removeEventListener('keydown',tourKey);}
+function tourKey(e){if(e.key==='Escape')tourEnd();}
+var tourCur=null;
+function tourPos(){
+  if(!tourEl||!tourCur)return;
+  var els=tourCur.els,pad=6,vw=innerWidth,vh=innerHeight,rs=els.map(function(e){return e.getBoundingClientRect();});
+  var svg=tourEl[0],holes='';
+  // Rahmen je Element (auf den sichtbaren Bereich begrenzt)
+  var bx=rs.map(function(r){var x=Math.max(3,r.left-pad),y=Math.max(3,r.top-pad);
+    return {x:x,y:y,w:Math.min(vw-3,r.right+pad)-x,h:Math.min(vh-3,r.bottom+pad)-y};});
+  bx.forEach(function(r,i){holes+='<rect x="'+r.x+'" y="'+r.y+'" width="'+r.w+'" height="'+r.h+'" rx="12" fill="#000"/>';
+    var g=tourEl[3+i];if(g){g.style.left=r.x+'px';g.style.top=r.y+'px';g.style.width=r.w+'px';g.style.height=r.h+'px';}});
+  svg.setAttribute('viewBox','0 0 '+vw+' '+vh);
+  svg.innerHTML='<defs><mask id="tourmask"><rect width="100%" height="100%" fill="#fff"/>'+holes+'</mask></defs><rect width="100%" height="100%" fill="rgba(10,16,24,.55)" mask="url(#tourmask)"/>';
+  // Sprechblase: zuerst neben der Gesamtflaeche aller hervorgehobenen Elemente
+  // (unten/oben/rechts/links), sonst neben dem ersten Element, sonst mittig
+  var tip=tourEl[1],tw=tip.offsetWidth,th=tip.offsetHeight,gap=14,m=10;
+  var U={l:Math.min.apply(0,bx.map(function(r){return r.x;})),t:Math.min.apply(0,bx.map(function(r){return r.y;})),
+         r:Math.max.apply(0,bx.map(function(r){return r.x+r.w;})),b:Math.max.apply(0,bx.map(function(r){return r.y+r.h;}))};
+  var A={l:bx[0].x,t:bx[0].y,r:bx[0].x+bx[0].w,b:bx[0].y+bx[0].h};
+  var clx=function(x){return Math.max(m,Math.min(vw-tw-m,x));},cly=function(y){return Math.max(m,Math.min(vh-th-m,y));};
+  // Kandidaten der Reihe nach; genommen wird der erste, der kein hervorgehobenes Element verdeckt
+  function cands(R){var c=[],cx=(R.l+R.r)/2,cy=(R.t+R.b)/2;
+    if(R.b+gap+th<=vh-m)c.push({cls:'below',top:R.b+gap,left:clx(cx-tw/2),ax:cx});
+    if(R.t-gap-th>=m)c.push({cls:'above',top:R.t-gap-th,left:clx(cx-tw/2),ax:cx});
+    if(R.r+gap+tw<=vw-m)c.push({cls:'noarrow',top:cly(cy-th/2),left:R.r+gap});
+    if(R.l-gap-tw>=m)c.push({cls:'noarrow',top:cly(cy-th/2),left:R.l-gap-tw});
+    return c;}
+  var C=(els.length>1?cands(U):[]).concat(cands(A),[{cls:'noarrow',top:vh-th-m,left:clx(vw/2-tw/2)},{cls:'noarrow',top:m,left:clx(vw/2-tw/2)}]);
+  function frei(c){return bx.every(function(r){return c.left+tw<=r.x||c.left>=r.x+r.w||c.top+th<=r.y||c.top>=r.y+r.h;});}
+  var P=C.filter(frei)[0]||C[0];
+  tip.className='tour-tip '+P.cls;tip.style.top=P.top+'px';tip.style.left=P.left+'px';
+  if(P.ax!=null)tip.style.setProperty('--ax',Math.max(18,Math.min(tw-18,P.ax-P.left))+'px');
+}
+// steps: [{h,p,sel}], i: Startschritt, fertig: Callback am Ende (auch bei Abbruch)
+function tourShow(steps,i,fertig){
+  tourEnd();
+  var list=steps.map(function(st){var els=[];st.sel.forEach(function(q){document.querySelectorAll(q).forEach(function(e){if(tourVis(e))els.push(e);});});return {h:st.h,p:st.p,els:els};})
+    .filter(function(st){return st.els.length;});
+  if(!list.length){if(fertig)fertig();return;}
+  i=Math.max(0,Math.min(i||0,list.length-1));tourCur=list[i];
+  var a=tourCur.els[0],ar=a.getBoundingClientRect();
+  if(ar.top<60||ar.bottom>innerHeight-60)a.scrollIntoView({block:'center',behavior:'auto'});
+  var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('class','tour-dim');
+  var tip=document.createElement('div');tip.className='tour-tip';tip.setAttribute('role','dialog');tip.setAttribute('aria-live','polite');
+  var n=list.length,last=i===n-1,dots='';
+  if(n>1)for(var k=0;k<n;k++)dots+='<i'+(k===i?' class="on"':'')+'></i>';
+  function esc(x){var d=document.createElement('div');d.textContent=x;return d.innerHTML;}
+  tip.innerHTML=(n>1?'<div class="tt-step">'+(i+1)+' / '+n+'</div>':'')+'<h3>'+esc(tourCur.h)+'</h3><p>'+esc(tourCur.p)+'</p>'
+    +'<div class="tt-act"><span class="tt-dots">'+dots+'</span>'
+    +(n>1&&!last?'<button type="button" class="tt-skip">'+esc(TOUR.skip)+'</button>':'')
+    +(i>0?'<button type="button" class="tt-back">'+esc(TOUR.back)+'</button>':'')
+    +'<button type="button" class="tt-go">'+esc(n===1?TOUR.ok:(last?TOUR.done:TOUR.next))+'</button></div>';
+  // tourEl: [Abdunklung, Sprechblase, (frei), Ring je Element]; erstes Element = Anker, weitere gestrichelt
+  tourEl=[svg,tip,document.createComment('tour')];
+  tourCur.els.forEach(function(e,k){var g=document.createElement('div');g.className='tour-ring'+(k?' sub':'');tourEl.push(g);});
+  tourEl.forEach(function(e){document.body.appendChild(e);});
+  var done=function(){tourEnd();if(fertig)fertig();};
+  tip.querySelector('.tt-go').onclick=function(){if(last)done();else tourShow(steps,i+1,fertig);};
+  var bk=tip.querySelector('.tt-back');if(bk)bk.onclick=function(){tourShow(steps,i-1,fertig);};
+  var sk=tip.querySelector('.tt-skip');if(sk)sk.onclick=done;
+  svg.addEventListener('click',function(e){e.stopPropagation();});
+  window.addEventListener('resize',tourPos);window.addEventListener('scroll',tourPos,true);document.addEventListener('keydown',tourKey);
+  tourPos();setTimeout(tourPos,60);
+  tip.querySelector('.tt-go').focus({preventScroll:true});
+}
+function tourHome(){if(TOUR)tourShow(TOUR.steps,0,function(){try{localStorage.setItem('ftem-guide','1');}catch(_){}});}
+function firstGuide(){
+  var b=document.querySelector('.gd-btn');if(b)b.addEventListener('click',function(){var m=document.querySelector('#home .lang-ic-menu');if(m)m.hidden=true;tourHome();});
+  try{
+    if(!TOUR||localStorage.getItem('ftem-guide')||location.hash||/[?&]pres=1/.test(location.search))return;
+    setTimeout(function(){if(location.hash||!im.hidden||tourEl)return;tourHome();},900);
+  }catch(_){}
+}
+// Coach-Hinweis beim ersten Oeffnen des Athlet:innen-Wegs
+function coachTip(){
+  try{
+    if(!TOUR||localStorage.getItem('ftem-guide-aw')||/[?&]pres=1/.test(location.search))return;
+    setTimeout(function(){
+      var c=document.querySelector('.steady');
+      if(!location.hash||!tourVis(c)||tourEl||!im.hidden)return;
+      tourShow([TOUR.coach],0,function(){try{localStorage.setItem('ftem-guide-aw','1');}catch(_){}});
+    },1200);
+  }catch(_){}
+}
 function route(){
   document.documentElement.classList.remove('h'); // ab jetzt steuert JS die Sichtbarkeit
   const id=decodeURIComponent(location.hash.replace('#',''));
@@ -4271,7 +4435,7 @@ document.addEventListener('click',function(e){
   }
 });
 window.addEventListener('hashchange',route);
-route();
+route();firstGuide();coachTip();window.addEventListener('hashchange',function(){tourEnd();coachTip();});
 loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});
 // Feedback -> direkt in Supabase speichern (kein Mailprogramm). Anonym oder mit Name/Verband/E-Mail.
 (function(){
