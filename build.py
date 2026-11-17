@@ -1914,7 +1914,7 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .im-bar{display:flex;align-items:center;gap:10px;padding:calc(9px + env(safe-area-inset-top,0px)) 14px 9px;background:rgba(255,255,255,.95);color:var(--ink);border-bottom:1px solid var(--line)}
 .im-t{font-weight:800;font-size:13px;flex:1}
 .im-x{background:none;border:none;color:#98a1ad;font-size:17px;cursor:pointer;padding:2px 8px;line-height:1}
-.tour-dim{position:fixed;inset:0;z-index:2147483000;width:100vw;height:100vh;pointer-events:auto}
+.tour-dim{position:fixed;left:0;top:0;z-index:2147483000;width:100%;height:100%;pointer-events:auto;overflow:visible}
 .tour-ring{position:fixed;z-index:2147483001;border:2px solid #fff;border-radius:14px;box-shadow:0 0 0 4px rgba(213,43,30,.85);pointer-events:none;transition:all .25s ease}
 .tour-ring.sub{box-shadow:0 0 0 3px rgba(213,43,30,.55);border-style:dashed}
 .tour-tip{position:fixed;z-index:2147483002;width:min(340px,calc(100vw - 24px));background:#fff;color:#1d2630;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.28);padding:14px 16px 12px;font-size:13.5px;line-height:1.5;transition:top .25s ease,left .25s ease}
@@ -4208,7 +4208,8 @@ function tourPos(){
     return {x:x,y:y,w:Math.min(vw-3,r.right+pad)-x,h:Math.min(vh-3,r.bottom+pad)-y};});
   bx.forEach(function(r,i){holes+='<rect x="'+r.x+'" y="'+r.y+'" width="'+r.w+'" height="'+r.h+'" rx="12" fill="#000"/>';
     var g=tourEl[3+i];if(g){g.style.left=r.x+'px';g.style.top=r.y+'px';g.style.width=r.w+'px';g.style.height=r.h+'px';}});
-  svg.setAttribute('viewBox','0 0 '+vw+' '+vh);
+  // kein viewBox: SVG-Einheiten = CSS-Pixel (sonst verschiebt die Skalierung
+  // bei Bildschirm-Zoom/Scrollbalken die Aussparungen gegenueber den Rahmen)
   svg.innerHTML='<defs><mask id="tourmask"><rect width="100%" height="100%" fill="#fff"/>'+holes+'</mask></defs><rect width="100%" height="100%" fill="rgba(10,16,24,.55)" mask="url(#tourmask)"/>';
   // Sprechblase: zuerst neben der Gesamtflaeche aller hervorgehobenen Elemente
   // (unten/oben/rechts/links), sonst neben dem ersten Element, sonst mittig
