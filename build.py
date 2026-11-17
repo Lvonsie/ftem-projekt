@@ -4259,7 +4259,17 @@ function tourShow(steps,i,fertig){
   var sk=tip.querySelector('.tt-skip');if(sk)sk.onclick=done;
   svg.addEventListener('click',function(e){e.stopPropagation();});
   window.addEventListener('resize',tourPos);window.addEventListener('scroll',tourPos,true);document.addEventListener('keydown',tourKey);
-  tourPos();setTimeout(tourPos,60);
+  tourPos();
+  // Elemente koennen sich nach dem Start noch bewegen (Einblend-Animationen,
+  // Layout nach Bildladen, Hover-Effekte): Position jede Frame pruefen und
+  // Rahmen/Sprechblase nachfuehren, sobald sich etwas verschoben hat.
+  var sigLast='',me=tourEl;
+  (function follow(){
+    if(tourEl!==me)return;
+    var sig=tourCur.els.map(function(e){var r=e.getBoundingClientRect();return Math.round(r.left)+','+Math.round(r.top)+','+Math.round(r.width)+','+Math.round(r.height);}).join('|')+'|'+innerWidth+'x'+innerHeight;
+    if(sig!==sigLast){sigLast=sig;tourPos();}
+    requestAnimationFrame(follow);
+  })();
   tip.querySelector('.tt-go').focus({preventScroll:true});
 }
 function tourHome(){if(TOUR)tourShow(TOUR.steps,0,function(){try{localStorage.setItem('ftem-guide','1');}catch(_){}});}
