@@ -1603,6 +1603,13 @@ def home_html(datamap, lang):
     _tour = {k: TOUR[k] for k in ("t", "next", "back", "skip", "done", "ok")}
     _tour["steps"] = [{"h": h, "p": d, "sel": sel} for (h, d), sel in zip(TOUR["steps"], _tsel)]
     _tour["coach"] = {"h": TOUR["coach"][0], "p": TOUR["coach"][1], "sel": [".steady"]}
+    # Sportart-Wahl nach der Tour ("Waehle deine Sportart"), Reihenfolge wie SPORTS
+    _tour["pick"] = {
+     "de": {"t": "Wähle deine Sportart", "sub": "Die Seite zeigt dir danach immer deine Sportart. Ändern kannst du sie jederzeit oben rechts.", "later": "Später", "note": "Gespeichert nur in diesem Browser"},
+     "fr": {"t": "Choisis ton sport", "sub": "La page affichera ensuite toujours ton sport. Tu peux le changer à tout moment en haut à droite.", "later": "Plus tard", "note": "Enregistré uniquement dans ce navigateur"},
+     "it": {"t": "Scegli il tuo sport", "sub": "La pagina ti mostrerà poi sempre il tuo sport. Puoi cambiarlo in qualsiasi momento in alto a destra.", "later": "Più tardi", "note": "Salvato solo in questo browser"},
+     "en": {"t": "Choose your sport", "sub": "The page will then always show your sport. You can change it at any time at the top right.", "later": "Later", "note": "Saved in this browser only"},
+    }[lang]
     guide_tpl = ('<script type="application/json" id="tour-data">'
                  + json.dumps(_tour, ensure_ascii=False).replace("</", "<\\/") + '</script>')
     guide_btn = ('<button class="lang-ic-btn gd-btn" type="button" '
@@ -1917,6 +1924,22 @@ body{margin:0;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Ro
 .tour-dim{position:fixed;left:0;top:0;z-index:2147483000;width:100%;height:100%;pointer-events:auto;overflow:visible}
 .tour-ring{position:fixed;z-index:2147483001;border:2px solid #fff;border-radius:14px;box-shadow:0 0 0 4px rgba(213,43,30,.85);pointer-events:none;transition:all .25s ease}
 .tour-ring.sub{box-shadow:0 0 0 3px rgba(213,43,30,.55);border-style:dashed}
+.spsel-bg{position:fixed;inset:0;z-index:2147482000;background:rgba(15,22,32,.38);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:16px}
+.spsel{width:min(720px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#fff;color:#1d2630;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.28);padding:22px 22px 16px}
+.spsel h2{margin:0;font-size:20px;font-weight:800}
+.spsel .sub{margin:4px 0 16px;font-size:13.5px;color:#5f6b78}
+.spsel .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.spsel .tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px 6px;border:1px solid #e3e8ee;border-radius:12px;background:#f7f9fb;cursor:pointer;font:inherit;font-size:12.5px;font-weight:700;color:#1d2630;text-align:center;min-height:86px;line-height:1.25}
+.spsel .tile img{width:34px;height:34px;object-fit:contain}
+.spsel .tile:hover,.spsel .tile:focus-visible{border-color:#d52b1e;background:#fff;box-shadow:0 6px 18px rgba(213,43,30,.18);outline:none}
+.spsel .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;font-size:12px;color:#8a93a0}
+.spsel .later{font:inherit;font-size:13px;font-weight:600;color:#5f6b78;background:none;border:0;cursor:pointer;padding:6px 4px}
+[data-theme="dark"] .spsel{background:#1d2633;color:#e6ebf1}
+[data-theme="dark"] .spsel .sub,[data-theme="dark"] .spsel .later{color:#aeb8c6}
+[data-theme="dark"] .spsel .tile{background:#253041;border-color:#3a4554;color:#e6ebf1}
+[data-theme="dark"] .spsel .tile img{filter:invert(1) brightness(1.4)}
+[data-theme="dark"] .spsel .tile:hover{background:#2c394d}
+@media (max-width:560px){.spsel .tiles{grid-template-columns:repeat(3,1fr);gap:6px}.spsel{padding:16px 14px 10px}.spsel h2{font-size:18px}.spsel .sub{font-size:12.5px;margin-bottom:10px}.spsel .tile{min-height:64px;padding:8px 4px;font-size:11px;gap:4px}.spsel .tile img{width:26px;height:26px}.spsel .foot{margin-top:10px}}
 .tour-tip{position:fixed;z-index:2147483002;width:min(340px,calc(100vw - 24px));background:#fff;color:#1d2630;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.28);padding:14px 16px 12px;font-size:13.5px;line-height:1.5;transition:top .25s ease,left .25s ease}
 .tour-tip:before{content:"";position:absolute;width:14px;height:14px;background:inherit;transform:rotate(45deg);left:var(--ax,30px);margin-left:-7px}
 .tour-tip.below:before{top:-7px}.tour-tip.above:before{bottom:-7px}.tour-tip.noarrow:before{display:none}
@@ -3922,13 +3945,32 @@ if(homeSport)homeSport.addEventListener('change',updMissionLbl);
 updMissionLbl();
 // Vorwahl per Link: /?sport=<id> stellt die Sportart im Wahlmenue der Landing-
 // page ein (fuer Weiterleitungen alter my.ftem-Links, siehe netlify.toml).
+// Eigene Sportart (Sportart-Wahl bzw. letzte Wahl im Menue) bleibt im Browser
+// gespeichert ('ftem-sport') und ist beim naechsten Besuch vorgewaehlt. Eine
+// Vorwahl per Link gilt nur fuer diesen Besuch und ueberschreibt sie nicht.
+var SPORT_VIA_LINK=false, _spNoSave=false;
+function setHomeSport(v,save){
+  if(SPORT_IDS.indexOf(v)<0)return;
+  _spNoSave=!save;
+  var li=document.querySelector('.sportpick .sp-opt[data-val="'+v+'"]');
+  if(li){li.click();}else if(homeSport){homeSport.value=v;homeSport.dispatchEvent(new Event('change'));}
+  _spNoSave=false;
+  if(save){try{localStorage.setItem('ftem-sport',v);}catch(_){}}
+}
+if(homeSport)homeSport.addEventListener('change',function(){
+  if(_spNoSave)return;
+  try{localStorage.setItem('ftem-sport',homeSport.value);}catch(_){}
+});
 (function(){
   try{
     var q=new URLSearchParams(location.search).get('sport');
-    if(!q||SPORT_IDS.indexOf(q)<0)return;
-    var li=document.querySelector('.sportpick .sp-opt[data-val="'+q+'"]');
-    if(li){li.click();}else if(homeSport){homeSport.value=q;homeSport.dispatchEvent(new Event('change'));}
-    history.replaceState(null,'',location.pathname+location.hash);
+    if(q&&SPORT_IDS.indexOf(q)>=0){
+      SPORT_VIA_LINK=true;setHomeSport(q,false);
+      history.replaceState(null,'',location.pathname+location.hash);
+      return;
+    }
+    var mine=localStorage.getItem('ftem-sport');
+    if(mine&&SPORT_IDS.indexOf(mine)>=0&&homeSport&&homeSport.value!==mine)setHomeSport(mine,false);
   }catch(_){}
 })();
 // News nur fuer bestimmte Sportarten (data-sports): je nach gewaehlter Sportart
@@ -4001,7 +4043,7 @@ if(menuBtn&&menuPanel){
   const mpx=menuPanel.querySelector('.mp-x');
   if(mpx)mpx.addEventListener('click',()=>{menuPanel.hidden=true;menuBtn.setAttribute('aria-expanded','false');});
 }
-const langBtn=document.querySelector('.lang-ic-btn'), langMenu=document.querySelector('.lang-ic-menu');
+const langBtn=document.querySelector('.lang-ic .lang-ic-btn'), langMenu=document.querySelector('.lang-ic-menu');
 if(langBtn&&langMenu){
   langBtn.addEventListener('click',e=>{e.stopPropagation();langMenu.hidden=!langMenu.hidden;langBtn.setAttribute('aria-expanded',String(!langMenu.hidden));});
   document.addEventListener('click',e=>{if(!langMenu.hidden&&!e.target.closest('.lang-ic')){langMenu.hidden=true;langBtn.setAttribute('aria-expanded','false');}});
@@ -4273,12 +4315,41 @@ function tourShow(steps,i,fertig){
   })();
   tip.querySelector('.tt-go').focus({preventScroll:true});
 }
-function tourHome(){if(TOUR)tourShow(TOUR.steps,0,function(){try{localStorage.setItem('ftem-guide','1');}catch(_){}});}
+// ---- Sportart-Wahl ("Waehle deine Sportart") ----
+// Erscheint einmal nach der Tour, wenn man ueber die allgemeine Startseite kommt
+// (nicht per Sportart-Link, nicht im Athlet:innen-Weg). "Spaeter" = nicht mehr fragen.
+function sportPickDue(){
+  try{
+    if(!TOUR||!TOUR.pick||SPORT_VIA_LINK||location.hash||/[?&]pres=1/.test(location.search))return false;
+    return !localStorage.getItem('ftem-sport')&&!localStorage.getItem('ftem-sport-asked');
+  }catch(_){return false;}
+}
+function sportPick(){
+  if(document.querySelector('.spsel-bg'))return;
+  var P=TOUR.pick,h='';
+  document.querySelectorAll('#home .sportpick .sp-opt').forEach(function(li){
+    var img=li.querySelector('img'),nm=li.querySelector('span').textContent;
+    h+='<button type="button" class="tile" data-val="'+li.dataset.val+'"><img src="'+img.getAttribute('src')+'" alt="">'+_esc(nm)+'</button>';
+  });
+  var bg=document.createElement('div');bg.className='spsel-bg';
+  bg.innerHTML='<div class="spsel" role="dialog" aria-modal="true" aria-labelledby="spsel-t"><h2 id="spsel-t">'+_esc(P.t)+'</h2><p class="sub">'+_esc(P.sub)+'</p>'
+    +'<div class="tiles">'+h+'</div><div class="foot"><span>'+_esc(P.note)+'</span><button type="button" class="later">'+_esc(P.later)+'</button></div></div>';
+  function close(){bg.remove();document.removeEventListener('keydown',key);try{localStorage.setItem('ftem-sport-asked','1');}catch(_){}}
+  function key(e){if(e.key==='Escape')close();}
+  bg.querySelectorAll('.tile').forEach(function(t){t.onclick=function(){setHomeSport(t.dataset.val,true);close();};});
+  bg.querySelector('.later').onclick=close;
+  bg.addEventListener('click',function(e){if(e.target===bg)close();});
+  document.addEventListener('keydown',key);
+  document.body.appendChild(bg);
+}
+function tourHome(){if(TOUR)tourShow(TOUR.steps,0,function(){try{localStorage.setItem('ftem-guide','1');}catch(_){}if(sportPickDue())setTimeout(sportPick,250);});}
 function firstGuide(){
   var b=document.querySelector('.gd-btn');if(b)b.addEventListener('click',function(){var m=document.querySelector('#home .lang-ic-menu');if(m)m.hidden=true;tourHome();});
   try{
-    if(!TOUR||localStorage.getItem('ftem-guide')||location.hash||/[?&]pres=1/.test(location.search))return;
-    setTimeout(function(){if(location.hash||!im.hidden||tourEl)return;tourHome();},900);
+    if(!TOUR||location.hash||/[?&]pres=1/.test(location.search))return;
+    var tour=!localStorage.getItem('ftem-guide');
+    if(!tour&&!sportPickDue())return;
+    setTimeout(function(){if(location.hash||!im.hidden||tourEl)return;if(tour)tourHome();else sportPick();},900);
   }catch(_){}
 }
 // Coach-Hinweis beim ersten Oeffnen des Athlet:innen-Wegs
