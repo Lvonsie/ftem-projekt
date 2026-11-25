@@ -2286,9 +2286,14 @@ function setHomeSport(v,save){
   _spNoSave=false;
   if(save){try{localStorage.setItem('ftem-sport',v);}catch(_){}}
 }
+// Bewusste Wahl (Menue oder Sportart-Wahl, nicht automatische Vorwahl):
+// als eigene Sportart merken und fuer die Statistik als "sportwahl" zaehlen.
+var SPORT_CHOSEN=false, SPORT_OWN=false;
 if(homeSport)homeSport.addEventListener('change',function(){
   if(_spNoSave)return;
+  SPORT_CHOSEN=true;
   try{localStorage.setItem('ftem-sport',homeSport.value);}catch(_){}
+  if(window.__statPick)window.__statPick(homeSport.value);
 });
 (function(){
   try{
@@ -2299,7 +2304,7 @@ if(homeSport)homeSport.addEventListener('change',function(){
       return;
     }
     var mine=localStorage.getItem('ftem-sport');
-    if(mine&&SPORT_IDS.indexOf(mine)>=0&&homeSport&&homeSport.value!==mine)setHomeSport(mine,false);
+    if(mine&&SPORT_IDS.indexOf(mine)>=0){SPORT_OWN=true;if(homeSport&&homeSport.value!==mine)setHomeSport(mine,false);}
   }catch(_){}
 })();
 // News nur fuer bestimmte Sportarten (data-sports): je nach gewaehlter Sportart
@@ -2670,8 +2675,11 @@ function sportPick(){
   bg.addEventListener('click',function(e){if(e.target===bg)close();});
   document.addEventListener('keydown',key);
   document.body.appendChild(bg);
+  try{localStorage.setItem('ftem-sport-asked','1');}catch(_){}
 }
-function tourHome(){if(TOUR)tourShow(TOUR.steps,0,function(){try{localStorage.setItem('ftem-guide','1');}catch(_){}if(sportPickDue())setTimeout(sportPick,250);});}
+// Merken schon beim Start (nicht erst am Ende): wer die Tour mit Esc abbricht,
+// die Seite verlaesst oder in den Athlet:innen-Weg wechselt, soll sie nicht erneut sehen.
+function tourHome(){if(!TOUR)return;try{localStorage.setItem('ftem-guide','1');}catch(_){}tourShow(TOUR.steps,0,function(){if(sportPickDue())setTimeout(sportPick,250);});}
 function firstGuide(){
   var b=document.querySelector('.gd-btn');if(b)b.addEventListener('click',function(){var m=document.querySelector('#home .lang-ic-menu');if(m)m.hidden=true;tourHome();});
   try{
@@ -2688,7 +2696,8 @@ function coachTip(){
     setTimeout(function(){
       var c=document.querySelector('.steady');
       if(!location.hash||!tourVis(c)||tourEl||!im.hidden)return;
-      tourShow([TOUR.coach],0,function(){try{localStorage.setItem('ftem-guide-aw','1');}catch(_){}});
+      try{localStorage.setItem('ftem-guide-aw','1');}catch(_){}
+      tourShow([TOUR.coach],0);
     },1200);
   }catch(_){}
 }
@@ -2696,6 +2705,7 @@ function route(){
   document.documentElement.classList.remove('h'); // ab jetzt steuert JS die Sichtbarkeit
   const id=decodeURIComponent(location.hash.replace('#',''));
   show(SPORT_IDS.includes(id)?id:'');
+  if(window.__statRoute)window.__statRoute(id);
   if(SPORT_IDS.includes(id)&&window.__statSport)window.__statSport(id);
 }
 // ---- anonyme Nutzungsstatistik (Tabelle ftem_stats) ----
@@ -2733,7 +2743,22 @@ function route(){
         .then(function(r){if(!r.ok)direct();}).catch(direct);
     }catch(_){direct();}
   }
-  window.__statSport=function(sid){ev('sport',sid);};
+  window.__statPick=function(sid){ev('sportwahl',sid);};
+  // Aufruf Athlet:innen-Weg pro Sportart. Landet jemand nur wegen der automatischen
+  // Vorwahl (erste Sportart, nichts gewaehlt, kein Link) dort, zaehlt der Aufruf erst
+  // nach 20 s - wer vorher zu einer anderen Sportart oder zur Startseite wechselt,
+  // war "falsch gelandet" und wird nicht gezaehlt.
+  var initHash=location.hash, pend=null;
+  function cancelPend(){if(pend){clearTimeout(pend.t);pend=null;}}
+  window.__statRoute=function(id){if(pend&&pend.sid!==id)cancelPend();};
+  window.__statSport=function(sid){
+    if(pend&&pend.sid===sid)return;
+    var deep=initHash&&decodeURIComponent(initHash.slice(1))===sid;
+    var sure=sid!==SPORT_IDS[0]||SPORT_CHOSEN||SPORT_OWN||SPORT_VIA_LINK||deep;
+    if(sure){ev('sport',sid);return;}
+    try{if(sessionStorage.getItem('ftem-st-sport-'+sid))return;}catch(_){return;}
+    pend={sid:sid,t:setTimeout(function(){pend=null;ev('sport',sid);},20000)};
+  };
   // Link-Klicks: jeder Link, der die Seite verlaesst (Lernflink, swiss-ski.ch,
   // PDFs unter assets/ ...), einmal pro Sitzung und Link+Fundort. Gespeichert
   // werden nur Link, Linktext und Fundort (Sportart, Thema, Zeile, Stufe, Sprache).

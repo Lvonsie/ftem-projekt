@@ -11445,7 +11445,7 @@ function renderStats(rows,tage){
   var PER=tage>=3650?'seit Start':(tage+' T'), ZR=tage>=3650?'seit Start':('in '+_statRange(tage)), gran=_statGran(eff);
   var granTxt={tag:'pro Tag',woche:'pro Woche',monat:'pro Monat'}[gran];
   var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5;
-  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[],links=[],geo=[];
+  var ki=[],zu=[],sports={},picks={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[],links=[],geo=[];
   rows.forEach(function(x){
     var t=new Date(x.created_at).getTime();
     if(x.kind==='ki_frage'){ki.push({ts:x.created_at,key:'KI-Fragen'});if(t>=t0)kiToday++;if(t>=t7)ki7++;
@@ -11458,6 +11458,7 @@ function renderStats(rows,tage){
       zu.push({ts:x.created_at,key:l});zuLang[l]=(zuLang[l]||0)+1;if(t>=t0)zuToday++;if(t>=t7)zu7++;}
     else if(x.kind==='sport'&&x.meta){var s=sports[x.meta]||{n:0,last:x.created_at};
       s.n++;if(x.created_at>s.last)s.last=x.created_at;sports[x.meta]=s;}
+    else if(x.kind==='sportwahl'&&x.meta){picks[x.meta]=(picks[x.meta]||0)+1;}
     else if(x.kind==='link'&&x.meta){var o=null;try{o=JSON.parse(x.meta);}catch(_){}
       if(o&&o.u){o.ts=x.created_at;links.push(o);}}
   });
@@ -11473,6 +11474,14 @@ function renderStats(rows,tage){
     +'<table class="stat-top"><thead><tr><th>Sportart</th><th>Aufrufe</th><th>Anteil</th><th>zuletzt</th></tr></thead><tbody>'
     +top.map(function(x){return '<tr><td>'+fbEsc(spName[x.id]||x.id)+'</td><td>'+x.n+'</td><td>'+Math.round(x.n/spSum*100)+' %</td><td>'+fdate(x.last)+'</td></tr>';}).join('')
     +'</tbody></table>'):'';
+  // Bewusst gewaehlte Sportart (Sportart-Wahl / Menue auf der Startseite), ab 25.11.2026
+  var pkSum=0;Object.keys(picks).forEach(function(k){pkSum+=picks[k];});
+  var pk=Object.keys(picks).map(function(k){return {id:k,n:picks[k]};}).sort(function(a,b){return b.n-a.n;});
+  topHtml+=pk.length?('<div class="stat-cht-t">Gewählte Sportart auf der Startseite ('+PER+')</div>'
+    +'<table class="stat-top"><thead><tr><th>Sportart</th><th>Wahlen</th><th>Anteil</th></tr></thead><tbody>'
+    +pk.map(function(x){return '<tr><td>'+fbEsc(spName[x.id]||x.id)+'</td><td>'+x.n+'</td><td>'+Math.round(x.n/pkSum*100)+' %</td></tr>';}).join('')
+    +'</tbody></table>'):'';
+  topHtml+='<div class="stat-botnote">Besuchte Sportarten: ein Aufruf des Athlet:innen-Wegs pro Sitzung und Sportart. Seit 25.11.2026 zählt ein Aufruf über die blosse Vorwahl (Ski Alpin) erst nach 20 s, damit «falsch gelandete» Besuche nicht mitzählen. Gewählte Sportart: bewusste Wahl im Menü oder in «Wähle deine Sportart», einmal pro Sitzung.</div>';
   function avg(n){return (n/eff).toFixed(1).replace('.',',');}
   var kpiZr=tage>=3650?'Seit Start':(tage+' Tage');
   var hZu='<div class="stat-card"><div class="stat-h"><b>Zugriffe</b><span class="stat-pill">'+zu.length+' '+ZR+'</span></div>'

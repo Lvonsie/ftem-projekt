@@ -8,9 +8,9 @@
 //           Defekte Links werden nach 60 s ein zweites Mal geprueft.
 //           Links ohne Antwort (Drosselung, z.B. Flink/J+S) werden nach 2 min
 //           einzeln nachgeprueft.
-// Defekt:   404/410, Serverfehler (5xx), Domain existiert nicht / Verbindung
+// Defekt:   404/410, Serverfehler (5xx ausser 503 = Drosselung, z.B. Flink), Domain existiert nicht / Verbindung
 //           abgelehnt / Zertifikat ungueltig.
-// Nicht pruefbar (kein Alarm, nur im Protokoll): 401/403/429 sowie Zeitueber-
+// Nicht pruefbar (kein Alarm, nur im Protokoll): 401/403/429/503 sowie Zeitueber-
 //           schreitungen - viele Seiten sperren oder drosseln automatische
 //           Abrufe, obwohl der Link fuer Menschen geht.
 // Ergebnis: Bei defekten Links Warn-Mail (Resend) mit Fundstelle + roter Lauf.
@@ -106,7 +106,7 @@ async function pruefe(u) {
 // Zeitueberschreitung/abgebrochene Verbindung = meist Drosselung -> nicht pruefbar
 const ZEIT = /TIMEOUT|Timeout|Abort|ECONNRESET|UND_ERR_SOCKET|EPIPE/;
 const art = x => x.code === 0 ? (ZEIT.test(x.fehler) ? 'gesperrt' : 'defekt')
-  : [401, 403, 429].includes(x.code) ? 'gesperrt' : x.code >= 400 ? 'defekt' : 'ok';
+  : [401, 403, 429, 503].includes(x.code) ? 'gesperrt' : x.code >= 400 ? 'defekt' : 'ok';
 const warte = ms => new Promise(r => setTimeout(r, ms));
 // Bis zu 6 Abrufe gleichzeitig (so drosselt Flink am wenigsten, siehe Lauf #1/#2).
 async function alle(liste, n = 6) {
@@ -123,7 +123,7 @@ async function langsam(liste, pause) {
   for (const u of liste) {
     if (still >= 3) break;
     const x = await pruefe(u); erg.set(u, x);
-    still = x.code === 0 && ZEIT.test(x.fehler) ? still + 1 : 0;
+    still = (x.code === 0 && ZEIT.test(x.fehler)) || x.code === 503 ? still + 1 : 0;
     await warte(pause);
   }
   return erg;
@@ -136,7 +136,7 @@ if (defekt.length) {
   for (const [u, x] of await langsam(defekt, 1000)) erg.set(u, x);
   defekt = defekt.filter(u => art(erg.get(u)) === 'defekt');
 }
-const zeit = [...erg].filter(([, x]) => x.code === 0 && ZEIT.test(x.fehler)).map(([u]) => u);
+const zeit = [...erg].filter(([, x]) => (x.code === 0 && ZEIT.test(x.fehler)) || x.code === 503).map(([u]) => u);
 if (zeit.length) {
   console.log(`${zeit.length} Links ohne Antwort - in 2 min einzeln nachpruefen ...`);
   await warte(120000);

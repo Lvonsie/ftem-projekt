@@ -3967,9 +3967,14 @@ function setHomeSport(v,save){
   _spNoSave=false;
   if(save){try{localStorage.setItem('ftem-sport',v);}catch(_){}}
 }
+// Bewusste Wahl (Menue oder Sportart-Wahl, nicht automatische Vorwahl):
+// als eigene Sportart merken und fuer die Statistik als "sportwahl" zaehlen.
+var SPORT_CHOSEN=false, SPORT_OWN=false;
 if(homeSport)homeSport.addEventListener('change',function(){
   if(_spNoSave)return;
+  SPORT_CHOSEN=true;
   try{localStorage.setItem('ftem-sport',homeSport.value);}catch(_){}
+  if(window.__statPick)window.__statPick(homeSport.value);
 });
 (function(){
   try{
@@ -3980,7 +3985,7 @@ if(homeSport)homeSport.addEventListener('change',function(){
       return;
     }
     var mine=localStorage.getItem('ftem-sport');
-    if(mine&&SPORT_IDS.indexOf(mine)>=0&&homeSport&&homeSport.value!==mine)setHomeSport(mine,false);
+    if(mine&&SPORT_IDS.indexOf(mine)>=0){SPORT_OWN=true;if(homeSport&&homeSport.value!==mine)setHomeSport(mine,false);}
   }catch(_){}
 })();
 // News nur fuer bestimmte Sportarten (data-sports): je nach gewaehlter Sportart
@@ -4351,8 +4356,11 @@ function sportPick(){
   bg.addEventListener('click',function(e){if(e.target===bg)close();});
   document.addEventListener('keydown',key);
   document.body.appendChild(bg);
+  try{localStorage.setItem('ftem-sport-asked','1');}catch(_){}
 }
-function tourHome(){if(TOUR)tourShow(TOUR.steps,0,function(){try{localStorage.setItem('ftem-guide','1');}catch(_){}if(sportPickDue())setTimeout(sportPick,250);});}
+// Merken schon beim Start (nicht erst am Ende): wer die Tour mit Esc abbricht,
+// die Seite verlaesst oder in den Athlet:innen-Weg wechselt, soll sie nicht erneut sehen.
+function tourHome(){if(!TOUR)return;try{localStorage.setItem('ftem-guide','1');}catch(_){}tourShow(TOUR.steps,0,function(){if(sportPickDue())setTimeout(sportPick,250);});}
 function firstGuide(){
   var b=document.querySelector('.gd-btn');if(b)b.addEventListener('click',function(){var m=document.querySelector('#home .lang-ic-menu');if(m)m.hidden=true;tourHome();});
   try{
@@ -4369,7 +4377,8 @@ function coachTip(){
     setTimeout(function(){
       var c=document.querySelector('.steady');
       if(!location.hash||!tourVis(c)||tourEl||!im.hidden)return;
-      tourShow([TOUR.coach],0,function(){try{localStorage.setItem('ftem-guide-aw','1');}catch(_){}});
+      try{localStorage.setItem('ftem-guide-aw','1');}catch(_){}
+      tourShow([TOUR.coach],0);
     },1200);
   }catch(_){}
 }
@@ -4377,6 +4386,7 @@ function route(){
   document.documentElement.classList.remove('h'); // ab jetzt steuert JS die Sichtbarkeit
   const id=decodeURIComponent(location.hash.replace('#',''));
   show(SPORT_IDS.includes(id)?id:'');
+  if(window.__statRoute)window.__statRoute(id);
   if(SPORT_IDS.includes(id)&&window.__statSport)window.__statSport(id);
 }
 // ---- anonyme Nutzungsstatistik (Tabelle ftem_stats) ----
@@ -4414,7 +4424,22 @@ function route(){
         .then(function(r){if(!r.ok)direct();}).catch(direct);
     }catch(_){direct();}
   }
-  window.__statSport=function(sid){ev('sport',sid);};
+  window.__statPick=function(sid){ev('sportwahl',sid);};
+  // Aufruf Athlet:innen-Weg pro Sportart. Landet jemand nur wegen der automatischen
+  // Vorwahl (erste Sportart, nichts gewaehlt, kein Link) dort, zaehlt der Aufruf erst
+  // nach 20 s - wer vorher zu einer anderen Sportart oder zur Startseite wechselt,
+  // war "falsch gelandet" und wird nicht gezaehlt.
+  var initHash=location.hash, pend=null;
+  function cancelPend(){if(pend){clearTimeout(pend.t);pend=null;}}
+  window.__statRoute=function(id){if(pend&&pend.sid!==id)cancelPend();};
+  window.__statSport=function(sid){
+    if(pend&&pend.sid===sid)return;
+    var deep=initHash&&decodeURIComponent(initHash.slice(1))===sid;
+    var sure=sid!==SPORT_IDS[0]||SPORT_CHOSEN||SPORT_OWN||SPORT_VIA_LINK||deep;
+    if(sure){ev('sport',sid);return;}
+    try{if(sessionStorage.getItem('ftem-st-sport-'+sid))return;}catch(_){return;}
+    pend={sid:sid,t:setTimeout(function(){pend=null;ev('sport',sid);},20000)};
+  };
   // Link-Klicks: jeder Link, der die Seite verlaesst (Lernflink, swiss-ski.ch,
   // PDFs unter assets/ ...), einmal pro Sitzung und Link+Fundort. Gespeichert
   // werden nur Link, Linktext und Fundort (Sportart, Thema, Zeile, Stufe, Sprache).
@@ -5185,7 +5210,7 @@ function renderStats(rows,tage){
   var PER=tage>=3650?'seit Start':(tage+' T'), ZR=tage>=3650?'seit Start':('in '+_statRange(tage)), gran=_statGran(eff);
   var granTxt={tag:'pro Tag',woche:'pro Woche',monat:'pro Monat'}[gran];
   var d0=new Date();d0.setHours(0,0,0,0);var t0=d0.getTime(),t7=Date.now()-7*864e5;
-  var ki=[],zu=[],sports={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[],links=[],geo=[];
+  var ki=[],zu=[],sports={},picks={},kiToday=0,ki7=0,zuToday=0,zu7=0,zuLang={},qaList=[],links=[],geo=[];
   rows.forEach(function(x){
     var t=new Date(x.created_at).getTime();
     if(x.kind==='ki_frage'){ki.push({ts:x.created_at,key:'KI-Fragen'});if(t>=t0)kiToday++;if(t>=t7)ki7++;
@@ -5198,6 +5223,7 @@ function renderStats(rows,tage){
       zu.push({ts:x.created_at,key:l});zuLang[l]=(zuLang[l]||0)+1;if(t>=t0)zuToday++;if(t>=t7)zu7++;}
     else if(x.kind==='sport'&&x.meta){var s=sports[x.meta]||{n:0,last:x.created_at};
       s.n++;if(x.created_at>s.last)s.last=x.created_at;sports[x.meta]=s;}
+    else if(x.kind==='sportwahl'&&x.meta){picks[x.meta]=(picks[x.meta]||0)+1;}
     else if(x.kind==='link'&&x.meta){var o=null;try{o=JSON.parse(x.meta);}catch(_){}
       if(o&&o.u){o.ts=x.created_at;links.push(o);}}
   });
@@ -5213,6 +5239,14 @@ function renderStats(rows,tage){
     +'<table class="stat-top"><thead><tr><th>Sportart</th><th>Aufrufe</th><th>Anteil</th><th>zuletzt</th></tr></thead><tbody>'
     +top.map(function(x){return '<tr><td>'+fbEsc(spName[x.id]||x.id)+'</td><td>'+x.n+'</td><td>'+Math.round(x.n/spSum*100)+' %</td><td>'+fdate(x.last)+'</td></tr>';}).join('')
     +'</tbody></table>'):'';
+  // Bewusst gewaehlte Sportart (Sportart-Wahl / Menue auf der Startseite), ab 25.11.2026
+  var pkSum=0;Object.keys(picks).forEach(function(k){pkSum+=picks[k];});
+  var pk=Object.keys(picks).map(function(k){return {id:k,n:picks[k]};}).sort(function(a,b){return b.n-a.n;});
+  topHtml+=pk.length?('<div class="stat-cht-t">Gewählte Sportart auf der Startseite ('+PER+')</div>'
+    +'<table class="stat-top"><thead><tr><th>Sportart</th><th>Wahlen</th><th>Anteil</th></tr></thead><tbody>'
+    +pk.map(function(x){return '<tr><td>'+fbEsc(spName[x.id]||x.id)+'</td><td>'+x.n+'</td><td>'+Math.round(x.n/pkSum*100)+' %</td></tr>';}).join('')
+    +'</tbody></table>'):'';
+  topHtml+='<div class="stat-botnote">Besuchte Sportarten: ein Aufruf des Athlet:innen-Wegs pro Sitzung und Sportart. Seit 25.11.2026 zählt ein Aufruf über die blosse Vorwahl (Ski Alpin) erst nach 20 s, damit «falsch gelandete» Besuche nicht mitzählen. Gewählte Sportart: bewusste Wahl im Menü oder in «Wähle deine Sportart», einmal pro Sitzung.</div>';
   function avg(n){return (n/eff).toFixed(1).replace('.',',');}
   var kpiZr=tage>=3650?'Seit Start':(tage+' Tage');
   var hZu='<div class="stat-card"><div class="stat-h"><b>Zugriffe</b><span class="stat-pill">'+zu.length+' '+ZR+'</span></div>'
