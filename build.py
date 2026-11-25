@@ -1021,6 +1021,16 @@ CONS_LINKS = [(1,2),(2,3),(3,4),(5,8),(8,7),(6,9),(10,11)]
 #   "sports"  : optional - nur bei diesen Sportarten zeigen (Auswahl auf der Startseite)
 NEWS = [
     {
+        "title": "Snowboard & Ski Freestyle Days – Gemeinsam die Zukunft des Freestyle-Sports gestalten",
+        "date": "November 2026",
+        "body": ["Rund 100 Trainerinnen und Trainer sowie Funktionärinnen und Funktionäre aus der Freestyle-Community trafen sich vom 20. bis 22. November in St. Moritz zu Weiterbildung, Austausch und Networking."],
+        "bullets": ["Fortbildung in Theorie und Praxis: Athletik und Leistungstests, ADHS im Spitzensport sowie disziplinenspezifische Workshops auf und neben dem Schnee",
+                    "Strukturforum: Weltstandanalyse, Athletik und FTEM, mit Fokus auf die Nachwuchsförderung"],
+        "url": "https://www.swiss-ski.ch/snowboard/news/news/snowboard-ski-freestyle-days-gemeinsam-die-zukunft-des-freestyle-sports-gestalten",
+        # Artikel gibt es nur auf DE und FR (IT/EN fallen auf DE zurueck)
+        "url_lang": {"fr": "https://www.swiss-ski.ch/fr/snowboard/news/news/snowboard-ski-freestyle-days-faconnons-ensemble-lavenir-des-sports-freestyle"},
+    },
+    {
         "title": "Schneesportforum: Mit dem Lasergewehr am Fusse des Matterhorns",
         "date": "November 2026",
         "body": ["Rund 30 Langlauf-Expertinnen und -Experten von J+S und Swiss Snowsports trafen sich in Zermatt zum Fokusthema «Konzentration»."],
@@ -1638,7 +1648,7 @@ def home_html(datamap, lang):
                   # Teaser: erster Satz des News-Texts
                   + (('<span class="nb-teaser">'+esc(tr((it.get("body") or [""])[0], lang))+'</span>') if (it.get("body") or [""])[0] else '')
                   # Direktlink (oeffnet extern, ohne News-Overlay-Umweg)
-                  + (('<a class="nb-lnk" href="'+esc(it["url"])+'"'
+                  + (('<a class="nb-lnk" href="'+esc(it.get("url_lang", {}).get(lang) or it["url"])+'"'
                       + ((" data-urls='"+json.dumps(it["urls"], ensure_ascii=False).replace("'","&#39;")+"'") if it.get("urls") else '')
                       + ' target="_blank" rel="noopener">'
                       + esc({"de":"Mehr lesen","fr":"En savoir plus","it":"Leggi di più","en":"Read more"}.get(lang,"Mehr lesen"))+' →</a>') if it.get("url") else '')
