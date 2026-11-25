@@ -2239,7 +2239,25 @@ document.addEventListener('click',e=>{
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e._ovl&&im&&!im.hidden){closeInfo();e._ovl=true;}});
 
 // ---- Sportarten-Dropdown im Titel + Steady-Chat-Knopf ----
-sections.forEach(s=>{const ss=s.querySelector('.sportsel2');if(ss)ss.addEventListener('change',e=>{location.hash='#'+e.target.value;});});
+// Sportart im Athlet:innen-Weg wechseln: Verlaufseintrag ersetzen statt anhaengen,
+// damit "Zurueck" im Browser wieder zur Startseite fuehrt und nicht durch alle Sportarten.
+sections.forEach(s=>{const ss=s.querySelector('.sportsel2');if(ss)ss.addEventListener('change',e=>{location.replace('#'+e.target.value);});});
+// Zurueck-Knopf oben links: kam man von der Startseite dieser Seite, einen Schritt
+// zurueck im Verlauf (wie der Browser-Knopf); sonst Startseite ohne neuen Eintrag.
+// Vorher war es ein Link auf "#": Das legte jedes Mal einen neuen Verlaufseintrag an,
+// und der Browser-Zurueck-Knopf sprang danach wieder in den Athlet:innen-Weg.
+var _fromHome=false;
+window.addEventListener('hashchange',function(e){
+  var o=(e.oldURL||'').split('#')[1]||'';
+  if(SPORT_IDS.indexOf(decodeURIComponent(location.hash.slice(1)))>=0&&SPORT_IDS.indexOf(decodeURIComponent(o))<0)_fromHome=true;
+  if(!location.hash||location.hash==='#')_fromHome=false;
+});
+document.querySelectorAll('header.top a.back').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();
+  if(_fromHome){history.back();return;}
+  try{history.replaceState(null,'',location.pathname+location.search);}catch(_){}
+  route();
+}));
 const steadyBtn=document.querySelector('.steady');
 if(steadyBtn)steadyBtn.addEventListener('click',()=>{const sec=sections.find(x=>!x.hidden);if(sec)openChat(sec);});
 
