@@ -1385,6 +1385,28 @@ def home_html(datamap, lang):
         if not hm:
             continue
         ages2 = {kk: vv for kk, vv in ((d2.get("ages") or {}) if d2 else {}).items() if vv}
+        # "Wie viel trainieren?" kommt automatisch aus dem Thema "Trainingsstunden"
+        # des Athlet:innen-Wegs (inkl. Admin-Aenderungen, zur Laufzeit zusammengesetzt,
+        # siehe autoWV im Frontend) - so koennen Startseite und Athlet:innen-Weg
+        # nicht mehr auseinanderlaufen.
+        ts_auto = None
+        _st2 = d2.get("stages") or ["F1","F2","F3","T1","T2","T3","T4","E1","E2","M"]
+        for _ti, _t in enumerate(d2.get("themes") or []):
+            if _t and not _t.get("removed") and "trainingsstunden" in (_t.get("title") or "").lower():
+                _cb = ("shared|"+_t["_sh"]) if _t.get("_sh") else (s2["id"]+"|"+str(_ti))
+                _rows = []
+                for _ri, _r in enumerate(_t.get("rows") or []):
+                    _lb = (_r.get("label") or "").split("\n")[0].strip()
+                    if not _lb or _lb.lower().startswith("entwicklungsfokus"):
+                        continue
+                    _cells = []
+                    for _k, _sg in enumerate(merge_same_segs(_r["segs"])):
+                        _cells.append({"a": _sg["from"], "b": _sg["to"], "cid": _cb+"|"+str(_ri)+"|"+str(_k),
+                                       "v": clean_ws((tr(_sg.get("v") or "", lang) or "").strip()),
+                                       "bh": fnv36(_sg.get("v") or "")})
+                    _rows.append({"l": tr(_lb, lang), "c": _cells})
+                ts_auto = {"st": _st2, "rows": _rows}
+                break
         for k, (letter, pname, prng, pdesc) in zip(["f","t","e","m"], info["phases"]):
             intro2 = (hm.get("intro") or {}).get(k) or pdesc
             secs = ""
@@ -1392,15 +1414,28 @@ def home_html(datamap, lang):
             for si2, sec in enumerate(hm.get("sections", [])):
                 cols = ""
                 ncols = 0
+                _auto = bool(ts_auto) and "viel" in (sec.get("title") or "").lower()
                 for ulbl, ust in units2:
                     st = ust[0]
                     cell = (sec.get("cells") or {}).get(st)
-                    if not cell or not (cell.get("v") or cell.get("l")):
+                    if _auto:
+                        _ia = [_st2.index(x) for x in ust if x in _st2]
+                        _au = {"st": [x for x in ust if x in _st2],
+                               "rows": [{"l": r["l"], "c": [c for c in r["c"] if c["b"] >= min(_ia) and c["a"] <= max(_ia)]}
+                                        for r in ts_auto["rows"]]} if _ia else None
+                        if not _au:
+                            continue
+                        _au["idx"] = _ia
+                        body2 = ('<div class="ctext ps-auto" data-auto=\''
+                                 + json.dumps(_au, ensure_ascii=False).replace("&", "&amp;").replace("'", "&#39;").replace("<", "&lt;")
+                                 + '\'></div>')
+                    elif not cell or not (cell.get("v") or cell.get("l")):
                         continue
-                    # gleiche Aufbereitung wie die Zellen im Athlet:innen-Weg
-                    # (data-cid -> im Admin-Bereich als Startseiten-Inhalt editierbar)
-                    body2 = render_cell({"v": cell.get("v") or "", "l": cell.get("l") or []}, lang,
-                                        cid="home|"+s2["id"]+"|"+str(si2)+"|"+st)
+                    else:
+                        # gleiche Aufbereitung wie die Zellen im Athlet:innen-Weg
+                        # (data-cid -> im Admin-Bereich als Startseiten-Inhalt editierbar)
+                        body2 = render_cell({"v": cell.get("v") or "", "l": cell.get("l") or []}, lang,
+                                            cid="home|"+s2["id"]+"|"+str(si2)+"|"+st)
                     age2 = ages2.get(st, "") if len(ust) == 1 else ""
                     ncols += 1
                     cols += ('<div class="ps-col" data-st="'+" ".join(ust)+'"><div class="ps-st">'+ulbl
@@ -3172,6 +3207,39 @@ function loadOverrides(){
     .catch(()=>((cached&&cached.m)||{}));
 }
 function _fnv36(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return h.toString(36);}
+// ---- Startseite: "Wie viel trainieren?" automatisch aus "Trainingsstunden" ----
+// data-auto: {st:[Stufen], idx:[Spaltenindizes], rows:[{l:Zeile, c:[{a,b,cid,v,bh}]}]}
+// Texte = Admin-Override (Sprache zuerst, sonst geaenderter DE-Text) oder Basistext.
+var _AUTO_DROP=/^(soll-?wert|referenzwerte?|valeur cible|valeurs de référence|valore (?:target|obiettivo)|valori di riferimento|target value|reference values?|-|–)$/i;
+function autoWV(map){
+  map=map||{};
+  function pick(c){
+    var l=map[c.cid+'|'+PAGELANG];if(l!=null&&PAGELANG!=='de')return l;
+    var g=map[c.cid];if(g!=null&&_fnv36(g)!==c.bh)return g;
+    return c.v;
+  }
+  function lines(t){var out=[];String(t||'').split('\n').forEach(function(l){l=l.replace(/^[•\-]\s*/,'').trim();
+    if(!l||_AUTO_DROP.test(l))return;
+    if(out.length&&/:$/.test(out[out.length-1]))out[out.length-1]+=' '+l;
+    else if(out.length&&/^\(.*\)$/.test(l))out[out.length-1]+=' '+l;
+    else out.push(l);});return out;}
+  function run(root){root.querySelectorAll('[data-auto]').forEach(function(el){
+    var D;try{D=JSON.parse(el.getAttribute('data-auto'));}catch(_){return;}
+    var parts=[];
+    D.rows.forEach(function(r){
+      var per=D.idx.map(function(i,n){var c=r.c.filter(function(x){return x.a<=i&&i<=x.b;})[0];return {st:D.st[n],v:c?lines(pick(c)):[]};});
+      if(per.every(function(p){return !p.v.length;}))return;
+      var key=function(p){return p.v.join('\n');},out=[];
+      if(per.every(function(p){return key(p)===key(per[0]);}))out=per[0].v.map(function(x){return '• '+x;});
+      else{var grp=[];per.forEach(function(p){if(grp.length&&key(grp[grp.length-1].p)===key(p))grp[grp.length-1].s.push(p.st);else grp.push({s:[p.st],p:p});});
+        grp.forEach(function(g){if(!g.p.v.length)return;out.push('• '+g.s[0]+(g.s.length>1?'–'+g.s[g.s.length-1]:'')+': '+g.p.v.join(', '));});}
+      parts.push(r.l.toUpperCase()+'\n'+out.join('\n'));
+    });
+    el.innerHTML=structCell(parts.join('\n\n'));
+  });}
+  run(document);
+  document.querySelectorAll('template').forEach(function(t){run(t.content);});
+}
 function applyOverrides(map){
   // Klartext-Ziele (Titel, Einleitungen, News): nur Text ersetzen, <b>/<i> erlaubt
   function plain(v){return _esc(v).replace(/&lt;(\/?)(b|i)&gt;/g,'<$1$2>').replace(/\n/g,'<br>');}
@@ -4571,7 +4639,8 @@ document.addEventListener('click',function(e){
 });
 window.addEventListener('hashchange',route);
 route();firstGuide();coachTip();window.addEventListener('hashchange',function(){tourEnd();coachTip();});
-loadOverrides().then(map=>{applyOverrides(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});
+autoWV({});
+loadOverrides().then(map=>{applyOverrides(map);autoWV(map);sections.forEach(s=>{if(s.__clamp)s.__clamp();});});
 // Feedback -> direkt in Supabase speichern (kein Mailprogramm). Anonym oder mit Name/Verband/E-Mail.
 (function(){
   const panel=document.querySelector('.fb-panel'); if(!panel)return;
@@ -6127,8 +6196,15 @@ def home_edit_html(sport, d):
         blocks = _adm_field("Titel der Stufe", "home|"+sport["id"]+"|"+k+"|ptitle", pname,
                             "Der Stufen-Bereich ("+prng+") bleibt automatisch stehen")
         blocks += _adm_field("Einleitung", "home|"+sport["id"]+"|"+k+"|intro", intro)
+        _has_ts = any(t and not t.get("removed") and "trainingsstunden" in (t.get("title") or "").lower() for t in (d.get("themes") or []))
         for si, sec in enumerate(hm.get("sections", [])):
             cols = ""
+            if _has_ts and "viel" in (sec.get("title") or "").lower():
+                # automatisch aus "Trainingsstunden" (siehe autoWV) - hier nicht bearbeiten
+                blocks += ('<div class="adm-sec"><div class="adm-sect">'+esc(sec["title"])+'</div>'
+                           '<p class="glosnote">Wird automatisch aus dem Thema «Trainingsstunden» im Athlet:innen-Weg übernommen '
+                           '(alle Sprachen). Änderungen bitte dort vornehmen.</p></div>')
+                continue
             for ulbl, ust in home_units(hm, PH_STAGES_ADM[k]):
                 st = ust[0]
                 if st not in PH_STAGES_ADM[k]:
